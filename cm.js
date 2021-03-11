@@ -31,7 +31,7 @@ function syncDispatch(from, to) {
       console.log(syncAnnotation);
       views[to].dispatch({changes: tr.changes, annotations: syncAnnotation})
     }
-    else if (tr.annotation(syncAnnotation)){
+    else {
     	syncAnnotation.value = false;
     }
   }
