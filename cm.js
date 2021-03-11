@@ -1,6 +1,6 @@
 import {EditorState, basicSetup} from "@codemirror/basic-setup"
 import {EditorView, keymap} from "@codemirror/view"
-import {Transaction, Annotation} from "@codemirror/state"
+import {Transaction, Annotation, AnnotationType} from "@codemirror/state"
 import {defaultTabBinding} from "@codemirror/commands"
 import {javascript} from "@codemirror/lang-javascript"
 
