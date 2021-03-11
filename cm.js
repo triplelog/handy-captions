@@ -102,3 +102,10 @@ views.push(
     dispatch: syncDispatch(1, 0)
   })
 )
+
+
+function updateInfo() {
+	console.log(views[0]);
+}
+updateInfo();
+setTimeout(updateInfo,5000);
