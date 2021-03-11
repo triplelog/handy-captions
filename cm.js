@@ -16,7 +16,7 @@ const doc = `if (true) {
 let views = [];
 
 let syncAnnotation = new Annotation();
-syncAnnotation.define<boolean>();
+syncAnnotation.define();
 
 function syncDispatch(from: number, to: number) {
   return (tr: Transaction) => {
