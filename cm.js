@@ -18,7 +18,7 @@ let views = [];
 let syncAnnotation = new Annotation();
 syncAnnotation.define();
 
-function syncDispatch(from: number, to: number) {
+function syncDispatch(from, to) {
   return (tr: Transaction) => {
     views[from].update([tr])
     if (!tr.changes.empty && !tr.annotation(syncAnnotation))
