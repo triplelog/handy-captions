@@ -74,7 +74,46 @@ app.get('/memes.html',
 		res.end();
 	}
 );
-
+app.get('/scrims.html', 
+	function(req, res) {
+		res.write(nunjucks.render('templates/scrims.html',{
+		
+		}));
+		res.end();
+	}
+);
+app.get('/images.html', 
+	function(req, res) {
+		res.write(nunjucks.render('templates/images.html',{
+		
+		}));
+		res.end();
+	}
+);
+app.get('/code.html', 
+	function(req, res) {
+		res.write(nunjucks.render('templates/code.html',{
+		
+		}));
+		res.end();
+	}
+);
+app.get('/writing.html', 
+	function(req, res) {
+		res.write(nunjucks.render('templates/writing.html',{
+		
+		}));
+		res.end();
+	}
+);
+app.get('/tooltips.html', 
+	function(req, res) {
+		res.write(nunjucks.render('templates/tooltips.html',{
+		
+		}));
+		res.end();
+	}
+);
 
 const server1 = https.createServer(options, app);
 server1.listen(1337);
