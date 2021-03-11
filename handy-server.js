@@ -54,7 +54,6 @@ app.get('/index.html',
 		res.end();
 	}
 );
-console.log('aa',performance.now());
 
 
 
@@ -77,12 +76,8 @@ app.get('/memes.html',
 );
 
 
-
-console.log('cc',performance.now());
 const server1 = https.createServer(options, app);
-console.log('dd',performance.now());
 server1.listen(1337);
-console.log('ee',performance.now());
 
 
 
