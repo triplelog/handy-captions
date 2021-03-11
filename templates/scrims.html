@@ -245,8 +245,13 @@ function groupUp() {
 }
 function downloadImage() {
 	var url = canvas.toDataURL();
+	canvas.toBlob(function(blob) {
+	  var burl = URL.createObjectURL(blob);
+	  console.log(burl);
+
+	});
 	document.getElementById('downloadLink').href = url;
-	console.log(url);
+	//console.log(url);
 }
 </script>
 </body>
