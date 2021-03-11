@@ -18,6 +18,8 @@ let views = [];
 let syncAnnotation = new Annotation();
 syncAnnotation.value = false;
 console.log(syncAnnotation);
+console.log(syncAnnotation.define);
+console.log(syncAnnotation.define());
 
 function syncDispatch(from, to) {
 	console.log(from,to);
