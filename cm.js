@@ -19,7 +19,7 @@ let syncAnnotation = new Annotation();
 syncAnnotation.define();
 
 function syncDispatch(from, to) {
-  return (tr: Transaction) => {
+  return (tr) => {
     views[from].update([tr])
     if (!tr.changes.empty && !tr.annotation(syncAnnotation))
       views[to].dispatch({changes: tr.changes,
