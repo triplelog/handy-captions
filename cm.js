@@ -14,8 +14,8 @@ const doc = `if (true) {
 
 
 let views = [];
-let aType = new AnnotationType().of(false);
-let syncAnnotation = new Annotation(aType);
+let syncAnnotation = new AnnotationType().of(false);
+
 
 console.log(syncAnnotation);
 
