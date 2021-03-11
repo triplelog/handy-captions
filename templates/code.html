@@ -126,7 +126,7 @@
 	</svg>
 </div>
 
-<script src="js/cm.bundle.js"></script>
+
 <script>
 
 var curveWorker = new Worker('js/curveWorker.js');
@@ -246,10 +246,14 @@ function show(id) {
 	el.style.display = "inline-block";
 }
 
+
+</script>
+
+<script  type="module" src="js/cm.bundle.js"></script>
+<script  type="module">
 import draw from 'js/cm.bundle.js';
 draw();
 </script>
-
 </body>
 </html>
 
