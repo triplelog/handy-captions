@@ -14,7 +14,7 @@ const doc = `if (true) {
 
 
 let views = [];
-let syncAnnotation = new AnnotationType().of(false);
+let syncAnnotation = new AnnotationType();
 syncAnnotation.define;
 
 console.log(syncAnnotation);
@@ -28,7 +28,7 @@ function syncDispatch(from, to) {
     console.log(tr.annotation(syncAnnotation));
     console.log(tr.annotations);
     if (!tr.changes.empty && !tr.annotation(syncAnnotation)){
-      views[to].dispatch({changes: tr.changes, annotations: new AnnotationType().of(true)})
+      views[to].dispatch({changes: tr.changes, annotations: syncAnnotation.of(true)})
     }
   }
 }
