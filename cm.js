@@ -102,6 +102,8 @@ views.push(
   })
 )
 
-console.log(views[0]);
-views[0].scrollPosIntoView(500);
-console.log(views[0]);
+
+views[0].scrollPosIntoView(20);
+
+
+
