@@ -15,10 +15,11 @@ const doc = `if (true) {
 
 let views = [];
 
-let syncAnnotation = new Annotation<boolean>();
+let syncAnnotation = new Annotation();
 syncAnnotation.define();
 
 function syncDispatch(from, to) {
+	console.log(from,to);
   return (tr) => {
     views[from].update([tr])
     if (!tr.changes.empty && !tr.annotation(syncAnnotation))
