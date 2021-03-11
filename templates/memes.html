@@ -148,8 +148,7 @@ curveWorker.onmessage = function(evt){
 }
 
 function inputDown(evt) {
-	console.log(evt);
-	currentCurve = [[evt.clientX,evt.clientY]];
+	curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 	isDown = true;
 }
 function inputMove(evt) {

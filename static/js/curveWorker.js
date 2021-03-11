@@ -1,15 +1,23 @@
 var recentPoints = [];
+var myInterval;
 onmessage = function(evt){
 	if (evt.data.type == "move"){
 		recentPoints.push([evt.data.x,evt.data.y]);
 	}
+	else if (evt.data.type == "down"){
+		recentPoints.push([evt.data.x,evt.data.y]);
+		myInterval = setInterval(sendPoints, 100);
+	}
 	else if (evt.data.type == "up"){
+		recentPoints.push([evt.data.x,evt.data.y]);
+		clearInterval(myInterval);
+		sendPoints(false);
 		createPD();
 	}
 	
 }
 
-function sendPoints() {
+function sendPoints(send=true) {
 	var rlen = recentPoints.length;
 	if (rlen == 0){return;}
 	var points = [[0,0,0],[0,0,0],[0,0,0]];
@@ -54,10 +62,12 @@ function sendPoints() {
 	for (var i=0;i<points.length;i++){
 		currentCurve.push([points[i][0],points[i][1]]);
 	}
-	postMessage({'type':'inputCurve','points':points});
+	if (send){
+		postMessage({'type':'inputCurve','points':points});
+	}
 	recentPoints = [];
 }
-setInterval(sendPoints, 100);
+
 
 var currentCurve = [];
 var allCurves = {};
