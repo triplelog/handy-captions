@@ -1,5 +1,5 @@
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
-import {EditorView, keymap} from "@codemirror/view"
+import {keymap} from "@codemirror/view"
 import {defaultTabBinding} from "@codemirror/commands"
 import {javascript} from "@codemirror/lang-javascript"
 
