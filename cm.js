@@ -16,6 +16,8 @@ const doc = `if (true) {
 let views = [];
 
 let syncAnnotation = new Annotation();
+syncAnnotation.type = boolean;
+syncAnnotation.value = false;
 console.log(syncAnnotation);
 
 function syncDispatch(from, to) {
