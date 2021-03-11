@@ -26,6 +26,8 @@ function syncDispatch(from, to) {
   return (tr) => {
     views[from].update([tr]);
     console.log(syncAnnotation);
+    console.log(tr.annotation(syncAnnotation));
+    console.log(tr.annotations);
     if (!tr.changes.empty && !tr.annotation(syncAnnotation)){
       syncAnnotation.value = true;
       console.log(syncAnnotation);
