@@ -15,7 +15,7 @@ const doc = `if (true) {
 
 let views = [];
 
-let syncAnnotation = new Annotation().of(false);
+let syncAnnotation = new Annotation(false);
 
 console.log(syncAnnotation);
 
