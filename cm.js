@@ -105,5 +105,9 @@ views.push(
 
 views[0].scrollPosIntoView(100);
 
+export function draw() {
+	console.log(views[0].posAtCoords({x: 10, y: 10}));
+	console.log(views[0].coordsAtPos(100));
+}
 
 

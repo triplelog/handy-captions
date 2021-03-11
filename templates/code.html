@@ -126,6 +126,7 @@
 	</svg>
 </div>
 
+<script src="js/cm.bundle.js"></script>
 <script>
 
 var curveWorker = new Worker('js/curveWorker.js');
@@ -244,8 +245,10 @@ function show(id) {
 	var el = document.querySelector('.input-'+id);
 	el.style.display = "inline-block";
 }
+
+draw();
 </script>
-<script src="js/cm.bundle.js"></script>
+
 </body>
 </html>
 
