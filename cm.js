@@ -103,7 +103,7 @@ views.push(
 )
 
 
-views[0].scrollPosIntoView(20);
+views[0].scrollPosIntoView(100);
 
 
 
