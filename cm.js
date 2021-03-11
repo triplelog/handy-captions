@@ -9,6 +9,61 @@ const doc = `if (true) {
 } else {
   console.log("oh no")
 }
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
+if (true) {
+  console.log("okay")
+} else {
+  console.log("oh no")
+}
 `
 
 
@@ -35,6 +90,7 @@ views.push(
 		extensions: [basicSetup, keymap.of([defaultTabBinding]), javascript()]
 	}),
 	parent: document.querySelector('.input-1'),
+	viewport: {from: 100, to: 500},
     dispatch: syncDispatch(0, 1)
   }),
   new EditorView({
