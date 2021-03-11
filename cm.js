@@ -1,5 +1,6 @@
-import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
-import {keymap} from "@codemirror/view"
+import {EditorState, basicSetup} from "@codemirror/basic-setup"
+import {EditorView, keymap} from "@codemirror/view"
+import {Transaction, Annotation} from "@codemirror/state"
 import {defaultTabBinding} from "@codemirror/commands"
 import {javascript} from "@codemirror/lang-javascript"
 
@@ -10,10 +11,36 @@ const doc = `if (true) {
 }
 `
 
-let editor = new EditorView({
-  state: EditorState.create({
-    doc,
-    extensions: [basicSetup, keymap.of([defaultTabBinding]), javascript()]
+
+
+let views: EditorView[] = []
+
+let syncAnnotation = Annotation.define<boolean>()
+
+function syncDispatch(from: number, to: number) {
+  return (tr: Transaction) => {
+    views[from].update([tr])
+    if (!tr.changes.empty && !tr.annotation(syncAnnotation))
+      views[to].dispatch({changes: tr.changes,
+                          annotations: syncAnnotation.of(true)})
+  }
+}
+
+views.push(
+  new EditorView({
+    state: EditorState.create({
+		doc,
+		extensions: [basicSetup, keymap.of([defaultTabBinding]), javascript()]
+	}),
+	parent: document.querySelector('.input-1'),
+    dispatch: syncDispatch(0, 1)
   }),
-  parent: document.body
-})
+  new EditorView({
+    state: EditorState.create({
+		doc,
+		extensions: [basicSetup, keymap.of([defaultTabBinding]), javascript()]
+	}),
+	parent: document.querySelector('.input-2'),
+    dispatch: syncDispatch(1, 0)
+  })
+)

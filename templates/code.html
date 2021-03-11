@@ -17,16 +17,22 @@
 
 <style>
 
-.input {
+.input, .input-1, .input-2 {
 	position: absolute;
 	left: 0px;
-	top:0px;
+	top:2rem;
 	width: 100%;
-	height: 50%;
+	height: calc(100% - 2rem);
 	display: inline-block;
 	border: 1px solid black;
 	touch-action: none;
 	
+}
+.input, .input-1, .input-2 {
+	display: none;
+}
+.input-1 {
+	display: inline-block;
 }
 .output {
 	position: absolute;
@@ -57,8 +63,9 @@
 }
 .tools {
 	position: absolute;
-	left: 300px;
-	top:50%;
+	left: 0px;
+	top:0px;
+	height: 2rem;
 	display: inline-block;
 	
 }
@@ -75,14 +82,20 @@
 </style>
 </head>
 <body>
-<img id="imgBG" src="img/pexels-photo-963278.jpeg" style="display: none;"/>
+<div class="tools">
+	<button onclick="show(1);">1</button>
+	<button onclick="show(2);">2</button>
+</div>
 <div class="input">
 
 </div>
+<div class="input-1">
 
-	<canvas class="output" width="300px" height="300px">
-		
-	</canvas>
+</div>
+<div class="input-2">
+
+</div>
+
 <div class="o2" >
 	<svg id="textSVG" viewBox="0 0 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<defs>
@@ -112,16 +125,8 @@
 		</g>
 	</svg>
 </div>
-<div class="tools">
-	<button onclick="selectGroup();">Group</button>
-	<button onclick="downloadImage();">Download</button>
-	<a id="downloadLink" download="a.png" href="">Download</a>
-</div>
+
 <script>
-var canvas = document.querySelector('canvas');
-var ctx = canvas.getContext("2d");
-var img = document.getElementById("imgBG");
-img.onload = function(){ctx.drawImage(img, 0, 0, 300, 300);}
 
 var curveWorker = new Worker('js/curveWorker.js');
 var inputEl = document.querySelector('.input');
@@ -230,23 +235,14 @@ function drawConvexHull(pdArray) {
 	
 
 }
-function selectGroup(){
-	isGroup = true;
-}
 
-function groupDown() {
-
-}
-function groupMove() {
-
-}
-function groupUp() {
-	isGroup = false;
-}
-function downloadImage() {
-	var url = canvas.toDataURL();
-	document.getElementById('downloadLink').href = url;
-	console.log(url);
+function show(id) {
+	var el1 = document.querySelector('.input-1');
+	el1.style.display = "none";
+	var el2 = document.querySelector('.input-2');
+	el2.style.display = "none";
+	var el = document.querySelector('.input-'+id);
+	el.style.display = "inline-block";
 }
 </script>
 <script src="js/cm.bundle.js"></script>
