@@ -13,7 +13,7 @@ const doc = `if (true) {
 
 
 
-let views: EditorView[] = []
+let views = [];
 
 let syncAnnotation = Annotation.define<boolean>()
 
