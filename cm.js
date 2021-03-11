@@ -22,11 +22,18 @@ console.log(syncAnnotation);
 
 function syncDispatch(from, to) {
 	console.log(from,to);
+	console.log(syncAnnotation);
   return (tr) => {
-    views[from].update([tr])
-    if (!tr.changes.empty && !tr.annotation(syncAnnotation))
-      views[to].dispatch({changes: tr.changes,
-                          annotations: syncAnnotation.of(true)})
+    views[from].update([tr]);
+    console.log(syncAnnotation);
+    if (!tr.changes.empty && !tr.annotation(syncAnnotation)){
+      syncAnnotation.value = true;
+      console.log(syncAnnotation);
+      views[to].dispatch({changes: tr.changes, annotations: syncAnnotation})
+    }
+    else if (tr.annotation(syncAnnotation)){
+    	syncAnnotation.value = false;
+    }
   }
 }
 
