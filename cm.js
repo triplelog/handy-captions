@@ -90,7 +90,6 @@ views.push(
 		extensions: [basicSetup, keymap.of([defaultTabBinding]), javascript()]
 	}),
 	parent: document.querySelector('.input-1'),
-	scrollPosIntoView: {pos: 500},
     dispatch: syncDispatch(0, 1)
   }),
   new EditorView({
@@ -103,3 +102,6 @@ views.push(
   })
 )
 
+console.log(views[0]);
+views[0].scrollPosIntoView({pos: 500});
+console.log(views[0]);
