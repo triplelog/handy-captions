@@ -16,7 +16,7 @@ const doc = `if (true) {
 let views = [];
 
 let syncAnnotation = new Annotation();
-syncAnnotation.define();
+console.log(syncAnnotation);
 
 function syncDispatch(from, to) {
 	console.log(from,to);
