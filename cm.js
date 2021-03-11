@@ -17,16 +17,11 @@ let views = [];
 let syncAnnotation = new AnnotationType();
 syncAnnotation.define;
 
-console.log(syncAnnotation);
 
 function syncDispatch(from, to) {
 	console.log(from,to);
-	console.log(syncAnnotation);
   return (tr) => {
     views[from].update([tr]);
-    console.log(syncAnnotation);
-    console.log(tr.annotation(syncAnnotation));
-    console.log(tr.annotations);
     if (!tr.changes.empty && !tr.annotation(syncAnnotation)){
       views[to].dispatch({changes: tr.changes, annotations: syncAnnotation.of(true)})
     }
