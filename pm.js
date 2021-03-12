@@ -45,17 +45,20 @@ let syncPlugin = new Plugin({
     var myId = s.doc.attrs.id;
     console.log(myId);
 	
-	if (myId == 0){
+	if (myId == 0 && !t.getMeta('k')){
 		myViews[1].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-1 > div > .ProseMirror"));
 		myViews[1].state.doc.attrs = {id:1};
-		/*var tt = myViews[1].state.tr;
+		var tt = myViews[1].state.tr;
 		tt.setMeta('k',true);
 		var rPos = myViews[1].state.doc.resolve(3);
 		var rPos2 = myViews[1].state.doc.resolve(6);
 		var sel = new TextSelection(rPos,rPos2);
 		tt.setSelection(sel);
-		myViews[1].dispatch(tt);*/
-		return true;
+		myViews[1].dispatch(tt);
+		
+		t.setMeta('k',true);
+		myViews[0].dispatch(t);
+		return false;
 	}
   	return true; 
   }
