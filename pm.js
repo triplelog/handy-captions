@@ -55,6 +55,9 @@ let syncPlugin = new Plugin({
   		t.setMeta('k',true);
   		myViews[0].dispatch(t);
   	}
+  	else {
+  		return false;
+  	}
   	return true; 
   }
 })
