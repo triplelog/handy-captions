@@ -81,14 +81,16 @@ myViews[2].state.doc.attrs = {id:2};
 
 var minPos = [-1,-1];
 var maxPos = [-1,-1];
-var el = document.querySelector(".input-0");
-el.addEventListener('pointerdown',inputDown);
-el.addEventListener('pointermove',inputMove);
-el.addEventListener('pointerup',function(evt) {inputUp(evt,0);});
+for (var i=0;i<3;i++){
+	var el = document.querySelector(".input-"+i);
+	el.addEventListener('pointerdown',function(evt) {inputDown(evt,i);});
+	el.addEventListener('pointermove',function(evt) {inputMove(evt,i);});
+	el.addEventListener('pointerup',function(evt) {inputUp(evt,i);});
+}
 
-function inputDown(evt){
-	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY+16});
+function inputDown(evt,id){
+	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
 		minPos[0] = posTop.pos;
 		maxPos[0] = posTop.pos;
@@ -98,9 +100,9 @@ function inputDown(evt){
 		maxPos[1] = posBottom.pos;
 	}
 }
-function inputMove(evt){
-	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY+16});
+function inputMove(evt,id){
+	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
 		if (posTop.pos < minPos[0]){
 			minPos[0] = posTop.pos;
@@ -120,9 +122,8 @@ function inputMove(evt){
 }
 function inputUp(evt,id){
 	console.log("id:",id);
-	var id = 0;
-	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY+16});
+	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
 		if (posTop.pos < minPos[0]){
 			minPos[0] = posTop.pos;
