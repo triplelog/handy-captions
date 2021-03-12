@@ -460,6 +460,8 @@ function drawConvexHull(pdArray) {
 var currentTab = 0;
 function show(id) {
 	pm.chgTab(currentTab,id);
+	var el0 = document.querySelector('.input-0');
+	el0.style.display = "none";
 	var el1 = document.querySelector('.input-1');
 	el1.style.display = "none";
 	var el2 = document.querySelector('.input-2');
