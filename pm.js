@@ -74,7 +74,7 @@ let syncPlugin = new Plugin({
 
 		return tt;
 	}
-  	return false; 
+	
   }
 })
 
