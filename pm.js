@@ -140,7 +140,7 @@ function inputDown(evt){
 	
 	if (writing){
 		evt.preventDefault();
-		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
+		
 		if (anchor) {
 			var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
 			console.log(pos);
@@ -150,6 +150,9 @@ function inputDown(evt){
 
 			anchor = false;
 		}
+		var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
+		curveWorker.postMessage({'type':'down','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
+		
 	}
 	
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
@@ -170,7 +173,9 @@ function inputMove(evt){
 	if (writing){
 		evt.preventDefault();
 		if (isDown){
-			curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
+			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
+			curveWorker.postMessage({'type':'move','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
+			
 		}
 	}
 	
@@ -251,7 +256,9 @@ function inputUp(evt){
 			
 		}
 		if (writing){
-			curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
+			curveWorker.postMessage({'type':'up','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
+
 		}
 
 		isDown = false;
