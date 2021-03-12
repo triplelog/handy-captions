@@ -104,20 +104,18 @@ function inputUp(evt){
 	}
 	console.log(minPos[0],maxPos[0]);
 	console.log(minPos[1],maxPos[1]);
-	var rPos = myView.state.doc.resolve(130);
-	var rPos2 = myView.state.doc.resolve(140);
-	var tt = myView.state.tr;
-	var sel = new TextSelection(rPos,rPos2);
-	tt.setSelection(sel);
-	tt.deleteSelection();
 	
-	selectedText.start = 20;
-	selectedText.end = 50;
 	
-	myView.dispatch(tt);
-	console.log(myView);
-	selectedText.start = 40;
-	selectedText.end = 50;
-	console.log(myView);
+	if (minPos[1] <= maxPos[0]){
+		selectedText.start = minPos[1];
+		selectedText.end = maxPos[0];
+		var rPos = myView.state.doc.resolve(minPos[1]);
+		var rPos2 = myView.state.doc.resolve(maxPos[0]);
+		var tt = myView.state.tr;
+		var sel = new TextSelection(rPos,rPos2);
+		tt.setSelection(sel);
+		myView.dispatch(tt);
+	}
+
 	
 }
