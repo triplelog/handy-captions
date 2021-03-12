@@ -75,7 +75,6 @@ let syncPlugin = new Plugin({
 		var rPos2 = myViews[1].state.doc.resolve(6);
 		var sel = new TextSelection(rPos,rPos2);
 		tt.setSelection(sel);
-		myViews[1].dispatch(tt);
 
 		return tt;
 	}
