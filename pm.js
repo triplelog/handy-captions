@@ -26,13 +26,8 @@ var myState = EditorState.create({
     schema: mySchema,
     plugins: exampleSetup({schema: mySchema})
 });
-console.log(myState);
+
 myState.doc = 'Test';
-console.log(myState);
-var newState = myState.fromJSON({
-    schema: mySchema,
-    plugins: exampleSetup({schema: mySchema})
-});
 console.log(myState);
 
 window.view = new EditorView(document.querySelector(".input-1"), {
