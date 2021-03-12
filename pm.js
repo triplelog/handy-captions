@@ -18,6 +18,9 @@ const mySchema = new Schema({
 console.log(mySchema);
 
 let highlightPlugin = new Plugin({
+  state: {
+    
+  },
   props: {
     
   }
