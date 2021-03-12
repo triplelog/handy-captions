@@ -37,45 +37,10 @@ let myPlugin = new Plugin({
 })
 
 
-let syncPlugin = new Plugin({
-  props: {
-    
-  },
-  appendTransaction: (tl,s1,s2) => {
-    var myId = s1.doc.attrs.id;
-    console.log(myId);
-	console.log(tl);
-	if (myId == 0 && !tl[0].getMeta('k')){
-		myViews[1].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-1 > div > .ProseMirror"));
-		myViews[1].state.doc.attrs = {id:1};
-		var tt = myViews[1].state.tr;
-		tt.setMeta('k',true);
-		var rPos = myViews[1].state.doc.resolve(0);
-		var rPos2 = myViews[1].state.doc.resolve(1);
-		var sel = new TextSelection(rPos,rPos2);
-		tt.setSelection(sel);
-		myViews[1].dispatch(tt);
-		
-	}
-	else if (myId == 1 && !tl[0].getMeta('k')){
-		myViews[0].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-2 > div > .ProseMirror"));
-		myViews[0].state.doc.attrs = {id:0};
-		var tt = myViews[0].state.tr;
-		tt.setMeta('k',true);
-		var rPos = myViews[0].state.doc.resolve(0);
-		var rPos2 = myViews[0].state.doc.resolve(1);
-		var sel = new TextSelection(rPos,rPos2);
-		tt.setSelection(sel);
-		myViews[0].dispatch(tt);
-		
-	}
-  }
-})
 
 var plugins = exampleSetup({schema: mySchema});
 
 plugins.push(myPlugin);
-plugins.push(syncPlugin);
 
 
 
@@ -173,4 +138,17 @@ function inputUp(evt){
 	}
 
 	
+}
+
+
+export function switch(x) {
+	myViews[x].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-2 > div > .ProseMirror"));
+	myViews[x].state.doc.attrs = {id:x};
+	var tt = myViews[x].state.tr;
+	tt.setMeta('k',true);
+	var rPos = myViews[x].state.doc.resolve(0);
+	var rPos2 = myViews[x].state.doc.resolve(1);
+	var sel = new TextSelection(rPos,rPos2);
+	tt.setSelection(sel);
+	myViews[x].dispatch(tt);
 }

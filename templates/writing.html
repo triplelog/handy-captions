@@ -19,9 +19,9 @@
 
 .input, .input-1, .input-2 {
 	position: absolute;
-	left: 0px;
+	left: 1rem;
 	top:2rem;
-	width: 100%;
+	width: calc(100% - 2rem);
 	height: calc(25rem);
 	display: inline-block;
 	border: 1px solid black;
@@ -454,12 +454,14 @@ function drawConvexHull(pdArray) {
 }
 
 function show(id) {
+	pm.switch(id-1);
 	var el1 = document.querySelector('.input-1');
 	el1.style.display = "none";
 	var el2 = document.querySelector('.input-2');
 	el2.style.display = "none";
 	var el = document.querySelector('.input-'+id);
 	el.style.display = "inline-block";
+	
 }
 
 
