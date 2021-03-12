@@ -26,8 +26,7 @@ let myPlugin = new Plugin({
     }
   },
   filterTransaction: (t,s) => {
-    console.log(t);
-    console.log(s);
+    console.log(s.id);
   	const oldStart = selectedText.start;
   	const oldEnd = selectedText.end;
   	selectedText.start = t.mapping.map(oldStart);
@@ -54,7 +53,8 @@ myViews.push(new EditorView(document.querySelector(".input-1"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
-		plugins: plugins
+		plugins: plugins,
+		id: 0
 	}),
   dispatch: syncDispatch(0,1)
 }));
@@ -70,6 +70,7 @@ myViews.push(new EditorView(document.querySelector(".input-2"), {
 console.log(myViews[0].state);
 console.log(myViews[0].state.id);
 myViews[0].state.id = 0;
+myViews[1].state.id = 1;
 console.log(myViews[0].state);
 console.log(myViews[0].state.id);
 var minPos = [-1,-1];
