@@ -17,12 +17,24 @@ const mySchema = new Schema({
 
 console.log(mySchema);
 
+let highlightPlugin = new Plugin({
+  props: {
+    decorations(state) {
+      return DecorationSet.create(state.doc, [
+        Decoration.inline(0, state.doc.content.size, {style: "color: purple"})
+      ])
+    }
+  }
+})
+
+var plugins = exampleSetup({schema: mySchema});
+console.log(plugins);
 
 var myView = new EditorView(document.querySelector(".input-1"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
-		plugins: exampleSetup({schema: mySchema})
+		plugins: plugins
 	})
 })
 
