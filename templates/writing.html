@@ -285,7 +285,7 @@ li.ProseMirror-selectednode:after {
 	<button onclick="show(0);">0</button>
 	<button onclick="show(1);">1</button>
 	<button onclick="show(2);">2</button>
-	<button onclick="anchor();">A</button>
+	<button onclick="resetAnchor();">A</button>
 </div>
 <div class="input">
 
@@ -466,7 +466,7 @@ function show(id) {
 	currentTab = id;
 	
 }
-function anchor() {
+function resetAnchor() {
 	pm.anchor();
 }
 
