@@ -59,7 +59,7 @@ let syncPlugin = new Plugin({
 	}
 	else if (myId == 1 && !tl[0].getMeta('k')){
 		myViews[0].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-2 > div > .ProseMirror"));
-		myViews[0].state.doc.attrs = {id:1};
+		myViews[0].state.doc.attrs = {id:0};
 		var tt = myViews[0].state.tr;
 		tt.setMeta('k',true);
 		var rPos = myViews[0].state.doc.resolve(0);
