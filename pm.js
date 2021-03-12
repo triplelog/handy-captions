@@ -46,7 +46,7 @@ let syncPlugin = new Plugin({
     console.log(myId);
 	
 	if (myId == 1 && !t.getMeta('k')){
-		myViews[1].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector("#content2"));
+		myViews[1].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-1"));
 		myViews[1].state.doc.attrs = {id:1};
 		var tt = myViews[1].state.tr;
 		tt.setMeta('k',true);
