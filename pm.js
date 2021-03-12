@@ -89,7 +89,7 @@ for (var i=0;i<3;i++){
 }
 
 function inputDown(evt){
-	var id = 0;
+	var id = -1;
 	var el = evt.target;
 	while (id == -1 && el){
 		console.log(el);
