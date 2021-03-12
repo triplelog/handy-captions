@@ -87,7 +87,7 @@ function inputUp(evt){
 	}
 	console.log(minPos[0],maxPos[0]);
 	console.log(minPos[1],maxPos[1]);
-	var t = new Transaction();
+	var t = EditorState.tr;
 	console.log(t);
 	
 }
