@@ -17,11 +17,13 @@ const mySchema = new Schema({
 
 console.log(mySchema);
 
+var x = 150;
+
 let myPlugin = new Plugin({
   props: {
     decorations(state) {
       return DecorationSet.create(state.doc, [
-        Decoration.inline(0, state.doc.content.size, {style: "color: purple"})
+        Decoration.inline(140, x, {style: "color: purple"})
       ])
     }
   }
