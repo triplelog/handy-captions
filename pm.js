@@ -16,7 +16,7 @@ const mySchema = new Schema({
 console.log(mySchema);
 
 window.view = new EditorView(document.querySelector(".input-1"), {
-  state: EditorState.create({
+  state: EditorState.create(config: {
     doc: 'Test text',
     schema: mySchema,
     plugins: exampleSetup({schema: mySchema})
