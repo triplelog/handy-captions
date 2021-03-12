@@ -141,7 +141,7 @@ function inputUp(evt){
 }
 
 
-export function switch(x) {
+export function chgTab(x) {
 	myViews[x].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-2 > div > .ProseMirror"));
 	myViews[x].state.doc.attrs = {id:x};
 	var tt = myViews[x].state.tr;
