@@ -26,6 +26,8 @@ let myPlugin = new Plugin({
     }
   },
   filterTransaction: (t,s) => {
+    console.log(t);
+    console.log(s);
   	const oldStart = selectedText.start;
   	const oldEnd = selectedText.end;
   	selectedText.start = t.mapping.map(oldStart);
@@ -41,12 +43,7 @@ plugins.push(myPlugin);
 
 function syncDispatch(from, to) {
 	console.log(from,to);
-  return (tr) => {
-    myViews[from].update([tr]);
-    if (!tr.changes.empty){
-      myViews[to].dispatch({changes: tr.changes})
-    }
-  }
+
 }
 
 
