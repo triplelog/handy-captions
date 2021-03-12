@@ -15,11 +15,19 @@ const mySchema = new Schema({
 
 console.log(mySchema);
 
-window.view = new EditorView(document.querySelector(".input-1"), {
-  state: EditorState.create({config: {
+var myState = EditorState.create({
     doc: 'Test text',
     schema: mySchema,
     plugins: exampleSetup({schema: mySchema})
-  }
-  })
+})
+
+console.log(myState);
+
+var mySetup = exampleSetup({schema: mySchema})
+
+
+console.log(mySetup);
+
+window.view = new EditorView(document.querySelector(".input-1"), {
+  state: myState
 })
