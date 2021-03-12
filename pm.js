@@ -24,7 +24,7 @@ let myPlugin = new Plugin({
   props: {
     decorations(state) {
       return DecorationSet.create(state.doc, [
-        Decoration.inline(selectedText.start, selectedText.end, {style: "color: purple"})
+        Decoration.inline(selectedText.start, selectedText.end, {style: "background: yellow"})
       ])
     }
   }
@@ -113,7 +113,7 @@ function inputUp(evt){
 		var rPos2 = myView.state.doc.resolve(maxPos[0]);
 		var tt = myView.state.tr;
 		var sel = new TextSelection(rPos,rPos2);
-		tt.setSelection(sel);
+		//tt.setSelection(sel);
 		myView.dispatch(tt);
 	}
 
