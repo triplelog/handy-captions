@@ -7,6 +7,7 @@ import {exampleSetup} from "prosemirror-example-setup"
 
 // Mix the nodes from prosemirror-schema-list into the basic schema to
 // create a schema with list support.
+console.log(schema);
 const mySchema = new Schema({
   nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
   marks: schema.spec.marks
