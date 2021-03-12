@@ -87,10 +87,15 @@ function inputUp(evt){
 	}
 	console.log(minPos[0],maxPos[0]);
 	console.log(minPos[1],maxPos[1]);
-	console.log(myView.state);
+	console.log(myView.state.doc);
+	var rPos = myView.state.doc.resolve(130);
+	console.log(rPos);
+	var rPos2 = myView.state.doc.resolve(140);
+	console.log(rPos2);
 	var tt = myView.state.tr;
 	console.log(tt);
-	var sel = new Selection();
+	var sel = new TextSelection(rPos,rPos2);
+	console.log(sel);
 	tt.setSelection(sel);
 	console.log(tt);
 	
