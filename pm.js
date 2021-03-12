@@ -38,12 +38,13 @@ let myPlugin = new Plugin({
 		selectedText[idx].start = t.mapping.map(oldStart);
 		selectedText[idx].end = t.mapping.map(oldEnd);
 		if (idx == 0){
-			var offsetLeft = myViews[idx].coordsAtPos(selectedText[idx].start).left;
-			selectedText[idx].offset[2] = offsetLeft;
+			var offset = myViews[idx].coordsAtPos(selectedText[idx].start);
+			selectedText[idx].offset[2] = offset.left;
+			selectedText[idx].offset[3] = offset.top;
 			
 			console.log(selectedText[idx].offset);
 			var el = document.querySelector('.o2');
-			el.style.top = 0+'px';
+			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
 		}
   	}
