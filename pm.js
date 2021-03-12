@@ -86,6 +86,7 @@ function inputUp(evt){
 	}
 	console.log(minPos[0],maxPos[0]);
 	console.log(minPos[1],maxPos[1]);
-	console.log(myView.nodeDOM(135));
+	var t = new Transaction();
+	console.log(t);
 	
 }
