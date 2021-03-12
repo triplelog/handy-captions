@@ -147,10 +147,9 @@ function inputDown(evt){
 		var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
 		console.log(pos);
 		var offset = myViews[id].coordsAtPos(pos.pos);
-		selectedText[id].offset = [offset.left,offset.top,offset.left,offset.top,pos.pos];
-		var el = document.querySelector('.o2');
-		el.style.top = '0px';
-		el.style.left = '0px';
+		var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
+		selectedText[id].offset = [offset.left-currentOffset[0],offset.top-currentOffset[1],offset.left,offset.top,pos.pos];
+
 		anchor = false;
 	}
 	curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
