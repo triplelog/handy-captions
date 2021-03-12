@@ -42,12 +42,15 @@ let syncPlugin = new Plugin({
   },
   filterTransaction: (t,s) => {
     var myId = s.doc.attrs.id;
-  	if (myId == 0){
-  		var t1 = JSON.stringify(t);
-  		
-  		var tt = JSON.parse(t1);
-  		tt.doc = myViews[1].state.doc;
-  		myViews[1].dispatch(tt);
+  	if (myId == 0 && !t.k){
+  		t.doc = myViews[1].state.doc;
+  		myViews[1].dispatch(t);
+  		return false;
+  	}
+  	else {
+  		t.doc = myViews[0].state.doc;
+  		t.setMeta('k',true);
+  		myViews[0].dispatch(t);
   	}
   	return true; 
   }
