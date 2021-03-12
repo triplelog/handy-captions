@@ -120,7 +120,7 @@ var tabId = -1;
 var anchor = true;
 var writing = false;
 function inputDown(evt){
-	if (writing){evt.preventDefault();}
+	if (writing){evt.preventDefault(); curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});}
 	var id = -1;
 	var el = evt.target;
 	while (id == -1 && el){
@@ -154,11 +154,17 @@ function inputDown(evt){
 
 		anchor = false;
 	}
-	curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
+	
 	isDown = true;
 }
 function inputMove(evt){
-	if (writing){evt.preventDefault();}
+	if (writing){
+		evt.preventDefault();
+		if (isDown){
+			curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
+		}
+	}
+	
 	if (isDown){
 		var id = tabId;
 		if (id == -1){return;}
@@ -181,7 +187,7 @@ function inputMove(evt){
 			}
 		}
 	
-		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
+		
 	}
 }
 function inputUp(evt){
