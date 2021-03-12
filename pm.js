@@ -90,7 +90,16 @@ for (var i=0;i<3;i++){
 
 function inputDown(evt){
 	var id = 0;
-	console.log(evt.target.parentElement);
+	var el = evt.target;
+	while (id == -1 && el){
+		if (el.id.substr(0,4) != 'tab-'){
+			el = el.parentElement;
+		}
+		else {
+			id = parseInt(el.id.substr(4));
+		}
+	}
+	console.log(id);
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
