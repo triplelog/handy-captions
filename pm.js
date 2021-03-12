@@ -18,6 +18,5 @@ console.log(mySchema);
 window.view = new EditorView(document.querySelector(".input-1"), {
   state: EditorState.create({
     doc: 'Test text',
-    plugins: exampleSetup({schema: mySchema})
   })
 })
