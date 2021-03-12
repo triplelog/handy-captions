@@ -98,7 +98,7 @@ function inputUp(evt){
 	console.log(sel);
 	tt.setSelection(sel);
 	console.log(tt);
-	tt.deleteSelction();
+	tt.deleteSelection();
 	console.log(tt);
 	myView.dispatch(tt);
 	console.log(myView);
