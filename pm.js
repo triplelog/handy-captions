@@ -47,7 +47,7 @@ let syncPlugin = new Plugin({
 	
 	if (myId == 1){
 		myViews[1].state = EditorState.create({
-			doc: DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-1")),
+			doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content2")),
 			schema: mySchema,
 			plugins: plugins
 		});
