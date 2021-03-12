@@ -118,7 +118,9 @@ for (var i=0;i<3;i++){
 
 var tabId = -1;
 var anchor = true;
+var writing = false;
 function inputDown(evt){
+	if (writing){evt.preventDefault();}
 	var id = -1;
 	var el = evt.target;
 	while (id == -1 && el){
@@ -156,6 +158,7 @@ function inputDown(evt){
 	isDown = true;
 }
 function inputMove(evt){
+	if (writing){evt.preventDefault();}
 	if (isDown){
 		var id = tabId;
 		if (id == -1){return;}
@@ -182,6 +185,7 @@ function inputMove(evt){
 	}
 }
 function inputUp(evt){
+	if (writing){evt.preventDefault();}
 	if (isDown){
 		var id = -1;
 		var el = evt.target;
@@ -231,7 +235,9 @@ function inputUp(evt){
 			
 			
 		}
-		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+		if (writing){
+			curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+		}
 
 		isDown = false;
 		
@@ -302,4 +308,9 @@ export function chgTab(from,to) {
 }
 export function resetAnchor() {
 	anchor = true;
+}
+export function writingMode() {
+	if (writing){writing = false}
+	else {writing = true;}
+	
 }

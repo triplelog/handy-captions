@@ -286,6 +286,7 @@ li.ProseMirror-selectednode:after {
 	<button onclick="show(1);">1</button>
 	<button onclick="show(2);">2</button>
 	<button onclick="resetAnchor();">A</button>
+	<button onclick="writingMode();">W</button>
 </div>
 <div class="input">
 
@@ -468,6 +469,9 @@ function show(id) {
 }
 function resetAnchor() {
 	pm.resetAnchor();
+}
+function writingMode() {
+	pm.writingMode();
 }
 
 
