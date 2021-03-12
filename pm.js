@@ -16,22 +16,12 @@ const mySchema = new Schema({
 console.log(mySchema);
 
 
-
-var mySetup = exampleSetup({schema: mySchema})
-
-
-console.log(mySetup);
-
-var myState = EditorState.create({
-    schema: mySchema,
-    plugins: exampleSetup({schema: mySchema})
-});
-
-myState.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector("#content"));
-console.log(myState);
-
 window.view = new EditorView(document.querySelector(".input-1"), {
-  state: myState
+  state: EditorState.create({
+  		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
+		schema: mySchema,
+		plugins: exampleSetup({schema: mySchema})
+	})
 })
 
 
