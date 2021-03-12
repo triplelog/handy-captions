@@ -31,12 +31,13 @@ let myPlugin = new Plugin({
     }
   },
   filterTransaction: (t,s) => {
-    var id = s.doc.attrs.id;
-    console.log(id);
-  	const oldStart = selectedText[id].start;
-  	const oldEnd = selectedText[id].end;
-  	selectedText[id].start = t.mapping.map(oldStart);
-  	selectedText[id].end = t.mapping.map(oldEnd);
+
+    for (var idx=0;idx<3;idx++){
+		const oldStart = selectedText[idx].start;
+		const oldEnd = selectedText[idx].end;
+		selectedText[idx].start = t.mapping.map(oldStart);
+		selectedText[idx].end = t.mapping.map(oldEnd);
+  	}
   	return true; 
   }
 })
