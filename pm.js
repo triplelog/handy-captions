@@ -27,7 +27,7 @@ var myState = EditorState.create({
     plugins: exampleSetup({schema: mySchema})
 });
 
-myState.doc = 'Test';
+myState.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector("#content"));
 console.log(myState);
 
 window.view = new EditorView(document.querySelector(".input-1"), {
