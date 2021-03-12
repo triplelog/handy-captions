@@ -5,6 +5,7 @@ import {schema} from "prosemirror-schema-basic"
 import {addListNodes} from "prosemirror-schema-list"
 import {exampleSetup} from "prosemirror-example-setup"
 import {TextSelection, Selection, Transaction} from "prosemirror-state"
+import {Decoration, DecorationSet} from "prosemirror-view"
 
 // Mix the nodes from prosemirror-schema-list into the basic schema to
 // create a schema with list support.
@@ -87,20 +88,15 @@ function inputUp(evt){
 	}
 	console.log(minPos[0],maxPos[0]);
 	console.log(minPos[1],maxPos[1]);
-	console.log(myView.state.doc);
 	var rPos = myView.state.doc.resolve(130);
-	console.log(rPos);
 	var rPos2 = myView.state.doc.resolve(140);
-	console.log(rPos2);
 	var tt = myView.state.tr;
-	console.log(tt);
 	var sel = new TextSelection(rPos,rPos2);
-	console.log(sel);
 	tt.setSelection(sel);
-	console.log(tt);
 	tt.deleteSelection();
-	console.log(tt);
 	myView.dispatch(tt);
+	console.log(myView);
+	myView.decorations = {};
 	console.log(myView);
 	
 }
