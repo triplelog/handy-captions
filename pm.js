@@ -179,10 +179,10 @@ function inputUp(evt){
 		selectedText[id].end = maxPos[0];
 		//var rPos = myView.state.doc.resolve(minPos[1]);
 		//var rPos2 = myView.state.doc.resolve(maxPos[0]);
-		var tt = myViews[0].state.tr;
+		var tt = myViews[id].state.tr;
 		//var sel = new TextSelection(rPos,rPos2);
 		//tt.setSelection(sel);
-		myViews[0].dispatch(tt);
+		myViews[id].dispatch(tt);
 	}
 
 	
