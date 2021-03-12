@@ -17,7 +17,7 @@ const mySchema = new Schema({
 
 console.log(mySchema);
 
-let highlightPlugin = new Plugin({
+/*let highlightPlugin = new Plugin({
   props: {
     decorations(state) {
       return DecorationSet.create(state.doc, [
@@ -26,7 +26,7 @@ let highlightPlugin = new Plugin({
     }
   }
 })
-
+*/
 var plugins = exampleSetup({schema: mySchema});
 console.log(plugins);
 
