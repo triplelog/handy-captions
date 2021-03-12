@@ -101,6 +101,7 @@ function inputDown(evt,id){
 	}
 }
 function inputMove(evt,id){
+	console.log(id);
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
