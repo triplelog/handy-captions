@@ -36,9 +36,9 @@ let myPlugin = new Plugin({
 })
 
 var plugins = exampleSetup({schema: mySchema});
+
 plugins.push(myPlugin);
-
-
+console.log(plugins.length);
 
 function syncDispatch(from, to) {
 	console.log(from,to);
@@ -58,6 +58,10 @@ myViews.push(new EditorView(document.querySelector(".input-1"), {
 	}),
   dispatch: syncDispatch(0,1)
 }));
+
+plugins.pop();
+console.log(plugins.length);
+
 myViews.push(new EditorView(document.querySelector(".input-2"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
