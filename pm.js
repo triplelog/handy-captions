@@ -45,12 +45,15 @@ let syncPlugin = new Plugin({
     var myId = s.doc.attrs.id;
     console.log(myId);
 	
-	if (myId == 1){
+	if (myId == 1 && !t.getMeta('k')){
 		myViews[1].state = EditorState.create({
 			doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content2")),
 			schema: mySchema,
 			plugins: plugins
 		});
+		var tt = myViews[1].state.tr;
+		tt.setMeta('k',true)
+		myViews[1].dispatch(tt);
 		return false;
 	}
   	return true; 
