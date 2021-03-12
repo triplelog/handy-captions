@@ -57,7 +57,7 @@ myViews.push(new EditorView(document.querySelector(".input-1"), {
 	}),
   dispatch: syncDispatch(0,1)
 }));
-
+myViews[0].state.doc.attrs = {k:'val'};
 plugins.pop();
 console.log(plugins.length);
 
