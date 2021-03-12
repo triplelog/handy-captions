@@ -42,9 +42,9 @@ plugins.push(myPlugin);
 function syncDispatch(from, to) {
 	console.log(from,to);
   return (tr) => {
-    views[from].update([tr]);
+    myViews[from].update([tr]);
     if (!tr.changes.empty){
-      views[to].dispatch({changes: tr.changes})
+      myViews[to].dispatch({changes: tr.changes})
     }
   }
 }
