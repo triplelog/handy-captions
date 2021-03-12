@@ -120,7 +120,19 @@ var tabId = -1;
 var anchor = true;
 var writing = false;
 function inputDown(evt){
-	if (writing){evt.preventDefault(); curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});}
+	if (writing){
+		evt.preventDefault();
+		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
+		if (anchor) {
+			var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
+			console.log(pos);
+			var offset = myViews[id].coordsAtPos(pos.pos);
+			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
+			selectedText[id].offset = [offset.left-currentOffset[0],offset.top-currentOffset[1],offset.left,offset.top,pos.pos];
+
+			anchor = false;
+		}
+	}
 	var id = -1;
 	var el = evt.target;
 	while (id == -1 && el){
@@ -145,15 +157,7 @@ function inputDown(evt){
 		minPos[1] = posBottom.pos;
 		maxPos[1] = posBottom.pos;
 	}
-	if (anchor) {
-		var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
-		console.log(pos);
-		var offset = myViews[id].coordsAtPos(pos.pos);
-		var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
-		selectedText[id].offset = [offset.left-currentOffset[0],offset.top-currentOffset[1],offset.left,offset.top,pos.pos];
 
-		anchor = false;
-	}
 	
 	isDown = true;
 }
