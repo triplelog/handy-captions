@@ -37,11 +37,11 @@ el.addEventListener('pointerup',inputUp);
 function inputDown(evt){
 	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
-	if (posTop.pos){
+	if (posTop && posTop.pos){
 		minPos[0] = posTop.pos;
 		maxPos[0] = posTop.pos;
 	}
-	if (posBottom.pos){
+	if (posBottom && posBottom.pos){
 		minPos[1] = posBottom.pos;
 		maxPos[1] = posBottom.pos;
 	}
@@ -49,7 +49,7 @@ function inputDown(evt){
 function inputMove(evt){
 	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
-	if (posTop.pos){
+	if (posTop && posTop.pos){
 		if (posTop.pos < minPos[0]){
 			minPos[0] = posTop.pos;
 		}
@@ -57,7 +57,7 @@ function inputMove(evt){
 			maxPos[0] = posTop.pos;
 		}
 	}
-	if (posBottom.pos){
+	if (posBottom && posBottom.pos){
 		if (posBottom.pos < minPos[1]){
 			minPos[1] = posBottom.pos;
 		}
@@ -69,7 +69,7 @@ function inputMove(evt){
 function inputUp(evt){
 	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
-	if (posTop.pos){
+	if (posTop && posTop.pos){
 		if (posTop.pos < minPos[0]){
 			minPos[0] = posTop.pos;
 		}
@@ -77,7 +77,7 @@ function inputUp(evt){
 			maxPos[0] = posTop.pos;
 		}
 	}
-	if (posBottom.pos){
+	if (posBottom && posBottom.pos){
 		if (posBottom.pos < minPos[1]){
 			minPos[1] = posBottom.pos;
 		}
@@ -87,7 +87,11 @@ function inputUp(evt){
 	}
 	console.log(minPos[0],maxPos[0]);
 	console.log(minPos[1],maxPos[1]);
-	var t = EditorState.tr;
+	console.log(myView);
+	console.log(myView.state);
+	var t = EditorState.tr();
 	console.log(t);
+	var tt = myView.tr();
+	console.log(tt);
 	
 }
