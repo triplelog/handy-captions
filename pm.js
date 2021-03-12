@@ -26,11 +26,35 @@ var myView = new EditorView(document.querySelector(".input-1"), {
 
 
 
-
+var minPos = -1;
+var maxPos = -1;
 var el = document.querySelector(".input-1");
-el.addEventListener('mousedown',inputDown);
+el.addEventListener('pointerdown',inputDown);
+el.addEventListener('pointermove',inputMove);
+el.addEventListener('pointerup',inputUp);
 
 function inputDown(evt){
-	console.log(evt);
-	console.log(myView.posAtCoords({left:evt.screenX,top:evt.screenY}));
+	var pos = myView.posAtCoords({left:evt.clientX,top:evt.clientY});
+	minPos = pos.pos;
+	maxPos = pos.pos;
+}
+function inputMove(evt){
+	var pos = myView.posAtCoords({left:evt.clientX,top:evt.clientY});
+	if (pos.pos < minPos){
+		minPos = pos.pos;
+	}
+	else if (pos.pos > maxPos){
+		maxPos = pos.pos;
+	}
+}
+function inputUp(evt){
+	var pos = myView.posAtCoords({left:evt.clientX,top:evt.clientY});
+	if (pos.pos < minPos){
+		minPos = pos.pos;
+	}
+	else if (pos.pos > maxPos){
+		maxPos = pos.pos;
+	}
+	console.log(minPos,maxPos);
+	
 }
