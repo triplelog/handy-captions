@@ -28,8 +28,19 @@ var myState = new EditorState();
 
 console.log(myState);
 
+myState.create({
+    doc: 'Test text',
+    schema: mySchema,
+    plugins: exampleSetup({schema: mySchema})
+});
+
+console.log(myState);
+
 myState.doc = 'Test text';
+
+console.log(myState);
 myState.schema = mySchema;
+console.log(myState);
 myState.plugins = mySetup;
 
 
