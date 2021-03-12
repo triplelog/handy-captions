@@ -22,7 +22,11 @@ var mySetup = exampleSetup({schema: mySchema})
 
 console.log(mySetup);
 
-var myState = new EditorState();
+var myState = new EditorState({
+    doc: 'Test text',
+    schema: mySchema,
+    plugins: exampleSetup({schema: mySchema})
+});
 
 
 
