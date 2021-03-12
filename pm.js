@@ -15,7 +15,7 @@ const mySchema = new Schema({
   marks: schema.spec.marks
 })
 
-var selectedText = {0:{start:0,end:0,offset:[0,0,0,0]},1:{start:0,end:0,offset:[0,0,0,0]},2:{start:0,end:0,offset:[0,0,0,0]}};
+var selectedText = {0:{start:0,end:0,offset:[0,0,0,0,0]},1:{start:0,end:0,offset:[0,0,0,0,0]},2:{start:0,end:0,offset:[0,0,0,0,0]}};
 
 let myPlugin = new Plugin({
   props: {
@@ -35,14 +35,14 @@ let myPlugin = new Plugin({
     for (var idx=0;idx<3;idx++){
 		const oldStart = selectedText[idx].start;
 		const oldEnd = selectedText[idx].end;
+		const oldAnchor = selectedText[idx].offset[4];
 		selectedText[idx].start = t.mapping.map(oldStart);
 		selectedText[idx].end = t.mapping.map(oldEnd);
+		selectedText[idx].offset[4] = t.mapping.map(oldAnchor);
 		if (idx == 0){
-			var offset = myViews[idx].coordsAtPos(selectedText[idx].start);
+			var offset = myViews[idx].coordsAtPos(selectedText[idx].offset[4]);
 			selectedText[idx].offset[2] = offset.left;
 			selectedText[idx].offset[3] = offset.top;
-			
-			console.log(selectedText[idx].offset);
 			var el = document.querySelector('.o2');
 			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
@@ -117,6 +117,7 @@ for (var i=0;i<3;i++){
 }
 
 var tabId = -1;
+var anchor = true;
 function inputDown(evt){
 	var id = -1;
 	var el = evt.target;
@@ -141,6 +142,15 @@ function inputDown(evt){
 	if (posBottom && posBottom.pos){
 		minPos[1] = posBottom.pos;
 		maxPos[1] = posBottom.pos;
+	}
+	if (anchor) {
+		var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
+		var offset = myViews[id].coordsAtPos(pos);
+		selectedText[id].offset = [offset.left,offset.top,offset.left,offset.top,pos];
+		var el = document.querySelector('.o2');
+		el.style.top = '0px';
+		el.style.left = '0px';
+		anchor = false;
 	}
 	curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 	isDown = true;
@@ -218,11 +228,10 @@ function inputUp(evt){
 			//var sel = new TextSelection(rPos,rPos2);
 			//tt.setSelection(sel);
 			myViews[id].dispatch(tt);
-			curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
-			var offset = myViews[id].coordsAtPos(minPos[1]);
-			selectedText[id].offset = [offset.left,offset.top,offset.left,offset.top];
+			
+			
 		}
-	
+		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
 
 		isDown = false;
 		
@@ -240,9 +249,7 @@ function drawCurveIn(pt){
 	inputEl.appendChild(el);
 }
 function drawCurveOut(id,pd,startPoint,endPoint){
-	var el = document.querySelector('.o2');
-	el.style.top = '0px';
-	el.style.left = '0px';
+	
 	var svg = document.querySelector('.o2 .bgSVG');
 	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
@@ -292,4 +299,7 @@ export function chgTab(from,to) {
 	var sel = new TextSelection(rPos,rPos2);
 	tt.setSelection(sel);
 	myViews[to].dispatch(tt);
+}
+export function anchor() {
+	anchor = true;
 }

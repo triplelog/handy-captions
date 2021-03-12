@@ -54,7 +54,7 @@
 	width: 600px;
 	height: 600px;
 	display: inline-block;
-	border: 1px solid red;
+	border: 0px solid red;
 	background-color: transparent;
 	pointer-events: none;
 	touch-action: none;
@@ -285,6 +285,7 @@ li.ProseMirror-selectednode:after {
 	<button onclick="show(0);">0</button>
 	<button onclick="show(1);">1</button>
 	<button onclick="show(2);">2</button>
+	<button onclick="anchor();">A</button>
 </div>
 <div class="input">
 
@@ -464,6 +465,9 @@ function show(id) {
 	el.style.display = "inline-block";
 	currentTab = id;
 	
+}
+function anchor() {
+	pm.anchor();
 }
 
 
