@@ -32,5 +32,5 @@ el.addEventListener('mousedown',inputDown);
 
 function inputDown(evt){
 	console.log(evt);
-	console.log(myView.posAtCoords({left:evt.clientX,top:evt.clientY}));
+	console.log(myView.posAtCoords({left:evt.screenX,top:evt.screenY}));
 }
