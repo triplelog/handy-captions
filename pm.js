@@ -84,7 +84,7 @@ var maxPos = [-1,-1];
 var el = document.querySelector(".input-0");
 el.addEventListener('pointerdown',inputDown);
 el.addEventListener('pointermove',inputMove);
-el.addEventListener('pointerup',inputUp);
+el.addEventListener('pointerup',inputUp,0);
 
 function inputDown(evt){
 	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
@@ -118,7 +118,8 @@ function inputMove(evt){
 		}
 	}
 }
-function inputUp(evt){
+function inputUp(evt,id){
+	console.log("id:",id);
 	var id = 0;
 	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY+16});
