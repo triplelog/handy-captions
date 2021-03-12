@@ -28,7 +28,7 @@ let myPlugin = new Plugin({
       ])
     }
   },
-  filterTransaction: (t,s) => {console.log(t); return true; }
+  filterTransaction: (t,s) => {console.log(t.mapping.map(selectedText.start)); return true; }
 })
 
 var plugins = exampleSetup({schema: mySchema});
