@@ -23,7 +23,7 @@ let myPlugin = new Plugin({
     	var id = state.doc.attrs.id;
     	console.log(id);
     	console.log(selectedText);
-    	if (id){
+    	if (id || id == 0){
 		  return DecorationSet.create(state.doc, [
 			Decoration.inline(selectedText[id].start, selectedText[id].end, {style: "background: yellow"})
 		  ])
