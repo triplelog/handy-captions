@@ -15,7 +15,7 @@ const mySchema = new Schema({
   marks: schema.spec.marks
 })
 
-var selectedText = {start:0,end:0};
+var selectedText = {0:{start:0,end:0},1:{start:0,end:0},2:{start:0,end:0}};
 
 let myPlugin = new Plugin({
   props: {
@@ -45,6 +45,14 @@ plugins.push(myPlugin);
 
 
 var myViews = [];
+myViews.push(new EditorView(document.querySelector(".input-0"), {
+  state: EditorState.create({
+  		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
+		schema: mySchema,
+		plugins: plugins
+	})
+}));
+
 myViews.push(new EditorView(document.querySelector(".input-1"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
@@ -63,10 +71,11 @@ myViews.push(new EditorView(document.querySelector(".input-2"), {
 
 myViews[0].state.doc.attrs = {id:0};
 myViews[1].state.doc.attrs = {id:1};
+myViews[2].state.doc.attrs = {id:2};
 
 var minPos = [-1,-1];
 var maxPos = [-1,-1];
-var el = document.querySelector(".input-1");
+var el = document.querySelector(".input-0");
 el.addEventListener('pointerdown',inputDown);
 el.addEventListener('pointermove',inputMove);
 el.addEventListener('pointerup',inputUp);
@@ -141,14 +150,14 @@ function inputUp(evt){
 }
 
 
-export function chgTab(x) {
-	myViews[x].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-"+(2-x)+" > div > .ProseMirror"));
-	myViews[x].state.doc.attrs = {id:x};
-	var tt = myViews[x].state.tr;
+export function chgTab(from,to) {
+	myViews[to].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-"+from+" > div > .ProseMirror"));
+	myViews[to].state.doc.attrs = {id:to};
+	var tt = myViews[to].state.tr;
 	tt.setMeta('k',true);
-	var rPos = myViews[x].state.doc.resolve(0);
-	var rPos2 = myViews[x].state.doc.resolve(1);
+	var rPos = myViews[to].state.doc.resolve(0);
+	var rPos2 = myViews[to].state.doc.resolve(1);
 	var sel = new TextSelection(rPos,rPos2);
 	tt.setSelection(sel);
-	myViews[x].dispatch(tt);
+	myViews[to].dispatch(tt);
 }
