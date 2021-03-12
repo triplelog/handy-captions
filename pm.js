@@ -26,7 +26,6 @@ let myPlugin = new Plugin({
     }
   },
   filterTransaction: (t,s) => {
-    console.log(s.doc.attrs.id);
   	const oldStart = selectedText.start;
   	const oldEnd = selectedText.end;
   	selectedText.start = t.mapping.map(oldStart);
@@ -35,9 +34,21 @@ let myPlugin = new Plugin({
   }
 })
 
+let syncPlugin = new Plugin({
+  props: {
+    
+  },
+  filterTransaction: (t,s) => {
+    console.log(s.doc.attrs.id);
+  	console.log(s);
+  	return true; 
+  }
+})
+
 var plugins = exampleSetup({schema: mySchema});
 
 plugins.push(myPlugin);
+plugins.push(syncPlugin);
 
 function syncDispatch(from, to) {
 	console.log(from,to);
@@ -53,8 +64,7 @@ myViews.push(new EditorView(document.querySelector(".input-1"), {
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
 		plugins: plugins
-	}),
-  dispatch: syncDispatch(0,1)
+	})
 }));
 
 myViews.push(new EditorView(document.querySelector(".input-2"), {
@@ -62,8 +72,7 @@ myViews.push(new EditorView(document.querySelector(".input-2"), {
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
 		plugins: plugins
-	}),
-  dispatch: syncDispatch(1,0)
+	})
 }));
 
 myViews[0].state.doc.attrs = {id:0};
