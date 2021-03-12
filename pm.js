@@ -51,6 +51,7 @@ let syncPlugin = new Plugin({
 			schema: mySchema,
 			plugins: plugins
 		});
+		myViews[1].state.doc.attrs = {id:1};
 		var tt = myViews[1].state.tr;
 		tt.setMeta('k',true)
 		myViews[1].dispatch(tt);
@@ -86,12 +87,7 @@ myViews.push(new EditorView(document.querySelector(".input-2"), {
 
 myViews[0].state.doc.attrs = {id:0};
 myViews[1].state.doc.attrs = {id:1};
-console.log(myViews[0].state);
-console.log(myViews[0].state.id);
-myViews[0].state.id = 0;
-myViews[1].state.id = 1;
-console.log(myViews[0].state);
-console.log(myViews[0].state.id);
+
 var minPos = [-1,-1];
 var maxPos = [-1,-1];
 var el = document.querySelector(".input-1");
