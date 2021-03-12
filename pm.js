@@ -145,8 +145,9 @@ function inputDown(evt){
 	}
 	if (anchor) {
 		var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
-		var offset = myViews[id].coordsAtPos(pos);
-		selectedText[id].offset = [offset.left,offset.top,offset.left,offset.top,pos];
+		console.log(pos);
+		var offset = myViews[id].coordsAtPos(pos.pos);
+		selectedText[id].offset = [offset.left,offset.top,offset.left,offset.top,pos.pos];
 		var el = document.querySelector('.o2');
 		el.style.top = '0px';
 		el.style.left = '0px';
