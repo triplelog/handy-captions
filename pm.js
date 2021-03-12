@@ -54,7 +54,7 @@ let syncPlugin = new Plugin({
   	else if (myId == 1 && !t.getMeta('k')) {
   		t.doc = myViews[0].state.doc;
   		t.setMeta('k',true);
-  		myViews[0].dispatch(t);
+  		//myViews[0].dispatch(t);
   	}
   	else {
   		return false;
