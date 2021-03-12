@@ -96,10 +96,10 @@ function inputUp(evt){
 	tt.deleteSelection();
 	myView.dispatch(tt);
 	console.log(myView);
-	var decos = new DecorationSet();
+	
 	var d = Decoration.inline(160,170,{class: 'highlight'});
 	console.log(d);
-	decos = decos.add(myView.state.doc,[d]);
+	var decos = DecorationSet.create(myView.state.doc,[d]);
 	console.log(decos);
 	myView.decorations = decos;
 	console.log(myView);
