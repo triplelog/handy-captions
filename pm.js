@@ -17,20 +17,7 @@ const mySchema = new Schema({
 
 console.log(mySchema);
 
-let highlightPlugin = new Plugin({
-  state: {
-    init(_, {doc}) {
-      let speckles = []
-      for (let pos = 1; pos < doc.content.size; pos += 4)
-        speckles.push(Decoration.inline(pos - 1, pos, {style: "background: yellow"}))
-      return DecorationSet.create(doc, speckles)
-    },
-    apply(tr, set) { return set.map(tr.mapping, tr.doc) }
-  },
-  props: {
-    decorations(state) { return highlightPlugin.getState(state) }
-  }
-});
+let highlightPlugin = new Plugin();
 
 var plugins = exampleSetup({schema: mySchema});
 console.log(plugins);
