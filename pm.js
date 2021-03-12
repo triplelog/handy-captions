@@ -39,8 +39,10 @@ let syncPlugin = new Plugin({
     
   },
   filterTransaction: (t,s) => {
-    console.log(s.doc.attrs.id);
-  	console.log(s);
+    var myId = s.doc.attrs.id;
+  	if (myId == 0){
+  		myViews[1].dispatch(t);
+  	}
   	return true; 
   }
 })
