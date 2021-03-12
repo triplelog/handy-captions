@@ -4,19 +4,16 @@ import {Schema, DOMParser} from "prosemirror-model"
 import {schema} from "prosemirror-schema-basic"
 import {addListNodes} from "prosemirror-schema-list"
 import {exampleSetup} from "prosemirror-example-setup"
-import {TextSelection, Selection, Transaction} from "prosemirror-state"
+import {TextSelection, Selection, Transaction, Annotation, AnnotationType} from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
 
 // Mix the nodes from prosemirror-schema-list into the basic schema to
 // create a schema with list support.
-console.log(schema);
+
 const mySchema = new Schema({
   nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
   marks: schema.spec.marks
 })
-
-console.log(mySchema);
-
 
 var selectedText = {start:0,end:0};
 
@@ -33,16 +30,30 @@ let myPlugin = new Plugin({
   	const oldEnd = selectedText.end;
   	selectedText.start = t.mapping.map(oldStart);
   	selectedText.end = t.mapping.map(oldEnd);
-  	/*if (oldEnd - selectedText.end != oldStart - selectedText.start){
-  		selectedText.end = oldEnd;
-  	}*/
   	return true; 
   }
 })
 
 var plugins = exampleSetup({schema: mySchema});
 plugins.push(myPlugin);
-console.log(plugins);
+
+
+let views = [];
+let syncAnnotation = new AnnotationType();
+syncAnnotation.define;
+
+
+function syncDispatch(from, to) {
+	console.log(from,to);
+  return (tr) => {
+    views[from].update([tr]);
+    if (!tr.changes.empty && !tr.annotation(syncAnnotation)){
+      views[to].dispatch({changes: tr.changes, annotations: syncAnnotation.of(true)})
+    }
+  }
+}
+
+
 
 var myView = new EditorView(document.querySelector(".input-1"), {
   state: EditorState.create({
