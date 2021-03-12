@@ -96,7 +96,8 @@ function inputUp(evt){
 	tt.deleteSelection();
 	myView.dispatch(tt);
 	console.log(myView);
-	myView.decorations = {};
+	var decos = new DecorationSet();
+	myView.decorations = decos;
 	console.log(myView);
 	
 }
