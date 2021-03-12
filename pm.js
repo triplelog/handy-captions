@@ -93,7 +93,7 @@ curveWorker.onmessage = function(evt){
 		}
 	}
 	else if (evt.data.type == 'outputCurve'){
-		drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint,evt.data.startPosition);
+		drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint);
 	}
 	else if (evt.data.type == 'convexHull'){
 		drawConvexHull(evt.data.pdArray);
@@ -211,9 +211,9 @@ function inputUp(evt){
 			//var sel = new TextSelection(rPos,rPos2);
 			//tt.setSelection(sel);
 			myViews[id].dispatch(tt);
-			curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY,'start':minPos[1]});
-			var offsetLeft = myViews[id].coordsAtPos(minPos[1]);
-			selectedText[id].offset = [offsetLeft,0,offsetLeft,0];
+			curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+			var offset = myViews[id].coordsAtPos(minPos[1]);
+			selectedText[id].offset = [offset.left,offset.top,offset.left,offset.top];
 		}
 	
 

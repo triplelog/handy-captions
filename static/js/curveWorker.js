@@ -12,7 +12,7 @@ onmessage = function(evt){
 		recentPoints.push([evt.data.x,evt.data.y]);
 		clearInterval(myInterval);
 		sendPoints(false);
-		createPD(evt.data.start);
+		createPD();
 	}
 	
 }
@@ -90,7 +90,7 @@ function drawCurveIn(pt){
 	el.style.top = pt[1]+"px";
 	inputEl.appendChild(el);
 }
-function createPD(start){
+function createPD(){
 	if (currentCurve.length < 1){
 		return;
 	}
@@ -117,7 +117,7 @@ function createPD(start){
 
 	
 	allCurves[id]= currentCurve;
-	postMessage({'type':'outputCurve','id':id,'pd':pd,'startPoint':[currentCurve[0][0],currentCurve[0][1]],'endPoint':[currentCurve[currentCurve.length - 1][0],currentCurve[currentCurve.length - 1][1]],'startPosition':start});
+	postMessage({'type':'outputCurve','id':id,'pd':pd,'startPoint':[currentCurve[0][0],currentCurve[0][1]],'endPoint':[currentCurve[currentCurve.length - 1][0],currentCurve[currentCurve.length - 1][1]]});
 	convexHull(currentCurve);
 	currentCurve = [];
 	recentPoints = [];
