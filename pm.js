@@ -28,6 +28,7 @@ let myPlugin = new Plugin({
 })
 
 var plugins = exampleSetup({schema: mySchema});
+plugins.push(myPlugin);
 console.log(plugins);
 
 var myView = new EditorView(document.querySelector(".input-1"), {
