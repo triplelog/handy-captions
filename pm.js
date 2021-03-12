@@ -28,7 +28,16 @@ let myPlugin = new Plugin({
       ])
     }
   },
-  filterTransaction: (t,s) => {selectedText.start = t.mapping.map(selectedText.start); return true; }
+  filterTransaction: (t,s) => {
+  	const oldStart = selectedText.start;
+  	const oldEnd = selectedText.end;
+  	selectedText.start = t.mapping.map(oldStart);
+  	selectedText.end = t.mapping.map(oldEnd);
+  	if (oldEnd - selectedText.end > oldStart - selectedText.start){
+  		selectedText.end = oldEnd;
+  	}
+  	return true; 
+  }
 })
 
 var plugins = exampleSetup({schema: mySchema});
