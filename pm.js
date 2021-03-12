@@ -41,13 +41,9 @@ let syncPlugin = new Plugin({
   filterTransaction: (t,s) => {
     var myId = s.doc.attrs.id;
   	if (myId == 0){
-  		console.log(t);
-  		
-  		var tt = myViews[1].state.tr;
-  		console.log(tt);
-  		myViews[1].dispatch(tt);
   		console.log(JSON.stringify(t));
-  		console.log(JSON.stringify(tt));
+  		t.doc = myViews[1].state.doc;
+  		console.log(JSON.stringify(t));
   	}
   	return true; 
   }
