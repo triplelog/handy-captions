@@ -37,9 +37,15 @@ let myPlugin = new Plugin({
 		const oldEnd = selectedText[idx].end;
 		selectedText[idx].start = t.mapping.map(oldStart);
 		selectedText[idx].end = t.mapping.map(oldEnd);
-		var offsetLeft = myViews[idx].coordsAtPos(selectedText[idx].start).left;
-		selectedText[idx].offset[2] = offsetLeft;
-		console.log(selectedText[idx].offset);
+		if (idx == 0){
+			var offsetLeft = myViews[idx].coordsAtPos(selectedText[idx].start).left;
+			selectedText[idx].offset[2] = offsetLeft;
+			
+			console.log(selectedText[idx].offset);
+			var el = document.querySelector('.o2');
+			el.style.top = 0+'px';
+			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
+		}
   	}
   	return true; 
   }
