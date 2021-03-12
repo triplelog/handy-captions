@@ -43,24 +43,8 @@ let syncPlugin = new Plugin({
   },
   filterTransaction: (t,s) => {
     var myId = s.doc.attrs.id;
-    console.log(t.getMeta('k'));
     console.log(myId);
 
-  	/*if (myId == 0 && !t.getMeta('k')){
-  		t.doc = myViews[1].state.doc;
-  		myViews[1].dispatch(t);
-  		return false;
-  	}
-  	else*/ if (myId == 0 && !t.getMeta('k')) {
-  		myViews[1].state.doc = myViews[0].state.doc.copy();
-  		return true;
-  	}
-  	else if (myId == 0 && t.getMeta('k')){
-  		return true;
-  	}
-  	else {
-  		return false;
-  	}
   	return true; 
   }
 })
