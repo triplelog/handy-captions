@@ -18,7 +18,7 @@ const mySchema = new Schema({
 console.log(mySchema);
 
 
-var selectedText = {start:140,end:150};
+var selectedText = {start:0,end:0};
 
 let myPlugin = new Plugin({
   props: {
@@ -27,7 +27,8 @@ let myPlugin = new Plugin({
         Decoration.inline(selectedText.start, selectedText.end, {style: "background: yellow"})
       ])
     }
-  }
+  },
+  filterTransaction: (t,s) => {console.log(t);}
 })
 
 var plugins = exampleSetup({schema: mySchema});
