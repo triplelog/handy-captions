@@ -42,12 +42,11 @@ let syncPlugin = new Plugin({
     var myId = s.doc.attrs.id;
   	if (myId == 0){
   		console.log(t);
-  		t.doc = myViews[1].state.doc;
-  		console.log(t);
-  		var tt = myViews[1].state.tr;
-  		tt = t;
   		
+  		var tt = myViews[1].state.tr;
+  		console.log(tt);
   		myViews[1].dispatch(tt);
+  		console.log(JSON.stringify(tt));
   	}
   	return true; 
   }
