@@ -300,6 +300,6 @@ export function chgTab(from,to) {
 	tt.setSelection(sel);
 	myViews[to].dispatch(tt);
 }
-export function anchor() {
+export function resetAnchor() {
 	anchor = true;
 }
