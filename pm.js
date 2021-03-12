@@ -88,7 +88,7 @@ function inputUp(evt){
 	console.log(minPos[0],maxPos[0]);
 	console.log(minPos[1],maxPos[1]);
 	console.log(myView.state);
-	var tt = myView.tr;
+	var tt = myView.state.tr;
 	console.log(tt);
 	
 }
