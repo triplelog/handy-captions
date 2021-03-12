@@ -26,35 +26,53 @@ var myView = new EditorView(document.querySelector(".input-1"), {
 
 
 
-var minPos = -1;
-var maxPos = -1;
+var minPos = [-1,-1];
+var maxPos = [-1,-1];
 var el = document.querySelector(".input-1");
 el.addEventListener('pointerdown',inputDown);
 el.addEventListener('pointermove',inputMove);
 el.addEventListener('pointerup',inputUp);
 
 function inputDown(evt){
-	var pos = myView.posAtCoords({left:evt.clientX,top:evt.clientY});
-	minPos = pos.pos;
-	maxPos = pos.pos;
+	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	minPos[0] = posTop.pos;
+	maxPos[0] = posTop.pos;
+	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
+	minPos[1] = posBottom.pos;
+	maxPos[1] = posBottom.pos;
 }
 function inputMove(evt){
-	var pos = myView.posAtCoords({left:evt.clientX,top:evt.clientY});
-	if (pos.pos < minPos){
-		minPos = pos.pos;
+	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
+	if (posTop.pos < minPos[0]){
+		minPos[0] = posTop.pos;
 	}
-	else if (pos.pos > maxPos){
-		maxPos = pos.pos;
+	else if (posTop.pos > maxPos[0]){
+		maxPos[0] = posTop.pos;
+	}
+	if (posBottom.pos < minPos[1]){
+		minPos[1] = posBottom.pos;
+	}
+	else if (posBottom.pos > maxPos[1]){
+		maxPos[1] = posBottom.pos;
 	}
 }
 function inputUp(evt){
-	var pos = myView.posAtCoords({left:evt.clientX,top:evt.clientY});
-	if (pos.pos < minPos){
-		minPos = pos.pos;
+	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
+	if (posTop.pos < minPos[0]){
+		minPos[0] = posTop.pos;
 	}
-	else if (pos.pos > maxPos){
-		maxPos = pos.pos;
+	else if (posTop.pos > maxPos[0]){
+		maxPos[0] = posTop.pos;
 	}
-	console.log(minPos,maxPos);
+	if (posBottom.pos < minPos[1]){
+		minPos[1] = posBottom.pos;
+	}
+	else if (posBottom.pos > maxPos[1]){
+		maxPos[1] = posBottom.pos;
+	}
+	console.log(minPos[0],maxPos[0]);
+	console.log(minPos[1],maxPos[1]);
 	
 }
