@@ -52,7 +52,7 @@ let syncPlugin = new Plugin({
   		return false;
   	}
   	else*/ if (myId == 0 && !t.getMeta('k')) {
-  		myViews[1].state.doc = myViews[0].state.doc;
+  		myViews[1].state.doc = myViews[0].state.doc.copy();
   		return true;
   	}
   	else if (myId == 0 && t.getMeta('k')){
