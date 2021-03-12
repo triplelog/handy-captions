@@ -4,7 +4,7 @@ import {Schema, DOMParser} from "prosemirror-model"
 import {schema} from "prosemirror-schema-basic"
 import {addListNodes} from "prosemirror-schema-list"
 import {exampleSetup} from "prosemirror-example-setup"
-import {TextSelection, Selection, Transaction, Annotation} from "prosemirror-state"
+import {TextSelection, Selection, Transaction} from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
 
 // Mix the nodes from prosemirror-schema-list into the basic schema to
@@ -38,31 +38,25 @@ var plugins = exampleSetup({schema: mySchema});
 plugins.push(myPlugin);
 
 
-let views = [];
-let syncAnnotation = new AnnotationType();
-syncAnnotation.define;
-
-
-function syncDispatch(from, to) {
-	console.log(from,to);
-  return (tr) => {
-    views[from].update([tr]);
-    if (!tr.changes.empty && !tr.annotation(syncAnnotation)){
-      views[to].dispatch({changes: tr.changes, annotations: syncAnnotation.of(true)})
-    }
-  }
-}
 
 
 
-var myView = new EditorView(document.querySelector(".input-1"), {
+
+var myViews = [];
+myViews.push(new EditorView(document.querySelector(".input-1"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
 		plugins: plugins
 	})
-})
-
+}));
+myViews.push(new EditorView(document.querySelector(".input-2"), {
+  state: EditorState.create({
+  		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
+		schema: mySchema,
+		plugins: plugins
+	})
+}));
 
 
 var minPos = [-1,-1];
@@ -73,8 +67,8 @@ el.addEventListener('pointermove',inputMove);
 el.addEventListener('pointerup',inputUp);
 
 function inputDown(evt){
-	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
+	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
 		minPos[0] = posTop.pos;
 		maxPos[0] = posTop.pos;
@@ -85,8 +79,8 @@ function inputDown(evt){
 	}
 }
 function inputMove(evt){
-	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
+	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
 		if (posTop.pos < minPos[0]){
 			minPos[0] = posTop.pos;
@@ -105,8 +99,8 @@ function inputMove(evt){
 	}
 }
 function inputUp(evt){
-	var posTop = myView.posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myView.posAtCoords({left:evt.clientX,top:evt.clientY+16});
+	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
 		if (posTop.pos < minPos[0]){
 			minPos[0] = posTop.pos;
@@ -130,12 +124,12 @@ function inputUp(evt){
 	if (minPos[1] <= maxPos[0]){
 		selectedText.start = minPos[1];
 		selectedText.end = maxPos[0];
-		var rPos = myView.state.doc.resolve(minPos[1]);
-		var rPos2 = myView.state.doc.resolve(maxPos[0]);
-		var tt = myView.state.tr;
-		var sel = new TextSelection(rPos,rPos2);
+		//var rPos = myView.state.doc.resolve(minPos[1]);
+		//var rPos2 = myView.state.doc.resolve(maxPos[0]);
+		var tt = myViews[0].state.tr;
+		//var sel = new TextSelection(rPos,rPos2);
 		//tt.setSelection(sel);
-		myView.dispatch(tt);
+		myViews[0].dispatch(tt);
 	}
 
 	
