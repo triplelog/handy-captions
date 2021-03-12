@@ -17,13 +17,14 @@ const mySchema = new Schema({
 
 console.log(mySchema);
 
-var x = 150;
+
+var selectedText = {start:140,end:150};
 
 let myPlugin = new Plugin({
   props: {
     decorations(state) {
       return DecorationSet.create(state.doc, [
-        Decoration.inline(140, x, {style: "color: purple"})
+        Decoration.inline(selectedText.start, selectedText.end, {style: "color: purple"})
       ])
     }
   }
@@ -109,14 +110,14 @@ function inputUp(evt){
 	var sel = new TextSelection(rPos,rPos2);
 	tt.setSelection(sel);
 	tt.deleteSelection();
+	
+	selectedText.start = 20;
+	selectedText.end = 50;
+	
 	myView.dispatch(tt);
 	console.log(myView);
-	
-	var d = Decoration.inline(160,170,{class: 'highlight'});
-	console.log(d);
-	var decos = DecorationSet.create(myView.state.doc,[d]);
-	console.log(decos);
-	myView.decorations = decos;
+	selectedText.start = 40;
+	selectedText.end = 50;
 	console.log(myView);
 	
 }
