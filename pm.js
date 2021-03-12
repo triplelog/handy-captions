@@ -26,6 +26,8 @@ let myPlugin = new Plugin({
     }
   },
   filterTransaction: (t,s) => {
+  	console.log(t);
+  	console.log(s);
   	const oldStart = selectedText.start;
   	const oldEnd = selectedText.end;
   	selectedText.start = t.mapping.map(oldStart);
@@ -45,11 +47,7 @@ let syncPlugin = new Plugin({
   		
   		var tt = JSON.parse(t1);
   		tt.doc = myViews[1].state.doc;
-  		console.log(JSON.stringify(tt));
   		myViews[1].dispatch(tt);
-  	}
-  	else {
-  		console.log(JSON.stringify(t));
   	}
   	return true; 
   }
