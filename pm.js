@@ -25,7 +25,7 @@ console.log(mySetup);
 var myState = EditorState.fromJSON({
     schema: mySchema,
     plugins: exampleSetup({schema: mySchema})
-});
+},{});
 console.log(myState);
 myState.doc = 'Test';
 console.log(myState);
