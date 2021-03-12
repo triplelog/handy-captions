@@ -99,7 +99,7 @@ function inputUp(evt){
 	var decos = new DecorationSet();
 	var d = Decoration.inline(160,170,{class: 'highlight'});
 	console.log(d);
-	decos.add(myView.state.doc,[d]);
+	decos = decos.add(myView.state.doc,[d]);
 	console.log(decos);
 	myView.decorations = decos;
 	console.log(myView);
