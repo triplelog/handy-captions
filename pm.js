@@ -36,7 +36,7 @@ let myPlugin = new Plugin({
   }
 })
 
-var stack = 0;
+
 let syncPlugin = new Plugin({
   props: {
     
@@ -44,13 +44,13 @@ let syncPlugin = new Plugin({
   filterTransaction: (t,s) => {
     var myId = s.doc.attrs.id;
     console.log(t.getMeta('k'));
-    stack++;
-  	if (myId == 0 && stack < 10){
+
+  	if (myId == 0 && !t.getMeta('k')){
   		t.doc = myViews[1].state.doc;
   		myViews[1].dispatch(t);
   		return false;
   	}
-  	else if (stack < 10) {
+  	else if (!t.getMeta('k')) {
   		t.doc = myViews[0].state.doc;
   		t.setMeta('k',true);
   		myViews[0].dispatch(t);
