@@ -61,7 +61,7 @@ let syncPlugin = new Plugin({
 		return false;
 	}*/
   	return true; 
-  }
+  },
   appendTransaction: (tl,s1,s2) => {
     var myId = s1.doc.attrs.id;
     console.log(myId);
