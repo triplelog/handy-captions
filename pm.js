@@ -15,7 +15,7 @@ const mySchema = new Schema({
   marks: schema.spec.marks
 })
 
-var selectedText = {0:{start:0,end:0},1:{start:0,end:0},2:{start:0,end:0}};
+var selectedText = {0:{start:0,end:0,offset:[0,0,0,0]},1:{start:0,end:0,offset:[0,0,0,0]},2:{start:0,end:0,offset:[0,0,0,0]}};
 
 let myPlugin = new Plugin({
   props: {
@@ -37,6 +37,9 @@ let myPlugin = new Plugin({
 		const oldEnd = selectedText[idx].end;
 		selectedText[idx].start = t.mapping.map(oldStart);
 		selectedText[idx].end = t.mapping.map(oldEnd);
+		var offsetLeft = myViews[idx].coordsAtPos(selectedText[idx].start).left;
+		selectedText[idx].offset[2] = offsetLeft;
+		console.log(selectedText[idx].offset);
   	}
   	return true; 
   }
@@ -90,7 +93,7 @@ curveWorker.onmessage = function(evt){
 		}
 	}
 	else if (evt.data.type == 'outputCurve'){
-		drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint);
+		drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint,evt.data.startPosition);
 	}
 	else if (evt.data.type == 'convexHull'){
 		drawConvexHull(evt.data.pdArray);
@@ -208,12 +211,15 @@ function inputUp(evt){
 			//var sel = new TextSelection(rPos,rPos2);
 			//tt.setSelection(sel);
 			myViews[id].dispatch(tt);
+			curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY,'start':minPos[1]});
+			var offsetLeft = myViews[id].coordsAtPos(minPos[1]);
+			selectedText[id].offset = [offsetLeft,0,offsetLeft,0];
 		}
 	
 
 		isDown = false;
 		
-		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+		
 	}
 	
 }
@@ -227,6 +233,9 @@ function drawCurveIn(pt){
 	inputEl.appendChild(el);
 }
 function drawCurveOut(id,pd,startPoint,endPoint){
+	var el = document.querySelector('.o2');
+	el.style.top = '0px';
+	el.style.left = '0px';
 	var svg = document.querySelector('.o2 .bgSVG');
 	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
@@ -257,6 +266,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	svg2.appendChild(path2);
 	
 	allCurves[id]= currentCurve;
+	
 }
 
 function drawConvexHull(pdArray) {
