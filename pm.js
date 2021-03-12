@@ -46,12 +46,12 @@ let syncPlugin = new Plugin({
     console.log(t.getMeta('k'));
     console.log(myId);
 
-  	if (myId == 0 && !t.getMeta('k')){
+  	/*if (myId == 0 && !t.getMeta('k')){
   		t.doc = myViews[1].state.doc;
   		myViews[1].dispatch(t);
   		return false;
   	}
-  	else if (myId == 1 && !t.getMeta('k')) {
+  	else*/ if (myId == 0 && !t.getMeta('k')) {
   		t.doc = myViews[0].state.doc;
   		t.setMeta('k',true);
   		myViews[0].dispatch(t);
