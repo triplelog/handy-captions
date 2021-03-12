@@ -36,13 +36,16 @@ let myPlugin = new Plugin({
   }
 })
 
+var stack = 0;
 let syncPlugin = new Plugin({
   props: {
     
   },
   filterTransaction: (t,s) => {
     var myId = s.doc.attrs.id;
-  	if (myId == 0 && !t.getMeta('k')){
+    console.log(t.getMeta('k'));
+    stack++;
+  	if (myId == 0 && stack < 10){
   		t.doc = myViews[1].state.doc;
   		myViews[1].dispatch(t);
   		return false;
