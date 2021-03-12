@@ -20,18 +20,20 @@ var selectedText = {0:{start:0,end:0},1:{start:0,end:0},2:{start:0,end:0}};
 let myPlugin = new Plugin({
   props: {
     decorations(state) {
+    	var id = state.doc.attrs.id;
+    	console.log(id);
       return DecorationSet.create(state.doc, [
-        Decoration.inline(selectedText.start, selectedText.end, {style: "background: yellow"})
+        Decoration.inline(selectedText[id].start, selectedText[id].end, {style: "background: yellow"})
       ])
     }
   },
   filterTransaction: (t,s) => {
-  	console.log(t);
-  	console.log(s);
-  	const oldStart = selectedText.start;
-  	const oldEnd = selectedText.end;
-  	selectedText.start = t.mapping.map(oldStart);
-  	selectedText.end = t.mapping.map(oldEnd);
+    var id = s.doc.attrs.id;
+    console.log(id);
+  	const oldStart = selectedText[id].start;
+  	const oldEnd = selectedText[id].end;
+  	selectedText[id].start = t.mapping.map(oldStart);
+  	selectedText[id].end = t.mapping.map(oldEnd);
   	return true; 
   }
 })
@@ -113,6 +115,7 @@ function inputMove(evt){
 	}
 }
 function inputUp(evt){
+	var id = 0;
 	var posTop = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[0].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
@@ -136,8 +139,8 @@ function inputUp(evt){
 	
 	
 	if (minPos[1] <= maxPos[0]){
-		selectedText.start = minPos[1];
-		selectedText.end = maxPos[0];
+		selectedText[id].start = minPos[1];
+		selectedText[id].end = maxPos[0];
 		//var rPos = myView.state.doc.resolve(minPos[1]);
 		//var rPos2 = myView.state.doc.resolve(maxPos[0]);
 		var tt = myViews[0].state.tr;
