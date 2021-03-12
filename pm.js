@@ -33,7 +33,7 @@ let myPlugin = new Plugin({
   	const oldEnd = selectedText.end;
   	selectedText.start = t.mapping.map(oldStart);
   	selectedText.end = t.mapping.map(oldEnd);
-  	if (oldEnd - selectedText.end > oldStart - selectedText.start){
+  	if (oldEnd - selectedText.end != oldStart - selectedText.start){
   		selectedText.end = oldEnd;
   	}
   	return true; 
