@@ -81,6 +81,24 @@ myViews[2].state.doc.attrs = {id:2};
 
 var minPos = [-1,-1];
 var maxPos = [-1,-1];
+var inputEl = document.querySelector('.input');
+var curveWorker = new Worker('js/curveWorker.js');
+curveWorker.onmessage = function(evt){
+	if (evt.data.type == 'inputCurve'){
+		for (var i=0;i<evt.data.points.length;i++){
+			drawCurveIn(evt.data.points[i]);
+		}
+	}
+	else if (evt.data.type == 'outputCurve'){
+		drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint);
+	}
+	else if (evt.data.type == 'convexHull'){
+		drawConvexHull(evt.data.pdArray);
+	}
+}
+
+var isDown = false;
+
 for (var i=0;i<3;i++){
 	var el = document.querySelector(".input-"+i);
 	el.addEventListener('pointerdown',inputDown);
@@ -114,78 +132,141 @@ function inputDown(evt){
 		minPos[1] = posBottom.pos;
 		maxPos[1] = posBottom.pos;
 	}
+	curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
+	isDown = true;
 }
 function inputMove(evt){
-	var id = tabId;
-	if (id == -1){return;}
-	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
-	if (posTop && posTop.pos){
-		if (posTop.pos < minPos[0]){
-			minPos[0] = posTop.pos;
+	if (isDown){
+		var id = tabId;
+		if (id == -1){return;}
+		var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+		var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
+		if (posTop && posTop.pos){
+			if (posTop.pos < minPos[0]){
+				minPos[0] = posTop.pos;
+			}
+			else if (posTop.pos > maxPos[0]){
+				maxPos[0] = posTop.pos;
+			}
 		}
-		else if (posTop.pos > maxPos[0]){
-			maxPos[0] = posTop.pos;
+		if (posBottom && posBottom.pos){
+			if (posBottom.pos < minPos[1]){
+				minPos[1] = posBottom.pos;
+			}
+			else if (posBottom.pos > maxPos[1]){
+				maxPos[1] = posBottom.pos;
+			}
 		}
-	}
-	if (posBottom && posBottom.pos){
-		if (posBottom.pos < minPos[1]){
-			minPos[1] = posBottom.pos;
-		}
-		else if (posBottom.pos > maxPos[1]){
-			maxPos[1] = posBottom.pos;
-		}
+	
+		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
 	}
 }
 function inputUp(evt){
-	var id = -1;
-	var el = evt.target;
-	while (id == -1 && el){
-		console.log(el);
-		if (el.id.substr(0,4) != 'tab-'){
-			el = el.parentElement;
+	if (isDown){
+		var id = -1;
+		var el = evt.target;
+		while (id == -1 && el){
+			console.log(el);
+			if (el.id.substr(0,4) != 'tab-'){
+				el = el.parentElement;
+			}
+			else {
+				id = parseInt(el.id.substr(4));
+			}
 		}
-		else {
-			id = parseInt(el.id.substr(4));
+		if (id == -1){return;}
+		console.log("Upid:",id);
+		tabId = id;
+		var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+		var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
+		if (posTop && posTop.pos){
+			if (posTop.pos < minPos[0]){
+				minPos[0] = posTop.pos;
+			}
+			else if (posTop.pos > maxPos[0]){
+				maxPos[0] = posTop.pos;
+			}
 		}
-	}
-	if (id == -1){return;}
-	console.log("Upid:",id);
-	tabId = id;
-	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
-	if (posTop && posTop.pos){
-		if (posTop.pos < minPos[0]){
-			minPos[0] = posTop.pos;
+		if (posBottom && posBottom.pos){
+			if (posBottom.pos < minPos[1]){
+				minPos[1] = posBottom.pos;
+			}
+			else if (posBottom.pos > maxPos[1]){
+				maxPos[1] = posBottom.pos;
+			}
 		}
-		else if (posTop.pos > maxPos[0]){
-			maxPos[0] = posTop.pos;
-		}
-	}
-	if (posBottom && posBottom.pos){
-		if (posBottom.pos < minPos[1]){
-			minPos[1] = posBottom.pos;
-		}
-		else if (posBottom.pos > maxPos[1]){
-			maxPos[1] = posBottom.pos;
-		}
-	}
-	console.log(minPos[0],maxPos[0]);
-	console.log(minPos[1],maxPos[1]);
+		console.log(minPos[0],maxPos[0]);
+		console.log(minPos[1],maxPos[1]);
 	
 	
-	if (minPos[1] <= maxPos[0]){
-		selectedText[id].start = minPos[1];
-		selectedText[id].end = maxPos[0];
-		//var rPos = myView.state.doc.resolve(minPos[1]);
-		//var rPos2 = myView.state.doc.resolve(maxPos[0]);
-		var tt = myViews[id].state.tr;
-		//var sel = new TextSelection(rPos,rPos2);
-		//tt.setSelection(sel);
-		myViews[id].dispatch(tt);
+		if (minPos[1] <= maxPos[0]){
+			selectedText[id].start = minPos[1];
+			selectedText[id].end = maxPos[0];
+			//var rPos = myView.state.doc.resolve(minPos[1]);
+			//var rPos2 = myView.state.doc.resolve(maxPos[0]);
+			var tt = myViews[id].state.tr;
+			//var sel = new TextSelection(rPos,rPos2);
+			//tt.setSelection(sel);
+			myViews[id].dispatch(tt);
+		}
+	
+
+		isDown = false;
+		
+		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+	}
+	
+}
+
+function drawCurveIn(pt){
+	
+	var el = document.createElement('div');
+	el.classList.add("pt");
+	el.style.left = pt[0]+"px";
+	el.style.top = pt[1]+"px";
+	inputEl.appendChild(el);
+}
+function drawCurveOut(id,pd,startPoint,endPoint){
+	var svg = document.querySelector('.o2 .bgSVG');
+	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	
+	path0.setAttribute('d',pd);
+	path0.setAttribute('stroke','none');
+	path0.setAttribute('stroke-width','11');
+	path0.setAttribute('fill','none');
+	path0.id = "bbg-"+id;
+	svg.appendChild(path0);
+	
+
+	var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	
+	path.setAttribute('d',pd);
+	path.setAttribute('stroke','none');
+	path.setAttribute('stroke-width','7');
+	path.setAttribute('fill','none');
+	path.id = "bg-"+id;
+	svg.appendChild(path);
+	
+	var svg2 = document.querySelector('.o2  .fgSVG');
+	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	path2.setAttribute('d',pd);
+	path2.setAttribute('stroke','none');
+	path2.setAttribute('stroke-width','5');
+	path2.setAttribute('fill','none');
+	path2.id = "fg-"+id;
+	svg2.appendChild(path2);
+	
+	allCurves[id]= currentCurve;
+}
+
+function drawConvexHull(pdArray) {
+	for (var i=0;i<10;i++){
+		var el = document.querySelector('.convexHull-'+i);
+		el.setAttribute('d',pdArray[i]);
 	}
 
-	
+
+
 }
 
 
