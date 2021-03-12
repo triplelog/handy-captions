@@ -52,9 +52,13 @@ let syncPlugin = new Plugin({
   		return false;
   	}
   	else if (myId == 1 && !t.getMeta('k')) {
-  		t.doc = myViews[1].state.doc;
+  		t.doc = myViews[0].state.doc;
   		t.setMeta('k',true);
-  		//myViews[0].dispatch(t);
+  		myViews[0].dispatch(t);
+  		return false;
+  	}
+  	else if (myId == 0 && t.getMeta('k')){
+  		return true;
   	}
   	else {
   		return false;
