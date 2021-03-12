@@ -232,7 +232,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	
 	path0.setAttribute('d',pd);
 	path0.setAttribute('stroke','rgba(255,255,255,.1)');
-	path0.setAttribute('stroke-width','11');
+	path0.setAttribute('stroke-width','5');
 	path0.setAttribute('fill','none');
 	path0.id = "bbg-"+id;
 	svg.appendChild(path0);
@@ -242,7 +242,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	
 	path.setAttribute('d',pd);
 	path.setAttribute('stroke','rgba(255,255,255,.9)');
-	path.setAttribute('stroke-width','7');
+	path.setAttribute('stroke-width','4');
 	path.setAttribute('fill','none');
 	path.id = "bg-"+id;
 	svg.appendChild(path);
@@ -251,7 +251,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
 	path2.setAttribute('stroke','black');
-	path2.setAttribute('stroke-width','5');
+	path2.setAttribute('stroke-width','3');
 	path2.setAttribute('fill','none');
 	path2.id = "fg-"+id;
 	svg2.appendChild(path2);
@@ -260,11 +260,6 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 }
 
 function drawConvexHull(pdArray) {
-	for (var i=0;i<10;i++){
-		var el = document.querySelector('.convexHull-'+i);
-		el.setAttribute('d',pdArray[i]);
-	}
-
 
 
 }
