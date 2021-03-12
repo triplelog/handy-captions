@@ -46,6 +46,7 @@ let syncPlugin = new Plugin({
   		var tt = myViews[1].state.tr;
   		console.log(tt);
   		myViews[1].dispatch(tt);
+  		console.log(JSON.stringify(t));
   		console.log(JSON.stringify(tt));
   	}
   	return true; 
