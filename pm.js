@@ -17,7 +17,14 @@ const mySchema = new Schema({
 
 console.log(mySchema);
 
-let highlightPlugin = new Plugin();
+let myPlugin = new Plugin({
+  props: {
+    handleKeyDown(view, event) {
+      console.log("A key was pressed!")
+      return false // We did not handle this
+    }
+  }
+})
 
 var plugins = exampleSetup({schema: mySchema});
 console.log(plugins);
