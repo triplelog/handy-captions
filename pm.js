@@ -50,7 +50,7 @@ let syncPlugin = new Plugin({
   		myViews[1].dispatch(t);
   		return false;
   	}
-  	else {
+  	else if (stack < 10) {
   		t.doc = myViews[0].state.doc;
   		t.setMeta('k',true);
   		myViews[0].dispatch(t);
