@@ -71,10 +71,13 @@ let syncPlugin = new Plugin({
 		myViews[1].state.doc.attrs = {id:1};
 		var tt = myViews[1].state.tr;
 		tt.setMeta('k',true);
+		var rPos = myViews[1].state.doc.resolve(0);
+		var rPos2 = myViews[1].state.doc.resolve(1);
+		var sel = new TextSelection(rPos,rPos2);
+		tt.setSelection(sel);
 
 		return tt;
 	}
-	
   }
 })
 
