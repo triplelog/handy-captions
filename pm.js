@@ -83,12 +83,14 @@ var minPos = [-1,-1];
 var maxPos = [-1,-1];
 for (var i=0;i<3;i++){
 	var el = document.querySelector(".input-"+i);
-	el.addEventListener('pointerdown',function(evt) {inputDown(evt,i);});
-	el.addEventListener('pointermove',function(evt) {inputMove(evt,i);});
-	el.addEventListener('pointerup',function(evt) {inputUp(evt,i);});
+	el.addEventListener('pointerdown',inputDown);
+	el.addEventListener('pointermove',inputMove);
+	el.addEventListener('pointerup',inputUp);
 }
 
-function inputDown(evt,id){
+function inputDown(evt){
+	var id = 0;
+	console.log(evt.target.parentElement);
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
@@ -100,7 +102,8 @@ function inputDown(evt,id){
 		maxPos[1] = posBottom.pos;
 	}
 }
-function inputMove(evt,id){
+function inputMove(evt){
+	var id = 0;
 	console.log(id);
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
@@ -121,7 +124,8 @@ function inputMove(evt,id){
 		}
 	}
 }
-function inputUp(evt,id){
+function inputUp(evt){
+	var id = 0;
 	console.log("id:",id);
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
