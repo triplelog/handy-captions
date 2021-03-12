@@ -22,7 +22,7 @@ var mySetup = exampleSetup({schema: mySchema})
 
 console.log(mySetup);
 
-var myState = new EditorState().fromJSON({
+var myState = EditorState.fromJSON({
     schema: mySchema,
     plugins: exampleSetup({schema: mySchema})
 });
