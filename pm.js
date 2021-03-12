@@ -16,7 +16,7 @@ const mySchema = new Schema({
 console.log(mySchema);
 
 
-window.view = new EditorView(document.querySelector(".input-1"), {
+var myView = new EditorView(document.querySelector(".input-1"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
@@ -25,10 +25,12 @@ window.view = new EditorView(document.querySelector(".input-1"), {
 })
 
 
-/*
-var myState = EditorState.create({
-    doc: 'Test text',
-    schema: mySchema,
-    plugins: exampleSetup({schema: mySchema})
-})
-*/
+
+
+var el = document.querySelector(".input-1");
+el.addEventListener('mousedown',inputDown);
+
+function inputDown(evt){
+	console.log(evt);
+	console.log(myView.posAtCoords({left:evt.clientX,top:evt.clientY}));
+}
