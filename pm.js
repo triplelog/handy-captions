@@ -19,9 +19,10 @@ console.log(mySchema);
 
 let myPlugin = new Plugin({
   props: {
-    handleKeyDown(view, event) {
-      console.log("A key was pressed!")
-      return false // We did not handle this
+    decorations(state) {
+      return DecorationSet.create(state.doc, [
+        Decoration.inline(0, state.doc.content.size, {style: "color: purple"})
+      ])
     }
   }
 })
