@@ -26,7 +26,7 @@ let myPlugin = new Plugin({
     }
   },
   filterTransaction: (t,s) => {
-    console.log(s.id);
+    console.log(s.doc);
   	const oldStart = selectedText.start;
   	const oldEnd = selectedText.end;
   	selectedText.start = t.mapping.map(oldStart);
@@ -53,8 +53,7 @@ myViews.push(new EditorView(document.querySelector(".input-1"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
-		plugins: plugins,
-		id: 0
+		plugins: plugins
 	}),
   dispatch: syncDispatch(0,1)
 }));
