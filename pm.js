@@ -42,7 +42,7 @@ let syncPlugin = new Plugin({
   },
   filterTransaction: (t,s) => {
     var myId = s.doc.attrs.id;
-  	if (myId == 0 && !t.k){
+  	if (myId == 0 && !t.getMeta('k')){
   		t.doc = myViews[1].state.doc;
   		myViews[1].dispatch(t);
   		return false;
