@@ -88,6 +88,7 @@ for (var i=0;i<3;i++){
 	el.addEventListener('pointerup',inputUp);
 }
 
+var tabId = -1;
 function inputDown(evt){
 	var id = -1;
 	var el = evt.target;
@@ -102,6 +103,7 @@ function inputDown(evt){
 	}
 	if (id == -1){return;}
 	console.log("Downid:",id);
+	tabId = id;
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
@@ -114,17 +116,7 @@ function inputDown(evt){
 	}
 }
 function inputMove(evt){
-	var id = -1;
-	var el = evt.target;
-	while (id == -1 && el){
-		console.log(el);
-		if (el.id.substr(0,4) != 'tab-'){
-			el = el.parentElement;
-		}
-		else {
-			id = parseInt(el.id.substr(4));
-		}
-	}
+	var id = tabId;
 	if (id == -1){return;}
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
@@ -159,6 +151,7 @@ function inputUp(evt){
 	}
 	if (id == -1){return;}
 	console.log("Upid:",id);
+	tabId = id;
 	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
