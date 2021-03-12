@@ -67,7 +67,11 @@ myViews.push(new EditorView(document.querySelector(".input-2"), {
   dispatch: syncDispatch(1,0)
 }));
 
-
+console.log(myViews[0].state);
+console.log(myViews[0].state.id);
+myViews[0].state.id = 0;
+console.log(myViews[0].state);
+console.log(myViews[0].state.id);
 var minPos = [-1,-1];
 var maxPos = [-1,-1];
 var el = document.querySelector(".input-1");
