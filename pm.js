@@ -46,7 +46,7 @@ let syncPlugin = new Plugin({
   		var tt = JSON.parse(t1);
   		tt.doc = myViews[1].state.doc;
   		console.log(JSON.stringify(tt));
-  		myViews[1].state.dispatch(tt);
+  		myViews[1].dispatch(tt);
   	}
   	else {
   		console.log(JSON.stringify(t));
