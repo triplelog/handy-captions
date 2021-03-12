@@ -44,9 +44,10 @@ let syncPlugin = new Plugin({
   		console.log(t);
   		t.doc = myViews[1].state.doc;
   		console.log(t);
-  		//var tt = myViews[0].state.tr;
+  		var tt = myViews[1].state.tr;
+  		tt = t;
   		
-  		myViews[1].dispatch(t);
+  		myViews[1].dispatch(tt);
   	}
   	return true; 
   }
