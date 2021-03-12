@@ -231,7 +231,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 	path0.setAttribute('d',pd);
-	path0.setAttribute('stroke','none');
+	path0.setAttribute('stroke','rgba(255,255,255,.1)');
 	path0.setAttribute('stroke-width','11');
 	path0.setAttribute('fill','none');
 	path0.id = "bbg-"+id;
@@ -241,7 +241,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 	path.setAttribute('d',pd);
-	path.setAttribute('stroke','none');
+	path.setAttribute('stroke','rgba(255,255,255,.9)');
 	path.setAttribute('stroke-width','7');
 	path.setAttribute('fill','none');
 	path.id = "bg-"+id;
@@ -250,7 +250,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg2 = document.querySelector('.o2  .fgSVG');
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
-	path2.setAttribute('stroke','none');
+	path2.setAttribute('stroke','black');
 	path2.setAttribute('stroke-width','5');
 	path2.setAttribute('fill','none');
 	path2.id = "fg-"+id;
