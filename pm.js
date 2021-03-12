@@ -44,8 +44,8 @@ let syncPlugin = new Plugin({
   appendTransaction: (tl,s1,s2) => {
     var myId = s1.doc.attrs.id;
     console.log(myId);
-	
-	if (myId == 0 && !t.getMeta('k')){
+	console.log(tl);
+	if (myId == 0 && !tl[0].getMeta('k')){
 		myViews[1].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-1 > div > .ProseMirror"));
 		myViews[1].state.doc.attrs = {id:1};
 		var tt = myViews[1].state.tr;
@@ -57,7 +57,7 @@ let syncPlugin = new Plugin({
 		myViews[1].dispatch(tt);
 		
 	}
-	else if (myId == 1 && !t.getMeta('k')){
+	else if (myId == 1 && !tl[0].getMeta('k')){
 		myViews[0].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-2 > div > .ProseMirror"));
 		myViews[0].state.doc.attrs = {id:1};
 		var tt = myViews[0].state.tr;
