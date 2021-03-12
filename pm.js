@@ -39,6 +39,16 @@ plugins.push(myPlugin);
 
 
 
+function syncDispatch(from, to) {
+	console.log(from,to);
+  return (tr) => {
+    views[from].update([tr]);
+    if (!tr.changes.empty){
+      views[to].dispatch({changes: tr.changes})
+    }
+  }
+}
+
 
 
 
@@ -48,14 +58,16 @@ myViews.push(new EditorView(document.querySelector(".input-1"), {
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
 		plugins: plugins
-	})
+	}),
+  dispatch: syncDispatch(0,1)
 }));
 myViews.push(new EditorView(document.querySelector(".input-2"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
 		plugins: plugins
-	})
+	}),
+  dispatch: syncDispatch(1,0)
 }));
 
 
