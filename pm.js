@@ -22,17 +22,15 @@ var mySetup = exampleSetup({schema: mySchema})
 
 console.log(mySetup);
 
-var myState = new EditorState({
-    doc: 'Test text',
+var myState = new EditorState();
+console.log(myState);
+myState.doc = 'Test';
+console.log(myState);
+var newState = myState.fromJSON({
     schema: mySchema,
     plugins: exampleSetup({schema: mySchema})
 });
-
-
-
 console.log(myState);
-
-
 
 window.view = new EditorView(document.querySelector(".input-1"), {
   state: myState
