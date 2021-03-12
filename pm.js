@@ -45,11 +45,14 @@ let syncPlugin = new Plugin({
     var myId = s.doc.attrs.id;
     console.log(myId);
 	
-	myViews[1].state = EditorState.create({
-  		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content2")),
-		schema: mySchema,
-		plugins: plugins
-	});
+	if (myId == 1){
+		myViews[1].state = EditorState.create({
+			doc: DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-1")),
+			schema: mySchema,
+			plugins: plugins
+		});
+		return false;
+	}
   	return true; 
   }
 })
