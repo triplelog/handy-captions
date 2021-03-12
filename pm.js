@@ -172,16 +172,18 @@ function inputDown(evt){
 function inputMove(evt){
 	if (writing){
 		evt.preventDefault();
-		if (isDown){
-			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
-			curveWorker.postMessage({'type':'move','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
-			
-		}
 	}
 	
 	if (isDown){
 		var id = tabId;
 		if (id == -1){return;}
+		if (writing){
+			if (isDown){
+				var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
+				curveWorker.postMessage({'type':'move','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
+			
+			}
+		}
 		var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
 		var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 		if (posTop && posTop.pos){
