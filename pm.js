@@ -4,7 +4,7 @@ import {Schema, DOMParser} from "prosemirror-model"
 import {schema} from "prosemirror-schema-basic"
 import {addListNodes} from "prosemirror-schema-list"
 import {exampleSetup} from "prosemirror-example-setup"
-import {TextSelection, Selection, Transaction, Annotation, AnnotationType} from "prosemirror-state"
+import {TextSelection, Selection, Transaction, Annotation} from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
 
 // Mix the nodes from prosemirror-schema-list into the basic schema to
