@@ -22,11 +22,15 @@ var mySetup = exampleSetup({schema: mySchema})
 
 console.log(mySetup);
 
-var myState = EditorState.create({
-    doc: 'Test text',
-    schema: mySchema,
-    plugins: exampleSetup({schema: mySchema})
-})
+var myState = new EditorState();
+
+
+
+console.log(myState);
+
+myState.doc = 'Test text';
+myState.schema = mySchema;
+myState.plugins = mySetup;
 
 
 
@@ -35,3 +39,12 @@ console.log(myState);
 window.view = new EditorView(document.querySelector(".input-1"), {
   state: myState
 })
+
+
+/*
+var myState = EditorState.create({
+    doc: 'Test text',
+    schema: mySchema,
+    plugins: exampleSetup({schema: mySchema})
+})
+*/
