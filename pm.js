@@ -44,7 +44,12 @@ let syncPlugin = new Plugin({
   filterTransaction: (t,s) => {
     var myId = s.doc.attrs.id;
     console.log(myId);
-
+	
+	myViews[1].state = EditorState.create({
+  		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content2")),
+		schema: mySchema,
+		plugins: plugins
+	});
   	return true; 
   }
 })
@@ -53,12 +58,6 @@ var plugins = exampleSetup({schema: mySchema});
 
 plugins.push(myPlugin);
 plugins.push(syncPlugin);
-
-function syncDispatch(from, to) {
-	console.log(from,to);
-
-}
-
 
 
 
