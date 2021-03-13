@@ -140,8 +140,7 @@ function inputDown(evt){
 	tabId = id;
 	
 	if (writing){
-		evt.preventDefault();
-		
+
 		if (anchor) {
 			var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
 			console.log(pos);
@@ -320,7 +319,7 @@ function drawConvexHull(pdArray) {
 
 
 export function chgTab(from,to) {
-	myViews[to].state.doc = DOMParser.fromSchema(mySchema).parse(document.querySelector(".input-"+from+" > div > .ProseMirror"));
+	myViews[to].state.doc = myViews[from].state.doc;
 	myViews[to].state.doc.attrs = {id:to};
 	var tt = myViews[to].state.tr;
 	tt.setMeta('k',true);
