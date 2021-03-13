@@ -118,8 +118,8 @@ for (var i=0;i<3;i++){
 	el.addEventListener('pointerup',inputUp);
 }
 
-var tabId = -1;
-var anchor = true;
+var tabId = 0;
+var anchor = [true,true,true];
 var writing = false;
 function inputDown(evt){
 	if (writing){
@@ -141,14 +141,14 @@ function inputDown(evt){
 	
 	if (writing){
 
-		if (anchor) {
+		if (anchor[id]) {
 			var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
 			console.log(pos);
 			var offset = myViews[id].coordsAtPos(pos.pos);
 			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
 			selectedText[id].offset = [offset.left-currentOffset[0],offset.top-currentOffset[1],offset.left,offset.top,pos.pos];
 
-			anchor = false;
+			anchor[id] = false;
 		}
 		var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
 		curveWorker.postMessage({'type':'down','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
@@ -327,7 +327,7 @@ export function chgTab(from,to) {
 	myViews[to].dispatch(ttt);
 }
 export function resetAnchor() {
-	anchor = true;
+	anchor[tabId] = true;
 }
 export function writingMode() {
 	if (writing){writing = false}
