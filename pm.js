@@ -43,7 +43,7 @@ let myPlugin = new Plugin({
 			var offset = myViews[idx].coordsAtPos(selectedText[idx].offset[4]);
 			selectedText[idx].offset[2] = offset.left;
 			selectedText[idx].offset[3] = offset.top;
-			var el = document.querySelector('.o2');
+			var el = document.querySelector('.out-'+idx);
 			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
 			console.log("off:",offset);
@@ -279,7 +279,7 @@ function drawCurveIn(pt){
 }
 function drawCurveOut(id,pd,startPoint,endPoint){
 	
-	var svg = document.querySelector('.o2 .bgSVG');
+	var svg = document.querySelector('.out-'+id+' .bgSVG');
 	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 	path0.setAttribute('d',pd);
@@ -299,7 +299,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	path.id = "bg-"+id;
 	svg.appendChild(path);
 	
-	var svg2 = document.querySelector('.o2  .fgSVG');
+	var svg2 = document.querySelector('.out-'+id+'  .fgSVG');
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
 	path2.setAttribute('stroke','black');

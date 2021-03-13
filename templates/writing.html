@@ -47,18 +47,21 @@
 	background-size: 300px 300px;*/
 	
 }
-.o2 {
+.out-0, .out-1, .out-2, {
 	position: absolute;
 	left: 0rem;
 	top:0rem;
 	width: 600px;
 	height: 600px;
-	display: inline-block;
+	display: none;
 	border: 0px solid red;
 	background-color: transparent;
 	pointer-events: none;
 	touch-action: none;
 	
+}
+.out-0 {
+	display: inline-block;
 }
 .tools {
 	position: absolute;
@@ -317,7 +320,55 @@ li.ProseMirror-selectednode:after {
 <div style="display: none" id="content2">
   <h3>Hello ProseMirror</h3>
 </div>
-<div class="o2" >
+<div class="out-0" >
+	<svg id="textSVG" viewBox="0 0 600 600" width="600" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+			  <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+			  <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+			</linearGradient>
+			<radialGradient id="grad2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%" gradientUnits="userSpaceOnUse">
+			  <stop offset="0%" style="stop-color:rgb(0,0,0);stop-opacity:1" />
+			  <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+			</radialGradient>
+			<pattern id="img1" patternUnits="userSpaceOnUse" width="100%" height="100%">
+				<image href="img/pnggrad16rgb.png" x="0" y="0" width="100%" height="100%" />
+			</pattern>
+		</defs>
+		
+		<g class="bgSVG">
+
+		</g>
+		<g class="fgSVG">
+			
+		</g>
+	</svg>
+</div>
+<div class="out-1" >
+	<svg id="textSVG" viewBox="0 0 600 600" width="600" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+			  <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+			  <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+			</linearGradient>
+			<radialGradient id="grad2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%" gradientUnits="userSpaceOnUse">
+			  <stop offset="0%" style="stop-color:rgb(0,0,0);stop-opacity:1" />
+			  <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+			</radialGradient>
+			<pattern id="img1" patternUnits="userSpaceOnUse" width="100%" height="100%">
+				<image href="img/pnggrad16rgb.png" x="0" y="0" width="100%" height="100%" />
+			</pattern>
+		</defs>
+		
+		<g class="bgSVG">
+
+		</g>
+		<g class="fgSVG">
+			
+		</g>
+	</svg>
+</div>
+<div class="out-2" >
 	<svg id="textSVG" viewBox="0 0 600 600" width="600" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<defs>
 			<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -455,15 +506,17 @@ function drawConvexHull(pdArray) {
 
 var currentTab = 0;
 function show(id) {
+	for (var i=0;i<3;i++){
+		var el = document.querySelector('.input-'+i);
+		el.style.display = "none";
+		var ell = document.querySelector('.out-'+i);
+		ell.style.display = "none";
+	}
 	
-	var el0 = document.querySelector('.input-0');
-	el0.style.display = "none";
-	var el1 = document.querySelector('.input-1');
-	el1.style.display = "none";
-	var el2 = document.querySelector('.input-2');
-	el2.style.display = "none";
 	var el = document.querySelector('.input-'+id);
 	el.style.display = "inline-block";
+	var ell = document.querySelector('.out-'+id);
+	ell.style.display = "inline-block";
 	pm.chgTab(currentTab,id);
 	currentTab = id;
 	
