@@ -325,7 +325,8 @@ export function chgTab(from,to) {
 	var ttt = myViews[to].state.tr;
 	ttt.setMeta('k',true);
 	var rPos1 = myViews[to].state.doc.resolve(selectedText[to].start);
-	var s = new Selection(rPos1,rPos1);
+	var rPos2 = myViews[to].state.doc.resolve(selectedText[to].start+1);
+	var s = new Selection(rPos1,rPos2);
 	ttt.setSelection(s);
 	ttt.scrollIntoView();
 	myViews[to].dispatch(ttt);
