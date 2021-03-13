@@ -68,7 +68,7 @@ plugins.push(myPlugin);
 
 
 var myViews = [];
-myViews.push(new EditorView(document.querySelector(".input-0"), {
+myViews.push(new EditorView(document.querySelector("#tab-0"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
@@ -76,7 +76,7 @@ myViews.push(new EditorView(document.querySelector(".input-0"), {
 	})
 }));
 
-myViews.push(new EditorView(document.querySelector(".input-1"), {
+myViews.push(new EditorView(document.querySelector("#tab-1"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
@@ -84,7 +84,7 @@ myViews.push(new EditorView(document.querySelector(".input-1"), {
 	})
 }));
 
-myViews.push(new EditorView(document.querySelector(".input-2"), {
+myViews.push(new EditorView(document.querySelector("#tab-2"), {
   state: EditorState.create({
   		doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
 		schema: mySchema,
@@ -117,7 +117,7 @@ curveWorker.onmessage = function(evt){
 var isDown = false;
 
 for (var i=0;i<3;i++){
-	var el = document.querySelector(".input-"+i);
+	var el = document.querySelector("#tab-"+i);
 	el.addEventListener('pointerdown',inputDown);
 	el.addEventListener('pointermove',inputMove);
 	el.addEventListener('pointerup',inputUp);
