@@ -102,7 +102,7 @@ curveWorker.onmessage = function(evt){
 		}
 	}
 	else if (evt.data.type == 'outputCurve'){
-		drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint);
+		drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint,evt.data.tab);
 	}
 	else if (evt.data.type == 'convexHull'){
 		drawConvexHull(evt.data.pdArray);
@@ -258,7 +258,7 @@ function inputUp(evt){
 		}
 		if (writing){
 			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
-			curveWorker.postMessage({'type':'up','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
+			curveWorker.postMessage({'type':'up','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1],'tab':id});
 
 		}
 
@@ -277,9 +277,9 @@ function drawCurveIn(pt){
 	el.style.top = pt[1]+"px";
 	inputEl.appendChild(el);
 }
-function drawCurveOut(id,pd,startPoint,endPoint){
+function drawCurveOut(id,pd,startPoint,endPoint,tab){
 	
-	var svg = document.querySelector('.out-'+id+' .bgSVG');
+	var svg = document.querySelector('.out-'+tab+' .bgSVG');
 	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 	path0.setAttribute('d',pd);
@@ -299,7 +299,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	path.id = "bg-"+id;
 	svg.appendChild(path);
 	
-	var svg2 = document.querySelector('.out-'+id+'  .fgSVG');
+	var svg2 = document.querySelector('.out-'+tab+'  .fgSVG');
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
 	path2.setAttribute('stroke','black');
