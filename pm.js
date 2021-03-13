@@ -323,10 +323,6 @@ export function chgTab(from,to) {
 	myViews[to].state.doc.attrs = {id:to};
 	var tt = myViews[to].state.tr;
 	tt.setMeta('k',true);
-	var rPos = myViews[to].state.doc.resolve(0);
-	var rPos2 = myViews[to].state.doc.resolve(1);
-	var sel = new TextSelection(rPos,rPos2);
-	tt.setSelection(sel);
 	myViews[to].dispatch(tt);
 }
 export function resetAnchor() {
