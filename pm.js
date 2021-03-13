@@ -321,7 +321,7 @@ function drawConvexHull(pdArray) {
 export function chgTab(from,to) {
 	myViews[to].state.doc = myViews[from].state.doc;
 	myViews[to].state.doc.attrs = {id:to};
-	myViews[to].update(myViews[to].props);
+	//myViews[to].update(myViews[to].props);
 	myViews[to].updateState(myViews[to].state);
 	var ttt = myViews[to].state.tr;
 	ttt.setMeta('k',true);
