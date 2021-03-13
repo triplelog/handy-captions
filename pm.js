@@ -43,9 +43,14 @@ let myPlugin = new Plugin({
 			var offset = myViews[idx].coordsAtPos(selectedText[idx].offset[4]);
 			selectedText[idx].offset[2] = offset.left;
 			selectedText[idx].offset[3] = offset.top;
-			var el = document.querySelector('.out-'+idx);
-			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
-			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
+			var el = document.querySelector('.out-'+idx+' > svg');
+			var newViewBox = (selectedText[idx].offset[2]-selectedText[idx].offset[0]) + ' ';
+			newViewBox += (selectedText[idx].offset[3]-selectedText[idx].offset[1]) + ' ';
+			newViewBox += '600 600';
+			el.setAttribute('viewBox',newViewBox); 
+			//el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
+			//el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
+			
 			console.log("off:",offset);
 			
 		}
