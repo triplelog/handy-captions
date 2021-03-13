@@ -44,7 +44,11 @@ let myPlugin = new Plugin({
 			var el = document.querySelector('.o2');
 			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
-			console.log(selectedText[idx]);
+			console.log("st:",selectedText[idx]);
+			var tt = myViews[idx].state.tr;
+			tt.setMeta('k',true);
+			myViews[idx].dispatch(tt);
+			console.log("st2:",selectedText[idx]);
 		}
   	}
   	return true; 
