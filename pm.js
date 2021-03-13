@@ -45,10 +45,7 @@ let myPlugin = new Plugin({
 			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
 			console.log("st:",selectedText[idx]);
-			var tt = myViews[idx].state.tr;
-			tt.setMeta('k',true);
-			myViews[idx].dispatch(tt);
-			console.log("st2:",selectedText[idx]);
+			
 		}
   	}
   	return true; 
@@ -129,7 +126,6 @@ function inputDown(evt){
 	var id = -1;
 	var el = evt.target;
 	while (id == -1 && el){
-		console.log(el);
 		if (el.id.substr(0,4) != 'tab-'){
 			el = el.parentElement;
 		}
@@ -215,7 +211,6 @@ function inputUp(evt){
 		var id = -1;
 		var el = evt.target;
 		while (id == -1 && el){
-			console.log(el);
 			if (el.id.substr(0,4) != 'tab-'){
 				el = el.parentElement;
 			}
