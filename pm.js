@@ -29,7 +29,7 @@ let myPlugin = new Plugin({
     }
   },
   filterTransaction: (t,s) => {
-
+	
     for (var idx=0;idx<3;idx++){
 		const oldStart = selectedText[idx].start;
 		const oldEnd = selectedText[idx].end;
@@ -47,6 +47,14 @@ let myPlugin = new Plugin({
 			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
 			console.log("off:",offset);
+			
+			if (t.getMeta('k') != 7){
+				myViews[idx].updateState(myViews[idx].state);
+				var ttt = myViews[idx].state.tr;
+				ttt.setMeta('k',7);
+			
+				myViews[idx].dispatch(ttt);
+			}
 			
 		}
   	}
@@ -321,7 +329,6 @@ function drawConvexHull(pdArray) {
 export function chgTab(from,to) {
 	myViews[to].state.doc = myViews[from].state.doc;
 	myViews[to].state.doc.attrs = {id:to};
-	//myViews[to].update(myViews[to].props);
 	myViews[to].updateState(myViews[to].state);
 	var ttt = myViews[to].state.tr;
 	ttt.setMeta('k',true);
