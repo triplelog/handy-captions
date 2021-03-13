@@ -323,8 +323,14 @@ export function chgTab(from,to) {
 	myViews[to].state.doc.attrs = {id:to};
 	var tt = myViews[to].state.tr;
 	tt.setMeta('k',true);
+	tt.scrollIntoView();
 	myViews[to].dispatch(tt);
-	myViews[to].updateState(myViews[to].state);
+	myViews[to].update();
+	myViews[to].updateState();
+	var ttt = myViews[to].state.tr;
+	ttt.setMeta('k',true);
+	ttt.scrollIntoView();
+	myViews[to].dispatch(ttt);
 }
 export function resetAnchor() {
 	anchor = true;
