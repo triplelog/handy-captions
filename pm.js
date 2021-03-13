@@ -29,7 +29,7 @@ let myPlugin = new Plugin({
     }
   },
   filterTransaction: (t,s) => {
-	if (t.getMeta('k')){return true;}
+
     for (var idx=0;idx<3;idx++){
 		const oldStart = selectedText[idx].start;
 		const oldEnd = selectedText[idx].end;
