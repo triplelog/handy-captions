@@ -46,7 +46,7 @@ let myPlugin = new Plugin({
 			var el = document.querySelector('.o2');
 			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
-			console.log("stopost:",selectedText[idx].offset);
+			console.log("off:",offset);
 			
 		}
   	}
