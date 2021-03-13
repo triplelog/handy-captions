@@ -37,7 +37,7 @@ let myPlugin = new Plugin({
 		selectedText[idx].start = t.mapping.map(oldStart);
 		selectedText[idx].end = t.mapping.map(oldEnd);
 		selectedText[idx].offset[4] = t.mapping.map(oldAnchor);
-		if (idx == 0){
+		if (idx == s.doc.attrs.id){
 			console.log("st4:",selectedText[idx].offset[4]);
 			console.log("catst4:",myViews[idx].coordsAtPos(selectedText[idx].offset[4]));
 			var offset = myViews[idx].coordsAtPos(selectedText[idx].offset[4]);
@@ -47,14 +47,6 @@ let myPlugin = new Plugin({
 			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
 			console.log("off:",offset);
-			
-			if (t.getMeta('k') != 7){
-				myViews[idx].updateState(myViews[idx].state);
-				var ttt = myViews[idx].state.tr;
-				ttt.setMeta('k',7);
-			
-				myViews[idx].dispatch(ttt);
-			}
 			
 		}
   	}
