@@ -21,8 +21,6 @@ let myPlugin = new Plugin({
   props: {
     decorations(state) {
     	var id = state.doc.attrs.id;
-    	console.log(id);
-    	console.log(selectedText);
     	if (id || id == 0){
 		  return DecorationSet.create(state.doc, [
 			Decoration.inline(selectedText[id].start, selectedText[id].end, {style: "background: yellow"})
@@ -46,6 +44,7 @@ let myPlugin = new Plugin({
 			var el = document.querySelector('.o2');
 			el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
+			console.log(selectedText[idx]);
 		}
   	}
   	return true; 
