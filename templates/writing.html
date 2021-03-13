@@ -455,7 +455,7 @@ function drawConvexHull(pdArray) {
 
 var currentTab = 0;
 function show(id) {
-	pm.chgTab(currentTab,id);
+	
 	var el0 = document.querySelector('.input-0');
 	el0.style.display = "none";
 	var el1 = document.querySelector('.input-1');
@@ -464,6 +464,7 @@ function show(id) {
 	el2.style.display = "none";
 	var el = document.querySelector('.input-'+id);
 	el.style.display = "inline-block";
+	pm.chgTab(currentTab,id);
 	currentTab = id;
 	
 }

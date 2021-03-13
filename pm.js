@@ -38,6 +38,8 @@ let myPlugin = new Plugin({
 		selectedText[idx].end = t.mapping.map(oldEnd);
 		selectedText[idx].offset[4] = t.mapping.map(oldAnchor);
 		if (idx == 0){
+			console.log("st4:",selectedText[idx].offset[4]);
+			console.log("catst4:",myViews[idx].coordsAtPos(selectedText[idx].offset[4]));
 			var offset = myViews[idx].coordsAtPos(selectedText[idx].offset[4]);
 			selectedText[idx].offset[2] = offset.left;
 			selectedText[idx].offset[3] = offset.top;
