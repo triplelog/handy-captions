@@ -325,7 +325,7 @@ export function chgTab(from,to) {
 	tt.setMeta('k',true);
 	tt.scrollIntoView();
 	myViews[to].dispatch(tt);
-	myViews[to].update();
+	//myViews[to].update();
 	myViews[to].updateState();
 	var ttt = myViews[to].state.tr;
 	ttt.setMeta('k',true);
