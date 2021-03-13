@@ -324,6 +324,7 @@ export function chgTab(from,to) {
 	var tt = myViews[to].state.tr;
 	tt.setMeta('k',true);
 	myViews[to].dispatch(tt);
+	myViews[to].updateState(myViews[to].state);
 }
 export function resetAnchor() {
 	anchor = true;
