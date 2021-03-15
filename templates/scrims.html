@@ -400,26 +400,26 @@ function outline(){
 		cPoint[key]=[];
 		for (var ii=0;ii<myPoint.length/2;ii++){
 			var d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
-			var dx = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
-			var dy = margin*(myPoint[2*ii]-lastPoint[0])/d;
+			var dy = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
+			var dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
 			if (i==4){
 				console.log('4New:',ii,d,dx,dy, myPoint);
 			}
 			if (dx >= 0 && dy >= 0){
-				cPoint[key].push(myPoint[2*ii]+dx);
-				cPoint[key].push(myPoint[2*ii+1]-dy);
+				cPoint[key].push(myPoint[2*ii]+dy);
+				cPoint[key].push(myPoint[2*ii+1]-dx);
 			}
 			else if (dx >= 0 && dy < 0){
-				cPoint[key].push(myPoint[2*ii]-dx);
-				cPoint[key].push(myPoint[2*ii+1]+dy);
+				cPoint[key].push(myPoint[2*ii]-dy);
+				cPoint[key].push(myPoint[2*ii+1]+dx);
 			}
 			else if (dx < 0 && dy < 0){
-				cPoint[key].push(myPoint[2*ii]+dx);
-				cPoint[key].push(myPoint[2*ii+1]-dy);
+				cPoint[key].push(myPoint[2*ii]+dy);
+				cPoint[key].push(myPoint[2*ii+1]-dx);
 			}
 			else if (dx < 0 && dy >= 0){
-				cPoint[key].push(myPoint[2*ii]-dx);
-				cPoint[key].push(myPoint[2*ii+1]+dy);
+				cPoint[key].push(myPoint[2*ii]-dy);
+				cPoint[key].push(myPoint[2*ii+1]+dx);
 			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
@@ -433,32 +433,29 @@ function outline(){
 			if (ii>=myPoint.length/2){
 				var nextPoint = [next[nextKey][0],next[nextKey][1]];
 				d = Math.pow( Math.pow((nextPoint[1]-lastPoint[1]),2) + Math.pow((nextPoint[0]-lastPoint[0]),2) ,.5);
-				dx = margin*(nextPoint[1]-lastPoint[1])/d;
-				dy = margin*(nextPoint[0]-lastPoint[0])/d;
+				dy = margin*(nextPoint[1]-lastPoint[1])/d;
+				dx = margin*(nextPoint[0]-lastPoint[0])/d;
 			}
 			else {
 				d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
-				dx = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
-				dy = margin*(myPoint[2*ii]-lastPoint[0])/d;
-			}
-			if (i==4){
-				console.log('4Old:',ii,d,dx,dy, myPoint);
+				dy = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
+				dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
 			}
 			if (dx >= 0 && dy >= 0){
-				bPoint[key].push(myPoint[2*ii-2]+dx);
-				bPoint[key].push(myPoint[2*ii-1]-dy);
+				bPoint[key].push(myPoint[2*ii-2]+dy);
+				bPoint[key].push(myPoint[2*ii-1]-dx);
 			}
 			else if (dx >= 0 && dy < 0){
-				bPoint[key].push(myPoint[2*ii-2]-dx);
-				bPoint[key].push(myPoint[2*ii-1]+dy);
+				bPoint[key].push(myPoint[2*ii-2]-dy);
+				bPoint[key].push(myPoint[2*ii-1]+dx);
 			}
 			else if (dx < 0 && dy < 0){
-				bPoint[key].push(myPoint[2*ii-2]+dx);
-				bPoint[key].push(myPoint[2*ii-1]-dy);
+				bPoint[key].push(myPoint[2*ii-2]+dy);
+				bPoint[key].push(myPoint[2*ii-1]-dx);
 			}
 			else if (dx < 0 && dy >= 0){
-				bPoint[key].push(myPoint[2*ii-2]-dx);
-				bPoint[key].push(myPoint[2*ii-1]+dy);
+				bPoint[key].push(myPoint[2*ii-2]-dy);
+				bPoint[key].push(myPoint[2*ii-1]+dx);
 			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
