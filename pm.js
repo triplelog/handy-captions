@@ -42,8 +42,9 @@ let myPlugin = new Plugin({
 			console.log("st4:",selectedText[idx].offset[4]);
 			console.log("catst4:",myViews[idx].coordsAtPos(selectedText[idx].offset[4]));
 			var offset = myViews[idx].coordsAtPos(selectedText[idx].offset[4]);
-			offset.left = offset.left+evt.offsetX-evt.clientX;
-			offset.top = offset.top+evt.offsetY-evt.clientY;
+			var elInput = document.querySelector('.input-'+idx);
+			//offset.left = offset.left+evt.offsetX-evt.clientX;
+			offset.top = offset.top+elInput.offsetTop+elInput.scrollTop;
 			selectedText[idx].offset[2] = offset.left;
 			selectedText[idx].offset[3] = offset.top;
 			var el = document.querySelector('.out-'+idx+' > svg');
