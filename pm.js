@@ -151,7 +151,7 @@ function inputDown(evt){
 			console.log('x',evt.offsetX);
 			console.log('y',evt.offsetY);
 			console.log('evt',evt);
-			var pos = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY});
+			var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
 			console.log(pos);
 			var offset = myViews[id].coordsAtPos(pos.pos);
 			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
@@ -164,8 +164,8 @@ function inputDown(evt){
 		
 	}
 	
-	var posTop = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY-16});
-	var posBottom = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY+16});
+	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 	if (posTop && posTop.pos){
 		minPos[0] = posTop.pos;
 		maxPos[0] = posTop.pos;
@@ -193,8 +193,8 @@ function inputMove(evt){
 			
 			}
 		}
-		var posTop = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY-16});
-		var posBottom = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY+16});
+		var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+		var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 		if (posTop && posTop.pos){
 			if (posTop.pos < minPos[0]){
 				minPos[0] = posTop.pos;
@@ -231,8 +231,8 @@ function inputUp(evt){
 		if (id == -1){return;}
 		console.log("Upid:",id);
 		tabId = id;
-		var posTop = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY-16});
-		var posBottom = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY+16});
+		var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
+		var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
 		if (posTop && posTop.pos){
 			if (posTop.pos < minPos[0]){
 				minPos[0] = posTop.pos;
