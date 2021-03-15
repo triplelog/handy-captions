@@ -51,14 +51,14 @@
 	display: inline-block;
 	border: 1px solid red;
 	display: none;
-	background-blend-mode: hue;
+	//background-blend-mode: hue;
 	/*background-image: url("img/pexels-photo-963278.jpeg");
 	background-color: black;
 	background-size: 300px 300px;*/
 	
 }
 .o2 svg {
-	background-blend-mode: hue;
+	//background-blend-mode: hue;
 }
 .tools {
 	position: absolute;
@@ -267,14 +267,21 @@ function heart() {
 	el.querySelector('path').setAttribute('d',newPath);
 	el.style.display = "inline-block";
 	document.getElementById('heart').style.display = "inline-block";
+	let clonedSvgElementB = document.getElementById("heartBig").cloneNode(true);
+	var imgB = new Image();
 	let clonedSvgElement = document.getElementById("heart").cloneNode(true);
 	var img2 = new Image();
 	
-	img2.onload = function() {
+	imgB.onload = function() {
 		ctx.drawImage(img, 0, 0, 300, 300);
-		ctx.drawImage(img2, 0, 0,300,300);
+		ctx.drawImage(imgB, 0, 0,300,300);
+		img2.onload = function() {
+			ctx.drawImage(img2, 0, 0,300,300);
+		
+		}
 		
 	}
+	imgB.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElementB.outerHTML);
 	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
 	
 	outline();
