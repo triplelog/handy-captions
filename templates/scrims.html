@@ -36,6 +36,7 @@
 	height: 300px;
 	display: inline-block;
 	border: 1px solid red;
+	background-blend-mode: hue;
 	/*background-image: url("img/pexels-photo-963278.jpeg");
 	background-color: black;
 	background-size: 300px 300px;*/
@@ -99,9 +100,9 @@
 			</pattern>
 		</defs>
 		<g class="hullSVG">
-			{% for idx in range(0,1) %}<path class="convexHull-{{ idx }}" fill="rgba(255,255,255,{{ 0.25 }})" {% if idx == 0 %}stroke="none"{% else %}stroke="none"{% endif %} stroke-width="2" d="M5 5 150 5 295 25 295 275 150 295 5 295Z" />
+			{% for idx in range(0,1) %}<path class="convexHull-{{ idx }}" fill="rgba(255,0,0,{{ 0.25 }})" {% if idx == 0 %}stroke="none"{% else %}stroke="none"{% endif %} stroke-width="2" d="M5 5 150 5 295 25 295 275 150 295 5 295Z" />
 			{% endfor %}
-			{% for idx in range(1,10) %}<path class="convexHull-{{ idx }}" fill="rgba(255,255,255,{{ 0.05 - idx*1.0/400.0 }})" {% if idx == 0 %}stroke="none"{% else %}stroke="none"{% endif %} stroke-width="2" d="M5 5 150 5 295 25 295 275 150 295 5 295Z" />
+			{% for idx in range(1,10) %}<path class="convexHull-{{ idx }}" fill="rgba(255,0,0,{{ 0.05 - idx*1.0/400.0 }})" {% if idx == 0 %}stroke="none"{% else %}stroke="none"{% endif %} stroke-width="2" d="M5 5 150 5 295 25 295 275 150 295 5 295Z" />
 			{% endfor %}
 		</g>
 		<g class="bgSVG">
@@ -113,6 +114,14 @@
 	</svg>
 </div>
 <div class="tools">
+	<select>
+		<option value="heart">Heart</option>
+		<option value="cloud">Cloud</option>
+		<option value="cloud">Animal</option>
+		<option value="cloud">Star</option>
+	</select>
+	<input type="radio" >Monochrome</input>
+	<input type="radio" >Opacity</input>
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
