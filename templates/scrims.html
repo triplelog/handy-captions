@@ -415,8 +415,8 @@ function outline(){
 				cPoint[key].push(myPoint[2*ii+1]-dy);
 			}
 			else if (dx >= 0 && dy < 0){
-				cPoint[key].push(myPoint[2*ii]+dx);
-				cPoint[key].push(myPoint[2*ii+1]-dy);
+				cPoint[key].push(myPoint[2*ii]-dx);
+				cPoint[key].push(myPoint[2*ii+1]+dy);
 			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
@@ -452,8 +452,8 @@ function outline(){
 				bPoint[key].push(myPoint[2*ii-1]-dy);
 			}
 			else if (dx >= 0 && dy < 0){
-				bPoint[key].push(myPoint[2*ii-2]+dx);
-				bPoint[key].push(myPoint[2*ii-1]-dy);
+				bPoint[key].push(myPoint[2*ii-2]-dx);
+				bPoint[key].push(myPoint[2*ii-1]+dy);
 			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
@@ -465,6 +465,9 @@ function outline(){
 			aPoint[key].push(cPoint[key][ii]*.5+bPoint[key][ii]*.5);
 		}
 		avgPoints.push(aPoint);
+		console.log(i);
+		console.log(points[i]);
+		console.log(aPoint);
 	}
 	avgPoints.push(points[points.length-1])
 	var newPd = toPath(avgPoints);
