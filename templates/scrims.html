@@ -315,7 +315,9 @@ function parsePath(pd) {
 function toPath(points){
 	var pd = "";
 	for (var i=0;i<points.length;i++){
+		console.log(Object.keys(points[i]));
 		var key = Object.keys(points[i])[0];
+		console.log(key);
 		pd += ' '+key;
 		for (var ii=0;ii<points[i][key].length;ii++){
 			pd += ' '+points[i][ii];
