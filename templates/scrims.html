@@ -253,6 +253,15 @@ function drawConvexHull(pdArray) {
 }
 function heart() {
 	document.getElementById('heart').style.display = "inline-block";
+	let clonedSvgElement = document.getElementById("textSVG").cloneNode(true);
+	var img2 = new Image();
+	
+	img2.onload = function() {
+		ctx.drawImage(img, 0, 0, 300, 300);
+		ctx.drawImage(img2, 0, 0,300,300);
+		
+	}
+	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
 }
 function selectGroup(){
 	isGroup = true;
