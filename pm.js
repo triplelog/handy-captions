@@ -262,9 +262,9 @@ function inputUp(evt){
 			
 		}
 		if (writing){
-			console.log('x':evt.clientX);
-			console.log('y':evt.clientX);
-			console.log('evt':evt);
+			console.log('x',evt.clientX);
+			console.log('y',evt.clientX);
+			console.log('evt',evt);
 			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
 			curveWorker.postMessage({'type':'up','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1],'tab':id});
 
