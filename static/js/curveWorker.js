@@ -281,3 +281,8 @@ function convexHull(points){
 	postMessage({'type':'convexHull','pdArray':pdArray});
 	
 }
+
+
+
+
+
