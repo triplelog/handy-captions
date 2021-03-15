@@ -402,11 +402,14 @@ function outline(){
 			var d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
 			var dx = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
 			var dy = margin*(myPoint[2*ii]-lastPoint[0])/d;
+			if (i==4){
+				console.log('4New:',ii,d,dx,dy, myPoint);
+			}
 			if (dx >= 0 && dy >= 0){
 				cPoint[key].push(myPoint[2*ii]+dx);
 				cPoint[key].push(myPoint[2*ii+1]-dy);
 			}
-			else if (dx < 0 && dy >= 0){
+			else if (dx >= 0 && dy < 0){
 				cPoint[key].push(myPoint[2*ii]-dx);
 				cPoint[key].push(myPoint[2*ii+1]+dy);
 			}
@@ -414,10 +417,9 @@ function outline(){
 				cPoint[key].push(myPoint[2*ii]+dx);
 				cPoint[key].push(myPoint[2*ii+1]-dy);
 			}
-			else if (dx >= 0 && dy < 0){
+			else if (dx < 0 && dy >= 0){
 				cPoint[key].push(myPoint[2*ii]-dx);
 				cPoint[key].push(myPoint[2*ii+1]+dy);
-				console.log('new',i,key,ii);
 			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
@@ -439,12 +441,14 @@ function outline(){
 				dx = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
 				dy = margin*(myPoint[2*ii]-lastPoint[0])/d;
 			}
-			
+			if (i==4){
+				console.log('4Old:',ii,d,dx,dy, myPoint);
+			}
 			if (dx >= 0 && dy >= 0){
 				bPoint[key].push(myPoint[2*ii-2]+dx);
 				bPoint[key].push(myPoint[2*ii-1]-dy);
 			}
-			else if (dx < 0 && dy >= 0){
+			else if (dx >= 0 && dy < 0){
 				bPoint[key].push(myPoint[2*ii-2]-dx);
 				bPoint[key].push(myPoint[2*ii-1]+dy);
 			}
@@ -452,10 +456,9 @@ function outline(){
 				bPoint[key].push(myPoint[2*ii-2]+dx);
 				bPoint[key].push(myPoint[2*ii-1]-dy);
 			}
-			else if (dx >= 0 && dy < 0){
+			else if (dx < 0 && dy >= 0){
 				bPoint[key].push(myPoint[2*ii-2]-dx);
 				bPoint[key].push(myPoint[2*ii-1]+dy);
-				console.log('old',i,key,ii);
 			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
