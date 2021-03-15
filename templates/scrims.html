@@ -280,26 +280,26 @@ function outline() {
 			currentMove = pdSplit[i];
 		}
 		else if (currentPoint.length == 0) {
-			currentPoint.push(parseFloat(pdSplit(i)));
+			currentPoint.push(parseFloat(pdSplit[i]));
 			if (currentMove == 'H' || currentMove == 'V') {
 				points.push({currentMove:[currentPoint[0]]});
 				currentPoint = [];
 			}
 		}
 		else if (currentMove == 'M' || currentMove == 'L') {
-			currentPoint.push(parseFloat(pdSplit(i)));
+			currentPoint.push(parseFloat(pdSplit[i]));
 			points.push({currentMove:currentPoint});
 			currentPoint = [];
 		}
 		else if (currentMove == 'Q') {
-			currentPoint.push(parseFloat(pdSplit(i)));
+			currentPoint.push(parseFloat(pdSplit[i]));
 			if (currentPoint.length>=3){
 				points.push({'Q':currentPoint});
 				currentPoint = [];
 			}
 		}
 		else if (currentMove == 'C') {
-			currentPoint.push(parseFloat(pdSplit(i)));
+			currentPoint.push(parseFloat(pdSplit[i]));
 			if (currentPoint.length>=5){
 				points.push({'Q':currentPoint});
 				currentPoint = [];
