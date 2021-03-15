@@ -342,8 +342,8 @@ export function chgTab(from,to) {
 	myViews[to].updateState(myViews[to].state);
 	var ttt = myViews[to].state.tr;
 	ttt.setMeta('k',true);
-	var rPos1 = myViews[to].state.doc.resolve(selectedText[to].start);
-	var rPos2 = myViews[to].state.doc.resolve(selectedText[to].start);
+	var rPos1 = myViews[to].state.doc.resolve(selectedText[to].offset[4]);
+	var rPos2 = myViews[to].state.doc.resolve(selectedText[to].offset[4]);
 	
 	var s = new TextSelection(rPos1,rPos2);
 	console.log(s);
