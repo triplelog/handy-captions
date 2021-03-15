@@ -363,6 +363,7 @@ function outline(){
 	
 	points.splice(0,0,points[points.length-1]);
 	points.push(points[1]);
+	console.log(points);
 	
 	for (var i=1;i<points.length-1;i++){
 		var aPoint = {};
@@ -405,9 +406,7 @@ function outline(){
 			var d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
 			var dy = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
 			var dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
-			if (i==4){
-				console.log('4New:',ii,d,dx,dy, myPoint);
-			}
+
 			if (dx >= 0 && dy >= 0){
 				cPoint[key].push(myPoint[2*ii]+dy);
 				cPoint[key].push(myPoint[2*ii+1]-dx);
@@ -470,9 +469,6 @@ function outline(){
 			aPoint[key].push(cPoint[key][ii]*.5+bPoint[key][ii]*.5);
 		}
 		avgPoints.push(aPoint);
-		console.log(i);
-		console.log(points[i]);
-		console.log(aPoint);
 	}
 
 	var newPd = toPath(avgPoints);
