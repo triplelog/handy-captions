@@ -148,6 +148,9 @@ function inputDown(evt){
 	if (writing){
 
 		if (anchor[id]) {
+			console.log('x',evt.offsetX);
+			console.log('y',evt.offsetY);
+			console.log('evt',evt);
 			var pos = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY});
 			console.log(pos);
 			var offset = myViews[id].coordsAtPos(pos.pos);
