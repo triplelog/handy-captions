@@ -39,8 +39,6 @@ let myPlugin = new Plugin({
 		selectedText[idx].end = t.mapping.map(oldEnd);
 		selectedText[idx].offset[4] = t.mapping.map(oldAnchor);
 		if (idx == s.doc.attrs.id){
-			console.log("st4:",selectedText[idx].offset[4]);
-			console.log("catst4:",myViews[idx].coordsAtPos(selectedText[idx].offset[4]));
 			var offset = myViews[idx].coordsAtPos(selectedText[idx].offset[4]);
 			var elInput = document.querySelector('.input-'+idx);
 			offset.left = offset.left-elInput.offsetLeft+elInput.scrollLeft;
@@ -52,11 +50,7 @@ let myPlugin = new Plugin({
 			newViewBox += (selectedText[idx].offset[1]-selectedText[idx].offset[3]) + ' ';
 			var elWidth = elInput.clientWidth;
 			newViewBox += elWidth+' 600';
-			el.setAttribute('viewBox',newViewBox); 
-			//el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
-			//el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
-			
-			console.log("off:",offset);
+			el.setAttribute('viewBox',newViewBox);
 			
 		}
   	}
