@@ -417,6 +417,7 @@ function outline(){
 			else if (dx >= 0 && dy < 0){
 				cPoint[key].push(myPoint[2*ii]-dx);
 				cPoint[key].push(myPoint[2*ii+1]+dy);
+				console.log('new',i,key,ii);
 			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
@@ -454,6 +455,7 @@ function outline(){
 			else if (dx >= 0 && dy < 0){
 				bPoint[key].push(myPoint[2*ii-2]-dx);
 				bPoint[key].push(myPoint[2*ii-1]+dy);
+				console.log('old',i,key,ii);
 			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
