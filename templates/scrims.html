@@ -281,14 +281,24 @@ function parsePath(pd) {
 		else if (currentPoint.length == 0) {
 			currentPoint.push(parseFloat(pdSplit[i]));
 			if (currentMove == 'H' || currentMove == 'V') {
-				points.push({currentMove:[currentPoint[0]]});
+				if (currentMove == 'H'){
+					points.push({'H':[currentPoint[0]]});
+				}
+				else if (currentMove == 'V'){
+					points.push({'V':[currentPoint[0]]});
+				}
 				currentPoint = [];
 				currentMove == 'L';
 			}
 		}
 		else if (currentMove == 'M' || currentMove == 'L') {
 			currentPoint.push(parseFloat(pdSplit[i]));
-			points.push({currentMove:currentPoint});
+			if (currentMove == 'M'){
+					points.push({'M':currentPoint});
+				}
+				else if (currentMove == 'L'){
+					points.push({'L':currentPoint});
+				}
 			currentPoint = [];
 			currentMove == 'L';
 		}
@@ -317,7 +327,7 @@ function toPath(points){
 	for (var i=0;i<points.length;i++){
 		console.log(Object.keys(points[i]));
 		var key = Object.keys(points[i])[0];
-		console.log(key);
+		console.log(key,points[i][key]);
 		pd += ' '+key;
 		for (var ii=0;ii<points[i][key].length;ii++){
 			pd += ' '+points[i][ii];
