@@ -349,7 +349,23 @@ export function resetAnchor() {
 	anchor[tabId] = true;
 }
 export function writingMode() {
-	if (writing){writing = false}
-	else {writing = true;}
+	if (writing){
+		writing = false;
+		var els = document.querySelectorAll('.ProseMirror-menubar-wrapper > *');
+		for (var i=0;i<els.length;i++){
+			var el = els[i];
+			el.style.pointerEvents = 'all';
+			el.style.touchAction = 'all';
+		}
+	}
+	else {
+		writing = true;
+		var els = document.querySelectorAll('.ProseMirror-menubar-wrapper > *');
+		for (var i=0;i<els.length;i++){
+			var el = els[i];
+			el.style.pointerEvents = 'none';
+			el.style.touchAction = 'none';
+		}
+	}
 	
 }
