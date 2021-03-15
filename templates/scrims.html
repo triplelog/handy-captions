@@ -360,9 +360,12 @@ function outline(){
 	var newPoints = [];
 	var oldPoints = [];
 	var avgPoints = [];
-	
-	points.splice(0,0,points[points.length-1]);
-	points.push(points[1]);
+	var ll = {'M':[]};
+	ll['M']=points[points.length-1][Object.keys(points[points.length-1])[0]];
+	var ff = {'M':[]};
+	ff['M']=points[0][Object.keys(points[0])[0]];
+	points.splice(0,0,ll);
+	points.push(ff);
 	console.log(points);
 	
 	for (var i=1;i<points.length-1;i++){
