@@ -410,8 +410,8 @@ function outline(){
 				cPoint[key].push(myPoint[2*ii+1]-dx);
 			}
 			else if (dx >= 0 && dy < 0){
-				cPoint[key].push(myPoint[2*ii]-dy);
-				cPoint[key].push(myPoint[2*ii+1]+dx);
+				cPoint[key].push(myPoint[2*ii]+dy);
+				cPoint[key].push(myPoint[2*ii+1]-dx);
 			}
 			else if (dx < 0 && dy < 0){
 				cPoint[key].push(myPoint[2*ii]+dy);
@@ -446,8 +446,8 @@ function outline(){
 				bPoint[key].push(myPoint[2*ii-1]-dx);
 			}
 			else if (dx >= 0 && dy < 0){
-				bPoint[key].push(myPoint[2*ii-2]-dy);
-				bPoint[key].push(myPoint[2*ii-1]+dx);
+				bPoint[key].push(myPoint[2*ii-2]+dy);
+				bPoint[key].push(myPoint[2*ii-1]-dx);
 			}
 			else if (dx < 0 && dy < 0){
 				bPoint[key].push(myPoint[2*ii-2]+dy);
