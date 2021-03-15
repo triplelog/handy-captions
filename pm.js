@@ -264,7 +264,7 @@ function inputUp(evt){
 		}
 		if (writing){
 			console.log('x',evt.offsetX);
-			console.log('y',evt.offsetX);
+			console.log('y',evt.offsetY);
 			console.log('evt',evt);
 			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
 			curveWorker.postMessage({'type':'up','x':evt.offsetX-currentOffset[0],'y':evt.offsetY-currentOffset[1],'tab':id});
