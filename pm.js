@@ -9,7 +9,7 @@ import {Decoration, DecorationSet} from "prosemirror-view"
 
 // Mix the nodes from prosemirror-schema-list into the basic schema to
 // create a schema with list support.
-
+var allCurves = {};
 const mySchema = new Schema({
   nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
   marks: schema.spec.marks
