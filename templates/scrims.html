@@ -318,12 +318,19 @@ function outline(){
 	var points = parsePath(pd);
 	var margin = 10;
 	var newPoints = [{}];
-	for (var i=1;i<points.length;i++){
+	var oldPoints = [{}];
+	var avgPoints = [{}];
+	avgPoints[0] = points[0];
+	for (var i=1;i<points.length-1;i++){
+		var aPoint = {};
 		var cPoint = {};
 		var key = Object.keys(points[i])[0];
+		aPoint[key]=[];
 		var myPoint = points[i][key];
 		var last = points[i-1];
 		var lastKey = Object.keys(last)[0];
+		var next = points[i+1];
+		var nextKey = Object.keys(next)[0];
 		if (key == 'H' ){
 			
 			continue;
@@ -332,7 +339,24 @@ function outline(){
 			
 			continue;
 		}
+		if (lastKey == 'H' ){
+			
+			continue;
+		}
+		else if (lastKey == 'V'){
+			
+			continue;
+		}
+		if (nextKey == 'H' ){
+			
+			continue;
+		}
+		else if (nextKey == 'V'){
+			
+			continue;
+		}
 		var lastPoint = [last[lastKey][last[lastKey].length - 2],last[lastKey][last[lastKey].length - 1]];
+		
 		cPoint[key]=[];
 		for (var ii=0;ii<myPoint.length/2;ii++){
 			var d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
@@ -354,12 +378,57 @@ function outline(){
 				cPoint[key].push(myPoint[2*ii]-dx);
 				cPoint[key].push(myPoint[2*ii+1]+dy);
 			}
+			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
+			
+		}
+		
+		lastPoint = [myPoint[0],myPoint[1]];
+		var bPoint = {};
+		bPoint[lastKey]=[];
+		for (var ii=1;ii<myPoint.length/2+1;ii++){
+			var d; var dx; var dy;
+			if (ii>=myPoint.length/2){
+				var nextPoint = [next[nextKey][0],next[nextKey][1]];
+				d = Math.pow( Math.pow((nextPoint[1]-lastPoint[1]),2) + Math.pow((nextPoint[0]-lastPoint[0]),2) ,.5);
+				dx = margin*(nextPoint[1]-lastPoint[1])/d;
+				dy = margin*(nextPoint[0]-lastPoint[0])/d;
+			}
+			else {
+				d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
+				dx = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
+				dy = margin*(myPoint[2*ii]-lastPoint[0])/d;
+			}
+			
+			if (dx >= 0 && dy >= 0){
+				bPoint[key].push(myPoint[2*ii-2]+dx);
+				bPoint[key].push(myPoint[2*ii-1]-dy);
+			}
+			else if (dx < 0 && dy >= 0){
+				bPoint[key].push(myPoint[2*ii-2]-dx);
+				bPoint[key].push(myPoint[2*ii-1]+dy);
+			}
+			else if (dx < 0 && dy < 0){
+				bPoint[key].push(myPoint[2*ii-2]+dx);
+				bPoint[key].push(myPoint[2*ii-1]-dy);
+			}
+			else if (dx >= 0 && dy < 0){
+				bPoint[key].push(myPoint[2*ii-2]-dx);
+				bPoint[key].push(myPoint[2*ii-1]+dy);
+			}
+			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
 		}
 		
 		newPoints.push(cPoint);
+		oldPoints.push(bPoint);
+		for (var ii=0;ii<cPoint[key].length;ii++){
+			aPoint[key].push(cPoint[key][ii]*.5+bPoint[key][ii]*.5);
+		}
+		avgPoints.push(aPoint);
 	}
-	console.log(newPoints);
+	avgPoints.push(points[points.length-1])
+	
+	console.log(avgPoints);
 }
 
 
