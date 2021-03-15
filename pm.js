@@ -147,7 +147,7 @@ function inputDown(evt){
 	if (writing){
 
 		if (anchor[id]) {
-			var pos = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY});
+			var pos = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY});
 			console.log(pos);
 			var offset = myViews[id].coordsAtPos(pos.pos);
 			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
@@ -156,12 +156,12 @@ function inputDown(evt){
 			anchor[id] = false;
 		}
 		var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
-		curveWorker.postMessage({'type':'down','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
+		curveWorker.postMessage({'type':'down','x':evt.offsetX-currentOffset[0],'y':evt.offsetY-currentOffset[1]});
 		
 	}
 	
-	var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
-	var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
+	var posTop = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY-16});
+	var posBottom = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY+16});
 	if (posTop && posTop.pos){
 		minPos[0] = posTop.pos;
 		maxPos[0] = posTop.pos;
@@ -185,12 +185,12 @@ function inputMove(evt){
 		if (writing){
 			if (isDown){
 				var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
-				curveWorker.postMessage({'type':'move','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1]});
+				curveWorker.postMessage({'type':'move','x':evt.offsetX-currentOffset[0],'y':evt.offsetY-currentOffset[1]});
 			
 			}
 		}
-		var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
-		var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
+		var posTop = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY-16});
+		var posBottom = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY+16});
 		if (posTop && posTop.pos){
 			if (posTop.pos < minPos[0]){
 				minPos[0] = posTop.pos;
@@ -227,8 +227,8 @@ function inputUp(evt){
 		if (id == -1){return;}
 		console.log("Upid:",id);
 		tabId = id;
-		var posTop = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY-16});
-		var posBottom = myViews[id].posAtCoords({left:evt.clientX,top:evt.clientY+16});
+		var posTop = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY-16});
+		var posBottom = myViews[id].posAtCoords({left:evt.offsetX,top:evt.offsetY+16});
 		if (posTop && posTop.pos){
 			if (posTop.pos < minPos[0]){
 				minPos[0] = posTop.pos;
@@ -262,11 +262,11 @@ function inputUp(evt){
 			
 		}
 		if (writing){
-			console.log('x',evt.clientX);
-			console.log('y',evt.clientX);
+			console.log('x',evt.offsetX);
+			console.log('y',evt.offsetX);
 			console.log('evt',evt);
 			var currentOffset = [selectedText[id].offset[2]-selectedText[id].offset[0],selectedText[id].offset[3]-selectedText[id].offset[1]];
-			curveWorker.postMessage({'type':'up','x':evt.clientX-currentOffset[0],'y':evt.clientY-currentOffset[1],'tab':id});
+			curveWorker.postMessage({'type':'up','x':evt.offsetX-currentOffset[0],'y':evt.offsetY-currentOffset[1],'tab':id});
 
 		}
 
