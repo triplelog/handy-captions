@@ -43,7 +43,7 @@ let myPlugin = new Plugin({
 			console.log("catst4:",myViews[idx].coordsAtPos(selectedText[idx].offset[4]));
 			var offset = myViews[idx].coordsAtPos(selectedText[idx].offset[4]);
 			var elInput = document.querySelector('.input-'+idx);
-			//offset.left = offset.left+evt.offsetX-evt.clientX;
+			offset.left = offset.left-elInput.offsetLeft-elInput.scrollLeft;
 			offset.top = offset.top-elInput.offsetTop-elInput.scrollTop;
 			selectedText[idx].offset[2] = offset.left;
 			selectedText[idx].offset[3] = offset.top;
