@@ -50,7 +50,8 @@ let myPlugin = new Plugin({
 			var el = document.querySelector('.out-'+idx+' > svg');
 			var newViewBox = (selectedText[idx].offset[0]-selectedText[idx].offset[2]) + ' ';
 			newViewBox += (selectedText[idx].offset[1]-selectedText[idx].offset[3]) + ' ';
-			newViewBox += '600 600';
+			var elWidth = elInput.clientWidth;
+			newViewBox += elWidth+' 600';
 			el.setAttribute('viewBox',newViewBox); 
 			//el.style.top = (selectedText[idx].offset[3]-selectedText[idx].offset[1])+'px';
 			//el.style.left = (selectedText[idx].offset[2]-selectedText[idx].offset[0])+'px';
