@@ -711,7 +711,7 @@ function outline(){
 				var pp1 = {};
 				var pp2 = {};
 				var pp3 = {};
-				z+= 1.0;
+				z = 1.0;
 				pp1.x = box['topLeft'][0];
 				pp1.y = box['topLeft'][1];
 				pp2.x = curveCenterXTop*z+(box['topLeft'][0]+box['topRight'][0])/2*(1-z);
@@ -723,6 +723,8 @@ function outline(){
 				circleVals.cx = circle2.x;
 				circleVals.cy = circle2.y;
 				circleVals.r = circle2.r;
+				console.log(pp2,circleVals);
+				break;
 			}
 			//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 		}
