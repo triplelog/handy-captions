@@ -479,6 +479,12 @@ function outline(){
 		pdPoint = {};
 		
 		pdPoint[key]=[];
+		
+		var lastPoint = [last[lastKey][last[lastKey].length - 2],last[lastKey][last[lastKey].length - 1]];
+		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
+		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
+		fillPath += " L "+(lastPoint[0]+lastShift[0]) + " "+(lastPoint[1]+lastShift[1]);
+		fillPath += key;
 		for (var ii=0;ii<myPoint.length/2;ii++){
 			var shift = [0,0];
 			shift[0] = thisShift[0]*(ii+1)/(myPoint.length/2);
@@ -486,12 +492,21 @@ function outline(){
 			shift[1] = thisShift[1]*(ii+1)/(myPoint.length/2);
 			shift[1] += lastShift[1]*(myPoint.length/2-ii-1)/(myPoint.length/2);
 			pdPoint[key].push([myPoint[2*ii]+shift[0],myPoint[2*ii+1]+shift[1]]);
+			fillPath += " "+(myPoint[2*ii]+shift[0])+" "+(myPoint[2*ii+1]+shift[1]);
 			
 		}
-		console.log(i,pdPoint);
+		fillPath += " L "+(thisPoint[0]) + " "+(thisPoint[1]);
+		fillPath += key;
+		for (var ii=myPoint.length/2-1;ii>=0;ii--){
+			
+			fillPath += " "+(myPoint[2*ii])+" "+(myPoint[2*ii+1]);
+		}
+		console.log(fillPath);
 		pdPoints.push(pdPoint);
+		
+		
 	}
-	console.log(JSON.stringify(pdPoints.slice(14)));
+	
 	var newPd = toPath(pdPoints);
 	return newPd;
 }
