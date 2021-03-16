@@ -298,7 +298,7 @@ function parsePath(pd) {
 			currentMove = pdSplit[i];
 		}
 		else if (currentPoint.length == 0) {
-			currentPoint.push(parseFloat(pdSplit[i]));
+			currentPoint.push(Math.round(parseFloat(pdSplit[i]),1));
 			if (currentMove == 'H' || currentMove == 'V') {
 				if (currentMove == 'H'){
 					points.push({'H':[currentPoint[0]]});
@@ -311,7 +311,7 @@ function parsePath(pd) {
 			}
 		}
 		else if (currentMove == 'M' || currentMove == 'L') {
-			currentPoint.push(parseFloat(pdSplit[i]));
+			currentPoint.push(Math.round(parseFloat(pdSplit[i]),1));
 			if (currentMove == 'M'){
 					points.push({'M':currentPoint});
 				}
@@ -322,7 +322,7 @@ function parsePath(pd) {
 			currentMove == 'L';
 		}
 		else if (currentMove == 'Q') {
-			currentPoint.push(parseFloat(pdSplit[i]));
+			currentPoint.push(Math.round(parseFloat(pdSplit[i]),1));
 			if (currentPoint.length>=4){
 				points.push({'Q':currentPoint});
 				currentPoint = [];
@@ -330,7 +330,7 @@ function parsePath(pd) {
 			}
 		}
 		else if (currentMove == 'C') {
-			currentPoint.push(parseFloat(pdSplit[i]));
+			currentPoint.push(Math.round(parseFloat(pdSplit[i]),1));
 			if (currentPoint.length>=6){
 				points.push({'C':currentPoint});
 				currentPoint = [];
@@ -338,7 +338,6 @@ function parsePath(pd) {
 			}
 		}
 	}
-	console.log(points);
 	return points;
 }
 function toPath(points){
@@ -361,9 +360,9 @@ function outline(){
 	var newPoints = [];
 	var oldPoints = [];
 	var avgPoints = [];
-	var ll = {'M':[323.70555,578.32901]};
+	var ll = {'M':[323.7,578.3]};
 	//ll['M']=points[points.length-1][Object.keys(points[points.length-1])[0]];
-	var ff = {'M':[283.52243,535.43191]};
+	var ff = {'M':[283.5,535.4]};
 	//ff['M']=points[0][Object.keys(points[0])[0]];
 	points.splice(0,0,ll);
 	points.push(ff);
@@ -469,7 +468,7 @@ function outline(){
 		newPoints.push(cPoint);
 		oldPoints.push(bPoint);
 		for (var ii=0;ii<cPoint[key].length;ii++){
-			aPoint[key].push(cPoint[key][ii]*.5+bPoint[key][ii]*.5);
+			aPoint[key].push(Math.round(cPoint[key][ii]*.5+bPoint[key][ii]*.5,1));
 		}
 		avgPoints.push(aPoint);
 	}
@@ -505,4 +504,3 @@ function downloadImage() {
 </script>
 </body>
 </html>
-
