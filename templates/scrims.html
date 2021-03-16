@@ -665,7 +665,17 @@ function outline(){
 			curveCenterYTop += Math.pow(t,3)*pdPoint[key][2][1];
 		}
 		
-		if (i==11){
+		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
+		var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
+		
+		var circleVals = {};
+		circleVals.cx = centerF[0];
+		circleVals.cy = centerF[1];
+		circleVals.fx = centerF[0];
+		circleVals.fy = centerF[1];
+		circleVals.r = Math.pow(bigR2,.5);
+		circleVals.fr = Math.pow(smallR2,.5);
+		if (myPoint.length== 6){
 			var p1 = {};
 			var p2 = {};
 			var p3 = {};
@@ -676,6 +686,10 @@ function outline(){
 			p3.x = box['bottomRight'][0];
 			p3.y = box['bottomRight'][1];
 			var circle = circleFromThreePoints(p1,p2,p3);
+			
+			circleVals.fx = circle.x;
+			circleVals.fy = circle.y;
+			circleVals.fr = circle.r;
 			
 			var pp1 = {};
 			var pp2 = {};
@@ -688,16 +702,20 @@ function outline(){
 			pp3.y = box['topRight'][1];
 			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
 			
-			console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
+			circleVals.cx = circle2.x;
+			circleVals.cy = circle2.y;
+			circleVals.r = circle2.r;
+			
+			//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 		}
-		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
-		var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
-		lG.setAttribute('cx',centerF[0]);
-		lG.setAttribute('cy',centerF[1]);
-		lG.setAttribute('fx',centerF[0]);
-		lG.setAttribute('fy',centerF[1]);
-		lG.setAttribute('r',Math.pow(bigR2,.5));
-		lG.setAttribute('fr',Math.pow(smallR2,.5));
+		
+		
+		lG.setAttribute('cx',circleVals.cx);
+		lG.setAttribute('cy',circleVals.cy);
+		lG.setAttribute('fx',circleVals.fx);
+		lG.setAttribute('fy',circleVals.fy);
+		lG.setAttribute('r',circleVals.r);
+		lG.setAttribute('fr',circleVals.fr);
 		lG.setAttribute('gradientUnits','userSpaceOnUse');
 		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 		newStop.setAttribute('offset','0%');
