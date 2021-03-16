@@ -361,8 +361,7 @@ function outline(){
 	var points = parsePath(pd);
 	console.log(JSON.stringify(points.slice(14)));
 	var margin = 40;
-	var newPoints = [];
-	var oldPoints = [];
+
 	var avgPoints = [[0,0]];
 	var pdPoints = [];
 	var ll = {'M':[297.29747,550.86823]};
@@ -374,7 +373,7 @@ function outline(){
 	
 	for (var i=1;i<points.length-1;i++){
 		var aPoint = {};
-		var cPoint = {};
+
 		var key = Object.keys(points[i])[0];
 		
 		var myPoint = points[i][key];
@@ -410,46 +409,39 @@ function outline(){
 		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
 		var nextPoint = [next[nextKey][next[nextKey].length - 2],next[nextKey][next[nextKey].length - 1]];
 		
-		var d = Math.pow( Math.pow((thisPoint[1]-lastPoint[1]),2) + Math.pow((thisPoint[0]-lastPoint[0]),2) ,1);
-		var dy = margin*Math.pow((thisPoint[1]-lastPoint[1]),2)/d;
-		var dx = margin*Math.pow((thisPoint[0]-lastPoint[0]),2)/d;
+		var d1 = Math.pow( Math.pow((thisPoint[1]-lastPoint[1]),2) + Math.pow((thisPoint[0]-lastPoint[0]),2) ,1);
+		var dy1 = margin*Math.pow((thisPoint[1]-lastPoint[1]),2)/d;
+		var dx1 = margin*Math.pow((thisPoint[0]-lastPoint[0]),2)/d;
 		if (thisPoint[1]<lastPoint[1]){
-			dy *= -1;
+			dy1 *= -1;
 		}
 		if (thisPoint[0]<lastPoint[0]){
-			dx *= -1;
+			dx1 *= -1;
 		}
 			
-		cPoint[key]=[];
-		cPoint[key].push(dy);
-		cPoint[key].push(-1*dx);
+		dx1 *= -1
 
 		
-		d = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,1);
-		dy = margin*Math.pow((nextPoint[1]-thisPoint[1]),2)/d;
-		dx = margin*Math.pow((nextPoint[0]-thisPoint[0]),2)/d;
+		d2 = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,1);
+		dy2 = margin*Math.pow((nextPoint[1]-thisPoint[1]),2)/d;
+		dx2 = margin*Math.pow((nextPoint[0]-thisPoint[0]),2)/d;
 		if (nextPoint[1]<thisPoint[1]){
-			dy *= -1;
+			dy2 *= -1;
 		}
 		if (nextPoint[0]<thisPoint[0]){
-			dx *= -1;
+			dx2 *= -1;
 		}
 		
-		//lastPoint = [myPoint[0],myPoint[1]];
-		var bPoint = {};
-		bPoint[key]=[];
-
-		bPoint[key].push(dy);
-		bPoint[key].push(-1*dx);
-
+		dx2 *= -1
 		
-		newPoints.push(cPoint);
-		oldPoints.push(bPoint);
 		
-		aPoint=[];
-		for (var ii=0;ii<cPoint[key].length;ii++){
-			aPoint.push(Math.round(cPoint[key][ii]*.5+bPoint[key][ii]*.5));
-		}
+		var ay = (dy1+dy2)/2;
+		var ax = (dx1+dx2)/2;
+		var mul = Math.pow(margin,1)/Math.pow((Math.pow(ay,2)+Math.pow(ax,2)),.5);
+		
+		
+		aPoint=[ay*mul,ax*mul];
+		
 		avgPoints.push(aPoint);
 	}
 	
