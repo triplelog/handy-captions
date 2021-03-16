@@ -474,18 +474,15 @@ function outline(){
 		var thisShift = [avgPoints[i][0],avgPoints[i][1]];
 		
 		pdPoint = {};
-		var aKey = 'L';
-		if (i==1){
-			aKey = 'M';
-		}
-		pdPoint[aKey]=[];
+		
+		pdPoint[key]=[];
 		for (var ii=0;ii<myPoint.length/2;ii++){
 			var shift = [0,0];
 			shift[0] = thisShift[0]*(ii+1)/(myPoint.length/2);
 			shift[0] += lastShift[0]*(myPoint.length/2-ii-1)/(myPoint.length/2);
 			shift[1] = thisShift[1]*(ii+1)/(myPoint.length/2);
 			shift[1] += lastShift[1]*(myPoint.length/2-ii-1)/(myPoint.length/2);
-			pdPoint[aKey].push([myPoint[2*ii]+shift[0],myPoint[2*ii+1]+shift[1]]);
+			pdPoint[key].push([myPoint[2*ii]+shift[0],myPoint[2*ii+1]+shift[1]]);
 			
 		}
 		console.log(i,pdPoint);
