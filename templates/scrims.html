@@ -425,9 +425,15 @@ function outline(){
 		cPoint[key].push(-1*dx);
 
 		
-		d = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,.5);
-		dy = margin*(nextPoint[1]-thisPoint[1])/d;
-		dx = margin*(nextPoint[0]-thisPoint[0])/d;
+		d = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,1);
+		dy = margin*Math.pow((nextPoint[1]-thisPoint[1]),2)/d;
+		dx = margin*Math.pow((nextPoint[0]-thisPoint[0]),2)/d;
+		if (nextPoint[1]<thisPoint[1]){
+			dy *= -1;
+		}
+		if (nextPoint[0]<thisPoint[0]){
+			dx *= -1;
+		}
 		
 		//lastPoint = [myPoint[0],myPoint[1]];
 		var bPoint = {};
