@@ -598,7 +598,21 @@ function outline(){
 	}
 	
 	var newPd = toPath(pdPoints);
+	
+	var p1= {'x':1,'y':0};
+	var p2= {'x':0,'y':1};
+	var c= {'x':0,'y':0};
+	getEllipse(p1,p2,c);
 	return newPd;
+}
+
+function getEllipse(p1,p2,c){
+	var b2Top = Math.pow(p2.y-c.y,2)*Math.pow(p1.x-c.x,2)-Math.pow(p2.x-c.x,2)*Math.pow(p1.y-c.y,2);
+	var b2Bottom = Math.pow(p1.x-c.x,2)-Math.pow(p2.x-c.x,2);
+	var b2 = b2Top/b2Bottom;
+	var b = Math.pow(b2,.5);
+	var a = Math.pow(p1.x-c.x,2)/(1-(Math.pow(p1.y-c.y,2))/b2);
+	console.log(a,b);
 }
 
 function outlineOld(){
