@@ -511,7 +511,7 @@ function outline(){
 		}
 		
 		
-		
+		var box = {'bottom':[lastPoint[0],lastPoint[1]],'top':[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]]};
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(lastPoint[0]+lastShift[0]) + " "+(lastPoint[1]+lastShift[1]);
 		fillPath += " "+key;
@@ -570,9 +570,26 @@ function outline(){
 		fillPath += " "+lastPoint[0] + " "+lastPoint[1];
 		//console.log(fillPath);
 		var heartFill = document.getElementById('heartFill');
+		var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+		var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
+		lG.id="box-grad-"+i;
+		lG.setAttribute('x1',box['bottom'][0]);
+		lG.setAttribute('y1',box['bottom'][1]);
+		lG.setAttribute('x2',box['top'][0]);
+		lG.setAttribute('y2',box['top'][1]);
+		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+		newStop.setAttribute('offset','0%');
+		newStop.setAttribute('stop-color','red');
+		lG.appendChild(newStop);
+		var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+		newStopT.setAttribute('offset','1000%');
+		newStopT.setAttribute('stop-color','blue');
+		lG.appendChild(newStopT);
+		newDef.appendChild(lG);
+		heartFill.appendChild(newDef);
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		newPath.setAttribute('d',fillPath);
-		newPath.style.fill = "blue";
+		newPath.style.fill = "url(#box-grad-"+i+")";
 		heartFill.appendChild(newPath);
 		pdPoints.push(pdPoint);
 		
