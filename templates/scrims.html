@@ -413,6 +413,12 @@ function outline(){
 		var d = Math.pow( Math.pow((thisPoint[1]-lastPoint[1]),2) + Math.pow((thisPoint[0]-lastPoint[0]),2) ,1);
 		var dy = margin*Math.pow((thisPoint[1]-lastPoint[1]),2)/d;
 		var dx = margin*Math.pow((thisPoint[0]-lastPoint[0]),2)/d;
+		if (thisPoint[1]<lastPoint[1]){
+			dy *= -1;
+		}
+		if (thisPoint[0]<lastPoint[0]){
+			dx *= -1;
+		}
 			
 		cPoint[key]=[];
 		cPoint[key].push(dy);
