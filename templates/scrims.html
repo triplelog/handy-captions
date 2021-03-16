@@ -655,7 +655,7 @@ function outline(){
 }
 
 function lineIntersect(line1,line2) {
-	var xTop = line2['m']*(line1['point'][0]-line2['point'][0])+line2['point'][1]-line1['point'][1];
+	var xTop = line1['m']*line1['point'][0] - line2['m']*line2['point'][0])+line2['point'][1]-line1['point'][1];
 	var xBottom = line1['m']-line2['m'];
 	var x = xTop/xBottom;
 	var y = line1['m']*(x-line1['point'][0])+line1['point'][1];
