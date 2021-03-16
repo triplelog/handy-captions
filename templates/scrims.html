@@ -480,9 +480,9 @@ function outline(){
 		pdPoint[key]=[];
 		for (var ii=0;ii<myPoint.length/2;ii++){
 			var shift = [0,0];
-			shift[0] = thisShift[0]*(ii+1)/(myPoint.length/2);
+			shift[0] = thisShift[0]*(ii+1)///(myPoint.length/2);
 			shift[0] += lastShift[0]*(myPoint.length/2-ii-1)/(myPoint.length/2);
-			shift[1] = thisShift[1]*(ii+1)/(myPoint.length/2);
+			shift[1] = thisShift[1]*(ii+1)///(myPoint.length/2);
 			shift[1] += lastShift[1]*(myPoint.length/2-ii-1)/(myPoint.length/2);
 			pdPoint[key].push([myPoint[2*ii]+shift[0],myPoint[2*ii+1]+shift[1]]);
 			
