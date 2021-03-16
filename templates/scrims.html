@@ -360,9 +360,9 @@ function outline(){
 	var newPoints = [];
 	var oldPoints = [];
 	var avgPoints = [];
-	var ll = {'M':[323.7,578.3]};
+	var ll = {'M':[297.29747,550.86823]};
 	//ll['M']=points[points.length-1][Object.keys(points[points.length-1])[0]];
-	var ff = {'M':[283.5,535.4]};
+	var ff = {'M':[297.29747,550.86823]};
 	//ff['M']=points[0][Object.keys(points[0])[0]];
 	points.splice(0,0,ll);
 	points.push(ff);
@@ -402,22 +402,23 @@ function outline(){
 			continue;
 		}
 		var lastPoint = [last[lastKey][last[lastKey].length - 2],last[lastKey][last[lastKey].length - 1]];
+		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
+		var nextPoint = [next[nextKey][next[nextKey].length - 2],next[nextKey][next[nextKey].length - 1]];
 		
+		var d = Math.pow( Math.pow((thisPoint[1]-lastPoint[1]),2) + Math.pow((thisPoint[0]-lastPoint[0]),2) ,.5);
+		var dy = margin*(thisPoint[1]-lastPoint[1])/d;
+		var dx = margin*(thisPoint[0]-lastPoint[0])/d;
+			
 		cPoint[key]=[];
 		for (var ii=0;ii<myPoint.length/2;ii++){
-			var d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
-			var dy = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
-			var dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
 			
-			if (i > 15){
-				console.log('old1:',i,ii,key,d,dx,dy,cPoint[key],lastPoint,myPoint,myPoint[2*ii]+dy,myPoint[2*ii+1]-dx);
-			}
+			
 			cPoint[key].push(myPoint[2*ii]+dy);
 			cPoint[key].push(myPoint[2*ii+1]-dx);
-			if (i > 15){
-				console.log('old2:',i,ii,key,d,dx,dy,cPoint[key],lastPoint,myPoint);
-			}
-			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
+			//if (i > 15){
+			//	console.log('old2:',i,ii,key,d,dx,dy,cPoint[key],lastPoint,myPoint);
+			//}
+			//lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
 		}
 		
@@ -425,29 +426,18 @@ function outline(){
 		var bPoint = {};
 		bPoint[key]=[];
 		for (var ii=1;ii<myPoint.length/2+1;ii++){
-			var d; var dx; var dy;
-			if (ii>=myPoint.length/2){
-				var nextPoint = [next[nextKey][0],next[nextKey][1]];
-				d = Math.pow( Math.pow((nextPoint[1]-lastPoint[1]),2) + Math.pow((nextPoint[0]-lastPoint[0]),2) ,.5);
-				dy = margin*(nextPoint[1]-lastPoint[1])/d;
-				dx = margin*(nextPoint[0]-lastPoint[0])/d;
-			}
-			else {
-				d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
-				dy = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
-				dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
-			}
+			
 			
 			
 
 			bPoint[key].push(myPoint[2*ii-2]+dy);
 			bPoint[key].push(myPoint[2*ii-1]-dx);
 			
-			if (i > 15){
-				console.log('new',i,ii,key,d,dx,dy,bPoint[key]);
-			}
+			//if (i > 15){
+			//	console.log('new',i,ii,key,d,dx,dy,bPoint[key],lastPoint,myPoint);
+			//}
 
-			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
+			//lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
 		}
 		
