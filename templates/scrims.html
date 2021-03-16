@@ -366,7 +366,7 @@ function outline(){
 	var pdPoints = [];
 	var ll = {'M':[297.29747,550.86823]};
 	//ll['M']=points[points.length-1][Object.keys(points[points.length-1])[0]];
-	var ff = {'M':[297.29747,550.86823]};
+	var ff = {'L':[297.29747,550.86823]};
 	//ff['M']=points[0][Object.keys(points[0])[0]];
 	points.splice(0,0,ll);
 	points.push(ff);
@@ -445,7 +445,8 @@ function outline(){
 		avgPoints.push(aPoint);
 	}
 	avgPoints[0] = avgPoints[avgPoints.length-1];
-	
+	console.log(avgPoints[0]);
+	console.log(avgPoints[avgPoints.length-1]);
 	for (var i=1;i<points.length-1;i++){
 		var aPoint = {};
 		var cPoint = {};
