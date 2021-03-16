@@ -298,7 +298,7 @@ function parsePath(pd) {
 			currentMove = pdSplit[i];
 		}
 		else if (currentPoint.length == 0) {
-			currentPoint.push(Math.round(parseFloat(pdSplit[i]),1));
+			currentPoint.push(Math.round(parseFloat(pdSplit[i])));
 			if (currentMove == 'H' || currentMove == 'V') {
 				if (currentMove == 'H'){
 					points.push({'H':[currentPoint[0]]});
@@ -311,7 +311,7 @@ function parsePath(pd) {
 			}
 		}
 		else if (currentMove == 'M' || currentMove == 'L') {
-			currentPoint.push(Math.round(parseFloat(pdSplit[i]),1));
+			currentPoint.push(Math.round(parseFloat(pdSplit[i])));
 			if (currentMove == 'M'){
 					points.push({'M':currentPoint});
 				}
@@ -322,7 +322,7 @@ function parsePath(pd) {
 			currentMove == 'L';
 		}
 		else if (currentMove == 'Q') {
-			currentPoint.push(Math.round(parseFloat(pdSplit[i]),1));
+			currentPoint.push(Math.round(parseFloat(pdSplit[i])));
 			if (currentPoint.length>=4){
 				points.push({'Q':currentPoint});
 				currentPoint = [];
@@ -330,7 +330,7 @@ function parsePath(pd) {
 			}
 		}
 		else if (currentMove == 'C') {
-			currentPoint.push(Math.round(parseFloat(pdSplit[i]),1));
+			currentPoint.push(Math.round(parseFloat(pdSplit[i])));
 			if (currentPoint.length>=6){
 				points.push({'C':currentPoint});
 				currentPoint = [];
@@ -408,23 +408,13 @@ function outline(){
 			var d = Math.pow( Math.pow((myPoint[2*ii+1]-lastPoint[1]),2) + Math.pow((myPoint[2*ii]-lastPoint[0]),2) ,.5);
 			var dy = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
 			var dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
+			
+			if (i > 13){
+				console.log('old',i,ii,key,d,dx,dy);
+			}
+			cPoint[key].push(myPoint[2*ii]+dy);
+			cPoint[key].push(myPoint[2*ii+1]-dx);
 
-			if (dx >= 0 && dy >= 0){
-				cPoint[key].push(myPoint[2*ii]+dy);
-				cPoint[key].push(myPoint[2*ii+1]-dx);
-			}
-			else if (dx >= 0 && dy < 0){
-				cPoint[key].push(myPoint[2*ii]+dy);
-				cPoint[key].push(myPoint[2*ii+1]-dx);
-			}
-			else if (dx < 0 && dy < 0){
-				cPoint[key].push(myPoint[2*ii]+dy);
-				cPoint[key].push(myPoint[2*ii+1]-dx);
-			}
-			else if (dx < 0 && dy >= 0){
-				cPoint[key].push(myPoint[2*ii]+dy);
-				cPoint[key].push(myPoint[2*ii+1]-dx);
-			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
 		}
@@ -445,22 +435,14 @@ function outline(){
 				dy = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
 				dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
 			}
-			if (dx >= 0 && dy >= 0){
-				bPoint[key].push(myPoint[2*ii-2]+dy);
-				bPoint[key].push(myPoint[2*ii-1]-dx);
+			
+			if (i > 13){
+				console.log('old',i,ii,key,d,dx,dy);
 			}
-			else if (dx >= 0 && dy < 0){
-				bPoint[key].push(myPoint[2*ii-2]+dy);
-				bPoint[key].push(myPoint[2*ii-1]-dx);
-			}
-			else if (dx < 0 && dy < 0){
-				bPoint[key].push(myPoint[2*ii-2]+dy);
-				bPoint[key].push(myPoint[2*ii-1]-dx);
-			}
-			else if (dx < 0 && dy >= 0){
-				bPoint[key].push(myPoint[2*ii-2]+dy);
-				bPoint[key].push(myPoint[2*ii-1]-dx);
-			}
+
+			bPoint[key].push(myPoint[2*ii-2]+dy);
+			bPoint[key].push(myPoint[2*ii-1]-dx);
+
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
 		}
@@ -468,7 +450,7 @@ function outline(){
 		newPoints.push(cPoint);
 		oldPoints.push(bPoint);
 		for (var ii=0;ii<cPoint[key].length;ii++){
-			aPoint[key].push(Math.round(cPoint[key][ii]*.5+bPoint[key][ii]*.5,1));
+			aPoint[key].push(Math.round(cPoint[key][ii]*.5+bPoint[key][ii]*.5));
 		}
 		avgPoints.push(aPoint);
 	}
@@ -504,3 +486,6 @@ function downloadImage() {
 </script>
 </body>
 </html>
+
+[{"C":[402,497,329,568,324,578]},{"C":[318,590,323,580,297,551]}]
+[{"C":[428,528,361,591,360,596]},{"C":[318,590,290,584,267,577]}]
