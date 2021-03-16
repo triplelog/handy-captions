@@ -611,8 +611,11 @@ function outline(){
 		bottomLine['point']=[(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
 		bottomLine['m']=-1/bottomLine['m'];
 		
-		var centerF = lineIntersect(bottomLine,leftLine);
 		
+		var centerF = lineIntersect(bottomLine,leftLine);
+		if (i==11){
+			console.log(bottomLine,leftLine,centerF);
+		}
 		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
 		var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
 		lG.setAttribute('cx',centerF[0]);
