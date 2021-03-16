@@ -444,6 +444,7 @@ function outline(){
 		
 		avgPoints.push(aPoint);
 	}
+	avgPoints[0] = avgPoints[avgPoints.length-1];
 	
 	for (var i=1;i<points.length-1;i++){
 		var aPoint = {};
