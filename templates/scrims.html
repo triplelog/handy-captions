@@ -447,7 +447,7 @@ function outline(){
 		
 		avgPoints.push(aPoint);
 	}
-
+	avgPoints.splice(0,1);
 	points.splice(0,2);
 	for (var i=1;i<points.length-1;i++){
 		var aPoint = {};
