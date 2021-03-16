@@ -688,7 +688,7 @@ function outline(){
 			pp3.y = box['topRight'][1];
 			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
 			
-			console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,circle,circle2);
+			console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 		}
 		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
 		var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
