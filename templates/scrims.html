@@ -651,7 +651,7 @@ function outline(){
 	return newPd;
 }
 
-function lineIntercept(line1,line2) {
+function lineIntersect(line1,line2) {
 	var xTop = line2['m']*(line1['point'][0]-line2['point'][0])+line2['point'][1]-line1['point'][1];
 	var xBottom = line1['m']-line2['m'];
 	var x = xTop/xBottom;
