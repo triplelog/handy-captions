@@ -410,9 +410,9 @@ function outline(){
 		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
 		var nextPoint = [next[nextKey][next[nextKey].length - 2],next[nextKey][next[nextKey].length - 1]];
 		
-		var d = Math.pow( Math.pow((thisPoint[1]-lastPoint[1]),2) + Math.pow((thisPoint[0]-lastPoint[0]),2) ,.5);
-		var dy = margin*(thisPoint[1]-lastPoint[1])/d;
-		var dx = margin*(thisPoint[0]-lastPoint[0])/d;
+		var d = Math.pow( Math.pow((thisPoint[1]-lastPoint[1]),2) + Math.pow((thisPoint[0]-lastPoint[0]),2) ,1);
+		var dy = margin*Math.pow((thisPoint[1]-lastPoint[1]),2)/d;
+		var dx = margin*Math.pow((thisPoint[0]-lastPoint[0]),2)/d;
 			
 		cPoint[key]=[];
 		cPoint[key].push(dy);
