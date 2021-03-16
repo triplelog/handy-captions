@@ -609,7 +609,13 @@ function outline(){
 		rightLine['point']=box['bottomRight'];
 		
 		bottomLine['point']=[(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
-		bottomLine['m']=-1/bottomLine['m'];
+		
+		if (bottomLine['m'] != 0){
+			bottomLine['m']=-1/bottomLine['m'];
+		}
+		else {
+			bottomLine['m']=1000;
+		}
 		
 		
 		var centerF = lineIntersect(bottomLine,leftLine);
@@ -657,9 +663,16 @@ function outline(){
 function lineIntersect(line1,line2) {
 	var xTop = line1['m']*line1['point'][0] - line2['m']*line2['point'][0] + line2['point'][1]-line1['point'][1];
 	var xBottom = line1['m']-line2['m'];
-	var x = xTop/xBottom;
-	var y = line1['m']*(x-line1['point'][0])+line1['point'][1];
-	return [x,y];
+	if (xBottom != 0){
+		var x = xTop/xBottom;
+		var y = line1['m']*(x-line1['point'][0])+line1['point'][1];
+		return [x,y];
+	}
+	else {
+		var x = line1['point'][0];
+		var y = line1['m']*(x-line1['point'][0])+line1['point'][1];
+		return [x,y];
+	}
 }
 function getEllipse(p1,p2,c){
 	var b2Top = Math.pow(p2.y-c.y,2)*Math.pow(p1.x-c.x,2)-Math.pow(p2.x-c.x,2)*Math.pow(p1.y-c.y,2);
