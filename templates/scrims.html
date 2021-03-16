@@ -723,7 +723,9 @@ function outline(){
 				circleVals.cx = circle2.x;
 				circleVals.cy = circle2.y;
 				circleVals.r = circle2.r;
-				break;
+				if (z<0.2){
+					break;
+				}
 			}
 			//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 		}
