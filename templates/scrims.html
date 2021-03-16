@@ -611,6 +611,7 @@ function outline(){
 		bottomLine['point']=[(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
 		bottomLine['m']=-1/bottomLine['m'];
 		
+		leftLine['m']= -1;
 		var centerF = lineIntersect(bottomLine,leftLine);
 		
 		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
