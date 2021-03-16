@@ -412,7 +412,7 @@ function outline(){
 			
 		cPoint[key]=[];
 		cPoint[key].push(dy);
-		cPoint[key].push(dx);
+		cPoint[key].push(-1*dx);
 
 		
 		d = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,.5);
@@ -424,7 +424,7 @@ function outline(){
 		bPoint[key]=[];
 
 		bPoint[key].push(dy);
-		bPoint[key].push(dx);
+		bPoint[key].push(-1*dx);
 
 		
 		newPoints.push(cPoint);
@@ -436,7 +436,7 @@ function outline(){
 		}
 		avgPoints.push(aPoint);
 	}
-	avgPoints.push(aPoint);
+	
 	for (var i=1;i<points.length-1;i++){
 		var aPoint = {};
 		var cPoint = {};
@@ -472,7 +472,7 @@ function outline(){
 			continue;
 		}
 		var lastShift = [avgPoints[i-1][0],avgPoints[i-1][1]];
-		var thisShift = [avgPoints[i+1][0],avgPoints[i+1][1]];
+		var thisShift = [avgPoints[i][0],avgPoints[i][1]];
 		
 		lastShift = [0,0];
 		//thisShift = [0,0];
