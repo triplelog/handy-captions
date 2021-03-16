@@ -707,7 +707,7 @@ function outline(){
 			circleVals.r = circle2.r;
 			
 			var z = 0.0;
-			while (circleIntersect(circle,circle2)){
+			while (circleIntersect(circle,circle2,i)){
 				var pp1 = {};
 				var pp2 = {};
 				var pp3 = {};
@@ -764,12 +764,16 @@ function outline(){
 	return newPd;
 }
 
-function circleIntersect(circle,circle2) {
+function circleIntersect(circle,circle2,i) {
 	var dc = Math.pow(circle.x-circle2.x,2)+Math.pow(circle.y-circle2.y,2);
 	var dr = Math.abs(circle.r-circle2.r);
 	var drp = Math.abs(circle.r+circle2.r);
+	console.log(i,dr,Math.pow(dc,.5),drp);
 	if (dr <= Math.pow(dc,.5) && Math.pow(dc,.5) <= drp){
 		return true;
+	}
+	else {
+		return false;
 	}
 	//y*(2*circle2.y-2*circle.y)
 	//=
