@@ -577,12 +577,13 @@ function outline(){
 		lG.setAttribute('y1',box['bottom'][1]);
 		lG.setAttribute('x2',box['top'][0]);
 		lG.setAttribute('y2',box['top'][1]);
+		lG.setAttribute('gradientUnits','userSpaceOnUse');
 		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 		newStop.setAttribute('offset','0%');
 		newStop.setAttribute('stop-color','red');
 		lG.appendChild(newStop);
 		var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-		newStopT.setAttribute('offset','1000%');
+		newStopT.setAttribute('offset','100%');
 		newStopT.setAttribute('stop-color','blue');
 		lG.appendChild(newStopT);
 		newDef.appendChild(lG);
