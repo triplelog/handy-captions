@@ -513,7 +513,21 @@ function outline(){
 			
 			
 			var oldD = [myPoint[2*ii]-lastPoint[0],myPoint[2*ii+1]-lastPoint[1]];
-			var newD = [oldD[0]*zeroThisNew[0]/zeroThis[0],oldD[1]*zeroThisNew[1]/zeroThis[1]];
+			
+			var newD = [0,0];
+			if (zeroThis[0] != 0){
+				newD[0] = oldD[0]*zeroThisNew[0]/zeroThis[0];
+			}
+			else {
+				newD[0] = oldD[0];
+			}
+			
+			if (zeroThis[1] != 0){
+				newD[1] = oldD[1]*zeroThisNew[1]/zeroThis[1];
+			}
+			else {
+				newD[1] = oldD[1];
+			}
 			
 			
 			pdPoint[key].push([newD[0]+lastPoint[0]+lastShift[0],newD[1]+lastPoint[1]+lastShift[1]]);
