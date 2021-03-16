@@ -637,8 +637,23 @@ function outline(){
 		
 		
 		var centerF = lineIntersect(bottomLine,leftLine);
+		var curveCenterX = 0;
+		var curveCenterY = 0;
+		var t = 0.5;
+		if (myPoint.length== 6){
+			curveCenterX = Math.pow(1-t,3)*lastPoint[0];
+			curveCenterX += 3*Math.pow(1-t,2)*t*myPoint[0];
+			curveCenterX += 3*Math.pow(t,2)*(1-t)*myPoint[2];
+			curveCenterX += Math.pow(t,3)*myPoint[4];
+		}
+		if (myPoint.length== 6){
+			curveCenterY = Math.pow(1-t,3)*lastPoint[1];
+			curveCenterY += 3*Math.pow(1-t,2)*t*myPoint[1];
+			curveCenterY += 3*Math.pow(t,2)*(1-t)*myPoint[3];
+			curveCenterY += Math.pow(t,3)*myPoint[5];
+		}
 		if (i==11){
-			console.log(bottomLine,leftLine,centerF);
+			console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY);
 		}
 		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
 		var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
