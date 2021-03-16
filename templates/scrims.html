@@ -639,18 +639,30 @@ function outline(){
 		var centerF = lineIntersect(bottomLine,leftLine);
 		var curveCenterX = 0;
 		var curveCenterY = 0;
+		var curveCenterXTop = 0;
+		var curveCenterYTop = 0;
 		var t = 0.5;
 		if (myPoint.length== 6){
 			curveCenterX = Math.pow(1-t,3)*lastPoint[0];
 			curveCenterX += 3*Math.pow(1-t,2)*t*myPoint[0];
 			curveCenterX += 3*Math.pow(t,2)*(1-t)*myPoint[2];
 			curveCenterX += Math.pow(t,3)*myPoint[4];
+			
+			curveCenterXTop = Math.pow(1-t,3)*(lastPoint[0]+lastShift[0]);
+			curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0];
+			curveCenterXTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][2];
+			curveCenterXTop += Math.pow(t,3)*pdPoint[key][4];
 		}
 		if (myPoint.length== 6){
 			curveCenterY = Math.pow(1-t,3)*lastPoint[1];
 			curveCenterY += 3*Math.pow(1-t,2)*t*myPoint[1];
 			curveCenterY += 3*Math.pow(t,2)*(1-t)*myPoint[3];
 			curveCenterY += Math.pow(t,3)*myPoint[5];
+			
+			curveCenterYTop = Math.pow(1-t,3)*(lastPoint[1]+lastShift[1]);
+			curveCenterYTop += 3*Math.pow(1-t,2)*t*pdPoint[key][1];
+			curveCenterYTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][3];
+			curveCenterYTop += Math.pow(t,3)*pdPoint[key][5];
 		}
 		
 		if (i==11){
@@ -664,7 +676,19 @@ function outline(){
 			p3.x = box['bottomRight'][0];
 			p3.y = box['bottomRight'][1];
 			var circle = circleFromThreePoints(p1,p2,p3);
-			console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,circle);
+			
+			var pp1 = {};
+			var pp2 = {};
+			var pp3 = {};
+			pp1.x = box['topLeft'][0];
+			pp1.y = box['topLeft'][1];
+			pp2.x = curveCenterXTop;
+			pp2.y = curveCenterYTop;
+			pp3.x = box['topRight'][0];
+			pp3.y = box['topRight'][1];
+			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
+			
+			console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,circle,circle2);
 		}
 		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
 		var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
