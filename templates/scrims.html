@@ -649,9 +649,9 @@ function outline(){
 			curveCenterX += Math.pow(t,3)*myPoint[4];
 			
 			curveCenterXTop = Math.pow(1-t,3)*(lastPoint[0]+lastShift[0]);
-			curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0];
-			curveCenterXTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][2];
-			curveCenterXTop += Math.pow(t,3)*pdPoint[key][4];
+			curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][0];
+			curveCenterXTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][0];
+			curveCenterXTop += Math.pow(t,3)*pdPoint[key][2][0];
 		}
 		if (myPoint.length== 6){
 			curveCenterY = Math.pow(1-t,3)*lastPoint[1];
@@ -660,9 +660,9 @@ function outline(){
 			curveCenterY += Math.pow(t,3)*myPoint[5];
 			
 			curveCenterYTop = Math.pow(1-t,3)*(lastPoint[1]+lastShift[1]);
-			curveCenterYTop += 3*Math.pow(1-t,2)*t*pdPoint[key][1];
-			curveCenterYTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][3];
-			curveCenterYTop += Math.pow(t,3)*pdPoint[key][5];
+			curveCenterYTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][1];
+			curveCenterYTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][1];
+			curveCenterYTop += Math.pow(t,3)*pdPoint[key][2][1];
 		}
 		
 		if (i==11){
