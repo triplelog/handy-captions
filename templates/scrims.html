@@ -359,7 +359,8 @@ function outline(){
 	var margin = 40;
 	var newPoints = [];
 	var oldPoints = [];
-	var avgPoints = [];
+	var avgPoints = [[0,0]];
+	var pdPoints = [];
 	var ll = {'M':[297.29747,550.86823]};
 	//ll['M']=points[points.length-1][Object.keys(points[points.length-1])[0]];
 	var ff = {'M':[297.29747,550.86823]};
@@ -410,8 +411,8 @@ function outline(){
 		var dx = margin*(thisPoint[0]-lastPoint[0])/d;
 			
 		cPoint[key]=[];
-		cPoint[key].push(thisPoint[0]+dy);
-		cPoint[key].push(thisPoint[1]-dx);
+		cPoint[key].push(dy);
+		cPoint[key].push(dx);
 
 		
 		d = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,.5);
@@ -422,24 +423,76 @@ function outline(){
 		var bPoint = {};
 		bPoint[key]=[];
 
-		bPoint[key].push(thisPoint[0]+dy);
-		bPoint[key].push(thisPoint[1]-dx);
+		bPoint[key].push(dy);
+		bPoint[key].push(dx);
 
 		
 		newPoints.push(cPoint);
 		oldPoints.push(bPoint);
+		
+		aPoint=[];
+		for (var ii=0;ii<cPoint[key].length;ii++){
+			aPoint.push(Math.round(cPoint[key][ii]*.5+bPoint[key][ii]*.5));
+		}
+		avgPoints.push(aPoint);
+	}
+	for (var i=1;i<points.length-1;i++){
+		var aPoint = {};
+		var cPoint = {};
+		var key = Object.keys(points[i])[0];
+		
+		var myPoint = points[i][key];
+		var last = points[i-1];
+		var lastKey = Object.keys(last)[0];
+		var next = points[i+1];
+		var nextKey = Object.keys(next)[0];
+		if (key == 'H' ){
+			
+			continue;
+		}
+		else if (key == 'V'){
+			
+			continue;
+		}
+		if (lastKey == 'H' ){
+			
+			continue;
+		}
+		else if (lastKey == 'V'){
+			
+			continue;
+		}
+		if (nextKey == 'H' ){
+			
+			continue;
+		}
+		else if (nextKey == 'V'){
+			
+			continue;
+		}
+		var lastShift = [avgPoints[i-1][0],avgPoints[i-1][1]];
+		var thisShift = [avgPoints[i][0],avgPoints[i][1]];
+		
+		pdPoint = {};
 		var aKey = 'L';
 		if (i==1){
 			aKey = 'M';
 		}
-		aPoint[aKey]=[];
-		for (var ii=0;ii<cPoint[key].length;ii++){
-			aPoint[aKey].push(Math.round(cPoint[key][ii]*.5+bPoint[key][ii]*.5));
+		pdPoint[aKey]=[];
+		for (var ii=0;ii<myPoint.length/2;ii++){
+			var shift = [0,0];
+			shift[0] = thisShift[0]*(ii+1)/(myPoint.length/2);
+			shift[0] += lastShift[0]*(myPoint.length/2-ii-1)/(myPoint.length/2);
+			shift[1] = thisShift[1]*(ii+1)/(myPoint.length/2);
+			shift[1] += lastShift[1]*(myPoint.length/2-ii-1)/(myPoint.length/2);
+			pdPoint[aKey].push([myPoint[2*ii]+shift[0],myPoint[2*ii+1]+shift[1]]);
+			
 		}
-		avgPoints.push(aPoint);
+		console.log(i,pdPoint);
+		pdPoints.push(pdPoint);
 	}
-	console.log(JSON.stringify(avgPoints.slice(14)));
-	var newPd = toPath(avgPoints);
+	console.log(JSON.stringify(pdPoints.slice(14)));
+	var newPd = toPath(pdPoints);
 	return newPd;
 }
 
