@@ -511,7 +511,9 @@ function outline(){
 		}
 		
 		
-		var box = {'bottom':[lastPoint[0],lastPoint[1]],'top':[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]]};
+		var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'topLeft':[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]]};
+		box['topRight']=[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]];
+		box['bottomRight']=[thisPoint[0],thisPoint[1]];
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(lastPoint[0]+lastShift[0]) + " "+(lastPoint[1]+lastShift[1]);
 		fillPath += " "+key;
@@ -561,6 +563,7 @@ function outline(){
 		console.log(i);
 		console.log(myPoint);
 		console.log(pdPoint[key]);
+		
 		fillPath += " L "+(thisPoint[0]) + " "+(thisPoint[1]);
 		fillPath += " "+key;
 		for (var ii=myPoint.length/2-2;ii>=0;ii--){
@@ -570,13 +573,54 @@ function outline(){
 		fillPath += " "+lastPoint[0] + " "+lastPoint[1];
 		//console.log(fillPath);
 		var heartFill = document.getElementById('heartFill');
-		var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+		
+		
+		/*var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 		var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
 		lG.id="box-grad-"+i;
-		lG.setAttribute('x1',box['bottom'][0]);
-		lG.setAttribute('y1',box['bottom'][1]);
-		lG.setAttribute('x2',box['top'][0]);
-		lG.setAttribute('y2',box['top'][1]);
+		lG.setAttribute('x1',box['bottomLeft'][0]);
+		lG.setAttribute('y1',box['bottomLeft'][1]);
+		lG.setAttribute('x2',box['topLeft'][0]);
+		lG.setAttribute('y2',box['topLeft'][1]);
+		lG.setAttribute('gradientUnits','userSpaceOnUse');
+		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+		newStop.setAttribute('offset','0%');
+		newStop.setAttribute('stop-color','red');
+		lG.appendChild(newStop);
+		var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+		newStopT.setAttribute('offset','100%');
+		newStopT.setAttribute('stop-color','blue');
+		lG.appendChild(newStopT);
+		newDef.appendChild(lG);
+		heartFill.appendChild(newDef);*/
+		
+		
+		var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+		var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
+		lG.id="box-grad-"+i;
+		var bottomLine = {'m':0,'point':[0,0]};
+		var leftLine = {'m':0,'point':[0,0]};
+		var rightLine = {'m':0,'point':[0,0]};
+		bottomLine['m']=(box['bottomRight'][1]-box['bottomLeft'][1])/(box['bottomRight'][0]-box['bottomLeft'][0]);
+		leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
+		rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+		
+		leftLine['point']=box['bottomLeft'];
+		rightLine['point']=box['bottomRight'];
+		
+		bottomLine['point']=[(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
+		bottomLine['m']=-1/bottomLine['m'];
+		
+		var centerF = lineIntersect(bottomLine,leftLine);
+		
+		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
+		var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
+		lG.setAttribute('cx',centerF[0]);
+		lG.setAttribute('cy',centerF[1]);
+		lG.setAttribute('fx',centerF[0]);
+		lG.setAttribute('fy',centerF[1]);
+		lG.setAttribute('r',Math.pow(bigR2,.5));
+		lG.setAttribute('fr',Math.pow(smallR2,.5));
 		lG.setAttribute('gradientUnits','userSpaceOnUse');
 		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 		newStop.setAttribute('offset','0%');
@@ -588,6 +632,7 @@ function outline(){
 		lG.appendChild(newStopT);
 		newDef.appendChild(lG);
 		heartFill.appendChild(newDef);
+		
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		newPath.setAttribute('d',fillPath);
 		newPath.style.fill = "url(#box-grad-"+i+")";
@@ -606,12 +651,20 @@ function outline(){
 	return newPd;
 }
 
+function lineIntercept(line1,line2) {
+	var xTop = line2['m']*(line1['point'][0]-line2['point'][0])+line2['point'][1]-line1['point'][1];
+	var xBottom = line1['m']-line2['m'];
+	var x = xTop/xBottom;
+	var y = line1['m']*(x-line1['point'][0])+line1['point'][1];
+	return [x,y];
+}
 function getEllipse(p1,p2,c){
 	var b2Top = Math.pow(p2.y-c.y,2)*Math.pow(p1.x-c.x,2)-Math.pow(p2.x-c.x,2)*Math.pow(p1.y-c.y,2);
 	var b2Bottom = Math.pow(p1.x-c.x,2)-Math.pow(p2.x-c.x,2);
 	var b2 = b2Top/b2Bottom;
 	var b = Math.pow(b2,.5);
-	var a = Math.pow(p1.x-c.x,2)/(1-(Math.pow(p1.y-c.y,2))/b2);
+	var a2 = Math.pow(p1.x-c.x,2)/(1-(Math.pow(p1.y-c.y,2))/b2);
+	var a = Math.pow(a2,.5);
 	console.log(a,b);
 }
 
