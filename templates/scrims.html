@@ -706,6 +706,24 @@ function outline(){
 			circleVals.cy = circle2.y;
 			circleVals.r = circle2.r;
 			
+			var z = 0.0;
+			while (circleIntersect(circle,circle2)){
+				var pp1 = {};
+				var pp2 = {};
+				var pp3 = {};
+				z+= 1.0;
+				pp1.x = box['topLeft'][0];
+				pp1.y = box['topLeft'][1];
+				pp2.x = curveCenterXTop*z+(box['topLeft'][0]+box['topRight'][0])/2*(1-z);
+				pp2.y = curveCenterYTop*z+(box['topLeft'][1]+box['topRight'][1])/2*(1-z);
+				pp3.x = box['topRight'][0];
+				pp3.y = box['topRight'][1];
+				var circle2 = circleFromThreePoints(pp1,pp2,pp3);
+			
+				circleVals.cx = circle2.x;
+				circleVals.cy = circle2.y;
+				circleVals.r = circle2.r;
+			}
 			//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 		}
 		
@@ -744,6 +762,18 @@ function outline(){
 	var c= {'x':0,'y':0};
 	getEllipse(p1,p2,c);
 	return newPd;
+}
+
+function circleIntersect(circle,circle2) {
+	var dc = Math.pow(circle.x-circle2.x,2)+Math.pow(circle.y-circle2.y,2);
+	var dr = Math.abs(circle.r-circle2.r);
+	var drp = Math.abs(circle.r+circle2.r);
+	if (dr <= Math.pow(dc,.5) && Math.pow(dc,.5) <= drp){
+		return true;
+	}
+	//y*(2*circle2.y-2*circle.y)
+	//=
+	//Math.pow((x-circle2.x),2)-Math.pow((x-circle.x),2)-Math.pow(circle2.r,2)+Math.pow(circle.r,2)+Math.pow(circle2.y,2)-Math.pow(circle.y,2);
 }
 
 function circleFromThreePoints(p1, p2, p3) {
