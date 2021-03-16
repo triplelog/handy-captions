@@ -601,9 +601,27 @@ function outline(){
 		var bottomLine = {'m':0,'point':[0,0]};
 		var leftLine = {'m':0,'point':[0,0]};
 		var rightLine = {'m':0,'point':[0,0]};
-		bottomLine['m']=(box['bottomRight'][1]-box['bottomLeft'][1])/(box['bottomRight'][0]-box['bottomLeft'][0]);
-		leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
-		rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+		
+		if (box['bottomRight'][0]!=box['bottomLeft'][0]){
+			bottomLine['m']=(box['bottomRight'][1]-box['bottomLeft'][1])/(box['bottomRight'][0]-box['bottomLeft'][0]);
+		}
+		else {
+			bottomLine['m']=1000;
+		}
+		if (box['topLeft'][0]!=box['bottomLeft'][0]){
+			leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
+		}
+		else {
+			leftLine['m']=1000;
+		}
+		if (box['bottomRight'][0]!=box['topRight'][0]){
+			rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+		}
+		else {
+			rightLine['m']=1000;
+		}
+		
+		
 		
 		leftLine['point']=box['bottomLeft'];
 		rightLine['point']=box['bottomRight'];
