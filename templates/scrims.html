@@ -534,6 +534,9 @@ function outline(){
 			fillPath += " "+(newD[0]+lastPoint[0]+lastShift[0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
 			
 		}
+		console.log(i);
+		console.log(myPoint);
+		console.log(pdPoint[key]);
 		fillPath += " L "+(thisPoint[0]) + " "+(thisPoint[1]);
 		fillPath += " "+key;
 		for (var ii=myPoint.length/2-2;ii>=0;ii--){
@@ -541,7 +544,7 @@ function outline(){
 			fillPath += " "+(myPoint[2*ii])+" "+(myPoint[2*ii+1]);
 		}
 		fillPath += " "+lastPoint[0] + " "+lastPoint[1];
-		console.log(fillPath);
+		//console.log(fillPath);
 		var heartFill = document.getElementById('heartFill');
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		newPath.setAttribute('d',fillPath);
