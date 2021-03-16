@@ -490,6 +490,15 @@ function outline(){
 		
 		var lastPoint = [last[lastKey][last[lastKey].length - 2],last[lastKey][last[lastKey].length - 1]];
 		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
+		
+		var zeroLast = [0,0];
+		var zeroThis = [thisPoint[0]-lastPoint[0],thisPoint[1]-lastPoint[1]]; 
+		var zeroLastNew = [0,0];
+		var zeroThisNew = [thisPoint[0]+thisShift[0]-lastPoint[0]-lastShift[0],thisPoint[1]+thisShift[1]-lastPoint[1]-lastShift[1]]; 
+		
+		
+		
+		
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(lastPoint[0]+lastShift[0]) + " "+(lastPoint[1]+lastShift[1]);
 		fillPath += " "+key;
@@ -499,8 +508,16 @@ function outline(){
 			shift[0] += lastShift[0]*(myPoint.length/2-ii-1)/(myPoint.length/2);
 			shift[1] = thisShift[1]*(ii+1)/(myPoint.length/2);
 			shift[1] += lastShift[1]*(myPoint.length/2-ii-1)/(myPoint.length/2);
-			pdPoint[key].push([myPoint[2*ii]+shift[0],myPoint[2*ii+1]+shift[1]]);
-			fillPath += " "+(myPoint[2*ii]+shift[0])+" "+(myPoint[2*ii+1]+shift[1]);
+			//pdPoint[key].push([myPoint[2*ii]+shift[0],myPoint[2*ii+1]+shift[1]]);
+			//fillPath += " "+(myPoint[2*ii]+shift[0])+" "+(myPoint[2*ii+1]+shift[1]);
+			
+			
+			var oldD = [myPoint[2*ii]-lastPoint[0],myPoint[2*ii+1]-lastPoint[1]];
+			var newD = [oldD[0]*zeroThisNew[0]/zeroThis[0],oldD[1]*zeroThisNew[1]/zeroThis[1]];
+			
+			
+			pdPoint[key].push([newD[0]+lastPoint[0]+lastShift[0],newD[1]+lastPoint[1]+lastShift[1]]);
+			fillPath += " "+(newD[0]+lastPoint[0]+lastShift[0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
 			
 		}
 		fillPath += " L "+(thisPoint[0]) + " "+(thisPoint[1]);
@@ -515,7 +532,7 @@ function outline(){
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		newPath.setAttribute('d',fillPath);
 		newPath.style.fill = "blue";
-		heartFill.appendChild(newPath);
+		//heartFill.appendChild(newPath);
 		pdPoints.push(pdPoint);
 		
 		
