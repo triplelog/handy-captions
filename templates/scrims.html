@@ -422,7 +422,11 @@ function outline(){
 			
 		}
 		
-		lastPoint = [myPoint[0],myPoint[1]];
+		d = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,.5);
+		dy = margin*(nextPoint[1]-thisPoint[1])/d;
+		dx = margin*(nextPoint[0]-thisPoint[0])/d;
+		
+		//lastPoint = [myPoint[0],myPoint[1]];
 		var bPoint = {};
 		bPoint[key]=[];
 		for (var ii=1;ii<myPoint.length/2+1;ii++){
