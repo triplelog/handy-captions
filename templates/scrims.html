@@ -409,12 +409,12 @@ function outline(){
 			var dy = margin*(myPoint[2*ii+1]-lastPoint[1])/d;
 			var dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
 			
-			if (i > 13){
-				console.log('old',i,ii,key,d,dx,dy);
-			}
+			
 			cPoint[key].push(myPoint[2*ii]+dy);
 			cPoint[key].push(myPoint[2*ii+1]-dx);
-
+			if (i > 15){
+				console.log('old',i,ii,key,d,dx,dy,cPoint[key]);
+			}
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
 		}
@@ -436,12 +436,14 @@ function outline(){
 				dx = margin*(myPoint[2*ii]-lastPoint[0])/d;
 			}
 			
-			if (i > 13){
-				console.log('new',i,ii,key,d,dx,dy);
-			}
+			
 
 			bPoint[key].push(myPoint[2*ii-2]+dy);
 			bPoint[key].push(myPoint[2*ii-1]-dx);
+			
+			if (i > 15){
+				console.log('new',i,ii,key,d,dx,dy,bPoint[key]);
+			}
 
 			lastPoint = [myPoint[2*ii],myPoint[2*ii+1]];
 			
