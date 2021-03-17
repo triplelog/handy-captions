@@ -81,6 +81,9 @@
 #heart, #heartBig, #heartFill {
 	position: absolute;
 }
+#heartBig {
+	display: none;
+}
 
 </style>
 </head>
@@ -640,6 +643,7 @@ function outline(){
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		newPath.setAttribute('d',fillPath);
 		newPath.style.fill = "url(#box-grad-"+i+")";
+		newPath.style.stroke = "url(#box-grad-"+i+")";
 		heartFill.appendChild(newPath);
 		
 		
