@@ -98,12 +98,7 @@
 				<image href="img/pnggrad16rgb.png" x="0" y="0" width="100%" height="100%" />
 			</pattern>
 		</defs>
-		<g class="hullSVG">
-			{% for idx in range(0,1) %}<path class="convexHull-{{ idx }}" fill="rgba(255,255,255,{{ 0.25 }})" {% if idx == 0 %}stroke="none"{% else %}stroke="none"{% endif %} stroke-width="2" d="M5 5 150 5 295 25 295 275 150 295 5 295Z" />
-			{% endfor %}
-			{% for idx in range(1,10) %}<path class="convexHull-{{ idx }}" fill="rgba(255,255,255,{{ 0.05 - idx*1.0/400.0 }})" {% if idx == 0 %}stroke="none"{% else %}stroke="none"{% endif %} stroke-width="2" d="M5 5 150 5 295 25 295 275 150 295 5 295Z" />
-			{% endfor %}
-		</g>
+		
 		<g class="bgSVG">
 
 		</g>
@@ -113,6 +108,15 @@
 	</svg>
 </div>
 <div class="tools">
+	<select>
+		<option value="image">Image BG</option>
+		<option value="neon">Neon</option>
+		<option value="gradient">Gradient</option>
+		<option value="isometric">Isometric</option>
+		<option value="3d">3D</option>
+		<option value="emboss">Emboss</option>
+		<option value="pixel">Cross-stitch</option>
+	</select>
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
@@ -180,7 +184,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 	path0.setAttribute('d',pd);
-	path0.setAttribute('stroke','none');
+	path0.setAttribute('stroke','rgba(0,0,0,.5)');
 	path0.setAttribute('stroke-width','11');
 	path0.setAttribute('fill','none');
 	path0.id = "bbg-"+id;
@@ -190,7 +194,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 	path.setAttribute('d',pd);
-	path.setAttribute('stroke','none');
+	path.setAttribute('stroke','black');
 	path.setAttribute('stroke-width','7');
 	path.setAttribute('fill','none');
 	path.id = "bg-"+id;
@@ -199,7 +203,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg2 = document.querySelector('.o2  .fgSVG');
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
-	path2.setAttribute('stroke','none');
+	path2.setAttribute('stroke','white');
 	path2.setAttribute('stroke-width','5');
 	path2.setAttribute('fill','none');
 	path2.id = "fg-"+id;
