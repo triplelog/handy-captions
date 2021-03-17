@@ -207,12 +207,12 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
 			if (i < 3){
-				path.setAttribute('stroke','rgba(255,255,255,1)');
-				path.setAttribute('transform','translate(0 -'+(i)+')');
+				path.setAttribute('stroke','rgba(255,255,255,'+(0.33+i/3)+')');
+				path.setAttribute('transform','translate(0 -'+(3-i)+')');
 			}
 			else{
-				path.setAttribute('stroke','rgba(0,0,0,1)');
-				path.setAttribute('transform','translate(0 '+(i-3)+')');
+				path.setAttribute('stroke','rgba(0,0,0,'+(-0.66+i/3)+')');
+				path.setAttribute('transform','translate(0 '+(6-i)+')');
 			}
 			svg.appendChild(path);
 		}
