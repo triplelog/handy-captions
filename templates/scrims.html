@@ -595,16 +595,18 @@ function outline(){
 			//var linearV = Math.pow((box['topLeft'][0]+box['topRight'][0])/2-box['topLeft'][0],2)+Math.pow((box['topLeft'][1]+box['topRight'][1])/2-box['topLeft'][1],2);
 			//var topSlope = ((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop)/((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop);
 			//var bottomSlope = ((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterY)/((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX);
-			var topSlope = ((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop);
-			var bottomSlope = ((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX);
+			var topX = ((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop);
+			var bottomX = ((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX);
+			var topY = ((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop);
+			var bottomY = ((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterY);
 			
-			if (topSlope*bottomSlope <= 0){
+			if (topX*bottomX <= 0){
 				linear = true;
 			}
 			else {
 				linear = false;
 			}
-			console.log(i,topSlope,bottomSlope);
+			console.log(i,topX,bottomX,topY,bottomY);
 		}
 		
 		
