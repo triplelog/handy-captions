@@ -770,13 +770,14 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		
 		var z = 1.0;
 		var ci = circleIntersect(circle,circle2,i);
+		var flipZ = false;
 		var count = 0;
-		while ( ci && ci != 0 && count < 10){
+		while ( ci && ci != 0 && count < 20){
 			console.log(i,ci,z);
 			var pp1 = {};
 			var pp2 = {};
 			var pp3 = {};
-			if (ci < 0){
+			if (flipZ){
 				z+= 0.1;
 			}
 			else {
@@ -791,13 +792,16 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 			pp3.y = box['topRight'][1];
 			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
 			ci = circleIntersect(circle,circle2,i);
+			
+			cii = ci;
 			circleVals.cx = circle2.x;
 			circleVals.cy = circle2.y;
 			circleVals.r = circle2.r;
-			if (z<0.2 || z > 2.0){
-				break;
+			if (z<0.2){
+				flipZ = true;
 			}
 			count++;
+			
 		}
 		//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 	}
