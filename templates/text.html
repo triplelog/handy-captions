@@ -49,6 +49,7 @@
 	height: 300px;
 	display: inline-block;
 	border: 1px solid red;
+	background: gray;
 	/*display: none;*/
 	/*background-image: url("img/pexels-photo-963278.jpeg");
 	background-color: black;
@@ -184,22 +185,22 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 	path0.setAttribute('d',pd);
-	path0.setAttribute('stroke','rgba(0,0,0,.5)');
-	path0.setAttribute('stroke-width','11');
+	path0.setAttribute('stroke','rgba(0,0,0,1)');
+	path0.setAttribute('stroke-width','5');
 	path0.setAttribute('fill','none');
 	path0.id = "bbg-"+id;
-	path0.setAttribute('transform','translate(10 10)');
+	path0.setAttribute('transform','translate(0 3)');
 	svg.appendChild(path0);
 	
 
 	var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 	path.setAttribute('d',pd);
-	path.setAttribute('stroke','black');
-	path.setAttribute('stroke-width','7');
+	path.setAttribute('stroke','rgba(0,0,0,.5)');
+	path.setAttribute('stroke-width','5');
 	path.setAttribute('fill','none');
 	path.id = "bg-"+id;
-	path.setAttribute('transform','translate(10 10)');
+	path.setAttribute('transform','translate(0 6)');
 	svg.appendChild(path);
 	
 	var svg2 = document.querySelector('.o2  .fgSVG');
