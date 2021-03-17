@@ -782,7 +782,7 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 			pp3.x = box['topRight'][0];
 			pp3.y = box['topRight'][1];
 			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
-		
+			console.log(i,circleIntersect(circle,circle2,i),z);
 			circleVals.cx = circle2.x;
 			circleVals.cy = circle2.y;
 			circleVals.r = circle2.r;
