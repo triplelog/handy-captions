@@ -288,7 +288,7 @@ function heart() {
 	imgB.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElementB.outerHTML);
 	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
 	
-	outline();
+	
 }
 
 
@@ -561,9 +561,6 @@ function outline(){
 			fillPath += " "+(newD[0]+lastPoint[0]+lastShift[0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
 			
 		}
-		console.log(i);
-		console.log(myPoint);
-		console.log(pdPoint[key]);
 		
 		fillPath += " L "+(thisPoint[0]) + " "+(thisPoint[1]);
 		fillPath += " "+key;
