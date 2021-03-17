@@ -643,7 +643,8 @@ function outline(){
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		newPath.setAttribute('d',fillPath);
 		newPath.style.fill = "url(#box-grad-"+i+")";
-		newPath.setAttribute('stroke-width','0');
+		newPath.setAttribute('stroke-width','1');
+		newPath.setAttribute('stroke','black');
 		heartFill.appendChild(newPath);
 		
 		
