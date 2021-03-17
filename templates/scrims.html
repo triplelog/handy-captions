@@ -574,7 +574,7 @@ function outline(){
 		
 		var linear = true;
 		if (myPoint.length== 6){
-			
+			var t = 0.5;
 			var curveCenterXTop = Math.pow(1-t,3)*(lastPoint[0]+lastShift[0]);
 			curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][0];
 			curveCenterXTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][0];
