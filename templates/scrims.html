@@ -361,6 +361,7 @@ function outline(){
 	
 	var points = parsePath(pd);
 	var qPoints = toQuadratics(points);
+	points = qPoints;
 	console.log(qPoints);
 	console.log(toPath(qPoints));
 	console.log(JSON.stringify(points.slice(14)));
