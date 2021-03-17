@@ -601,14 +601,12 @@ function outline(){
 				if (curveCenterYTop<topYatX){
 					underTop = true;
 				}
-				console.log(i,curveCenterYTop,topYatX);
 			}
 			else {
 				var topYatX = (curveCenterXTop-box['topLeft'][0])/(box['topRight'][0]-box['topLeft'][0]) * (box['topRight'][1]-box['topLeft'][1]) + box['topLeft'][1];
 				if (curveCenterYTop<topYatX){
 					underTop = true;
 				}
-				console.log(i,curveCenterYTop,topYatX);
 			}
 			
 			var underBottom = false;
@@ -617,18 +615,16 @@ function outline(){
 				if (curveCenterY<bottomYatX){
 					underBottom = true;
 				}
-				console.log(i,curveCenterY,bottomYatX);
 			}
 			else {
 				var bottomYatX = (curveCenterXTop-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
 				if (curveCenterY<bottomYatX){
 					underBottom = true;
 				}
-				console.log(i,curveCenterY,bottomYatX);
 			}
 			
 			
-			if (1 <= 0){
+			if (underTop != underBottom){
 				linear = true;
 			}
 			else {
