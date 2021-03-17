@@ -406,15 +406,17 @@ function outline(pd){
 				linear = true;
 			}
 			else {
+				
 				linear = false;
 			}
-			console.log(i,underTop,underBottom);
+			
 		}
 		if (i>2 && i < points.length-3){
 			if (linear){
 				linearGradient(i,box);
 			}
 			else {
+				console.log(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
 				radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
 			}
 			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
