@@ -183,7 +183,7 @@ function drawCurveIn(pt){
 function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg = document.querySelector('.o2 .bgSVG');
 	
-	for (var i=0;i<10;i++){
+	for (var i=0;i<8;i++){
 		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 		path.setAttribute('d',pd);
@@ -191,7 +191,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		path.setAttribute('stroke-width','5');
 		path.setAttribute('fill','none');
 		path.id = "bg-"+id+"-"+i;
-		path.setAttribute('transform','translate(0 '+(10-i*1)+')');
+		path.setAttribute('transform','translate(0 '+(8-i*1)+')');
 		svg.appendChild(path);
 	}
 
