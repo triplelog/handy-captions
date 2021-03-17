@@ -271,21 +271,18 @@ function heart() {
 	el.querySelector('path').setAttribute('d',newPath);
 	el.style.display = "inline-block";
 	document.getElementById('heart').style.display = "inline-block";
-	let clonedSvgElementB = document.getElementById("heartBig").cloneNode(true);
-	var imgB = new Image();
+	//let clonedSvgElementB = document.getElementById("heartBig").cloneNode(true);
+	//var imgB = new Image();
 	let clonedSvgElement = document.getElementById("heart").cloneNode(true);
 	var img2 = new Image();
 	
-	imgB.onload = function() {
-		ctx.drawImage(img, 0, 0, 300, 300);
-		ctx.drawImage(imgB, 0, 0,300,300);
+
 		img2.onload = function() {
+			ctx.drawImage(img, 0, 0, 300, 300);
 			ctx.drawImage(img2, 0, 0,300,300);
 		
 		}
-		
-	}
-	imgB.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElementB.outerHTML);
+
 	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
 	
 	
