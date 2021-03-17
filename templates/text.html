@@ -237,6 +237,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		}
 	}
 	else if (textStyle == 'neon'){
+		var heartFill = document.querySelector('.o2 .textSVG');
 		outline(pd);
 		for (var i=0;i<8;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
