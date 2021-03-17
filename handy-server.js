@@ -90,6 +90,14 @@ app.get('/images.html',
 		res.end();
 	}
 );
+app.get('/text.html', 
+	function(req, res) {
+		res.write(nunjucks.render('templates/text.html',{
+		
+		}));
+		res.end();
+	}
+);
 app.get('/code.html', 
 	function(req, res) {
 		res.write(nunjucks.render('templates/code.html',{
