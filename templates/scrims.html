@@ -690,10 +690,10 @@ function toQuadratics(points) {
 		var myPoint = points[i][key];
 		var lx = (lastPoint[0]-3*myPoint[0]+3*myPoint[2]-myPoint[4])/16;
 		var mx = (3*lastPoint[0]+9*myPoint[0]-3*myPoint[2]-myPoint[4])/16;
-		var nx = (-3*lastPoint[0]+3*myPoint[0]+3*myPoint[2]+5myPoint[4])/16;
+		var nx = (-3*lastPoint[0]+3*myPoint[0]+3*myPoint[2]+5*myPoint[4])/16;
 		var ly = (lastPoint[1]-3*myPoint[1]+3*myPoint[3]-myPoint[5])/16;
 		var my = (3*lastPoint[1]+9*myPoint[1]-3*myPoint[3]-myPoint[5])/16;
-		var ny = (-3*lastPoint[1]+3*myPoint[1]+3*myPoint[3]+5myPoint[5])/16;
+		var ny = (-3*lastPoint[1]+3*myPoint[1]+3*myPoint[3]+5*myPoint[5])/16;
 		var t = 0.5;
 		var curveCenterX = Math.pow(1-t,3)*lastPoint[0];
 		curveCenterX += 3*Math.pow(1-t,2)*t*myPoint[0];
