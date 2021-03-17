@@ -181,7 +181,7 @@ function drawCurveIn(pt){
 	el.style.top = pt[1]+"px";
 	inputEl.appendChild(el);
 }
-var textStyle = 'isometric';
+var textStyle = 'neon';
 var textBG = 'gradient';
 function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg = document.querySelector('.o2 .bgSVG');
@@ -230,6 +230,19 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
 			path.setAttribute('transform','translate(-'+(16-i*1)+' -'+(16-i*1)+')');
+			svg.appendChild(path);
+		}
+	}
+	else if (textStyle == 'neon'){
+		for (var i=0;i<8;i++){
+			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	
+			path.setAttribute('d',pd);
+			path.setAttribute('stroke','rgba(0,0,0,'+(1.0-i*0.1)+')');
+			path.setAttribute('stroke-width','5');
+			path.setAttribute('fill','none');
+			path.id = "bg-"+id+"-"+i;
+			path.setAttribute('transform','translate(0 '+(8-i*1)+')');
 			svg.appendChild(path);
 		}
 	}
