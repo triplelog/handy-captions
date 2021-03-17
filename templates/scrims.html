@@ -821,7 +821,7 @@ function circleIntersect(circle,circle2,i) {
 	var dr = Math.abs(circle.r-circle2.r);
 	var drp = Math.abs(circle.r+circle2.r);
 	if (dr <= Math.pow(dc,.5) && Math.pow(dc,.5) <= drp){
-		return dr/Math.pow(dc,.5);
+		return dr;
 	}
 	else {
 		return -1;
