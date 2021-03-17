@@ -598,6 +598,9 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 	circleVals.fy = centerF[1];
 	circleVals.r = Math.pow(bigR2,.5);
 	circleVals.fr = Math.pow(smallR2,.5);
+	
+	console.log(circleVals);
+	
 	if (myPoint.length== 4){
 		var p1 = {};
 		var p2 = {};
@@ -613,6 +616,8 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		circleVals.fx = circle.x;
 		circleVals.fy = circle.y;
 		circleVals.fr = circle.r;
+		
+		console.log(circleVals,p1,p2,p3);
 		
 		var pp1 = {};
 		var pp2 = {};
