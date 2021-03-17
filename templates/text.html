@@ -123,6 +123,9 @@
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
 </div>
+
+<script src="js/outlines.js">
+</script>
 <script>
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext("2d");
@@ -234,6 +237,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		}
 	}
 	else if (textStyle == 'neon'){
+		outline(pd);
 		for (var i=0;i<8;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
