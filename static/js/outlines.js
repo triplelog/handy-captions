@@ -127,6 +127,9 @@ function outline(pd){
 		var nextPoint = [next[nextKey][next[nextKey].length - 2],next[nextKey][next[nextKey].length - 1]];
 		
 		var d1 = Math.pow( Math.pow((thisPoint[1]-lastPoint[1]),2) + Math.pow((thisPoint[0]-lastPoint[0]),2) ,1);
+		if (d1 == 0){
+			console.log(i,thisPoint);
+		}
 		var dy1 = margin*Math.pow((thisPoint[1]-lastPoint[1]),2)/d1;
 		var dx1 = margin*Math.pow((thisPoint[0]-lastPoint[0]),2)/d1;
 		if (thisPoint[1]<lastPoint[1]){
@@ -140,6 +143,9 @@ function outline(pd){
 
 		
 		d2 = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,1);
+		if (d2 == 0){
+			console.log(i,thisPoint);
+		}
 		dy2 = margin*Math.pow((nextPoint[1]-thisPoint[1]),2)/d2;
 		dx2 = margin*Math.pow((nextPoint[0]-thisPoint[0]),2)/d2;
 		if (nextPoint[1]<thisPoint[1]){
@@ -154,6 +160,9 @@ function outline(pd){
 		
 		var ay = (dy1+dy2)/2;
 		var ax = (dx1+dx2)/2;
+		if (ay == 0 && ax == 0){
+			console.log(i,thisPoint);
+		}
 		var mul = Math.pow(margin,1)/Math.pow((Math.pow(ay,2)+Math.pow(ax,2)),.5);
 		
 		
