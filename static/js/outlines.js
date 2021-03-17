@@ -78,7 +78,7 @@ function outline(pd){
 	var ll1 = {'M':[323.70555,578.32901]};
 	var ll2 = {'L':[297.29747,550.86823]};
 	
-	//ll['M']=points[points.length-1][Object.keys(points[points.length-1])[0]];
+	ll1['M']=points[points.length-1][Object.keys(points[points.length-1])[0]];
 
 	var ff2 = {'L':[220.86277,483.99412]};
 	var ff3 = {'L':[91.719238,380.29088]};
@@ -446,11 +446,11 @@ function outline(pd){
 			newPath.style.fill = "url(#box-grad-"+i+")";
 		
 			if (i%2 == 0){
-				newPath.setAttribute('stroke-width','0.1');
+				newPath.setAttribute('stroke-width','0.0');
 				newPath.setAttribute('stroke',"url(#box-grad-"+i+")");
 			}
 			else {
-				newPath.setAttribute('stroke-width','0.1');
+				newPath.setAttribute('stroke-width','0.0');
 				newPath.setAttribute('stroke',"url(#box-grad-"+i+")");
 			}
 		
