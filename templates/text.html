@@ -181,6 +181,7 @@ function drawCurveIn(pt){
 	inputEl.appendChild(el);
 }
 var textStyle = 'isometric';
+var textBG = 'gradient';
 function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg = document.querySelector('.o2 .bgSVG');
 	
@@ -219,7 +220,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	else if (textStyle == 'isometric'){
 		svg.style.transform = "skew(0deg, -30deg)";
-		for (var i=0;i<12;i++){
+		for (var i=0;i<16;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
@@ -227,7 +228,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			path.setAttribute('stroke-width','5');
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
-			path.setAttribute('transform','translate(-'+(12-i*1)+' -'+(12-i*1)+')');
+			path.setAttribute('transform','translate(-'+(16-i*1)+' -'+(16-i*1)+')');
 			svg.appendChild(path);
 		}
 	}
@@ -240,7 +241,13 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
-	path2.setAttribute('stroke','white');
+	if (textBG == 'gradient'){
+		path2.setAttribute('stroke','url(#grad1)');
+	}
+	else {
+		path2.setAttribute('stroke','white');
+	}
+	
 	path2.setAttribute('stroke-width','5');
 	path2.setAttribute('fill','none');
 	path2.id = "fg-"+id;
