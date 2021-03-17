@@ -654,7 +654,7 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 	}
 	
-	
+	console.log(circleVals);
 	lG.setAttribute('cx',circleVals.cx);
 	lG.setAttribute('cy',circleVals.cy);
 	lG.setAttribute('fx',circleVals.fx);
