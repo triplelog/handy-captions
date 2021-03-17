@@ -186,7 +186,7 @@ function drawCurveIn(pt){
 }
 var textStyle = 'isometric';
 var textBG = 'gradient';
-
+var textOptions = {'skewAngle':'-15'};
 var heartFill = document.querySelector('.o2 .bgSVG');
 function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg = document.querySelector('.o2 .bgSVG');
@@ -225,7 +225,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		}
 	}
 	else if (textStyle == 'isometric'){
-		svg.style.transform = "skew(0deg, -30deg)";
+		svg.style.transform = "skew(0deg, "+textOptions.skewAngle+"deg)";
 		for (var i=0;i<16;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
@@ -258,7 +258,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	
 	var svg2 = document.querySelector('.o2  .fgSVG');
 	if (textStyle == 'isometric'){
-		svg2.style.transform = "skew(0deg, -30deg)";
+		svg2.style.transform = "skew(0deg, "+textOptions.skewAngle+"deg)";
 	}
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
