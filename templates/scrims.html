@@ -769,7 +769,8 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		circleVals.r = circle2.r;
 		
 		var z = 1.0;
-		while (circleIntersect(circle,circle2,i)){
+		while (circleIntersect(circle,circle2,i) != -1){
+			console.log(i,circleIntersect(circle,circle2,i),z);
 			var pp1 = {};
 			var pp2 = {};
 			var pp3 = {};
@@ -820,10 +821,10 @@ function circleIntersect(circle,circle2,i) {
 	var dr = Math.abs(circle.r-circle2.r);
 	var drp = Math.abs(circle.r+circle2.r);
 	if (dr <= Math.pow(dc,.5) && Math.pow(dc,.5) <= drp){
-		return true;
+		return dr/Math.pow(dc,.5);
 	}
 	else {
-		return false;
+		return -1;
 	}
 	//y*(2*circle2.y-2*circle.y)
 	//=
