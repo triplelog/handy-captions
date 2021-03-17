@@ -600,6 +600,10 @@ function outline(){
 		else {
 			radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
 		}
+		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+		newPath.setAttribute('d',fillPath);
+		newPath.style.fill = "url(#box-grad-"+i+")";
+		heartFill.appendChild(newPath);
 		
 		
 		
@@ -795,10 +799,7 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 	newDef.appendChild(lG);
 	heartFill.appendChild(newDef);
 	
-	var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-	newPath.setAttribute('d',fillPath);
-	newPath.style.fill = "url(#box-grad-"+i+")";
-	heartFill.appendChild(newPath);
+	
 }
 function circleIntersect(circle,circle2,i) {
 	var dc = Math.pow(circle.x-circle2.x,2)+Math.pow(circle.y-circle2.y,2);
