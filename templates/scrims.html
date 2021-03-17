@@ -583,8 +583,8 @@ function outline(){
 			curveCenterYTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][1];
 			curveCenterYTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][1];
 			curveCenterYTop += Math.pow(t,3)*pdPoint[key][2][1];
-			var linearH = Math.pow((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterXTop,2)+Math.pow((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterYTop,2);
-			var linearV = Math.pow((box['bottomLeft'][0]+box['bottomRight'][0])/2-box['bottomLeft'][0],2)+Math.pow((box['bottomLeft'][1]+box['bottomRight'][1])/2-box['bottomLeft'][1],2);
+			var linearH = Math.pow((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop,2)+Math.pow((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop,2);
+			var linearV = Math.pow((box['topLeft'][0]+box['topRight'][0])/2-box['topLeft'][0],2)+Math.pow((box['topLeft'][1]+box['topRight'][1])/2-box['topLeft'][1],2);
 			if (linearH/linearV < 0.01){
 				linear = true;
 			}
