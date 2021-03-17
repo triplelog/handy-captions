@@ -281,7 +281,7 @@ function outline(pd){
 		}
 		fillPath += " "+lastPoint[0] + " "+lastPoint[1];
 		//console.log(fillPath);
-		var heartFill = document.getElementById('heartFill');
+
 		
 		var linear = true;
 		if (myPoint.length== 6){
