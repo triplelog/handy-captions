@@ -182,26 +182,20 @@ function drawCurveIn(pt){
 }
 function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg = document.querySelector('.o2 .bgSVG');
-	var path0 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
-	path0.setAttribute('d',pd);
-	path0.setAttribute('stroke','rgba(0,0,0,1)');
-	path0.setAttribute('stroke-width','5');
-	path0.setAttribute('fill','none');
-	path0.id = "bbg-"+id;
-	path0.setAttribute('transform','translate(0 3)');
-	svg.appendChild(path0);
+	for (var i=1;i<6;i++){
+		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
+		path.setAttribute('d',pd);
+		path.setAttribute('stroke','rgba(0,0,0,'+(i*0.1)+')');
+		path.setAttribute('stroke-width','5');
+		path.setAttribute('fill','none');
+		path.id = "bg-"+id+"-"+i;
+		path.setAttribute('transform','translate(0 '+(i*2)+')');
+		svg.appendChild(path);
+	}
 
-	var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
-	path.setAttribute('d',pd);
-	path.setAttribute('stroke','rgba(0,0,0,.5)');
-	path.setAttribute('stroke-width','5');
-	path.setAttribute('fill','none');
-	path.id = "bg-"+id;
-	path.setAttribute('transform','translate(0 6)');
-	svg.appendChild(path);
 	
 	var svg2 = document.querySelector('.o2  .fgSVG');
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
