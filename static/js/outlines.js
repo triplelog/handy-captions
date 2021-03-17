@@ -417,7 +417,11 @@ function outline(pd){
 			}
 			else {
 				console.log(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
-				radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
+				
+				var isLinear = radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
+				if (isLinear == 'linear'){
+					linearGradient(i,box);
+				}
 			}
 			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 			newPath.setAttribute('d',fillPath);
@@ -598,8 +602,7 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 	circleVals.fy = centerF[1];
 	circleVals.r = Math.pow(bigR2,.5);
 	circleVals.fr = Math.pow(smallR2,.5);
-	
-	console.log(circleVals);
+
 	
 	if (myPoint.length== 4){
 		var p1 = {};
@@ -611,7 +614,11 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		p2.y = curveCenterY;
 		p3.x = box['bottomRight'][0];
 		p3.y = box['bottomRight'][1];
+		
 		var circle = circleFromThreePoints(p1,p2,p3);
+		if (!isFinite(circle.r)){
+			return 'linear';
+		}
 		
 		circleVals.fx = circle.x;
 		circleVals.fy = circle.y;
@@ -629,7 +636,9 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		pp3.x = box['topRight'][0];
 		pp3.y = box['topRight'][1];
 		var circle2 = circleFromThreePoints(pp1,pp2,pp3);
-		
+		if (!isFinite(circle2.r)){
+			return 'linear';
+		}
 		circleVals.cx = circle2.x;
 		circleVals.cy = circle2.y;
 		circleVals.r = circle2.r;
@@ -657,6 +666,9 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 			pp3.x = box['topRight'][0];
 			pp3.y = box['topRight'][1];
 			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
+			if (!isFinite(circle2.r)){
+				return 'linear';
+			}
 			ci = circleIntersect(circle,circle2,i);
 			
 			cii = ci;
