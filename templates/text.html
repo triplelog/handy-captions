@@ -186,7 +186,7 @@ function drawCurveIn(pt){
 }
 var textStyle = 'isometric';
 var textBG = 'gradient';
-var textOptions = {'skewAngle':'-15'};
+var textOptions = {'skewAngle':'-15','depth':32};
 var heartFill = document.querySelector('.o2 .bgSVG');
 function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg = document.querySelector('.o2 .bgSVG');
@@ -226,15 +226,15 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	else if (textStyle == 'isometric'){
 		svg.style.transform = "skew(0deg, "+textOptions.skewAngle+"deg)";
-		for (var i=0;i<16;i++){
+		for (var i=0;i<textOptions.depth;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
-			path.setAttribute('stroke','rgba(0,0,0,'+(0.0+i*0.1)+')');
+			path.setAttribute('stroke','rgba(0,0,0,'+(0.0+i*1.0/textOptions.depth)+')');
 			path.setAttribute('stroke-width','5');
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
-			path.setAttribute('transform','translate(-'+(16-i*1)+' -'+(16-i*1)+')');
+			path.setAttribute('transform','translate(-'+(textOptions.depth-i*1)+' -'+(textOptions.depth-i*1)+')');
 			svg.appendChild(path);
 		}
 	}
