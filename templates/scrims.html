@@ -595,18 +595,47 @@ function outline(){
 			//var linearV = Math.pow((box['topLeft'][0]+box['topRight'][0])/2-box['topLeft'][0],2)+Math.pow((box['topLeft'][1]+box['topRight'][1])/2-box['topLeft'][1],2);
 			//var topSlope = ((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop)/((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop);
 			//var bottomSlope = ((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterY)/((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX);
-			var topX = ((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop);
-			var bottomX = ((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX);
-			var topY = ((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop);
-			var bottomY = ((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterY);
+			var underTop = false;
+			if (box['topLeft'][0]>box['topRight'][0]){
+				var topYatX = (curveCenterXTop-box['topRight'][0])/(box['topLeft'][0]-box['topRight'][0]) * (box['topLeft'][1]-box['topRight'][1]) + box['topRight'][1];
+				if (curveCenterYTop<topYatX){
+					underTop = true;
+				}
+				console.log(i,curveCenterYTop,topYatX);
+			}
+			else {
+				var topYatX = (curveCenterXTop-box['topLeft'][0])/(box['topRight'][0]-box['topLeft'][0]) * (box['topRight'][1]-box['topLeft'][1]) + box['topLeft'][1];
+				if (curveCenterYTop<topYatX){
+					underTop = true;
+				}
+				console.log(i,curveCenterYTop,topYatX);
+			}
 			
-			if (topX*bottomX <= 0){
+			var underBottom = false;
+			if (box['bottomLeft'][0]>box['bottomRight'][0]){
+				var bottomYatX = (curveCenterX-box['bottomRight'][0])/(box['bottomLeft'][0]-box['bottomRight'][0]) * (box['bottomLeft'][1]-box['bottomRight'][1]) + box['bottomRight'][1];
+				if (curveCenterY<bottomYatX){
+					underBottom = true;
+				}
+				console.log(i,curveCenterY,bottomYatX);
+			}
+			else {
+				var bottomYatX = (curveCenterXTop-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
+				if (curveCenterY<bottomYatX){
+					underBottom = true;
+				}
+				console.log(i,curveCenterY,bottomYatX);
+			}
+			
+			
+			if (1 <= 0){
 				linear = true;
 			}
 			else {
 				linear = false;
 			}
-			console.log(i,topX,bottomX,topY,bottomY);
+			linear = false;
+			console.log(i,underTop,underBottom);
 		}
 		
 		
