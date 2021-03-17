@@ -706,15 +706,15 @@ function toQuadratics(points) {
 			
 		var firstPoint = {'Q':[0,0,0,0]};
 		var secondPoint = {'Q':[0,0,0,0]};
-		firstPoint[2] = curveCenterX;
-		firstPoint[0] = lx*t1+mx-t1/(2*(t1-1))*firstPoint[2];
-		firstPoint[3] = curveCenterY;
-		firstPoint[1] = ly*t1+my-t1/(2*(t1-1))*firstPoint[3];
+		firstPoint['Q'][2] = curveCenterX;
+		firstPoint['Q'][0] = lx*t1+mx-t1/(2*(t1-1))*firstPoint['Q'][2];
+		firstPoint['Q'][3] = curveCenterY;
+		firstPoint['Q'][1] = ly*t1+my-t1/(2*(t1-1))*firstPoint['Q'][3];
 		
-		secondPoint[2] = myPoint[4];
-		secondPoint[0] = lx*(t2+1)+nx-(t2-1)/(2*(t2))*secondPoint[2];
-		secondPoint[3] = myPoint[5];
-		secondPoint[1] = ly*(t2+1)+ny-(t2-1)/(2*(t2))*secondPoint[3];
+		secondPoint['Q'][2] = myPoint[4];
+		secondPoint['Q'][0] = lx*(t2+1)+nx-(t2-1)/(2*(t2))*secondPoint['Q'][2];
+		secondPoint['Q'][3] = myPoint[5];
+		secondPoint['Q'][1] = ly*(t2+1)+ny-(t2-1)/(2*(t2))*secondPoint['Q'][3];
 		
 		qPoints.push(firstPoint);
 		qPoints.push(secondPoint);
