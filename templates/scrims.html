@@ -596,7 +596,7 @@ function outline(){
 			var topSlope = ((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop)/((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop);
 			var bottomSlope = ((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterY)/((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX);
 			
-			if (topSlope*bottomSlope <= 0){
+			if (((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop)*((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX) <= 0){
 				linear = true;
 			}
 			else {
