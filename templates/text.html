@@ -180,19 +180,42 @@ function drawCurveIn(pt){
 	el.style.top = pt[1]+"px";
 	inputEl.appendChild(el);
 }
+var textStyle = 'emboss';
 function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg = document.querySelector('.o2 .bgSVG');
 	
-	for (var i=0;i<8;i++){
-		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	if (textStyle == '3D'){
+		for (var i=0;i<8;i++){
+			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
-		path.setAttribute('d',pd);
-		path.setAttribute('stroke','rgba(0,0,0,'+(1.0-i*0.1)+')');
-		path.setAttribute('stroke-width','5');
-		path.setAttribute('fill','none');
-		path.id = "bg-"+id+"-"+i;
-		path.setAttribute('transform','translate(0 '+(8-i*1)+')');
-		svg.appendChild(path);
+			path.setAttribute('d',pd);
+			path.setAttribute('stroke','rgba(0,0,0,'+(1.0-i*0.1)+')');
+			path.setAttribute('stroke-width','5');
+			path.setAttribute('fill','none');
+			path.id = "bg-"+id+"-"+i;
+			path.setAttribute('transform','translate(0 '+(8-i*1)+')');
+			svg.appendChild(path);
+		}
+	}
+	else if (textStyle == 'emboss'){
+		for (var i=0;i<4;i++){
+			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	
+			path.setAttribute('d',pd);
+			
+			path.setAttribute('stroke-width','5');
+			path.setAttribute('fill','none');
+			path.id = "bg-"+id+"-"+i;
+			if (i < 2){
+				path.setAttribute('stroke','rgba(255,255,255,1)');
+				path.setAttribute('transform','translate(0 -'+(i)+')');
+			}
+			else{
+				path.setAttribute('stroke','rgba(0,0,0,1)');
+				path.setAttribute('transform','translate(0 '+(i-2)+')');
+			}
+			svg.appendChild(path);
+		}
 	}
 
 	
@@ -200,7 +223,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg2 = document.querySelector('.o2  .fgSVG');
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
-	path2.setAttribute('stroke','white');
+	path2.setAttribute('stroke','blue');
 	path2.setAttribute('stroke-width','5');
 	path2.setAttribute('fill','none');
 	path2.id = "fg-"+id;
