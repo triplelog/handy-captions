@@ -219,15 +219,15 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	else if (textStyle == 'isometric'){
 		svg.style.transform = "skew(0deg, -30deg)";
-		for (var i=0;i<8;i++){
+		for (var i=0;i<12;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
-			path.setAttribute('stroke','rgba(0,0,0,'+(1.0-i*0.1)+')');
+			path.setAttribute('stroke','rgba(0,0,0,'+(0.0+i*0.1)+')');
 			path.setAttribute('stroke-width','5');
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
-			path.setAttribute('transform','translate(-'+(8-i*1)+' -'+(8-i*1)+')');
+			path.setAttribute('transform','translate(-'+(12-i*1)+' -'+(12-i*1)+')');
 			svg.appendChild(path);
 		}
 	}
