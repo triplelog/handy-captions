@@ -188,6 +188,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	path0.setAttribute('stroke-width','11');
 	path0.setAttribute('fill','none');
 	path0.id = "bbg-"+id;
+	path0.setAttribute('transform','translate(10 10)');
 	svg.appendChild(path0);
 	
 
@@ -198,6 +199,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	path.setAttribute('stroke-width','7');
 	path.setAttribute('fill','none');
 	path.id = "bg-"+id;
+	path.setAttribute('transform','translate(10 10)');
 	svg.appendChild(path);
 	
 	var svg2 = document.querySelector('.o2  .fgSVG');
