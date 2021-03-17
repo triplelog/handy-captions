@@ -644,7 +644,13 @@ function outline(){
 		newPath.setAttribute('d',fillPath);
 		newPath.style.fill = "url(#box-grad-"+i+")";
 		newPath.setAttribute('stroke-width','1');
-		newPath.setAttribute('stroke','black');
+		if (i%2 == 0){
+			newPath.setAttribute('stroke','black');
+		}
+		else {
+			newPath.setAttribute('stroke','green');
+		}
+		
 		heartFill.appendChild(newPath);
 		
 		
