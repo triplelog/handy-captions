@@ -149,7 +149,7 @@ curveWorker.onmessage = function(evt){
 		drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint);
 	}
 	else if (evt.data.type == 'convexHull'){
-		drawConvexHull(evt.data.pdArray);
+		//drawConvexHull(evt.data.pdArray);
 	}
 }
 
@@ -213,27 +213,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	console.log(allCurves);
 }
 
-function drawConvexHull(pdArray) {
-	for (var i=0;i<10;i++){
-		var el = document.querySelector('.convexHull-'+i);
-		el.setAttribute('d',pdArray[i]);
-	}
-	
-	let clonedSvgElement = document.getElementById("textSVG").cloneNode(true);
-	var img2 = new Image();
-	
-	img2.onload = function() {
-		ctx.drawImage(img, 0, 0, 300, 300);
-		ctx.drawImage(img2, 0, 0,300,300);
-		
-	}
-	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
-	
-	
 
-	
-
-}
 function selectGroup(){
 	isGroup = true;
 }
