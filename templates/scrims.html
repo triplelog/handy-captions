@@ -633,28 +633,28 @@ function outline(){
 			console.log(i,underTop,underBottom);
 		}
 		
+		if (i>2){
+			if (linear){
+				linearGradient(i,box);
+			}
+			else {
+				radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
+			}
+			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+			newPath.setAttribute('d',fillPath);
+			newPath.style.fill = "url(#box-grad-"+i+")";
 		
-		if (linear){
-			linearGradient(i,box);
-		}
-		else {
-			radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
-		}
-		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-		newPath.setAttribute('d',fillPath);
-		newPath.style.fill = "url(#box-grad-"+i+")";
+			if (i%2 == 0){
+				newPath.setAttribute('stroke-width','0.1');
+				newPath.setAttribute('stroke',"url(#box-grad-"+i+")");
+			}
+			else {
+				newPath.setAttribute('stroke-width','0.1');
+				newPath.setAttribute('stroke',"url(#box-grad-"+i+")");
+			}
 		
-		if (i%2 == 0){
-			newPath.setAttribute('stroke-width','0.1');
-			newPath.setAttribute('stroke',"url(#box-grad-"+i+")");
+			heartFill.appendChild(newPath);
 		}
-		else {
-			newPath.setAttribute('stroke-width','0.1');
-			newPath.setAttribute('stroke',"url(#box-grad-"+i+")");
-		}
-		
-		heartFill.appendChild(newPath);
-		
 		
 		
 		
