@@ -688,10 +688,10 @@ function toQuadratics(points) {
 		var t2 = 0.5;
 		
 		var myPoint = points[i][key];
-		var lx = (lastPoint[0]-3*myPoint[0]+3*myPoint[2]-myPoint[4])/8;
+		var lx = (lastPoint[0]-3*myPoint[0]+3*myPoint[2]-myPoint[4])/16;
 		var mx = (3*lastPoint[0]+9*myPoint[0]-3*myPoint[2]-myPoint[4])/16;
 		var nx = (-3*lastPoint[0]+3*myPoint[0]+3*myPoint[2]+5*myPoint[4])/16;
-		var ly = (lastPoint[1]-3*myPoint[1]+3*myPoint[3]-myPoint[5])/8;
+		var ly = (lastPoint[1]-3*myPoint[1]+3*myPoint[3]-myPoint[5])/16;
 		var my = (3*lastPoint[1]+9*myPoint[1]-3*myPoint[3]-myPoint[5])/16;
 		var ny = (-3*lastPoint[1]+3*myPoint[1]+3*myPoint[3]+5*myPoint[5])/16;
 		var t = 0.5;
@@ -712,9 +712,9 @@ function toQuadratics(points) {
 		firstPoint['Q'][1] = ly*t1+my-t1/(2*(t1-1))*firstPoint['Q'][3];
 		
 		secondPoint['Q'][2] = myPoint[4];
-		secondPoint['Q'][0] = lx*t2+nx+(t2-1)/(2*(t2)-1)*secondPoint['Q'][2];
+		secondPoint['Q'][0] = lx*(t2+1)+nx+(t2-1)/(2*(t2))*secondPoint['Q'][2];
 		secondPoint['Q'][3] = myPoint[5];
-		secondPoint['Q'][1] = ly*t2+ny+(t2-1)/(2*(t2)-1)*secondPoint['Q'][3];
+		secondPoint['Q'][1] = ly*(t2+1)+ny+(t2-1)/(2*(t2))*secondPoint['Q'][3];
 		
 		qPoints.push(firstPoint);
 		qPoints.push(secondPoint);
