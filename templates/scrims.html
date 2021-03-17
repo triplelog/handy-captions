@@ -769,12 +769,19 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		circleVals.r = circle2.r;
 		
 		var z = 1.0;
-		while (circleIntersect(circle,circle2,i) != -1){
-			console.log(i,circleIntersect(circle,circle2,i),z);
+		var ci = circleIntersect(circle,circle2,i);
+		while ( ci && ci != 0){
+			console.log(i,ci,z);
 			var pp1 = {};
 			var pp2 = {};
 			var pp3 = {};
-			z -= 0.1;
+			if (ci < 0){
+				z+= 0.1;
+			}
+			else {
+				z -= 0.1;
+			}
+			
 			pp1.x = box['topLeft'][0];
 			pp1.y = box['topLeft'][1];
 			pp2.x = curveCenterXTop*z+(box['topLeft'][0]+box['topRight'][0])/2*(1-z);
@@ -782,11 +789,11 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 			pp3.x = box['topRight'][0];
 			pp3.y = box['topRight'][1];
 			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
-			console.log(i,circleIntersect(circle,circle2,i),z);
+			ci = circleIntersect(circle,circle2,i);
 			circleVals.cx = circle2.x;
 			circleVals.cy = circle2.y;
 			circleVals.r = circle2.r;
-			if (z<0.2){
+			if (z<0.2 || z > 2.0){
 				break;
 			}
 		}
@@ -824,7 +831,7 @@ function circleIntersect(circle,circle2,i) {
 		return circle.r-circle2.r;
 	}
 	else {
-		return -1;
+		return false;
 	}
 	//y*(2*circle2.y-2*circle.y)
 	//=
