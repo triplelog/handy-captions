@@ -770,7 +770,8 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		
 		var z = 1.0;
 		var ci = circleIntersect(circle,circle2,i);
-		while ( ci && ci != 0){
+		var count = 0;
+		while ( ci && ci != 0 && count < 10){
 			console.log(i,ci,z);
 			var pp1 = {};
 			var pp2 = {};
@@ -796,6 +797,7 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 			if (z<0.2 || z > 2.0){
 				break;
 			}
+			count++;
 		}
 		//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 	}
