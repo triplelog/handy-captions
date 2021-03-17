@@ -361,36 +361,48 @@ function outline(pd){
 			//var linearV = Math.pow((box['topLeft'][0]+box['topRight'][0])/2-box['topLeft'][0],2)+Math.pow((box['topLeft'][1]+box['topRight'][1])/2-box['topLeft'][1],2);
 			//var topSlope = ((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop)/((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop);
 			//var bottomSlope = ((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterY)/((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX);
-			var underTop = false;
+			var underTop = -1;
 			if (box['topLeft'][0]>box['topRight'][0]){
 				var topYatX = (curveCenterXTop-box['topRight'][0])/(box['topLeft'][0]-box['topRight'][0]) * (box['topLeft'][1]-box['topRight'][1]) + box['topRight'][1];
 				if (curveCenterYTop<topYatX){
-					underTop = true;
+					underTop = 1;
+				}
+				else if (curveCenterYTop == topYatX){
+					underTop = 0;
 				}
 			}
 			else {
 				var topYatX = (curveCenterXTop-box['topLeft'][0])/(box['topRight'][0]-box['topLeft'][0]) * (box['topRight'][1]-box['topLeft'][1]) + box['topLeft'][1];
 				if (curveCenterYTop<topYatX){
-					underTop = true;
+					underTop = 1;
+				}
+				else if (curveCenterYTop == topYatX){
+					underTop = 0;
 				}
 			}
 			
-			var underBottom = false;
+			var underBottom = -1;
 			if (box['bottomLeft'][0]>box['bottomRight'][0]){
 				var bottomYatX = (curveCenterX-box['bottomRight'][0])/(box['bottomLeft'][0]-box['bottomRight'][0]) * (box['bottomLeft'][1]-box['bottomRight'][1]) + box['bottomRight'][1];
 				if (curveCenterY<bottomYatX){
-					underBottom = true;
+					underBottom = 1;
+				}
+				else if (curveCenterY == bottomYatX){
+					underBottom = 0;
 				}
 			}
 			else {
 				var bottomYatX = (curveCenterXTop-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
 				if (curveCenterY<bottomYatX){
-					underBottom = true;
+					underBottom = 1;
+				}
+				else if (curveCenterY == bottomYatX){
+					underBottom = 0;
 				}
 			}
 			
 			
-			if (underTop != underBottom){
+			if (underTop != underBottom || underBottom == 0 || underTop == 0){
 				linear = true;
 			}
 			else {
