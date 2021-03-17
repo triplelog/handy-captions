@@ -572,187 +572,38 @@ function outline(){
 		//console.log(fillPath);
 		var heartFill = document.getElementById('heartFill');
 		
-		
-		/*var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
-		var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
-		lG.id="box-grad-"+i;
-		lG.setAttribute('x1',box['bottomLeft'][0]);
-		lG.setAttribute('y1',box['bottomLeft'][1]);
-		lG.setAttribute('x2',box['topLeft'][0]);
-		lG.setAttribute('y2',box['topLeft'][1]);
-		lG.setAttribute('gradientUnits','userSpaceOnUse');
-		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-		newStop.setAttribute('offset','0%');
-		newStop.setAttribute('stop-color','red');
-		lG.appendChild(newStop);
-		var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-		newStopT.setAttribute('offset','100%');
-		newStopT.setAttribute('stop-color','blue');
-		lG.appendChild(newStopT);
-		newDef.appendChild(lG);
-		heartFill.appendChild(newDef);*/
-		
-		
-		var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
-		var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
-		lG.id="box-grad-"+i;
-		var bottomLine = {'m':0,'point':[0,0]};
-		var leftLine = {'m':0,'point':[0,0]};
-		var rightLine = {'m':0,'point':[0,0]};
-		
-		if (box['bottomRight'][0]!=box['bottomLeft'][0]){
-			bottomLine['m']=(box['bottomRight'][1]-box['bottomLeft'][1])/(box['bottomRight'][0]-box['bottomLeft'][0]);
-		}
-		else {
-			bottomLine['m']=1000;
-		}
-		if (box['topLeft'][0]!=box['bottomLeft'][0]){
-			leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
-		}
-		else {
-			leftLine['m']=1000;
-		}
-		if (box['bottomRight'][0]!=box['topRight'][0]){
-			rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
-		}
-		else {
-			rightLine['m']=1000;
-		}
-		
-		
-		
-		leftLine['point']=box['bottomLeft'];
-		rightLine['point']=box['bottomRight'];
-		
-		bottomLine['point']=[(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
-		
-		if (bottomLine['m'] != 0){
-			bottomLine['m']=-1/bottomLine['m'];
-		}
-		else {
-			bottomLine['m']=1000;
-		}
-		
-		
-		var centerF = lineIntersect(bottomLine,leftLine);
-		var curveCenterX = 0;
-		var curveCenterY = 0;
-		var curveCenterXTop = 0;
-		var curveCenterYTop = 0;
-		var t = 0.5;
+		var linear = true;
 		if (myPoint.length== 6){
-			curveCenterX = Math.pow(1-t,3)*lastPoint[0];
-			curveCenterX += 3*Math.pow(1-t,2)*t*myPoint[0];
-			curveCenterX += 3*Math.pow(t,2)*(1-t)*myPoint[2];
-			curveCenterX += Math.pow(t,3)*myPoint[4];
 			
-			curveCenterXTop = Math.pow(1-t,3)*(lastPoint[0]+lastShift[0]);
+			var curveCenterXTop = Math.pow(1-t,3)*(lastPoint[0]+lastShift[0]);
 			curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][0];
 			curveCenterXTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][0];
 			curveCenterXTop += Math.pow(t,3)*pdPoint[key][2][0];
-		}
-		if (myPoint.length== 6){
-			curveCenterY = Math.pow(1-t,3)*lastPoint[1];
-			curveCenterY += 3*Math.pow(1-t,2)*t*myPoint[1];
-			curveCenterY += 3*Math.pow(t,2)*(1-t)*myPoint[3];
-			curveCenterY += Math.pow(t,3)*myPoint[5];
-			
-			curveCenterYTop = Math.pow(1-t,3)*(lastPoint[1]+lastShift[1]);
+			var curveCenterYTop = Math.pow(1-t,3)*(lastPoint[1]+lastShift[1]);
 			curveCenterYTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][1];
 			curveCenterYTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][1];
 			curveCenterYTop += Math.pow(t,3)*pdPoint[key][2][1];
-		}
-		
-		var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
-		var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
-		
-		var circleVals = {};
-		circleVals.cx = centerF[0];
-		circleVals.cy = centerF[1];
-		circleVals.fx = centerF[0];
-		circleVals.fy = centerF[1];
-		circleVals.r = Math.pow(bigR2,.5);
-		circleVals.fr = Math.pow(smallR2,.5);
-		if (myPoint.length== 6){
-			var p1 = {};
-			var p2 = {};
-			var p3 = {};
-			p1.x = box['bottomLeft'][0];
-			p1.y = box['bottomLeft'][1];
-			p2.x = curveCenterX;
-			p2.y = curveCenterY;
-			p3.x = box['bottomRight'][0];
-			p3.y = box['bottomRight'][1];
-			var circle = circleFromThreePoints(p1,p2,p3);
-			
-			circleVals.fx = circle.x;
-			circleVals.fy = circle.y;
-			circleVals.fr = circle.r;
-			
-			var pp1 = {};
-			var pp2 = {};
-			var pp3 = {};
-			pp1.x = box['topLeft'][0];
-			pp1.y = box['topLeft'][1];
-			pp2.x = curveCenterXTop;
-			pp2.y = curveCenterYTop;
-			pp3.x = box['topRight'][0];
-			pp3.y = box['topRight'][1];
-			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
-			
-			circleVals.cx = circle2.x;
-			circleVals.cy = circle2.y;
-			circleVals.r = circle2.r;
-			
-			var z = 1.0;
-			while (circleIntersect(circle,circle2,i)){
-				var pp1 = {};
-				var pp2 = {};
-				var pp3 = {};
-				z -= 0.1;
-				pp1.x = box['topLeft'][0];
-				pp1.y = box['topLeft'][1];
-				pp2.x = curveCenterXTop*z+(box['topLeft'][0]+box['topRight'][0])/2*(1-z);
-				pp2.y = curveCenterYTop*z+(box['topLeft'][1]+box['topRight'][1])/2*(1-z);
-				pp3.x = box['topRight'][0];
-				pp3.y = box['topRight'][1];
-				var circle2 = circleFromThreePoints(pp1,pp2,pp3);
-			
-				circleVals.cx = circle2.x;
-				circleVals.cy = circle2.y;
-				circleVals.r = circle2.r;
-				if (z<0.2){
-					break;
-				}
+			var linearH = Math.pow((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterXTop,2)+Math.pow((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterYTop,2);
+			var linearV = Math.pow((box['bottomLeft'][0]+box['bottomRight'][0])/2-box['bottomLeft'][0],2)+Math.pow((box['bottomLeft'][1]+box['bottomRight'][1])/2-box['bottomLeft'][1],2);
+			if (linearH/linearV < 0.01){
+				linear = true;
 			}
-			//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
+			else {
+				linear = false;
+			}
 		}
 		
 		
-		lG.setAttribute('cx',circleVals.cx);
-		lG.setAttribute('cy',circleVals.cy);
-		lG.setAttribute('fx',circleVals.fx);
-		lG.setAttribute('fy',circleVals.fy);
-		lG.setAttribute('r',circleVals.r);
-		lG.setAttribute('fr',circleVals.fr);
-		lG.setAttribute('gradientUnits','userSpaceOnUse');
-		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-		newStop.setAttribute('offset','0%');
-		newStop.setAttribute('stop-color','red');
-		newStop.setAttribute('stop-opacity','1.0');
-		lG.appendChild(newStop);
-		var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-		newStopT.setAttribute('offset','100%');
-		newStopT.setAttribute('stop-color','red');
-		newStopT.setAttribute('stop-opacity','0.0');
-		lG.appendChild(newStopT);
-		newDef.appendChild(lG);
-		heartFill.appendChild(newDef);
+		if (linear){
+			linearGradient(i,box);
+		}
+		else {
+			radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint);
+		}
 		
-		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-		newPath.setAttribute('d',fillPath);
-		newPath.style.fill = "url(#box-grad-"+i+")";
-		heartFill.appendChild(newPath);
+		
+		
+		
 		pdPoints.push(pdPoint);
 		
 		
@@ -767,6 +618,188 @@ function outline(){
 	return newPd;
 }
 
+function linearGradient(i,box){
+	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
+	lG.id="box-grad-"+i;
+	lG.setAttribute('x1',box['bottomLeft'][0]);
+	lG.setAttribute('y1',box['bottomLeft'][1]);
+	lG.setAttribute('x2',box['topLeft'][0]);
+	lG.setAttribute('y2',box['topLeft'][1]);
+	lG.setAttribute('gradientUnits','userSpaceOnUse');
+	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+	newStop.setAttribute('offset','0%');
+	newStop.setAttribute('stop-color','red');
+	lG.appendChild(newStop);
+	var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+	newStopT.setAttribute('offset','100%');
+	newStopT.setAttribute('stop-color','blue');
+	lG.appendChild(newStopT);
+	newDef.appendChild(lG);
+	heartFill.appendChild(newDef);
+}
+function radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint){
+	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
+	lG.id="box-grad-"+i;
+	var bottomLine = {'m':0,'point':[0,0]};
+	var leftLine = {'m':0,'point':[0,0]};
+	var rightLine = {'m':0,'point':[0,0]};
+	
+	if (box['bottomRight'][0]!=box['bottomLeft'][0]){
+		bottomLine['m']=(box['bottomRight'][1]-box['bottomLeft'][1])/(box['bottomRight'][0]-box['bottomLeft'][0]);
+	}
+	else {
+		bottomLine['m']=1000;
+	}
+	if (box['topLeft'][0]!=box['bottomLeft'][0]){
+		leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
+	}
+	else {
+		leftLine['m']=1000;
+	}
+	if (box['bottomRight'][0]!=box['topRight'][0]){
+		rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+	}
+	else {
+		rightLine['m']=1000;
+	}
+	
+	
+	
+	leftLine['point']=box['bottomLeft'];
+	rightLine['point']=box['bottomRight'];
+	
+	bottomLine['point']=[(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
+	
+	if (bottomLine['m'] != 0){
+		bottomLine['m']=-1/bottomLine['m'];
+	}
+	else {
+		bottomLine['m']=1000;
+	}
+	
+	
+	var centerF = lineIntersect(bottomLine,leftLine);
+	var curveCenterX = 0;
+	var curveCenterY = 0;
+	var curveCenterXTop = 0;
+	var curveCenterYTop = 0;
+	var t = 0.5;
+	if (myPoint.length== 6){
+		curveCenterX = Math.pow(1-t,3)*lastPoint[0];
+		curveCenterX += 3*Math.pow(1-t,2)*t*myPoint[0];
+		curveCenterX += 3*Math.pow(t,2)*(1-t)*myPoint[2];
+		curveCenterX += Math.pow(t,3)*myPoint[4];
+		
+		curveCenterXTop = Math.pow(1-t,3)*(lastPoint[0]+lastShift[0]);
+		curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][0];
+		curveCenterXTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][0];
+		curveCenterXTop += Math.pow(t,3)*pdPoint[key][2][0];
+	}
+	if (myPoint.length== 6){
+		curveCenterY = Math.pow(1-t,3)*lastPoint[1];
+		curveCenterY += 3*Math.pow(1-t,2)*t*myPoint[1];
+		curveCenterY += 3*Math.pow(t,2)*(1-t)*myPoint[3];
+		curveCenterY += Math.pow(t,3)*myPoint[5];
+		
+		curveCenterYTop = Math.pow(1-t,3)*(lastPoint[1]+lastShift[1]);
+		curveCenterYTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][1];
+		curveCenterYTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][1];
+		curveCenterYTop += Math.pow(t,3)*pdPoint[key][2][1];
+	}
+	
+	var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
+	var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
+	
+	var circleVals = {};
+	circleVals.cx = centerF[0];
+	circleVals.cy = centerF[1];
+	circleVals.fx = centerF[0];
+	circleVals.fy = centerF[1];
+	circleVals.r = Math.pow(bigR2,.5);
+	circleVals.fr = Math.pow(smallR2,.5);
+	if (myPoint.length== 6){
+		var p1 = {};
+		var p2 = {};
+		var p3 = {};
+		p1.x = box['bottomLeft'][0];
+		p1.y = box['bottomLeft'][1];
+		p2.x = curveCenterX;
+		p2.y = curveCenterY;
+		p3.x = box['bottomRight'][0];
+		p3.y = box['bottomRight'][1];
+		var circle = circleFromThreePoints(p1,p2,p3);
+		
+		circleVals.fx = circle.x;
+		circleVals.fy = circle.y;
+		circleVals.fr = circle.r;
+		
+		var pp1 = {};
+		var pp2 = {};
+		var pp3 = {};
+		pp1.x = box['topLeft'][0];
+		pp1.y = box['topLeft'][1];
+		pp2.x = curveCenterXTop;
+		pp2.y = curveCenterYTop;
+		pp3.x = box['topRight'][0];
+		pp3.y = box['topRight'][1];
+		var circle2 = circleFromThreePoints(pp1,pp2,pp3);
+		
+		circleVals.cx = circle2.x;
+		circleVals.cy = circle2.y;
+		circleVals.r = circle2.r;
+		
+		var z = 1.0;
+		while (circleIntersect(circle,circle2,i)){
+			var pp1 = {};
+			var pp2 = {};
+			var pp3 = {};
+			z -= 0.1;
+			pp1.x = box['topLeft'][0];
+			pp1.y = box['topLeft'][1];
+			pp2.x = curveCenterXTop*z+(box['topLeft'][0]+box['topRight'][0])/2*(1-z);
+			pp2.y = curveCenterYTop*z+(box['topLeft'][1]+box['topRight'][1])/2*(1-z);
+			pp3.x = box['topRight'][0];
+			pp3.y = box['topRight'][1];
+			var circle2 = circleFromThreePoints(pp1,pp2,pp3);
+		
+			circleVals.cx = circle2.x;
+			circleVals.cy = circle2.y;
+			circleVals.r = circle2.r;
+			if (z<0.2){
+				break;
+			}
+		}
+		//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
+	}
+	
+	
+	lG.setAttribute('cx',circleVals.cx);
+	lG.setAttribute('cy',circleVals.cy);
+	lG.setAttribute('fx',circleVals.fx);
+	lG.setAttribute('fy',circleVals.fy);
+	lG.setAttribute('r',circleVals.r);
+	lG.setAttribute('fr',circleVals.fr);
+	lG.setAttribute('gradientUnits','userSpaceOnUse');
+	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+	newStop.setAttribute('offset','0%');
+	newStop.setAttribute('stop-color','red');
+	newStop.setAttribute('stop-opacity','1.0');
+	lG.appendChild(newStop);
+	var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+	newStopT.setAttribute('offset','100%');
+	newStopT.setAttribute('stop-color','red');
+	newStopT.setAttribute('stop-opacity','0.0');
+	lG.appendChild(newStopT);
+	newDef.appendChild(lG);
+	heartFill.appendChild(newDef);
+	
+	var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	newPath.setAttribute('d',fillPath);
+	newPath.style.fill = "url(#box-grad-"+i+")";
+	heartFill.appendChild(newPath);
+}
 function circleIntersect(circle,circle2,i) {
 	var dc = Math.pow(circle.x-circle2.x,2)+Math.pow(circle.y-circle2.y,2);
 	var dr = Math.abs(circle.r-circle2.r);
