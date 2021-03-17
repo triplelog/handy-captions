@@ -598,7 +598,7 @@ function outline(){
 			linearGradient(i,box);
 		}
 		else {
-			radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint);
+			radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
 		}
 		
 		
@@ -638,7 +638,7 @@ function linearGradient(i,box){
 	newDef.appendChild(lG);
 	heartFill.appendChild(newDef);
 }
-function radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint){
+function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
 	lG.id="box-grad-"+i;
@@ -693,9 +693,9 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint){
 		curveCenterX += Math.pow(t,3)*myPoint[4];
 		
 		curveCenterXTop = Math.pow(1-t,3)*(lastPoint[0]+lastShift[0]);
-		curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][0];
-		curveCenterXTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][0];
-		curveCenterXTop += Math.pow(t,3)*pdPoint[key][2][0];
+		curveCenterXTop += 3*Math.pow(1-t,2)*t*newPoint[0][0];
+		curveCenterXTop += 3*Math.pow(t,2)*(1-t)*newPoint[1][0];
+		curveCenterXTop += Math.pow(t,3)*newPoint[2][0];
 	}
 	if (myPoint.length== 6){
 		curveCenterY = Math.pow(1-t,3)*lastPoint[1];
@@ -704,9 +704,9 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint){
 		curveCenterY += Math.pow(t,3)*myPoint[5];
 		
 		curveCenterYTop = Math.pow(1-t,3)*(lastPoint[1]+lastShift[1]);
-		curveCenterYTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][1];
-		curveCenterYTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][1];
-		curveCenterYTop += Math.pow(t,3)*pdPoint[key][2][1];
+		curveCenterYTop += 3*Math.pow(1-t,2)*t*newPoint[0][1];
+		curveCenterYTop += 3*Math.pow(t,2)*(1-t)*newPoint[1][1];
+		curveCenterYTop += Math.pow(t,3)*newPoint[2][1];
 	}
 	
 	var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
