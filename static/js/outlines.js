@@ -316,9 +316,14 @@ function outline(pd,margin,direction){
 			else if (intersect[0] > box['bottomLeft'][0]*1.03 && intersect[0] < box['topLeft'][0]*.97){
 				isTriangle = true;
 			}
-			if (isTriangle){
+			
+			var actualTriangle = false;
+			if (box['topLeft'][0] == box['topRight'][0] && box['topLeft'][1] == box['topRight'][1] ){
+				actualTriangle = true;
+			}
+			if (isTriangle || actualTriangle){
 				console.log(i,id,box,intersect[0]);
-				if (problem.length == 0){
+				if (problem.length == 0 && isTriangle){ //Start problem
 					problem.push(i-1);
 					problem.push(i);
 					problem.push(i+1);
@@ -326,7 +331,7 @@ function outline(pd,margin,direction){
 				else if (problem[problem.length-1]==i){
 					problem.push(i+1);
 				}
-				else {
+				else if (isTriangle){ //Start problem
 					problems.push(problem);
 					problem = [];
 					problem.push(i-1);
