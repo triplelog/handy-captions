@@ -250,14 +250,6 @@ function outline(pd,margin,direction){
 		fillPath += " L "+(lastPoint[0]+lastShift[0]) + " "+(lastPoint[1]+lastShift[1]);
 		fillPath += " "+key;
 		for (var ii=0;ii<myPoint.length/2;ii++){
-			var shift = [0,0];
-			shift[0] = thisShift[0]*(ii+1)/(myPoint.length/2);
-			shift[0] += lastShift[0]*(myPoint.length/2-ii-1)/(myPoint.length/2);
-			shift[1] = thisShift[1]*(ii+1)/(myPoint.length/2);
-			shift[1] += lastShift[1]*(myPoint.length/2-ii-1)/(myPoint.length/2);
-			//pdPoint[key].push([myPoint[2*ii]+shift[0],myPoint[2*ii+1]+shift[1]]);
-			//fillPath += " "+(myPoint[2*ii]+shift[0])+" "+(myPoint[2*ii+1]+shift[1]);
-			
 			
 			
 			var oldDistance = Math.pow(myPoint[2*ii]-lastPoint[0],2)+Math.pow(myPoint[2*ii+1]-lastPoint[1],2);
@@ -266,26 +258,12 @@ function outline(pd,margin,direction){
 			
 			var newD = [0,0];
 			if (ii >= myPoint.length/2-1){
-				if (zeroThis[0] != 0){
-					newD[0] = oldD[0]*zeroThisNew[0]/zeroThis[0];
-				}
-				else {
-					newD[0] = oldD[0];
-				}
-			
-				if (zeroThis[1] != 0){
-					newD[1] = oldD[1]*zeroThisNew[1]/zeroThis[1];
-				}
-				else {
-					newD[1] = oldD[1];
-				}
+				
 				pdPoint[key].push([myPoint[2*ii]+thisShift[0],myPoint[2*ii+1]+thisShift[1]]);
 				fillPath += " "+(myPoint[2*ii]+thisShift[0])+" "+(myPoint[2*ii+1]+thisShift[1]);
 			}
 			else {
 				newD[0] = oldD[0]*ratio;
-			
-			
 				newD[1] = oldD[1]*ratio;
 				pdPoint[key].push([newD[0]+lastPoint[0]+lastShift[0],newD[1]+lastPoint[1]+lastShift[1]]);
 				fillPath += " "+(newD[0]+lastPoint[0]+lastShift[0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
