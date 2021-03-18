@@ -524,9 +524,10 @@ function outline(pd,margin,direction){
 		
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(box['topLeft'][0]) + " "+(box['topLeft'][1]);
-		fillPath += " "+key;
+		
 		var isTriangle = false;
 		if (box['topLeft'][0] != box['topRight'][0] || box['topLeft'][1] != box['topRight'][1] ){
+			fillPath += " "+key;
 			for (var ii=0;ii<myPoint.length/2;ii++){
 			
 			
