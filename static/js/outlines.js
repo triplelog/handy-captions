@@ -240,6 +240,7 @@ function outline(pd,margin,direction){
 		
 	}
 	
+	for (var ji=0;ji<10;ji++){
 	for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
 		var cPoint = {};
@@ -320,6 +321,7 @@ function outline(pd,margin,direction){
 			topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
 			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
 		}
+	}
 	}
 	/*for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
