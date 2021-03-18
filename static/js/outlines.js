@@ -241,7 +241,8 @@ function outline(pd,margin,direction){
 	}
 	
 	for (var ji=0;ji<1;ji++){
-		var problem = [];
+		var problems = [];
+		var problem  =[];
 		for (var i=2;i<points.length-3;i++){
 			var aPoint = {};
 			var cPoint = {};
@@ -326,8 +327,11 @@ function outline(pd,margin,direction){
 					problem.push(i+1);
 				}
 				else {
-					console.log(problem);
-					break;
+					problems.push(problem);
+					problem = [];
+					problem.push(i-1);
+					problem.push(i);
+					problem.push(i+1);
 				}
 				/*var d2 = Math.pow( Math.pow((box['bottomLeft'][1]-box['topRight'][1]),2) + Math.pow((box['bottomLeft'][0]-box['topRight'][0]),2) ,1);
 			
@@ -396,10 +400,14 @@ function outline(pd,margin,direction){
 				*/
 			}
 		}
+		if (problem.length > 0){
+			problems.push(problem);
+		}
+		for (var i=0;i<problems.length;i++){
+			topPoints = fixProblem(points,problems[i],topPoints);
+			console.log(problem);
+		}
 		
-		topPoints = fixProblem(points,problem,topPoints);
-		
-		console.log(problem);
 	}
 	/*for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
@@ -760,7 +768,7 @@ function outline(pd,margin,direction){
 }
 
 
-function fixProblem(points,problem,topPoints) {
+function fixProblem(points,problem,topPoints,direction) {
 	var key = Object.keys(points[problem[0]])[0];
 	var lastGood = points[problem[0]][key];
 	var bottomFirst = {'x':lastGood[lastGood.length-2],'y':lastGood[lastGood.length-1]};
@@ -768,7 +776,7 @@ function fixProblem(points,problem,topPoints) {
 	var lastBad = points[problem[problem.length-2]][key];
 	var bottomLast = {'x':lastBad[lastBad.length-2],'y':lastBad[lastBad.length-1]};
 	console.log(bottomFirst, bottomLast);
-	var c = circleFrom2Points(bottomFirst,bottomLast,25);
+	var c = circleFrom2Points(bottomFirst,bottomLast,25,direction);
 	console.log(c);
 	topPoints[problem[0]-1][1] = [c[0],c[1]];
 	for (var ip=1;ip<problem.length-1;ip++){
@@ -895,12 +903,19 @@ function fixProblem(points,problem,topPoints) {
 	}
 }
 
-function circleFrom2Points(p1,p2,r){
+function circleFrom2Points(p1,p2,r,direction){
 	var q = Math.sqrt(Math.pow(p2.x-p1.x,2)+Math.pow(p2.y-p1.y,2));
 	var x3 = (p1.x+p2.x)/2;
 	var y3 = (p1.y+p2.y)/2;
-	var x0 = x3 - Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p1.y-p2.y)/q;
-	var y0 = y3 - Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p2.x-p1.x)/q;
+	var x0; var y0;
+	if (direction == 'out'){
+		x0 = x3 - Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p1.y-p2.y)/q;
+		y0 = y3 - Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p2.x-p1.x)/q;
+	}
+	else if (direction == 'in'){
+		x0 = x3 + Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p1.y-p2.y)/q;
+		y0 = y3 + Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p2.x-p1.x)/q;
+	}
 	return [x0,y0];
 }	
 function toQuadratics(points) {
