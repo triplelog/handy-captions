@@ -241,8 +241,8 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	else if (textStyle == 'neon'){
 		
-		outline(pd);
-		for (var i=0;i<8;i++){
+		outline(pd,10);
+		/*for (var i=0;i<8;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
@@ -252,7 +252,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			path.id = "bg-"+id+"-"+i;
 			path.setAttribute('transform','translate(0 '+(8-i*1)+')');
 			svg.appendChild(path);
-		}
+		}*/
 	}
 
 	

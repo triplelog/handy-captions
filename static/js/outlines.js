@@ -63,7 +63,7 @@ function toPath(points){
 	return pd;
 }
 
-function outline(pd){
+function outline(pd,margin){
 	
 	var points = parsePath(pd);
 	var qPoints = toQuadratics(points);
@@ -71,7 +71,7 @@ function outline(pd){
 	console.log(qPoints);
 	console.log(toPath(qPoints));
 	console.log(JSON.stringify(points.slice(14)));
-	var margin = 100;
+
 
 	var avgPoints = [];
 	var pdPoints = [];
