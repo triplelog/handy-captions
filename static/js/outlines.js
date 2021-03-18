@@ -675,7 +675,7 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 			var pp2 = {};
 			var pp3 = {};
 			if (flipZ){
-				z+= 0.0;
+				z+= 0.1;
 			}
 			else {
 				z -= 0.1;
