@@ -183,7 +183,7 @@ function outline(pd,margin,direction){
 	}
 	avgPoints.splice(0,0);
 	points.splice(0,1);
-	
+	var topPoints = [];
 	for (var i=1;i<points.length-2;i++){
 		var aPoint = {};
 		var cPoint = {};
@@ -279,17 +279,20 @@ function outline(pd,margin,direction){
 				else {
 					newD[1] = oldD[1];
 				}
+				pdPoint[key].push([myPoint[2*ii]+lastShift[0],myPoint[2*ii+1]+lastShift[1]]);
+				fillPath += " "+(myPoint[2*ii]+lastShift[0])+" "+(myPoint[2*ii+1]+lastShift[1]);
 			}
 			else {
 				newD[0] = oldD[0]*ratio;
 			
 			
 				newD[1] = oldD[1]*ratio;
+				pdPoint[key].push([newD[0]+lastPoint[0]+lastShift[0],newD[1]+lastPoint[1]+lastShift[1]]);
+				fillPath += " "+(newD[0]+lastPoint[0]+lastShift[0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
 			}
 			
 			
-			pdPoint[key].push([newD[0]+lastPoint[0]+lastShift[0],newD[1]+lastPoint[1]+lastShift[1]]);
-			fillPath += " "+(newD[0]+lastPoint[0]+lastShift[0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
+			
 			
 		}
 		
@@ -433,6 +436,9 @@ function outline(pd,margin,direction){
 		}
 		if (i>2 && i < points.length-3){
 			var id = direction;
+			
+			
+	
 			if (linear){
 				linearGradient(i,id,box);
 			}
@@ -473,6 +479,18 @@ function outline(pd,margin,direction){
 	return newPd;
 }
 
+/*
+var intersect = lineIntersect(leftLine,rightLine);
+var isTriangle = false;
+if (intersect[0] < box['bottomLeft'][0] && intersect[0] > box['topLeft'][0]){
+	console.log(i,id,box);
+	isTriangle = true;
+}
+else if (intersect[0] > box['bottomLeft'][0] && intersect[0] < box['topLeft'][0]){
+	console.log(i,id,box);
+	isTriangle = true;
+}*/
+			
 function toQuadratics(points) {
 	var qPoints = [];
 	var lastPoint = [];
@@ -537,48 +555,12 @@ function linearGradient(i,id,box){
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
 	lG.id="box-grad-"+i+"-"+id;
 	
-	var leftLine = {'m':0,'point':[0,0]};
-	var rightLine = {'m':0,'point':[0,0]};
 	
+	lG.setAttribute('x1',(box['bottomLeft'][0]+box['bottomRight'][0])/2);
+	lG.setAttribute('y1',(box['bottomLeft'][1]+box['bottomRight'][1])/2);
+	lG.setAttribute('x2',(box['topLeft'][0]+box['topRight'][0])/2);
+	lG.setAttribute('y2',(box['topLeft'][1]+box['topRight'][1])/2);
 
-	if (box['topLeft'][0]!=box['bottomLeft'][0]){
-		leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
-	}
-	else {
-		leftLine['m']=1000;
-	}
-	if (box['bottomRight'][0]!=box['topRight'][0]){
-		rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
-	}
-	else {
-		rightLine['m']=1000;
-	}
-	leftLine['point']=box['bottomLeft'];
-	rightLine['point']=box['bottomRight'];
-	
-	var intersect = lineIntersect(leftLine,rightLine);
-	var isTriangle = false;
-	if (intersect[0] < box['bottomLeft'][0] && intersect[0] > box['topLeft'][0]){
-		console.log(i,id,box);
-		isTriangle = true;
-	}
-	else if (intersect[0] > box['bottomLeft'][0] && intersect[0] < box['topLeft'][0]){
-		console.log(i,id,box);
-		isTriangle = true;
-	}
-	
-	if (isTriangle){
-		lG.setAttribute('x1',(box['bottomLeft'][0]+box['bottomRight'][0])/2);
-		lG.setAttribute('y1',(box['bottomLeft'][1]+box['bottomRight'][1])/2);
-		lG.setAttribute('x2',intersect[0]);
-		lG.setAttribute('y2',intersect[1]);
-	}
-	else {
-		lG.setAttribute('x1',(box['bottomLeft'][0]+box['bottomRight'][0])/2);
-		lG.setAttribute('y1',(box['bottomLeft'][1]+box['bottomRight'][1])/2);
-		lG.setAttribute('x2',(box['topLeft'][0]+box['topRight'][0])/2);
-		lG.setAttribute('y2',(box['topLeft'][1]+box['topRight'][1])/2);
-	}
 	
 	lG.setAttribute('gradientUnits','userSpaceOnUse');
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
