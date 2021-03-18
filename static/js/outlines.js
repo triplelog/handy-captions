@@ -813,7 +813,7 @@ function linearGradient(i,id,box){
 	lG.setAttribute('x2',(box['topLeft'][0]+box['topRight'][0])/2);
 	lG.setAttribute('y2',(box['topLeft'][1]+box['topRight'][1])/2);
 	
-	var d = Math.pow(Math.pow(box['bottomLeft'][0]+box['bottomRight'][0])/2-box['topLeft'][0]+box['topRight'][0])/2,2)+Math.pow(box['bottomLeft'][1]+box['bottomRight'][1])/2-box['topLeft'][1]+box['topRight'][1])/2,2),0.5);
+	var d = Math.pow(Math.pow((box['bottomLeft'][0]+box['bottomRight'][0])/2-(box['topLeft'][0]+box['topRight'][0])/2,2)+Math.pow((box['bottomLeft'][1]+box['bottomRight'][1])/2-(box['topLeft'][1]+box['topRight'][1])/2,2),0.5);
 	var stopOpacity = 0.7*(1.0 - d/25);
 	lG.setAttribute('gradientUnits','userSpaceOnUse');
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
