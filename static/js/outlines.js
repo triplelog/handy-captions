@@ -766,7 +766,7 @@ function fixProblem(points,problem) {
 	var bottomFirst = {'x':lastGood[lastGood.length-2],'y':lastGood[lastGood.length-1]};
 	key = Object.keys(points[problem[problem.length-2]])[0];
 	var lastBad = points[problem[problem.length-2]][key];
-	var bottomLast = {'x':nextGood[nextGood.length-2],'y':nextGood[nextGood.length-1]};
+	var bottomLast = {'x':lastBad[lastBad.length-2],'y':lastBad[lastBad.length-1]};
 	console.log(bottomFirst, bottomLast);
 	var c = circleFrom2Points(bottomFirst,bottomLast,25);
 	console.log(c);
