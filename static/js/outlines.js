@@ -538,10 +538,11 @@ function linearGradient(i,id,box){
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
 	lG.id="box-grad-"+i+"-"+id;
-	lG.setAttribute('x1',box['bottomLeft'][0]);
-	lG.setAttribute('y1',box['bottomLeft'][1]);
-	lG.setAttribute('x2',box['topLeft'][0]);
-	lG.setAttribute('y2',box['topLeft'][1]);
+	
+	lG.setAttribute('x1',(box['bottomLeft'][0]+box['bottomRight'][0])/2);
+	lG.setAttribute('y1',(box['bottomLeft'][1]+box['bottomRight'][1])/2);
+	lG.setAttribute('x2',(box['topLeft'][0]+box['topRight'][0])/2);
+	lG.setAttribute('y2',(box['topLeft'][1]+box['topRight'][1])/2);
 	lG.setAttribute('gradientUnits','userSpaceOnUse');
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStop.setAttribute('offset','0%');
