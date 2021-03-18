@@ -68,9 +68,7 @@ function outline(pd,margin,direction){
 	var points = parsePath(pd);
 	var qPoints = toQuadratics(points);
 	points = qPoints;
-	console.log(qPoints);
-	console.log(toPath(qPoints));
-	console.log(JSON.stringify(points.slice(14)));
+
 
 
 	var avgPoints = [];
@@ -555,14 +553,16 @@ function linearGradient(i,id,box){
 	else {
 		rightLine['m']=1000;
 	}
+	leftLine['point']=box['bottomLeft'];
+	rightLine['point']=box['bottomRight'];
 	
 	var intersect = lineIntersect(leftLine,rightLine);
 	var isTriangle = false;
-	if (intersect[0] < leftLine['point'][0] && intersect[0] > rightLine['point'][0]){
+	if (intersect[0] < box['bottomLeft'][0] && intersect[0] > box['topLeft'][0]){
 		console.log(i,id,box);
 		isTriangle = true;
 	}
-	else if (intersect[0] > leftLine['point'][0] && intersect[0] < rightLine['point'][0]){
+	else if (intersect[0] > box['bottomLeft'][0] && intersect[0] < box['topLeft'][0]){
 		console.log(i,id,box);
 		isTriangle = true;
 	}
