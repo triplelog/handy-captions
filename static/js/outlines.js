@@ -434,20 +434,21 @@ function outline(pd,margin,direction){
 			
 		}
 		if (i>2 && i < points.length-3){
+			var id = direction;
 			if (linear){
-				linearGradient(i,box);
+				linearGradient(i,id,box);
 			}
 			else {
 				console.log(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
 				
-				var isLinear = radialGradient(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
+				var isLinear = radialGradient(i,id,box,lastPoint,myPoint,lastShift,pdPoint[key]);
 				if (isLinear == 'linear'){
-					linearGradient(i,box);
+					linearGradient(i,id,box);
 				}
 			}
 			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 			newPath.setAttribute('d',fillPath);
-			newPath.style.fill = "url(#box-grad-"+i+")";
+			newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
 		
 			if (i%2 == 0){
 				newPath.setAttribute('stroke-width','0.4');
@@ -533,10 +534,10 @@ function toQuadratics(points) {
 	return qPoints;
 }
 
-function linearGradient(i,box){
+function linearGradient(i,id,box){
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
-	lG.id="box-grad-"+i;
+	lG.id="box-grad-"+i+"-"+id;
 	lG.setAttribute('x1',box['bottomLeft'][0]);
 	lG.setAttribute('y1',box['bottomLeft'][1]);
 	lG.setAttribute('x2',box['topLeft'][0]);
@@ -556,10 +557,10 @@ function linearGradient(i,box){
 	heartFill.appendChild(newDef);
 }
 
-function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
+function radialGradient(i,id,box,lastPoint,myPoint,lastShift,newPoint){
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
-	lG.id="box-grad-"+i;
+	lG.id="box-grad-"+i+"-"+id;
 	var bottomLine = {'m':0,'point':[0,0]};
 	var leftLine = {'m':0,'point':[0,0]};
 	var rightLine = {'m':0,'point':[0,0]};
