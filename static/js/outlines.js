@@ -240,6 +240,168 @@ function outline(pd,margin,direction){
 		
 	}
 	
+	for (var i=2;i<points.length-2;i++){
+		var aPoint = {};
+		var cPoint = {};
+		var key = Object.keys(points[i])[0];
+		
+		var myPoint = points[i][key];
+		var last = points[i-1];
+		var lastKey = Object.keys(last)[0];
+		var next = points[i+1];
+		var nextKey = Object.keys(next)[0];
+		if (key == 'H' ){
+			
+			continue;
+		}
+		else if (key == 'V'){
+			
+			continue;
+		}
+		if (lastKey == 'H' ){
+			
+			continue;
+		}
+		else if (lastKey == 'V'){
+			
+			continue;
+		}
+		if (nextKey == 'H' ){
+			
+			continue;
+		}
+		else if (nextKey == 'V'){
+			
+			continue;
+		}
+		
+		
+		var lastPoint = [last[lastKey][last[lastKey].length - 2],last[lastKey][last[lastKey].length - 1]];
+		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
+		
+		
+		var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'bottomRight':[thisPoint[0],thisPoint[1]]};
+		box['topLeft']=[topPoints[i-1][0][0],topPoints[i-1][0][1]];
+		box['topRight']=[topPoints[i-1][1][0],topPoints[i-1][1][1]];
+		
+		var leftLine = {'m':0,'point':[0,0]};
+		var rightLine = {'m':0,'point':[0,0]};
+	
+		
+		if (box['topLeft'][0]!=box['bottomLeft'][0]){
+			leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
+		}
+		else {
+			leftLine['m']=1000;
+		}
+		if (box['bottomRight'][0]!=box['topRight'][0]){
+			rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+		}
+		else {
+			rightLine['m']=1000;
+		}
+	
+		leftLine['point']=box['bottomLeft'];
+		rightLine['point']=box['bottomRight'];
+	
+		
+		var intersect = lineIntersect(leftLine,rightLine);
+		var isTriangle = false;
+		if (intersect[0] < box['bottomLeft'][0] && intersect[0] > box['topLeft'][0]){
+			isTriangle = true;
+		}
+		else if (intersect[0] > box['bottomLeft'][0] && intersect[0] < box['topLeft'][0]){
+			isTriangle = true;
+		}
+		if (isTriangle){
+			console.log(i,id,box);
+			topPoints[i-1][0] = [box['topRight'][0],box['topRight'][1]];
+			topPoints[i-1][1] = [box['topLeft'][0],box['topLeft'][1]];
+			topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
+			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
+		}
+	}
+	for (var i=2;i<points.length-2;i++){
+		var aPoint = {};
+		var cPoint = {};
+		var key = Object.keys(points[i])[0];
+		
+		var myPoint = points[i][key];
+		var last = points[i-1];
+		var lastKey = Object.keys(last)[0];
+		var next = points[i+1];
+		var nextKey = Object.keys(next)[0];
+		if (key == 'H' ){
+			
+			continue;
+		}
+		else if (key == 'V'){
+			
+			continue;
+		}
+		if (lastKey == 'H' ){
+			
+			continue;
+		}
+		else if (lastKey == 'V'){
+			
+			continue;
+		}
+		if (nextKey == 'H' ){
+			
+			continue;
+		}
+		else if (nextKey == 'V'){
+			
+			continue;
+		}
+		
+		
+		var lastPoint = [last[lastKey][last[lastKey].length - 2],last[lastKey][last[lastKey].length - 1]];
+		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
+		
+		
+		var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'bottomRight':[thisPoint[0],thisPoint[1]]};
+		box['topLeft']=[topPoints[i-1][0][0],topPoints[i-1][0][1]];
+		box['topRight']=[topPoints[i-1][1][0],topPoints[i-1][1][1]];
+		
+		var leftLine = {'m':0,'point':[0,0]};
+		var rightLine = {'m':0,'point':[0,0]};
+	
+		
+		if (box['topLeft'][0]!=box['bottomLeft'][0]){
+			leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
+		}
+		else {
+			leftLine['m']=1000;
+		}
+		if (box['bottomRight'][0]!=box['topRight'][0]){
+			rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+		}
+		else {
+			rightLine['m']=1000;
+		}
+	
+		leftLine['point']=box['bottomLeft'];
+		rightLine['point']=box['bottomRight'];
+	
+		
+		var intersect = lineIntersect(leftLine,rightLine);
+		var isTriangle = false;
+		if (intersect[0] < box['bottomLeft'][0] && intersect[0] > box['topLeft'][0]){
+			isTriangle = true;
+		}
+		else if (intersect[0] > box['bottomLeft'][0] && intersect[0] < box['topLeft'][0]){
+			isTriangle = true;
+		}
+		if (isTriangle){
+			console.log(i,id,box);
+			topPoints[i-1][0] = [box['topRight'][0],box['topRight'][1]];
+			topPoints[i-1][1] = [box['topLeft'][0],box['topLeft'][1]];
+			topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
+			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
+		}
+	}
 	for (var i=1;i<points.length-2;i++){
 		var aPoint = {};
 		var cPoint = {};
@@ -274,11 +436,7 @@ function outline(pd,margin,direction){
 			
 			continue;
 		}
-		var lastShift = [avgPoints[i-1][0],avgPoints[i-1][1]];
-		var thisShift = [avgPoints[i][0],avgPoints[i][1]];
 		
-		//lastShift = [0,0];
-		//thisShift = [0,0];
 		pdPoint = {};
 		
 		pdPoint[key]=[];
@@ -515,17 +673,7 @@ function outline(pd,margin,direction){
 	return newPd;
 }
 
-/*
-var intersect = lineIntersect(leftLine,rightLine);
-var isTriangle = false;
-if (intersect[0] < box['bottomLeft'][0] && intersect[0] > box['topLeft'][0]){
-	console.log(i,id,box);
-	isTriangle = true;
-}
-else if (intersect[0] > box['bottomLeft'][0] && intersect[0] < box['topLeft'][0]){
-	console.log(i,id,box);
-	isTriangle = true;
-}*/
+
 			
 function toQuadratics(points) {
 	var qPoints = [];
