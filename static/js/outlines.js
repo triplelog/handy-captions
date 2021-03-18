@@ -270,8 +270,8 @@ function outline(pd,margin,direction){
 			else {
 				newD[0] = oldD[0]*ratio;
 				newD[1] = oldD[1]*ratio;
-				pdPoint[key].push([newD[0]+lastPoint[0]+lastShift[0],newD[1]+lastPoint[1]+lastShift[1]]);
-				fillPath += " "+(newD[0]+lastPoint[0]+lastShift[0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
+				pdPoint[key].push([newD[0]+topPoints[i-1][0][0],newD[1]+lastPoint[1]+lastShift[1]]);
+				fillPath += " "+(newD[0]+topPoints[i-1][0][0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
 			}
 			
 			
