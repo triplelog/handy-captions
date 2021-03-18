@@ -525,29 +525,33 @@ function outline(pd,margin,direction){
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(box['topLeft'][0]) + " "+(box['topLeft'][1]);
 		fillPath += " "+key;
-		for (var ii=0;ii<myPoint.length/2;ii++){
+		var isTriangle = false;
+		if (box['topLeft'][0] != box['topRight'][0] || box['topLeft'][1] != box['topRight'][1] ){
+			for (var ii=0;ii<myPoint.length/2;ii++){
 			
 			
-			var oldDistance = Math.pow(myPoint[2*ii]-lastPoint[0],2)+Math.pow(myPoint[2*ii+1]-lastPoint[1],2);
-			var newDistance = Math.pow(myPoint[2*ii]-lastPoint[0],2)+Math.pow(myPoint[2*ii+1]-lastPoint[1],2);
-			var oldD = [myPoint[2*ii]-lastPoint[0],myPoint[2*ii+1]-lastPoint[1]];
+				var oldDistance = Math.pow(myPoint[2*ii]-lastPoint[0],2)+Math.pow(myPoint[2*ii+1]-lastPoint[1],2);
+				var newDistance = Math.pow(myPoint[2*ii]-lastPoint[0],2)+Math.pow(myPoint[2*ii+1]-lastPoint[1],2);
+				var oldD = [myPoint[2*ii]-lastPoint[0],myPoint[2*ii+1]-lastPoint[1]];
 			
-			var newD = [0,0];
-			if (ii >= myPoint.length/2-1){
+				var newD = [0,0];
+				if (ii >= myPoint.length/2-1){
 				
-				pdPoint[key].push([box['topRight'][0],box['topRight'][1]]);
-				fillPath += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
+					pdPoint[key].push([box['topRight'][0],box['topRight'][1]]);
+					fillPath += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
+				}
+				else {
+					newD[0] = oldD[0]*ratio;
+					newD[1] = oldD[1]*ratio;
+					pdPoint[key].push([newD[0]+box['topLeft'][0],newD[1]+box['topLeft'][1]]);
+					fillPath += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
+				}
+			
+			
 			}
-			else {
-				newD[0] = oldD[0]*ratio;
-				newD[1] = oldD[1]*ratio;
-				pdPoint[key].push([newD[0]+box['topLeft'][0],newD[1]+box['topLeft'][1]]);
-				fillPath += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
-			}
-			
-			
-			
-			
+		}
+		else {
+			isTriangle = true;
 		}
 		
 		fillPath += " L "+(thisPoint[0]) + " "+(thisPoint[1]);
@@ -561,7 +565,7 @@ function outline(pd,margin,direction){
 
 		
 		var linear = true;
-		if (myPoint.length== 6){
+		if (myPoint.length== 6 && !isTriangle){
 			var t = 0.5;
 			var curveCenterXTop = Math.pow(1-t,3)*(topPoints[i-1][1][0]);
 			curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][0];
@@ -620,7 +624,7 @@ function outline(pd,margin,direction){
 			}
 			console.log(i,underTop,underBottom);
 		}
-		else if (myPoint.length== 4){
+		else if (myPoint.length== 4 && !isTriangle){
 			var t = 0.5;
 			var curveCenterXTop = Math.pow(1-t,2)*(box['topLeft'][0]);
 			curveCenterXTop += 2*Math.pow(1-t,1)*t*pdPoint[key][0][0];
@@ -688,6 +692,7 @@ function outline(pd,margin,direction){
 			}
 			
 		}
+		
 		if (i>2 && i < points.length-3){
 			var id = direction;
 			
