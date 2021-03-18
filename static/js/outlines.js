@@ -446,11 +446,11 @@ function outline(pd){
 			newPath.style.fill = "url(#box-grad-"+i+")";
 		
 			if (i%2 == 0){
-				newPath.setAttribute('stroke-width','0.25');
+				newPath.setAttribute('stroke-width','0.0');
 				newPath.setAttribute('stroke',"green");
 			}
 			else {
-				newPath.setAttribute('stroke-width','0.25');
+				newPath.setAttribute('stroke-width','0.0');
 				newPath.setAttribute('stroke',"green");
 			}
 		
