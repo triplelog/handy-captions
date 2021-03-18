@@ -670,9 +670,7 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		var flipZ = false;
 		var count = 0;
 		while ( ci && ci != 0 && count < 20){
-			if (ci == 'linear'){
-				return 'linear';
-			}
+			
 			var pp1 = {};
 			var pp2 = {};
 			var pp3 = {};
@@ -694,9 +692,7 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 				return 'linear';
 			}
 			ci = circleIntersect(circle,circle2,i);
-			if (ci == 'linear'){
-				return 'linear';
-			}
+			
 			cii = ci;
 			circleVals.cx = circle2.x;
 			circleVals.cy = circle2.y;
