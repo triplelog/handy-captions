@@ -892,8 +892,8 @@ function circleFrom2Points(p1,p2,r){
 	var q = Math.sqrt(Math.pow(p2.x-p1.x,2)+Math.pow(p2.y-p1.y,2));
 	var x3 = (p1.x+p2.x)/2;
 	var y3 = (p1.y+p2.y)/2;
-	var x0 = x3 + Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p1.y-p2.y)/q;
-	var y0 = x3 + Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p2.x-p1.x)/q;
+	var x0 = x3 - Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p1.y-p2.y)/q;
+	var y0 = y3 - Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p2.x-p1.x)/q;
 	return [x0,y0];
 }	
 function toQuadratics(points) {
