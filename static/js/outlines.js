@@ -763,9 +763,13 @@ function outline(pd,margin,direction){
 function fixProblem(points,problem) {
 	var key = Object.keys(points[problem[0]])[0];
 	var lastGood = points[problem[0]][key];
-	var bottomFirst = [lastGood[lastGood.length-2],lastGood[lastGood.length-2]];
-	console.log(bottomFirst);
-	
+	var bottomFirst = {'x':lastGood[lastGood.length-2],'y':lastGood[lastGood.length-1]};
+	key = Object.keys(points[problem[problem.length-2]])[0];
+	var lastBad = points[problem[problem.length-2]][key];
+	var bottomLast = {'x':nextGood[nextGood.length-2],'y':nextGood[nextGood.length-1]};
+	console.log(bottomFirst, bottomLast);
+	var c = circleFrom2Points(bottomFirst,bottomLast,25);
+	console.log(c);
 	for (var ip=0;ip<problem.length*0;ip++){
 		var i = problem[ip];
 		var aPoint = {};
@@ -883,7 +887,15 @@ function fixProblem(points,problem) {
 		}
 	}
 }
-			
+
+function circleFrom2Points(p1,p2,r){
+	var q = Math.sqrt(Math.pow(p2.x-p1.x,2)+Math.pow(p2.y-p1.y,2));
+	var x3 = (p1.x+p2.x)/2;
+	var y3 = (p1.y+p2.y)/2;
+	var x0 = x3 + Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p1.y-p2.y)/q;
+	var y0 = x3 + Math.sqrt(Math.pow(r,2)-Math.pow(q/2,2))*(p2.x-p1.x)/q;
+	return [x0,y0];
+}	
 function toQuadratics(points) {
 	var qPoints = [];
 	var lastPoint = [];
