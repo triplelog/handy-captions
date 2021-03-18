@@ -317,8 +317,8 @@ function outline(pd,margin,direction){
 			console.log(i,id,box,intersect[0]);
 			topPoints[i-1][0] = [box['topRight'][0],box['topRight'][1]];
 			topPoints[i-1][1] = [box['topLeft'][0],box['topLeft'][1]];
-			//topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
-			//topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
+			topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
+			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
 		}
 	}
 	/*for (var i=2;i<points.length-3;i++){
