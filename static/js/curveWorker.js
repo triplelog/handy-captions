@@ -101,6 +101,13 @@ function createPD(tab){
 	pd += " " + currentCurve[0][1];
 		
 	for (var i=1; i<currentCurve.length - 2; i++){
+		if (Math.abs(currentCurve[i][0] + currentCurve[i+1][0]) < 1){
+			if (Math.abs(currentCurve[i][1] + currentCurve[i+1][1]) < 1){
+				currentCurve.splice(i+1,1);
+				i--;
+				continue;
+			}
+		}
 		pd += " Q " + currentCurve[i][0];
 		pd += " " + currentCurve[i][1];
 		var xc = (currentCurve[i][0] + currentCurve[i+1][0]) / 2;
