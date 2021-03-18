@@ -316,10 +316,48 @@ function outline(pd,margin,direction){
 		}
 		if (isTriangle){
 			console.log(i,id,box,intersect[0]);
-			topPoints[i-1][0] = [box['topRight'][0],box['topRight'][1]];
-			topPoints[i-1][1] = [box['topLeft'][0],box['topLeft'][1]];
-			topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
-			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
+			var d2 = Math.pow( Math.pow((box['bottomLeft'][1]-box['topRight'][1]),2) + Math.pow((box['bottomLeft'][0]-box['topRight'][0]),2) ,1);
+			
+			dy2 = margin*Math.pow(Math.pow((box['bottomLeft'][1]-box['topRight'][1]),2)/d2,0.5);
+			dx2 = margin*Math.pow(Math.pow((box['bottomLeft'][0]-box['topRight'][0]),2)/d2,0.5);
+			var newTopLeftY = 0;
+			if (box['topRight'][1]>box['bottomLeft'][1]){
+				newTopLeftY = box['bottomLeft'][1] + dy2;
+			}
+			else {
+				newTopLeftY = box['bottomLeft'][1] - dy2;
+			}
+			var newTopLeftX = 0;
+			if (box['topRight'][0]>box['bottomLeft'][0]){
+				newTopLeftX = box['bottomLeft'][0] + dx2;
+			}
+			else {
+				newTopLeftX = box['bottomLeft'][0] - dx2;
+			}
+			
+			var d2 = Math.pow( Math.pow((box['bottomRight'][1]-box['topLeft'][1]),2) + Math.pow((box['bottomRight'][0]-box['topLeft'][0]),2) ,1);
+			
+			dy2 = margin*Math.pow(Math.pow((box['bottomRight'][1]-box['topLeft'][1]),2)/d2,0.5);
+			dx2 = margin*Math.pow(Math.pow((box['bottomRight'][0]-box['topLeft'][0]),2)/d2,0.5);
+			var newTopRightY = 0;
+			if (box['topLeft'][1]>box['bottomRight'][1]){
+				newTopRightY = box['bottomRight'][1] + dy2;
+			}
+			else {
+				newTopRightY = box['bottomRight'][1] - dy2;
+			}
+			var newTopRightX = 0;
+			if (box['topLeft'][0]>box['bottomRight'][0]){
+				newTopRightX = box['bottomRight'][0] + dx2;
+			}
+			else {
+				newTopRightX = box['bottomRight'][0] - dx2;
+			}
+			
+			topPoints[i-1][0] = [newTopLeftX,newTopLeftY];
+			topPoints[i-1][1] = [newTopRightX,newTopRightY];
+			topPoints[i-2][1] = [newTopLeftX,newTopLeftY];
+			topPoints[i][0] = [newTopRightX,newTopRightY];
 		}
 	}
 	}
