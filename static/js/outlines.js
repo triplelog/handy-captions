@@ -230,10 +230,19 @@ function outline(pd,margin,direction){
 		var lastPoint = [last[lastKey][last[lastKey].length - 2],last[lastKey][last[lastKey].length - 1]];
 		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
 		
+		
+		
+		
+		var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'topLeft':[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]]};
+		box['topRight']=[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]];
+		box['bottomRight']=[thisPoint[0],thisPoint[1]];
+		topPoints.push([[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]],[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]]]);
+		
+		
 		var zeroLast = [0,0];
 		var zeroThis = [thisPoint[0]-lastPoint[0],thisPoint[1]-lastPoint[1]]; 
 		var zeroLastNew = [0,0];
-		var zeroThisNew = [thisPoint[0]+thisShift[0]-lastPoint[0]-lastShift[0],thisPoint[1]+thisShift[1]-lastPoint[1]-lastShift[1]]; 
+		var zeroThisNew = [topPoints[i-1][1][0]-topPoints[i-1][0][0],topPoints[i-1][1][1]-topPoints[i-1][0][1]]; 
 		
 		var oldTD = Math.pow(zeroThis[0],2)+Math.pow(zeroThis[1],2);
 		var newTD = Math.pow(zeroThisNew[0],2)+Math.pow(zeroThisNew[1],2);
@@ -242,14 +251,8 @@ function outline(pd,margin,direction){
 			ratio = Math.pow(newTD/oldTD,.5);
 		}
 		
-		
-		var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'topLeft':[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]]};
-		box['topRight']=[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]];
-		box['bottomRight']=[thisPoint[0],thisPoint[1]];
-		topPoints.push([[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]],[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]]]);
-		
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
-		fillPath += " L "+(lastPoint[0]+lastShift[0]) + " "+(lastPoint[1]+lastShift[1]);
+		fillPath += " L "+(topPoints[i-1][0][0]) + " "+(topPoints[i-1][0][1]);
 		fillPath += " "+key;
 		for (var ii=0;ii<myPoint.length/2;ii++){
 			
@@ -267,8 +270,8 @@ function outline(pd,margin,direction){
 			else {
 				newD[0] = oldD[0]*ratio;
 				newD[1] = oldD[1]*ratio;
-				pdPoint[key].push([newD[0]+lastPoint[0]+lastShift[0],newD[1]+lastPoint[1]+lastShift[1]]);
-				fillPath += " "+(newD[0]+lastPoint[0]+lastShift[0])+" "+(newD[1]+lastPoint[1]+lastShift[1]);
+				pdPoint[key].push([newD[0]+topPoints[i-1][0][0],newD[1]+topPoints[i-1][0][1]]);
+				fillPath += " "+(newD[0]+topPoints[i-1][0][0])+" "+(newD[1]+topPoints[i-1][0][1]);
 			}
 			
 			
