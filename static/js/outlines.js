@@ -394,7 +394,7 @@ function outline(pd,margin,direction){
 			}
 		}
 		
-		margin *= .9;
+		console.log(problem);
 	}
 	/*for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
