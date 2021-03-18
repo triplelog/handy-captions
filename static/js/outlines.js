@@ -240,7 +240,7 @@ function outline(pd,margin,direction){
 		
 	}
 	
-	for (var ji=0;ji<10;ji++){
+	for (var ji=0;ji<1;ji++){
 	for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
 		var cPoint = {};
@@ -335,7 +335,7 @@ function outline(pd,margin,direction){
 				newTopLeftX = box['bottomLeft'][0] - dx2;
 			}
 			
-			var d2 = Math.pow( Math.pow((box['bottomRight'][1]-box['topLeft'][1]),2) + Math.pow((box['bottomRight'][0]-box['topLeft'][0]),2) ,1);
+			d2 = Math.pow( Math.pow((box['bottomRight'][1]-box['topLeft'][1]),2) + Math.pow((box['bottomRight'][0]-box['topLeft'][0]),2) ,1);
 			
 			dy2 = margin*Math.pow(Math.pow((box['bottomRight'][1]-box['topLeft'][1]),2)/d2,0.5);
 			dx2 = margin*Math.pow(Math.pow((box['bottomRight'][0]-box['topLeft'][0]),2)/d2,0.5);
