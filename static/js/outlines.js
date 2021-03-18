@@ -709,11 +709,11 @@ function outline(pd,margin,direction){
 			newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
 		
 			if (i%2 == 0){
-				newPath.setAttribute('stroke-width','1.0');
+				newPath.setAttribute('stroke-width','0.0');
 				newPath.setAttribute('stroke',"green");
 			}
 			else {
-				newPath.setAttribute('stroke-width','1.0');
+				newPath.setAttribute('stroke-width','0.0');
 				newPath.setAttribute('stroke',"green");
 			}
 		
