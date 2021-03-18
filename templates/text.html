@@ -243,17 +243,17 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		
 		outline(pd,25,'out');
 		outline(pd,25,'in');
-		/*for (var i=0;i<8;i++){
+		for (var i=0;i<1;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
-			path.setAttribute('stroke','rgba(0,0,0,'+(1.0-i*0.1)+')');
-			path.setAttribute('stroke-width','5');
+			path.setAttribute('stroke','black');
+			path.setAttribute('stroke-width','6');
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
 			path.setAttribute('transform','translate(0 '+(8-i*1)+')');
 			svg.appendChild(path);
-		}*/
+		}
 	}
 
 	
