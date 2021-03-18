@@ -240,7 +240,7 @@ function outline(pd,margin,direction){
 		
 	}
 	
-	for (var i=2;i<points.length-2;i++){
+	for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
 		var cPoint = {};
 		var key = Object.keys(points[i])[0];
@@ -321,7 +321,7 @@ function outline(pd,margin,direction){
 			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
 		}
 	}
-	for (var i=2;i<points.length-2;i++){
+	for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
 		var cPoint = {};
 		var key = Object.keys(points[i])[0];
