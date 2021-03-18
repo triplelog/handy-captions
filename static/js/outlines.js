@@ -790,10 +790,9 @@ function fixProblem(points,problem,topPoints,direction) {
 	var d= Math.pow(bottomLast.x-bottomFirst.x,2)+Math.pow(bottomLast.y-bottomFirst.y,2);
 	if (d>Math.pow(25,2)){
 		var mid = Math.floor(problem.length/2);
-		var problemLeft = problem.slice(0,mid);
-		problemLeft.push(problem[mid]);
-		var problemRight = problem.slice(mid);
-		problemRight.splice(0,0,problem[mid]);
+		var problemLeft = problem.slice(0,mid+1);
+		problemLeft.push(problem[mid+1]);
+		var problemRight = problem.slice(mid+1);
 		console.log(problemLeft,problemRight);
 		return topPoints;
 	}
