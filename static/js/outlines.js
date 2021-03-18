@@ -240,7 +240,8 @@ function outline(pd,margin,direction){
 		
 	}
 	
-	for (var ji=0;ji<20;ji++){
+	for (var ji=0;ji<1;ji++){
+		var problem = [];
 		for (var i=2;i<points.length-3;i++){
 			var aPoint = {};
 			var cPoint = {};
@@ -316,6 +317,18 @@ function outline(pd,margin,direction){
 			}
 			if (isTriangle){
 				console.log(i,id,box,intersect[0]);
+				if (problem.length == 0){
+					problem.push(i-1);
+					problem.push(i);
+					problem.push(i+1);
+				}
+				else if (problem[problem.length-1]==i){
+					problem.push(i+1);
+				}
+				else {
+					console.log(problem);
+					break;
+				}
 				/*var d2 = Math.pow( Math.pow((box['bottomLeft'][1]-box['topRight'][1]),2) + Math.pow((box['bottomLeft'][0]-box['topRight'][0]),2) ,1);
 			
 				dy2 = margin*Math.pow(Math.pow((box['bottomLeft'][1]-box['topRight'][1]),2)/d2,0.5);
