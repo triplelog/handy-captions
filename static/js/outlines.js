@@ -63,7 +63,7 @@ function toPath(points){
 	return pd;
 }
 
-function outline(pd,margin){
+function outline(pd,margin,direction){
 	
 	var points = parsePath(pd);
 	var qPoints = toQuadratics(points);
@@ -166,6 +166,10 @@ function outline(pd,margin){
 		
 		var ay = (dy1+dy2)/2;
 		var ax = (dx1+dx2)/2;
+		if (direction == 'in'){
+			ay *= -1;
+			ax *= -1;
+		}
 		if (ay == 0 && ax == 0){
 			console.log(i,thisPoint);
 			points.splice(i,1);
