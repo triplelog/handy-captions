@@ -246,6 +246,8 @@ function outline(pd,margin,direction){
 		var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'topLeft':[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]]};
 		box['topRight']=[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]];
 		box['bottomRight']=[thisPoint[0],thisPoint[1]];
+		topPoints.push([[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]],[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]]]);
+		
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(lastPoint[0]+lastShift[0]) + " "+(lastPoint[1]+lastShift[1]);
 		fillPath += " "+key;
@@ -259,8 +261,8 @@ function outline(pd,margin,direction){
 			var newD = [0,0];
 			if (ii >= myPoint.length/2-1){
 				
-				pdPoint[key].push([myPoint[2*ii]+thisShift[0],myPoint[2*ii+1]+thisShift[1]]);
-				fillPath += " "+(myPoint[2*ii]+thisShift[0])+" "+(myPoint[2*ii+1]+thisShift[1]);
+				pdPoint[key].push([topPoints[i-1][1][0],topPoints[i-1][1][1]]);
+				fillPath += " "+(topPoints[i-1][1][0])+" "+(topPoints[i-1][1][1]);
 			}
 			else {
 				newD[0] = oldD[0]*ratio;
