@@ -240,7 +240,7 @@ function outline(pd,margin,direction){
 		
 	}
 	
-	for (var ji=0;ji<1;ji++){
+	for (var ji=0;ji<2;ji++){
 		var problems = [];
 		var problem  =[];
 		for (var i=2;i<points.length-3;i++){
@@ -405,7 +405,7 @@ function outline(pd,margin,direction){
 		}
 		for (var i=0;i<problems.length;i++){
 			topPoints = fixProblem(points,problems[i],topPoints,direction);
-			console.log(problem);
+			console.log(problems[i]);
 		}
 		
 	}
