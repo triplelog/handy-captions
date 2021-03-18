@@ -252,7 +252,7 @@ function outline(pd,margin,direction){
 		}
 		
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
-		fillPath += " L "+(lastPoint[0]+lastShift[0]) + " "+(lastPoint[1]+lastShift[1]);
+		fillPath += " L "+(topPoints[i-1][0][0]) + " "+(topPoints[i-1][0][1]);
 		fillPath += " "+key;
 		for (var ii=0;ii<myPoint.length/2;ii++){
 			
