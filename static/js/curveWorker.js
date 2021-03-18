@@ -99,14 +99,14 @@ function createPD(tab){
 	
 	pd += " " + currentCurve[0][0];
 	pd += " " + currentCurve[0][1];
-		
+	console.log(currentCurve.length);
 	for (var i=1; i<currentCurve.length - 2; i++){
-		if (Math.abs(currentCurve[i][0] + currentCurve[i+1][0]) < 1){
-			if (Math.abs(currentCurve[i][1] + currentCurve[i+1][1]) < 1){
-				currentCurve.splice(i+1,1);
-				i--;
-				continue;
-			}
+		var minD2 = nearestBezier(currentCurve[i-1][0],currentCurve[i][0],currentCurve[i+2][0],currentCurve[i-1][1],currentCurve[i][1],currentCurve[i+2][1], currentCurve[i+1][0], currentCurve[i+1][1]);
+		console.log(minD2);
+		if (minD2 < 1){
+			currentCurve.splice(i+1,1);
+			i--;
+			continue;
 		}
 		pd += " Q " + currentCurve[i][0];
 		pd += " " + currentCurve[i][1];
@@ -115,6 +115,7 @@ function createPD(tab){
 		pd += " " + xc;
 		pd += " " + yc;
 	}
+	console.log(currentCurve.length);
 	if (currentCurve.length > 1){
 		pd += " Q " + currentCurve[currentCurve.length - 2][0];
 		pd += " " + currentCurve[currentCurve.length - 2][1];
@@ -130,6 +131,35 @@ function createPD(tab){
 	recentPoints = [];
 }
 
+function nearestBezier(a,b,c,d,e,f,x,y){
+	//a,b,c are x-coordinates of 3 bezierpoints
+	//d,e,f are y-coordinates
+	//x,y are coordinates of point to match
+	/*var aa = 4*a^2-16*a*b+8*a*c + 16*b^2 - 16*b*c + 4*c^2 + 4*d^2 - 16*d*e + 8*d*f + 16*e^2 - 16*e*f + 4*f^2;
+	var bb = -12*a^2 + 36*a*b - 12*a*c - 24*b^2 + 12*b*c - 12*d^2 + 36*d*e - 12*d*f - 24*e^2 + 12*e*f;
+	var cc = 12*a^2 - 24*a*b + 4*a*c - 4*a*x + 8*b^2 + 8*b*x - 4*c*x + 12*d^2 - 24*d*e + 4*d*f - 4*d*y + 8*e^2 +8*e*y - 4*f*y;
+	var dd = -4*a^2  + 4*a*b + 4*a*x - 4*b*x  - 4*d^2 + 4*d*e + 4*d*y - 4*e*y;
+	
+	var p = -1*bb/(3*aa);
+	var q = p^3 + (bb*cc - 3*aa*dd)/(6*aa^2);
+	var r = cc/(3*aa);
+	
+	var t = Math.pow(q+(q^2+(r-p^2)^3)^.5,.3333) + Math.pow(q-(q^2+(r-p^2)^3)^.5,.3333) + p;*/
+	var min = [0,0];
+	for (var i=0;i<9;i++){
+		var t = 0.125*i;
+		var d2 = Math.pow(Math.pow(1-t,2)*a+2*t*(1-t)*b+t*t*c - x,2) + Math.pow(Math.pow(1-t,2)*d+2*t*(1-t)*e+t*t*f - y,2);
+		if (i==0){
+			min[1] = d2;
+		}
+		else if (d2 < min[1]){
+			min[1] = d2;
+			min[0] = i;
+		}
+	}
+	return d2;
+	
+}
 function selectGroup(){
 	isGroup = true;
 }
