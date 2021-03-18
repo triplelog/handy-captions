@@ -404,7 +404,7 @@ function outline(pd,margin,direction){
 			problems.push(problem);
 		}
 		for (var i=0;i<problems.length;i++){
-			topPoints = fixProblem(points,problems[i],topPoints);
+			topPoints = fixProblem(points,problems[i],topPoints,direction);
 			console.log(problem);
 		}
 		
