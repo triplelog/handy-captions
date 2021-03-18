@@ -315,13 +315,13 @@ function outline(pd,margin,direction){
 		}
 		if (isTriangle){
 			console.log(i,id,box);
-			topPoints[i-1][0] = [box['topRight'][0],box['topRight'][1]];
-			topPoints[i-1][1] = [box['topLeft'][0],box['topLeft'][1]];
-			topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
-			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
+			//topPoints[i-1][0] = [box['topRight'][0],box['topRight'][1]];
+			//topPoints[i-1][1] = [box['topLeft'][0],box['topLeft'][1]];
+			//topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
+			//topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
 		}
 	}
-	for (var i=2;i<points.length-3;i++){
+	/*for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
 		var cPoint = {};
 		var key = Object.keys(points[i])[0];
@@ -401,7 +401,7 @@ function outline(pd,margin,direction){
 			topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
 			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
 		}
-	}
+	}*/
 	for (var i=1;i<points.length-2;i++){
 		var aPoint = {};
 		var cPoint = {};
