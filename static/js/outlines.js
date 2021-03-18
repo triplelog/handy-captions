@@ -240,7 +240,7 @@ function outline(pd,margin,direction){
 		
 	}
 	
-	for (var ji=0;ji<1;ji++){
+	for (var ji=0;ji<10;ji++){
 	for (var i=2;i<points.length-3;i++){
 		var aPoint = {};
 		var cPoint = {};
