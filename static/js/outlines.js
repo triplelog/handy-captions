@@ -666,7 +666,9 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 		var flipZ = false;
 		var count = 0;
 		while ( ci && ci != 0 && count < 20){
-			console.log(i,ci,z);
+			if (ci == 'linear'){
+				return 'linear';
+			}
 			var pp1 = {};
 			var pp2 = {};
 			var pp3 = {};
@@ -688,7 +690,9 @@ function radialGradient(i,box,lastPoint,myPoint,lastShift,newPoint){
 				return 'linear';
 			}
 			ci = circleIntersect(circle,circle2,i);
-			
+			if (ci == 'linear'){
+				return 'linear';
+			}
 			cii = ci;
 			circleVals.cx = circle2.x;
 			circleVals.cy = circle2.y;
@@ -733,6 +737,9 @@ function circleIntersect(circle,circle2,i) {
 	var drp = Math.abs(circle.r+circle2.r);
 	if (dr <= Math.pow(dc,.5) && Math.pow(dc,.5) <= drp){
 		return circle.r-circle2.r;
+	}
+	else if (Math.pow(dc,.5) > drp){
+		return 'linear';
 	}
 	else {
 		return false;
