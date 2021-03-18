@@ -240,7 +240,7 @@ function outline(pd,margin,direction){
 		
 	}
 	
-	for (var ji=0;ji<2;ji++){
+	for (var ji=0;ji<5;ji++){
 		var problems = [];
 		var problem  =[];
 		for (var i=2;i<points.length-3;i++){
@@ -748,11 +748,11 @@ function outline(pd,margin,direction){
 			newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
 		
 			if (i%2 == 0){
-				newPath.setAttribute('stroke-width','0.5');
+				newPath.setAttribute('stroke-width','0.0');
 				newPath.setAttribute('stroke',"green");
 			}
 			else {
-				newPath.setAttribute('stroke-width','0.5');
+				newPath.setAttribute('stroke-width','0.0');
 				newPath.setAttribute('stroke',"green");
 			}
 		
