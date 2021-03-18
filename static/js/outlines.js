@@ -315,8 +315,8 @@ function outline(pd,margin,direction){
 		}
 		if (isTriangle){
 			console.log(i,id,box,intersect[0]);
-			//topPoints[i-1][0] = [box['topRight'][0],box['topRight'][1]];
-			//topPoints[i-1][1] = [box['topLeft'][0],box['topLeft'][1]];
+			topPoints[i-1][0] = [box['topRight'][0],box['topRight'][1]];
+			topPoints[i-1][1] = [box['topLeft'][0],box['topLeft'][1]];
 			//topPoints[i-2][1] = [box['topRight'][0],box['topRight'][1]];
 			//topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
 		}
@@ -649,11 +649,11 @@ function outline(pd,margin,direction){
 			newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
 		
 			if (i%2 == 0){
-				newPath.setAttribute('stroke-width','0.0');
+				newPath.setAttribute('stroke-width','1.0');
 				newPath.setAttribute('stroke',"green");
 			}
 			else {
-				newPath.setAttribute('stroke-width','0.0');
+				newPath.setAttribute('stroke-width','1.0');
 				newPath.setAttribute('stroke',"green");
 			}
 		
