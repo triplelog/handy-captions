@@ -439,7 +439,7 @@ function outline(pd,margin,direction){
 				linearGradient(i,id,box);
 			}
 			else {
-				console.log(i,box,lastPoint,myPoint,lastShift,pdPoint[key]);
+				
 				
 				var isLinear = radialGradient(i,id,box,lastPoint,myPoint,lastShift,pdPoint[key]);
 				if (isLinear == 'linear'){
@@ -539,10 +539,47 @@ function linearGradient(i,id,box){
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
 	lG.id="box-grad-"+i+"-"+id;
 	
-	lG.setAttribute('x1',(box['bottomLeft'][0]+box['bottomRight'][0])/2);
-	lG.setAttribute('y1',(box['bottomLeft'][1]+box['bottomRight'][1])/2);
-	lG.setAttribute('x2',(box['topLeft'][0]+box['topRight'][0])/2);
-	lG.setAttribute('y2',(box['topLeft'][1]+box['topRight'][1])/2);
+	var leftLine = {'m':0,'point':[0,0]};
+	var rightLine = {'m':0,'point':[0,0]};
+	
+
+	if (box['topLeft'][0]!=box['bottomLeft'][0]){
+		leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
+	}
+	else {
+		leftLine['m']=1000;
+	}
+	if (box['bottomRight'][0]!=box['topRight'][0]){
+		rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+	}
+	else {
+		rightLine['m']=1000;
+	}
+	
+	var intersect = lineIntersect(leftLine,rightLine);
+	var isTriangle = false;
+	if (intersect[0] < leftLine['point'][0] && intersect[0] > rightLine['point'][0]){
+		console.log(i,id,box);
+		isTriangle = true;
+	}
+	else if (intersect[0] > leftLine['point'][0] && intersect[0] < rightLine['point'][0]){
+		console.log(i,id,box);
+		isTriangle = true;
+	}
+	
+	if (isTriangle){
+		lG.setAttribute('x1',(box['bottomLeft'][0]+box['bottomRight'][0])/2);
+		lG.setAttribute('y1',(box['bottomLeft'][1]+box['bottomRight'][1])/2);
+		lG.setAttribute('x2',intersect[0]);
+		lG.setAttribute('y2',intersect[1]);
+	}
+	else {
+		lG.setAttribute('x1',(box['bottomLeft'][0]+box['bottomRight'][0])/2);
+		lG.setAttribute('y1',(box['bottomLeft'][1]+box['bottomRight'][1])/2);
+		lG.setAttribute('x2',(box['topLeft'][0]+box['topRight'][0])/2);
+		lG.setAttribute('y2',(box['topLeft'][1]+box['topRight'][1])/2);
+	}
+	
 	lG.setAttribute('gradientUnits','userSpaceOnUse');
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStop.setAttribute('offset','0%');
@@ -648,7 +685,6 @@ function radialGradient(i,id,box,lastPoint,myPoint,lastShift,newPoint){
 		circleVals.fy = circle.y;
 		circleVals.fr = circle.r;
 		
-		console.log(circleVals,p1,p2,p3);
 		
 		var pp1 = {};
 		var pp2 = {};
@@ -711,7 +747,6 @@ function radialGradient(i,id,box,lastPoint,myPoint,lastShift,newPoint){
 		//console.log(bottomLine,leftLine,centerF,curveCenterX,curveCenterY,curveCenterXTop,curveCenterYTop,circle,circle2,pp1,pp2,pp3);
 	}
 	
-	console.log(circleVals);
 	lG.setAttribute('cx',circleVals.cx);
 	lG.setAttribute('cy',circleVals.cy);
 	lG.setAttribute('fx',circleVals.fx);
