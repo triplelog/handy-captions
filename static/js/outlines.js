@@ -310,10 +310,10 @@ function outline(pd,margin,direction){
 		
 			var intersect = lineIntersect(leftLine,rightLine);
 			var isTriangle = false;
-			if (intersect[0] < box['bottomLeft'][0]*.98 && intersect[0] > box['topLeft'][0]*1.02){
+			if (intersect[0] < box['bottomLeft'][0]*1 && intersect[0] > box['topLeft'][0]*1.00){
 				isTriangle = true;
 			}
-			else if (intersect[0] > box['bottomLeft'][0]*1.02 && intersect[0] < box['topLeft'][0]*.98){
+			else if (intersect[0] > box['bottomLeft'][0]*1.00 && intersect[0] < box['topLeft'][0]*1){
 				isTriangle = true;
 			}
 			
