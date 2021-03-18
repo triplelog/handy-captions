@@ -1005,6 +1005,9 @@ function radialGradient(i,id,box,lastPoint,myPoint,newPoint){
 }
 
 function circleIntersect(circle,circle2,i) {
+	if (circle.r > circle2.r){
+		return 'linear';
+	}
 	var dc = Math.pow(circle.x-circle2.x,2)+Math.pow(circle.y-circle2.y,2);
 	var dr = Math.abs(circle.r-circle2.r);
 	var drp = Math.abs(circle.r+circle2.r);
