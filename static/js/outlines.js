@@ -366,6 +366,8 @@ function outline(pd,margin,direction){
 				else {
 					newTopRightX = box['bottomRight'][0] - dx2;
 				}*/
+				
+				/*
 				var bottomMid = [(box['bottomLeft'][0]+box['bottomRight'][0])/2,(box['bottomLeft'][1]+box['bottomRight'][1])/2];
 				var topMid = [(box['topLeft'][0]+box['topRight'][0])/2,(box['topLeft'][1]+box['topRight'][1])/2];
 				var d2 = Math.pow( Math.pow((bottomMid[1]-topMid[1]),2) + Math.pow((bottomMid[0]-topMid[0]),2) ,1);
@@ -391,8 +393,11 @@ function outline(pd,margin,direction){
 				topPoints[i-1][1] = [newTopMidX,newTopMidY];
 				topPoints[i-2][1] = [newTopMidX,newTopMidY];
 				topPoints[i][0] = [newTopMidX,newTopMidY];
+				*/
 			}
 		}
+		
+		fixProblem(points,problem);
 		
 		console.log(problem);
 	}
@@ -755,6 +760,129 @@ function outline(pd,margin,direction){
 }
 
 
+function fixProblem(points,problem) {
+	var key = Object.keys(points[problem[0]])[0];
+	var lastGood = points[problem[0]][key];
+	var bottomFirst = [lastGood[lastGood.length-2],lastGood[lastGood.length-2]];
+	console.log(bottomFirst);
+	
+	for (var ip=0;ip<problems.length*0;ip++){
+		var i = problems[ip];
+		var aPoint = {};
+		var cPoint = {};
+		var key = Object.keys(points[i])[0];
+	
+		var myPoint = points[i][key];
+		var last = points[i-1];
+		var lastKey = Object.keys(last)[0];
+		var next = points[i+1];
+		var nextKey = Object.keys(next)[0];
+		if (key == 'H' ){
+		
+			continue;
+		}
+		else if (key == 'V'){
+		
+			continue;
+		}
+		if (lastKey == 'H' ){
+		
+			continue;
+		}
+		else if (lastKey == 'V'){
+		
+			continue;
+		}
+		if (nextKey == 'H' ){
+		
+			continue;
+		}
+		else if (nextKey == 'V'){
+		
+			continue;
+		}
+	
+	
+		var lastPoint = [last[lastKey][last[lastKey].length - 2],last[lastKey][last[lastKey].length - 1]];
+		var thisPoint = [myPoint[myPoint.length - 2],myPoint[myPoint.length - 1]];
+	
+	
+		var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'bottomRight':[thisPoint[0],thisPoint[1]]};
+		box['topLeft']=[topPoints[i-1][0][0],topPoints[i-1][0][1]];
+		box['topRight']=[topPoints[i-1][1][0],topPoints[i-1][1][1]];
+	
+		var leftLine = {'m':0,'point':[0,0]};
+		var rightLine = {'m':0,'point':[0,0]};
+
+	
+		if (box['topLeft'][0]!=box['bottomLeft'][0]){
+			leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
+		}
+		else {
+			leftLine['m']=1000;
+		}
+		if (box['bottomRight'][0]!=box['topRight'][0]){
+			rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+		}
+		else {
+			rightLine['m']=1000;
+		}
+
+		leftLine['point']=box['bottomLeft'];
+		rightLine['point']=box['bottomRight'];
+
+	
+		var intersect = lineIntersect(leftLine,rightLine);
+		var isTriangle = false;
+		if (intersect[0] < box['bottomLeft'][0]*.97 && intersect[0] > box['topLeft'][0]*1.03){
+			isTriangle = true;
+		}
+		else if (intersect[0] > box['bottomLeft'][0]*1.03 && intersect[0] < box['topLeft'][0]*.97){
+			isTriangle = true;
+		}
+		if (isTriangle){
+			console.log(i,id,box,intersect[0]);
+			if (problem.length == 0){
+				problem.push(i-1);
+				problem.push(i);
+				problem.push(i+1);
+			}
+			else if (problem[problem.length-1]==i){
+				problem.push(i+1);
+			}
+			else {
+				console.log(problem);
+				break;
+			}
+			
+			var bottomMid = [(box['bottomLeft'][0]+box['bottomRight'][0])/2,(box['bottomLeft'][1]+box['bottomRight'][1])/2];
+			var topMid = [(box['topLeft'][0]+box['topRight'][0])/2,(box['topLeft'][1]+box['topRight'][1])/2];
+			var d2 = Math.pow( Math.pow((bottomMid[1]-topMid[1]),2) + Math.pow((bottomMid[0]-topMid[0]),2) ,1);
+		
+			dy2 = margin*Math.pow(Math.pow((bottomMid[1]-topMid[1]),2)/d2,0.5);
+			dx2 = margin*Math.pow(Math.pow((bottomMid[0]-topMid[0]),2)/d2,0.5);
+			var newTopMidY = 0;
+			if (topMid[1]>bottomMid[1]){
+				newTopMidY = bottomMid[1] + dy2;
+			}
+			else {
+				newTopMidY = bottomMid[1] - dy2;
+			}
+			var newTopMidX = 0;
+			if (topMid[0]>bottomMid[0]){
+				newTopMidX = bottomMid[0] + dx2;
+			}
+			else {
+				newTopMidX = bottomMid[0] - dx2;
+			}
+		
+			topPoints[i-1][0] = [newTopMidX,newTopMidY];
+			topPoints[i-1][1] = [newTopMidX,newTopMidY];
+			topPoints[i-2][1] = [newTopMidX,newTopMidY];
+			topPoints[i][0] = [newTopMidX,newTopMidY];
+		}
+	}
+}
 			
 function toQuadratics(points) {
 	var qPoints = [];
