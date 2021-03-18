@@ -766,8 +766,8 @@ function fixProblem(points,problem) {
 	var bottomFirst = [lastGood[lastGood.length-2],lastGood[lastGood.length-2]];
 	console.log(bottomFirst);
 	
-	for (var ip=0;ip<problems.length*0;ip++){
-		var i = problems[ip];
+	for (var ip=0;ip<problem.length*0;ip++){
+		var i = problem[ip];
 		var aPoint = {};
 		var cPoint = {};
 		var key = Object.keys(points[i])[0];
