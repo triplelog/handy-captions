@@ -1359,6 +1359,27 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 			circle = circleFromThreePoints(p4,p5,p6);
 			ci = circleIntersect(circle,circle2,0);
 			count++;
+			
+		}
+		if (count == 10){
+			while (ci && count < 20){
+				var dxxBottom = Math.pow(ratioBottomX*dyBottom,0.5)/(1+(count-10)/10);
+				var dxyBottom = Math.pow(ratioBottomY*dyBottom,0.5)/(1+(count-10)/10);
+				if (cBottom[0]>curveCenterX){
+					dxxBottom *=-1;
+				}
+				if (cBottom[1]>curveCenterY){
+					dxyBottom *=-1;
+				}
+				var cBottom = [(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
+				p6.x = cBottom[0]+dxxBottom;
+				p6.y = cBottom[1]+dxyBottom;
+				circle2 = circleFromThreePoints(p1,p3,p6);
+				ci = circleIntersect(circle,circle2,0);
+				count++;
+			
+			}
+			
 		}
 		
 		console.log(i,id,direction,underBottom,underTop);
