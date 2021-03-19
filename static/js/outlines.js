@@ -606,6 +606,10 @@ function outline(pd,margin,direction){
 
 		
 		var linear = 1;
+		if (isTriangle){
+			linear = 6;
+		}
+		
 		if (myPoint.length== 6 && !isTriangle){
 			var t = 0.5;
 			var curveCenterXTop = Math.pow(1-t,3)*(topPoints[i-1][1][0]);
@@ -1063,6 +1067,9 @@ function linearGradient(i,id,box,type){
 	}
 	else if (type == 5){
 		myColor = 'rgb(255,255,0)';
+	}
+	else if (type == 6){
+		myColor = 'rgb(0,255,255)';
 	}
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
