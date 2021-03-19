@@ -247,7 +247,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		filter.id = 'blur';
 		var filterBlur = document.createElementNS("http://www.w3.org/2000/svg", 'feGaussianBlur');
 		filterBlur.setAttribute('in','SourceGraphic');
-		filterBlur.setAttribute('stdDeviation','10');
+		filterBlur.setAttribute('stdDeviation','15');
 		filterBlur.setAttribute('edgeMode','none');
 		filter.appendChild(filterBlur);
 		svg.appendChild(filter);
@@ -260,12 +260,12 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		rect.setAttribute('height','100%');
 		rect.setAttribute('fill','rgba(0,0,0,0)');
 		g.appendChild(rect);
-		for (var i=0;i<6;i++){
+		for (var i=0;i<10;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
-			path.setAttribute('stroke','rgba(255,0,0,'+(0.1+i/6)+')');
-			path.setAttribute('stroke-width',''+(30-4*i));
+			path.setAttribute('stroke','rgba(255,0,0,'+(0.1+i/10)+')');
+			path.setAttribute('stroke-width',''+(40-4*i));
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
 			g.appendChild(path);
