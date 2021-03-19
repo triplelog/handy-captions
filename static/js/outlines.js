@@ -749,17 +749,20 @@ function outline(pd,margin,direction){
 			
 			
 	
-			if (linear ){
+			if (linear && linear != 2){
 				linearGradient(i,id,box,linear,direction);
 			}
 			else {
 				var diff = false;
 				if (linear == 2){
 					diff = true;
+					radialGradientDiff(i,id,box,lastPoint,myPoint,pdPoint[key],diff);
 				}
-				var isLinear = radialGradient(i,id,box,lastPoint,myPoint,pdPoint[key],diff);
-				if (isLinear == 'linear'){
-					linearGradient(i,id,box,5,direction);
+				else {
+					var isLinear = radialGradient(i,id,box,lastPoint,myPoint,pdPoint[key],diff);
+					if (isLinear == 'linear'){
+						linearGradient(i,id,box,5,direction);
+					}
 				}
 			}
 			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
@@ -1143,9 +1146,63 @@ function linearGradient(i,id,box,type,direction){
 	heartFill.appendChild(newDef);
 }
 
-function radialGradient(i,id,box,lastPoint,myPoint,newPoint,diff){
+function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,diff){
 	
-	/*var underBottom = -1;
+	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
+	lG.id="box-grad-"+i+"-"+id;
+	var bottomLine = {'m':0,'point':[0,0]};
+	var leftLine = {'m':0,'point':[0,0]};
+	var rightLine = {'m':0,'point':[0,0]};
+	
+	if (box['bottomRight'][0]!=box['bottomLeft'][0]){
+		bottomLine['m']=(box['bottomRight'][1]-box['bottomLeft'][1])/(box['bottomRight'][0]-box['bottomLeft'][0]);
+	}
+	else {
+		bottomLine['m']=1000;
+	}
+	if (box['topLeft'][0]!=box['bottomLeft'][0]){
+		leftLine['m']=(box['topLeft'][1]-box['bottomLeft'][1])/(box['topLeft'][0]-box['bottomLeft'][0]);
+	}
+	else {
+		leftLine['m']=1000;
+	}
+	if (box['bottomRight'][0]!=box['topRight'][0]){
+		rightLine['m']=(box['bottomRight'][1]-box['topRight'][1])/(box['bottomRight'][0]-box['topRight'][0]);
+	}
+	else {
+		rightLine['m']=1000;
+	}
+	
+	
+	
+	leftLine['point']=box['bottomLeft'];
+	rightLine['point']=box['bottomRight'];
+	
+	bottomLine['point']=[(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
+	
+	if (bottomLine['m'] != 0){
+		bottomLine['m']=-1/bottomLine['m'];
+	}
+	else {
+		bottomLine['m']=1000;
+	}
+	
+	
+	var centerF = lineIntersect(bottomLine,leftLine);
+
+	var t = 0.5;
+	var curveCenterXTop = (box['topLeft'][0]+box['topRight'][0])/2;
+	var curveCenterYTop = (box['topLeft'][1]+box['topRight'][1])/2;
+	var curveCenterX = Math.pow(1-t,2)*lastPoint[0];
+	curveCenterX += 2*Math.pow(1-t,1)*t*myPoint[0];
+	curveCenterX += Math.pow(t,2)*myPoint[2];
+	var curveCenterY = Math.pow(1-t,2)*lastPoint[1];
+	curveCenterY += 2*Math.pow(1-t,1)*t*myPoint[1];
+	curveCenterY += Math.pow(t,2)*myPoint[3];
+	
+	
+	var underBottom = -1;
 	if (box['bottomLeft'][0]>box['bottomRight'][0]){
 		var bottomYatX = (curveCenterX-box['bottomRight'][0])/(box['bottomLeft'][0]-box['bottomRight'][0]) * (box['bottomLeft'][1]-box['bottomRight'][1]) + box['bottomRight'][1];
 		if (curveCenterY<bottomYatX){
@@ -1156,14 +1213,140 @@ function radialGradient(i,id,box,lastPoint,myPoint,newPoint,diff){
 		}
 	}
 	else {
-		var bottomYatX = (curveCenterXTop-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
+		var bottomYatX = (curveCenterX-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
 		if (curveCenterY<bottomYatX){
 			underBottom = 1;
 		}
 		else if (curveCenterY == bottomYatX){
 			underBottom = 0;
 		}
-	}*/
+	}
+	var underTop= -1;
+	if (box['bottomLeft'][0]>box['bottomRight'][0]){
+		var topYatX = (curveCenterXTop-box['bottomRight'][0])/(box['bottomLeft'][0]-box['bottomRight'][0]) * (box['bottomLeft'][1]-box['bottomRight'][1]) + box['bottomRight'][1];
+		if (curveCenterYTop<topYatX){
+			underTop = 1;
+		}
+		else if (curveCenterYTop == topYatX){
+			underTop= 0;
+		}
+	}
+	else {
+		var topYatX = (curveCenterXTop-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
+		if (curveCenterYTop<topYatX){
+			underTop = 1;
+		}
+		else if (curveCenterYTop == topYatX){
+			underTop = 0;
+		}
+	}
+	
+	var bigR; 
+	var smallR;
+	var circle;
+	var circle2;
+	if (underBottom == underTop ){
+		//big circle is based on top
+		var p1 = {};
+		var p2 = {};
+		var p3 = {};
+		p1.x = box['bottomLeft'][0];
+		p1.y = box['bottomLeft'][1];
+		p2.x = curveCenterX;
+		p2.y = curveCenterY;
+		p3.x = box['bottomRight'][0];
+		p3.y = box['bottomRight'][1];
+		
+		circle = circleFromThreePoints(p1,p2,p3);
+		
+		bigR = circle.r+25;
+		smallR = circle.r;
+		
+		var p4 = {};
+		var p5 = {};
+		p4.x = box['topLeft'][0];
+		p4.y = box['topLeft'][1];
+		p5.x = box['topRight'][0];
+		p5.y = box['topRight'][1];
+		circle2 = circleFrom2Points(p4,p5,bigR);
+	}
+	else {
+		//big circle is based on bottom
+		var p1 = {};
+		var p2 = {};
+		var p3 = {};
+		p1.x = box['bottomLeft'][0];
+		p1.y = box['bottomLeft'][1];
+		p2.x = curveCenterX;
+		p2.y = curveCenterY;
+		p3.x = box['bottomRight'][0];
+		p3.y = box['bottomRight'][1];
+		
+		circle2 = circleFromThreePoints(p1,p2,p3);
+		
+		bigR = circle2.r;
+		smallR = circle2.r-25;
+		
+		var p4 = {};
+		var p5 = {};
+		p4.x = box['topLeft'][0];
+		p4.y = box['topLeft'][1];
+		p5.x = box['topRight'][0];
+		p5.y = box['topRight'][1];
+		var d = Math.pow(Math.pow(p4.x-p5.x,2)+Math.pow(p4.y-p5.y,2),0.5);
+		if (d > 1.5*smallR){
+			bigR = d/1.5+25;
+			smallR = d/1.5;
+			circle2 = circleFrom2Points(p1,p3,bigR);
+		}
+		
+		circle = circleFrom2Points(p4,p5,smallR);
+	}
+	
+	
+	
+	var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
+	var smallR2 = Math.pow(box['bottomLeft'][0]-centerF[0],2)+Math.pow(box['bottomLeft'][1]-centerF[1],2);
+	
+	var circleVals = {};
+	circleVals.cx = circle2.x;
+	circleVals.cy = circle2.y;
+	circleVals.fx = circle.x;
+	circleVals.fy = circle.y;
+	circleVals.r = bigR;
+	circleVals.fr = smallR;
+
+	
+	lG.setAttribute('cx',circleVals.cx);
+	lG.setAttribute('cy',circleVals.cy);
+	lG.setAttribute('fx',circleVals.fx);
+	lG.setAttribute('fy',circleVals.fy);
+	lG.setAttribute('r',circleVals.r);
+	lG.setAttribute('fr',circleVals.fr);
+	lG.setAttribute('gradientUnits','userSpaceOnUse');
+	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+	newStop.setAttribute('offset','0%');
+	newStop.setAttribute('stop-color','white');
+	newStop.setAttribute('stop-opacity','0.7');
+	lG.appendChild(newStop);
+	var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+	newStopT.setAttribute('offset','100%');
+	newStopT.setAttribute('stop-color','white');
+	newStopT.setAttribute('stop-opacity','0.0');
+	lG.appendChild(newStopT);
+	newDef.appendChild(lG);
+	
+	var strokeGrad = lG.cloneNode(true);
+	strokeGrad.id = "box-gradh-"+i+"-"+id;
+	strokeGrad.querySelector('stop').setAttribute('stop-opacity','0.2');
+	newDef.appendChild(strokeGrad);
+	
+	heartFill.appendChild(newDef);
+	
+	
+}
+
+function radialGradient(i,id,box,lastPoint,myPoint,newPoint,diff){
 			
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
