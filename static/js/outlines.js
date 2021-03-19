@@ -1245,6 +1245,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	var smallR;
 	var circle;
 	var circle2;
+	var reverseColor = false;
 	if (underBottom == 0){
 		//big circle is based on top
 		var p1 = {};
@@ -1255,9 +1256,9 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		p3.x = box['bottomRight'][0];
 		p3.y = box['bottomRight'][1];
 		
-		var circleXY = circleFrom2Points(p1,p3,2000,direction);
-		circle = {'x':circleXY[0],'y':circleXY[1],'r':2000};
-		console.log(circle);
+		var circle2XY = circleFrom2Points(p1,p3,2000,direction);
+		circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':2000};
+		console.log(circle2);
 		bigR = 2000;
 		smallR = 1000;
 		
@@ -1267,9 +1268,9 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		p4.y = box['topLeft'][1];
 		p5.x = box['topRight'][0];
 		p5.y = box['topRight'][1];
-		var circle2XY = circleFrom2Points(p4,p5,1000,direction);
-		circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':1000};
-		console.log(circle2);
+		var circleXY = circleFrom2Points(p4,p5,1000,direction);
+		circle = {'x':circleXY[0],'y':circleXY[1],'r':1000};
+		console.log(circle);
 	}
 	else if (underBottom == underTop){
 		//big circle is based on top
@@ -1334,6 +1335,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		var circleXY = circleFrom2Points(p4,p5,smallR,direction);
 		circle = {'x':circleXY[0],'y':circleXY[1],'r':smallR};
 		console.log(circle);
+		reverseColor = true;
 	}
 	
 	
@@ -1360,12 +1362,23 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStop.setAttribute('offset','0%');
 	newStop.setAttribute('stop-color','white');
-	newStop.setAttribute('stop-opacity','0.7');
+	if (reverseColor){
+		newStop.setAttribute('stop-opacity','0.0');
+	}
+	else {
+		newStop.setAttribute('stop-opacity','0.7');
+	}
+	
 	lG.appendChild(newStop);
 	var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStopT.setAttribute('offset','100%');
 	newStopT.setAttribute('stop-color','white');
-	newStopT.setAttribute('stop-opacity','0.0');
+	if (reverseColor){
+		newStop.setAttribute('stop-opacity','0.7');
+	}
+	else {
+		newStop.setAttribute('stop-opacity','0.0');
+	}
 	lG.appendChild(newStopT);
 	newDef.appendChild(lG);
 	
