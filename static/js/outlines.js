@@ -1245,7 +1245,32 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	var smallR;
 	var circle;
 	var circle2;
-	if (underBottom == underTop ){
+	if (underBottom == 0){
+		//big circle is based on top
+		var p1 = {};
+		var p2 = {};
+		var p3 = {};
+		p1.x = box['bottomLeft'][0];
+		p1.y = box['bottomLeft'][1];
+		p3.x = box['bottomRight'][0];
+		p3.y = box['bottomRight'][1];
+		
+		circle = circleFrom2Points(p1,p3,2000,direction);
+		
+		console.log(circle);
+		bigR = 2000;
+		smallR = 1000;
+		
+		var p4 = {};
+		var p5 = {};
+		p4.x = box['topLeft'][0];
+		p4.y = box['topLeft'][1];
+		p5.x = box['topRight'][0];
+		p5.y = box['topRight'][1];
+		circle2 = circleFrom2Points(p4,p5,1000,direction);
+		console.log(circle2);
+	}
+	else if (underBottom == underTop){
 		//big circle is based on top
 		var p1 = {};
 		var p2 = {};
@@ -1259,7 +1284,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		
 		circle = circleFromThreePoints(p1,p2,p3);
 		
-		console.log(circle);
+		console.log(circle,underBottom);
 		bigR = circle.r+25;
 		smallR = circle.r;
 		
