@@ -1273,7 +1273,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		circle = {'x':circleXY[0],'y':circleXY[1],'r':1000};
 		console.log(circle);
 		reverseColor = true;
-		myColor = 'rgb(150,150,255)';
+		myColor = 'rgb(250,250,255)';
 	}
 	else if (underBottom == underTop){
 		//big circle is based on top
@@ -1302,7 +1302,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		var circle2XY = circleFrom2Points(p4,p5,bigR,direction);
 		circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':bigR};
 		console.log(circle2);
-		myColor = 'rgb(255,150,150)';
+		myColor = 'rgb(255,250,250)';
 	}
 	else {
 		//big circle is based on bottom
@@ -1340,7 +1340,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		circle = {'x':circleXY[0],'y':circleXY[1],'r':smallR};
 		console.log(circle);
 		reverseColor = true;
-		myColor = 'rgb(150,255,150)';
+		myColor = 'rgb(250,255,250)';
 	}
 	
 	
