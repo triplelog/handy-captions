@@ -759,7 +759,7 @@ function outline(pd,margin,direction){
 					radialGradientDiff(i,id,box,lastPoint,myPoint,pdPoint[key],direction);
 				}
 				else {
-					var isLinear = radialGradient(i,id,box,lastPoint,myPoint,pdPoint[key],diff);
+					var isLinear = radialGradientDiff(i,id,box,lastPoint,myPoint,pdPoint[key],direction);
 					if (isLinear == 'linear'){
 						linearGradient(i,id,box,5,direction);
 					}
