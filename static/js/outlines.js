@@ -1246,6 +1246,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	var circle;
 	var circle2;
 	var reverseColor = false;
+	var myColor = 'rgb(255,255,255)';
 	if (underBottom == 0){
 		//big circle is based on top
 		var p1 = {};
@@ -1271,6 +1272,8 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		var circleXY = circleFrom2Points(p4,p5,1000,direction);
 		circle = {'x':circleXY[0],'y':circleXY[1],'r':1000};
 		console.log(circle);
+		reverseColor = true;
+		myColor = 'rgb(0,0,255)';
 	}
 	else if (underBottom == underTop){
 		//big circle is based on top
@@ -1299,6 +1302,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		var circle2XY = circleFrom2Points(p4,p5,bigR,direction);
 		circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':bigR};
 		console.log(circle2);
+		myColor = 'rgb(255,0,0)';
 	}
 	else {
 		//big circle is based on bottom
@@ -1336,6 +1340,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		circle = {'x':circleXY[0],'y':circleXY[1],'r':smallR};
 		console.log(circle);
 		reverseColor = true;
+		myColor = 'rgb(0,255,0)';
 	}
 	
 	
@@ -1361,7 +1366,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	lG.setAttribute('gradientUnits','userSpaceOnUse');
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStop.setAttribute('offset','0%');
-	newStop.setAttribute('stop-color','white');
+	newStop.setAttribute('stop-color',myColor);
 	if (reverseColor){
 		newStop.setAttribute('stop-opacity','0.0');
 	}
@@ -1372,7 +1377,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	lG.appendChild(newStop);
 	var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStopT.setAttribute('offset','100%');
-	newStopT.setAttribute('stop-color','white');
+	newStopT.setAttribute('stop-color',myColor);
 	if (reverseColor){
 		newStopT.setAttribute('stop-opacity','0.7');
 	}
@@ -1384,7 +1389,13 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	
 	var strokeGrad = lG.cloneNode(true);
 	strokeGrad.id = "box-gradh-"+i+"-"+id;
-	strokeGrad.querySelector('stop').setAttribute('stop-opacity','0.2');
+	
+	if (reverseColor){
+		strokeGrad.querySelectorAll('stop')[1].setAttribute('stop-opacity','0.2');
+	}
+	else {
+		strokeGrad.querySelector('stop').setAttribute('stop-opacity','0.2');
+	}
 	newDef.appendChild(strokeGrad);
 	
 	heartFill.appendChild(newDef);
