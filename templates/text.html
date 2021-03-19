@@ -266,8 +266,8 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
-			path.setAttribute('stroke','rgba(255,0,0,'+(0.1+i/50)+')');
-			path.setAttribute('stroke-width',''+(41-4*i));
+			path.setAttribute('stroke','rgba(255,0,0,'+(0.1)+')');
+			path.setAttribute('stroke-width',''+(50-5*i));
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
 			path.setAttribute('filter','url(#blur-'+(20-2*i)+')');
