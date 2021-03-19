@@ -310,10 +310,10 @@ function outline(pd,margin,direction){
 		
 			var intersect = lineIntersect(leftLine,rightLine);
 			var isTriangle = false;
-			if (intersect[0] < box['bottomLeft'][0]*1.02 && intersect[0] > box['topLeft'][0]*0.98){
+			if (intersect[0] <= box['bottomLeft'][0]*1 && intersect[0] >= box['topLeft'][0]*1){
 				isTriangle = true;
 			}
-			else if (intersect[0] > box['bottomLeft'][0]*0.98 && intersect[0] < box['topLeft'][0]*1.02){
+			else if (intersect[0] >= box['bottomLeft'][0]*1 && intersect[0] <= box['topLeft'][0]*1){
 				isTriangle = true;
 			}
 			
@@ -794,6 +794,8 @@ function fixProblem(points,problem,topPoints,direction) {
 		problemLeft.push(problem[mid+1]);
 		var problemRight = problem.slice(mid+1);
 		console.log(problemLeft,problemRight);
+		topPoints = fixProblem(points,problemLeft,topPoints,direction);
+		topPoints = fixProblem(points,problemRight,topPoints,direction);
 		return topPoints;
 	}
 	console.log(bottomFirst, bottomLast);
