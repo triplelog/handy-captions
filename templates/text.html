@@ -249,7 +249,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			filter.id = 'blur-'+i;
 			var filterBlur = document.createElementNS("http://www.w3.org/2000/svg", 'feGaussianBlur');
 			filterBlur.setAttribute('in','SourceGraphic');
-			filterBlur.setAttribute('stdDeviation',''+(i*width));
+			filterBlur.setAttribute('stdDeviation',''+(i*width/2));
 			filterBlur.setAttribute('edgeMode','duplicate');
 			filter.appendChild(filterBlur);
 			svg.appendChild(filter);
