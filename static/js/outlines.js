@@ -1345,8 +1345,8 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		var ci = true;
 		var count = 0;
 		while (ci && count < 10){
-			var dxxTop = Math.pow(ratioBottomX*dyTop,0.5)*(1+count/3);
-			var dxyTop = Math.pow(ratioBottomY*dyTop,0.5)*(1+count/3);
+			var dxxTop = Math.pow(ratioBottomX*dyTop,0.5)*(1+count/2);
+			var dxyTop = Math.pow(ratioBottomY*dyTop,0.5)*(1+count/2);
 			if (cBottom[0]>curveCenterX){
 				dxxTop *=-1;
 			}
@@ -1363,8 +1363,8 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		}
 		if (count == 10){
 			while (ci && count < 20){
-				var dxxBottom = Math.pow(ratioBottomX*dyBottom,0.5)/(1+(count-10)/10);
-				var dxyBottom = Math.pow(ratioBottomY*dyBottom,0.5)/(1+(count-10)/10);
+				var dxxBottom = Math.pow(ratioBottomX*dyBottom,0.5)/(1+(count-10)/2);
+				var dxyBottom = Math.pow(ratioBottomY*dyBottom,0.5)/(1+(count-10)/2);
 				if (cBottom[0]>curveCenterX){
 					dxxBottom *=-1;
 				}
@@ -1382,7 +1382,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 			
 		}
 		
-		console.log(i,id,direction,underBottom,underTop);
+		console.log(i,id,direction,underBottom,underTop,count);
 		reverseColor = true;
 		myColor = 'rgb(250,255,250)';
 	}
