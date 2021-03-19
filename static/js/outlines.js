@@ -755,12 +755,12 @@ function outline(pd,margin,direction){
 			newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
 		
 			if (i%2 == 0){
-				newPath.setAttribute('stroke-width','0.0');
-				newPath.setAttribute('stroke',"green");
+				newPath.setAttribute('stroke-width','0.5');
+				newPath.setAttribute('stroke',"url(#box-grad-"+i+"-"+id+")");
 			}
 			else {
-				newPath.setAttribute('stroke-width','0.0');
-				newPath.setAttribute('stroke',"green");
+				newPath.setAttribute('stroke-width','0.5');
+				newPath.setAttribute('stroke',"url(#box-grad-"+i+"-"+id+")");
 			}
 		
 			heartFill.appendChild(newPath);
