@@ -249,7 +249,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			var filterBlur = document.createElementNS("http://www.w3.org/2000/svg", 'feGaussianBlur');
 			filterBlur.setAttribute('in','SourceGraphic');
 			filterBlur.setAttribute('stdDeviation','5');
-			filterBlur.setAttribute('edgeMode','none');
+			filterBlur.setAttribute('edgeMode','duplicate');
 			filter.appendChild(filterBlur);
 			svg.appendChild(filter);
 		}
@@ -270,7 +270,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			path.setAttribute('stroke-width',''+(50-5*i));
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
-			path.setAttribute('filter','url(#blur-'+(20-2*i)+')');
+			path.setAttribute('filter','url(#blur-'+(2+2*i)+')');
 			g.appendChild(path);
 		}
 		//g.setAttribute('filter','url(#blur)');
