@@ -262,20 +262,20 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		rect.setAttribute('height','100%');
 		rect.setAttribute('fill','rgba(0,0,0,0)');
 		g.appendChild(rect);
-		for (var i=0;i<10;i++){
+		for (var i=0;i<3;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
-			path.setAttribute('stroke','rgba(255,0,0,'+(0.05+i/20)+')');
-			path.setAttribute('stroke-width',''+(50-5*i));
+			path.setAttribute('stroke','rgba(255,0,0,'+(0.3+i/3)+')');
+			path.setAttribute('stroke-width',''+(25-10*i));
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
-			if (i > 5){
-				path.setAttribute('filter','url(#blur-'+(20-2*i)+')');
+			if (i > 0){
+				path.setAttribute('filter','url(#blur-'+(20-8*i)+')');
 			}
 			g.appendChild(path);
 		}
-		g.setAttribute('filter','url(#blur-4)');
+		g.setAttribute('filter','url(#blur-20)');
 		svg.appendChild(g);
 		
 		/*var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
