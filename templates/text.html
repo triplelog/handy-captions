@@ -272,6 +272,15 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		}
 		g.setAttribute('filter','url(#blur)');
 		svg.appendChild(g);
+		
+		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	
+		path.setAttribute('d',pd);
+		path.setAttribute('stroke','rgba(255,0,0,0)');
+		path.setAttribute('stroke-width',''+(60-6*0));
+		path.setAttribute('fill','none');
+		path.id = "bg-"+id+"-"+i;
+		svg.appendChild(path);
 	}
 
 	
