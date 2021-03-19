@@ -1284,7 +1284,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		
 		circle = circleFromThreePoints(p1,p2,p3);
 		
-		console.log(circle,underBottom);
+		console.log(circle,underBottom,box);
 		bigR = circle.r+25;
 		smallR = circle.r;
 		
