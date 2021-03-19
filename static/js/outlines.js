@@ -1342,18 +1342,24 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		var ratioBottomY = dxyBottom/dyBottom;
 		var dyTop = Math.pow(box['topRight'][0]-box['topLeft'][0],2)+Math.pow(box['topRight'][1]-box['topLeft'][1],2);
 		
-		var dxxTop = Math.pow(ratioBottomX*dyTop,0.5)*2;
-		var dxyTop = Math.pow(ratioBottomY*dyTop,0.5)*2;
-		if (cBottom[0]>curveCenterX){
-			dxxTop *=-1;
+		var ci = true;
+		var count = 0;
+		while (ci && count < 10){
+			var dxxTop = Math.pow(ratioBottomX*dyTop,0.5)*(1+count/3);
+			var dxyTop = Math.pow(ratioBottomY*dyTop,0.5)*(1+count/3);
+			if (cBottom[0]>curveCenterX){
+				dxxTop *=-1;
+			}
+			if (cBottom[1]>curveCenterY){
+				dxyTop *=-1;
+			}
+			var cTop = [(box['topRight'][0]+box['topLeft'][0])/2,(box['topRight'][1]+box['topLeft'][1])/2];
+			p6.x = cTop[0]+dxxTop;
+			p6.y = cTop[1]+dxyTop;
+			circle = circleFromThreePoints(p4,p5,p6);
+			ci = circleIntersect(circle,circle2,0);
+			count++;
 		}
-		if (cBottom[1]>curveCenterY){
-			dxyTop *=-1;
-		}
-		var cTop = [(box['topRight'][0]+box['topLeft'][0])/2,(box['topRight'][1]+box['topLeft'][1])/2];
-		p6.x = cTop[0]+dxxTop;
-		p6.y = cTop[1]+dxyTop;
-		circle = circleFromThreePoints(p4,p5,p6);
 		
 		console.log(i,id,direction,underBottom,underTop);
 		reverseColor = true;
