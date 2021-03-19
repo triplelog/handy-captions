@@ -753,7 +753,7 @@ function outline(pd,margin,direction){
 				linearGradient(i,id,box,linear,direction);
 			}
 			else {
-				var diff - false;
+				var diff = false;
 				if (linear == 2){
 					diff = true;
 				}
