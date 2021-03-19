@@ -1374,10 +1374,10 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	newStopT.setAttribute('offset','100%');
 	newStopT.setAttribute('stop-color','white');
 	if (reverseColor){
-		newStop.setAttribute('stop-opacity','0.7');
+		newStopT.setAttribute('stop-opacity','0.7');
 	}
 	else {
-		newStop.setAttribute('stop-opacity','0.0');
+		newStopT.setAttribute('stop-opacity','0.0');
 	}
 	lG.appendChild(newStopT);
 	newDef.appendChild(lG);
