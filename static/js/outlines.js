@@ -750,14 +750,14 @@ function outline(pd,margin,direction){
 			
 	
 			if (linear){
-				linearGradient(i,id,box,linear);
+				linearGradient(i,id,box,linear,direction);
 			}
 			else {
 				
 				
 				var isLinear = radialGradient(i,id,box,lastPoint,myPoint,pdPoint[key]);
 				if (isLinear == 'linear'){
-					linearGradient(i,id,box,5);
+					linearGradient(i,id,box,5,direction);
 				}
 			}
 			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
@@ -1051,7 +1051,7 @@ function toQuadratics(points) {
 	return qPoints;
 }
 
-function linearGradient(i,id,box,type){
+function linearGradient(i,id,box,type,direction){
 	var myColor = 'rgb(0,0,0)';
 	if (type == 1){
 		myColor = 'rgb(0,0,255)';
