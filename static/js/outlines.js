@@ -1336,8 +1336,21 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 			console.log(circle2);
 		}
 		
+		
 		var circleXY = circleFrom2Points(p4,p5,smallR,direction);
 		circle = {'x':circleXY[0],'y':circleXY[1],'r':smallR};
+		var count = 0;
+		while (circleIntersect(circle,circle2,0) && count < 10){
+			smallR*= 0.9;
+			if (d > 1.5*smallR){
+				circle = {'x':(p4.x+p5.x)/2,'y':(p4.y+p5.y)/2,'r':smallR};
+			}
+			else {
+				var circleXY = circleFrom2Points(p4,p5,smallR,direction);
+				circle = {'x':circleXY[0],'y':circleXY[1],'r':smallR};
+			}
+			count++;
+		}
 		console.log(circle);
 		reverseColor = true;
 		myColor = 'rgb(250,255,250)';
