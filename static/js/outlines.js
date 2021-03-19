@@ -1088,18 +1088,18 @@ function linearGradient(i,id,box,type,direction){
 		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 		newStop.setAttribute('offset','0%');
 		newStop.setAttribute('stop-color','white');
-		newStop.setAttribute('stop-opacity','0.7');
+		newStop.setAttribute('stop-opacity','0.0');
 		lG.appendChild(newStop);
 		var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 		newStopT.setAttribute('offset','100%');
 		newStopT.setAttribute('stop-color','white');
-		newStopT.setAttribute('stop-opacity','0.0');
+		newStopT.setAttribute('stop-opacity','0.7');
 		lG.appendChild(newStopT);
 		newDef.appendChild(lG);
 	
 		var strokeGrad = lG.cloneNode(true);
 		strokeGrad.id = "box-gradh-"+i+"-"+id;
-		strokeGrad.querySelector('stop').setAttribute('stop-opacity','0.2');
+		strokeGrad.querySelectorAll('stop')[1].setAttribute('stop-opacity','0.2');
 		newDef.appendChild(strokeGrad);
 	
 		heartFill.appendChild(newDef);
