@@ -781,6 +781,35 @@ function outline(pd,margin,direction){
 
 
 function fixProblem(points,problem,topPoints,direction) {
+	var mid = Math.floor(problem.length/2);
+	var key = Object.keys(points[problem[mid]])[0];
+	var midPoint = points[problem[mid]][key];
+	var midLeft = {'x':midPoint[midPoint.length-2],'y':midPoint[midPoint.length-1]};
+	key = Object.keys(points[problem[mid+1]])[0];
+	var midPoint2 = points[problem[mid+1]][key];
+	var midRight = {'x':midPoint2[midPoint2.length-2],'y':midPoint2[midPoint2.length-1]};
+	var d= Math.pow(midRight.x-midLeft.x,2)+Math.pow(midRight.y-midLeft.y,2);
+	if (d>Math.pow(49,2)){
+		var mid = Math.floor(problem.length/2);
+		var problemLeft = problem.slice(0,mid+1);
+		problemLeft.push(problem[mid+1]);
+		var problemRight = problem.slice(mid+1);
+		console.log(problemLeft,problemRight);
+		topPoints = fixProblem(points,problemLeft,topPoints,direction);
+		topPoints = fixProblem(points,problemRight,topPoints,direction);
+		return topPoints;
+	}
+	console.log(midLeft, midRight);
+	var c = circleFrom2Points(midLeft,midRight,25,direction);
+	console.log(c);
+	topPoints[problem[0]-1][1] = [c[0],c[1]];
+	for (var ip=1;ip<problem.length-1;ip++){
+		topPoints[problem[ip]-1][0] = [c[0],c[1]];
+		topPoints[problem[ip]-1][1] = [c[0],c[1]];
+	}
+	topPoints[problem[problem.length-1]-1][0] = [c[0],c[1]];
+	return topPoints;
+	/*
 	var key = Object.keys(points[problem[0]])[0];
 	var lastGood = points[problem[0]][key];
 	var bottomFirst = {'x':lastGood[lastGood.length-2],'y':lastGood[lastGood.length-1]};
@@ -807,6 +836,7 @@ function fixProblem(points,problem,topPoints,direction) {
 		topPoints[problem[ip]-1][1] = [c[0],c[1]];
 	}
 	topPoints[problem[problem.length-1]-1][0] = [c[0],c[1]];
+	*/
 	return topPoints;
 	for (var ip=0;ip<problem.length*0;ip++){
 		var i = problem[ip];
