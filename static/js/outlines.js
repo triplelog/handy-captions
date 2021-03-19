@@ -756,7 +756,7 @@ function outline(pd,margin,direction){
 				var diff = false;
 				if (linear == 2){
 					diff = true;
-					radialGradientDiff(i,id,box,lastPoint,myPoint,pdPoint[key],diff);
+					radialGradientDiff(i,id,box,lastPoint,myPoint,pdPoint[key],direction);
 				}
 				else {
 					var isLinear = radialGradient(i,id,box,lastPoint,myPoint,pdPoint[key],diff);
@@ -1146,7 +1146,7 @@ function linearGradient(i,id,box,type,direction){
 	heartFill.appendChild(newDef);
 }
 
-function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,diff){
+function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
@@ -1269,7 +1269,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,diff){
 		p4.y = box['topLeft'][1];
 		p5.x = box['topRight'][0];
 		p5.y = box['topRight'][1];
-		circle2 = circleFrom2Points(p4,p5,bigR);
+		circle2 = circleFrom2Points(p4,p5,bigR,direction);
 		console.log(circle2);
 	}
 	else {
@@ -1299,11 +1299,11 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,diff){
 		if (d > 1.5*smallR){
 			bigR = d/1.5+25;
 			smallR = d/1.5;
-			circle2 = circleFrom2Points(p1,p3,bigR);
+			circle2 = circleFrom2Points(p1,p3,bigR,direction);
 			console.log(circle2);
 		}
 		
-		circle = circleFrom2Points(p4,p5,smallR);
+		circle = circleFrom2Points(p4,p5,smallR,direction);
 		console.log(circle);
 	}
 	
