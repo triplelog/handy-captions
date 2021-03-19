@@ -1072,7 +1072,7 @@ function linearGradient(i,id,box,type,direction){
 		myColor = 'rgb(0,255,255)';
 		var p1 = {'x':box['bottomLeft'][0],'y':box['bottomLeft'][1]};
 		var p2 = {'x':box['bottomRight'][0],'y':box['bottomRight'][1]};
-		var c = circleFrom2Points(p1,p2,25*2,direction);
+		var c = circleFrom2Points(p1,p2,25*4,direction);
 		var d2 = Math.pow(box['topLeft'][0]-c[0],2)+Math.pow(box['topLeft'][1]-c[1],2);
 		var d = Math.pow(d2,0.5);
 		var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
@@ -1082,7 +1082,7 @@ function linearGradient(i,id,box,type,direction){
 		lG.setAttribute('cy',c[1]);
 		lG.setAttribute('fx',box['topLeft'][0]);
 		lG.setAttribute('fy',box['topLeft'][1]);
-		lG.setAttribute('r',25*2);
+		lG.setAttribute('r',25*4);
 		lG.setAttribute('fr',0.25);
 		lG.setAttribute('gradientUnits','userSpaceOnUse');
 		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
