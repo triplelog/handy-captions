@@ -1342,8 +1342,8 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		var ratioBottomY = dxyBottom/dyBottom;
 		var dyTop = Math.pow(box['topRight'][0]-box['topLeft'][0],2)+Math.pow(box['topRight'][1]-box['topLeft'][1],2);
 		
-		var dxxTop = Math.pow(ratioBottomX*dyTop,0.5);
-		var dxyTop = Math.pow(ratioBottomY*dyTop,0.5);
+		var dxxTop = Math.pow(ratioBottomX*dyTop,0.5)*2;
+		var dxyTop = Math.pow(ratioBottomY*dyTop,0.5)*2;
 		if (cBottom[0]>curveCenterX){
 			dxxTop *=-1;
 		}
