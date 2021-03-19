@@ -243,7 +243,8 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		
 		//outline(pd,25,'out');
 		//outline(pd,25,'in');
-		var width = 20;
+		var width = 3;
+		var intensity = 2;
 		for (var i=1;i<11;i++){
 			var filter = document.createElementNS("http://www.w3.org/2000/svg", 'filter');
 			filter.id = 'blur-'+i;
@@ -264,6 +265,13 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		rect.setAttribute('fill','rgba(0,0,0,0)');
 		g.appendChild(rect);
 		var widths = [5+5*width,5+3*width,5+2*width,5+width,5]
+		var alphas = [];
+		if (intensity > 1){
+			alphas = [0.1,0.3,0.7,0.9,1]
+		}
+		else {
+			alphas = [0.2,0.4,0.6,0.8,1]
+		}
 		for (var i=0;i<5;i++){
 			var gg = document.createElementNS("http://www.w3.org/2000/svg", 'g');
 			var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
@@ -276,7 +284,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
-			path.setAttribute('stroke','rgba(255,0,0,'+(0.2+i/5)+')');
+			path.setAttribute('stroke','rgba(255,0,0,'+alphas[i]+')');
 			path.setAttribute('stroke-width',''+widths[i]);
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
