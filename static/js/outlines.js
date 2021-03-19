@@ -1075,7 +1075,7 @@ function linearGradient(i,id,box,type,direction){
 		myColor = 'rgb(255,255,0)';
 	}
 	else if (type == 6){
-		myColor = 'rgb(0,255,255)';
+		myColor = 'rgb(255,255,255)';
 		var p1 = {'x':box['bottomLeft'][0],'y':box['bottomLeft'][1]};
 		var p2 = {'x':box['bottomRight'][0],'y':box['bottomRight'][1]};
 		var c = circleFrom2Points(p1,p2,25*4,direction);
@@ -1259,7 +1259,6 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		
 		var circle2XY = circleFrom2Points(p1,p3,2000,direction);
 		circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':2000};
-		console.log(circle2);
 		bigR = 2000;
 		smallR = 100;
 		
@@ -1271,7 +1270,6 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		p5.y = box['topRight'][1];
 		var circleXY = circleFrom2Points(p4,p5,100,direction);
 		circle = {'x':circleXY[0],'y':circleXY[1],'r':100};
-		console.log(circle);
 		reverseColor = true;
 		myColor = 'rgb(250,250,255)';
 	}
@@ -1289,7 +1287,6 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		
 		circle = circleFromThreePoints(p1,p2,p3);
 		
-		console.log(circle,underBottom,box);
 		bigR = circle.r+25;
 		smallR = circle.r;
 		
@@ -1310,8 +1307,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 			}
 			circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':bigR};
 		}
-		console.log(circle2);
-		myColor = 'rgb(255,50,50)';
+		myColor = 'rgb(255,250,250)';
 	}
 	else {
 		//big circle is based on bottom
@@ -1360,7 +1356,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 			}
 			count++;
 		}
-		console.log(circle);
+		console.log(direction,underBottom,underTop);
 		reverseColor = true;
 		myColor = 'rgb(250,255,250)';
 	}
