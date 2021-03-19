@@ -781,7 +781,17 @@ function outline(pd,margin,direction){
 
 
 function fixProblem(points,problem,topPoints,direction) {
-	var mid = Math.floor(problem.length/2);
+	var sum = [0,0];
+	var n = [0,0];
+	for (var i=0;i<problem.length;i++){
+		sum[0] += topPoints[problem[i]-1][0][0];
+		sum[0] += topPoints[problem[i]-1][1][0];
+		sum[1] += topPoints[problem[i]-1][0][1];
+		sum[1] += topPoints[problem[i]-1][1][1];
+		n[0]+=2;
+		n[1]+=2;
+	}
+	/*var mid = Math.floor(problem.length/2);
 	var key = Object.keys(points[problem[mid]])[0];
 	var midPoint = points[problem[mid]][key];
 	var midLeft = {'x':midPoint[midPoint.length-2],'y':midPoint[midPoint.length-1]};
@@ -800,7 +810,8 @@ function fixProblem(points,problem,topPoints,direction) {
 		return topPoints;
 	}
 	console.log(midLeft, midRight);
-	var c = circleFrom2Points(midLeft,midRight,25,direction);
+	var c = circleFrom2Points(midLeft,midRight,25,direction);*/
+	var c = [sum[0]/n[0],sum[1]/n[1]];
 	console.log(c);
 	topPoints[problem[0]-1][1] = [c[0],c[1]];
 	for (var ip=1;ip<problem.length-1;ip++){
