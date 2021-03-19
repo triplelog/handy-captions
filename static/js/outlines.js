@@ -1079,14 +1079,12 @@ function linearGradient(i,id,box,type){
 	lG.setAttribute('gradientUnits','userSpaceOnUse');
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStop.setAttribute('offset','0%');
-	if (type == 1){
-		newStop.setAttribute('stop-color','rgb(0,0,255)');
-	}
+	newStop.setAttribute('stop-color',myColor);
 	newStop.setAttribute('stop-opacity','0.7');
 	lG.appendChild(newStop);
 	var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStopT.setAttribute('offset','100%');
-	newStopT.setAttribute('stop-color','rgb(0,0,'+(50*type)+')');
+	newStopT.setAttribute('stop-color',myColor);
 	newStopT.setAttribute('stop-opacity',stopOpacity);
 	lG.appendChild(newStopT);
 	newDef.appendChild(lG);
