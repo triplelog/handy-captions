@@ -755,12 +755,12 @@ function outline(pd,margin,direction){
 			newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
 		
 			if (i%2 == 0){
-				newPath.setAttribute('stroke-width','0.5');
-				newPath.setAttribute('stroke',"url(#box-grad-"+i+"-"+id+")");
+				newPath.setAttribute('stroke-width','0.25');
+				newPath.setAttribute('stroke',"url(#box-gradh-"+i+"-"+id+")");
 			}
 			else {
-				newPath.setAttribute('stroke-width','0.5');
-				newPath.setAttribute('stroke',"url(#box-grad-"+i+"-"+id+")");
+				newPath.setAttribute('stroke-width','0.25');
+				newPath.setAttribute('stroke',"url(#box-gradh-"+i+"-"+id+")");
 			}
 		
 			heartFill.appendChild(newPath);
@@ -1066,6 +1066,13 @@ function linearGradient(i,id,box){
 	newStopT.setAttribute('stop-opacity',stopOpacity);
 	lG.appendChild(newStopT);
 	newDef.appendChild(lG);
+	
+	
+	var strokeGrad = lG.cloneNode(true);
+	strokeGrad.id = "box-gradh-"+i+"-"+id;
+	strokeGrad.querySelector('stop').setAttribute('stop-opacity','0.25');
+	newDef.appendChild(strokeGrad);
+	
 	heartFill.appendChild(newDef);
 }
 
