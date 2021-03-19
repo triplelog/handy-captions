@@ -1080,9 +1080,9 @@ function linearGradient(i,id,box,type,direction){
 		lG.id="box-grad-"+i+"-"+id;
 		lG.setAttribute('cx',c[0]);
 		lG.setAttribute('cy',c[1]);
-		lG.setAttribute('fx',c[0]);
-		lG.setAttribute('fy',c[1]);
-		lG.setAttribute('r',25*2);
+		lG.setAttribute('fx',box['topLeft'][0]);
+		lG.setAttribute('fy',box['topLeft'][1]);
+		lG.setAttribute('r',0.25);
 		lG.setAttribute('fr',d);
 		lG.setAttribute('gradientUnits','userSpaceOnUse');
 		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
