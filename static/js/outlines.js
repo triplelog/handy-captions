@@ -1301,8 +1301,17 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		p5.y = box['topRight'][1];
 		var circle2XY = circleFrom2Points(p4,p5,bigR,direction);
 		circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':bigR};
+		if (circleIntersect(circle,circle2,0) == 'linear'){
+			if (direction == 'in'){
+				circle2XY = circleFrom2Points(p4,p5,bigR,'out');
+			}
+			else {
+				circle2XY = circleFrom2Points(p4,p5,bigR,'in');
+			}
+			circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':bigR};
+		}
 		console.log(circle2);
-		myColor = 'rgb(255,250,250)';
+		myColor = 'rgb(255,50,50)';
 	}
 	else {
 		//big circle is based on bottom
@@ -1340,7 +1349,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		var circleXY = circleFrom2Points(p4,p5,smallR,direction);
 		circle = {'x':circleXY[0],'y':circleXY[1],'r':smallR};
 		var count = 0;
-		while (circleIntersect(circle,circle2,0) && count < 10){
+		while (circleIntersect(circle,circle2,0) && circleIntersect(circle,circle2,0) != 'linear' && count < 10){
 			smallR*= 0.9;
 			if (d > 1.5*smallR){
 				circle = {'x':(p4.x+p5.x)/2,'y':(p4.y+p5.y)/2,'r':smallR};
