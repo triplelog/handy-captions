@@ -1048,6 +1048,22 @@ function toQuadratics(points) {
 }
 
 function linearGradient(i,id,box,type){
+	var myColor = 'rgb(0,0,0)';
+	if (type == 1){
+		myColor = 'rgb(0,0,255)';
+	}
+	else if (type == 2){
+		myColor = 'rgb(0,255,0)';
+	}
+	else if (type == 3){
+		myColor = 'rgb(255,0,0)';
+	}
+	else if (type == 4){
+		myColor = 'rgb(255,0,255)';
+	}
+	else if (type == 5){
+		myColor = 'rgb(255,255,0)';
+	}
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
 	lG.id="box-grad-"+i+"-"+id;
@@ -1063,7 +1079,9 @@ function linearGradient(i,id,box,type){
 	lG.setAttribute('gradientUnits','userSpaceOnUse');
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStop.setAttribute('offset','0%');
-	newStop.setAttribute('stop-color','rgb(0,0,'+(50*type)+')');
+	if (type == 1){
+		newStop.setAttribute('stop-color','rgb(0,0,255)');
+	}
 	newStop.setAttribute('stop-opacity','0.7');
 	lG.appendChild(newStop);
 	var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
@@ -1243,12 +1261,12 @@ function radialGradient(i,id,box,lastPoint,myPoint,newPoint){
 	lG.setAttribute('gradientUnits','userSpaceOnUse');
 	var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStop.setAttribute('offset','0%');
-	newStop.setAttribute('stop-color','red');
+	newStop.setAttribute('stop-color','white');
 	newStop.setAttribute('stop-opacity','0.7');
 	lG.appendChild(newStop);
 	var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
 	newStopT.setAttribute('offset','100%');
-	newStopT.setAttribute('stop-color','red');
+	newStopT.setAttribute('stop-color','white');
 	newStopT.setAttribute('stop-opacity','0.0');
 	lG.appendChild(newStopT);
 	newDef.appendChild(lG);
