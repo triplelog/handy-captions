@@ -788,7 +788,7 @@ function fixProblem(points,problem,topPoints,direction) {
 	var lastBad = points[problem[problem.length-2]][key];
 	var bottomLast = {'x':lastBad[lastBad.length-2],'y':lastBad[lastBad.length-1]};
 	var d= Math.pow(bottomLast.x-bottomFirst.x,2)+Math.pow(bottomLast.y-bottomFirst.y,2);
-	if (d>Math.pow(40,2)){
+	if (d>Math.pow(49,2)){
 		var mid = Math.floor(problem.length/2);
 		var problemLeft = problem.slice(0,mid+1);
 		problemLeft.push(problem[mid+1]);
