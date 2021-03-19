@@ -1072,7 +1072,7 @@ function linearGradient(i,id,box,type){
 		myColor = 'rgb(0,255,255)';
 		var p1 = {'x':box['bottomLeft'][0],'y':box['bottomLeft'][1]};
 		var p2 = {'x':box['bottomRight'][0],'y':box['bottomRight'][1]};
-		var c = circelFrom2Points(p1,p2,25*2,direction);
+		var c = circleFrom2Points(p1,p2,25*2,direction);
 		var d2 = Math.pow(box['topLeft'][0]-c[0],2)+Math.pow(box['topLeft'][1]-c[1],2);
 		var d = Math.pow(d2,0.5);
 		var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
