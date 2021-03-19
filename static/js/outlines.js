@@ -718,7 +718,7 @@ function outline(pd,margin,direction){
 				}
 			}
 			else {
-				var bottomYatX = (curveCenterXTop-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
+				var bottomYatX = (curveCenterX-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
 				if (curveCenterY<bottomYatX){
 					underBottom = 1;
 				}
@@ -749,13 +749,15 @@ function outline(pd,margin,direction){
 			
 			
 	
-			if (linear){
+			if (linear ){
 				linearGradient(i,id,box,linear,direction);
 			}
 			else {
-				
-				
-				var isLinear = radialGradient(i,id,box,lastPoint,myPoint,pdPoint[key]);
+				var diff - false;
+				if (linear == 2){
+					diff = true;
+				}
+				var isLinear = radialGradient(i,id,box,lastPoint,myPoint,pdPoint[key],diff);
 				if (isLinear == 'linear'){
 					linearGradient(i,id,box,5,direction);
 				}
@@ -1058,40 +1060,7 @@ function linearGradient(i,id,box,type,direction){
 	}
 	else if (type == 2){
 		myColor = 'rgb(0,255,0)';
-		var p1 = {'x':box['bottomLeft'][0],'y':box['bottomLeft'][1]};
-		var p2 = {'x':box['bottomRight'][0],'y':box['bottomRight'][1]};
-		var c = circleFrom2Points(p1,p2,25*4,direction);
-		var d2 = Math.pow(box['topLeft'][0]-c[0],2)+Math.pow(box['topLeft'][1]-c[1],2);
-		var d = Math.pow(d2,0.5);
-		var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
-		var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
-		lG.id="box-grad-"+i+"-"+id;
-		lG.setAttribute('cx',c[0]);
-		lG.setAttribute('cy',c[1]);
-		lG.setAttribute('fx',(box['topLeft'][0]+box['topRight'][0])/2);
-		lG.setAttribute('fy',(box['topLeft'][1]+box['topRight'][1])/2);
-		lG.setAttribute('r',25*4);
-		lG.setAttribute('fr',0.25);
-		lG.setAttribute('gradientUnits','userSpaceOnUse');
-		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-		newStop.setAttribute('offset','0%');
-		newStop.setAttribute('stop-color','white');
-		newStop.setAttribute('stop-opacity','0.0');
-		lG.appendChild(newStop);
-		var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-		newStopT.setAttribute('offset','100%');
-		newStopT.setAttribute('stop-color','white');
-		newStopT.setAttribute('stop-opacity','0.7');
-		lG.appendChild(newStopT);
-		newDef.appendChild(lG);
-	
-		var strokeGrad = lG.cloneNode(true);
-		strokeGrad.id = "box-gradh-"+i+"-"+id;
-		strokeGrad.querySelectorAll('stop')[1].setAttribute('stop-opacity','0.2');
-		newDef.appendChild(strokeGrad);
-	
-		heartFill.appendChild(newDef);
-		return;
+		
 	}
 	else if (type == 3){
 		myColor = 'rgb(255,0,0)';
@@ -1174,7 +1143,28 @@ function linearGradient(i,id,box,type,direction){
 	heartFill.appendChild(newDef);
 }
 
-function radialGradient(i,id,box,lastPoint,myPoint,newPoint){
+function radialGradient(i,id,box,lastPoint,myPoint,newPoint,diff){
+	
+	/*var underBottom = -1;
+	if (box['bottomLeft'][0]>box['bottomRight'][0]){
+		var bottomYatX = (curveCenterX-box['bottomRight'][0])/(box['bottomLeft'][0]-box['bottomRight'][0]) * (box['bottomLeft'][1]-box['bottomRight'][1]) + box['bottomRight'][1];
+		if (curveCenterY<bottomYatX){
+			underBottom = 1;
+		}
+		else if (curveCenterY == bottomYatX){
+			underBottom = 0;
+		}
+	}
+	else {
+		var bottomYatX = (curveCenterXTop-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
+		if (curveCenterY<bottomYatX){
+			underBottom = 1;
+		}
+		else if (curveCenterY == bottomYatX){
+			underBottom = 0;
+		}
+	}*/
+			
 	var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 	var lG = document.createElementNS("http://www.w3.org/2000/svg", 'radialGradient');
 	lG.id="box-grad-"+i+"-"+id;
