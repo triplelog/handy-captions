@@ -1255,8 +1255,8 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		p3.x = box['bottomRight'][0];
 		p3.y = box['bottomRight'][1];
 		
-		circle = circleFrom2Points(p1,p3,2000,direction);
-		
+		var circleXY = circleFrom2Points(p1,p3,2000,direction);
+		circle = {'x':circleXY[0],'y':circleXY[1],'r':2000};
 		console.log(circle);
 		bigR = 2000;
 		smallR = 1000;
@@ -1267,7 +1267,8 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		p4.y = box['topLeft'][1];
 		p5.x = box['topRight'][0];
 		p5.y = box['topRight'][1];
-		circle2 = circleFrom2Points(p4,p5,1000,direction);
+		var circle2XY = circleFrom2Points(p4,p5,1000,direction);
+		circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':1000};
 		console.log(circle2);
 	}
 	else if (underBottom == underTop){
@@ -1294,7 +1295,8 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		p4.y = box['topLeft'][1];
 		p5.x = box['topRight'][0];
 		p5.y = box['topRight'][1];
-		circle2 = circleFrom2Points(p4,p5,bigR,direction);
+		var circle2XY = circleFrom2Points(p4,p5,bigR,direction);
+		circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':bigR};
 		console.log(circle2);
 	}
 	else {
@@ -1324,11 +1326,13 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		if (d > 1.5*smallR){
 			bigR = d/1.5+25;
 			smallR = d/1.5;
-			circle2 = circleFrom2Points(p1,p3,bigR,direction);
+			var circle2XY = circleFrom2Points(p1,p3,bigR,direction);
+			circle2 = {'x':circle2XY[0],'y':circle2XY[1],'r':bigR};
 			console.log(circle2);
 		}
 		
-		circle = circleFrom2Points(p4,p5,smallR,direction);
+		var circleXY = circleFrom2Points(p4,p5,smallR,direction);
+		circle = {'x':circleXY[0],'y':circleXY[1],'r':smallR};
 		console.log(circle);
 	}
 	
@@ -1345,7 +1349,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	circleVals.r = bigR;
 	circleVals.fr = smallR;
 
-	
+	console.log(circleVals);
 	lG.setAttribute('cx',circleVals.cx);
 	lG.setAttribute('cy',circleVals.cy);
 	lG.setAttribute('fx',circleVals.fx);
