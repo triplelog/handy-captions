@@ -1332,6 +1332,56 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		p4.y = box['topLeft'][1];
 		p5.x = box['topRight'][0];
 		p5.y = box['topRight'][1];
+		
+		var cBottom = [(box['bottomRight'][0]+box['bottomLeft'][0])/2,(box['bottomRight'][1]+box['bottomLeft'][1])/2];
+		var dxxBottom = Math.pow(cBottom[0]-curveCenterX,2);
+		var dxyBottom = Math.pow(cBottom[1]-curveCenterY,2);
+		var dyBottom = Math.pow(box['bottomRight'][0]-box['bottomLeft'][0],2)+Math.pow(box['bottomRight'][1]-box['bottomLeft'][1],2);
+		var ratioBottomX = dxxBottom/dyBottom;
+		var ratioBottomY = dxyBottom/dyBottom;
+		var dyTop = Math.pow(box['topRight'][0]-box['topLeft'][0],2)+Math.pow(box['topRight'][1]-box['topLeft'][1],2);
+		
+		var dxxTop = Math.pow(ratioBottomX*dyTop,0.5);
+		var dxyTop = Math.pow(ratioBottomY*dyTop,0.5);
+		if (cBottom[0]>curveCenterX){
+			dxxTop *=-1;
+		}
+		if (cBottom[1]>curveCenterY){
+			dxyTop *=-1;
+		}
+		var cTop = [(box['topRight'][0]+box['topLeft'][0])/2,(box['topRight'][1]+box['topLeft'][1])/2];
+		p6.x = cTop[0]+dxxTop;
+		p6.y = cTop[1]+dxyTop;
+		circle = circleFromThreePoints(p4,p5,p6);
+		
+		console.log(i,id,direction,underBottom,underTop);
+		reverseColor = true;
+		myColor = 'rgb(250,255,250)';
+	}
+	/*
+	else {
+		//big circle is based on bottom
+		var p1 = {};
+		var p2 = {};
+		var p3 = {};
+		p1.x = box['bottomLeft'][0];
+		p1.y = box['bottomLeft'][1];
+		p2.x = curveCenterX;
+		p2.y = curveCenterY;
+		p3.x = box['bottomRight'][0];
+		p3.y = box['bottomRight'][1];
+		
+		circle2 = circleFromThreePoints(p1,p2,p3);
+		console.log(circle2);
+		bigR = circle2.r;
+		smallR = circle2.r-25;
+		
+		var p4 = {};
+		var p5 = {};
+		p4.x = box['topLeft'][0];
+		p4.y = box['topLeft'][1];
+		p5.x = box['topRight'][0];
+		p5.y = box['topRight'][1];
 		var d = Math.pow(Math.pow(p4.x-p5.x,2)+Math.pow(p4.y-p5.y,2),0.5);
 		if (d > 1.5*smallR){
 			bigR = d/1.5+25;
@@ -1356,11 +1406,11 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 			}
 			count++;
 		}
-		console.log(direction,underBottom,underTop);
+		console.log(i,id,direction,underBottom,underTop);
 		reverseColor = true;
 		myColor = 'rgb(250,255,250)';
 	}
-	
+	*/
 	
 	
 	var bigR2 = Math.pow(box['topLeft'][0]-centerF[0],2)+Math.pow(box['topLeft'][1]-centerF[1],2);
@@ -1374,7 +1424,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	circleVals.r = bigR;
 	circleVals.fr = smallR;
 
-	console.log(circleVals);
+	//console.log(circleVals);
 	lG.setAttribute('cx',circleVals.cx);
 	lG.setAttribute('cy',circleVals.cy);
 	lG.setAttribute('fx',circleVals.fx);
