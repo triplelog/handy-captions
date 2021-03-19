@@ -243,12 +243,13 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		
 		//outline(pd,25,'out');
 		//outline(pd,25,'in');
+		var width = 3;
 		for (var i=1;i<11;i++){
 			var filter = document.createElementNS("http://www.w3.org/2000/svg", 'filter');
-			filter.id = 'blur-'+(i*2);
+			filter.id = 'blur-'+i;
 			var filterBlur = document.createElementNS("http://www.w3.org/2000/svg", 'feGaussianBlur');
 			filterBlur.setAttribute('in','SourceGraphic');
-			filterBlur.setAttribute('stdDeviation',''+(i*2));
+			filterBlur.setAttribute('stdDeviation',''+(i*width));
 			filterBlur.setAttribute('edgeMode','duplicate');
 			filter.appendChild(filterBlur);
 			svg.appendChild(filter);
@@ -262,7 +263,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		rect.setAttribute('height','100%');
 		rect.setAttribute('fill','rgba(0,0,0,0)');
 		g.appendChild(rect);
-		var widths = [34,21,13,8,5]
+		var widths = [25+3*width,15+2*width,10+width,5+width,5]
 		for (var i=0;i<5;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
@@ -272,11 +273,11 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
 			if (i > 1){
-				path.setAttribute('filter','url(#blur-'+(20-4*i)+')');
+				path.setAttribute('filter','url(#blur-'+(10-i*2)+')');
 			}
 			g.appendChild(path);
 		}
-		g.setAttribute('filter','url(#blur-10)');
+		g.setAttribute('filter','url(#blur-5)');
 		svg.appendChild(g);
 		
 		/*var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
