@@ -1328,6 +1328,7 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 		
 		var p4 = {};
 		var p5 = {};
+		var p6 = {};
 		p4.x = box['topLeft'][0];
 		p4.y = box['topLeft'][1];
 		p5.x = box['topRight'][0];
