@@ -1428,8 +1428,8 @@ function radialGradientDiff(i,id,box,lastPoint,myPoint,newPoint,direction){
 	circleVals.cy = circle2.y;
 	circleVals.fx = circle.x;
 	circleVals.fy = circle.y;
-	circleVals.r = bigR;
-	circleVals.fr = smallR;
+	circleVals.r = circle2.r;
+	circleVals.fr = circle.r;
 
 	//console.log(circleVals);
 	lG.setAttribute('cx',circleVals.cx);
