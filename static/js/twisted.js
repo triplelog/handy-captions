@@ -63,7 +63,7 @@ function toPath(points){
 	return pd;
 }
 
-function outline(pd,margin,direction){
+function outline(pd,margin,direction,under){
 	
 	var points = parsePath(pd);
 	var qPoints = toQuadratics(points);
@@ -481,6 +481,9 @@ function outline(pd,margin,direction){
 	}
 	
 	for (var opi=0;opi<2;opi++){
+		if (opi != under){
+			continue;
+		}
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		newPath.setAttribute('d',outPaths[opi]);
 		newPath.style.fill = "none";
