@@ -442,7 +442,7 @@ function outline(pd,margin,direction,under){
 			outPaths[0] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
 		}
 		//if (outPaths[opi].length == 0){
-		if (opi > 0){
+		if (under > 0 && opi > 0){
 			outPaths[opi] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
 		}
 		
@@ -462,7 +462,7 @@ function outline(pd,margin,direction,under){
 			
 				pdPoint[key].push([box['topRight'][0],box['topRight'][1]]);
 				outPaths[0] += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
-				if (opi > 0){
+				if (under > 0 && opi > 0){
 					outPaths[opi] += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
 				}
 			}
@@ -471,7 +471,7 @@ function outline(pd,margin,direction,under){
 				newD[1] = oldD[1]*ratio;
 				pdPoint[key].push([newD[0]+box['topLeft'][0],newD[1]+box['topLeft'][1]]);
 				outPaths[0] += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
-				if (opi > 0){
+				if (under > 0 && opi > 0){
 					outPaths[opi] += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
 				}
 			}
@@ -488,18 +488,9 @@ function outline(pd,margin,direction,under){
 		
 		
 	}
-	
-	for (var opi=0;opi<2;opi++){
-		
-		if (opi != under && direction == 'out'){
-			continue;
-		}
-		else if (opi > 0 && opi == under && direction == 'in'){
-			continue;
-		}
-		console.log(opi,under,direction);
+	if (under == 0){
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-		newPath.setAttribute('d',outPaths[opi]);
+		newPath.setAttribute('d',outPaths[0]);
 		newPath.style.fill = "none";
 
 		newPath.setAttribute('stroke-width','3');
@@ -511,6 +502,26 @@ function outline(pd,margin,direction,under){
 		}
 
 		heartFill.appendChild(newPath);
+	}
+	else {
+		for (var opi=1;opi<2;opi++){
+		
+			
+			console.log(opi,under,direction);
+			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+			newPath.setAttribute('d',outPaths[opi]);
+			newPath.style.fill = "none";
+
+			newPath.setAttribute('stroke-width','3');
+			if (direction == 'in'){
+				newPath.setAttribute('stroke',"red");
+			}
+			else {
+				newPath.setAttribute('stroke',"blue");
+			}
+
+			heartFill.appendChild(newPath);
+		}
 	}
 	var newPd = toPath(pdPoints);
 	
