@@ -240,9 +240,11 @@ function outline(pd,margin,direction){
 		
 	}
 	
+	var pathLength = 0;
 	for (var ji=0;ji<5;ji++){
 		var problems = [];
 		var problem  =[];
+		pathLength = 0;
 		for (var i=2;i<points.length-3;i++){
 			var aPoint = {};
 			var cPoint = {};
@@ -286,7 +288,10 @@ function outline(pd,margin,direction){
 			var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'bottomRight':[thisPoint[0],thisPoint[1]]};
 			box['topLeft']=[topPoints[i-1][0][0],topPoints[i-1][0][1]];
 			box['topRight']=[topPoints[i-1][1][0],topPoints[i-1][1][1]];
-		
+			
+			var pathD = Math.pow((box['bottomLeft'][0]+box['topLeft'][0])/2-(box['bottomRight'][0]+box['topRight'][0])/2,2);
+			pathD += Math.pow((box['bottomLeft'][1]+box['topLeft'][1])/2-(box['bottomRight'][1]+box['topRight'][1])/2,2);
+			pathLength += Math.pow(pathD,0.5);
 			var leftLine = {'m':0,'point':[0,0]};
 			var rightLine = {'m':0,'point':[0,0]};
 	
@@ -502,6 +507,7 @@ function outline(pd,margin,direction){
 			topPoints[i][0] = [box['topLeft'][0],box['topLeft'][1]];
 		}
 	}*/
+	var runningLength = 0;
 	for (var i=1;i<points.length-2;i++){
 		var aPoint = {};
 		var cPoint = {};
@@ -749,8 +755,16 @@ function outline(pd,margin,direction){
 			
 			
 	
-			var startColor = 'rgb(255,0,0)';
-			var endColor = 'rgb(0,0,255)';
+			
+			var pathD = Math.pow((box['bottomLeft'][0]+box['topLeft'][0])/2-(box['bottomRight'][0]+box['topRight'][0])/2,2);
+			pathD += Math.pow((box['bottomLeft'][1]+box['topLeft'][1])/2-(box['bottomRight'][1]+box['topRight'][1])/2,2);
+			var startR = 255 - 255*(runningLength/pathLength);
+			var startB = 0 + 255*(runningLength/pathLength);
+			runningLength += pathD;
+			var endR = 255 - 255*(runningLength/pathLength);
+			var endB = 0 + 255*(runningLength/pathLength);
+			var startColor = 'rgb('+startR+',0,'+startB+')';
+			var endColor = 'rgb('+endR+',0,'+endB+')';
 			linearGradient(i,id,box,direction,startColor,endColor);
 
 			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
