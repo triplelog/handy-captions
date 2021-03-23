@@ -150,7 +150,7 @@ function outline(pd,margin,direction,under){
 		
 		d2 = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,1);
 		if (d2 == 0 && i > 0 && i+1 <points.length){
-			console.log(i,thisPoint,nextPoint,points.length);
+			console.log(i,thisPoint,nextPoint,points.length,points[i-1],points[i],points[i+1],next,myPoint);
 			points.splice(i,1);
 			i--;
 			continue;
