@@ -755,9 +755,13 @@ function outline(pd,margin,direction){
 	newPath.setAttribute('d',outPaths[0]);
 	newPath.style.fill = "none";
 
-	newPath.setAttribute('stroke-width','2');
-	newPath.setAttribute('stroke',"white");
-
+	newPath.setAttribute('stroke-width','4');
+	if (direction == 'in'){
+		newPath.setAttribute('stroke',"white");
+	}
+	else {
+		newPath.setAttribute('stroke',"black");
+	}
 
 	heartFill.appendChild(newPath);
 	
