@@ -772,7 +772,7 @@ function outline(pd,margin,direction){
 			newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
 
 			newPath.setAttribute('stroke-width','0.25');
-			newPath.setAttribute('stroke',"rgb(255,0,255)");
+			newPath.setAttribute('stroke',startColor);
 
 		
 			heartFill.appendChild(newPath);

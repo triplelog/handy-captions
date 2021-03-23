@@ -312,8 +312,8 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	else if (textStyle == 'ftc'){
 		
-		outline(pd,25,'out');
-		outline(pd,25,'in');
+		outline(pd,10,'out');
+		outline(pd,10,'in');
 		
 	}
 	
@@ -324,7 +324,10 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
-	if (textBG == 'gradient'){
+	if (textStyle == 'ftc'){
+		path2.setAttribute('stroke','none');
+	}
+	else if (textBG == 'gradient'){
 		path2.setAttribute('stroke','url(#img1)');
 	}
 	else {
