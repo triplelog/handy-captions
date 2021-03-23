@@ -755,7 +755,7 @@ function outline(pd,margin,direction){
 	newPath.setAttribute('d',outPaths[0]);
 	newPath.style.fill = "none";
 
-	newPath.setAttribute('stroke-width','3');
+	newPath.setAttribute('stroke-width','2');
 	if (direction == 'in'){
 		newPath.setAttribute('stroke',"red");
 	}

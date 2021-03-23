@@ -315,14 +315,14 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
 			path.setAttribute('d',pd);
-			path.setAttribute('stroke','rgba(0,0,0,1)');
-			path.setAttribute('stroke-width','9');
+			path.setAttribute('stroke','white');
+			path.setAttribute('stroke-width','6');
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id+"-"+i;
 			svg.appendChild(path);
 		}
-		outline(pd,1.5,'out');
-		outline(pd,1.5,'in');
+		outline(pd,2,'out');
+		outline(pd,2,'in');
 		
 	}
 	
