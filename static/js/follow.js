@@ -765,6 +765,10 @@ function outline(pd,margin,direction){
 			var endB = 0 + 255*(runningLength/pathLength);
 			var startColor = 'rgb('+startR+',0,'+startB+')';
 			var endColor = 'rgb('+endR+',0,'+endB+')';
+			if (direction == 'in'){
+				endColor = 'rgb('+startR+',0,'+startB+')';
+				startColor = 'rgb('+endR+',0,'+endB+')';
+			}
 			linearGradient(i,id,box,direction,startColor,endColor);
 
 			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
