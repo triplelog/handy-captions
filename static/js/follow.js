@@ -753,7 +753,7 @@ function outline(pd,margin,direction){
 	
 	var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	newPath.setAttribute('d',outPaths[0]);
-	newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
+	newPath.style.fill = "none";
 
 	newPath.setAttribute('stroke-width','2');
 	newPath.setAttribute('stroke',"white");
