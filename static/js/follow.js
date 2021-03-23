@@ -741,7 +741,7 @@ function outline(pd,margin,direction){
 			newPath.setAttribute('stroke',startColor);
 
 		
-			heartFill.appendChild(newPath);
+			//heartFill.appendChild(newPath);
 		}
 		
 		
