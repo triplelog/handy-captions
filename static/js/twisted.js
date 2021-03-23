@@ -477,7 +477,7 @@ function outline(pd,margin,direction,under){
 		var zeroLast = [0,0];
 		var zeroThis = [thisPoint[0]-lastPoint[0],thisPoint[1]-lastPoint[1]]; 
 		var zeroLastNew = [0,0];
-		var zeroThisNew = [topPoints[i-1][1][0]-topPoints[i-1][0][0],topPoints[i-1][1][1]-topPoints[i-1][0][1]]; 
+		var zeroThisNew = [topPoints[i][1][0]-topPoints[i][0][0],topPoints[i][1][1]-topPoints[i][0][1]]; 
 		
 		var oldTD = Math.pow(zeroThis[0],2)+Math.pow(zeroThis[1],2);
 		var newTD = Math.pow(zeroThisNew[0],2)+Math.pow(zeroThisNew[1],2);
