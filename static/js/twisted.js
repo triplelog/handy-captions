@@ -600,7 +600,7 @@ function fixProblem(points,problem,topPoints,direction) {
 	}
 
 	var c = [sum[0]/n[0],sum[1]/n[1]];
-	topPoints[problem[0]-1][1] = [c[0],c[1]];
+	topPoints[problem[0]][1] = [c[0],c[1]];
 	for (var ip=1;ip<problem.length-1;ip++){
 		topPoints[problem[ip]][0] = [c[0],c[1]];
 		topPoints[problem[ip]][1] = [c[0],c[1]];
