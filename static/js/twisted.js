@@ -367,7 +367,6 @@ function outline(pd,margin,direction,under){
 		}
 		for (var i=0;i<problems.length;i++){
 			topPoints = fixProblem(points,problems[i],topPoints,direction);
-			console.log(problems[i]);
 		}
 		
 	}
@@ -481,6 +480,7 @@ function outline(pd,margin,direction,under){
 	}
 	
 	for (var opi=0;opi<2;opi++){
+		console.log(opi,under);
 		if (opi != under){
 			continue;
 		}
