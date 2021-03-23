@@ -202,6 +202,9 @@ function outline(pd,margin,direction,under){
 		
 		avgPoints.push(aPoint);
 	}
+	avgPoints[0][0] = avgPoints[1][0];
+	avgPoints[0][1] = avgPoints[1][1];
+	
 	console.log(avgPoints);
 	var topPoints = [];
 	for (var i=0;i<points.length;i++){
