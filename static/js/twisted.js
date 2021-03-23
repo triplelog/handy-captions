@@ -171,12 +171,18 @@ function outline(pd,margin,direction,under){
 				ax *= -1;
 				underTwist = true;
 			}
+			else {
+				underTwist = false;
+			}
 		}
 		if (direction == 'out'){
 			if (i%2 ==1 ){
 				ay *= -1;
 				ax *= -1;
 				underTwist = true;
+			}
+			else {
+				underTwist = false;
 			}
 		}
 		if (ay == 0 && ax == 0){
@@ -444,7 +450,7 @@ function outline(pd,margin,direction,under){
 		}
 		outPaths[0] += " "+key;
 		if (under > 0 && opi > 0){
-			outPaths[opi] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
+			outPaths[opi] += ' M ' + box['topLeft'][0] + " "+box['topLeft'][1];
 			outPaths[opi] += " "+key;
 		}
 		
