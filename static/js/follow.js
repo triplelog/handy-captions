@@ -760,7 +760,7 @@ function outline(pd,margin,direction){
 			pathD += Math.pow((box['bottomLeft'][1]+box['topLeft'][1])/2-(box['bottomRight'][1]+box['topRight'][1])/2,2);
 			var startR = 255 - 255*(runningLength/pathLength);
 			var startB = 0 + 255*(runningLength/pathLength);
-			runningLength += pathD;
+			runningLength += Math.pow(pathD,0.5);
 			var endR = 255 - 255*(runningLength/pathLength);
 			var endB = 0 + 255*(runningLength/pathLength);
 			var startColor = 'rgb('+startR+',0,'+startB+')';
