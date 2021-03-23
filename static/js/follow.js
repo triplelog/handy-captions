@@ -334,7 +334,6 @@ function outline(pd,margin,direction){
 				actualTriangle = true;
 			}
 			if (isTriangle || actualTriangle){
-				console.log(i,id,box,intersect[0]);
 				if (problem.length == 0 && isTriangle){ //Start problem
 					problem.push(i-1);
 					problem.push(i);
@@ -508,6 +507,7 @@ function outline(pd,margin,direction){
 		}
 	}*/
 	var runningLength = 0;
+	var outPaths = [''];
 	for (var i=1;i<points.length-2;i++){
 		var aPoint = {};
 		var cPoint = {};
@@ -570,10 +570,15 @@ function outline(pd,margin,direction){
 		
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(box['topLeft'][0]) + " "+(box['topLeft'][1]);
+		if (outPaths[0].length == 0){
+			outPaths[0] += 'M ' + box['topLeft'][0]) + " "+(box['topLeft'][1];
+		}
+		
 		
 		var isTriangle = false;
 		if (box['topLeft'][0] != box['topRight'][0] || box['topLeft'][1] != box['topRight'][1] ){
 			fillPath += " "+key;
+			outPaths[0] += " "+key;
 			for (var ii=0;ii<myPoint.length/2;ii++){
 			
 			
@@ -586,12 +591,14 @@ function outline(pd,margin,direction){
 				
 					pdPoint[key].push([box['topRight'][0],box['topRight'][1]]);
 					fillPath += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
+					outPaths[0] += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
 				}
 				else {
 					newD[0] = oldD[0]*ratio;
 					newD[1] = oldD[1]*ratio;
 					pdPoint[key].push([newD[0]+box['topLeft'][0],newD[1]+box['topLeft'][1]]);
 					fillPath += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
+					outPaths[0] += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
 				}
 			
 			
@@ -616,66 +623,7 @@ function outline(pd,margin,direction){
 			linear = 6;
 		}
 		
-		if (myPoint.length== 6 && !isTriangle){
-			var t = 0.5;
-			var curveCenterXTop = Math.pow(1-t,3)*(topPoints[i-1][1][0]);
-			curveCenterXTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][0];
-			curveCenterXTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][0];
-			curveCenterXTop += Math.pow(t,3)*pdPoint[key][2][0];
-			var curveCenterYTop = Math.pow(1-t,3)*(topPoints[i-1][0][1]);
-			curveCenterYTop += 3*Math.pow(1-t,2)*t*pdPoint[key][0][1];
-			curveCenterYTop += 3*Math.pow(t,2)*(1-t)*pdPoint[key][1][1];
-			curveCenterYTop += Math.pow(t,3)*pdPoint[key][2][1];
-			var curveCenterX = Math.pow(1-t,3)*lastPoint[0];
-			curveCenterX += 3*Math.pow(1-t,2)*t*myPoint[0];
-			curveCenterX += 3*Math.pow(t,2)*(1-t)*myPoint[2];
-			curveCenterX += Math.pow(t,3)*myPoint[4];
-			var curveCenterY = Math.pow(1-t,3)*lastPoint[1];
-			curveCenterY += 3*Math.pow(1-t,2)*t*myPoint[1];
-			curveCenterY += 3*Math.pow(t,2)*(1-t)*myPoint[3];
-			curveCenterY += Math.pow(t,3)*myPoint[5];
-			//var linearH = Math.pow((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop,2)+Math.pow((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop,2);
-			//var linearV = Math.pow((box['topLeft'][0]+box['topRight'][0])/2-box['topLeft'][0],2)+Math.pow((box['topLeft'][1]+box['topRight'][1])/2-box['topLeft'][1],2);
-			//var topSlope = ((box['topLeft'][1]+box['topRight'][1])/2-curveCenterYTop)/((box['topLeft'][0]+box['topRight'][0])/2-curveCenterXTop);
-			//var bottomSlope = ((box['bottomLeft'][1]+box['bottomRight'][1])/2-curveCenterY)/((box['bottomLeft'][0]+box['bottomRight'][0])/2-curveCenterX);
-			var underTop = false;
-			if (box['topLeft'][0]>box['topRight'][0]){
-				var topYatX = (curveCenterXTop-box['topRight'][0])/(box['topLeft'][0]-box['topRight'][0]) * (box['topLeft'][1]-box['topRight'][1]) + box['topRight'][1];
-				if (curveCenterYTop<topYatX){
-					underTop = true;
-				}
-			}
-			else {
-				var topYatX = (curveCenterXTop-box['topLeft'][0])/(box['topRight'][0]-box['topLeft'][0]) * (box['topRight'][1]-box['topLeft'][1]) + box['topLeft'][1];
-				if (curveCenterYTop<topYatX){
-					underTop = true;
-				}
-			}
-			
-			var underBottom = false;
-			if (box['bottomLeft'][0]>box['bottomRight'][0]){
-				var bottomYatX = (curveCenterX-box['bottomRight'][0])/(box['bottomLeft'][0]-box['bottomRight'][0]) * (box['bottomLeft'][1]-box['bottomRight'][1]) + box['bottomRight'][1];
-				if (curveCenterY<bottomYatX){
-					underBottom = true;
-				}
-			}
-			else {
-				var bottomYatX = (curveCenterXTop-box['bottomLeft'][0])/(box['bottomRight'][0]-box['bottomLeft'][0]) * (box['bottomRight'][1]-box['bottomLeft'][1]) + box['bottomLeft'][1];
-				if (curveCenterY<bottomYatX){
-					underBottom = true;
-				}
-			}
-			
-			
-			if (underTop != underBottom){
-				linear = true;
-			}
-			else {
-				linear = false;
-			}
-			console.log(i,underTop,underBottom);
-		}
-		else if (myPoint.length== 4 && !isTriangle){
+		if (myPoint.length== 4 && !isTriangle){
 			var t = 0.5;
 			var curveCenterXTop = Math.pow(1-t,2)*(box['topLeft'][0]);
 			curveCenterXTop += 2*Math.pow(1-t,1)*t*pdPoint[key][0][0];
@@ -802,6 +750,16 @@ function outline(pd,margin,direction){
 		
 		
 	}
+	
+	var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	newPath.setAttribute('d',outPaths[0]);
+	newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
+
+	newPath.setAttribute('stroke-width','2');
+	newPath.setAttribute('stroke',"white");
+
+
+	heartFill.appendChild(newPath);
 	
 	var newPd = toPath(pdPoints);
 	
