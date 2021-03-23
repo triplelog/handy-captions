@@ -73,29 +73,34 @@ function outline(pd,margin,direction,under){
 
 	var avgPoints = [];
 	var pdPoints = [];
-	var ll1 = {'M':[323.70555,578.32901]};
-	var ll2 = {'L':[297.29747,550.86823]};
 	
-	ll1['M']=points[points.length-1][Object.keys(points[points.length-1])[0]];
-
-	var ff2 = {'L':[220.86277,483.99412]};
-	var ff3 = {'L':[91.719238,380.29088]};
-	//ff['M']=points[0][Object.keys(points[0])[0]];
-	points.splice(0,0,ll2);
-	points.splice(0,0,ll1);
-	points.push(ff2);
-	points.push(ff3);
+	
+	
+	
 	
 	var underTwist = false;
-	for (var i=1;i<points.length-1;i++){
+	for (var i=0;i<points.length;i++){
 		var aPoint = {};
 
 		var key = Object.keys(points[i])[0];
 		
 		var myPoint = points[i][key];
-		var last = points[i-1];
+		var last;
+		if (i>0){
+			last = points[i-1];
+		}
+		else {
+			last = points[0];
+			
+		}
 		var lastKey = Object.keys(last)[0];
-		var next = points[i+1];
+		var next;
+		if (i+i<points.length){
+			next = points[i+1];
+		}
+		else {
+			next = points[i];
+		}
 		var nextKey = Object.keys(next)[0];
 		if (key == 'H' ){
 			
@@ -197,18 +202,33 @@ function outline(pd,margin,direction,under){
 		
 		avgPoints.push(aPoint);
 	}
-	avgPoints.splice(0,0);
-	points.splice(0,1);
+	
 	var topPoints = [];
-	for (var i=1;i<points.length-2;i++){
+	for (var i=0;i<points.length;i++){
 		var aPoint = {};
 		var cPoint = {};
 		var key = Object.keys(points[i])[0];
 		
 		var myPoint = points[i][key];
-		var last = points[i-1];
+		var last;
+		var lastShift
+		if (i>0){
+			last = points[i-1];
+			lastShift = [avgPoints[i-1][0],avgPoints[i-1][1]];
+		}
+		else {
+			last = points[0];
+			lastShift = [avgPoints[i][0],avgPoints[i][1]];
+			
+		}
 		var lastKey = Object.keys(last)[0];
-		var next = points[i+1];
+		var next;
+		if (i+i<points.length){
+			next = points[i+1];
+		}
+		else {
+			next = points[i];
+		}
 		var nextKey = Object.keys(next)[0];
 		if (key == 'H' ){
 			
@@ -234,7 +254,6 @@ function outline(pd,margin,direction,under){
 			
 			continue;
 		}
-		var lastShift = [avgPoints[i-1][0],avgPoints[i-1][1]];
 		var thisShift = [avgPoints[i][0],avgPoints[i][1]];
 		
 		//lastShift = [0,0];
@@ -261,15 +280,28 @@ function outline(pd,margin,direction,under){
 		var problems = [];
 		var problem  =[];
 		pathLength = 0;
-		for (var i=2;i<points.length-3;i++){
+		for (var i=1;i<points.length-1;i++){
 			var aPoint = {};
 			var cPoint = {};
 			var key = Object.keys(points[i])[0];
 		
 			var myPoint = points[i][key];
-			var last = points[i-1];
+			var last;
+			if (i>0){
+				last = points[i-1];
+			}
+			else {
+				last = points[0];
+			
+			}
 			var lastKey = Object.keys(last)[0];
-			var next = points[i+1];
+			var next;
+			if (i+i<points.length){
+				next = points[i+1];
+			}
+			else {
+				next = points[i];
+			}
 			var nextKey = Object.keys(next)[0];
 			if (key == 'H' ){
 			
@@ -302,8 +334,8 @@ function outline(pd,margin,direction,under){
 		
 		
 			var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'bottomRight':[thisPoint[0],thisPoint[1]]};
-			box['topLeft']=[topPoints[i-1][0][0],topPoints[i-1][0][1]];
-			box['topRight']=[topPoints[i-1][1][0],topPoints[i-1][1][1]];
+			box['topLeft']=[topPoints[i][0][0],topPoints[i][0][1]];
+			box['topRight']=[topPoints[i][1][0],topPoints[i][1][1]];
 			
 			var pathD = Math.pow((box['bottomLeft'][0]+box['topLeft'][0])/2-(box['bottomRight'][0]+box['topRight'][0])/2,2);
 			pathD += Math.pow((box['bottomLeft'][1]+box['topLeft'][1])/2-(box['bottomRight'][1]+box['topRight'][1])/2,2);
@@ -379,7 +411,7 @@ function outline(pd,margin,direction,under){
 	
 	var runningLength = 0;
 	var outPaths = ['',''];
-	for (var i=1;i<points.length-2;i++){
+	for (var i=0;i<points.length;i++){
 		var aPoint = {};
 		var cPoint = {};
 		var key = Object.keys(points[i])[0];
@@ -388,9 +420,21 @@ function outline(pd,margin,direction,under){
 			opi = 1;
 		}
 		var myPoint = points[i][key];
-		var last = points[i-1];
+		var last;
+		if (i>0){
+			last = points[i-1];
+		}
+		else {
+			last = points[0];
+		}
 		var lastKey = Object.keys(last)[0];
-		var next = points[i+1];
+		var next;
+		if (i+i<points.length){
+			next = points[i+1];
+		}
+		else {
+			next = points[i];
+		}
 		var nextKey = Object.keys(next)[0];
 		if (key == 'H' ){
 			
@@ -426,8 +470,8 @@ function outline(pd,margin,direction,under){
 
 		
 		var box = {'bottomLeft':[lastPoint[0],lastPoint[1]],'bottomRight':[thisPoint[0],thisPoint[1]]};
-		box['topLeft']=[topPoints[i-1][0][0],topPoints[i-1][0][1]];
-		box['topRight']=[topPoints[i-1][1][0],topPoints[i-1][1][1]];
+		box['topLeft']=[topPoints[i][0][0],topPoints[i][0][1]];
+		box['topRight']=[topPoints[i][1][0],topPoints[i][1][1]];
 		
 		
 		var zeroLast = [0,0];
