@@ -117,14 +117,14 @@
 		<option value="isometric">Isometric</option>
 		<option value="3d">3D</option>
 		<option value="emboss">Emboss</option>
-		<option value="pixel">Cross-stitch</option>
+		<option value="ftc">FTC</option>
 	</select>
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
 </div>
 
-<script src="js/outlines.js">
+<script src="js/follow.js">
 </script>
 <script>
 var canvas = document.querySelector('canvas');
@@ -310,7 +310,12 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		path.id = "bg-"+id+"-"+i;
 		svg.appendChild(path);*/
 	}
-
+	else if (textStyle == 'ftc'){
+		
+		outline(pd,25,'out');
+		outline(pd,25,'in');
+		
+	}
 	
 	
 	var svg2 = document.querySelector('.o2  .fgSVG');
