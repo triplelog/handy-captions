@@ -274,7 +274,8 @@ function outline(pd,margin,direction,under){
 		topPoints.push([[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]],[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]]]);
 		
 	}
-	
+	console.log(points);
+	console.log(topPoints);
 	var pathLength = 0;
 	for (var ji=0;ji<5;ji++){
 		var problems = [];
@@ -408,7 +409,8 @@ function outline(pd,margin,direction,under){
 		}
 		
 	}
-	
+	console.log(points);
+	console.log(topPoints);
 	var runningLength = 0;
 	var outPaths = ['',''];
 	for (var i=0;i<points.length;i++){
