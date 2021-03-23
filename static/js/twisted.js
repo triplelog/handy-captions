@@ -94,14 +94,12 @@ function outline(pd,margin,direction,under){
 		}
 		var lastKey = Object.keys(last)[0];
 		var next;
-		if (i+i<points.length){
+		if (i+1<points.length){
 			next = points[i+1];
 		}
 		else {
-			console.log(i,i+1,points.length);
 			next = points[i];
 		}
-		console.log(next);
 		var nextKey = Object.keys(next)[0];
 		if (key == 'H' ){
 			
@@ -133,7 +131,6 @@ function outline(pd,margin,direction,under){
 		
 		var d1 = Math.pow( Math.pow((thisPoint[1]-lastPoint[1]),2) + Math.pow((thisPoint[0]-lastPoint[0]),2) ,1);
 		if (d1 == 0 && i > 0 && i+1 <points.length){
-			console.log(i,thisPoint);
 			points.splice(i,1);
 			i--;
 			continue;
@@ -152,7 +149,6 @@ function outline(pd,margin,direction,under){
 		
 		d2 = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,1);
 		if (d2 == 0 && i > 0 && i+1 <points.length){
-			console.log(i,thisPoint,nextPoint,points.length,points[i-1],points[i],points[i+1],next,myPoint);
 			points.splice(i,1);
 			i--;
 			continue;
@@ -227,7 +223,7 @@ function outline(pd,margin,direction,under){
 		}
 		var lastKey = Object.keys(last)[0];
 		var next;
-		if (i+i<points.length){
+		if (i+1<points.length){
 			next = points[i+1];
 		}
 		else {
@@ -301,7 +297,7 @@ function outline(pd,margin,direction,under){
 			}
 			var lastKey = Object.keys(last)[0];
 			var next;
-			if (i+i<points.length){
+			if (i+1<points.length){
 				next = points[i+1];
 			}
 			else {
@@ -435,7 +431,7 @@ function outline(pd,margin,direction,under){
 		}
 		var lastKey = Object.keys(last)[0];
 		var next;
-		if (i+i<points.length){
+		if (i+1<points.length){
 			next = points[i+1];
 		}
 		else {
