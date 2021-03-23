@@ -438,9 +438,13 @@ function outline(pd,margin,direction,under){
 		
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(box['topLeft'][0]) + " "+(box['topLeft'][1]);
+		if (outPaths[0].length == 0){
+			outPaths[0] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
+		}
 		//if (outPaths[opi].length == 0){
-		outPaths[opi] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
-		//}
+		if (opi > 0){
+			outPaths[opi] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
+		}
 		
 		
 		
@@ -457,13 +461,19 @@ function outline(pd,margin,direction,under){
 			if (ii >= myPoint.length/2-1){
 			
 				pdPoint[key].push([box['topRight'][0],box['topRight'][1]]);
-				outPaths[opi] += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
+				outPaths[0] += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
+				if (opi > 0){
+					outPaths[opi] += " "+(box['topRight'][0])+" "+(box['topRight'][1]);
+				}
 			}
 			else {
 				newD[0] = oldD[0]*ratio;
 				newD[1] = oldD[1]*ratio;
 				pdPoint[key].push([newD[0]+box['topLeft'][0],newD[1]+box['topLeft'][1]]);
-				outPaths[opi] += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
+				outPaths[0] += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
+				if (opi > 0){
+					outPaths[opi] += " "+(newD[0]+box['topLeft'][0])+" "+(newD[1]+box['topLeft'][1]);
+				}
 			}
 		
 		
@@ -481,10 +491,10 @@ function outline(pd,margin,direction,under){
 	
 	for (var opi=0;opi<2;opi++){
 		
-		if (opi > 0 && opi != under && direction == 'out'){
+		if (opi != under && direction == 'out'){
 			continue;
 		}
-		else if (opi == under && direction == 'in'){
+		else if (opi > 0 && opi == under && direction == 'in'){
 			continue;
 		}
 		console.log(opi,under,direction);
