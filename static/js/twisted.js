@@ -202,7 +202,7 @@ function outline(pd,margin,direction,under){
 		
 		avgPoints.push(aPoint);
 	}
-	
+	console.log(avgPoints);
 	var topPoints = [];
 	for (var i=0;i<points.length;i++){
 		var aPoint = {};
