@@ -201,8 +201,9 @@ function outline(pd,margin,direction,under){
 	}
 	avgPoints[0][0] = avgPoints[1][0];
 	avgPoints[0][1] = avgPoints[1][1];
-	
-	console.log(avgPoints);
+	avgPoints[avgPoints.length-1][0] = avgPoints[avgPoints.length-2][0];
+	avgPoints[avgPoints.length-1][1] = avgPoints[avgPoints.length-2][1];
+
 	var topPoints = [];
 	for (var i=0;i<points.length;i++){
 		var aPoint = {};
@@ -274,8 +275,7 @@ function outline(pd,margin,direction,under){
 		topPoints.push([[lastPoint[0]+lastShift[0],lastPoint[1]+lastShift[1]],[thisPoint[0]+thisShift[0],thisPoint[1]+thisShift[1]]]);
 		
 	}
-	console.log(points);
-	console.log(topPoints);
+
 	var pathLength = 0;
 	for (var ji=0;ji<5;ji++){
 		var problems = [];
