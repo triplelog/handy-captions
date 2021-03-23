@@ -552,7 +552,7 @@ function outline(pd,margin,direction,under){
 			newPath.setAttribute('stroke',"red");
 		}
 		else {
-			newPath.setAttribute('stroke',"blue");
+			newPath.setAttribute('stroke',"red");
 		}
 
 		heartFill.appendChild(newPath);
@@ -571,7 +571,7 @@ function outline(pd,margin,direction,under){
 				newPath.setAttribute('stroke',"red");
 			}
 			else {
-				newPath.setAttribute('stroke',"blue");
+				newPath.setAttribute('stroke',"red");
 			}
 
 			heartFill.appendChild(newPath);
