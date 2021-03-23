@@ -440,16 +440,18 @@ function outline(pd,margin,direction,under){
 		fillPath += " L "+(box['topLeft'][0]) + " "+(box['topLeft'][1]);
 		if (outPaths[0].length == 0){
 			outPaths[0] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
+			
 		}
-		//if (outPaths[opi].length == 0){
+		outPaths[0] += " "+key;
 		if (under > 0 && opi > 0){
 			outPaths[opi] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
+			outPaths[opi] += " "+key;
 		}
 		
 		
 		
 		
-		outPaths[opi] += " "+key;
+		
 		for (var ii=0;ii<myPoint.length/2;ii++){
 		
 		
