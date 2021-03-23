@@ -717,3 +717,17 @@ function toQuadratics(points) {
 	return qPoints;
 }
 
+function lineIntersect(line1,line2) {
+	var xTop = line1['m']*line1['point'][0] - line2['m']*line2['point'][0] + line2['point'][1]-line1['point'][1];
+	var xBottom = line1['m']-line2['m'];
+	if (xBottom != 0){
+		var x = xTop/xBottom;
+		var y = line1['m']*(x-line1['point'][0])+line1['point'][1];
+		return [x,y];
+	}
+	else {
+		var x = line1['point'][0];
+		var y = line1['m']*(x-line1['point'][0])+line1['point'][1];
+		return [x,y];
+	}
+}
