@@ -481,7 +481,7 @@ function outline(pd,margin,direction,under){
 	
 	for (var opi=0;opi<2;opi++){
 		
-		if (opi != under && direction == 'out'){
+		if (opi > 0 && opi != under && direction == 'out'){
 			continue;
 		}
 		else if (opi == under && direction == 'in'){
@@ -492,7 +492,7 @@ function outline(pd,margin,direction,under){
 		newPath.setAttribute('d',outPaths[opi]);
 		newPath.style.fill = "none";
 
-		newPath.setAttribute('stroke-width','2');
+		newPath.setAttribute('stroke-width','3');
 		if (direction == 'in'){
 			newPath.setAttribute('stroke',"red");
 		}
