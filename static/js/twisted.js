@@ -100,7 +100,6 @@ function outline(pd,margin,direction,under){
 		else {
 			next = points[i];
 		}
-		console.log(i,points.length,next,points);
 		var nextKey = Object.keys(next)[0];
 		if (key == 'H' ){
 			
@@ -150,7 +149,7 @@ function outline(pd,margin,direction,under){
 
 		
 		d2 = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,1);
-		if (d2 == 0){
+		if (d2 == 0 && i > 0 && i+1 <points.length){
 			console.log(i,thisPoint);
 			points.splice(i,1);
 			i--;
