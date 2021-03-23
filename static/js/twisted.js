@@ -101,6 +101,7 @@ function outline(pd,margin,direction,under){
 		else {
 			next = points[i];
 		}
+		console.log(next);
 		var nextKey = Object.keys(next)[0];
 		if (key == 'H' ){
 			
