@@ -766,8 +766,14 @@ function outline(pd,margin,direction){
 			var startColor = 'rgb('+startR+',0,'+startB+')';
 			var endColor = 'rgb('+endR+',0,'+endB+')';
 			if (direction == 'in'){
-				endColor = 'rgb('+startR+',0,'+startB+')';
-				startColor = 'rgb('+endR+',0,'+endB+')';
+				runningLength -= Math.pow(pathD,0.5);
+				startR = 0 + 255*(runningLength/pathLength);
+				startB = 255 - 255*(runningLength/pathLength);
+				runningLength += Math.pow(pathD,0.5);
+				endR = 0 + 255*(runningLength/pathLength);
+				endB = 255 - 255*(runningLength/pathLength);
+				startColor = 'rgb('+startR+',0,'+startB+')';
+				endColor = 'rgb('+endR+',0,'+endB+')';
 			}
 			linearGradient(i,id,box,direction,startColor,endColor);
 
