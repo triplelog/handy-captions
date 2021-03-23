@@ -571,7 +571,7 @@ function outline(pd,margin,direction){
 		var fillPath = "M "+lastPoint[0] + " "+lastPoint[1];
 		fillPath += " L "+(box['topLeft'][0]) + " "+(box['topLeft'][1]);
 		if (outPaths[0].length == 0){
-			outPaths[0] += 'M ' + box['topLeft'][0]) + " "+(box['topLeft'][1];
+			outPaths[0] += 'M ' + box['topLeft'][0] + " "+box['topLeft'][1];
 		}
 		
 		
