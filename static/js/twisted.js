@@ -516,10 +516,10 @@ function outline(pd,margin,direction,under){
 
 			newPath.setAttribute('stroke-width','3');
 			if (direction == 'in'){
-				newPath.setAttribute('stroke',"red");
+				newPath.setAttribute('stroke',"black");
 			}
 			else {
-				newPath.setAttribute('stroke',"blue");
+				newPath.setAttribute('stroke',"green");
 			}
 
 			heartFill.appendChild(newPath);
