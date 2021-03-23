@@ -150,7 +150,7 @@ function outline(pd,margin,direction,under){
 		
 		d2 = Math.pow( Math.pow((thisPoint[1]-nextPoint[1]),2) + Math.pow((thisPoint[0]-nextPoint[0]),2) ,1);
 		if (d2 == 0 && i > 0 && i+1 <points.length){
-			console.log(i,thisPoint);
+			console.log(i,thisPoint,nextPoint,points.length);
 			points.splice(i,1);
 			i--;
 			continue;
@@ -656,9 +656,7 @@ function toQuadratics(points) {
 		secondPoint['Q'][1] = (1/8)*(lastPoint[1]*(t2-1)+myPoint[1]*3*(1-t2)+myPoint[3]*3*(1+t2)+myPoint[5]*(3-t2));
 		
 		
-		if (i==13){
-			console.log(lastPoint,lx,ly,mx,my,nx,ny,t1,t2,firstPoint['Q'],secondPoint['Q'],myPoint);
-		}
+		
 		qPoints.push(firstPoint);
 		qPoints.push(secondPoint);
 		
