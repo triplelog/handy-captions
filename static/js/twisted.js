@@ -480,10 +480,11 @@ function outline(pd,margin,direction,under){
 	}
 	
 	for (var opi=0;opi<2;opi++){
-		console.log(opi,under);
+		
 		if (opi != under){
 			continue;
 		}
+		console.log(opi,under,direction);
 		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		newPath.setAttribute('d',outPaths[opi]);
 		newPath.style.fill = "none";
