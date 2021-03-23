@@ -481,7 +481,10 @@ function outline(pd,margin,direction,under){
 	
 	for (var opi=0;opi<2;opi++){
 		
-		if (opi != under){
+		if (opi != under && direction == 'out'){
+			continue;
+		}
+		else if (opi == under && direction == 'in'){
 			continue;
 		}
 		console.log(opi,under,direction);
