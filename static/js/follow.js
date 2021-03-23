@@ -761,10 +761,12 @@ function outline(pd,margin,direction){
 			var startR = 255 - 255*(runningLength/pathLength);
 			var startB = 0 + 255*(runningLength/pathLength);
 			startB = 0;
+			startR = 255;
 			runningLength += Math.pow(pathD,0.5);
 			var endR = 255 - 255*(runningLength/pathLength);
 			var endB = 0 + 255*(runningLength/pathLength);
 			endB = 0;
+			endR = 255;
 			var startColor = 'rgb('+startR+',0,'+startB+')';
 			var endColor = 'rgb('+endR+',0,'+endB+')';
 			if (direction == 'in'){
@@ -772,10 +774,12 @@ function outline(pd,margin,direction){
 				startR = 0 + 255*(runningLength/pathLength);
 				startB = 255 - 255*(runningLength/pathLength);
 				startR = 0;
+				startB = 255;
 				runningLength += Math.pow(pathD,0.5);
 				endR = 0 + 255*(runningLength/pathLength);
 				endB = 255 - 255*(runningLength/pathLength);
 				endR = 0;
+				endB = 255;
 				startColor = 'rgb('+startR+',0,'+startB+')';
 				endColor = 'rgb('+endR+',0,'+endB+')';
 			}
