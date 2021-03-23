@@ -561,52 +561,6 @@ function outline(pd,margin,direction){
 			
 		}
 		
-		if (i>2 && i < points.length-3){
-			var id = direction;
-			
-			
-	
-			
-			var pathD = Math.pow((box['bottomLeft'][0]+box['topLeft'][0])/2-(box['bottomRight'][0]+box['topRight'][0])/2,2);
-			pathD += Math.pow((box['bottomLeft'][1]+box['topLeft'][1])/2-(box['bottomRight'][1]+box['topRight'][1])/2,2);
-			var startR = 255 - 255*(runningLength/pathLength);
-			var startB = 0 + 255*(runningLength/pathLength);
-			startB = 0;
-			startR = 255;
-			runningLength += Math.pow(pathD,0.5);
-			var endR = 255 - 255*(runningLength/pathLength);
-			var endB = 0 + 255*(runningLength/pathLength);
-			endB = 0;
-			endR = 255;
-			var startColor = 'rgb('+startR+',0,'+startB+')';
-			var endColor = 'rgb('+endR+',0,'+endB+')';
-			if (direction == 'in'){
-				runningLength -= Math.pow(pathD,0.5);
-				startR = 0 + 255*(runningLength/pathLength);
-				startB = 255 - 255*(runningLength/pathLength);
-				startR = 0;
-				startB = 255;
-				runningLength += Math.pow(pathD,0.5);
-				endR = 0 + 255*(runningLength/pathLength);
-				endB = 255 - 255*(runningLength/pathLength);
-				endR = 0;
-				endB = 255;
-				startColor = 'rgb('+startR+',0,'+startB+')';
-				endColor = 'rgb('+endR+',0,'+endB+')';
-			}
-			linearGradient(i,id,box,direction,startColor,endColor);
-
-			var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-			newPath.setAttribute('d',fillPath);
-			newPath.style.fill = "url(#box-grad-"+i+"-"+id+")";
-
-			newPath.setAttribute('stroke-width','0.25');
-			newPath.setAttribute('stroke',startColor);
-
-		
-			//heartFill.appendChild(newPath);
-		}
-		
 		
 		
 		pdPoints.push(pdPoint);
