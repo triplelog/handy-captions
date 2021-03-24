@@ -228,6 +228,44 @@ function strand(pathEl,start,color,n,bottom,d,l) {
 	heartFill.appendChild(newPath);
 }
 
+function sunburst(path,strands){
+	var len = path.getTotalLength();
+	var halfPath = '';
+	var centerPoint = {'x':0,'y':0};
+	for (var i=0;i<100;i++){
+		var pt = path.getPointAtLength(len*i/100);
+		centerPoint.x += pt.x/100;
+		centerPoint.y += pt.y/100;
+	}
+	var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
+	for (var i=0;i<99;i++){
+		var pt1 = path.getPointAtLength(len*i/100);
+		var pt2 = path.getPointAtLength(len*(i+1)/100);
+		
+		halfPath += ' L '+pt1.x+' '+pt1.y;
+		halfPath += ' L '+pt2.x+' '+pt2.y;
+		halfPath += ' L '+centerPoint.x+' '+centerPoint.y;
+	}
+	var pt1 = path.getPointAtLength(len*99/100);
+	var pt2 = path.getPointAtLength(len*(0)/100);
+	
+	halfPath += ' L '+pt1.x+' '+pt1.y;
+	halfPath += ' L '+pt2.x+' '+pt2.y;
+	halfPath += ' L '+centerPoint.x+' '+centerPoint.y;
+	
+	var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	newPath.setAttribute('d',outPath);
+	newPath.style.fill = "green";
+
+	newPath.setAttribute('stroke-width','1');
+	
+	newPath.setAttribute('stroke','none');
+
+
+	heartFill.appendChild(newPath);
+	
+}
+
 function slopeToD(m,d,point2,point1){
 	var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 	var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);

@@ -118,6 +118,7 @@
 		<option value="3D">3D</option>
 		<option value="embossed">Embossed</option>
 		<option value="twisted">Twisted</option>
+		<option value="Sunburst">Sunburst</option>
 	</select>
 	<div class="twistedOptions">
 		<div>Width: <input id="strandWidth" type="number" value="3" min="0"></input></div>
@@ -357,6 +358,23 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		}*/
 		
 		twist(path,colors,'open',parseFloat(textOptions['strandWidth']),parseFloat(textOptions['strandLength']));
+		
+		
+	}
+	else if (textStyle == 'sunburst'){
+		
+		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+
+		path.setAttribute('d',pd);
+		path.setAttribute('stroke','none');
+		path.setAttribute('stroke-width','1');
+		path.setAttribute('fill','none');
+		path.id = "bg-"+id+"-"+i;
+		svg.appendChild(path);
+		
+		var colors = textOptions.strandColors.split(',');
+		
+		sunburst(path,colors);
 		
 		
 	}
