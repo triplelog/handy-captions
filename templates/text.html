@@ -321,8 +321,33 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		path.id = "bg-"+id+"-"+i;
 		svg.appendChild(path);
 		
+		var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+		var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
+		lG.id="linear-grad-0";
+	
+	
+		lG.setAttribute('x1','0');
+		lG.setAttribute('y1','0');
+		lG.setAttribute('x2','100%');
+		lG.setAttribute('y2','100%');
+	
 		
-		twist(path,['red','black','blue'],'open',4,16);
+		lG.setAttribute('gradientUnits','userSpaceOnUse');
+		var newStop = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+		newStop.setAttribute('offset','0%');
+		newStop.setAttribute('stop-color','red');
+		newStop.setAttribute('stop-opacity','1.0');
+		lG.appendChild(newStop);
+		var newStopT = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+		newStopT.setAttribute('offset','100%');
+		newStopT.setAttribute('stop-color','white');
+		newStopT.setAttribute('stop-opacity','1.0');
+		lG.appendChild(newStopT);
+		newDef.appendChild(lG);
+
+		heartFill.appendChild(newDef);
+		
+		twist(path,['url(#linear-grad-0)','black','blue'],'open',4,16);
 		
 		
 	}
