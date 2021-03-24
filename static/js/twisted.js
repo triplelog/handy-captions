@@ -63,35 +63,33 @@ function toPath(points){
 	return pd;
 }
 
-function twist(path,strands,type){
+function twist(path,strands,type,d,l){
 	if (type == 'closed'){
 		for (var i=0;i<strands.length;i++){
-			strand(path,i,strands[i],strands.length,-1);
+			strand(path,i,strands[i],strands.length,-1,d,l);
 		}
 		for (var i=0;i<strands.length;i++){
-			strand(path,i,strands[i],strands.length,1);
+			strand(path,i,strands[i],strands.length,1,d,l);
 		}
 	}
 	else {
 	
 		for (var i=0;i<strands.length;i++){
-			strand(path,i,strands[i],strands.length,-1);
+			strand(path,i,strands[i],strands.length,-1,d,l);
 		}
 		for (var i=0;i<strands.length-1;i++){
-			strand(path,i,strands[i],strands.length,0);
+			strand(path,i,strands[i],strands.length,0,d,l);
 		}
 	}
 	
 }
-function strand(pathEl,start,color,n,bottom) {
+function strand(pathEl,start,color,n,bottom,d,l) {
 	
 	var len = pathEl.getTotalLength();
 	console.log(len);
 	var points = [];
 	var pointsMid = [''];
 	var lastPoint;
-	var d = 2;//width of strand
-	var l = 12;//length of strand
 	for (var i=0;i<len;i+=l){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);

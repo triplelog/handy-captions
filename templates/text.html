@@ -184,7 +184,7 @@ function drawCurveIn(pt){
 	el.style.top = pt[1]+"px";
 	inputEl.appendChild(el);
 }
-var textStyle = 'ftc';
+var textStyle = 'twisted';
 var textBG = 'gradient';
 textBG = 'white';
 var textOptions = {'skewAngle':'-15','depth':32};
@@ -310,19 +310,19 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		path.id = "bg-"+id+"-"+i;
 		svg.appendChild(path);*/
 	}
-	else if (textStyle == 'ftc'){
+	else if (textStyle == 'twisted'){
 		
 		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 
 		path.setAttribute('d',pd);
 		path.setAttribute('stroke','white');
-		path.setAttribute('stroke-width','6');
+		path.setAttribute('stroke-width','24');
 		path.setAttribute('fill','none');
 		path.id = "bg-"+id+"-"+i;
 		svg.appendChild(path);
 		
 		
-		twist(path,['red','black','blue'],'closed');
+		twist(path,['red','black','blue'],'closed',2,12);
 		
 		
 	}
@@ -334,7 +334,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
-	if (textStyle == 'ftc'){
+	if (textStyle == 'twisted'){
 		path2.setAttribute('stroke','none');
 	}
 	else if (textBG == 'gradient'){
