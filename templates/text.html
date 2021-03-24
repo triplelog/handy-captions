@@ -312,14 +312,14 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	else if (textStyle == 'twisted'){
 		
-		/*var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 
 		path.setAttribute('d',pd);
-		path.setAttribute('stroke','white');
-		path.setAttribute('stroke-width','24');
+		path.setAttribute('stroke','none');
+		path.setAttribute('stroke-width','1');
 		path.setAttribute('fill','none');
 		path.id = "bg-"+id+"-"+i;
-		svg.appendChild(path);*/
+		svg.appendChild(path);
 		
 		
 		twist(path,['red','black','blue'],'open',4,16);
