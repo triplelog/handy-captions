@@ -687,7 +687,7 @@ function twist(pathEl) {
 	var currentSlope = {'last':0,'next':0};
 	var points = [];
 	var lastPoint;
-	for (var i=0;i<len;i+=100){
+	for (var i=0;i<len;i+=20){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
 		if (i>0){
@@ -711,21 +711,23 @@ function twist(pathEl) {
 		var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 		var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 		if (i == 0){
-			if (points[i+1].y > points[i].y){
+			if (points[i+1].y < points[i].y){
 				dy *= -1;
 			}
-			if (points[i+1].x > points[i].x){
+			if (points[i+1].x < points[i].x){
 				dx *= -1;
 			}
+			dx *= -1;
 			outPath += 'M '+(points[i].x+dx)+' '+(points[i].y+dy);
 		}
 		else {
-			if (points[i].y > points[i-1].y){
+			if (points[i].y < points[i-1].y){
 				dy *= -1;
 			}
-			if (points[i].x > points[i-1].x){
+			if (points[i].x < points[i-1].x){
 				dx *= -1;
 			}
+			dx *= -1;
 			outPath += ' L '+(points[i].x+dx)+' '+(points[i].y+dy);
 		}
 		
