@@ -721,11 +721,13 @@ function twist(pathEl) {
 		
 		var mul = Math.pow(d,1)/Math.pow((Math.pow(dy,2)+Math.pow(dx,2)),.5);
 		if (i == 0){
-			
 			outPath += 'M '+(points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
 		}
-		else {
+		else if (i%2 == 0) {
 			outPath += ' L '+(points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
+		}
+		else {
+			outPath += ' L '+(points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
 		}
 		
 		
@@ -748,23 +750,6 @@ function slopeToD(m,d,point2,point1){
 	var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 	var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 	
-	/*var direction = (point2.y - point1.y)*(point2.x - point1.x);
-	if (direction < 0){
-		if (point2.x > point1.x){
-			dx *= -1;
-		}
-		if (point2.y < point1.y){
-			dy *= -1;
-		}
-	}
-	else {
-		if (point2.x < point1.x){
-			dx *= -1;
-		}
-		if (point2.y > point1.y){
-			dy *= -1;
-		}
-	}*/
 	
 	if (point2.x < point1.x){
 		dx *= -1;
@@ -774,48 +759,4 @@ function slopeToD(m,d,point2,point1){
 	}
 	dx *= -1;
 	return [dx,dy];
-}
-
-function deltaPoint(thisPoint,lastPoint,nextPoint,margin,direction) {
-	var d1 = Math.pow( Math.pow((thisPoint.y-lastPoint.y),2) + Math.pow((thisPoint.x-lastPoint.x),2) ,1);
-	
-	var dy1 = margin*Math.pow((thisPoint.y-lastPoint.y),2)/d1;
-	var dx1 = margin*Math.pow((thisPoint.x-lastPoint.x),2)/d1;
-	if (thisPoint.y<lastPoint.y){
-		dy1 *= -1;
-	}
-	if (thisPoint.x<lastPoint.x){
-		dx1 *= -1;
-	}
-		
-	dx1 *= -1
-
-	
-	d2 = Math.pow( Math.pow((thisPoint.y-nextPoint.y),2) + Math.pow((thisPoint.x-nextPoint.x),2) ,1);
-
-	dy2 = margin*Math.pow((nextPoint.y-thisPoint.y),2)/d2;
-	dx2 = margin*Math.pow((nextPoint.x-thisPoint.x),2)/d2;
-	if (nextPoint.y<thisPoint.y){
-		dy2 *= -1;
-	}
-	if (nextPoint.x<thisPoint.x){
-		dx2 *= -1;
-	}
-	
-	dx2 *= -1
-	
-	
-	var ay = (dy1+dy2)/2;
-	var ax = (dx1+dx2)/2;
-	if (direction == 'in'){
-		ay *= -1;
-		ax *= -1;
-
-	}
-	
-	var mul = Math.pow(margin,1)/Math.pow((Math.pow(ay,2)+Math.pow(ax,2)),.5);
-	
-	
-	aPoint=[ay*mul,ax*mul,underTwist];
-	return [ay*mul,ax*mul]
 }
