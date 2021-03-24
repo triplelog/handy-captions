@@ -97,31 +97,31 @@ function createPD(tab){
 	var id = "curve-"+Math.random().toString(36).substr(3,12);
 	var pd = "M"; 
 	
-	pd += " " + currentCurve[0][0];
-	pd += " " + currentCurve[0][1];
+	pd += " " + curveRound(currentCurve[0][0]);
+	pd += " " + curveRound(currentCurve[0][1]);
 	console.log(currentCurve.length);
 	for (var i=1; i<currentCurve.length - 2; i++){
 		var minD2 = nearestBezier(currentCurve[i-1][0],currentCurve[i][0],currentCurve[i+2][0],currentCurve[i-1][1],currentCurve[i][1],currentCurve[i+2][1], currentCurve[i+1][0], currentCurve[i+1][1]);
 		console.log(minD2);
-		if (minD2 < 10){
+		if (minD2 < 1){
 			currentCurve.splice(i+1,1);
 			i--;
 			continue;
 		}
-		pd += " Q " + currentCurve[i][0];
-		pd += " " + currentCurve[i][1];
+		pd += " Q " + curveRound(currentCurve[i][0]);
+		pd += " " + curveRound(currentCurve[i][1]);
 		var xc = (currentCurve[i][0] + currentCurve[i+1][0]) / 2;
 		var yc = (currentCurve[i][1] + currentCurve[i+1][1]) / 2;
-		pd += " " + xc;
-		pd += " " + yc;
+		pd += " " + curveRound(xc);
+		pd += " " + curveRound(yc);
 	}
 	console.log(currentCurve.length);
 	if (currentCurve.length > 1){
-		pd += " Q " + currentCurve[currentCurve.length - 2][0];
-		pd += " " + currentCurve[currentCurve.length - 2][1];
+		pd += " Q " + curveRound(currentCurve[currentCurve.length - 2][0]);
+		pd += " " + curveRound(currentCurve[currentCurve.length - 2][1]);
 	}
-	pd += " " + currentCurve[currentCurve.length - 1][0];
-	pd += " " + currentCurve[currentCurve.length - 1][1];
+	pd += " " + curveRound(currentCurve[currentCurve.length - 1][0]);
+	pd += " " + curveRound(currentCurve[currentCurve.length - 1][1]);
 
 	
 	allCurves[id]= currentCurve;
@@ -131,6 +131,10 @@ function createPD(tab){
 	recentPoints = [];
 }
 
+function curveRound(x){
+	var xx = x*10;
+	return Math.round(xx)/10;
+}
 function nearestBezier(a,b,c,d,e,f,x,y){
 	//a,b,c are x-coordinates of 3 bezierpoints
 	//d,e,f are y-coordinates
