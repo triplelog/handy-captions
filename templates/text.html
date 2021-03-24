@@ -322,7 +322,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		svg.appendChild(path);
 		
 		var colors = ['red','black','blue'];
-		var colorsEnd = ['green','black','blue'];
+		var colorsEnd = ['white','black','blue'];
 		for (var i=0;i<3;i++){
 			var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 			var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
@@ -330,7 +330,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	
 	
 			lG.setAttribute('x1','0');
-			lG.setAttribute('y1','0');
+			lG.setAttribute('y1','50%');
 			lG.setAttribute('x2','100%');
 			lG.setAttribute('y2','100%');
 	
