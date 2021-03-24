@@ -63,14 +63,14 @@ function toPath(points){
 	return pd;
 }
 
-function twist(pathEl,start) {
+function twist(pathEl,start,color) {
 	
 	var len = pathEl.getTotalLength();
 	console.log(len);
 	var points = [];
 	var lastPoint;
-	var d = 5;
-	for (var i=0;i<len;i+=30){
+	var d = 2;
+	for (var i=0;i<len;i+=20){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
 		if (i>0){
@@ -122,7 +122,7 @@ function twist(pathEl,start) {
 
 	newPath.setAttribute('stroke-width','2');
 	
-	newPath.setAttribute('stroke',"red");
+	newPath.setAttribute('stroke',color);
 
 
 	heartFill.appendChild(newPath);
