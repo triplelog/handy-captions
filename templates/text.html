@@ -386,7 +386,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
-	if (textStyle == 'twisted'){
+	if (textStyle == 'twisted' || textStyle == 'sunburst'){
 		path2.setAttribute('stroke','none');
 	}
 	else if (textStyle == 'embossed'){
