@@ -220,7 +220,7 @@ function strand(pathEl,start,color,n,bottom,d,l) {
 	newPath.setAttribute('d',outPath);
 	newPath.style.fill = "none";
 
-	newPath.setAttribute('stroke-width','3');
+	newPath.setAttribute('stroke-width',d);
 	
 	newPath.setAttribute('stroke',color);
 
