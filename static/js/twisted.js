@@ -68,11 +68,16 @@ function twist(pathEl,start,color,top) {
 	var len = pathEl.getTotalLength();
 	console.log(len);
 	var points = [];
+	var pointsMid = [''];
 	var lastPoint;
 	var d = 2;
 	for (var i=0;i<len;i+=10){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
+		if (i > 0){
+			var ptMid = pathEl.getPointAtLength(i-5);
+			pointsMid.push(ptMid);
+		}
 		if (i>0){
 			var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
 			var dxy = slopeToD(m,d,pt,lastPoint);
@@ -122,15 +127,24 @@ function twist(pathEl,start,color,top) {
 				outPath += 'M ';
 			}
 			else {
-				outPath += ' L ';
+				outPath += ' Q ';
 			}
 			if (i%3 == start) {
+				if (i>0){
+					outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
+				}
 				outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
 			}
 			else if (i%3 == (start +1)%3 ) {
+				if (i>0){
+					outPath += (pointsMid[i].x+dy*mul/2)+' '+(pointsMid[i].y+dx*mul/2)+' ';
+				}
 				outPath += (points[i].x+0*dy*mul)+' '+(points[i].y+0*dx*mul);
 			}
 			else {
+				if (i>0){
+					outPath += (pointsMid[i].x-dy*mul/2)+' '+(pointsMid[i].y-dx*mul/2)+' ';
+				}
 				outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
 			}
 		}
