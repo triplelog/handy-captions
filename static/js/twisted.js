@@ -696,14 +696,41 @@ function twist(pathEl) {
 			lastPoint.next = m;
 			pt.last = m;
 		}
-		
-		
-		console.log(points);
-		
 		lastPoint = pt;
 	}
+	if (points.length > 1){
+		points[0].last = points[0].next;
+		points[points.length-1].nextt = points[points.length-1].last;
+	}
+	console.log(points);
 	
+	var d = 10;
+	var outPath = '';
+	for (var i=0;i<len;i+=100){
+		var m = (points[i].last + points[i].next)/2;
+		var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
+		var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
+		if (i == 0){
+			if (points[i+1].y > points[i].y){
+				dy *= -1;
+			}
+			if (points[i+1].x > points[i].x){
+				dx *= -1;
+			}
+			outPath += 'M '+(points[i].x+dx)+' '+(points[i].y+dy);
+		}
+		else {
+			if (points[i].y > points[i-1].y){
+				dy *= -1;
+			}
+			if (points[i].x > points[i-1].x){
+				dx *= -1;
+			}
+			outPath += 'L '+(points[i].x+dx)+' '+(points[i].y+dy);
+		}
+		
+		
+	}
 	
-	
-	//console.log();
+	console.log(outPath);
 }
