@@ -684,23 +684,26 @@ function twist(pathEl) {
 	
 	var len = pathEl.getTotalLength();
 	console.log(len);
-	var currentSlope = {'last':0,'next':0};
 	var points = [];
 	var lastPoint;
 	for (var i=0;i<len;i+=20){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
 		if (i>0){
-			currentSlope['last']=currentSlope['next'];
 			var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
-			lastPoint.next = m;
-			pt.last = m;
+			var dxy = slopeToD(m,10,pt,lastPoint);
+			lastPoint.nextDX = dxy[0];
+			lastPoint.nextDY = dxy[1];
+			pt.lastDX = dxy[0];
+			pt.lastDY = dxy[1];
 		}
 		lastPoint = pt;
 	}
 	if (points.length > 1){
-		points[0].last = points[0].next;
-		points[points.length-1].next = points[points.length-1].last;
+		points[0].lastDX = points[0].nextDX;
+		points[0].lastDY = points[0].nextDY;
+		points[points.length-1].nextDX = points[points.length-1].lastDX;
+		points[points.length-1].nextDY = points[points.length-1].lastDY;
 	}
 	console.log(points);
 	
@@ -708,26 +711,12 @@ function twist(pathEl) {
 	var outPath = '';
 	for (var i=0;i<points.length;i++){
 		var m = (points[i].last + points[i].next)/2;
-		var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
-		var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
+		var dx = (points[i].nextDX + points[i].lastDX)/2;
+		var dy = (points[i].nextDY + points[i].lastDY)/2;
 		if (i == 0){
-			if (points[i+1].y < points[i].y){
-				dy *= -1;
-			}
-			if (points[i+1].x < points[i].x){
-				dx *= -1;
-			}
-			dx *= -1;
 			outPath += 'M '+(points[i].x+dx)+' '+(points[i].y+dy);
 		}
 		else {
-			if (points[i].y < points[i-1].y){
-				dy *= -1;
-			}
-			if (points[i].x < points[i-1].x){
-				dx *= -1;
-			}
-			dx *= -1;
 			outPath += ' L '+(points[i].x+dx)+' '+(points[i].y+dy);
 		}
 		
@@ -745,4 +734,18 @@ function twist(pathEl) {
 
 	heartFill.appendChild(newPath);
 	console.log(outPath);
+}
+
+function slopeToD(m,d,point2,point1){
+	var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
+	var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
+
+	if (point2.y < point1.y){
+		dy *= -1;
+	}
+	if (point2.x < point1.x){
+		dx *= -1;
+	}
+	dx *= -1;
+	return [dx,dy];
 }
