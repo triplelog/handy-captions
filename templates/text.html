@@ -321,10 +321,8 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		path.id = "bg-"+id+"-"+i;
 		svg.appendChild(path);
 		
-		//outline(pd,2,'out',0);
-		//outline(pd,2,'in',0);
-		//outline(pd,2,'out',1);
-		twist(path,['red','yellow','blue'],'open');
+		
+		twist(path,['red','yellow','blue'],'closed');
 		
 		
 	}
