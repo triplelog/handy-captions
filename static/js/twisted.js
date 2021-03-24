@@ -226,7 +226,7 @@ function strand(pathEl,start,color,n,bottom) {
 		else if (bottom == -2){
 			
 			var offset = (n+i-start)%n;
-			if (i%2 == 0){
+			if (i%2 == (start+n)%2){
 				outPath += 'M ';
 				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 			}
@@ -245,7 +245,7 @@ function strand(pathEl,start,color,n,bottom) {
 			
 			
 			var offset = (n+i-start)%n;
-			if (i%2 == 1){
+			if (i%2 == (start+n+1)%2){
 				outPath += 'M ';
 				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 			}
