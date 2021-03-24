@@ -123,15 +123,17 @@ function twist(pathEl,start,color,top) {
 		var dy = (points[i].nextDY + points[i].lastDY)/2;
 		
 		var mul = Math.pow(d,1)/Math.pow((Math.pow(dy,2)+Math.pow(dx,2)),.5);
-		if (top && i%3 != (start +1)%3 && i > start){
-			if (i%3 == start ){
-				outPath += ' Q ';
-				outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
-				outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
-			}
-			else {
-				outPath += ' M ';
-				outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
+		if (top){
+			if (i%3 != (start +1)%3 && i > start) {
+				if (i%3 == start ){
+					outPath += ' Q ';
+					outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
+					outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
+				}
+				else {
+					outPath += ' M ';
+					outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
+				}
 			}
 			
 		}
