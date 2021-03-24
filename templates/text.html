@@ -356,7 +356,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			heartFill.appendChild(newDef);
 		}
 		
-		twist(path,['url(#linear-grad-0)','black','url(#linear-grad-2)'],'open',textOptions['strandWidth'],textOptions['strandLength']);
+		twist(path,['url(#linear-grad-0)','black','url(#linear-grad-2)'],'open',parseFloat(textOptions['strandWidth']),parseFloat(textOptions['strandLength']));
 		
 		
 	}
@@ -398,6 +398,7 @@ function setOptions(evt,first=false) {
 			el.addEventListener('change',setOptions);
 		}
 	}
+	console.log(textOptions);
 	
 }
 setOptions(false,true);
