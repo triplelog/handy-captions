@@ -722,7 +722,7 @@ function twist(pathEl) {
 			outPath += 'M '+(points[i].x+dxy[0])+' '+(points[i].y+dxy[1]);
 		}
 		else {
-			var dxy = slopeToD(m,10,points[i+1],points[i]);
+			var dxy = slopeToD(m,10,points[i],points[i-1]);
 			outPath += ' L '+(points[i].x+dxy[0])+' '+(points[i].y+dxy[1]);
 		}
 		
