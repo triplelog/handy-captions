@@ -746,6 +746,6 @@ function slopeToD(m,d,point2,point1){
 	if (point2.x < point1.x){
 		dx *= -1;
 	}
-	dx *= -1;
+	//dx *= -1;
 	return [dx,dy];
 }
