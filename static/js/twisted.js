@@ -684,9 +684,23 @@ function twist(pathEl) {
 	
 	var len = pathEl.getTotalLength();
 	console.log(len);
+	var currentSlope = {'last':0,'next':0};
+	var points = [];
+	var lastPoint;
 	for (var i=0;i<len;i+=100){
 		var pt = pathEl.getPointAtLength(i);
-		console.log(pt);
+		points.push(pt);
+		if (i>0){
+			currentSlope['last']=currentSlope['next'];
+			var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
+			lastPoint.next = m;
+			pt.last = m;
+		}
+		
+		
+		console.log(points);
+		
+		lastPoint = pt;
 	}
 	
 	
