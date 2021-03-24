@@ -90,6 +90,21 @@ function twist(pathEl,start,color,top) {
 		}
 		lastPoint = pt;
 	}
+	var pt = pathEl.getPointAtLength(len-0.1);
+	points.push(pt);
+
+	var ptMid = pathEl.getPointAtLength(i-5);
+	pointsMid.push(ptMid);
+
+	var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
+	var dxy = slopeToD(m,d,pt,lastPoint);
+	lastPoint.nextDX = dxy[0];
+	lastPoint.nextDY = dxy[1];
+	lastPoint.next = m;
+	pt.lastDX = dxy[0];
+	pt.lastDY = dxy[1];
+	pt.last = m;
+
 	if (points.length > 1){
 		points[0].lastDX = points[0].nextDX;
 		points[0].lastDY = points[0].nextDY;
