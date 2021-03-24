@@ -122,10 +122,14 @@ function strand(pathEl,start,color,n,top) {
 		points[points.length-1].nextDY = points[points.length-1].lastDY;
 		points[points.length-1].next = points[points.length-1].last;
 	}
-	console.log(points);
 	
 	
 	var outPath = '';
+	var maxShift = (n/2-0.5);
+	var shifts = [];
+	for (var i=0;i<n;i++){
+		shifts.push(maxShift-i);
+	}
 	for (var i=0;i<points.length;i++){
 		var m = (points[i].last + points[i].next)/2;
 		var dx = (points[i].nextDX + points[i].lastDX)/2;
@@ -133,15 +137,18 @@ function strand(pathEl,start,color,n,top) {
 		
 		var mul = Math.pow(d,1)/Math.pow((Math.pow(dy,2)+Math.pow(dx,2)),.5);
 		if (top){
-			if (i%n != (start +1)%n && i > start) {
+			if ( (i%n ==start || i%n == (n+start-1)%n) && i > start) {
+				var offset = (n+i-start)%n;
 				if (i%n == start ){
+					var offsetL = (n+i-1-start)%n;
+					var avgShift = (shifts[offset]+shifts[offsetL])/2;
 					outPath += ' Q ';
-					outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
-					outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
+					outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
+					outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 				}
 				else {
 					outPath += ' M ';
-					outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
+					outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 				}
 			}
 			
@@ -153,24 +160,15 @@ function strand(pathEl,start,color,n,top) {
 			else {
 				outPath += ' Q ';
 			}
-			if (i%n == start) {
-				if (i>0){
-					outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
-				}
-				outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
+			
+			var offset = (n+i-start)%n;
+			if (i>0){
+				var offsetL = (n+i-1-start)%n;
+				var avgShift = (shifts[offset]+shifts[offsetL])/2;
+				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
 			}
-			else if (i%n == (start +1)%n ) {
-				if (i>0){
-					outPath += (pointsMid[i].x+dy*mul/2)+' '+(pointsMid[i].y+dx*mul/2)+' ';
-				}
-				outPath += (points[i].x+0*dy*mul)+' '+(points[i].y+0*dx*mul);
-			}
-			else {
-				if (i>0){
-					outPath += (pointsMid[i].x-dy*mul/2)+' '+(pointsMid[i].y-dx*mul/2)+' ';
-				}
-				outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
-			}
+			outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+			
 		}
 		
 		
@@ -186,7 +184,6 @@ function strand(pathEl,start,color,n,top) {
 
 
 	heartFill.appendChild(newPath);
-	console.log(outPath);
 }
 
 function slopeToD(m,d,point2,point1){
