@@ -72,6 +72,17 @@ function twist(path,strands,type){
 			strand(path,i,strands[i],strands.length,1);
 		}
 	}
+	else if (type == 'mixed'){
+		for (var i=0;i<strands.length;i++){
+			strand(path,i,strands[i],strands.length,-2);
+		}
+		for (var i=0;i<strands.length;i++){
+			strand(path,i,strands[i],strands.length,0);
+		}
+		for (var i=0;i<strands.length;i++){
+			strand(path,i,strands[i],strands.length,2);
+		}
+	}
 	else {
 	
 		for (var i=0;i<strands.length;i++){
@@ -210,6 +221,39 @@ function strand(pathEl,start,color,n,bottom) {
 				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
 			}
 			outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+			
+		}
+		else if (bottom == -2){
+			
+			var offset = (n+i-start)%n;
+			if (i%2 == 0){
+				outPath += 'M ';
+				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+			}
+			else {
+				outPath += ' Q ';
+				var offsetL = (n+i-1-start)%n;
+				var avgShift = (shifts[offset]+shifts[offsetL])/2;
+				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
+			}
+			
+			
+			
+		}
+		else if (bottom == 2){
+			
+			
+			var offset = (n+i-start)%n;
+			if (i%2 == 1){
+				outPath += 'M ';
+				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+			}
+			else if (i>0) {
+				outPath += ' Q ';
+				var offsetL = (n+i-1-start)%n;
+				var avgShift = (shifts[offset]+shifts[offsetL])/2;
+				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
+			}
 			
 		}
 		
