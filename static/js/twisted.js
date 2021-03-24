@@ -110,15 +110,17 @@ function twist(pathEl,start,color,top) {
 		var mul = Math.pow(d,1)/Math.pow((Math.pow(dy,2)+Math.pow(dx,2)),.5);
 		if (top && i%3 != (start +1)%3 && i > start){
 			if (i%3 == start ){
-				outPath += 'L ';
+				outPath += ' Q ';
 			}
 			else {
 				outPath += ' M ';
 			}
 			if (i%3 == start) {
+				outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
 				outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
 			}
 			else {
+				outPath += (pointsMid[i].x-dy*mul/2)+' '+(pointsMid[i].y-dx*mul/2)+' ';
 				outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
 			}
 		}
