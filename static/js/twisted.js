@@ -700,7 +700,7 @@ function twist(pathEl) {
 	}
 	if (points.length > 1){
 		points[0].last = points[0].next;
-		points[points.length-1].nextt = points[points.length-1].last;
+		points[points.length-1].next = points[points.length-1].last;
 	}
 	console.log(points);
 	
@@ -708,7 +708,6 @@ function twist(pathEl) {
 	var outPath = '';
 	for (var i=0;i<points.length;i++){
 		var m = (points[i].last + points[i].next)/2;
-		console.log(i,m);
 		var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 		var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 		if (i == 0){
@@ -733,5 +732,15 @@ function twist(pathEl) {
 		
 	}
 	
+	var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+	newPath.setAttribute('d',outPath);
+	newPath.style.fill = "none";
+
+	newPath.setAttribute('stroke-width','2');
+	
+	newPath.setAttribute('stroke',"red");
+
+
+	heartFill.appendChild(newPath);
 	console.log(outPath);
 }
