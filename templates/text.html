@@ -119,6 +119,11 @@
 		<option value="emboss">Embossed</option>
 		<option value="twisted">Twisted</option>
 	</select>
+	<div class="twistedOptions">
+		Width: <input id="strandWidth" type="number" value="3" min="0"></input>
+		Length: <input id="strandLength" type="number" value="8" min="0"></input>
+		Colors: <input id="strandColors" type="text" value="red, white, blue"></input>
+	</div>
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
@@ -351,7 +356,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			heartFill.appendChild(newDef);
 		}
 		
-		twist(path,['url(#linear-grad-0)','black','url(#linear-grad-2)'],'open',3,9);
+		twist(path,['url(#linear-grad-0)','black','url(#linear-grad-2)'],'open',textOptions['strandWidth'],textOptions['strandLength']);
 		
 		
 	}
@@ -381,6 +386,22 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	allCurves[id]= currentCurve;
 	console.log(allCurves);
 }
+
+
+
+function setOptions(evt,first=false) {
+	var options = ['strandWidth','strandLength','strandColors'];
+	for (var i=0;i<options.length;i++){
+		var el = document.getElementById(options[i]);
+		textOptions[options[i]]=el.value;
+		if (first){
+			el.addEventListener('change',setOptions);
+		}
+	}
+	
+}
+setOptions(false,true);
+
 
 
 function selectGroup(){
