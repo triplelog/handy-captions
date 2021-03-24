@@ -708,6 +708,7 @@ function twist(pathEl) {
 	var outPath = '';
 	for (var i=0;i<points.length;i++){
 		var m = (points[i].last + points[i].next)/2;
+		console.log(i,m);
 		var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 		var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 		if (i == 0){
@@ -726,7 +727,7 @@ function twist(pathEl) {
 			if (points[i].x > points[i-1].x){
 				dx *= -1;
 			}
-			outPath += 'L '+(points[i].x+dx)+' '+(points[i].y+dy);
+			outPath += ' L '+(points[i].x+dx)+' '+(points[i].y+dy);
 		}
 		
 		
