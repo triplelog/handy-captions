@@ -91,7 +91,7 @@ function strand(pathEl,start,color,n,bottom) {
 	var pointsMid = [''];
 	var lastPoint;
 	var d = 2;//width of strand
-	var l = 16;//length of strand
+	var l = 12;//length of strand
 	for (var i=0;i<len;i+=l){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
