@@ -65,9 +65,9 @@ function toPath(points){
 
 function twist(path,strands,type){
 	if (type == 'closed'){
-		for (var i=0;i<strands.length;i++){
+		/*for (var i=0;i<strands.length;i++){
 			strand(path,i,strands[i],strands.length,0);
-		}
+		}*/
 		for (var i=0;i<strands.length;i++){
 			strand(path,i,strands[i],strands.length,1);
 		}
