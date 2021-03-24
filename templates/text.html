@@ -326,9 +326,9 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		path.id = "bg-"+id+"-"+i;
 		svg.appendChild(path);
 		
-		var colors = ['red','black','blue'];
+		var colors = textOptions.strandColors.split(',');
 		var colorsEnd = ['white','black','blue'];
-		for (var i=0;i<3;i++){
+		/*for (var i=0;i<3;i++){
 			var newDef = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
 			var lG = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
 			lG.id="linear-grad-"+i;
@@ -354,9 +354,9 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			newDef.appendChild(lG);
 
 			heartFill.appendChild(newDef);
-		}
+		}*/
 		
-		twist(path,['url(#linear-grad-0)','black','url(#linear-grad-2)'],'open',parseFloat(textOptions['strandWidth']),parseFloat(textOptions['strandLength']));
+		twist(path,colors,'open',parseFloat(textOptions['strandWidth']),parseFloat(textOptions['strandLength']));
 		
 		
 	}
@@ -398,7 +398,6 @@ function setOptions(evt,first=false) {
 			el.addEventListener('change',setOptions);
 		}
 	}
-	console.log(textOptions);
 	
 }
 setOptions(false,true);
