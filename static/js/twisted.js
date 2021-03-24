@@ -238,18 +238,27 @@ function sunburst(path,strands){
 		centerPoint.x += pt.x/100;
 		centerPoint.y += pt.y/100;
 	}
-	var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
+	
 	for (var i=0;i<99;i++){
 		var pt1 = path.getPointAtLength(len*i/100);
 		var pt2 = path.getPointAtLength(len*(i+1)/100);
-		
+		var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
 		halfPath += ' L '+pt1.x+' '+pt1.y;
 		halfPath += ' L '+pt2.x+' '+pt2.y;
 		halfPath += ' L '+centerPoint.x+' '+centerPoint.y;
+		
+		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+		newPath.setAttribute('d',halfPath);
+		newPath.style.fill = "green";
+	
+		newPath.setAttribute('stroke','none');
+
+		heartFill.appendChild(newPath);
 	}
 	var pt1 = path.getPointAtLength(len*99/100);
 	var pt2 = path.getPointAtLength(len*(0)/100);
 	
+	var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
 	halfPath += ' L '+pt1.x+' '+pt1.y;
 	halfPath += ' L '+pt2.x+' '+pt2.y;
 	halfPath += ' L '+centerPoint.x+' '+centerPoint.y;
@@ -258,11 +267,8 @@ function sunburst(path,strands){
 	newPath.setAttribute('d',halfPath);
 	newPath.style.fill = "green";
 
-	newPath.setAttribute('stroke-width','1');
-	
 	newPath.setAttribute('stroke','none');
 
-	console.log(halfPath);
 	heartFill.appendChild(newPath);
 	
 }
