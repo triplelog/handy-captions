@@ -72,17 +72,6 @@ function twist(path,strands,type){
 			strand(path,i,strands[i],strands.length,1);
 		}
 	}
-	else if (type == 'mixed'){
-		for (var i=0;i<strands.length;i++){
-			strand(path,i,strands[i],strands.length,-2);
-		}
-		for (var i=0;i<strands.length;i++){
-			strand(path,i,strands[i],strands.length,0);
-		}
-		for (var i=0;i<strands.length;i++){
-			strand(path,i,strands[i],strands.length,2);
-		}
-	}
 	else {
 	
 		for (var i=0;i<strands.length;i++){
@@ -177,7 +166,7 @@ function strand(pathEl,start,color,n,bottom) {
 			
 		}
 		else if (bottom == 1){
-			if ( (i%n ==start || i%n == (n+start-1)%n) && i > start) {
+			if ( (i%n ==start || i%n == (n+start-1)%n) && i >= start) {
 				var offset = (n+i-start)%n;
 				if (i%n == start ){
 					
@@ -187,6 +176,7 @@ function strand(pathEl,start,color,n,bottom) {
 				
 				continue;
 			}
+			
 			
 			if (i == 0){
 				outPath += 'M ';
@@ -223,41 +213,7 @@ function strand(pathEl,start,color,n,bottom) {
 			outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 			
 		}
-		else if (bottom == -2){
-			
-			var offset = (n+i-start)%n;
-			if (i%2 == (start+n)%2){
-				outPath += 'M ';
-				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
-			}
-			else if (i>0) {
-				outPath += ' Q ';
-				var offsetL = (n+i-1-start)%n;
-				var avgShift = (shifts[offset]+shifts[offsetL])/2;
-				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
-				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
-			}
-			
-			
-			
-		}
-		else if (bottom == 2){
-			
-			
-			var offset = (n+i-start)%n;
-			if (i%2 == (start+n+1)%2){
-				outPath += 'M ';
-				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
-			}
-			else if (i>0) {
-				outPath += ' Q ';
-				var offsetL = (n+i-1-start)%n;
-				var avgShift = (shifts[offset]+shifts[offsetL])/2;
-				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
-				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
-			}
-			
-		}
+		
 		
 		
 	}
