@@ -47,6 +47,9 @@
   50% {fill: #99FF99;}
   100% {fill: #99FF99;}
 }
+.topRight .bgSVG:hover{
+	cursor: pointer;
+}
 .topRight .bgSVG:hover path:nth-child(1){
 	animation-name: sunburst1;
   	animation-duration: 0.25s;
@@ -60,13 +63,13 @@
   	animation-direction: alternate;
 }
 .topRight .fgSVG path{
-	stroke: black;
+	stroke: #222222;
 }
 .topRight .fgSVG{
 	pointer-events: none;
 }
 .topRight .bgSVG:hover ~ .fgSVG path{
-	stroke: gray;
+	stroke: #000000;
 }
 
 </style>
