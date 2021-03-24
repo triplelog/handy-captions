@@ -59,7 +59,7 @@ app.get('/index.html',
 
 app.get('/home.html', 
 	function(req, res) {
-		res.write(nunjucks.render('templates/basehome.html',{
+		res.write(nunjucks.render('templates/index.html',{
 		
 		}));
 		res.end();
