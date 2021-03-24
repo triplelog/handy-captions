@@ -311,19 +311,20 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		svg.appendChild(path);*/
 	}
 	else if (textStyle == 'ftc'){
-		for (var i=0;i<1;i++){
-			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-	
-			path.setAttribute('d',pd);
-			path.setAttribute('stroke','white');
-			path.setAttribute('stroke-width','6');
-			path.setAttribute('fill','none');
-			path.id = "bg-"+id+"-"+i;
-			svg.appendChild(path);
-		}
-		outline(pd,2,'out',0);
-		outline(pd,2,'in',0);
-		outline(pd,2,'out',1);
+		
+		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+
+		path.setAttribute('d',pd);
+		path.setAttribute('stroke','white');
+		path.setAttribute('stroke-width','6');
+		path.setAttribute('fill','none');
+		path.id = "bg-"+id+"-"+i;
+		svg.appendChild(path);
+		
+		//outline(pd,2,'out',0);
+		//outline(pd,2,'in',0);
+		//outline(pd,2,'out',1);
+		twist(path);
 		
 	}
 	

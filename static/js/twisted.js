@@ -678,3 +678,8 @@ function lineIntersect(line1,line2) {
 		return [x,y];
 	}
 }
+
+
+function twist(pathEl) {
+	console.log(pathEl.getTotalLength());
+}
