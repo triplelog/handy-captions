@@ -239,7 +239,7 @@ function sunburst(path,strands){
 		centerPoint.y += pt.y/100;
 	}
 	
-	for (var i=0;i<1;i++){
+	for (var i=0;i<99;i+=2){
 		var pt1 = path.getPointAtLength(len*i/100);
 		var pt2 = path.getPointAtLength(len*(i+1)/100);
 		var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
@@ -255,7 +255,7 @@ function sunburst(path,strands){
 
 		heartFill.appendChild(newPath);
 	}
-	/*var pt1 = path.getPointAtLength(len*99/100);
+	var pt1 = path.getPointAtLength(len*100/100);
 	var pt2 = path.getPointAtLength(len*(0)/100);
 	
 	var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
@@ -269,7 +269,7 @@ function sunburst(path,strands){
 
 	newPath.setAttribute('stroke','none');
 
-	heartFill.appendChild(newPath);*/
+	heartFill.appendChild(newPath);
 	
 }
 
