@@ -764,6 +764,7 @@ function slopeToD(m,d,point2,point1){
 			dy *= -1;
 		}
 	}
+	dx *= -1;
 	
 	return [dx,dy];
 }
