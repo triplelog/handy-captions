@@ -111,18 +111,14 @@ function twist(pathEl,start,color,top) {
 		if (top && i%3 != (start +1)%3 && i > start){
 			if (i%3 == start ){
 				outPath += ' Q ';
-			}
-			else {
-				outPath += ' M ';
-			}
-			if (i%3 == start) {
 				outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
 				outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
 			}
 			else {
-				outPath += (pointsMid[i].x-dy*mul/2)+' '+(pointsMid[i].y-dx*mul/2)+' ';
+				outPath += ' M ';
 				outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
 			}
+			
 		}
 		else {
 			if (i == 0){
