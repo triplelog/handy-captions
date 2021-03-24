@@ -267,7 +267,8 @@ function sunburst(path,strands){
 		newPath.setAttribute('d',halfPaths[ii]);
 		newPath.style.fill = strands[ii];
 
-		newPath.setAttribute('stroke','none');
+		newPath.setAttribute('stroke',strands[ii]);
+		newPath.setAttribute('stroke-width','0.5');
 
 		heartFill.appendChild(newPath);
 	}
