@@ -116,8 +116,8 @@
 		<option value="gradient">Gradient</option>
 		<option value="isometric">Isometric</option>
 		<option value="3d">3D</option>
-		<option value="emboss">Emboss</option>
-		<option value="ftc">FTC</option>
+		<option value="emboss">Embossed</option>
+		<option value="twisted">Twisted</option>
 	</select>
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
@@ -351,7 +351,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			heartFill.appendChild(newDef);
 		}
 		
-		twist(path,['url(#linear-grad-0)','black','url(#linear-grad-2)'],'open',4,16);
+		twist(path,['url(#linear-grad-0)','black','url(#linear-grad-2)'],'open',3,9);
 		
 		
 	}
