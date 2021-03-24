@@ -686,12 +686,13 @@ function twist(pathEl) {
 	console.log(len);
 	var points = [];
 	var lastPoint;
+	var d = 10;
 	for (var i=0;i<len;i+=20){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
 		if (i>0){
 			var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
-			var dxy = slopeToD(m,10,pt,lastPoint);
+			var dxy = slopeToD(m,d,pt,lastPoint);
 			lastPoint.nextDX = dxy[0];
 			lastPoint.nextDY = dxy[1];
 			lastPoint.next = m;
@@ -711,19 +712,19 @@ function twist(pathEl) {
 	}
 	console.log(points);
 	
-	var d = 10;
+	
 	var outPath = '';
 	for (var i=0;i<points.length;i++){
 		var m = (points[i].last + points[i].next)/2;
 		var dx = (points[i].nextDX + points[i].lastDX)/2;
 		var dy = (points[i].nextDY + points[i].lastDY)/2;
+		var mul = Math.pow(d,1)/Math.pow((Math.pow(dy,2)+Math.pow(dx,2)),.5);
 		if (i == 0){
-			var dxy = slopeToD(m,10,points[i+1],points[i]);
-			outPath += 'M '+(points[i].x+dxy[0])+' '+(points[i].y+dxy[1]);
+			
+			outPath += 'M '+(points[i].x+dx*mul)+' '+(points[i].y+dy*mul);
 		}
 		else {
-			var dxy = slopeToD(m,10,points[i],points[i-1]);
-			outPath += ' L '+(points[i].x+dxy[0])+' '+(points[i].y+dxy[1]);
+			outPath += ' L '+(points[i].x+dx*mul)+' '+(points[i].y+dy*mul);
 		}
 		
 		
