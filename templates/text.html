@@ -110,7 +110,7 @@
 	</svg>
 </div>
 <div class="tools">
-	<select>
+	<select id="textStyle">
 		<option value="image">Image BG</option>
 		<option value="neon">Neon</option>
 		<option value="gradient">Gradient</option>
@@ -120,9 +120,9 @@
 		<option value="twisted">Twisted</option>
 	</select>
 	<div class="twistedOptions">
-		Width: <input id="strandWidth" type="number" value="3" min="0"></input>
-		Length: <input id="strandLength" type="number" value="8" min="0"></input>
-		Colors: <input id="strandColors" type="text" value="red, white, blue"></input>
+		<div>Width: <input id="strandWidth" type="number" value="3" min="0"></input></div>
+		<div>Length: <input id="strandLength" type="number" value="8" min="0"></input></div>
+		<div>Colors: <textarea id="strandColors" type="text" value="red, white, blue"></textarea></div>
 	</div>
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
@@ -390,6 +390,12 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 
 
 function setOptions(evt,first=false) {
+	var el = document.getElementById('textStyle');
+	textStyle=el.value;
+	if (first){
+		el.addEventListener('change',setOptions);
+	}
+	
 	var options = ['strandWidth','strandLength','strandColors'];
 	for (var i=0;i<options.length;i++){
 		var el = document.getElementById(options[i]);
