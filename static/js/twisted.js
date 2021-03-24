@@ -63,7 +63,15 @@ function toPath(points){
 	return pd;
 }
 
-function twist(pathEl,start,color,top) {
+function twist(path,strands){
+	for (var i=0;i<strands.length;i++){
+		strand(path,i,strands[i],strands.length);
+	}
+	for (var i=0;i<strands.length-1;i++){
+		strand(path,i,strands[i],strands.length,true);
+	}
+}
+function strand(pathEl,start,color,n,top) {
 	
 	var len = pathEl.getTotalLength();
 	console.log(len);
@@ -125,8 +133,8 @@ function twist(pathEl,start,color,top) {
 		
 		var mul = Math.pow(d,1)/Math.pow((Math.pow(dy,2)+Math.pow(dx,2)),.5);
 		if (top){
-			if (i%3 != (start +1)%3 && i > start) {
-				if (i%3 == start ){
+			if (i%n != (start +1)%n && i > start) {
+				if (i%n == start ){
 					outPath += ' Q ';
 					outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
 					outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
@@ -145,13 +153,13 @@ function twist(pathEl,start,color,top) {
 			else {
 				outPath += ' Q ';
 			}
-			if (i%3 == start) {
+			if (i%n == start) {
 				if (i>0){
 					outPath += (pointsMid[i].x+0)+' '+(pointsMid[i].y+0)+' ';
 				}
 				outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
 			}
-			else if (i%3 == (start +1)%3 ) {
+			else if (i%n == (start +1)%n ) {
 				if (i>0){
 					outPath += (pointsMid[i].x+dy*mul/2)+' '+(pointsMid[i].y+dx*mul/2)+' ';
 				}
