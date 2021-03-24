@@ -63,19 +63,23 @@ function toPath(points){
 	return pd;
 }
 
-function twist(path,strands){
-	/*for (var i=0;i<strands.length;i++){
-		strand(path,i,strands[i],strands.length,0);
+function twist(path,strands,type){
+	if (type == 'closed'){
+		for (var i=0;i<strands.length;i++){
+			strand(path,i,strands[i],strands.length,0);
+		}
+		for (var i=0;i<strands.length;i++){
+			strand(path,i,strands[i],strands.length,1);
+		}
 	}
-	for (var i=0;i<strands.length;i++){
-		strand(path,i,strands[i],strands.length,1);
-	}*/
+	else {
 	
-	for (var i=0;i<strands.length;i++){
-		strand(path,i,strands[i],strands.length,-1);
-	}
-	for (var i=0;i<strands.length-1;i++){
-		strand(path,i,strands[i],strands.length,0);
+		for (var i=0;i<strands.length;i++){
+			strand(path,i,strands[i],strands.length,-1);
+		}
+		for (var i=0;i<strands.length-1;i++){
+			strand(path,i,strands[i],strands.length,0);
+		}
 	}
 	
 }
