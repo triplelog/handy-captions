@@ -365,7 +365,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		
 		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 
-		path.setAttribute('d',pd);
+		path.setAttribute('d',pd+"Z");
 		path.setAttribute('stroke','none');
 		path.setAttribute('stroke-width','1');
 		path.setAttribute('fill','none');
