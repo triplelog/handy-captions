@@ -70,12 +70,12 @@ function twist(pathEl,start,color,top) {
 	var points = [];
 	var pointsMid = [''];
 	var lastPoint;
-	var d = 2;
-	for (var i=0;i<len;i+=10){
+	var d = 3;
+	for (var i=0;i<len;i+=12){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
 		if (i > 0){
-			var ptMid = pathEl.getPointAtLength(i-5);
+			var ptMid = pathEl.getPointAtLength(i-6);
 			pointsMid.push(ptMid);
 		}
 		if (i>0){
@@ -93,7 +93,7 @@ function twist(pathEl,start,color,top) {
 	var pt = pathEl.getPointAtLength(len-0.1);
 	points.push(pt);
 
-	var ptMid = pathEl.getPointAtLength(i-5);
+	var ptMid = pathEl.getPointAtLength(i-6);
 	pointsMid.push(ptMid);
 
 	var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
@@ -169,7 +169,7 @@ function twist(pathEl,start,color,top) {
 	newPath.setAttribute('d',outPath);
 	newPath.style.fill = "none";
 
-	newPath.setAttribute('stroke-width','2');
+	newPath.setAttribute('stroke-width','3');
 	
 	newPath.setAttribute('stroke',color);
 
