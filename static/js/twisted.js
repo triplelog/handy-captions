@@ -65,17 +65,17 @@ function toPath(points){
 
 function twist(path,strands){
 	/*for (var i=0;i<strands.length;i++){
-		strand(path,i,strands[i],strands.length,-2);
+		strand(path,i,strands[i],strands.length,0);
 	}
 	for (var i=0;i<strands.length;i++){
-		strand(path,i,strands[i],strands.length,-1);
+		strand(path,i,strands[i],strands.length,1);
 	}*/
 	
 	for (var i=0;i<strands.length;i++){
-		strand(path,i,strands[i],strands.length,1);
+		strand(path,i,strands[i],strands.length,-1);
 	}
 	for (var i=0;i<strands.length-1;i++){
-		strand(path,i,strands[i],strands.length,2);
+		strand(path,i,strands[i],strands.length,0);
 	}
 	
 }
@@ -144,7 +144,7 @@ function strand(pathEl,start,color,n,bottom) {
 		var dy = (points[i].nextDY + points[i].lastDY)/2;
 		
 		var mul = Math.pow(d,1)/Math.pow((Math.pow(dy,2)+Math.pow(dx,2)),.5);
-		if (bottom == -2){
+		if (bottom == 0){
 			if ( (i%n ==start || i%n == (n+start-1)%n) && i > start) {
 				var offset = (n+i-start)%n;
 				if (i%n == start ){
@@ -161,7 +161,7 @@ function strand(pathEl,start,color,n,bottom) {
 			}
 			
 		}
-		else if (bottom == -1){
+		else if (bottom == 1){
 			if ( (i%n ==start || i%n == (n+start-1)%n) && i > start) {
 				var offset = (n+i-start)%n;
 				if (i%n == start ){
@@ -189,24 +189,7 @@ function strand(pathEl,start,color,n,bottom) {
 			outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 			
 		}
-		else if (bottom == 2){
-			if ( (i%n ==start || i%n == (n+start-1)%n) && i > start) {
-				var offset = (n+i-start)%n;
-				if (i%n == start ){
-					var offsetL = (n+i-1-start)%n;
-					var avgShift = (shifts[offset]+shifts[offsetL])/2;
-					outPath += ' Q ';
-					outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
-					outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
-				}
-				else {
-					outPath += ' M ';
-					outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
-				}
-			}
-			
-		}
-		else if (bottom == 1){
+		else if (bottom == -1){
 			
 			
 			if (i == 0){
