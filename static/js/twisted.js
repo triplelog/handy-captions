@@ -230,11 +230,12 @@ function strand(pathEl,start,color,n,bottom) {
 				outPath += 'M ';
 				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 			}
-			else {
+			else if (i>0) {
 				outPath += ' Q ';
 				var offsetL = (n+i-1-start)%n;
 				var avgShift = (shifts[offset]+shifts[offsetL])/2;
 				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
+				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 			}
 			
 			
@@ -253,6 +254,7 @@ function strand(pathEl,start,color,n,bottom) {
 				var offsetL = (n+i-1-start)%n;
 				var avgShift = (shifts[offset]+shifts[offsetL])/2;
 				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
+				outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
 			}
 			
 		}
