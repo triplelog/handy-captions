@@ -233,32 +233,28 @@ function sunburst(path,strands){
 	var halfPath = '';
 	var centerPoint = {'x':0,'y':0};
 	console.log(halfPath);
-	for (var i=0;i<100;i++){
-		var pt = path.getPointAtLength(len*i/100);
-		centerPoint.x += pt.x/100;
-		centerPoint.y += pt.y/100;
+	var n = 50;
+	for (var i=0;i<n;i++){
+		var pt = path.getPointAtLength(len*i/n);
+		centerPoint.x += pt.x/n;
+		centerPoint.y += pt.y/n;
 	}
 	
-	for (var i=0;i<99;i+=2){
-		var pt1 = path.getPointAtLength(len*i/100);
-		var pt2 = path.getPointAtLength(len*(i+1)/100);
-		var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
+	var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
+	for (var i=0;i<n;i+=2){
+		var pt1 = path.getPointAtLength(len*i/n);
+		var pt2 = path.getPointAtLength(len*(i+1)/n);
+		
 		halfPath += ' L '+pt1.x+' '+pt1.y;
 		halfPath += ' L '+pt2.x+' '+pt2.y;
 		halfPath += ' L '+centerPoint.x+' '+centerPoint.y;
 		
-		var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-		newPath.setAttribute('d',halfPath);
-		newPath.style.fill = "green";
-	
-		newPath.setAttribute('stroke','none');
-
-		heartFill.appendChild(newPath);
+		
 	}
-	var pt1 = path.getPointAtLength(len*100/100);
-	var pt2 = path.getPointAtLength(len*(0)/100);
+	var pt1 = path.getPointAtLength(len*n/n);
+	var pt2 = path.getPointAtLength(len*(0)/n);
 	
-	var halfPath = 'M '+centerPoint.x+' '+centerPoint.y;
+	
 	halfPath += ' L '+pt1.x+' '+pt1.y;
 	halfPath += ' L '+pt2.x+' '+pt2.y;
 	halfPath += ' L '+centerPoint.x+' '+centerPoint.y;
