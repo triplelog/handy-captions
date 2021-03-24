@@ -232,6 +232,7 @@ function sunburst(path,strands){
 	var len = path.getTotalLength();
 	var halfPath = '';
 	var centerPoint = {'x':0,'y':0};
+	console.log(halfPath);
 	for (var i=0;i<100;i++){
 		var pt = path.getPointAtLength(len*i/100);
 		centerPoint.x += pt.x/100;
@@ -254,14 +255,14 @@ function sunburst(path,strands){
 	halfPath += ' L '+centerPoint.x+' '+centerPoint.y;
 	
 	var newPath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-	newPath.setAttribute('d',outPath);
+	newPath.setAttribute('d',halfPath);
 	newPath.style.fill = "green";
 
 	newPath.setAttribute('stroke-width','1');
 	
 	newPath.setAttribute('stroke','none');
 
-
+	console.log(halfPath);
 	heartFill.appendChild(newPath);
 	
 }
