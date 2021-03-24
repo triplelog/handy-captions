@@ -706,7 +706,7 @@ function twist(pathEl) {
 	
 	var d = 10;
 	var outPath = '';
-	for (var i=0;i<len;i+=100){
+	for (var i=0;i<points.length;i++){
 		var m = (points[i].last + points[i].next)/2;
 		var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 		var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
