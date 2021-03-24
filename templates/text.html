@@ -115,14 +115,14 @@
 		<option value="neon">Neon</option>
 		<option value="gradient">Gradient</option>
 		<option value="isometric">Isometric</option>
-		<option value="3d">3D</option>
-		<option value="emboss">Embossed</option>
+		<option value="3D">3D</option>
+		<option value="embossed">Embossed</option>
 		<option value="twisted">Twisted</option>
 	</select>
 	<div class="twistedOptions">
 		<div>Width: <input id="strandWidth" type="number" value="3" min="0"></input></div>
 		<div>Length: <input id="strandLength" type="number" value="8" min="0"></input></div>
-		<div>Colors: <textarea id="strandColors" type="text" value="red, white, blue"></textarea></div>
+		<div>Colors: <textarea id="strandColors" type="text">red, white, blue</textarea></div>
 	</div>
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
@@ -210,7 +210,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 			svg.appendChild(path);
 		}
 	}
-	else if (textStyle == 'emboss'){
+	else if (textStyle == 'embossed'){
 		for (var i=0;i<6;i++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	
@@ -370,6 +370,9 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	path2.setAttribute('d',pd);
 	if (textStyle == 'twisted'){
 		path2.setAttribute('stroke','none');
+	}
+	else if (textStyle == 'embossed'){
+		path2.setAttribute('stroke','gray');
 	}
 	else if (textBG == 'gradient'){
 		path2.setAttribute('stroke','url(#img1)');
