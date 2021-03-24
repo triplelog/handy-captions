@@ -64,19 +64,19 @@ function toPath(points){
 }
 
 function twist(path,strands){
-	for (var i=0;i<strands.length;i++){
+	/*for (var i=0;i<strands.length;i++){
 		strand(path,i,strands[i],strands.length,-2);
 	}
 	for (var i=0;i<strands.length;i++){
 		strand(path,i,strands[i],strands.length,-1);
-	}
+	}*/
 	
-	/*for (var i=0;i<strands.length;i++){
+	for (var i=0;i<strands.length;i++){
 		strand(path,i,strands[i],strands.length,1);
 	}
 	for (var i=0;i<strands.length-1;i++){
 		strand(path,i,strands[i],strands.length,2);
-	}*/
+	}
 	
 }
 function strand(pathEl,start,color,n,bottom) {
