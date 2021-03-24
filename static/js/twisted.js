@@ -681,5 +681,15 @@ function lineIntersect(line1,line2) {
 
 
 function twist(pathEl) {
-	console.log(pathEl.getTotalLength());
+	
+	var len = pathEl.getTotalLength();
+	console.log(len);
+	for (var i=0;i<len;i+=100){
+		var pt = pathEl.getPointAtLength(i);
+		console.log(pt);
+	}
+	
+	
+	
+	//console.log();
 }
