@@ -232,7 +232,6 @@ function sunburst(path,strands){
 	var len = path.getTotalLength();
 	var centerPoint = {'x':0,'y':0};
 	var s = strands.length;
-	console.log(halfPath);
 	var n = Math.round(50/s)*s;
 	for (var i=0;i<n;i++){
 		var pt = path.getPointAtLength(len*i/n);
