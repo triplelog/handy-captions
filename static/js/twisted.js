@@ -739,13 +739,24 @@ function twist(pathEl) {
 function slopeToD(m,d,point2,point1){
 	var dx = Math.pow(Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
 	var dy = Math.pow(Math.pow(m,2)*Math.pow(d,2)/(1+Math.pow(m,2)),0.5);
-
-	if (point2.y < point1.y){
-		dy *= -1;
+	
+	var direction = (point2.y < point1.y)*(point2.x < point1.x);
+	if (direction < 0){
+		if (point2.x > point1.x){
+			dx *= -1;
+		}
+		if (point2.y < point1.y){
+			dy *= -1;
+		}
 	}
-	if (point2.x < point1.x){
-		dx *= -1;
+	else {
+		if (point2.x < point1.x){
+			dx *= -1;
+		}
+		if (point2.y > point1.y){
+			dy *= -1;
+		}
 	}
-	dx *= -1;
+	
 	return [dx,dy];
 }
