@@ -63,7 +63,7 @@ function toPath(points){
 	return pd;
 }
 
-function twist(pathEl,start,color) {
+function twist(pathEl,start,color,top) {
 	
 	var len = pathEl.getTotalLength();
 	console.log(len);
@@ -103,20 +103,36 @@ function twist(pathEl,start,color) {
 		var dy = (points[i].nextDY + points[i].lastDY)/2;
 		
 		var mul = Math.pow(d,1)/Math.pow((Math.pow(dy,2)+Math.pow(dx,2)),.5);
-		if (i == 0){
-			outPath += 'M ';
+		if (top && i%3 != (start +1)%3 && i > start){
+			if (i%3 == start ){
+				outPath += 'L ';
+			}
+			else {
+				outPath += ' M ';
+			}
+			if (i%3 == start) {
+				outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
+			}
+			else {
+				outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
+			}
 		}
 		else {
-			outPath += ' L ';
-		}
-		if (i%3 == start) {
-			outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
-		}
-		else if (i%3 == (start +1)%3 ) {
-			outPath += (points[i].x+0*dy*mul)+' '+(points[i].y+0*dx*mul);
-		}
-		else {
-			outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
+			if (i == 0){
+				outPath += 'M ';
+			}
+			else {
+				outPath += ' L ';
+			}
+			if (i%3 == start) {
+				outPath += (points[i].x+dy*mul)+' '+(points[i].y+dx*mul);
+			}
+			else if (i%3 == (start +1)%3 ) {
+				outPath += (points[i].x+0*dy*mul)+' '+(points[i].y+0*dx*mul);
+			}
+			else {
+				outPath += (points[i].x-dy*mul)+' '+(points[i].y-dx*mul);
+			}
 		}
 		
 		
