@@ -694,16 +694,20 @@ function twist(pathEl) {
 			var dxy = slopeToD(m,10,pt,lastPoint);
 			lastPoint.nextDX = dxy[0];
 			lastPoint.nextDY = dxy[1];
+			lastPoint.next = m;
 			pt.lastDX = dxy[0];
 			pt.lastDY = dxy[1];
+			pt.last = m;
 		}
 		lastPoint = pt;
 	}
 	if (points.length > 1){
 		points[0].lastDX = points[0].nextDX;
 		points[0].lastDY = points[0].nextDY;
+		points[0].last = points[0].next;
 		points[points.length-1].nextDX = points[points.length-1].lastDX;
 		points[points.length-1].nextDY = points[points.length-1].lastDY;
+		points[points.length-1].next = points[points.length-1].last;
 	}
 	console.log(points);
 	
@@ -714,10 +718,12 @@ function twist(pathEl) {
 		var dx = (points[i].nextDX + points[i].lastDX)/2;
 		var dy = (points[i].nextDY + points[i].lastDY)/2;
 		if (i == 0){
-			outPath += 'M '+(points[i].x+dx)+' '+(points[i].y+dy);
+			var dxy = slopeToD(m,10,points[i+1],points[i]);
+			outPath += 'M '+(points[i].x+dxy[0])+' '+(points[i].y+dxy[1]);
 		}
 		else {
-			outPath += ' L '+(points[i].x+dx)+' '+(points[i].y+dy);
+			var dxy = slopeToD(m,10,points[i+1],points[i]);
+			outPath += ' L '+(points[i].x+dxy[0])+' '+(points[i].y+dxy[1]);
 		}
 		
 		
