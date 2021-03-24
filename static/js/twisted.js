@@ -71,7 +71,7 @@ function twist(pathEl,start,color,top) {
 	var pointsMid = [''];
 	var lastPoint;
 	var d = 3;//width of strand
-	var l = 8;//length of strand
+	var l = 6;//length of strand
 	for (var i=0;i<len;i+=l){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
