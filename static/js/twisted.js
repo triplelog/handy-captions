@@ -247,19 +247,20 @@ function sunburst(path,strands){
 	for (var i=0;i<n;i++){
 
 		var pt1 = path.getPointAtLength(len*(i)/n);
-		var pt2 = path.getPointAtLength(len*(i+1)/n);
+		var pt2 = path.getPointAtLength(len*(i+0.5)/n);
+		var pt3 = path.getPointAtLength(len*(i+1)/n);
 	
 		halfPaths[i%s] += ' L '+pt1.x+' '+pt1.y;
-		halfPaths[i%s] += ' L '+pt2.x+' '+pt2.y;
+		halfPaths[i%s] += ' Q '+pt2.x+' '+pt2.y+' '+pt3.x+' '+pt3.y;
 		halfPaths[i%s] += ' L '+centerPoint.x+' '+centerPoint.y;
 
 	}
 
 	var pt1 = path.getPointAtLength(len*n/n);
-	var pt2 = path.getPointAtLength(len*(0)/n);
+	var pt3 = path.getPointAtLength(len*(0)/n);
 
 	halfPaths[s-1] += ' L '+pt1.x+' '+pt1.y;
-	halfPaths[s-1] += ' L '+pt2.x+' '+pt2.y;
+	halfPaths[s-1] += ' L '+pt3.x+' '+pt3.y;
 	halfPaths[s-1] += ' L '+centerPoint.x+' '+centerPoint.y;
 	
 	for (var ii=0;ii<s;ii++){
