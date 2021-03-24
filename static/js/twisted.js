@@ -686,8 +686,8 @@ function twist(pathEl) {
 	console.log(len);
 	var points = [];
 	var lastPoint;
-	var d = 10;
-	for (var i=0;i<len;i+=20){
+	var d = 5;
+	for (var i=0;i<len;i+=30){
 		var pt = pathEl.getPointAtLength(i);
 		points.push(pt);
 		if (i>0){
