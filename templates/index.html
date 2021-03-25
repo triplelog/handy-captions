@@ -100,9 +100,7 @@
 #topRightHeader {
 	position: relative;
 	height: 150px;
-	width: calc(100% - 2rem);
-	left: 2rem;
-	display: block;
+	
 }
 #topRightHeader > svg {
 	position: relative;
@@ -110,6 +108,11 @@
 	height: 150px;
 	left: calc(50% - 150px);
 	display: inline-block;
+}
+.topRight > * > div {
+	width: calc(100% - 5rem);
+	left: 5rem;
+	display: block;
 }
 .content {
 	position: relative;
@@ -150,7 +153,7 @@
 }
 .centerFlex > div {
 	width: 10rem;
-	left: calc(50% - 5rem);
+	margin-left: calc(50% - 5rem);
 	margin-right: 1000rem;
 	min-height: 1rem;
 	background: white;
