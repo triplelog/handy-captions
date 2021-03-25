@@ -20,6 +20,9 @@
 .resizer:hover {
 	cursor: pointer;
 }
+.underResizer:hover {
+	background: red;
+}
 .topRight .bgSVG path:nth-child(1){
 	fill: #99FF99;
 }
@@ -465,7 +468,7 @@
 
 	</div>
 	<div class="topLeft">
-		<div style="width: 100%; height: 100%; overflow: hidden; display: inline-block; position: absolute; background: rgba(0,0,0,0.2);">
+		<div style="width: 100%; height: 100%; overflow: hidden; display: inline-block; position: absolute;">
 			<div id="topLeftHeader">
 				<svg viewBox="0 0 300 150" width="300" height="150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<defs>
@@ -535,6 +538,10 @@
 				</div>
 			</div>
 		</div>
+		<div class="underResizer" style="position: absolute; right: -6rem; bottom: -6rem; width: 11rem; height: 11rem; background: transparent;">
+        	
+			
+        </div>
 		<div class="resizer" style="width:calc(50vw); height: calc(50vh); resize: both; max-width: calc(100vw - 2rem); min-width: calc(2rem); max-height: calc(100vh - 2rem); min-height: calc(2rem); overflow: hidden; transform: scale(12) translate(calc(-45.8333% + 0.5rem ), calc(-45.8333% + 0.5rem ));">
         </div>
         <div style="position: absolute; right: -6rem; bottom: -6rem; width: 11rem; height: 11rem; background: transparent; pointer-events: none;">
