@@ -52,7 +52,7 @@
   	animation-direction: alternate;
 }
 .topRight .fgSVG path{
-	stroke: #222222;
+	stroke: #444444;
 }
 .topRight .fgSVG{
 	pointer-events: none;
@@ -112,7 +112,22 @@
 .topRight > * > div {
 	width: calc(100% - 5rem);
 	left: 5rem;
-	
+}
+#bottomRightHeader {
+	position: relative;
+	height: 150px;
+	display: block;
+}
+#bottomRightHeader > svg {
+	position: relative;
+	width: 300px;
+	height: 150px;
+	left: calc(50% - 150px);
+	display: inline-block;
+}
+.bottomRight > * > div {
+	width: calc(100% - 5rem);
+	left: 5rem;
 }
 .content {
 	position: relative;
@@ -260,7 +275,7 @@
 		
 	</div>
 	<div class="bottomRight">
-		<div>
+		<div style="width: 100%; height: 100%; overflow: hidden; display: inline-block; position: absolute;">
 			<svg id="bottomRightHeader" viewBox="0 0 300 150" width="300" height="150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 				<defs>
 					
@@ -284,7 +299,45 @@
 					<path d="M 67.1 68.9 Q 67.1 69.7 67 70.1 Q 67 70.5 66.5 72.2 Q 65.9 73.9 65.5 75.4 Q 65 76.9 64.5 78.7 Q 64 80.6 62.9 85 Q 61.8 89.4 61.5 90.6 Q 61.2 91.8 61 92.5 Q 60.8 93.3 61.6 93.2 Q 62.4 93.2 63.6 92.9 Q 64.7 92.5 66.2 92.1 Q 67.6 91.6 73.7 89.1" stroke="white" stroke-width="5" fill="none" id="fg-curve-3oj1mm1gto"></path><path d="M 65.8 82.1 Q 69.3 81.2 71.1 80.7 Q 73 80.3 74.4 79.9 Q 75.9 79.5 76.6 78.5" stroke="white" stroke-width="5" fill="none" id="fg-curve-aqpsntbjam"></path><path d="M 68.9 70.5 Q 70.3 70 71.1 69.7 Q 71.9 69.4 73.8 68.9 Q 75.7 68.4 78.5 68 Q 81.2 67.5 82.6 66.2" stroke="white" stroke-width="5" fill="none" id="fg-curve-6zeqrzlyi"></path><path d="M 95 68.2 Q 95 68.8 94.9 69.4 Q 94.9 70.1 94.5 73.1 Q 94.2 76.1 94 79.3 Q 93.8 82.5 93.5 86.2 Q 93.2 89.9 93.6 92.8 Q 93.9 95.6 93.9 94.9 Q 93.9 94.2 93.6 92.5 Q 93.2 90.8 92.8 89.9 Q 92.4 88.9 91.9 88.3 Q 91.4 87.7 89.9 86.8 Q 88.4 85.9 87.2 86.8 Q 86 87.6 85.8 88 Q 85.5 88.5 85.3 89.8 Q 85.1 91.1 85.3 92 Q 85.6 92.8 87 93.4 Q 88.5 94 90.3 93.8 Q 92.1 93.6 94.3 93 Q 96.5 92.5 99.1 90.9 Q 101.7 89.3 102.4 88.2" stroke="white" stroke-width="5" fill="none" id="fg-curve-l6375p8a9"></path><path d="M 109.9 81.2 Q 109.8 83 109.6 84.3 Q 109.5 85.6 109.4 88.4 Q 109.3 91.2 109.5 90.2 Q 109.6 89.3 110 87" stroke="white" stroke-width="5" fill="none" id="fg-curve-60w8lhpzti"></path><path d="M 112.1 66.2 Q 111.9 66.4 112 67.1" stroke="white" stroke-width="5" fill="none" id="fg-curve-aem1bdmv3j"></path><path d="M 130.3 67 Q 130.5 68 130.4 68.8 Q 130.4 69.7 129.7 72.4 Q 129.1 75.2 128.8 76.7 Q 128.4 78.2 127.9 79.9 Q 127.5 81.6 126.8 83.7 Q 126.2 85.8 126.1 86.8 Q 126.1 87.7 126.2 88.9 Q 126.4 90.1 127.8 91.7 Q 129.2 93.3 131.2 92.1" stroke="white" stroke-width="5" fill="none" id="fg-curve-be237zlljp"></path><path d="M 123.1 77.5 Q 124.6 77.3 125.7 77.1 Q 126.9 76.9 128.5 76.6 Q 130.2 76.3 131.2 76.2 Q 132.3 76 134.3 75.7" stroke="white" stroke-width="5" fill="none" id="fg-curve-vb035eyndd"></path><path d="M 146.8 77.9 Q 146.1 78.4 145.6 78.8 Q 145.2 79.2 144.4 80.3 Q 143.7 81.5 143.3 82.4 Q 143 83.3 142.8 84.3 Q 142.6 85.3 143.2 86.6 Q 143.8 87.9 144.3 88.2 Q 144.7 88.6 145.8 89.3 Q 146.9 90 147.7 90.2 Q 148.4 90.4 149.6 90.6 Q 150.7 90.7 152.8 90.6 Q 154.9 90.4 155.7 89.5 Q 156.4 88.5 156.7 87.8 Q 157.1 87.1 157.4 86.3 Q 157.7 85.5 157.7 84.1 Q 157.6 82.8 157.3 82.4 Q 157 82 156 81.2 Q 155 80.5 154.5 80.2 Q 154.1 79.8 153.7 79.5 Q 153.3 79.2 152.6 79 Q 152 78.8 151.5 79 Q 151 79.2 150.1 79.5 Q 149.1 79.8 146.9 80.5" stroke="white" stroke-width="5" fill="none" id="fg-curve-7s9rh37pw"></path><path d="M 166.3 79.3 Q 166.2 80.1 166.3 80.6 Q 166.4 81.2 166.5 83.1 Q 166.7 85 167.1 87 Q 167.6 89 167.6 88.4 Q 167.6 87.7 167.6 87 Q 167.6 86.2 167.6 84.9 Q 167.7 83.5 168.5 80.9 Q 169.4 78.4 170.9 77.7 Q 172.5 77.1 173.8 76.9 Q 175 76.7 177.3 77.1" stroke="white" stroke-width="5" fill="none" id="fg-curve-u6sd0nko5"></path>
 				</g>
 			</svg>
+			<div class="content">
+				<div class="leftFlex">
+					<div style="width: 500%; position: absolute; left: 0px; height: 100%; display: flex; flex-wrap: wrap; flex-direction: row-reverse;">
+						<div style="width: 200px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 0; flex-shrink: 0; background: green;">
+						</div>
+					</div>
+				</div>
+				<div class="centerFlex">
+					<div>Isometric/3D</div>
+					<div>Gradients/Image BG</div>
+					<div>Twisted</div>
+					<div>Neon</div>
+					<div>More</div>
+				</div>
+				<div class="rightFlex">
+					<div style="width: 500%; position: absolute; right: 0px; height: 100%; display: flex; flex-wrap: wrap;">
+						<div style="width: 200px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 0; flex-shrink: 0; background: green;">
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
 	</div>
 	<div class="topLeft">
 		<div style="width:calc(50vw); height: calc(50vh); resize: both; max-width: calc(100vw - 2rem); min-width: calc(2rem); max-height: calc(100vh - 2rem); min-height: calc(2rem); overflow: hidden; transform: scale(16) translate(calc(-46.875% + 0.25rem ), calc(-46.875% + 0.25rem ));">
