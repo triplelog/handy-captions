@@ -111,46 +111,51 @@
 	left: calc(50% - 150px);
 	display: inline-block;
 }
-#topRightContent {
+.content {
 	position: relative;
 	height: calc(100% - 150px - 5rem);
-	display: block;
+	display: flex;
 	
 }
-#topRightContent > .listFlex {
-	position: absolute;
-	width: 50%;
-	max-width: 150px;
-	left: calc(50% - 75px);
-	left: max(25%,calc(50% - 75px));
+.content > .leftFlex {
+	width: 33%;
+	flex: 1;
 	height: 100%;
 	border: 0px solid black;
 	overflow: hidden;
 }
-.listFlex {
+.content > .centerFlex {
+	min-width: 10rem;
+	width: 34%;
+	flex: 1;
+	height: 100%;
+	border: 0px solid black;
+	overflow: hidden;
+}
+.content > .rightFlex {
+	width: 33%;
+	flex: 1;
+	height: 100%;
+	border: 0px solid black;
+	overflow: hidden;
+}
+.centerFlex {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	
 }
-.listFlex > div {
-	width: 150px;
+.centerFlex > div {
+	width: 10rem;
 	margin-right: 1000rem;
 	min-height: 1rem;
 	background: white;
 	display: inline-block;
 }
-.listFlex > div:nth-child(2n+1) {
+.centerFlex > div:nth-child(2n+1) {
 	background: gray;
 }
-#topRightContent > .rightFlex {
-	position: absolute;
-	width: 20%;
-	max-width: 200px;
-	left: calc(75%);
-	height: 100%;
-	overflow: hidden;
-}
+
 </style>
 </head>
 <body style="overflow:hidden; margin: 0px;">
@@ -178,8 +183,22 @@
 				
 				</svg>
 			</div>
-			<div id="topRightContent">
-				<div class="listFlex">
+			<div id="topRight content">
+				<div class="leftFlex">
+					<div style="width: 500%; position: absolute; right: 0px; height: 100%; display: flex; flex-wrap: wrap;">
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0; background: blue;">
+						</div>
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0; background: black;">
+						</div>
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0; background: gray;">
+						</div>
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0; background: white;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 0; flex-shrink: 0; background: green;">
+						</div>
+					</div>
+				</div>
+				<div class="centerFlex">
 					<div>Isometric/3D</div>
 					<div>Gradients/Image BG</div>
 					<div>Twisted</div>
