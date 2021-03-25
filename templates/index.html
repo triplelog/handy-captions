@@ -100,6 +100,8 @@
 #topRightHeader {
 	position: relative;
 	height: 150px;
+	width: calc(100% - 2rem);
+	left: 2rem;
 	display: block;
 }
 #topRightHeader > svg {
@@ -111,7 +113,7 @@
 }
 #topRightText {
 	position: relative;
-	height: calc(100% - 150px);
+	height: calc(100% - 150px - 2rem);
 	display: block;
 }
 #topRightText > ul {
@@ -119,6 +121,16 @@
 	width: 300px;
 	left: calc(50% - 150px);
 	display: inline-block;
+}
+.listFlex {
+	display: flex;
+}
+.listFlex > div {
+	width: 100px;
+	background: white;
+}
+.listFlex > div:nth-child(2n+1) {
+	background: gray;
 }
 </style>
 </head>
@@ -148,12 +160,13 @@
 				</svg>
 			</div>
 			<div id="topRightText">
-				<ul>
-					<li>Isometric/3D</li>
-					<li>Gradients/Image BG</li>
-					<li>Twisted</li>
-					<li>Neon</li>
-				</ul>
+				<div class="listFlex">
+					<div>Isometric/3D</div>
+					<div>Gradients/Image BG</div>
+					<div>Twisted</div>
+					<div>Neon</div>
+					<div>More</div>
+				</div>
 			</div>
 			
 			<svg preserveAspectRatio="xMidYMid slice" style="position: absolute; display: inline-block; width: 5rem; height: 100%; left: 0px; top: 0px;" id="topRightBorderL" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
