@@ -120,8 +120,9 @@
 #topRightText > div {
 	position: relative;
 	width: 50%;
-	max-width: 300px;
-	left: max(calc(25% + 75px),calc(50% - 150px));
+	max-width: 150px;
+	left: calc(50% - 75px);
+	left: max(25%,calc(50% - 75px));
 	height: 100%;
 	border: 0px solid black;
 	overflow: hidden;
@@ -134,7 +135,7 @@
 }
 .listFlex > div {
 	width: 150px;
-	margin-right: max(0px,calc(1000 * (150px - 50%)));
+	margin-right: 1000rem;
 	min-height: 1rem;
 	background: white;
 	display: inline-block;
