@@ -123,6 +123,7 @@
 	height: 100%;
 	border: 0px solid black;
 	overflow: hidden;
+	position: relative;
 }
 .content > .centerFlex {
 	min-width: 10rem;
@@ -131,6 +132,7 @@
 	height: 100%;
 	border: 0px solid black;
 	overflow: hidden;
+	position: relative;
 }
 .content > .rightFlex {
 	width: 33%;
@@ -138,6 +140,7 @@
 	height: 100%;
 	border: 0px solid black;
 	overflow: hidden;
+	position: relative;
 }
 .centerFlex {
 	display: flex;
@@ -147,6 +150,7 @@
 }
 .centerFlex > div {
 	width: 10rem;
+	left: calc(50% - 5rem);
 	margin-right: 1000rem;
 	min-height: 1rem;
 	background: white;
@@ -185,7 +189,18 @@
 			</div>
 			<div class="content">
 				<div class="leftFlex">
-					
+					<div style="width: 500%; position: absolute; right: 0px; height: 100%; display: flex; flex-wrap: wrap;">
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0;">
+						</div>
+						<div style="width: 200px; height: 100%; flex-grow: 0; flex-shrink: 0; background: green;">
+						</div>
+					</div>
 				</div>
 				<div class="centerFlex">
 					<div>Isometric/3D</div>
@@ -196,13 +211,13 @@
 				</div>
 				<div class="rightFlex">
 					<div style="width: 500%; position: absolute; right: 0px; height: 100%; display: flex; flex-wrap: wrap;">
-						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0; background: blue;">
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0;">
 						</div>
-						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0; background: black;">
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0;">
 						</div>
-						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0; background: gray;">
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0;">
 						</div>
-						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0; background: white;">
+						<div style="width: 100px; height: 100%; flex-grow: 1; flex-shrink: 0;">
 						</div>
 						<div style="width: 200px; height: 100%; flex-grow: 0; flex-shrink: 0; background: green;">
 						</div>
