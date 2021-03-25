@@ -72,28 +72,46 @@
 	stroke: #000000;
 }
 
+
+.container {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0px;
+  grid-template-rows: max-content 1fr;
+  height: 100vh;
+  width: 100vw;
+  border: 0px solid black;
+  overflow: hidden;
+}
+.topLeft {
+	background: rgb(96.3% 86.22% 88.93%);
+	grid-column: 1;
+	grid-row: 1;
+}
+.topRight {
+	background: rgb(80.66% 91.1% 88.57%);
+	grid-column: 2;
+	grid-row: 1;
+}
+.bottomLeft {
+	background: rgb(91.19% 88.59% 81.26%);
+	grid-column: 1;
+	grid-row: 2;
+}
+.bottomRight {
+	background: rgb(85.95% 88.94% 96.22%);
+	grid-column: 2;
+	grid-row: 2;
+}
+
 </style>
 </head>
 <body>
-<div style="width: 100vw; height: 100vh; position: absolute; left:0px; top: 0px;">
-	<svg id="fullBG" viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<defs>
-		
-		</defs>
-
-	
-		<g class="bgSVG">
-			<path d="M50 50 L100 50" stroke="black" stroke-width="1" fill="none" />
-			<path d="M50 50 L0 50" stroke="black" stroke-width="1" fill="none" />
-			<path d="M50 50 L50 100" stroke="black" stroke-width="1" fill="none" />
-			<path d="M50 50 L50 0" stroke="black" stroke-width="1" fill="none" />
-		</g>
-	
-	</svg>
-</div>
 <div class="container">
 	
-	<div>
+	<div class="topLeft">
+		<div style="width:calc(50vw); height: calc(50vh); resize: both; max-height: calc(100vh - 1rem); min-height: calc(1rem); overflow: hidden; transform: scale(16) translate(calc(-47.25% ), calc(-47.25% ));">
+        </div>
 	</div>
 	<div class="topRight">
 		<div>
