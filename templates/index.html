@@ -111,13 +111,13 @@
 	left: calc(50% - 150px);
 	display: inline-block;
 }
-#topRightText {
+#topRightContent {
 	position: relative;
 	height: calc(100% - 150px - 5rem);
 	display: block;
 	
 }
-#topRightText > div {
+#topRightContent > .listFlex {
 	position: relative;
 	width: 50%;
 	max-width: 150px;
@@ -142,6 +142,15 @@
 }
 .listFlex > div:nth-child(2n+1) {
 	background: gray;
+}
+#topRightContent > .rightFlex {
+	position: relative;
+	width: 20%;
+	max-width: 100px;
+	left: calc(75%);
+	height: 100%;
+	border: 1px solid black;
+	overflow: hidden;
 }
 </style>
 </head>
@@ -170,8 +179,15 @@
 				
 				</svg>
 			</div>
-			<div id="topRightText">
+			<div id="topRightContent">
 				<div class="listFlex">
+					<div>Isometric/3D</div>
+					<div>Gradients/Image BG</div>
+					<div>Twisted</div>
+					<div>Neon</div>
+					<div>More</div>
+				</div>
+				<div class="extraFlex">
 					<div>Isometric/3D</div>
 					<div>Gradients/Image BG</div>
 					<div>Twisted</div>
