@@ -508,7 +508,17 @@ function nearestColor(r,g,b,a) {
 			minD = d;
 		}
 	}*/
-	var color = {'r':85,'g':85,'b':85};
+	var color = {'r':255,'g':255,'b':255};
+	if (a > 3.0/4){
+		color = colorSet[0];
+	}
+	else if (a > 2.0/4){
+		color = colorSet[1];
+	}
+	else if (a > 1.0/4){
+		color = colorSet[2];
+	}
+	
 	return color;
 }
 
