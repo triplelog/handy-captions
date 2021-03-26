@@ -32,8 +32,8 @@
 	position: absolute;
 	left: 0px;
 	top:50%;
-	width: 160px;
-	height: 64px;
+	width: 150px;
+	height: 60px;
 	display: inline-block;
 	border: 1px solid red;
 	/*background-image: url("img/pexels-photo-963278.jpeg");
@@ -87,12 +87,12 @@
 
 </div>
 
-	<canvas class="output" width="160" height="64">
+	<canvas class="output" width="150" height="60">
 		
 	</canvas>
 	<svg id="pixelOut" width="0" height="0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	</svg>
-	<svg style="display: none;" id="pixelSVG" viewBox="0 0 750 300" width="160" height="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<svg style="display: none;" id="pixelSVG" viewBox="0 0 750 300" width="150" height="60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	</svg>
 	<svg style="display: none;" id="pixelX" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<path d="M0 0 L100 100 M0 100 L 100 0" stroke="black" stroke-width="40" fill="none" />
@@ -411,12 +411,12 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 
 			img2.onload = function() {
 				//ctx.drawImage(img, 0, 0, 300, 300);
-				ctx.clearRect(0,0,160,64);
-				ctx.drawImage(img2, 0, 0,160,64);
+				ctx.clearRect(0,0,150,60);
+				ctx.drawImage(img2, 0, 0,150,60);
 				var pixelOut = document.getElementById('pixelOut');
 				pixelOut.innerHTML = '';
-				var imgData = ctx.getImageData(0,0,160,64).data;
-				imgDataToDiv(pixelOut,imgData,64,160);
+				var imgData = ctx.getImageData(0,0,150,60).data;
+				imgDataToDiv(pixelOut,imgData,60,150);
 		
 			}
 
