@@ -84,6 +84,10 @@
 	<canvas class="output" width="300px" height="300px">
 		
 	</canvas>
+	<svg style="display: none;" id="pixelSVG" viewBox="0 0 3000 300" width="160" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		
+		
+	</svg>
 <div class="o2" >
 	<svg id="textSVG" viewBox="0 0 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<defs>
@@ -387,11 +391,11 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		path.setAttribute('stroke-width','5');
 		path.setAttribute('fill','none');
 		path.id = "bg-"+id+"-"+i;
-		svg.appendChild(path);
+		document.getElementById('pixelSVG').appendChild(path);
 		
 		var colors = textOptions.strandColors.split(',');
 		
-		let clonedSvgElement = document.getElementById("textSVG").cloneNode(true);
+		let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
 		var img2 = new Image();
 	
 
