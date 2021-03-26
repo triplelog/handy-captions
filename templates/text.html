@@ -223,6 +223,7 @@ var textOptions = {'skewAngle':'-15','depth':32};
 var heartFill = document.querySelector('.o2 .bgSVG');
 function drawCurveOut(id,pd,startPoint,endPoint){
 	var svg = document.querySelector('.o2 .bgSVG');
+	allCurves[id]= pd;
 	
 	if (textStyle == '3D'){
 		for (var i=0;i<8;i++){
@@ -405,16 +406,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	}
 	else if (textStyle == 'pixel'){
 		
-		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-
-		path.setAttribute('d',pd);
-		path.setAttribute('stroke','black');
-		path.setAttribute('stroke-width','10');
-		path.setAttribute('fill','none');
-		path.id = "bg-"+id+"-"+i;
-		document.getElementById('pixelSVG').appendChild(path);
 		
-		var colors = textOptions.pixelColors.split(',');
 		
 		createPixelArt();
 		
@@ -446,7 +438,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	path2.id = "fg-"+id;
 	svg2.appendChild(path2);
 	
-	allCurves[id]= pd;
+	
 	var svgForm = document.getElementById('svgForm');
 	svgForm.value = document.getElementById('textSVG').outerHTML;
 	var curvesForm = document.getElementById('curvesForm');
@@ -495,6 +487,20 @@ function imgDataToDiv(div,imgData,rows,cols){
 }
 
 function createPixelArt(){
+	document.getElementById('pixelSVG').innerHTML = '';
+	var ids = Object.keys(allCurves);
+	for (var id in ids){
+		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+
+		path.setAttribute('d',allCurves[id]);
+		path.setAttribute('stroke','black');
+		path.setAttribute('stroke-width',parseFloat(textOptions.pixelThickness));
+		path.setAttribute('fill','none');
+		path.id = "bg-"+id;
+		document.getElementById('pixelSVG').appendChild(path);
+	}
+	
+	var colors = textOptions.pixelColors.split(',');
 	let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
 	var img2 = new Image();
 
