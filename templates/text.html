@@ -487,6 +487,7 @@ function imgDataToDiv(div,imgData,rows,cols){
 }
 
 function createPixelArt(){
+	colorSet = textOptions.pixelColors.split(',');
 	document.getElementById('pixelSVG').innerHTML = '';
 	var ids = Object.keys(allCurves);
 	for (var i in ids){
@@ -550,6 +551,7 @@ function setOptions(evt,first=false) {
 		}
 	}
 	if (evt && evt.target && evt.target.id && evt.target.id.substring(0,5) == 'pixel'){
+		
 		createPixelArt();
 	}
 	
