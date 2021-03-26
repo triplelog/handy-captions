@@ -72,21 +72,21 @@
 }
 
 #pixelOut {
-	border:1px solid blue;
+	border:0px solid blue;
 	position: absolute;
-	bottom: 1rem;
+	bottom: 2rem;
 }
 #pixelOut, #pixelOut > div, #pixelOut > div > span {
 	margin:0;
 	padding:0;
 }
 #pixelOut > div {
-	height: 2px;
+	height: 4px;
 	display: block;
 }
 #pixelOut > div > span {
-	height: 2px;
-	width: 2px;
+	height: 4px;
+	width: 4px;
 	display: inline-block;
 }
 
@@ -408,7 +408,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 
 		path.setAttribute('d',pd);
 		path.setAttribute('stroke','black');
-		path.setAttribute('stroke-width','3');
+		path.setAttribute('stroke-width','4');
 		path.setAttribute('fill','none');
 		path.id = "bg-"+id+"-"+i;
 		document.getElementById('pixelSVG').appendChild(path);
