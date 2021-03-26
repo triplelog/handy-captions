@@ -76,19 +76,7 @@
 	position: absolute;
 	bottom: 2rem;
 }
-/*#pixelOut, #pixelOut > div, #pixelOut > div > svg {
-	margin:0;
-	padding:0;
-}
-#pixelOut > div {
-	height: 4px;
-	display: block;
-}
-#pixelOut > div > svg {
-	height: 4px;
-	width: 4px;
-	display: inline-block;
-}*/
+
 
 
 </style>
@@ -102,7 +90,7 @@
 	<canvas class="output" width="160" height="32">
 		
 	</canvas>
-	<svg id="pixelOut" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<svg id="pixelOut" width="0" height="0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	</svg>
 	<svg style="display: none;" id="pixelSVG" viewBox="0 0 1500 300" width="160" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	</svg>
@@ -474,7 +462,6 @@ function imgDataToDiv(div,imgData,rows,cols){
 		var row = document.createElement('div');
 		for (var ii=0;ii<cols;ii++){
 			var cell = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-			//let clonedX = document.getElementById("pixelX").cloneNode(true);
 			
 			var r = imgData[4*(i*cols+ii)+0];
 			var g = imgData[4*(i*cols+ii)+1];
@@ -487,9 +474,6 @@ function imgDataToDiv(div,imgData,rows,cols){
 			cell.setAttribute('stroke','rgba('+color.r+','+color.g+','+color.b+','+1+')');
 			cell.setAttribute('stroke-width',s*0.4);
 			cell.setAttribute('fill','none');
-			//clonedX.style.display = "inline-block";
-			//clonedX.querySelector('path').setAttribute('stroke','rgba('+color.r+','+color.g+','+color.b+','+1+')');
-			//cell.style.background = 'rgba('+color.r+','+color.g+','+color.b+','+1+')';
 			
 			div.appendChild(cell);
 		}
