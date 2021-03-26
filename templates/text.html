@@ -491,7 +491,7 @@ function createPixelArt(){
 	var ids = Object.keys(allCurves);
 	for (var id in ids){
 		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-
+		console.log(id,ids,allCurves);
 		path.setAttribute('d',allCurves[id]);
 		path.setAttribute('stroke','black');
 		path.setAttribute('stroke-width',parseFloat(textOptions.pixelThickness));
