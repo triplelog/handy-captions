@@ -484,7 +484,7 @@ function imgDataToDiv(div,imgData,rows,cols){
 	}
 	for (var i=0;i<colorSet.length;i++){
 		var cell = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-		var rgba = 'rgba('+colorSet[i].r+','+colorSet[i].g+','+colorSet[i].b+','+1+')';
+		var rgba = colorSet[i];
 		cell.setAttribute('d',colorPaths[rgba]);
 		cell.setAttribute('stroke',rgba);
 		cell.setAttribute('stroke-width',s*0.4);
