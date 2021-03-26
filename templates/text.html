@@ -489,7 +489,8 @@ function imgDataToDiv(div,imgData,rows,cols){
 function createPixelArt(){
 	document.getElementById('pixelSVG').innerHTML = '';
 	var ids = Object.keys(allCurves);
-	for (var id in ids){
+	for (var i in ids){
+		var id = ids[i];
 		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		console.log(id,ids,allCurves);
 		path.setAttribute('d',allCurves[id]);
