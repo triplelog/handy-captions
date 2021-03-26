@@ -76,7 +76,7 @@
 	position: absolute;
 	bottom: 2rem;
 }
-#pixelOut, #pixelOut > div, #pixelOut > div > svg {
+/*#pixelOut, #pixelOut > div, #pixelOut > div > svg {
 	margin:0;
 	padding:0;
 }
@@ -88,7 +88,7 @@
 	height: 4px;
 	width: 4px;
 	display: inline-block;
-}
+}*/
 
 
 </style>
@@ -102,8 +102,8 @@
 	<canvas class="output" width="160" height="32">
 		
 	</canvas>
-	<div id="pixelOut">
-	</div>
+	<svg id="pixelOut" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	</svg>
 	<svg style="display: none;" id="pixelSVG" viewBox="0 0 1500 300" width="160" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	</svg>
 	<svg style="display: none;" id="pixelX" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -466,24 +466,33 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 }
 
 function imgDataToDiv(div,imgData,rows,cols){
+	var s = 5;
+	div.setAttribute('width',s*cols);
+	div.setAttribute('height',s*rows);
+	div.setAttribute('viewBox','0 0 '+s*cols+' '+s*rows);
 	for (var i=0;i<rows;i++){
 		var row = document.createElement('div');
 		for (var ii=0;ii<cols;ii++){
-			//var cell = document.createElement('span');
-			let clonedX = document.getElementById("pixelX").cloneNode(true);
+			var cell = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+			//let clonedX = document.getElementById("pixelX").cloneNode(true);
 			
 			var r = imgData[4*(i*cols+ii)+0];
 			var g = imgData[4*(i*cols+ii)+1];
 			var b = imgData[4*(i*cols+ii)+2];
 			var a = imgData[4*(i*cols+ii)+3]/255;
 			var color = nearestColor(r,g,b,a);
-			clonedX.style.display = "inline-block";
-			clonedX.querySelector('path').setAttribute('stroke','rgba('+color.r+','+color.g+','+color.b+','+1+')');
+			var pd = "M "+(ii*s)+" "+(i*s)+" L "+((ii+1)*s)+" "+((i+1)*s);
+			pd += " M "+((ii+1)*s)+" "+(i*s)+" L "+((ii)*s)+" "+((i+1)*s);
+			cell.setAttribute('d',pd);
+			cell.setAttribute('stroke','rgba('+color.r+','+color.g+','+color.b+','+1+')');
+			cell.setAttribute('stroke-width',s*0.4);
+			cell.setAttribute('fill','none');
+			//clonedX.style.display = "inline-block";
+			//clonedX.querySelector('path').setAttribute('stroke','rgba('+color.r+','+color.g+','+color.b+','+1+')');
 			//cell.style.background = 'rgba('+color.r+','+color.g+','+color.b+','+1+')';
 			
-			row.appendChild(clonedX);
+			div.appendChild(cell);
 		}
-		div.appendChild(row);
 	}
 }
 
