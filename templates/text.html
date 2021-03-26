@@ -409,16 +409,16 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		var img2 = new Image();
 	
 
-			img2.onload = function() {
-				//ctx.drawImage(img, 0, 0, 300, 300);
-				ctx.clearRect(0,0,150,60);
-				ctx.drawImage(img2, 0, 0,150,60);
-				var pixelOut = document.getElementById('pixelOut');
-				pixelOut.innerHTML = '';
-				var imgData = ctx.getImageData(0,0,150,60).data;
-				imgDataToDiv(pixelOut,imgData,60,150);
-		
-			}
+		img2.onload = function() {
+			//ctx.drawImage(img, 0, 0, 300, 300);
+			ctx.clearRect(0,0,150,60);
+			ctx.drawImage(img2, 0, 0,150,60);
+			var pixelOut = document.getElementById('pixelOut');
+			pixelOut.innerHTML = '';
+			var imgData = ctx.getImageData(0,0,150,60).data;
+			imgDataToDiv(pixelOut,imgData,60,150);
+	
+		}
 
 		img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
 
