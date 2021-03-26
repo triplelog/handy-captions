@@ -61,7 +61,7 @@ app.get('/index.html',
 app.post('/save.html', 
 	function(req, res) {
 		var content = req.body.svg;
-		fs.writeFile('/saved/'+req.body.name+'.svg', content, err => {
+		fs.writeFile('saved/'+req.body.name+'.svg', content, err => {
 		  if (err) {
 			console.error(err)
 			return
@@ -69,7 +69,7 @@ app.post('/save.html',
 		  //file written successfully
 		});
 		var curves = req.body.curves;
-		fs.writeFile('/saved/'+req.body.name+'.txt', curves, err => {
+		fs.writeFile('saved/'+req.body.name+'.txt', curves, err => {
 		  if (err) {
 			console.error(err)
 			return
