@@ -549,6 +549,10 @@ function setOptions(evt,first=false) {
 			el.addEventListener('change',setOptions);
 		}
 	}
+	if (evt && evt.id.substr(0,5) == 'pixel'){
+		createPixelArt();
+	}
+	
 	
 }
 setOptions(false,true);
