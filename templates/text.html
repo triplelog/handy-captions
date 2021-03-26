@@ -76,7 +76,7 @@
 	position: absolute;
 	bottom: 2rem;
 }
-#pixelOut, #pixelOut > div, #pixelOut > div > span {
+#pixelOut, #pixelOut > div, #pixelOut > div > svg {
 	margin:0;
 	padding:0;
 }
@@ -84,7 +84,7 @@
 	height: 4px;
 	display: block;
 }
-#pixelOut > div > span {
+#pixelOut > div > svg {
 	height: 4px;
 	width: 4px;
 	display: inline-block;
@@ -105,7 +105,9 @@
 	<div id="pixelOut">
 	</div>
 	<svg style="display: none;" id="pixelSVG" viewBox="0 0 1500 300" width="160" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		
+	</svg>
+	<svg style="display: none;" id="pixelX" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<path d="M0 0 L100 100 M0 100 L 100 0" stroke="black" stroke-width="10" fill="none" />
 		
 	</svg>
 <div class="o2" >
@@ -467,15 +469,19 @@ function imgDataToDiv(div,imgData,rows,cols){
 	for (var i=0;i<rows;i++){
 		var row = document.createElement('div');
 		for (var ii=0;ii<cols;ii++){
-			var cell = document.createElement('span');
+			//var cell = document.createElement('span');
+			let clonedX = document.getElementById("pixelX").cloneNode(true);
+			
 			var r = imgData[4*(i*cols+ii)+0];
 			var g = imgData[4*(i*cols+ii)+1];
 			var b = imgData[4*(i*cols+ii)+2];
 			var a = imgData[4*(i*cols+ii)+3]/255;
 			var color = nearestColor(r,g,b,a);
-			cell.style.background = 'rgba('+color.r+','+color.g+','+color.b+','+1+')';
+			clonedX.style.display = "inline-block";
+			clonedX.querySelector('path').setAttribute('stroke','rgba('+color.r+','+color.g+','+color.b+','+1+')');
+			//cell.style.background = 'rgba('+color.r+','+color.g+','+color.b+','+1+')';
 			
-			row.appendChild(cell);
+			row.appendChild(clonedX);
 		}
 		div.appendChild(row);
 	}
