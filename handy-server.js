@@ -56,7 +56,12 @@ app.get('/index.html',
 );
 
 
-
+app.post('/save.html', 
+	function(req, res) {
+		console.log(req.body);
+		res.end();
+	}
+);
 app.get('/home.html', 
 	function(req, res) {
 		res.write(nunjucks.render('templates/index.html',{

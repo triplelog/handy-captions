@@ -143,7 +143,12 @@
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
-	<button onclick="saveSVG();">Save</button>
+	<form action="/save.html" method="post">
+		<input type="text" id="name" name="name" />
+		<input type="text" id="svgForm" name="svg" style="display: none;" />
+		<input type="text" id="curvesForm" name="curves" style="display: none;" />
+		<button type="submit">Save</button>
+	</form>
 </div>
 
 <script src="js/twisted.js">
@@ -451,6 +456,10 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	svg2.appendChild(path2);
 	
 	allCurves[id]= pd;
+	var svgForm = document.getElementById('svgForm');
+	svgForm.value = document.getElementById('textSVG').outerHTML;
+	var curvesForm = document.getElementById('curvesForm');
+	curvesForm.value = JSON.stringify('allCurves');
 
 }
 
@@ -560,9 +569,7 @@ function downloadImage() {
 	document.getElementById('downloadLink').href = url;
 	console.log(url);
 }
-function saveSVG() {
-	console.log(allCurves);
-}
+
 </script>
 </body>
 </html>
