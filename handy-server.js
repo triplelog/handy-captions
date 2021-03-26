@@ -35,6 +35,8 @@ var app = express();
 
 
 app.use('/',express.static('static'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.get('/', 
 	
@@ -59,7 +61,7 @@ app.get('/index.html',
 app.post('/save.html', 
 	function(req, res) {
 		console.log(req.body);
-		res.end();
+		res.redirect('/text.html');
 	}
 );
 app.get('/home.html', 
