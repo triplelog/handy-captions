@@ -118,6 +118,7 @@
 		<option value="3D">3D</option>
 		<option value="embossed">Embossed</option>
 		<option value="twisted">Twisted</option>
+		<option value="pixel">Pixel</option>
 		<option value="sunburst">Sunburst</option>
 	</select>
 	<div class="twistedOptions">
@@ -136,7 +137,7 @@
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext("2d");
 var img = document.getElementById("imgBG");
-img.onload = function(){ctx.drawImage(img, 0, 0, 300, 300);}
+//img.onload = function(){ctx.drawImage(img, 0, 0, 300, 300);}
 
 var curveWorker = new Worker('js/curveWorker.js');
 var inputEl = document.querySelector('.input');
@@ -375,8 +376,33 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		var colors = textOptions.strandColors.split(',');
 		
 		sunburst(path,colors);
+
+	}
+	else if (textStyle == 'pixel'){
 		
+		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+
+		path.setAttribute('d',pd);
+		path.setAttribute('stroke','black');
+		path.setAttribute('stroke-width','5');
+		path.setAttribute('fill','none');
+		path.id = "bg-"+id+"-"+i;
+		svg.appendChild(path);
 		
+		var colors = textOptions.strandColors.split(',');
+		
+		let clonedSvgElement = document.getElementById("textSVG").cloneNode(true);
+		var img2 = new Image();
+	
+
+			img2.onload = function() {
+				//ctx.drawImage(img, 0, 0, 300, 300);
+				ctx.drawImage(img2, 0, 0,300,300);
+		
+			}
+
+		img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
+
 	}
 	
 	
