@@ -60,7 +60,22 @@ app.get('/index.html',
 
 app.post('/save.html', 
 	function(req, res) {
-		console.log(req.body);
+		var content = req.body.svg;
+		fs.writeFile('/saved/'+req.body.name+'.svg', content, err => {
+		  if (err) {
+			console.error(err)
+			return
+		  }
+		  //file written successfully
+		});
+		var curves = req.body.curves;
+		fs.writeFile('/saved/'+req.body.name+'.txt', curves, err => {
+		  if (err) {
+			console.error(err)
+			return
+		  }
+		  //file written successfully
+		});
 		res.redirect('/text.html');
 	}
 );
