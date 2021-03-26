@@ -143,6 +143,7 @@
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
+	<button onclick="saveSVG();">Save</button>
 </div>
 
 <script src="js/twisted.js">
@@ -449,8 +450,8 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	path2.id = "fg-"+id;
 	svg2.appendChild(path2);
 	
-	allCurves[id]= currentCurve;
-	console.log(allCurves);
+	allCurves[id]= pd;
+
 }
 
 function imgDataToDiv(div,imgData,rows,cols){
@@ -558,6 +559,9 @@ function downloadImage() {
 	var url = canvas.toDataURL();
 	document.getElementById('downloadLink').href = url;
 	console.log(url);
+}
+function saveSVG() {
+	console.log(allCurves);
 }
 </script>
 </body>
