@@ -408,7 +408,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 
 		path.setAttribute('d',pd);
 		path.setAttribute('stroke','black');
-		path.setAttribute('stroke-width','4');
+		path.setAttribute('stroke-width','5');
 		path.setAttribute('fill','none');
 		path.id = "bg-"+id+"-"+i;
 		document.getElementById('pixelSVG').appendChild(path);
@@ -421,6 +421,7 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 
 			img2.onload = function() {
 				//ctx.drawImage(img, 0, 0, 300, 300);
+				ctx.clearRect(0,0,160,32);
 				ctx.drawImage(img2, 0, 0,160,32);
 				var pixelOut = document.getElementById('pixelOut');
 				pixelOut.innerHTML = '';
