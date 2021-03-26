@@ -140,6 +140,11 @@
 		<div>Length: <input id="strandLength" type="number" value="8" min="0"></input></div>
 		<div>Colors: <textarea id="strandColors" type="text">red, white, blue</textarea></div>
 	</div>
+	<div class="pixelOptions">
+		<div>Thickness: <input id="pixelThickness" type="number" value="10" min="0"></input></div>
+		<div>Height: <input id="pixelHeight" type="number" value="60" min="0"></input></div>
+		<div>Colors: <textarea id="pixelColors" type="text">black, gray, white</textarea></div>
+	</div>
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
@@ -409,24 +414,10 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 		path.id = "bg-"+id+"-"+i;
 		document.getElementById('pixelSVG').appendChild(path);
 		
-		var colors = textOptions.strandColors.split(',');
+		var colors = textOptions.pixelColors.split(',');
 		
-		let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
-		var img2 = new Image();
-	
-
-		img2.onload = function() {
-			//ctx.drawImage(img, 0, 0, 300, 300);
-			ctx.clearRect(0,0,150,60);
-			ctx.drawImage(img2, 0, 0,150,60);
-			var pixelOut = document.getElementById('pixelOut');
-			pixelOut.innerHTML = '';
-			var imgData = ctx.getImageData(0,0,150,60).data;
-			imgDataToDiv(pixelOut,imgData,60,150);
-	
-		}
-
-		img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
+		createPixelArt();
+		
 
 	}
 	
@@ -470,7 +461,7 @@ function imgDataToDiv(div,imgData,rows,cols){
 	div.setAttribute('viewBox','0 0 '+s*cols+' '+s*rows);
 	var colorPaths = {};
 	for (var i=0;i<colorSet.length;i++){
-		var rgba = 'rgba('+colorSet[i].r+','+colorSet[i].g+','+colorSet[i].b+','+1+')';
+		var rgba = colorSet[i];
 		colorPaths[rgba]="";
 	}
 	for (var i=0;i<rows;i++){
@@ -483,7 +474,7 @@ function imgDataToDiv(div,imgData,rows,cols){
 			var b = imgData[4*(i*cols+ii)+2];
 			var a = imgData[4*(i*cols+ii)+3]/255;
 			var color = nearestColor(r,g,b,a);
-			var rgba = 'rgba('+color.r+','+color.g+','+color.b+','+1+')';
+			var rgba = color;
 			
 			var pd = "M "+(ii*s)+" "+(i*s)+" L "+((ii+1)*s)+" "+((i+1)*s);
 			pd += " M "+((ii+1)*s)+" "+(i*s)+" L "+((ii)*s)+" "+((i+1)*s);
@@ -503,24 +494,30 @@ function imgDataToDiv(div,imgData,rows,cols){
 	}
 }
 
-var colorSet = [{'r':0,'g':0,'b':0},{'r':85,'g':85,'b':85},{'r':170,'g':170,'b':170},{'r':255,'g':255,'b':255}];
+function createPixelArt(){
+	let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
+	var img2 = new Image();
+
+
+	img2.onload = function() {
+		//ctx.drawImage(img, 0, 0, 300, 300);
+		ctx.clearRect(0,0,150,60);
+		ctx.drawImage(img2, 0, 0,150,60);
+		var pixelOut = document.getElementById('pixelOut');
+		pixelOut.innerHTML = '';
+		var imgData = ctx.getImageData(0,0,150,60).data;
+		imgDataToDiv(pixelOut,imgData,60,150);
+
+	}
+
+	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
+}
+var colorSet = ['black','gray','white'];
 //var colorSet = [{'r':0,'g':0,'b':0},{'r':255,'g':255,'b':255}];
 
 function nearestColor(r,g,b,a) {
-	/*var R = 255*(1-a)+r*a;
-	var G = 255*(1-a)+g*a;
-	var B = 255*(1-a)+b*a;
-	var minD = 0;
-	var color = {'r':255,'g':255,'b':255};
-	for (var i=0;i<colorSet.length;i++){
-		var c = colorSet[i];
-		var d = Math.pow(c.r-R,2)+Math.pow(c.g-G,2)+Math.pow(c.b-B,2);
-		if (i==0 || d < minD){
-			color = colorSet[i];
-			minD = d;
-		}
-	}*/
-	var color = {'r':255,'g':255,'b':255};
+
+	var color = 'white';
 	for (var i=0;i<colorSet.length-1;i++){
 		if (a > (colorSet.length-i-1)/colorSet.length){
 			color = colorSet[i];
@@ -537,7 +534,7 @@ function setOptions(evt,first=false) {
 		el.addEventListener('change',setOptions);
 	}
 	
-	var options = ['strandWidth','strandLength','strandColors'];
+	var options = ['strandWidth','strandLength','strandColors','pixelThickness','pixelHeight','pixelColors'];
 	for (var i=0;i<options.length;i++){
 		var el = document.getElementById(options[i]);
 		textOptions[options[i]]=el.value;
