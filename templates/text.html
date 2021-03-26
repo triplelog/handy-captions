@@ -466,7 +466,7 @@ function imgDataToDiv(div,imgData,rows,cols){
 	for (var i=0;i<rows;i++){
 		var row = document.createElement('div');
 		for (var ii=0;ii<cols;ii++){
-			var cell = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+			
 			
 			var r = imgData[4*(i*cols+ii)+0];
 			var g = imgData[4*(i*cols+ii)+1];
@@ -482,6 +482,7 @@ function imgDataToDiv(div,imgData,rows,cols){
 		}
 	}
 	for (var i=0;i<colorSet.length;i++){
+		var cell = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 		var rgba = 'rgba('+colorSet[i].r+','+colorSet[i].g+','+colorSet[i].b+','+1+')';
 		cell.setAttribute('d',colorPaths[rgba]);
 		cell.setAttribute('stroke',rgba);
