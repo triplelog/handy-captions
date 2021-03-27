@@ -305,16 +305,19 @@
 			</svg>
 			<svg class="bottomBorder" preserveAspectRatio="xMinYMax slice" style="position: absolute; display: inline-block; width: 330rem; height: 1.65rem; bottom: 0px; left: 0px;" id="topRightBorderB" viewBox="0 0 9000 45" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 				<defs>
-					
+					<pattern id="horTwist" width="260" height="45" patternContentUnits="objectBoundingBox">
+					   <path id="twist" d="M0 37 L130 8 L260 37" stroke="black" stroke-width="10" fill="none" />
+					 </pattern>
 				</defs>
 		
 				
 				<g class="borderSVG">
 					
 					<path d="M0 0 L130 0 {% for i in range(0,15) %}L{{260*i }} 45 L{{260*i + 130}} 0 {% endfor %} L9000 45 L0 45 Z" stroke="black" stroke-width="0" fill="rgb(85.95% 88.94% 96.22%)" />
-					<path id="twist" d="M0 8 L130 8 {% for i in range(0,15) %}L{{260*i }} 37 L{{260*i + 130}} 8 {% endfor %}" stroke="black" stroke-width="0" fill="none" />
+					<rect fill="url(#horTwist)" stroke="none" width="9000" height="45"/>
+					<!--<path id="twist" d="M0 8 L130 8 {% for i in range(0,15) %}L{{260*i }} 37 L{{260*i + 130}} 8 {% endfor %}" stroke="black" stroke-width="0" fill="none" />
 					<path d="{% for i in range(14,15) %}M{{260*i }} 37 L{{260*i + 130}} 8 {% endfor %} L9000 37" stroke="black" stroke-width="10" fill="none" />
-					
+					-->
 				</g>
 				
 				
@@ -588,7 +591,7 @@
 <script>
 	var path = document.getElementById('twist');
 	var heartFill = document.querySelector('.topRight .bottomBorder .borderSVG');
-	twist(path,['red','blue','green'],'open',5,12);
+	//twist(path,['red','blue','green'],'open',5,12);
 </script>
 </body>
 </html>
