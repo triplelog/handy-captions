@@ -164,6 +164,7 @@
 	<button onclick="selectGroup();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
+	<span id="pointerType"></span>
 	<form action="/save.html" method="post">
 		<input type="text" id="name" name="name" />
 		<input type="text" id="svgForm" name="svg" style="display: none;" />
@@ -208,6 +209,7 @@ curveWorker.onmessage = function(evt){
 
 function inputDown(evt) {
 	console.log(evt.pointerType);
+	document.getElementById('pointerType').innerHTML = evt.pointerType;
 	curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 	isDown = true;
 }
