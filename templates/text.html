@@ -191,6 +191,8 @@ inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
 inputEl.addEventListener('dragstart',inputDrag);
+inputEl.addEventListener('touchmove',inputDrag);
+inputEl.addEventListener('touchdown',inputDrag);
 var currentCurve = [];
 var allCurves = {};
 var isDown = false;
@@ -210,6 +212,8 @@ curveWorker.onmessage = function(evt){
 	}
 }
 function inputDrag(evt){
+	evt.preventDefault();
+	evt.stopPropagation();
 	document.getElementById('pointerType').innerHTML = evt.pointerType+'drag';
 }
 function inputCancel(evt){
