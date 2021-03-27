@@ -310,8 +310,9 @@
 		
 				
 				<g class="borderSVG">
-					<path d="M0 0 L130 0 L260 45 L390 0 L420 45 L650 0 L9000 45 L0 45 Z" stroke="black" stroke-width="0" fill="rgb(85.95% 88.94% 96.22%)" />
-					<path id="twist" d="M0 8 L130 8 L260 37 L390 8 L520 37 L650 8 L9000 37" stroke="black" stroke-width="0" fill="none" />
+					
+					<path d="M0 0 L130 0 {% for i in range(0,35) %}L{{260*i }} 45 L{{260*i + 130}} 0 {% endfor %} L9000 45 L0 45 Z" stroke="black" stroke-width="0" fill="rgb(85.95% 88.94% 96.22%)" />
+					<path id="twist" d="M0 8 L130 8 {% for i in range(0,35) %}L{{260*i }} 37 L{{260*i + 130}} 8 {% endfor %} L9000 37" stroke="black" stroke-width="0" fill="none" />
 					
 				</g>
 				
