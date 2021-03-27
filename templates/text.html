@@ -84,9 +84,12 @@
 <body>
 <img id="imgBG" src="img/pexels-photo-963278.jpeg" style="display: none;"/>
 <div class="input">
-	<svg id="isoBG" width="300" height="300" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<path d="M30 15 L 22.5 28 L 7.5 28 L 0 15 L 7.5 2 22.5 2" stroke="gray" stroke-width="0.5" fill="none" />
-		
+	<svg id="isoBG" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		{% for i in range(0,10) %}
+			{% for ii in range(0,10) %}
+			<path d="M{{30*ii +7.5}} {{30*i - 13}} {{30*ii + 15}} {{30*i }} {{30*ii +7.5}} {{30*i + 13}} {{30*ii -7.5}} {{30*i + 13}} {{30*ii - 15}} {{30*i}} {{30*ii -7.5}} {{30*i - 13}} Z" stroke="gray" stroke-width="0.5" fill="none" />
+			{% endfor %}
+		{% endfor %}
 	</svg>
 </div>
 
