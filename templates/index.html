@@ -385,16 +385,18 @@
 				</div>
 			</div>
 			
-			<svg preserveAspectRatio="xMidYMid slice" style="position: absolute; display: inline-block; width: 0.95333rem; height: 330rem; right: 0px; top: 0px;" id="topRightBorderL" viewBox="0 0 26 9000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<svg class="bottomBorder" preserveAspectRatio="xMidYMid slice" style="position: absolute; display: inline-block; width: 0.95333rem; height: 330rem; right: 0px; top: 0px;" id="topRightBorderL" viewBox="0 0 26 9000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 				<defs>
-					
+					<pattern id="verTwist" width="520" height="45" patternUnits="userSpaceOnUse">
+					   
+					 </pattern>
 				</defs>
 		
 				
 				<g class="borderSVG">
 					
 					<path d="M26 0 L0 150 L26 300 L0 450 L26 9000 Z" stroke="black" stroke-width="0" fill="rgb(85.95% 88.94% 96.22%)" />
-					<path d="M26 0 L0 150 L26 300 L0 450 L26 9000" stroke="black" stroke-width="10" fill="none" />
+					<path id="twist" d="M18 0 L8 150 L18 300 L8 450 L18 600 L26 9000" stroke="black" stroke-width="10" fill="none" />
 				</g>
 				
 				
@@ -599,8 +601,8 @@
 </script>
 <script>
 	var path = document.getElementById('twist');
-	var heartFill = document.querySelector('.topRight .bottomBorder .borderSVG');
-	//twist(path,['red','blue','green'],'open',5,12);
+	var heartFill = document.querySelector('.bottomLeft .bottomBorder .borderSVG');
+	twist(path,['red','blue','green'],'open',5,12);
 </script>
 </body>
 </html>
