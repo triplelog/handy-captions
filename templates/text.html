@@ -208,26 +208,27 @@ curveWorker.onmessage = function(evt){
 }
 
 function inputDown(evt) {
-
+	evt.preventDefault();
 	if (evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType;
 		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 		isDown = true;
 	}
 	else {
-		evt.preventDefault();
 		document.getElementById('pointerType').innerHTML = evt.pointerType;
 	}
 }
 function inputMove(evt) {
+	evt.preventDefault();
 	if (isDown && evt.pointerType == 'pen'){
+		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
 	}
 	else {
-		evt.preventDefault();
 	}
 }
 function inputUp(evt) {
+	evt.preventDefault();
 	if (isDown && evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"up";
 		isDown = false;
@@ -235,7 +236,6 @@ function inputUp(evt) {
 		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
 	}
 	else {
-		evt.preventDefault();
 	}
 }
 
