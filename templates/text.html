@@ -191,7 +191,7 @@ inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
-
+inputEl.ondragstart  = () => false
 var currentCurve = [];
 var allCurves = {};
 var isDown = false;
