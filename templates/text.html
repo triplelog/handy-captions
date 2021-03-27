@@ -220,7 +220,7 @@ function inputDown(evt) {
 }
 function inputMove(evt) {
 	evt.preventDefault();
-	if (isDown && evt.pointerType == 'pen'){
+	if (evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
 	}
