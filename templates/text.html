@@ -85,10 +85,16 @@
 <img id="imgBG" src="img/pexels-photo-963278.jpeg" style="display: none;"/>
 <div class="input">
 	<svg id="isoBG" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		{% for i in range(0,10) %}
-			{% for ii in range(0,10) %}
-			<path d="M{{45*ii +7.5}} {{26*i - 13}} {{45*ii + 15}} {{26*i }} {{45*ii +7.5}} {{26*i + 13}} {{45*ii -7.5}} {{26*i + 13}} {{45*ii - 15}} {{26*i}} {{45*ii -7.5}} {{26*i - 13}} Z" stroke="gray" stroke-width="0.5" fill="none" />
-			<path d="M{{45*ii +7.5 + 22.5}} {{26*i - 13 + 13}} {{45*ii + 15 + 22.5}} {{26*i + 13}} {{45*ii +7.5 + 22.5}} {{26*i + 13+ 13}} {{45*ii -7.5 + 22.5}} {{26*i + 13+ 13}} {{45*ii - 15 + 22.5}} {{26*i+ 13}} {{45*ii -7.5 + 22.5}} {{26*i - 13+ 13}} Z" stroke="gray" stroke-width="0.5" fill="none" />
+		{% for i in range(0,12) %}
+			{% for ii in range(0,8) %}
+			{% set cx = 26*i %}
+			{% set cy = 45*ii %}
+			{% set c = '' + cx + ' ' + cy %}
+			<path d="M{{ c }} {{ cx }} {{ cy - 15}} {{ cx + 13 }} {{ cy - 7.5}} {{ c }} {{ cx + 13}} {{ cy - 7.5}} {{ cx + 13 }} {{ cy + 7.5}} {{ c }} {{ cx +13 }} {{ cy + 7.5}} {{ cx }} {{ cy + 15}} {{ c }} {{ cx }} {{ cy + 15}} {{ cx - 13 }} {{ cy + 7.5}} {{ c }} {{ cx - 13 }} {{ cy + 7.5}} {{ cx - 13 }} {{ cy - 7.5}} {{ c }} {{ cx - 13 }} {{ cy - 7.5}} {{ cx }} {{ cy - 15}}" stroke="gray" stroke-width="0.5" fill="none" />
+			{% set cx = 26*i + 13 %}
+			{% set cy = 45*ii + 15 %}
+			{% set c = '' + cx + ' ' + cy %}
+			<path d="M{{ c }} {{ cx }} {{ cy - 15}} {{ cx + 13 }} {{ cy - 7.5}} {{ c }} {{ cx + 13}} {{ cy - 7.5}} {{ cx + 13 }} {{ cy + 7.5}} {{ c }} {{ cx +13 }} {{ cy + 7.5}} {{ cx }} {{ cy + 15}} {{ c }} {{ cx }} {{ cy + 15}} {{ cx - 13 }} {{ cy + 7.5}} {{ c }} {{ cx - 13 }} {{ cy + 7.5}} {{ cx - 13 }} {{ cy - 7.5}} {{ c }} {{ cx - 13 }} {{ cy - 7.5}} {{ cx }} {{ cy - 15}}" stroke="gray" stroke-width="0.5" fill="none" />
 			{% endfor %}
 		{% endfor %}
 	</svg>
