@@ -153,12 +153,12 @@ function strand(pathEl,start,color,n,bottom,d,l) {
 					var offsetL = (n+i-1-start)%n;
 					var avgShift = (shifts[offset]+shifts[offsetL])/2;
 					outPath += ' Q ';
-					outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
-					outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+					outPath += curveRound(pointsMid[i].x+dy*mul*avgShift)+' '+curveRound(pointsMid[i].y+dx*mul*avgShift)+' ';
+					outPath += curveRound(points[i].x+dy*mul*shifts[offset])+' '+curveRound(points[i].y+dx*mul*shifts[offset]);
 				}
 				else {
 					outPath += ' M ';
-					outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+					outPath += curveRound(points[i].x+dy*mul*shifts[offset])+' '+curveRound(points[i].y+dx*mul*shifts[offset]);
 				}
 			}
 			
@@ -169,7 +169,7 @@ function strand(pathEl,start,color,n,bottom,d,l) {
 				if (i%n == start ){
 					
 					outPath += ' M ';
-					outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+					outPath += curveRound(points[i].x+dy*mul*shifts[offset])+' '+curveRound(points[i].y+dx*mul*shifts[offset]);
 				}
 				
 				continue;
@@ -187,9 +187,9 @@ function strand(pathEl,start,color,n,bottom,d,l) {
 			if (i>0){
 				var offsetL = (n+i-1-start)%n;
 				var avgShift = (shifts[offset]+shifts[offsetL])/2;
-				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
+				outPath += curveRound(pointsMid[i].x+dy*mul*avgShift)+' '+curveRound(pointsMid[i].y+dx*mul*avgShift)+' ';
 			}
-			outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+			outPath += curveRound(points[i].x+dy*mul*shifts[offset])+' '+curveRound(points[i].y+dx*mul*shifts[offset]);
 			
 		}
 		else if (bottom == -1){
@@ -206,9 +206,9 @@ function strand(pathEl,start,color,n,bottom,d,l) {
 			if (i>0){
 				var offsetL = (n+i-1-start)%n;
 				var avgShift = (shifts[offset]+shifts[offsetL])/2;
-				outPath += (pointsMid[i].x+dy*mul*avgShift)+' '+(pointsMid[i].y+dx*mul*avgShift)+' ';
+				outPath += curveRound(pointsMid[i].x+dy*mul*avgShift)+' '+curveRound(pointsMid[i].y+dx*mul*avgShift)+' ';
 			}
-			outPath += (points[i].x+dy*mul*shifts[offset])+' '+(points[i].y+dx*mul*shifts[offset]);
+			outPath += curveRound(points[i].x+dy*mul*shifts[offset])+' '+curveRound(points[i].y+dx*mul*shifts[offset]);
 			
 		}
 		
@@ -290,4 +290,9 @@ function slopeToD(m,d,point2,point1){
 	}
 	dx *= -1;
 	return [dx,dy];
+}
+
+function curveRound(x){
+	var xx = x*10;
+	return Math.round(xx)/10;
 }
