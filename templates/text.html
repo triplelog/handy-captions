@@ -191,7 +191,7 @@ inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
-inputEl.ondragstart  = () => false
+inputEl.addEventListener('dragstart',inputDrag);
 var currentCurve = [];
 var allCurves = {};
 var isDown = false;
@@ -210,11 +210,13 @@ curveWorker.onmessage = function(evt){
 		//drawConvexHull(evt.data.pdArray);
 	}
 }
-
+function inputDrag(evt){
+	document.getElementById('pointerType').innerHTML = evt.pointerType+'drag';
+}
 function inputCancel(evt){
 	if (evt.pointerType == 'pen'){
 		evt.preventDefault();
-		document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
+		//document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 	}
 }
 function inputDown(evt) {
