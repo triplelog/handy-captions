@@ -213,6 +213,7 @@ curveWorker.onmessage = function(evt){
 }
 function inputDrag(evt){
 	evt.preventDefault();
+	evt.stopImmediatePropagation();
 	evt.stopPropagation();
 	document.getElementById('pointerType').innerHTML = evt.pointerType+'drag';
 }
