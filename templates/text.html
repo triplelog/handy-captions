@@ -437,20 +437,21 @@ function drawCurveOut(id,pd,startPoint,endPoint){
 	var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 	path2.setAttribute('d',pd);
 	if (textStyle == 'twisted' || textStyle == 'sunburst'){
-		path2.setAttribute('stroke','none');
+		svg2.style.stroke = 'none';
 	}
 	else if (textStyle == 'embossed'){
-		path2.setAttribute('stroke','gray');
+		svg2.style.stroke = 'gray';
 	}
 	else if (textBG == 'gradient'){
-		path2.setAttribute('stroke','url(#img1)');
+		svg2.style.stroke = 'url(#img1)';
 	}
 	else {
-		path2.setAttribute('stroke','white');
+		svg2.style.stroke = 'white';
 	}
 	
-	path2.setAttribute('stroke-width','5');
-	path2.setAttribute('fill','none');
+	svg2.style.strokeWidth = '5';
+	svg2.style.fill = 'none';
+	
 	path2.id = "fg-"+id;
 	
 	if (textStyle == 'twisted' || textStyle == 'sunburst'){
