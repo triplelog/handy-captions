@@ -226,6 +226,7 @@ function strand(pathEl,start,color,n,bottom,d,l) {
 
 
 	heartFill.appendChild(newPath);
+	console.log(newPath);
 }
 
 function sunburst(path,strands){
