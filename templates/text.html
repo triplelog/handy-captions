@@ -165,6 +165,9 @@
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
 	<span id="pointerType"></span>
+	<div id="pointerIds">
+	
+	</div>
 	<form action="/save.html" method="post">
 		<input type="text" id="name" name="name" />
 		<input type="text" id="svgForm" name="svg" style="display: none;" />
@@ -186,6 +189,7 @@ var inputEl = document.querySelector('.input');
 var outputEl = document.querySelector('.output');
 inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
+inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
 
 var currentCurve = [];
@@ -207,6 +211,11 @@ curveWorker.onmessage = function(evt){
 	}
 }
 
+function inputCancel(evt){
+	if (evt.pointerType == 'pen'){
+		document.getElementById('pointerType').innerHTML = evt.pointerType;
+	}
+}
 function inputDown(evt) {
 	evt.preventDefault();
 	if (evt.pointerType == 'pen'){
@@ -220,6 +229,8 @@ function inputDown(evt) {
 }
 function inputMove(evt) {
 	evt.preventDefault();
+	var el = document.getElementById('pointerIds');
+	el.innerHTML += evt.pointerId;
 	if (evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
