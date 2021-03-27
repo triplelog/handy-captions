@@ -207,6 +207,7 @@ curveWorker.onmessage = function(evt){
 }
 
 function inputDown(evt) {
+	console.log(evt.pointerType);
 	curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 	isDown = true;
 }
