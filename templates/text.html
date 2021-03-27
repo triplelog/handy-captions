@@ -208,18 +208,20 @@ curveWorker.onmessage = function(evt){
 }
 
 function inputDown(evt) {
-	console.log(evt.pointerType);
-	document.getElementById('pointerType').innerHTML = evt.pointerType;
-	curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
-	isDown = true;
+
+	if (evt.pointerType == 'pen'){
+		document.getElementById('pointerType').innerHTML = evt.pointerType;
+		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
+		isDown = true;
+	}
 }
 function inputMove(evt) {
-	if (isDown){
+	if (isDown && evt.pointerType == 'pen'){
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
 	}
 }
 function inputUp(evt) {
-	if (isDown){
+	if (isDown && evt.pointerType == 'pen'){
 		console.log(evt);
 		isDown = false;
 		
