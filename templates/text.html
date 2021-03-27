@@ -214,10 +214,16 @@ function inputDown(evt) {
 		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 		isDown = true;
 	}
+	else {
+		evt.preventDefault();
+	}
 }
 function inputMove(evt) {
 	if (isDown && evt.pointerType == 'pen'){
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
+	}
+	else {
+		evt.preventDefault();
 	}
 }
 function inputUp(evt) {
@@ -226,6 +232,9 @@ function inputUp(evt) {
 		isDown = false;
 		
 		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+	}
+	else {
+		evt.preventDefault();
 	}
 }
 
