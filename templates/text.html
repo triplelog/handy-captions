@@ -224,6 +224,7 @@ function inputCancel(evt){
 }
 function inputDown(evt) {
 	evt.preventDefault();
+	evt.stopPropagation();
 	if (evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType;
 		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
@@ -235,6 +236,7 @@ function inputDown(evt) {
 }
 function inputMove(evt) {
 	evt.preventDefault();
+	evt.stopPropagation();
 	var el = document.getElementById('pointerIds');
 	el.innerHTML += evt.pointerId;
 	if (evt.pointerType == 'pen'){
@@ -246,6 +248,7 @@ function inputMove(evt) {
 }
 function inputUp(evt) {
 	evt.preventDefault();
+	evt.stopPropagation();
 	if (isDown && evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"up";
 		isDown = false;
