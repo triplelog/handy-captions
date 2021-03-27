@@ -214,7 +214,7 @@ curveWorker.onmessage = function(evt){
 function inputCancel(evt){
 	if (evt.pointerType == 'pen'){
 		evt.preventDefault();
-		document.getElementById('pointerType').innerHTML = evt.pointerType;
+		document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 	}
 }
 function inputDown(evt) {
