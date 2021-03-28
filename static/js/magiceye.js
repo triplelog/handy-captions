@@ -218,8 +218,13 @@
 			
 				rgba[0] = 0;
 				var value = Math.abs(noise.perlin2(Math.random(), Math.random()));
+    			if (y == 150){
+    				console.log(x,value);
+    			}
     			value *= 256;
-    			
+    			if (y == 150){
+    				console.log(x,value);
+    			}
 				/*if (chain[x].length > 1 && chain[x][0] - chain[x][1] < 90){
 					var xr = Math.random();
 					var yr = Math.random();
@@ -228,7 +233,7 @@
     				
 				}*/
 				
-				rgba[1] = Math.floor(Math.random() * 255);
+				rgba[1] = Math.floor(value);
 				rgba[2] = Math.floor(Math.random() * 255);
 				rgba[3] = 255;
 				colorChain[y][x] = [0,0,0,0];
