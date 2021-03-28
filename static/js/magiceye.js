@@ -236,7 +236,7 @@
 				}
 				//var yr =  (y %100)/800 + Math.random()*7/8;
 				//var xr =  (ax %100)/1600 + Math.random()*15/16;
-				var value1 = Math.abs(noise.perlin2(xx, yy));
+				var value1 = Math.abs(noise.perlin2(yr, yy/100));
     			
     			value1 *= 2560/2;
     			if (value1 > 255){value1 = 255;}
