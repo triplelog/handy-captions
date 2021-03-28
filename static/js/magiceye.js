@@ -253,7 +253,7 @@
 					var yr = Math.random();
 					value = Math.abs(noise.perlin2(xr, yr));
     				value *= 256;*/
-    				rgba[0] = 50;
+    				rgba[0] = 100;
 				}
 				
 				rgba[1] = Math.floor(Math.random() * 255);
