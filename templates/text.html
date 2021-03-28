@@ -212,10 +212,12 @@ curveWorker.onmessage = function(evt){
 	}
 }
 function inputDrag(evt){
-	evt.preventDefault();
-	evt.stopImmediatePropagation();
-	evt.stopPropagation();
-	document.getElementById('pointerType').innerHTML = evt.pointerType+'drag';
+	if (evt.pointerType == 'touch'){
+		evt.preventDefault();
+		evt.stopImmediatePropagation();
+		evt.stopPropagation();
+		document.getElementById('pointerType').innerHTML = evt.pointerType+'drag';
+	}
 }
 function inputCancel(evt){
 	if (evt.pointerType != 'touch'){
@@ -225,7 +227,6 @@ function inputCancel(evt){
 }
 function inputDown(evt) {
 	evt.preventDefault();
-	evt.stopPropagation();
 	if (evt.pointerType != 'touch'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType;
 		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
@@ -237,7 +238,6 @@ function inputDown(evt) {
 }
 function inputMove(evt) {
 	evt.preventDefault();
-	evt.stopPropagation();
 	var el = document.getElementById('pointerIds');
 	el.innerHTML += evt.pointerId;
 	if (evt.pointerType != 'touch'){
@@ -249,7 +249,6 @@ function inputMove(evt) {
 }
 function inputUp(evt) {
 	evt.preventDefault();
-	evt.stopPropagation();
 	if (isDown && evt.pointerType != 'touch'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"up";
 		isDown = false;
