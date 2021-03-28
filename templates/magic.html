@@ -47,6 +47,25 @@
   		  dMap[y].push(v);
 	  }
   }
+  
+  var dMap = [];
+  for (var y=0;y<600;y++){
+  	  dMap.push([]);
+	  for (var x=0;x<800;x++){
+	  	  
+  		  dMap[y].push(0);
+	  }
+  }
+  for (var i=0;i<10;i++){
+	  for (var y=150-i*10;y<150-i*10+400;y++){
+		  for (var x=300-i*10;x<300-i*10+200;x++){
+		  
+			  dMap[y][x] = (i+1)/10;
+		  }
+	  }
+  }
+  
+  
   MagicEye.render({
     el: 'magiceye',
     depthMap: dMap
