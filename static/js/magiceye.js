@@ -212,8 +212,8 @@
 	  		for (var iii=0;iii<pts.length;iii++){
 	  			var ii = pts[iii];
 	  			
-	  			pixels[(fronts[i][0] * width * 4) + (ii -1) * 4 ] = 200;
-	  			pixels[(fronts[i][0] * width * 4) + (ii + 1) * 4 ] = 200;
+	  			pixels[(fronts[i][0] * width * 4) + (ii -1) * 4 ] = 10;
+	  			pixels[(fronts[i][0] * width * 4) + (ii + 1) * 4 ] = 10;
 	  			
 				//pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 3];
 	  		}
