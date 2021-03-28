@@ -221,7 +221,8 @@
     			if (y == 150){
     				console.log(x,value);
     			}
-    			value *= 256;
+    			value *= 2560;
+    			if (value > 255){value = 255;}
     			if (y == 150){
     				console.log(x,value);
     			}
