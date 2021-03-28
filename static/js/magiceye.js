@@ -232,7 +232,7 @@
 				var yy = 1*(xx)+yi;
 				
 				if (y == 150){
-					console.log(x,y,ax,yi,xMin,xMax,xx,yy);
+					console.log(x,y,ax,yi,xMin,xMax,xx,yr,yy);
 				}
 				//var yr =  (y %100)/800 + Math.random()*7/8;
 				//var xr =  (ax %100)/1600 + Math.random()*15/16;
