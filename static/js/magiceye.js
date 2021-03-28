@@ -84,13 +84,11 @@
     },
 
     renderToCanvas: function (canvas, pixelData, width, height) {
-    	console.log(pixelData.slice(0,100));
+    	console.log(pixelData.length);
       var context = canvas.getContext("2d"),
           imageData = context.createImageData(width, height);
       imageData.data.set(pixelData);
-      context.fillStyle = 'green';
-      context.fillRect(0,0,width,height);
-      //context.putImageData(imageData, 0, 0);
+      context.putImageData(imageData, 0, 0);
     },
 
     generatePixelData: function (opts) {
@@ -176,7 +174,11 @@
           }
         }
       }
-
+	  /*for (y = 0; y < height; y++) {
+	  	for (x = (width - 1); x >= 0; x--) {
+	  		pixels[(y * width) + (x)] = 
+	  	}
+	  }*/
       return pixels;
     },
 
