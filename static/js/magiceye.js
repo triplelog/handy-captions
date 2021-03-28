@@ -193,7 +193,7 @@
 	  for (var i=0;i<fronts.length;i++){
 	  	var l = fronts[i][2]-fronts[i][1];
 	  	for (var ii=fronts[i][1];ii<fronts[i][2]+1;ii++){
-	  		pixels[(fronts[i][0] * width * 4) + (ii) * 4] += (fronts[i][2]-ii)*1/l;
+	  		pixels[(fronts[i][0] * width * 4) + (ii) * 4] += (fronts[i][2]-ii)*5/l;
 	  	}
 	  }
 	  
