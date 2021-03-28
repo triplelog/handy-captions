@@ -248,15 +248,15 @@
     			value2 *= 2560/2;
     			if (value2 > 255){value2 = 255;}
     			
-				/*if (chain[x].length > 1 && chain[x][0] - chain[x][1] < 90){
-					var xr = Math.random();
+				if (chain[x].length > 1 && chain[x][0] - chain[x][1] < 90){
+					/*var xr = Math.random();
 					var yr = Math.random();
 					value = Math.abs(noise.perlin2(xr, yr));
-    				value *= 256;
-    				
-				}*/
+    				value *= 256;*/
+    				rgba[0] = 50;
+				}
 				
-				rgba[1] = Math.floor(value1);
+				rgba[1] = Math.floor(Math.random() * 255);
 				rgba[2] = Math.floor(Math.random() * 255);
 				rgba[3] = 255;
 				colorChain[y][x] = [0,0,0,0];
