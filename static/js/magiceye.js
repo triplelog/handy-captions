@@ -278,6 +278,16 @@
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
             }
+            var myChain = chain[chainStart[x]];
+            for (var i=1;i<myChain.length;i++){
+            	if (myChain[i] == x){
+            		if (myChain[i] - myChain[i-1] < 90){
+            			pixels[pixelOffset + 0] = 100;
+            		}
+            		break;
+            	}
+            }
+            
             //pixels[pixelOffset + 1] = 255 - pixels[pixelOffset + 1];
             //pixels[pixelOffset + 2] = 255 - pixels[pixelOffset + 2];
             
