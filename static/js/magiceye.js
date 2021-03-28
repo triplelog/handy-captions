@@ -124,7 +124,9 @@
         for (x = 0; x < width; x++) {
 
           z = depthMap[y][x];
-
+		  if (y < 300 && z > 0.5){
+		  	z = (y + 100) / 400;
+		  }
           // stereo separation corresponding to z
           sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 
@@ -205,8 +207,8 @@
 	  }
 	  for (var i=0;i<fronts.length;i++){
 	  	if (fronts[i][0] < 300){
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 4;
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = (fronts[i][0] - 100) / 8;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 3;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = (fronts[i][0] - 100) / 6;
 	  	}
 	  	else {
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = 0;
