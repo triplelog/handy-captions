@@ -214,14 +214,14 @@ function inputDrag(evt){
 	document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 }
 function inputCancel(evt){
-	if (evt.pointerType == 'pen'){
+	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
 		evt.preventDefault();
 		document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 	}
 }
 function inputDown(evt) {
 	evt.preventDefault();
-	if (evt.pointerType == 'pen'){
+	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType;
 		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 		isDown = true;
@@ -234,7 +234,7 @@ function inputMove(evt) {
 	evt.preventDefault();
 	var el = document.getElementById('pointerIds');
 	el.innerHTML += evt.pointerId;
-	if (evt.pointerType == 'pen'){
+	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
 	}
@@ -243,7 +243,7 @@ function inputMove(evt) {
 }
 function inputUp(evt) {
 	evt.preventDefault();
-	if (isDown && evt.pointerType == 'pen'){
+	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"up";
 		isDown = false;
 		
