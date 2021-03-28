@@ -182,13 +182,13 @@
       }
 	  for (y = 0; y < height; y++) {
 	  	for (x = (width - 1); x >= 0; x--) {
-	  		if (y > 320){
+	  		if (y > 400){
 				pixels[(y * width * 4) + (x - 0) * 4] = 0;
 				pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
 				pixels[(y * width * 4) + (x - 0) * 4 + 2] = pixels[(y * width * 4) + (x * 4) + 3];
 				//pixels[(y * width * 4) + (x - 0) * 4 + 3] = 255;
 			}
-			else if (y > 260){
+			else if (y > 200){
 				pixels[(y * width * 4) + (x - 0) * 4] = pixels[(y * width * 4) + (x * 4) + 3];
 				pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
 				pixels[(y * width * 4) + (x - 0) * 4 + 2] = pixels[(y * width * 4) + (x * 4) + 3];
@@ -204,9 +204,12 @@
 	  	}
 	  }
 	  for (var i=0;i<fronts.length;i++){
-	  	if (fronts[i][0] > 300){
+	  	if (fronts[i][0] > 400){
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4] = 30;
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4] = 10;
+	  	}
+	  	else if (fronts[i][0] > 200){
+	  		
 	  	}
 	  	else {
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 + 2] = 30;
