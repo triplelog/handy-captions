@@ -239,6 +239,7 @@
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
             }
+            pixels[pixelOffset + 1] = 255 - pixels[pixelOffset + 1];
             pixels[pixelOffset + 2] = 255 - pixels[pixelOffset + 2];
             
           }
