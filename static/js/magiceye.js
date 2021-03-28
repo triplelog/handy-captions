@@ -279,13 +279,11 @@
               pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
             }
             var myChain = chain[chainStart[x]];
+            pixels[pixelOffset + 0] = 0;
             for (var i=1;i<myChain.length;i++){
             	if (myChain[i] == x){
             		if (myChain[i] - myChain[i-1] < 90){
             			pixels[pixelOffset + 0] = 100;
-            		}
-            		else {
-            			pixels[pixelOffset + 0] = 0;
             		}
             		break;
             	}
