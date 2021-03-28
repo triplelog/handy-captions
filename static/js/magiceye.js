@@ -190,7 +190,7 @@
 	  		sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 	  		if (x > sep){
 				
-				pixels[(y * width * 4) + (x - sep) * 4] = 100;
+				pixels[(y * width * 4) + (x - sep) * 4] = 10;
 				pixels[(y * width * 4) + (x - sep) * 4 + 1] = 0;
 				pixels[(y * width * 4) + (x - sep) * 4 + 2] = pixels[(y * width * 4) + (x - sep) * 4 + 3];
 				//pixels[(y * width * 4) + (x - sep) * 4 + 3] = 255;
