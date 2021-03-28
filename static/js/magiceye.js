@@ -239,7 +239,7 @@
     				
 				}*/
 				
-				rgba[1] = Math.floor(value);
+				rgba[1] = Math.floor(value1);
 				rgba[2] = Math.floor(value2);
 				rgba[3] = 255;
 				colorChain[y][x] = [0,0,0,0];
