@@ -234,9 +234,9 @@
 				if (y == 150){
 					console.log(x,y,ax,yi,xMin,xMax,xx,yr,yy);
 				}
-				//var yr =  (y %100)/800 + Math.random()*7/8;
-				//var xr =  (ax %100)/1600 + Math.random()*15/16;
-				var value1 = Math.abs(noise.perlin2(xx/100, yy/100));
+				var yr =  (yy %100)/400 + Math.random()*3/4;
+				var xr =  (xx %100)/400 + Math.random()*3/4;
+				var value1 = Math.abs(noise.perlin2(xr,yr));
     			
     			value1 *= 2560/2;
     			if (value1 > 255){value1 = 255;}
