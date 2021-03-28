@@ -199,11 +199,11 @@
             	pF += fs[chain[x][i]];
             }
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
-            if (pF > 1){
-            	rgba[0] = 128;
-            }
-            //rgba[0] = 50 * pF / (chain[x].length);
-            //if (rgba[0] > 50){rgba[0] = 50;}
+            //if (pF > 1){
+            //	rgba[0] = 128;
+            //}
+            rgba[0] = 50 * pF / (chain[x].length);
+            if (rgba[0] > 50){rgba[0] = 50;}
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = rgba[i];
             }
