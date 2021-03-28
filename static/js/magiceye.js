@@ -217,9 +217,9 @@
 				rgba = opts.colors[Math.floor(Math.random() * numColors)];
 			
 				rgba[0] = 0;
-				var axm = (ax % 100)*2;
+				var axm = (ax % 100);
 				var yr = (y % 100)/100;
-				var yi = axm - 100;
+				var yi = axm - 50;
 				var xMin = 0;
 				if (yi < 0){
 					xMin = -1*yi;
