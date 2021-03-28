@@ -178,9 +178,9 @@
 	  	for (x = (width - 1); x >= 0; x--) {
 	  		z = depthMap[y][x];
 	  		if (z > 0.5){
-				pixels[(y * width * 4) + (x * 4)] = pixels[(y * width * 4) + (x * 4) + 3];
+				pixels[(y * width * 4) + (x * 4)] = 100;
 				pixels[(y * width * 4) + (x * 4) + 1] = 0;
-				pixels[(y * width * 4) + (x * 4) + 2] = 0;
+				pixels[(y * width * 4) + (x * 4) + 2] = pixels[(y * width * 4) + (x * 4) + 3];
 				pixels[(y * width * 4) + (x * 4) + 3] = 255;
 	  		}
 	  		else {
