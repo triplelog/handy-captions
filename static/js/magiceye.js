@@ -235,11 +235,9 @@
           } else {
             // constrained pixel, obey constraint
             pixelOffset = (y * width * 4) + (x * 4);
-            colorChain[y][x] = [0,0,0,0];
 				
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
-              colorChain[y][x][i] = pixels[(y * width * 4) + (same[x] * 4) + i];
             }
             
           }
