@@ -225,7 +225,7 @@
             }
             
           }
-          pixels[pixelOffset + 0] += x / 800;
+          pixels[pixelOffset + 0] += x * 100 / 800;
           if (pixels[pixelOffset + 0] > 255){pixels[pixelOffset + 0] = 255;}
         }
        
