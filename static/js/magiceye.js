@@ -231,6 +231,9 @@
 				var xx = yr*(xMax-xMin)+xMin;
 				var yy = 1*(xx)+yi;
 				
+				if (y == 150){
+					console.log(x,y,ax,yi,xMin,yMin,xx,yy);
+				}
 				//var yr =  (y %100)/800 + Math.random()*7/8;
 				//var xr =  (ax %100)/1600 + Math.random()*15/16;
 				var value1 = Math.abs(noise.perlin2(xx, yy));
@@ -254,7 +257,7 @@
 				}*/
 				
 				rgba[1] = Math.floor(value1);
-				rgba[2] = Math.floor(Math.random());
+				rgba[2] = Math.floor(Math.random() * 255);
 				rgba[3] = 255;
 				colorChain[y][x] = [0,0,0,0];
 				colorChain[y][x][0] = rgba[0];
