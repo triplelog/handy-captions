@@ -122,10 +122,8 @@
 
         // for each column
         var fs = {};
-        var fsb = {};
         for (x = 0; x < width; x++) {
         	fs[x] = 0;
-        	fsb[x] = 0;
         }
         for (x = 0; x < width; x++) {
 
@@ -167,10 +165,6 @@
 		  		fronts.push(frontPoint);
 		  		fs[frontPoint[2]]++;
               	fs[frontPoint[3]]++;
-              	fsb[frontPoint[2]-1]++;
-              	fsb[frontPoint[2]+1]++;
-              	fsb[frontPoint[3]-1]++;
-              	fsb[frontPoint[3]+1]++;
 		  	}
           }
           
@@ -195,22 +189,25 @@
 				
 			}
         }
+        
         for (x = (width - 1); x >= 0; x--) {
           pixelOffset = (y * width * 4) + (x * 4);
           
           if (same[x] === x) {
             // set random color
             var pF = 0;
+            var tx = 0;
             for (var i=0;i<chain[x].length;i++){
             	pF += fs[chain[x][i]];
             	pF -= fsb[chain[x][i]]/2;
+            	tx += chain[x][i];
             }
+            var ax = tx/chain[x].length;
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
-            if (pF/chain[x].length < -1.5){
-            	rgba[0] = 128;
-            }
-            //rgba[0] = 100 * pF / (chain[x].length);
-            //if (rgba[0] > 50){rgba[0] = 50;}
+            
+            rgba[0] = ax * 255 / 800;
+            
+            if (rgba[0] > 50){rgba[0] = 50;}
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = rgba[i];
             }
@@ -222,82 +219,9 @@
             }
           }
         }
-        if (y == 150){
-        	var t = 0;
-        	for (x = (width - 1); x >= 0; x--) {
-        		if (chain[x]){
-        			console.log(x,chain[x]);
-        			t += chain[x].length;
-        		}
-        		
-        	}
-        	console.log(t);
-        }
+       
       }
-	  for (y = 1; y < height -1; y++) {
-	  	for (x = (width - 2); x >= 1; x--) {
-	  		
-			
-			pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
-			
-			pixels[(y * width * 4) + (x - 0) * 4 + 2] = pixels[((y + 0) * width * 4) + ((x+0) * 4) + 3];
-	  		
-	  	}
-	  }
-	  /*
-	  var count = 0;
-	  for (var i=0;i<fronts.length;i++){
-	  	if (fronts[i][0] >= 0){
-	  		if (count % 100 == 0){
-	  			//console.log(fronts[i]);
-	  		}
-	  		count++;
-	  		var pts = [fronts[i][2],fronts[i][3]];
-	  		for (var iii=0;iii<pts.length;iii++){
-	  			var ii = pts[iii];
-	  			
-	  			pixels[(fronts[i][0] * width * 4) + (ii -1) * 4 ] = 10;
-	  			pixels[(fronts[i][0] * width * 4) + (ii + 1) * 4 ] = 10;
-	  			
-				//pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 3];
-	  		}
-	  	}
-	  	else {
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = 0;
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = 0;
-	  	}
-	  }
-	  for (var i=0;i<fronts.length;i++){
-	  	if (fronts[i][0] >= 0){
-	  		if (count % 100 == 0){
-	  			//console.log(fronts[i]);
-	  		}
-	  		count++;
-	  		var pts = [fronts[i][2],fronts[i][3]];
-	  		for (var iii=0;iii<pts.length;iii++){
-	  			var ii = pts[iii];
-	  			
-	  			pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = 20;
-	  			
-	  			
-				pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 3];
-				//pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 3;
-				//pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = (fronts[i][0] - 100) / 3;
-				//pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 + 3];
-				//pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 + 3];
-	  		}
-	  	}
-	  	else {
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = 0;
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = 0;
-	  	}
-	  }*/
 	  
-	  for (y = 0; y < height; y++) {
-	  	for (x = (width - 1); x >= 0; x--) {
-	  		pixels[(y * width * 4) + (x - 0) * 4 + 3] = 255;
-	  	}
-	  }
       return pixels;
     },
 
