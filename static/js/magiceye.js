@@ -190,10 +190,10 @@
 				pixels[(y * width * 4) + (x - 0) * 4] = 0;
 				pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
 			}
-			var b = 0;
+			var b = pixels[((y + 0) * width * 4) + ((x+0) * 4) + 3]/2;
 			for (var i=-1;i<2;i++){
 				for (var ii=-1;ii<2;ii++){
-					b += pixels[((y + i) * width * 4) + ((x+ii) * 4) + 3]/9;
+					b += pixels[((y + i) * width * 4) + ((x+ii) * 4) + 3]/18;
 				}
 			}
 			pixels[(y * width * 4) + (x - 0) * 4 + 2] = b;
