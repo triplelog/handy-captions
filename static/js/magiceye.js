@@ -208,8 +208,8 @@
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
             
             rgba[0] = ax * 255 / 800;
-            rgba[1] = Math.floor(Math.random() * 255);
-            rgba[2] = Math.floor(Math.random() * 255);
+            rgba[1] = 0;// Math.floor(Math.random() * 255);
+            rgba[2] = 0;//Math.floor(Math.random() * 255);
             rgba[3] = 255;
             
             if (rgba[0] > 50){rgba[0] = 50;}
