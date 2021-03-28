@@ -198,6 +198,11 @@
 	  		}
 	  	}
 	  }
+	  for (y = 0; y < height; y++) {
+	  	for (x = (width - 1); x >= 0; x--) {
+	  		pixels[(y * width * 4) + (x - 0) * 4 + 3] = 255;
+	  	}
+	  }
       return pixels;
     },
 
