@@ -21,6 +21,10 @@
         colors: [
           [255, 0, 0, 255],
           [0, 0, 0, 255]
+        ],
+        colors2: [
+          [0, 0, 255, 255],
+          [0, 0, 0, 255]
         ]
       };
 
@@ -55,12 +59,19 @@
           opts.colors[i] = this.helpers.hexToRGBa(opts.colors[i]);
         }
       }
+      // convert hex colors to RGBa
+      for (i = 0; i < opts.colors2.length; i++) {
+        if (typeof opts.colors2[i] === 'string') {
+          opts.colors2[i] = this.helpers.hexToRGBa(opts.colors2[i]);
+        }
+      }
 
       pixelData = this.generatePixelData({
         width: width,
         height: height,
         depthMap: depthMap,
-        colors: opts.colors
+        colors: opts.colors,
+        colors2: opts.colors2
       });
 
       switch (element.tagName) {
@@ -160,7 +171,12 @@
           pixelOffset = (y * width * 4) + (x * 4);
           if (same[x] === x) {
             // set random color
-            rgba = opts.colors[Math.floor(Math.random() * numColors)];
+            if (x > width/2){
+            	rgba = opts.colors2[Math.floor(Math.random() * numColors)];
+            }
+            else {
+            	rgba = opts.colors[Math.floor(Math.random() * numColors)];
+            }
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = rgba[i];
             }
