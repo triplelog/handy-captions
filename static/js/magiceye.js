@@ -163,21 +163,17 @@
           
         }
 		var chain = {};
+		for (x = (width - 1); x >= 0; x--) {
+			if (same[x] == x){
+				chain[x] = [];
+			}
+			else {
+				chain[same[x]].push(x);
+			}
+        }
         for (x = (width - 1); x >= 0; x--) {
           pixelOffset = (y * width * 4) + (x * 4);
-          if (y == 150){
-          	
-          	if (same[x] == x){
-          		chain[x] = [];
-          	}
-          	else {
-          		chain[x] = [];
-          		for (var i=0;i<chain[same[x]].length;i++){
-          			chain[x].push(chain[same[x]][i]);
-          		}
-          		chain[x].push(same[x]);
-          	}
-          }
+          
           if (same[x] === x) {
             // set random color
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
@@ -194,7 +190,10 @@
         }
         if (y == 150){
         	for (x = (width - 1); x >= 0; x--) {
-        		console.log(chain[x]);
+        		if (chain[x] || chain[x].length == 0){
+        			console.log(x,chain[x]);
+        		}
+        		
         	}
         }
       }
