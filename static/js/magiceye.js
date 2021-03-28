@@ -225,7 +225,7 @@
             }
             
           }
-          pixels[pixelOffset + 0] = x * 255 / 800;
+          pixels[pixelOffset + 0] = (Math.floor(x / 100) % 2) * 255 ;
         }
        
       }
