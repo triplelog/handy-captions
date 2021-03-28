@@ -197,7 +197,7 @@ var currentCurve = [];
 var allCurves = {};
 var isDown = false;
 var isGroup = false;
-
+monitorEvents(window);
 curveWorker.onmessage = function(evt){
 	if (evt.data.type == 'inputCurve'){
 		for (var i=0;i<evt.data.points.length;i++){
