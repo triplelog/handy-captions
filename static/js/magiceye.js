@@ -208,7 +208,7 @@
             //}
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
             
-            rgba[0] = Math.floor(Math.random() * 255);
+            rgba[0] = 0;
             rgba[1] = Math.floor(Math.random() * 255);
             rgba[2] = Math.floor(Math.random() * 255);
             rgba[3] = 255;
@@ -225,7 +225,9 @@
             }
             
           }
-          pixels[pixelOffset + 0] = (Math.floor(x / 100) % 2) * 255 ;
+          if ((Math.floor(x / 100) % 2) == (Math.floor(y / 100) % 2)){
+          	pixels[pixelOffset + 0] = 50 ;
+          }
         }
        
       }
