@@ -154,7 +154,7 @@
                 }
               }
               same[left] = right;
-              frontPoint = [y,left,right];
+              frontPoint = [y,x,left,right];
             }
             if (z > 0.5){
 		  		fronts.push(frontPoint);
@@ -201,9 +201,14 @@
 	  		
 	  	}
 	  }
+	  var count = 0;
 	  for (var i=0;i<fronts.length;i++){
 	  	if (fronts[i][0] >= 0){
-	  		var pts = [fronts[i][1],fronts[i][2]];
+	  		if (count % 100 == 0){
+	  			console.log(fronts[i]);
+	  		}
+	  		count++;
+	  		var pts = [fronts[i][1],fronts[i][2],fronts[i][3]];
 	  		for (var iii=0;iii<pts.length;iii++){
 	  			var ii = pts[iii];
 	  			pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = 50;
