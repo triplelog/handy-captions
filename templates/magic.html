@@ -42,6 +42,8 @@
   	  dMap.push([]);
 	  for (var x=0;x<800;x++){
 	  	  var v = Math.abs(noise.perlin2(x/800,y/600));
+	  	  v *= 2;
+	  	  if (v > 1){v = 1;}
   		  dMap[y].push(v);
 	  }
   }
