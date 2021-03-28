@@ -196,8 +196,12 @@
           
           if (same[x] === x) {
             // set random color
-            if (colorChain[y][x] == 7){
-            	rgba = colorChain[y][x];
+            if (colorChain[y][x]){
+            	rgba = [0,0,0,0];
+            	rgba[0] = colorChain[y][x][0];
+            	rgba[1] = colorChain[y][x][1];
+            	rgba[2] = colorChain[y][x][2];
+            	rgba[3] = colorChain[y][x][3];
             }
             else {
 				var pF = 0;
@@ -216,7 +220,11 @@
 				rgba[1] = Math.floor(Math.random() * 255);
 				rgba[2] = Math.floor(Math.random() * 255);
 				rgba[3] = 255;
-				colorChain[y][x] = rgba;
+				colorChain[y][x] = [0,0,0,0];
+				colorChain[y][x][0] = rgba[0];
+				colorChain[y][x][1] = rgba[1];
+				colorChain[y][x][2] = rgba[2];
+				colorChain[y][x][3] = rgba[3];
             }
             if (rgba[0] > 255){rgba[0] = 255;}
             for (i = 0; i < 4; i++) {
