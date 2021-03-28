@@ -217,8 +217,12 @@
 				rgba = opts.colors[Math.floor(Math.random() * numColors)];
 			
 				rgba[0] = 0;
-				var value = Math.abs(noise.perlin2((x%100) / 100, (y%100) / 100));
+				var value = Math.abs(noise.perlin2((x%800) / 800, (y%800) / 800));
     			value *= 256;
+				if (chain[x].length > 1 && chain[x][0] - chain[x][1] < 90){
+					value = Math.random() * 255;
+				}
+				
 				rgba[1] = Math.floor(value);
 				rgba[2] = Math.floor(Math.random() * 255);
 				rgba[3] = 255;
