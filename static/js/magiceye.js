@@ -212,7 +212,7 @@
             rgba[2] = 0;//Math.floor(Math.random() * 255);
             rgba[3] = 255;
             
-            if (rgba[0] > 50){rgba[0] = 50;}
+            if (rgba[0] > 255){rgba[0] = 255;}
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = rgba[i];
             }
