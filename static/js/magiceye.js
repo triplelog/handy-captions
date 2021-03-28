@@ -163,16 +163,21 @@
           
         }
 		var chain = {};
+		var chainStart = {};
 		for (x = (width - 1); x >= 0; x--) {
 			if (same[x] == x){
 				chain[x] = [x];
+				chainStart[x] = x;
 			}
 			else {
 				if (chain[same[x]]){
         			chain[same[x]].push(x);
+        			chainStart[x] = same[x];
         		}
         		else {
-        			console.log(x,same[x]);
+        			chain[chainStart[same[x]]].push(x);
+        			chainStart[x] = chainStart[same[x]];
+        			//console.log(x,same[x]);
         		}
 				
 			}
