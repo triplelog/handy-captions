@@ -165,10 +165,10 @@
 		var chain = {};
 		for (x = (width - 1); x >= 0; x--) {
 			if (same[x] == x){
-				chain[x] = [];
+				chain[x] = [x];
 			}
 			else {
-				if (chain[same[x]] || chain[same[x]].length == 0){
+				if (chain[same[x]]){
         			chain[same[x]].push(x);
         		}
         		else {
