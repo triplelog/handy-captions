@@ -196,8 +196,8 @@
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4] = 20;
 	  	}
 	  	else {
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 +1] = 50;
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 +1] = 20;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 +1] = 30;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 +1] = 15;
 	  	}
 	  }
 	  
