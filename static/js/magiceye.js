@@ -201,8 +201,14 @@
             if (colorChain[y][x]){
             	rgba = [0,0,0,0];
             	rgba[0] = colorChain[y][x][0];
-            	rgba[1] = Math.floor(colorChain[y][x][1]*2/3+Math.random()*255/3);
-            	rgba[2] = Math.floor(colorChain[y][x][2]*2/3+Math.random()*255/3);
+            	if (fs[x] > 0){
+            		rgba[1] = Math.floor(colorChain[y][x][1]*4/5+Math.random()*255/5);
+            		rgba[2] = Math.floor(colorChain[y][x][2]*4/5+Math.random()*255/5);
+            	}
+            	else {
+            		rgba[1] = Math.floor(colorChain[y][x][1]*1/2+Math.random()*255/2);
+            		rgba[2] = Math.floor(colorChain[y][x][2]*1/2+Math.random()*255/2);
+            	}
             	rgba[3] = colorChain[y][x][3];
             }
             else {
@@ -286,7 +292,7 @@
             }*/
             
             if (fs[x] > 0){
-				pixels[pixelOffset + 0] = 10;
+				pixels[pixelOffset + 0] = 0;
 			}
             
             //pixels[pixelOffset + 1] = 255 - pixels[pixelOffset + 1];
