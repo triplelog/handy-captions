@@ -196,27 +196,34 @@
           
           if (same[x] === x) {
             // set random color
-            var pF = 0;
-            var tx = 0;
-            for (var i=0;i<chain[x].length;i++){
-            	pF += fs[chain[x][i]];
-            	tx += chain[x][i];
+            if (colorChain[y][x]){
+            	rgba = colorChain[y][x];
             }
-            var ax = tx/chain[x].length;
-            //if (y = 150){
-            //	console.log(x,ax);
-            //}
-            rgba = opts.colors[Math.floor(Math.random() * numColors)];
-            
-            rgba[0] = 0;
-            rgba[1] = Math.floor(Math.random() * 255);
-            rgba[2] = Math.floor(Math.random() * 255);
-            rgba[3] = 255;
-            
+            else {
+				var pF = 0;
+				var tx = 0;
+				for (var i=0;i<chain[x].length;i++){
+					pF += fs[chain[x][i]];
+					tx += chain[x][i];
+				}
+				var ax = tx/chain[x].length;
+				//if (y = 150){
+				//	console.log(x,ax);
+				//}
+				rgba = opts.colors[Math.floor(Math.random() * numColors)];
+			
+				rgba[0] = 0;
+				rgba[1] = Math.floor(Math.random() * 255);
+				rgba[2] = Math.floor(Math.random() * 255);
+				rgba[3] = 255;
+				colorChain[y][x] = rgba;
+            }
             if (rgba[0] > 255){rgba[0] = 255;}
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = rgba[i];
             }
+            
+            
           } else {
             // constrained pixel, obey constraint
             pixelOffset = (y * width * 4) + (x * 4);
@@ -226,7 +233,7 @@
             
           }
           
-          pixels[pixelOffset + 0] = x * 128 / 800 ;
+          //pixels[pixelOffset + 0] = x * 128 / 800 ;
         }
        
       }

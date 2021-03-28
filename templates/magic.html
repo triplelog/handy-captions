@@ -32,10 +32,15 @@
 </canvas>
 
 <script>
+  var colorChain = {};
+  for (var i=0;i<600;i++){
+  	colorChain[i]={};
+  }
   MagicEye.render({
     el: 'magiceye',
     depthMapper: new MagicEye.TextDepthMapper('Hello World')
   });
+  
 
 </script>
 </body>
