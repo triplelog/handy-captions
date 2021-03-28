@@ -202,7 +202,7 @@
 	  }
 	  for (var i=0;i<fronts.length;i++){
 	  	if (fronts[i][0] < 300){
-	  		var pts = [fronts[i][1],fronts[i][2],(fronts[i][1]+fronts[i][2])/2];
+	  		var pts = [fronts[i][1],fronts[i][2]];
 	  		for (var iii=0;iii<pts.length;iii++){
 	  			var ii = pts[iii];
 	  			pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = (fronts[i][0] - 100) / 3;
