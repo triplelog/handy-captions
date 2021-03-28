@@ -201,8 +201,8 @@
             if (colorChain[y][x]){
             	rgba = [0,0,0,0];
             	rgba[0] = colorChain[y][x][0];
-            	rgba[1] = Math.floor(colorChain[y][x][1]/2+Math.random()*255/2);
-            	rgba[2] = Math.floor(colorChain[y][x][2]/2+Math.random()*255/2);
+            	rgba[1] = Math.floor(colorChain[y][x][1]*2/3+Math.random()*255/3);
+            	rgba[2] = Math.floor(colorChain[y][x][2]*2/3+Math.random()*255/3);
             	rgba[3] = colorChain[y][x][3];
             }
             else {

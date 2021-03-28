@@ -78,6 +78,7 @@
     el: 'magiceye',
     depthMapper: new MagicEye.TextDepthMapper('Hello Wor')
   });*/
+  var c = 0;
   function reRender() {
   	var dMap = [];
 	  for (var y=0;y<600;y++){
@@ -89,12 +90,13 @@
 	  }
 	  for (var i=1;i<10;i++){
 		  for (var y=60+i*5;y<60+i*5+400;y++){
-			  for (var x=210+i*5;x<210+i*5+100;x++){
+			  for (var x=210+i*5;x<210+i*5+100+c*5;x++){
 		  
 				  dMap[y][x] = (i+1)/10;
 			  }
 		  }
 	  }
+	  c++;
   	MagicEye.render({
 		el: 'magiceye',
 		depthMap: dMap
