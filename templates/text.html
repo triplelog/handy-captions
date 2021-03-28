@@ -191,9 +191,6 @@ inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
-inputEl.addEventListener('dragstart',inputDrag);
-inputEl.addEventListener('touchmove',inputTM);
-inputEl.addEventListener('mousemove',inputMM);
 var currentCurve = [];
 var allCurves = {};
 var isDown = false;
@@ -212,20 +209,14 @@ curveWorker.onmessage = function(evt){
 		//drawConvexHull(evt.data.pdArray);
 	}
 }
-function inputTM(evt){
-	document.getElementById('pointerType').innerHTML = evt.clientX+'tm';
-}
-function inputMM(evt){
-	document.getElementById('pointerIds').innerHTML = evt.clientX+'mm';
-}
-function inputDrag(evt){
-	document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
-}
+
 function inputCancel(evt){
 	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
 		evt.preventDefault();
 		document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 	}
+	isDown = false;
+	curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
 }
 function inputDown(evt) {
 	evt.preventDefault();
@@ -240,8 +231,6 @@ function inputDown(evt) {
 }
 function inputMove(evt) {
 	evt.preventDefault();
-	//var el = document.getElementById('pointerIds');
-	el.innerHTML += evt.pointerId;
 	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});

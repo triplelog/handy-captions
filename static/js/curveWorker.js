@@ -9,7 +9,9 @@ onmessage = function(evt){
 		myInterval = setInterval(sendPoints, 100);
 	}
 	else if (evt.data.type == "up"){
-		recentPoints.push([evt.data.x,evt.data.y]);
+		if (evt.data.x || evt.data.x == 0){
+			recentPoints.push([evt.data.x,evt.data.y]);
+		}
 		clearInterval(myInterval);
 		sendPoints(false);
 		createPD(evt.data.tab);
