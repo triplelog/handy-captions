@@ -196,7 +196,7 @@
           
           if (same[x] === x) {
             // set random color
-            if (colorChain[y][x]){
+            if (colorChain[y][x] == 7){
             	rgba = colorChain[y][x];
             }
             else {
