@@ -205,18 +205,36 @@
 	  for (var i=0;i<fronts.length;i++){
 	  	if (fronts[i][0] >= 0){
 	  		if (count % 100 == 0){
-	  			console.log(fronts[i]);
+	  			//console.log(fronts[i]);
 	  		}
 	  		count++;
-	  		var pts = [fronts[i][1],fronts[i][2],fronts[i][3]];
+	  		var pts = [fronts[i][2],fronts[i][3]];
 	  		for (var iii=0;iii<pts.length;iii++){
 	  			var ii = pts[iii];
-	  			if (iii == 0){
-	  				pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = 40;
-	  			}
-	  			else {
-	  				pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = 20;
-	  			}
+	  			
+	  			pixels[(fronts[i][0] * width * 4) + (ii -1) * 4 ] = 200;
+	  			pixels[(fronts[i][0] * width * 4) + (ii + 1) * 4 ] = 200;
+	  			
+				//pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 3];
+	  		}
+	  	}
+	  	else {
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = 0;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = 0;
+	  	}
+	  }
+	  for (var i=0;i<fronts.length;i++){
+	  	if (fronts[i][0] >= 0){
+	  		if (count % 100 == 0){
+	  			//console.log(fronts[i]);
+	  		}
+	  		count++;
+	  		var pts = [fronts[i][2],fronts[i][3]];
+	  		for (var iii=0;iii<pts.length;iii++){
+	  			var ii = pts[iii];
+	  			
+	  			pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = 20;
+	  			
 	  			
 				pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 3];
 				//pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 3;
