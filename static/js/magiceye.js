@@ -206,7 +206,7 @@
             	pF -= fsb[chain[x][i]]/2;
             }
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
-            if (pF/chain[x].length < -1/3){
+            if (pF/chain[x].length < -1/2){
             	rgba[0] = 128;
             }
             //rgba[0] = 100 * pF / (chain[x].length);
