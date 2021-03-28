@@ -202,9 +202,9 @@
             	tx += chain[x][i];
             }
             var ax = tx/chain[x].length;
-            if (y = 150){
-            	console.log(x,ax);
-            }
+            //if (y = 150){
+            //	console.log(x,ax);
+            //}
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
             
             rgba[0] = ax * 255 / 800;
