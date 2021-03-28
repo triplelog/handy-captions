@@ -161,7 +161,7 @@
               frontPoint = [y,x,left,right];
               
             }
-            if (z >= 0){
+            if (z > 0.5){
 		  		fronts.push(frontPoint);
 		  		fs[frontPoint[2]]++;
               	fs[frontPoint[3]]++;
@@ -208,7 +208,7 @@
             //}
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
             
-            rgba[0] = ax * 255 / 800;
+            rgba[0] = Math.floor(Math.random() * 255);
             rgba[1] = Math.floor(Math.random() * 255);
             rgba[2] = Math.floor(Math.random() * 255);
             rgba[3] = 255;
@@ -223,6 +223,7 @@
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
             }
+            pixels[pixelOffset + 0] = pixels[(y * width * 4) + (same[x] * 4) + 0] * x / 800;
           }
         }
        
