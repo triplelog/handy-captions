@@ -191,8 +191,8 @@
 	  	}
 	  }
 	  for (var i=0;i<fronts.length;i++){
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4] = 30;
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4] = 10;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4] = 50;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4] = 20;
 	  }
 	  
 	  for (y = 0; y < height; y++) {
