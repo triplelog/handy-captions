@@ -26,6 +26,7 @@
 	display: inline-block;
 	border: 1px solid black;
 	touch-action: none;
+	
 }
 .output {
 	position: absolute;
@@ -190,12 +191,12 @@ inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
-
+inputEl.addEventListener('dragstart',inputDrag);
 var currentCurve = [];
 var allCurves = {};
 var isDown = false;
 var isGroup = false;
-monitorEvents(window);
+
 curveWorker.onmessage = function(evt){
 	if (evt.data.type == 'inputCurve'){
 		for (var i=0;i<evt.data.points.length;i++){
@@ -210,22 +211,17 @@ curveWorker.onmessage = function(evt){
 	}
 }
 function inputDrag(evt){
-	if (evt.pointerType == 'touch'){
-		evt.preventDefault();
-		evt.stopImmediatePropagation();
-		evt.stopPropagation();
-		document.getElementById('pointerType').innerHTML = evt.pointerType+'drag';
-	}
+	document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 }
 function inputCancel(evt){
-	if (evt.pointerType != 'touch'){
+	if (evt.pointerType == 'pen'){
 		evt.preventDefault();
 		document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 	}
 }
 function inputDown(evt) {
 	evt.preventDefault();
-	if (evt.pointerType != 'touch'){
+	if (evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType;
 		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 		isDown = true;
@@ -238,7 +234,7 @@ function inputMove(evt) {
 	evt.preventDefault();
 	var el = document.getElementById('pointerIds');
 	el.innerHTML += evt.pointerId;
-	if (evt.pointerType != 'touch'){
+	if (evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
 	}
@@ -247,7 +243,7 @@ function inputMove(evt) {
 }
 function inputUp(evt) {
 	evt.preventDefault();
-	if (isDown && evt.pointerType != 'touch'){
+	if (isDown && evt.pointerType == 'pen'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"up";
 		isDown = false;
 		
