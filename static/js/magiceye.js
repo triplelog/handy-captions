@@ -165,6 +165,9 @@
 
         for (x = (width - 1); x >= 0; x--) {
           pixelOffset = (y * width * 4) + (x * 4);
+          if (y == 150){
+          	console.log(x,same[x]);
+          }
           if (same[x] === x) {
             // set random color
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
