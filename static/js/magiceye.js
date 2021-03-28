@@ -72,7 +72,6 @@
         var canvas = document.createElement('canvas');
         canvas.width = width;
         canvas.height = height;
-        console.log(pixelData.slice(0,100));
         this.renderToCanvas(canvas, pixelData, width, height);
         element.src = canvas.toDataURL('image/' + (opts.imageType || 'png'));
         break;
@@ -85,6 +84,7 @@
     },
 
     renderToCanvas: function (canvas, pixelData, width, height) {
+    	console.log(pixelData.slice(0,100));
       var context = canvas.getContext("2d"),
           imageData = context.createImageData(width, height);
       imageData.data.set(pixelData);
