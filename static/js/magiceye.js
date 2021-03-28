@@ -217,9 +217,23 @@
 				rgba = opts.colors[Math.floor(Math.random() * numColors)];
 			
 				rgba[0] = 0;
-				var yr =  (y %100)/800 + Math.random()*7/8;
-				var xr =  (ax %100)/1600 + Math.random()*15/16;
-				var value1 = Math.abs(noise.perlin2(xr, yr));
+				var axm = (ax % 100)*2;
+				var yr = (y % 100)/100;
+				var yi = axm - 100;
+				var xMin = 0;
+				if (yi < 0){
+					xMin = -1*yi;
+				}
+				var xMax = 100;
+				if (yi > 0){
+					xMax = 100 - yi;
+				}
+				var xx = yr*(xMax-xMin)+xMin;
+				var yy = 1*(xx)+yi;
+				
+				//var yr =  (y %100)/800 + Math.random()*7/8;
+				//var xr =  (ax %100)/1600 + Math.random()*15/16;
+				var value1 = Math.abs(noise.perlin2(xx, yy));
     			
     			value1 *= 2560/2;
     			if (value1 > 255){value1 = 255;}
@@ -240,7 +254,7 @@
 				}*/
 				
 				rgba[1] = Math.floor(value1);
-				rgba[2] = Math.floor(value2);
+				rgba[2] = Math.floor(Math.random());
 				rgba[3] = 255;
 				colorChain[y][x] = [0,0,0,0];
 				colorChain[y][x][0] = rgba[0];
