@@ -176,7 +176,8 @@
       }
 	  for (y = 0; y < height; y++) {
 	  	for (x = (width - 1); x >= 0; x--) {
-	  		if (y < height / 2){
+	  		z = depthMap[y][x];
+	  		if (z > 0.5){
 				pixels[(y * width * 4) + (x * 4)] = pixels[(y * width * 4) + (x * 4) + 3];
 				pixels[(y * width * 4) + (x * 4) + 1] = 0;
 				pixels[(y * width * 4) + (x * 4) + 2] = 0;
