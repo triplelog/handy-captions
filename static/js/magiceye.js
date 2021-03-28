@@ -222,7 +222,7 @@
 				if (chain[x].length > 1 && chain[x][0] - chain[x][1] < 90){
 					var xr = Math.random();
 					var yr = Math.random();
-					value = Math.abs(noise.perlin2(xr, yr);
+					value = Math.abs(noise.perlin2(xr, yr));
     				value *= 256;
     				
 				}
