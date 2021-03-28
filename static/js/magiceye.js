@@ -168,7 +168,13 @@
 				chain[x] = [];
 			}
 			else {
-				chain[same[x]].push(x);
+				if (chain[same[x]] || chain[same[x]].length == 0){
+        			chain[same[x]].push(x);
+        		}
+        		else {
+        			console.log(x,same[x]);
+        		}
+				
 			}
         }
         for (x = (width - 1); x >= 0; x--) {
