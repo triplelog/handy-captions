@@ -206,7 +206,7 @@
 	  		var pts = [fronts[i][1],fronts[i][2]];
 	  		for (var iii=0;iii<pts.length;iii++){
 	  			var ii = pts[iii];
-	  			//pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = 0;
+	  			pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = 50;
 				pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 3];
 				//pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 3;
 				//pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = (fronts[i][0] - 100) / 3;
