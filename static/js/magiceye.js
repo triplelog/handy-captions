@@ -125,7 +125,7 @@
 
           z = depthMap[y][x];
 		  if (y < 300 && z > 0.5){
-		  	z = (y + 600) / 800;
+		  	z = (y + 500) / 800;
 		  }
           // stereo separation corresponding to z
           sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
