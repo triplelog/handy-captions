@@ -200,7 +200,7 @@
             }
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
             if (pF > 0){
-            	rgba[0] = 10;
+            	rgba[0] = 128;
             }
             //rgba[0] = 50 * pF / (chain[x].length);
             //if (rgba[0] > 50){rgba[0] = 50;}
