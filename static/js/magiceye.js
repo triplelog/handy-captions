@@ -190,10 +190,10 @@
 				pixels[(y * width * 4) + (x - 0) * 4] = 0;
 				pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
 			}
-			var b = pixels[((y + 0) * width * 4) + ((x+0) * 4) + 3]/2;
+			var b = pixels[((y + 0) * width * 4) + ((x+0) * 4) + 3]*3/4;
 			for (var i=-1;i<2;i++){
 				for (var ii=-1;ii<2;ii++){
-					b += pixels[((y + i) * width * 4) + ((x+ii) * 4) + 3]/18;
+					b += pixels[((y + i) * width * 4) + ((x+ii) * 4) + 3]/36;
 				}
 			}
 			pixels[(y * width * 4) + (x - 0) * 4 + 2] = b;
@@ -205,7 +205,7 @@
 	  		var pts = [fronts[i][1],fronts[i][2]];
 	  		for (var iii=0;iii<pts.length;iii++){
 	  			var ii = pts[iii];
-	  			pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = (fronts[i][0] - 100) / 3;
+	  			pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = (fronts[i][0] - 100) / 6;
 				pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 3];
 				//pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 3;
 				//pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = (fronts[i][0] - 100) / 3;
