@@ -200,12 +200,15 @@
           }
         }
         if (y == 150){
+        	var t = 0;
         	for (x = (width - 1); x >= 0; x--) {
-        		if (chain[x] || chain[x].length == 0){
+        		if (chain[x]){
         			console.log(x,chain[x]);
+        			t += chain[x].length;
         		}
         		
         	}
+        	console.log(t);
         }
       }
 	  for (y = 1; y < height -1; y++) {
