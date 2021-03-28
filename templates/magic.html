@@ -68,19 +68,21 @@
   }
   
   
-  MagicEye.render({
+  /*MagicEye.render({
     el: 'magiceye',
     depthMap: dMap
-  });
+  });*/
   
-  /*
+  var str = 'Hello!';
+  var c = 1;
   MagicEye.render({
     el: 'magiceye',
-    depthMapper: new MagicEye.TextDepthMapper('Hello Wor')
-  });*/
-  var c = 0;
+    depthMapper: new MagicEye.TextDepthMapper(str.substring(0,c))
+  });
+
+  
   function reRender() {
-  	var dMap = [];
+  	/*var dMap = [];
 	  for (var y=0;y<600;y++){
 		  dMap.push([]);
 		  for (var x=0;x<800;x++){
@@ -95,11 +97,11 @@
 				  dMap[y][x] = (i+1)/10;
 			  }
 		  }
-	  }
+	  }*/
 	  c++;
   	MagicEye.render({
 		el: 'magiceye',
-		depthMap: dMap
+		depthMapper: new MagicEye.TextDepthMapper(str.substring(0,c))
 	  });
   }
   
