@@ -30,6 +30,8 @@
 </div>
 <canvas id="magiceye" width="800" height="600" >
 </canvas>
+<button style="position:absolute; left:800px; top:0px;" onclick="reRender()">Again</button>
+
 <script src='js/perlin.js'></script>
 <script>
 	noise.seed(Math.random());
@@ -75,13 +77,13 @@
   MagicEye.render({
     el: 'magiceye',
     depthMapper: new MagicEye.TextDepthMapper('Hello Wor')
-  });
+  });*/
   function reRender() {
   	MagicEye.render({
 		el: 'magiceye',
-		depthMapper: new MagicEye.TextDepthMapper('Hello World')
+		depthMap: dMap
 	  });
-  }*/
+  }
   
 
 </script>

@@ -62,6 +62,8 @@
         depthMap: depthMap,
         colors: opts.colors
       });
+      
+      
 
       switch (element.tagName) {
       case 'CANVAS':
@@ -284,7 +286,7 @@
             }*/
             
             if (fs[x] > 0){
-				pixels[pixelOffset + 0] = 60;
+				pixels[pixelOffset + 0] = 10;
 			}
             
             //pixels[pixelOffset + 1] = 255 - pixels[pixelOffset + 1];
