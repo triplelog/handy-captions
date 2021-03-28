@@ -290,7 +290,7 @@
             }*/
             
             if (fs[x] > 0){
-				pixels[pixelOffset + 0] = 100;
+				pixels[pixelOffset + 0] = 20;
 			}
             
             //pixels[pixelOffset + 1] = 255 - pixels[pixelOffset + 1];
