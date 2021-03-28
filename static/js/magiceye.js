@@ -223,8 +223,10 @@
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
             }
-            pixels[pixelOffset + 0] = pixels[(y * width * 4) + (same[x] * 4) + 0] * x / 800;
+            
           }
+          pixels[pixelOffset + 0] += x / 8000;
+          if (pixels[pixelOffset + 0] > 255){pixels[pixelOffset + 0] = 255;}
         }
        
       }
