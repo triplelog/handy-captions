@@ -90,7 +90,7 @@
       imageData.data.set(pixelData);
       context.fillStyle = 'green';
       context.fillRect(0,0,width,height);
-      context.putImageData(imageData, 0, 0);
+      //context.putImageData(imageData, 0, 0);
     },
 
     generatePixelData: function (opts) {
