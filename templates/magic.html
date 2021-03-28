@@ -38,8 +38,14 @@
   }
   MagicEye.render({
     el: 'magiceye',
-    depthMapper: new MagicEye.TextDepthMapper('Hello World')
+    depthMapper: new MagicEye.TextDepthMapper('Hello Wor')
   });
+  function reRender() {
+  	MagicEye.render({
+		el: 'magiceye',
+		depthMapper: new MagicEye.TextDepthMapper('Hello World')
+	  });
+  }
   
 
 </script>
