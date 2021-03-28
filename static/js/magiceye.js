@@ -205,7 +205,8 @@
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 3;
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = (fronts[i][0] - 100) / 3;
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 + 3];
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 + 3];
+	  		//pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 + 3];
+	  		
 	  	}
 	  	else {
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = 0;
