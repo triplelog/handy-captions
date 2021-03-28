@@ -108,7 +108,7 @@
           same, // points to a pixel to the right
           dpi = 72, // assuming output of 72 dots per inch
           eyeSep = Math.round(2.5 * dpi), // eye separation assumed to be 2.5 inches
-          mu = (1 / 2), // depth of field (fraction of viewing distance)
+          mu = (1 / 4), // depth of field (fraction of viewing distance)
           pixels = new Uint8ClampedArray(width * height * 4);
 
       // for each row
