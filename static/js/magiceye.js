@@ -234,8 +234,8 @@
 				if (y == 150){
 					console.log(x,y,ax,yi,xMin,xMax,xx,yr,yy);
 				}
-				var yr =  (yy %100)/400 + Math.random()*3/4;
-				var xr =  (xx %100)/400 + Math.random()*3/4;
+				var yr =  (yy %100)/100 + Math.random()*1/2;
+				var xr =  (xx %100)/100 + Math.random()*1/2;
 				var value1 = Math.abs(noise.perlin2(xr,yr));
     			
     			value1 *= 2560/2;
