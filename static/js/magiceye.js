@@ -180,7 +180,7 @@
 			pixels[(y * width * 4) + (x - 0) * 4] = 0;
 			pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
 			pixels[(y * width * 4) + (x - 0) * 4 + 2] = pixels[(y * width * 4) + (x * 4) + 3];
-			pixels[(y * width * 4) + (x - 0) * 4 + 3] = 255;
+			//pixels[(y * width * 4) + (x - 0) * 4 + 3] = 255;
 	  		
 	  	}
 	  }
@@ -193,7 +193,7 @@
 				pixels[(y * width * 4) + (x - sep) * 4] = 100;
 				pixels[(y * width * 4) + (x - sep) * 4 + 1] = 0;
 				pixels[(y * width * 4) + (x - sep) * 4 + 2] = pixels[(y * width * 4) + (x - sep) * 4 + 3];
-				pixels[(y * width * 4) + (x - sep) * 4 + 3] = 255;
+				//pixels[(y * width * 4) + (x - sep) * 4 + 3] = 255;
 				
 	  		}
 	  	}
