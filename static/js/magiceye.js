@@ -182,14 +182,10 @@
       }
 	  for (y = 1; y < height -1; y++) {
 	  	for (x = (width - 2); x >= 1; x--) {
-	  		if (y >=100 && y < 300){
-				pixels[(y * width * 4) + (x - 0) * 4] = (y - 100) / 6;
-				pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
-			}
-			else {
-				pixels[(y * width * 4) + (x - 0) * 4] = 0;
-				pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
-			}
+	  		
+			pixels[(y * width * 4) + (x - 0) * 4] = 0;
+			pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
+			
 			var b = pixels[((y + 0) * width * 4) + ((x+0) * 4) + 3]*3/4;
 			for (var i=-1;i<2;i++){
 				for (var ii=-1;ii<2;ii++){
@@ -201,11 +197,11 @@
 	  	}
 	  }
 	  for (var i=0;i<fronts.length;i++){
-	  	if (fronts[i][0] < 300){
+	  	if (fronts[i][0] >= 0){
 	  		var pts = [fronts[i][1],fronts[i][2]];
 	  		for (var iii=0;iii<pts.length;iii++){
 	  			var ii = pts[iii];
-	  			pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = (fronts[i][0] - 100) / 6;
+	  			//pixels[(fronts[i][0] * width * 4) + (ii) * 4 ] = 0;
 				pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 2] = pixels[(fronts[i][0] * width * 4) + (ii) * 4 + 3];
 				//pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 3;
 				//pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = (fronts[i][0] - 100) / 3;
