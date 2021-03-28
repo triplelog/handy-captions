@@ -88,6 +88,8 @@
       var context = canvas.getContext("2d"),
           imageData = context.createImageData(width, height);
       imageData.data.set(pixelData);
+      context.fillStyle = 'green';
+      context.fillRect(0,0,width,height);
       context.putImageData(imageData, 0, 0);
     },
 
