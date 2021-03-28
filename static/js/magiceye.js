@@ -122,8 +122,10 @@
 
         // for each column
         var fs = {};
+        var fsb = {};
         for (x = 0; x < width; x++) {
         	fs[x] = 0;
+        	fsb[x] = 0;
         }
         for (x = 0; x < width; x++) {
 
@@ -161,10 +163,14 @@
               frontPoint = [y,x,left,right];
               
             }
-            if (z > 0.5 && x < 200){
+            if (z > 0.5){
 		  		fronts.push(frontPoint);
 		  		fs[frontPoint[2]]++;
-              	fs[frontPoint[2]]++;
+              	fs[frontPoint[3]]++;
+              	fsb[frontPoint[2]-1]++;
+              	fsb[frontPoint[2]+1]++;
+              	fsb[frontPoint[3]-1]++;
+              	fsb[frontPoint[3]+1]++;
 		  	}
           }
           
