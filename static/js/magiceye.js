@@ -284,6 +284,9 @@
             		if (myChain[i] - myChain[i-1] < 90){
             			pixels[pixelOffset + 0] = 100;
             		}
+            		else {
+            			pixels[pixelOffset + 0] = 0;
+            		}
             		break;
             	}
             }
