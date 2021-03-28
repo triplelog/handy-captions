@@ -217,8 +217,9 @@
 				rgba = opts.colors[Math.floor(Math.random() * numColors)];
 			
 				rgba[0] = 0;
-				var yr = ( (y %100)/100 + Math.random())/2;
-				var value = Math.abs(noise.perlin2(Math.random(), yr));
+				var yr =  (y %100)/400 + Math.random()*3/4;
+				var xr =  (ax %100)/800 + Math.random()*7/8;
+				var value = Math.abs(noise.perlin2(xr, yr));
     			if (y == 150){
     				console.log(x,value);
     			}
