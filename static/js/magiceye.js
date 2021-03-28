@@ -192,12 +192,12 @@
 	  }
 	  for (var i=0;i<fronts.length;i++){
 	  	if (fronts[i][0] > 300){
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4] = 50;
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4] = 20;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4] = 30;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4] = 10;
 	  	}
 	  	else {
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 +1] = 30;
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 +1] = 15;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 +1] = 20;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 +1] = 5;
 	  	}
 	  }
 	  
