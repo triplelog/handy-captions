@@ -205,8 +205,8 @@
 	  }
 	  for (var i=0;i<fronts.length;i++){
 	  	if (fronts[i][0] < 300){
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = fronts[i][0] / 5;
-	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = fronts[i][0] / 10;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = (fronts[i][0] - 100) / 4;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = (fronts[i][0] - 100) / 8;
 	  	}
 	  	else {
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = 0;
