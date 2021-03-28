@@ -161,7 +161,7 @@
               frontPoint = [y,x,left,right];
               
             }
-            if (z > 0.5){
+            if (z > 0.5 && x < 200){
 		  		fronts.push(frontPoint);
 		  		fs[frontPoint[2]]++;
               	fs[frontPoint[2]]++;
