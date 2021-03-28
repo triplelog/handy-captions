@@ -30,8 +30,9 @@
 </div>
 <canvas id="magiceye" width="800" height="600" >
 </canvas>
-
+<script src='js/perlin.js'></script>
 <script>
+	noise.seed(Math.random());
   var colorChain = {};
   for (var i=0;i<600;i++){
   	colorChain[i]={};
