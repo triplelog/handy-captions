@@ -121,6 +121,10 @@
         }
 
         // for each column
+        var fs = {};
+        for (x = 0; x < width; x++) {
+        	fs[x] = 0;
+        }
         for (x = 0; x < width; x++) {
 
           z = depthMap[y][x];
@@ -155,9 +159,12 @@
               }
               same[left] = right;
               frontPoint = [y,x,left,right];
+              
             }
             if (z > 0.5){
 		  		fronts.push(frontPoint);
+		  		fs[frontPoint[2]]++;
+              	fs[frontPoint[2]]++;
 		  	}
           }
           
@@ -187,7 +194,13 @@
           
           if (same[x] === x) {
             // set random color
+            var pF = 0;
+            for (var i=0;i<chain[x].length;i++){
+            	pF += fs[chain[x][i]];
+            }
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
+            rgba[0] = 255 * pF / (chain[x].length);
+            if (rgba[0] > 255){rgba[0] = 255;}
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = rgba[i];
             }
@@ -214,24 +227,14 @@
 	  for (y = 1; y < height -1; y++) {
 	  	for (x = (width - 2); x >= 1; x--) {
 	  		
-			pixels[(y * width * 4) + (x - 0) * 4] = 0;
+			
 			pixels[(y * width * 4) + (x - 0) * 4 + 1] = 0;
 			
-			var b = pixels[((y + 0) * width * 4) + ((x+0) * 4) + 3]*1/4;
-			for (var i=-1;i<2;i++){
-				for (var ii=-1;ii<2;ii++){
-					b += pixels[((y + i) * width * 4) + ((x+ii) * 4) + 3]/18;
-				}
-			}
-			for (var i=-2;i<3;i++){
-				for (var ii=-2;ii<3;ii++){
-					b += pixels[((y + i) * width * 4) + ((x+ii) * 4) + 3]/100;
-				}
-			}
-			pixels[(y * width * 4) + (x - 0) * 4 + 2] = b;
+			pixels[(y * width * 4) + (x - 0) * 4 + 2] = pixels[((y + 0) * width * 4) + ((x+0) * 4) + 3];
 	  		
 	  	}
 	  }
+	  /*
 	  var count = 0;
 	  for (var i=0;i<fronts.length;i++){
 	  	if (fronts[i][0] >= 0){
@@ -278,7 +281,7 @@
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4 ] = 0;
 	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4 ] = 0;
 	  	}
-	  }
+	  }*/
 	  
 	  for (y = 0; y < height; y++) {
 	  	for (x = (width - 1); x >= 0; x--) {
