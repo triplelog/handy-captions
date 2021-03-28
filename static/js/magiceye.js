@@ -217,7 +217,9 @@
 				rgba = opts.colors[Math.floor(Math.random() * numColors)];
 			
 				rgba[0] = 0;
-				rgba[1] = Math.floor(Math.random() * 255);
+				var value = Math.abs(noise.perlin2((x%100) / 100, (y%100) / 100));
+    			value *= 256;
+				rgba[1] = Math.floor(value);
 				rgba[2] = Math.floor(Math.random() * 255);
 				rgba[3] = 255;
 				colorChain[y][x] = [0,0,0,0];
@@ -239,8 +241,8 @@
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
             }
-            pixels[pixelOffset + 1] = 255 - pixels[pixelOffset + 1];
-            pixels[pixelOffset + 2] = 255 - pixels[pixelOffset + 2];
+            //pixels[pixelOffset + 1] = 255 - pixels[pixelOffset + 1];
+            //pixels[pixelOffset + 2] = 255 - pixels[pixelOffset + 2];
             
           }
           
