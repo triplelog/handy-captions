@@ -199,7 +199,6 @@
             var tx = 0;
             for (var i=0;i<chain[x].length;i++){
             	pF += fs[chain[x][i]];
-            	pF -= fsb[chain[x][i]]/2;
             	tx += chain[x][i];
             }
             var ax = tx/chain[x].length;
