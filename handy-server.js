@@ -56,7 +56,15 @@ app.get('/index.html',
 		res.end();
 	}
 );
-
+app.get('/magic.html', 
+	
+	function(req, res) {
+		res.write(nunjucks.render('templates/magic.html',{
+		
+		}));
+		res.end();
+	}
+);
 
 app.post('/save.html', 
 	function(req, res) {
