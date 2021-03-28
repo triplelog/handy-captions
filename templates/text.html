@@ -25,7 +25,7 @@
 	height: 50%;
 	display: inline-block;
 	border: 1px solid black;
-	
+	touch-action: none;
 }
 .output {
 	position: absolute;
@@ -190,9 +190,7 @@ inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
-inputEl.addEventListener('dragstart',inputDrag);
-inputEl.addEventListener('touchmove',inputDrag);
-inputEl.addEventListener('touchdown',inputDrag);
+
 var currentCurve = [];
 var allCurves = {};
 var isDown = false;
