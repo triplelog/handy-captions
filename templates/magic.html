@@ -37,6 +37,20 @@
   for (var i=0;i<600;i++){
   	colorChain[i]={};
   }
+  var dMap = [];
+  for (var y=0;y<600;y++){
+  	  dMap.push([]);
+	  for (var x=0;x<800;x++){
+	  	  var v = Math.abs(noise.perlin2(x/800,y/600));
+  		  dMap[y].push(v);
+	  }
+  }
+  MagicEye.render({
+    el: 'magiceye',
+    depthMap: dMap
+  });
+  
+  /*
   MagicEye.render({
     el: 'magiceye',
     depthMapper: new MagicEye.TextDepthMapper('Hello Wor')
@@ -46,7 +60,7 @@
 		el: 'magiceye',
 		depthMapper: new MagicEye.TextDepthMapper('Hello World')
 	  });
-  }
+  }*/
   
 
 </script>
