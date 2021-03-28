@@ -99,7 +99,7 @@
        * translated from the C code that was featured in the article.
        * http://www.cs.sfu.ca/CourseCentral/414/li/material/refs/SIRDS-Computer-94.pdf
        */
-
+		var fronts = [];
       var x, y, i, left, right, visible, t, zt, k, sep, z, pixelOffset, rgba,
           width = opts.width,
           height = opts.height,
@@ -131,7 +131,8 @@
           // x-values corresponding to left and right eyes
           left = Math.round(x - ((sep + (sep & y & 1)) / 2));
           right = left + sep;
-
+          var frontPoint = [y,left,right];
+		  
           if (0 <= left && right < width) {
 
             // remove hidden surfaces
@@ -153,8 +154,13 @@
                 }
               }
               same[left] = right;
+              frontPoint = [y,left,right];
             }
+            if (z > 0.5){
+		  		fronts.push(frontPoint);
+		  	}
           }
+          
         }
 
         for (x = (width - 1); x >= 0; x--) {
@@ -184,20 +190,11 @@
 	  		
 	  	}
 	  }
-	  for (y = 0; y < height; y++) {
-	  	for (x = (width - 1); x >= 0; x--) {
-	  		z = depthMap[y][x];
-	  		sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
-	  		if (z > 0.5 && x > sep){
-				for (var i=x-sep;i<=x;i++){
-					pixels[(y * width * 4) + (i) * 4] = 100;
-					pixels[(y * width * 4) + (i) * 4 + 1] = 0;
-					pixels[(y * width * 4) + (i) * 4 + 2] = pixels[(y * width * 4) + (i) * 4 + 3];
-				}
-				
-	  		}
-	  	}
+	  for (var i=0;i<fronts.length;i++){
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][1]) * 4] = 100;
+	  		pixels[(fronts[i][0] * width * 4) + (fronts[i][2]) * 4] = 100;
 	  }
+	  
 	  for (y = 0; y < height; y++) {
 	  	for (x = (width - 1); x >= 0; x--) {
 	  		pixels[(y * width * 4) + (x - 0) * 4 + 3] = 255;
