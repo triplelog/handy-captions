@@ -188,12 +188,12 @@
 	  	for (x = (width - 1); x >= 0; x--) {
 	  		z = depthMap[y][x];
 	  		sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
-	  		if (x > sep){
-				
-				pixels[(y * width * 4) + (x - sep) * 4] = 10;
-				pixels[(y * width * 4) + (x - sep) * 4 + 1] = 0;
-				pixels[(y * width * 4) + (x - sep) * 4 + 2] = pixels[(y * width * 4) + (x - sep) * 4 + 3];
-				//pixels[(y * width * 4) + (x - sep) * 4 + 3] = 255;
+	  		if (z > 0.5 && x > sep){
+				for (var i=x-sep;i<=x;i++){
+					pixels[(y * width * 4) + (i) * 4] = 100;
+					pixels[(y * width * 4) + (i) * 4 + 1] = 0;
+					pixels[(y * width * 4) + (i) * 4 + 2] = pixels[(y * width * 4) + (i) * 4 + 3];
+				}
 				
 	  		}
 	  	}
