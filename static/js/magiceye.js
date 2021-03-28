@@ -228,6 +228,9 @@
           if ((Math.floor(x / 100) % 2) == (Math.floor(y / 100) % 2)){
           	pixels[pixelOffset + 0] = 100 ;
           }
+          else {
+          	pixels[pixelOffset + 0] = 0 ;
+          }
         }
        
       }
