@@ -280,14 +280,18 @@
             }
             var myChain = chain[chainStart[x]];
             pixels[pixelOffset + 0] = 0;
-            for (var i=1;i<myChain.length;i++){
+            /*for (var i=1;i<myChain.length;i++){
             	if (myChain[i] == x){
             		if (myChain[i] - myChain[i-1] < 90){
             			pixels[pixelOffset + 0] = 100;
             		}
             		break;
             	}
-            }
+            }*/
+            
+            if (fs[x] > 0){
+				pixels[pixelOffset + 0] = 100;
+			}
             
             //pixels[pixelOffset + 1] = 255 - pixels[pixelOffset + 1];
             //pixels[pixelOffset + 2] = 255 - pixels[pixelOffset + 2];
