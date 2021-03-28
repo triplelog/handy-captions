@@ -203,13 +203,14 @@
             var pF = 0;
             for (var i=0;i<chain[x].length;i++){
             	pF += fs[chain[x][i]];
+            	pF -= fsb[chain[x][i]]/2;
             }
             rgba = opts.colors[Math.floor(Math.random() * numColors)];
-            //if (pF > 1){
-            //	rgba[0] = 128;
-            //}
-            rgba[0] = 50 * pF / (chain[x].length);
-            if (rgba[0] > 50){rgba[0] = 50;}
+            if (pF < 0){
+            	rgba[0] = 128;
+            }
+            //rgba[0] = 100 * pF / (chain[x].length);
+            //if (rgba[0] > 50){rgba[0] = 50;}
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = rgba[i];
             }
