@@ -253,7 +253,7 @@
 				var yy = 1*(xx)+yi;
 				
 				if (y == 150){
-					console.log(x,y,ax,yi,xMin,xMax,xx,yr,yy);
+					//console.log(x,y,ax,yi,xMin,xMax,xx,yr,yy);
 				}
 				var yr =  (yy %100)/200 + Math.random()*1/2;
 				var xr =  (xx %100)/200 + Math.random()*1/2;
@@ -348,8 +348,10 @@
         	for (var i=1;i<3;i++){
         		var v = 0;
         		for (var ii=0;ii<mul && y*mul+ii<height;ii++){
-        			for (var iii=0;iii<mul && x*mul+iii<width;ii++){
-        				v += pixels[((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i];
+        			for (var iii=0;iii<mul && x*mul+iii<width;iii++){
+        				if (((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i < width * height * 4){
+        					v += pixels[((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i];
+        				}
         			}
         		}
         		v /= mul;
