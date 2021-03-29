@@ -338,22 +338,25 @@
         }*/
        
       }
-      for (y = 0; y < height/mul; y++) {
-        
+      for (y = 0; y < height/mul ; y++) {
+        /*if (y == height/mul){
+        	
+        }*/
         for (x = 0; x < width/mul; x++) {
-        	var pixelOffset = (y * width * 4) + (x * 4);
-        	var pixelOffsetBig = (y * width * mul * 4) + (x * mul * 4);
+        	var pixelOffset = (y * width / mul * 4) + (x * 4);
+        	var pixelOffsetBig = (y * mul * width * 4) + (x * mul * 4);
         	pixelsOut[pixelOffset] = 0;
         	pixelsOut[pixelOffset+3] = 255;
         	for (var i=1;i<3;i++){
-        		var v = 0;
+        		/*var v = 0;
         		for (var ii=0;ii<mul;ii++){
         			for (var iii=0;iii<mul;ii++){
         				v += pixels[pixelOffsetBig+i+iii*4+ii*width*mul*4];
         			}
         		}
         		v /= mul;
-        		v /= mul;
+        		v /= mul;*/
+        		v = pixels[pixelOffsetBig+i];
         		pixelsOut[pixelOffset+i] = Math.floor(v);
         	}
         	
