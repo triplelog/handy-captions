@@ -127,6 +127,14 @@
       }
       
       // for each row
+      var depth0 = {};
+      for (y = 0; y < height; y++) {
+      	depth0[y]={};
+      	for (x = 0; x < width; x++) {
+      		depth0[y][x]=0;
+      	}
+      }
+      
       for (y = 0; y < height; y++) {
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
@@ -180,6 +188,8 @@
 		  		fronts.push(frontPoint);
 		  		fs[frontPoint[2]]++;
               	fs[frontPoint[3]]++;
+              	depth0[y][frontPoint[2]]=1;
+              	depth0[y][frontPoint[3]]=1;
 		  	}
           }
           
@@ -347,15 +357,33 @@
         	pixelsOut[pixelOffset+3] = 255;
         	for (var i=1;i<3;i++){
         		var v = 0;
+        		var d = 0;
         		for (var ii=0;ii<mul && y*mul+ii<height;ii++){
         			for (var iii=0;iii<mul && x*mul+iii<width;iii++){
         				if (((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i < width * height * 4){
         					v += pixels[((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i];
+        					d += depth0[y * mul + ii][x * mul + iii];
         				}
         			}
         		}
         		v /= mul;
         		v /= mul;
+        		if (d == 0){
+        			var vv = 0;
+        			for (var ii=0;ii<2*mul && y*mul+ii<height;ii++){
+						for (var iii=0;iii<2*mul && x*mul+iii<width;iii++){
+							if (((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i < width * height * 4){
+								vv += pixels[((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i];
+								
+							}
+						}
+					}
+					vv /= mul;
+        			vv /= mul;
+        			vv /= 4;
+        			v = vv;
+        		}
+        		
         		pixelsOut[pixelOffset+i] = Math.floor(v);
         	}
         	
