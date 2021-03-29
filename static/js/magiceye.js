@@ -315,7 +315,7 @@
           
           //pixels[pixelOffset + 0] = x * 128 / 800 ;
         }
-        var minSep = Math.round((1 - (mu * 1)) * eyeSep / (2 - (mu * 1)));
+        /*var minSep = Math.round((1 - (mu * 1)) * eyeSep / (2 - (mu * 1)));
         var maxSep = Math.round((1 - (mu * 0)) * eyeSep / (2 - (mu * 0)));
         for (var x = 50; x < width-50; x++) {
         	
@@ -335,7 +335,7 @@
         	if (y == 150 && pMap[y][x] < 90){
         		console.log(depthMap[y][x],pMap[y][x])
         	}
-        }
+        }*/
        
       }
       for (y = 0; y < height/mul; y++) {
