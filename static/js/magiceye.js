@@ -114,7 +114,7 @@
           dpi = 72, // assuming output of 72 dots per inch
           eyeSep = Math.round(2.5 * dpi), // eye separation assumed to be 2.5 inches
           mu = (1 / 3), // depth of field (fraction of viewing distance)
-          pixels = new Uint8ClampedArray(width * height * 4);
+          pixels = new Uint8ClampedArray(width * height * 4),
           pixelsOut = new Uint8ClampedArray(width * height * 4 / mul / mul);
 	  
 	  var depthMap = [];
