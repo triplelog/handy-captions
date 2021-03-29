@@ -314,12 +314,12 @@
 			  var d = 0;
 			  d += Math.pow(pixels[y * width * 4 + left * 4 + 1]-pixels[y * width * 4 + right * 4 + 1],2);
 			  d += Math.pow(pixels[y * width * 4 + left * 4 + 2]-pixels[y * width * 4 + right * 4 + 2],2);
-			  if (d < 200){
+			  if (d < 1000){
 			  	pMap[y][x] = sep;
 			  	break;
 			  }
         	}
-        	if (y == 150){
+        	if (y == 150 && pMap[y][x] < 90){
         		console.log(depthMap[y][x],pMap[y][x])
         	}
         }
