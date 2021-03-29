@@ -18,6 +18,7 @@
         depthMap: null,
         depthMapper: new MagicEye.DepthMapper(),
         imageType: 'png',
+        mul: 2,
         colors: [
           [0, 0, 0, 0],
           [0, 0, 0, 255]
@@ -37,7 +38,7 @@
       }
 
       // use element's height and width unless height and width is provided
-      width = opts.width || element.width;
+      width = opts.width  || element.width ;
       if (!width) throw('MagicEye: width not set and could not be inferred from element: ' + opts.el);
       height = opts.height || element.height;
       if (!height) throw('MagicEye: height not set and could not be inferred from element: ' + opts.el);
@@ -46,7 +47,7 @@
       if (opts.depthMap) {
         depthMap = opts.depthMap;
       } else if (opts.depthMapper) {
-        depthMap = opts.depthMapper.generate(width, height);
+        depthMap = opts.depthMapper.generate(width, height );
       } else throw('MagicEye: no depthMap or depthMapper opts given');
 
       // convert hex colors to RGBa
@@ -60,6 +61,7 @@
         width: width,
         height: height,
         depthMap: depthMap,
+        mul: opts.mul,
         colors: opts.colors
       });
       
@@ -103,16 +105,27 @@
        */
 		var fronts = [];
       var x, y, i, left, right, visible, t, zt, k, sep, z, pixelOffset, rgba,
-          width = opts.width,
-          height = opts.height,
-          depthMap = opts.depthMap,
+          width = opts.width * opts.mul,
+          height = opts.height * opts.mul,
+          mul = opts.mul,
+          depthMapSmall = opts.depthMap,
           numColors = opts.colors.length,
           same, // points to a pixel to the right
           dpi = 72, // assuming output of 72 dots per inch
           eyeSep = Math.round(2.5 * dpi), // eye separation assumed to be 2.5 inches
           mu = (1 / 3), // depth of field (fraction of viewing distance)
           pixels = new Uint8ClampedArray(width * height * 4);
-
+          pixelsOut = new Uint8ClampedArray(width * height * 4 / mul / mul);
+	  
+	  var depthMap = [];
+	  for (y = 0; y < height; y++) {
+        depthMap.push([]);
+        for (x = 0; x < width; x++) {
+        	var d = depthMapSmall[Math.floor(y/mul)][Math.floor(x/mul)];
+        	depthMap[y].push(d);
+        }
+      }
+      
       // for each row
       for (y = 0; y < height; y++) {
         // max image width (for Uint16Array) is 65536
@@ -325,8 +338,19 @@
         }
        
       }
+      for (y = 0; y < height/mul; y++) {
+        
+        for (x = 0; x < width/mul; x++) {
+        	var pixelOffset = (y * width * 4) + (x * 4);
+        	var pixelOffsetBig = (y * width * mul * 4) + (x * mul * 4);
+        	pixelsOut[pixelOffset] = pixels[pixelOffsetBig];
+        	pixelsOut[pixelOffset+1] = pixels[pixelOffsetBig+1];
+        	pixelsOut[pixelOffset+2] = pixels[pixelOffsetBig+2];
+        	pixelsOut[pixelOffset+3] = pixels[pixelOffsetBig+3];
+        }
+      }
 	  
-      return pixels;
+      return pixelsOut;
     },
 
     helpers: {
