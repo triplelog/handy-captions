@@ -339,24 +339,21 @@
        
       }
       for (y = 0; y < height/mul ; y++) {
-        /*if (y == height/mul){
-        	
-        }*/
+        
         for (x = 0; x < width/mul; x++) {
         	var pixelOffset = (y * width / mul * 4) + (x * 4);
         	var pixelOffsetBig = (y * mul * width * 4) + (x * mul * 4);
         	pixelsOut[pixelOffset] = 0;
         	pixelsOut[pixelOffset+3] = 255;
         	for (var i=1;i<3;i++){
-        		/*var v = 0;
-        		for (var ii=0;ii<mul;ii++){
-        			for (var iii=0;iii<mul;ii++){
-        				v += pixels[pixelOffsetBig+i+iii*4+ii*width*mul*4];
+        		var v = 0;
+        		for (var ii=0;ii<mul && y*mul+ii<height;ii++){
+        			for (var iii=0;iii<mul && x*mul+iii<width;ii++){
+        				v += pixels[((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i];
         			}
         		}
         		v /= mul;
-        		v /= mul;*/
-        		v = pixels[pixelOffsetBig+i];
+        		v /= mul;
         		pixelsOut[pixelOffset+i] = Math.floor(v);
         	}
         	
