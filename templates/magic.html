@@ -51,11 +51,14 @@
   }
   
   var dMap = [];
+  var pMap = [];
   for (var y=0;y<600;y++){
   	  dMap.push([]);
+  	  pMap.push([]);
 	  for (var x=0;x<800;x++){
 	  	  
   		  dMap[y].push(0);
+  		  pMap[y].push(0);
 	  }
   }
   for (var i=0;i<10;i++){
@@ -68,17 +71,17 @@
   }
   
   
-  /*MagicEye.render({
+  MagicEye.render({
     el: 'magiceye',
     depthMap: dMap
-  });*/
-  
+  });
+  /*
   var str = 'Hello World!';
   var c = 1;
   MagicEye.render({
     el: 'magiceye',
     depthMapper: new MagicEye.TextDepthMapper(str.substring(0,c))
-  });
+  });*/
 
   
   function reRender() {

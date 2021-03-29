@@ -302,6 +302,27 @@
           
           //pixels[pixelOffset + 0] = x * 128 / 800 ;
         }
+        var minSep = Math.round((1 - (mu * 1)) * eyeSep / (2 - (mu * 1)));
+        var maxSep = Math.round((1 - (mu * 0)) * eyeSep / (2 - (mu * 0)));
+        for (var x = 50; x < width-50; x++) {
+        	
+        	var pDepth = 0;
+        	for (var sep = minSep; sep< maxSep+1;sep++){
+        	  
+			  left = Math.round(x - ((sep + (sep & y & 1)) / 2));
+			  right = left + sep;
+			  var d = 0;
+			  d += Math.pow(pixels[y * width * 4 + left * 4 + 1]-pixels[y * width * 4 + right * 4 + 1],2);
+			  d += Math.pow(pixels[y * width * 4 + left * 4 + 2]-pixels[y * width * 4 + right * 4 + 2],2);
+			  if (d < 200){
+			  	pMap[y][x] = sep;
+			  	break;
+			  }
+        	}
+        	if (y == 150){
+        		console.log(depthMap[y][x],pMap[y][x])
+        	}
+        }
        
       }
 	  
