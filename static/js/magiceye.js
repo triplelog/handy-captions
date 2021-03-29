@@ -368,8 +368,20 @@
         		}
         		v /= mul;
         		v /= mul;
-        		if (d > 0){
-        			pixelsOut[pixelOffset] = 20;
+        		if (d >= 0){
+        			var vv = 0;
+        			for (var ii=0;ii<2*mul && y*mul+ii<height;ii++){
+						for (var iii=0;iii<2*mul && x*mul+iii<width;iii++){
+							if (((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i < width * height * 4){
+								vv += pixels[((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i];
+								
+							}
+						}
+					}
+					vv /= mul;
+        			vv /= mul;
+        			vv /= 4;
+        			v = vv;
         		}
         		
         		pixelsOut[pixelOffset+i] = Math.floor(v);
