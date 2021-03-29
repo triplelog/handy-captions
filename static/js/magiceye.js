@@ -381,7 +381,7 @@
 					vv /= mul;
         			vv /= mul;
         			vv /= 4;
-        			v = vv;
+        			v = v/2 + vv/2;
         		}
         		
         		pixelsOut[pixelOffset+i] = Math.floor(v);
