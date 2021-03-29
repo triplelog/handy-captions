@@ -343,10 +343,20 @@
         for (x = 0; x < width/mul; x++) {
         	var pixelOffset = (y * width * 4) + (x * 4);
         	var pixelOffsetBig = (y * width * mul * 4) + (x * mul * 4);
-        	pixelsOut[pixelOffset] = pixels[pixelOffsetBig];
-        	pixelsOut[pixelOffset+1] = pixels[pixelOffsetBig+1];
-        	pixelsOut[pixelOffset+2] = pixels[pixelOffsetBig+2];
-        	pixelsOut[pixelOffset+3] = pixels[pixelOffsetBig+3];
+        	pixelsOut[pixelOffset] = 0;
+        	pixelsOut[pixelOffset+3] = 255;
+        	for (var i=1;i<3;i++){
+        		var v = 0;
+        		for (var ii=0;ii<mul;ii++){
+        			for (var iii=0;iii<mul;ii++){
+        				v += pixels[pixelOffsetBig+i+iii*4+ii*width*mul*4];
+        			}
+        		}
+        		v /= mul;
+        		v /= mul;
+        		pixelsOut[pixelOffset+i] = Math.floor(v);
+        	}
+        	
         }
       }
 	  
