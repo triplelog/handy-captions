@@ -272,14 +272,14 @@
 		  if (!setPixels[x]){
 		  	setPixels[x] = true;
 		  	for (var i=0;i<4;i++){
-				//pixels[pixelOffset + i] = colorsBG[(x % 180)][i];
+				pixels[pixelOffset + i] = colorsBG[(x % 180)][i];
 				
 		  	}
 		  	for (var ii=1;x + ii*180 < width;ii++){
 				if (!setPixels[x + ii*180]) {
 					setPixels[x + ii*180] = true;
 					for (var i=0;i<4;i++){
-						//pixels[pixelOffset + ii*720 + i] = colorsBG[(x % 180)][i];
+						pixels[pixelOffset + ii*720 + i] = colorsBG[(x % 180)][i];
 					}
 				}
 			}
