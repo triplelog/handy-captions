@@ -187,6 +187,8 @@
 		  	var right = x + s;
 		  	var leftOffset = (y * width * 4) + (left * 4);
 		  	var rightOffset = (y * width * 4) + (right * 4);
+		  	pixels[leftOffset + 0] = 80;
+			pixels[rightOffset + 0] = 80;
 		  	for (var i=1;i<3;i++){
 				pixels[leftOffset + i] = pixelColor[i];
 				pixels[rightOffset + i] = pixelColor[i];
