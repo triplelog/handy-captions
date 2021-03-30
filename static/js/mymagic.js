@@ -226,7 +226,7 @@
 						for (var i=1;i<3;i++){
 						
 							if (ii==1 && i == 2){
-								//pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
+								pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
 							}
 							else {
 								//pixels[rightOffset + ii*720 + i] = colorsBG[(x % 180)][i];
@@ -253,7 +253,7 @@
 						for (var i=1;i<3;i++){
 						
 							if (ii == 1 && i == 2){
-								//pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
+								pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
 							}
 							else {
 								//pixels[leftOffset + ii*-720 + i] = colorsBG[(x % 180)][i];
