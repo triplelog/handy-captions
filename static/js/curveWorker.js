@@ -319,8 +319,8 @@ function convexHull(points){
 		pdArray[i] += "Z";
 	}
 	const t1 = performance.now();
-	console.log(`Convex Hull took ${t1 - t0} milliseconds.`);
-	console.log(hullPoints.length);
+	//console.log(`Convex Hull took ${t1 - t0} milliseconds.`);
+	//console.log(hullPoints.length);
 	postMessage({'type':'convexHull','pdArray':pdArray});
 	
 }

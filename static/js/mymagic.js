@@ -90,7 +90,6 @@
     },
 
     renderToCanvas: function (canvas, pixelData, width, height) {
-    	console.log(pixelData.length);
       var context = canvas.getContext("2d"),
           imageData = context.createImageData(width, height);
       imageData.data.set(pixelData);
