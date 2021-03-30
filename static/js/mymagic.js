@@ -189,12 +189,15 @@
 		  	
 		  	for (var i=0;i<4;i++){
 				pixels[pixelOffset + i] = colors100[144 + (m % 50)][i];
-				for (var ii=1;x + ii*180 < width;ii++){
-					if (pixels[pixelOffset +ii*720 + 0] == 0 && pixels[pixelOffset+ii*720 + 1] == 0 && pixels[pixelOffset+ii*720 + 2] == 0) {
+				
+		  	}
+		  	for (var ii=1;x + ii*180 < width;ii++){
+				if (pixels[pixelOffset +ii*720 + 0] == 0 && pixels[pixelOffset+ii*720 + 1] == 0 && pixels[pixelOffset+ii*720 + 2] == 0) {
+					for (var i=0;i<4;i++){
 						pixels[pixelOffset + ii*720 + i] = colors100[144 + (m % 50)][i];
 					}
 				}
-		  	}
+			}
 		  	m++;
 		  }
 		  
