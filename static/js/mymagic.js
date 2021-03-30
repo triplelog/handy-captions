@@ -19,6 +19,7 @@
         depthMapper: new MagicEye.DepthMapper(),
         imageType: 'png',
         mul: 2,
+        s: 72,
         colors: [
           [0, 0, 0, 0],
           [0, 0, 0, 255]
@@ -62,7 +63,8 @@
         height: height,
         depthMap: depthMap,
         mul: opts.mul,
-        colors: opts.colors
+        colors: opts.colors,
+        s: opts.s
       });
       
       
@@ -108,6 +110,7 @@
           width = opts.width * opts.mul,
           height = opts.height * opts.mul,
           mul = opts.mul,
+          s = opts.s,
           depthMapSmall = opts.depthMap,
           numColors = opts.colors.length,
           same, // points to a pixel to the right
@@ -141,7 +144,7 @@
       		distance1[y][x]=-1;
       	}
       }
-      var s = 70;
+
       var colorsFGM = [];
 	  for (var i=0;i<s * 2;i++){
 		var c = [0,0,0,255];
