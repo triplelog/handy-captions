@@ -168,7 +168,7 @@ function drawCurveIn(pt) {
 		line.y = m*(i-pt[0])+pt[1];
 		var dx = Math.sqrt(Math.pow(r,2)/(1+Math.pow(line.m,2)));
 		console.log(dx,line.x,line.y,line.m);
-		for (var ii=Math.floor(-1*dx);ii<Math.floor(dx)+1;ii++){
+		for (var ii=Math.floor(line.x-1*dx);ii<Math.floor(line.x+dx)+1;ii++){
 			var yi = Math.floor(line.m*(ii-line.x)+line.y);
 			dMap[yi][ii]=1;
 			dMap[yi+1][ii]=1;
