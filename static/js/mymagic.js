@@ -178,7 +178,7 @@
         }
         var maxM = m;
         var m =0;
-        console.log(maxM);
+        //console.log(maxM);
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
@@ -197,11 +197,15 @@
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=1;i<3;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
+						var dd = ii*(maxM - m)*4;
 						if (ii==1 && i == 2){
-							pixels[rightOffset + ii*720 + i] = colors100[m % (s*2)][i];
+							pixels[rightOffset + dd + i] = colors100[m % (s*2)][i];
+						}
+						else if (ii==1 ){
+							pixels[rightOffset + dd + i] = colors100[m % (s*2)][i];
 						}
 						else {
-							pixels[rightOffset + ii*720 + i] = colors100[(s*2) + (m % 50)][i];
+							pixels[rightOffset + dd + (ii-1)*720 + i] = colors100[(s*2) + (m % 50)][i];
 						
 						}
 					}
