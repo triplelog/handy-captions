@@ -243,11 +243,13 @@
         			else {
         				lD = i - maxD;
         			}
+        			found = true;
         		}
         		else {
         			if (depth0[y][myChain[i]] > 0){
         				maxD++;
         			}
+        			
         		}
         	}
         	distance1[y][x]=distanceToFront;
