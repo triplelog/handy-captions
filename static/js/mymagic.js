@@ -195,7 +195,13 @@
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=0;i<4;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
-						pixels[rightOffset + ii*720 + i] = colors100[m % 144][i]/2+colors100[144 + (m % 50)][i]/2;
+						if (ii==1){
+							pixels[rightOffset + ii*720 + i] = colors100[m % 144][i]/2+colors100[144 + (m % 50)][i]/2;
+						}
+						else {
+							pixels[rightOffset + ii*720 + i] = colors100[m % 144][i];
+						
+						}
 					}
 				}
 		  	}
