@@ -247,7 +247,7 @@
         		}
         		else {
         			if (depth0[y][myChain[i]] > 0){
-        				maxD++;
+        				maxD = i;
         			}
         			
         		}
