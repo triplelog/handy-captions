@@ -146,6 +146,7 @@ curveWorker.onmessage = function(evt){
 var allCurves = {};
 function drawCurveOut(id,pd) {
 	allCurves[id]=pd;
+	createDepthMap();
 }
 function createDepthMap(){
 	
@@ -168,7 +169,7 @@ function createDepthMap(){
 	let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
 	var img2 = new Image();
 
-
+    console.log('hi');
 	img2.onload = function() {
 		//ctx.drawImage(img, 0, 0, 300, 300);
 		ctx.clearRect(0,0,800,600);
@@ -187,6 +188,7 @@ function createDepthMap(){
 			}
 		  }
 		}
+		console.log(dMap);
 		MagicEye.render({
 			el: 'magiceye',
 			s: 72,
