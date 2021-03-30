@@ -187,7 +187,7 @@
               frontPoint = [y,x,left,right];
               
             }
-            if (z > 0.5 && x < width - 90){
+            if (z > 0.5 ){
 		  		fronts.push(frontPoint);
 		  		fs[frontPoint[2]]++;
               	fs[frontPoint[3]]++;
@@ -430,7 +430,7 @@
         		pixelsOut[pixelOffset+i] = Math.floor(v);
         	}
         	if (distance1[y * mul][x * mul] >= 0){
-				pixelsOut[pixelOffset] = 200 - 10*distance1[y * mul][x * mul];
+				pixelsOut[pixelOffset] = 200 - 5*distance1[y * mul][x * mul];
 			}
 			
         	
