@@ -47,8 +47,33 @@
 <script>
 	noise.seed(Math.random());
   var colorChain = {};
+  var fullColorsFG = [];
+  var fullColorsBG = [];
   for (var i=0;i<1200;i++){
   	colorChain[i]={};
+  	var height = 1200;
+  	var s = 72;
+  	var ym = [];
+	ym.push(mulberry(y));
+	ym.push(mulberry(y + height));
+	ym.push(mulberry(y + 2 * height));
+	ym.push(mulberry(y + 3 * height));
+	var colorsFG = [];
+	  for (var ii=0;ii<s * 2;ii++){
+		var c = [0,0,0,255];
+		c[1] = mulberry(ym[0] + ii) % 256;
+		c[2] = mulberry(ym[1] + ii) % 256;
+		colorsFG.push(c);
+	  }
+	var colorsBG = [];
+	  for (var ii=0;ii<180;ii++){
+		var c = [0,0,0,255];
+		c[1] = mulberry(ym[2] + ii) % 256;
+		c[2] = mulberry(ym[3] + ii) % 256;
+		colorsBG.push(c);
+	  }
+	fullColorsFG.push(colorsFG);
+	fullColorsBG.push(colorsBG);
   }
   var dMap = [];
   for (var y=0;y<600;y++){
@@ -60,6 +85,8 @@
   		  dMap[y].push(v);
 	  }
   }
+  
+
   
   var dMap = [];
   var pMap = [];
@@ -85,36 +112,13 @@
   MagicEye.render({
     el: 'magiceye',
     s: 72,
+    fullColorsFG: fullColorsFG,
+    fullColorsBG: fullColorsBG,
     depthMap: dMap
   });
 
 
   
-  function reRender() {
-	
-	  c++;
-	  var dMap = [];
-	  for (var y=0;y<600;y++){
-		  dMap.push([]);
-		  for (var x=0;x<800;x++){
-		  
-			  dMap[y].push(0);
-		  }
-	  }
-	  for (var i=9;i<10;i++){
-		  for (var y=60+i*5;y<60+i*5+c*4;y++){
-			  for (var x=210+i*5;x<210+i*5+100;x++){
-		  
-				  dMap[y][x] = (i+1)/10;
-			  }
-		  }
-	  }
-  	MagicEye.render({
-		el: 'magiceye',
-		s: 72,
-		depthMap: dMap,
-	  });
-  }
 
 
 var curveWorker = new Worker('js/curveWorker.js');
@@ -197,6 +201,8 @@ function drawCurveIn(pt) {
 		el: 'magiceye',
 		s: 72,
 		rows: [minY,maxY],
+		fullColorsFG: fullColorsFG,
+    	fullColorsBG: fullColorsBG,
 		depthMap: dMap,
 	  });
 	const t1 = performance.now();
@@ -247,6 +253,8 @@ function createDepthMap(){
 		MagicEye.render({
 			el: 'magiceye',
 			s: 72,
+			fullColorsFG: fullColorsFG,
+    		fullColorsBG: fullColorsBG,
 			depthMap: dMap,
 		  });
 
@@ -292,6 +300,14 @@ function inputUp(evt) {
 	}
 	else {
 	}
+}
+function mulberry(a) {
+			
+	  var t = a += 0x6D2B79F5;
+	  t = Math.imul(t ^ t >>> 15, t | 1);
+	  t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+	  return (t ^ t >>> 14) >>> 0;
+			
 }
 
 </script>

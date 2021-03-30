@@ -21,6 +21,8 @@
         mul: 2,
         s: 72,
         rows: [0,-1],
+        fullColorsFG: [],
+    	fullColorsBG: [],
         colors: [
           [0, 0, 0, 0],
           [0, 0, 0, 255]
@@ -66,6 +68,8 @@
         mul: opts.mul,
         colors: opts.colors,
         s: opts.s,
+        fullColorsFG: opts.fullColorsFG,
+    	fullColorsBG: opts.fullColorsBG,
         rows: opts.rows
       });
       const t1 = performance.now();
@@ -157,26 +161,11 @@
 	  const t2 = performance.now();
 	  console.log(`Second part took ${t2 - t1} milliseconds.`);
       for (y = yMin; y < yMax; y++) {
-      	var ym = [];
-      	ym.push(this.helpers.mulberry(y));
-      	ym.push(this.helpers.mulberry(y + height));
-      	ym.push(this.helpers.mulberry(y + 2 * height));
-      	ym.push(this.helpers.mulberry(y + 3 * height));
+      	
+
         var m = 0;
-        var colorsFG = [];
-		  for (var i=0;i<s * 2;i++){
-			var c = [0,0,0,255];
-			c[1] = this.helpers.mulberry(ym[0] + i) % 256;
-			c[2] = this.helpers.mulberry(ym[1] + i) % 256;
-			colorsFG.push(c);
-		  }
-		var colorsBG = [];
-		  for (var i=0;i<180;i++){
-			var c = [0,0,0,255];
-			c[1] = this.helpers.mulberry(ym[2] + i) % 256;
-			c[2] = this.helpers.mulberry(ym[3] + i) % 256;
-			colorsBG.push(c);
-		  }
+        var colorsFG = fullColorsFG[y];
+		var colorsBG = fullColorsBG[y];
 		for (x = 0; x < width; x++) {
 			var pixelOffset = (y * width * 4) + (x * 4);
 			for (var i=0;i<4;i++){
@@ -338,15 +327,8 @@
           parseInt(result[3], 16),
           255
         ] : null;
-      },
-       mulberry: function (a) {
-			
-			  var t = a += 0x6D2B79F5;
-			  t = Math.imul(t ^ t >>> 15, t | 1);
-			  t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-			  return (t ^ t >>> 14) >>> 0;
-			
-	  }
+      }
+       
     }
 
   };
