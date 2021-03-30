@@ -242,6 +242,7 @@
         			}
         			else {
         				lD = i - maxD;
+        				distanceToFront = lD;
         			}
         			found = true;
         		}
