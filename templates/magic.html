@@ -70,21 +70,37 @@
 	  }
   }
   
-  var c=80;
+  var c=100;
   MagicEye.render({
     el: 'magiceye',
-    s: c,
+    s: 72,
     depthMap: dMap
   });
 
 
   
   function reRender() {
-
+	
 	  c--;
+	  var dMap = [];
+	  for (var y=0;y<600;y++){
+		  dMap.push([]);
+		  for (var x=0;x<800;x++){
+		  
+			  dMap[y].push(0);
+		  }
+	  }
+	  for (var i=9;i<10;i++){
+		  for (var y=60+i*5;y<60+i*5+c*4;y++){
+			  for (var x=210+i*5;x<210+i*5+100;x++){
+		  
+				  dMap[y][x] = (i+1)/10;
+			  }
+		  }
+	  }
   	MagicEye.render({
 		el: 'magiceye',
-		s: c,
+		s: 72,
 		depthMap: dMap,
 	  });
   }
