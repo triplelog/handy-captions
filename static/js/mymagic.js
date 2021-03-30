@@ -141,7 +141,7 @@
       		distance1[y][x]=-1;
       	}
       }
-      var s = 72;
+      var s = 55;
       var colorsFGM = [];
 	  for (var i=0;i<s * 2;i++){
 		var c = [0,0,0,255];
