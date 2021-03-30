@@ -20,6 +20,7 @@
         imageType: 'png',
         mul: 2,
         s: 72,
+        rows: [0,-1],
         colors: [
           [0, 0, 0, 0],
           [0, 0, 0, 255]
@@ -64,7 +65,8 @@
         depthMap: depthMap,
         mul: opts.mul,
         colors: opts.colors,
-        s: opts.s
+        s: opts.s,
+        rows: opts.rows
       });
       
       
@@ -110,6 +112,7 @@
           height = opts.height * opts.mul,
           mul = opts.mul,
           s = opts.s,
+          rows = opts.rows,
           depthMapSmall = opts.depthMap,
           numColors = opts.colors.length,
           same, // points to a pixel to the right
@@ -158,8 +161,13 @@
 		c[2] = Math.floor(Math.random() * 255);
 		colorsBGM.push(c);
 	  }
-	  
-      for (y = 0; y < height; y++) {
+	  var yMin = 0;
+	  var yMax = height;
+	  if (rows[1] > -1){
+	  	yMin = rows[0]*mul;
+	  	yMax = rows[1]*mul;
+	  }
+      for (y = yMin; y < yMax; y++) {
       	var ym = [];
       	ym.push(this.helpers.mulberry(y));
       	ym.push(this.helpers.mulberry(y + height));
