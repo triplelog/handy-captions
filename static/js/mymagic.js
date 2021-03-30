@@ -202,7 +202,7 @@
 							pixels[rightOffset + dd + i] = colors100[m % (s*2)][i];
 						}
 						else if (ii==1 ){
-							pixels[rightOffset + dd + i] = colors100[m % (s*2)][i];
+							pixels[rightOffset + dd + i] = colors100[(s*2) + (m % 50)][i];
 						}
 						else {
 							pixels[rightOffset + dd + (ii-1)*720 + i] = colors100[(s*2) + (m % 50)][i];
