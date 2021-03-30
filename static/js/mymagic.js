@@ -170,7 +170,9 @@
 		var colorsBG = fullColorsBG[y];
 		for (x = 0; x < width; x++) {
 			var pixelOffset = (y * width * 4) + (x * 4);
-			
+			pixels[pixelOffset + 0]=0;
+			pixels[pixelOffset + 1]=0;
+			pixels[pixelOffset + 2]=0;
 			pixels[pixelOffset + 3]=255;
 		}
 		
@@ -195,64 +197,65 @@
         var maxM = m;
         var m =0;
         //console.log(maxM);
-        for (x = 0; x < width; x++) {
-		  var pixelOffset = (y * width * 4) + (x * 4);
-          z = depthMap[y][x];
-		  if (z > 0.5){
-		  	if (m >= maxM - (s*2)){
-				var right = x + s;
-				var rightOffset = (y * width * 4) + (right * 4);
-				for (var i=1;i<3;i++){
-					for (var ii=1;right + ii*180 < width;ii++){
-						pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
-					}
-				}
-		  	}
-		  	else if (m >= maxM - 180){
-				var right = x + s;
-				var rightOffset = (y * width * 4) + (right * 4);
-				for (var i=1;i<3;i++){
-					for (var ii=1;right + ii*180 < width;ii++){
-						if (ii==1 && i == 2){
+        for (var ii=1;ii<width / 180;ii++){
+			for (x = 0; x < width; x++) {
+			  var pixelOffset = (y * width * 4) + (x * 4);
+			  z = depthMap[y][x];
+			  if (z > 0.5){
+				if (m >= maxM - (s*2)){
+					var right = x + s;
+					var rightOffset = (y * width * 4) + (right * 4);
+					for (var i=1;i<3;i++){
+						if (right + ii*180 < width){
 							pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
 						}
-						else {
-							pixels[rightOffset + ii*720 + i] = colorsBG[(x % 180)][i];
+					}
+				}
+				else if (m >= maxM - 180){
+					var right = x + s;
+					var rightOffset = (y * width * 4) + (right * 4);
+					for (var i=1;i<3;i++){
+						if (right + ii*180 < width){
+							if (ii==1 && i == 2){
+								pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
+							}
+							else {
+								pixels[rightOffset + ii*720 + i] = colorsBG[(x % 180)][i];
+						
+							}
+						}
+					}
+				}
+				if (m < (s*2)){
+					var left = x - s;
+					var leftOffset = (y * width * 4) + (left * 4);
+					for (var i=1;i<3;i++){
+						pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
+						if (left + ii*-180 >= 0){
+							pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
+						}
+					}
+				}
+				else if (m < 180){
+					var left = x - s;
+					var leftOffset = (y * width * 4) + (left * 4);
+					for (var i=1;i<3;i++){
+						pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
+						if (left + ii*-180 >= 0){
+							if (ii == 1 && i == 2){
+								pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
+							}
+							else {
+								pixels[leftOffset + ii*-720 + i] = colorsBG[(x % 180)][i];
+							}
 						
 						}
 					}
 				}
-		  	}
-		  	if (m < (s*2)){
-				var left = x - s;
-				var leftOffset = (y * width * 4) + (left * 4);
-				for (var i=1;i<3;i++){
-					pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
-					for (var ii=-1;left + ii*180 >= 0;ii--){
-						pixels[leftOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
-					}
-				}
-		  	}
-		  	else if (m < 180){
-				var left = x - s;
-				var leftOffset = (y * width * 4) + (left * 4);
-				for (var i=1;i<3;i++){
-					pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
-					for (var ii=-1;left + ii*180 >= 0;ii--){
-						if (ii == -1 && i == 2){
-							pixels[leftOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
-						}
-						else {
-							pixels[leftOffset + ii*720 + i] = colorsBG[(x % 180)][i];
-						}
-						
-					}
-				}
-		  	}
-		  	m++;
-		  }
+				m++;
+			  }
+			}
         }
-        
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           
