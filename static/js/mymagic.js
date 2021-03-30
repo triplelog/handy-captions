@@ -149,7 +149,7 @@
 	  for (var i=0;i<s * 2;i++){
 		var c = [0,0,0,255];
 		c[1] = Math.floor(Math.random() * 255);
-		c[2] = Math.floor(Math.random() * 255);
+		c[2] = 90 + i;
 		colorsFGM.push(c);
 	  }
 	  var colorsBGM = [];
