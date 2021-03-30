@@ -238,18 +238,32 @@
         				break;
         			}*/
         			if (right0[y][myChain[i]] > 0){
-        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] > 0){
-							if (rD < lD || lD == -1){
-								distanceToFront = rD;
+        				var isBorder = false;
+        				for (var ii=1;ii< 10 && myChain[i] + ii < width;ii++){
+							if (right0[y][myChain[i] + ii] == 0){
+								if (rD < lD || lD == -1){
+									distanceToFront = rD;
+								}
+								isBorder = true;
+								break;
 							}
+						}
+						if (isBorder){
 							break;
 						}
         			}
         		}
         		else if (myChain[i] == x){
         			if (right0[y][myChain[i]] > 0){
-        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] > 0){
-							distanceToFront = 0;
+        				var isBorder = false;
+        				for (var ii=1;ii< 10 && myChain[i] + ii < width;ii++){
+							if (right0[y][myChain[i] + ii] == 0){
+								distanceToFront = 0;
+								isBorder = true;
+								break;
+							}
+						}
+						if (isBorder){
 							break;
 						}
 						else if (maxD > -1){
@@ -268,8 +282,11 @@
         				maxD = i;
         			}*/
         			if (right0[y][myChain[i]] > 0){
-        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] > 0){
-							maxD = i;
+        				for (var ii=1;ii< 10 && myChain[i] + ii < width;ii++){
+							if (right0[y][myChain[i] + ii] == 0){
+								maxD = i;
+								break;
+							}
 						}
         			}
         			
