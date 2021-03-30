@@ -141,8 +141,9 @@
       		distance1[y][x]=-1;
       	}
       }
+      var s = 72;
       var colorsFGM = [];
-	  for (var i=0;i<150;i++){
+	  for (var i=0;i<s * 2;i++){
 		var c = [0,0,0,255];
 		c[1] = Math.floor(Math.random() * 255);
 		c[2] = Math.floor(Math.random() * 255);
@@ -159,10 +160,10 @@
       for (y = 0; y < height; y++) {
         var m = 0;
         var colorsFG = [];
-		  for (var i=0;i<150;i++){
+		  for (var i=0;i<s * 2;i++){
 			var c = [0,0,0,255];
 			c[1] = Math.floor(Math.random() * 255);
-			c[2] = Math.floor(Math.random() * 255)/2 + colorsFGM[(i+y)%150][2]/2;
+			c[2] = Math.floor(Math.random() * 255)/2 + colorsFGM[(i+y)%(s*2))][2]/2;
 			colorsFG.push(c);
 		  }
 		var colorsBG = [];
@@ -179,7 +180,7 @@
 			}
 			pixels[pixelOffset + 3]=255;
 		}
-		var s = 72;
+		
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
