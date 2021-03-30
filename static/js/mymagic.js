@@ -197,15 +197,11 @@
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=1;i<3;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
-						var dd = 180*4;
 						if (ii==1 && i == 2){
-							pixels[rightOffset + dd + i] = colors100[m % (s*2)][i];
-						}
-						else if (ii==1 ){
-							pixels[rightOffset + dd + i] = colors100[(s*2) + (m % 50)][i];
+							pixels[rightOffset + ii*720 + i] = colors100[m % (s*2)][i];
 						}
 						else {
-							pixels[rightOffset + dd + (ii-1)*720 + i] = colors100[(s*2) + (m % 50)][i];
+							pixels[rightOffset + ii*720 + i] = colors100[(s*2) + (m % 50)][i];
 						
 						}
 					}
@@ -227,15 +223,11 @@
 				for (var i=1;i<3;i++){
 					pixels[leftOffset + i] = colors100[m % (s*2)][i];
 					for (var ii=-1;left + ii*180 >= 0;ii--){
-						var dd = 180*4;
 						if (ii == -1 && i == 2){
-							pixels[leftOffset + dd + i] = colors100[m % (s*2)][i];
-						}
-						else if (ii == -1){
-							pixels[leftOffset + dd + i] = colors100[(s*2) + (m % 50)][i];
+							pixels[leftOffset + ii*720 + i] = colors100[m % (s*2)][i];
 						}
 						else {
-							pixels[leftOffset + dd + (ii-1)*720 + i] = colors100[(s*2) + (m % 50)][i];
+							pixels[leftOffset + ii*720 + i] = colors100[(s*2) + (m % 50)][i];
 						}
 						
 					}
