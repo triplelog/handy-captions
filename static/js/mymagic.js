@@ -147,7 +147,7 @@
         var colors100 = [];
 		  for (var i=0;i<350;i++){
 			var c = [0,0,0,255];
-			c[1] = Math.floor((55 + i)*0.6);
+			c[1] = Math.floor(Math.random() * 255);
 			c[2] = Math.floor(Math.random() * 255);
 			colors100.push(c);
 		  }
