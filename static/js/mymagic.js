@@ -219,6 +219,7 @@
 							}
 							else {
 								pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
+								pixels[rightOffset + ii*720 + 0] = 40;
 							}
 							
 							
@@ -255,6 +256,7 @@
 							}
 							else {
 								pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
+								pixels[leftOffset + ii*-720 + 0] = 40;
 							}
 						}
 					}
