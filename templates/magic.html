@@ -149,51 +149,19 @@ function drawCurveIn(pt) {
 }
 function tempDepthMap(pt){
 
-
-	var cir = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-	//console.log(id,ids,allCurves);
-	cir.setAttribute('cx',pt[0]);
-	cir.setAttribute('cy',pt[1]);
-	cir.setAttribute('fill','black');
-	cir.setAttribute('stroke','none');
-	cir.setAttribute('r','50');
-
-	document.getElementById('pixelSVG').appendChild(cir);
-	
-	
-	var canvas = document.getElementById('pixelCanvas');
-	var ctx = canvas.getContext("2d");
-	let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
-	var img2 = new Image();
-
-    console.log('hi');
-	img2.onload = function() {
-		//ctx.drawImage(img, 0, 0, 300, 300);
-		ctx.clearRect(0,0,800,600);
-		ctx.drawImage(img2, 0, 0,800,600);
-		
-		var imgData = ctx.getImageData(0,0,800,600).data;
-		var dMap = [];
-		for (var y=0;y<600;y++){
-		  dMap.push([]);
-		  for (var x=0;x<800;x++){
-		  	if (imgData[y*800*4+x*4+3] > 100){
-			  dMap[y].push(1);
-			}
-			else {
-			  dMap[y].push(0);
-			}
-		  }
+	for (var i=-50;i<51;i++){
+		for (var ii=-50;ii<51;ii++){
+			dMap[pt[1]+i][pt[0]+ii]=1;
 		}
-		MagicEye.render({
-			el: 'magiceye',
-			s: 72,
-			depthMap: dMap,
-		  });
-
 	}
 
-	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
+
+	MagicEye.render({
+		el: 'magiceye',
+		s: 72,
+		depthMap: dMap,
+	  });
+
 }
 
 function createDepthMap(){
@@ -224,7 +192,7 @@ function createDepthMap(){
 		ctx.drawImage(img2, 0, 0,800,600);
 		
 		var imgData = ctx.getImageData(0,0,800,600).data;
-		var dMap = [];
+		dMap = [];
 		for (var y=0;y<600;y++){
 		  dMap.push([]);
 		  for (var x=0;x<800;x++){
