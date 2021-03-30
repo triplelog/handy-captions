@@ -180,7 +180,7 @@
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
 		  if (z > 0.5){
-		  	if (m >= maxM - 72){
+		  	if (m >= maxM - 180 && m < maxM - 36){
 				var right = x + 72;
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=0;i<4;i++){
@@ -190,7 +190,7 @@
 					}
 				}
 		  	}
-		  	else if (m < 72){
+		  	else if (m < 180 && m >= 36){
 				var left = x - 72;
 				var leftOffset = (y * width * 4) + (left * 4);
 				for (var i=0;i<4;i++){
