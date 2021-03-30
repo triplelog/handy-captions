@@ -191,7 +191,7 @@
 					}
 				}
 		  	}
-		  	else if (m < 180 && m >= 36){
+		  	if (m < 180 && m >= 36){
 				var left = x - 72;
 				var leftOffset = (y * width * 4) + (left * 4);
 				for (var i=0;i<4;i++){
