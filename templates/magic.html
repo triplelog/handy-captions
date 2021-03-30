@@ -144,7 +144,7 @@ function drawCurveOut(id,pd) {
 	allCurves[id]=pd;
 	createDepthMap();
 }
-var lastPoint = [0,0];
+var lastPoint = [-1,0];
 function drawCurveIn(pt) {
 
 	var r = 25;
@@ -152,7 +152,11 @@ function drawCurveIn(pt) {
 	if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
 		return;
 	}
-		
+	if (lastPoint[0] = -1){
+		lastPoint[0] = pt[0];
+		lastPoint[1] = pt[1];
+		return;
+	}	
 	var m = (lastPoint[1]-pt[1])/(lastPoint[0]-pt[0]);
 	var minX = Math.min(pt[0],lastPoint[0]);
 	var maxX = Math.max(pt[0],lastPoint[0]);
@@ -249,6 +253,8 @@ function inputDown(evt) {
 	evt.preventDefault();
 	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
 		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
+		lastPoint[0] = evt.clientX;
+		lastPoint[1] = evt.clientY;
 		isDown = true;
 	}
 	else {
