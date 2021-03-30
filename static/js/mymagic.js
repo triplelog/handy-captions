@@ -73,14 +73,14 @@
 
       switch (element.tagName) {
       case 'CANVAS':
-        this.renderToCanvas(element, pixelData, width, height);
+        this.renderToCanvas(element, pixelData, width, height, opts.rows);
         break;
 
       case 'IMG':
         var canvas = document.createElement('canvas');
         canvas.width = width;
         canvas.height = height;
-        this.renderToCanvas(canvas, pixelData, width, height);
+        this.renderToCanvas(canvas, pixelData, width, height, opts.rows);
         element.src = canvas.toDataURL('image/' + (opts.imageType || 'png'));
         break;
 
@@ -91,11 +91,16 @@
       return this;
     },
 
-    renderToCanvas: function (canvas, pixelData, width, height) {
-      var context = canvas.getContext("2d"),
-          imageData = context.createImageData(width, height);
+    renderToCanvas: function (canvas, pixelData, width, height, rows) {
+      var context = canvas.getContext("2d");
+      if (rows[1] > -1){
+      	height = (rows[1] - rows[0]);
+      	pixelData = pixelData.slice(rows[0]*width*4,rows[1]*width*4);
+      }
+      var imageData = context.createImageData(width, height);
+      
       imageData.data.set(pixelData);
-      context.putImageData(imageData, 0, 0);
+      context.putImageData(imageData, 0, rows[0]);
     },
 
     generatePixelData: function (opts) {
