@@ -18,6 +18,15 @@
 	height: 600px;
 	background: red;
 }	
+.input {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: inline-block;
+	width: 800px;
+	height: 600px;
+	opacity: 0;
+}
 
 </script>
 </head>
@@ -30,6 +39,9 @@
 </div>
 <canvas id="magiceye" width="800" height="600" >
 </canvas>
+<div class="input">
+
+</div>
 <button style="position:absolute; left:800px; top:0px;" onclick="reRender()">Again</button>
 
 <script src='js/perlin.js'></script>
@@ -104,7 +116,70 @@
 		depthMap: dMap,
 	  });
   }
-  
+
+
+var curveWorker = new Worker('js/curveWorker.js');
+var inputEl = document.querySelector('.input');
+inputEl.addEventListener('pointerdown',inputDown);
+inputEl.addEventListener('pointermove',inputMove);
+inputEl.addEventListener('pointercancel',inputCancel);
+inputEl.addEventListener('pointerup',inputUp);
+
+
+curveWorker.onmessage = function(evt){
+	if (evt.data.type == 'inputCurve'){
+		/*for (var i=0;i<evt.data.points.length;i++){
+			drawCurveIn(evt.data.points[i]);
+		}*/
+	}
+	else if (evt.data.type == 'outputCurve'){
+		//drawCurveOut(evt.data.id,evt.data.pd,evt.data.startPoint,evt.data.endPoint);
+		console.log(evt.data.pd);
+	}
+	else if (evt.data.type == 'convexHull'){
+		//drawConvexHull(evt.data.pdArray);
+	}
+}
+
+function inputCancel(evt){
+	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
+		evt.preventDefault();
+		document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
+	}
+	isDown = false;
+	curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+}
+function inputDown(evt) {
+	evt.preventDefault();
+	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
+		document.getElementById('pointerType').innerHTML = evt.pointerType;
+		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
+		isDown = true;
+	}
+	else {
+		//document.getElementById('pointerType').innerHTML = evt.pointerType;
+	}
+}
+function inputMove(evt) {
+	evt.preventDefault();
+	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
+		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
+		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
+	}
+	else {
+	}
+}
+function inputUp(evt) {
+	evt.preventDefault();
+	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
+		document.getElementById('pointerType').innerHTML = evt.pointerType+"up";
+		isDown = false;
+		
+		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+	}
+	else {
+	}
+}
 
 </script>
 </body>
