@@ -160,31 +160,37 @@ function drawCurveIn(pt) {
 	var m = (lastPoint[1]-pt[1])/(lastPoint[0]-pt[0]);
 	var minX = Math.min(pt[0],lastPoint[0]);
 	var maxX = Math.max(pt[0],lastPoint[0]);
-		
+	
+	var minY = -1;
+	var maxY = -1;
 	for (var i=minX;i<maxX;i++){
 		var line = {};
 		line.m = -1/m;
 		line.x = i;
 		line.y = m*(i-pt[0])+pt[1];
 		var dx = Math.sqrt(Math.pow(r,2)/(1+Math.pow(line.m,2)));
-		console.log(dx,line.x,line.y,line.m);
 		for (var ii=Math.floor(line.x-1*dx);ii<Math.floor(line.x+dx)+1;ii++){
 			var yi = Math.floor(line.m*(ii-line.x)+line.y);
-			console.log(ii,yi);
 			dMap[yi][ii]=1;
 			dMap[yi+1][ii]=1;
+			if (yi < minY || minY == -1){
+				minY = yi;
+			}
+			if (yi > maxY || maxY == -1){
+				maxY = yi;
+			}
 		}
 	}
 	
 
 	lastPoint[0] = pt[0];
 	lastPoint[1] = pt[1];
-		
+	console.log(minY,maxY);
 	const t0 = performance.now();
 	MagicEye.render({
 		el: 'magiceye',
 		s: 72,
-		rows: [yi-r,yi+r+1],
+		rows: [minY,maxY],
 		depthMap: dMap,
 	  });
 	const t1 = performance.now();
