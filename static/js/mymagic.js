@@ -164,7 +164,7 @@
 				for (var ii=1;right + ii*100 < width;ii++){
 					pixels[rightOffset + ii*400 + i] = colors100[m % 72][i];
 				}
-				for (var ii=-1;left + ii*100 < width;ii--){
+				for (var ii=-1;left + ii*100 > 0;ii--){
 					pixels[leftOffset + ii*400 + i] = colors100[m % 72][i];
 				}
 		  	}
