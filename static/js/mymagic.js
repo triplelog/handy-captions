@@ -193,13 +193,10 @@
 		  	else if (m >= maxM - 180){
 				var right = x + 72;
 				var rightOffset = (y * width * 4) + (right * 4);
-				for (var i=0;i<2;i++){
+				for (var i=0;i<4;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
-						pixels[rightOffset + ii*720 + i] = colors100[m % 144][i];
+						pixels[rightOffset + ii*720 + i] = colors100[m % 144][i]/2+colors100[144 + (m % 50)][i]/2;
 					}
-				}
-				for (var ii=1;right + ii*180 < width;ii++){
-					pixels[rightOffset + ii*720 + 2] = colors100[144 + (m % 50)][2];
 				}
 		  	}
 		  	if (m < 180 && m >= 36){
