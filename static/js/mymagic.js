@@ -154,10 +154,14 @@
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
 		  if (z > 0.5){
-		  	pixels[pixelOffset + 0] = colors100[m % 72][0];
-		  	pixels[pixelOffset + 1] = colors100[m % 72][1];
-		  	pixels[pixelOffset + 2] = colors100[m % 72][2];
-		  	pixels[pixelOffset + 3] = colors100[m % 72][3];
+		  	var left = x - 36;
+		  	var right = x + 36;
+		  	var leftOffset = (y * width * 4) + (left * 4);
+		  	var rightOffset = (y * width * 4) + (right * 4);
+		  	for (var i=0;i<4;i++){
+				pixels[leftOffset + i] = colors100[m % 72][i];
+				pixels[rightOffset + i] = colors100[m % 72][i];
+		  	}
 		  	m++;
 		  }
 		  else {
