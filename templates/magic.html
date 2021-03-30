@@ -145,7 +145,6 @@ curveWorker.onmessage = function(evt){
 function inputCancel(evt){
 	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
 		evt.preventDefault();
-		document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 	}
 	isDown = false;
 	curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
@@ -153,7 +152,6 @@ function inputCancel(evt){
 function inputDown(evt) {
 	evt.preventDefault();
 	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
-		document.getElementById('pointerType').innerHTML = evt.pointerType;
 		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
 		isDown = true;
 	}
@@ -164,7 +162,6 @@ function inputDown(evt) {
 function inputMove(evt) {
 	evt.preventDefault();
 	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
-		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
 	}
 	else {
@@ -173,7 +170,6 @@ function inputMove(evt) {
 function inputUp(evt) {
 	evt.preventDefault();
 	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
-		document.getElementById('pointerType').innerHTML = evt.pointerType+"up";
 		isDown = false;
 		
 		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
