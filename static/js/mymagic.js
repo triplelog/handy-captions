@@ -205,7 +205,7 @@
 		  }
         }
         
-        for (x = 0; x < width; x++) {
+        /*for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           
 		  if (pixels[pixelOffset + 0] == 0 && pixels[pixelOffset + 1] == 0 && pixels[pixelOffset + 2] == 0){
@@ -225,7 +225,7 @@
 		  }
 		  
           
-        }
+        }*/
 		
        
       }
