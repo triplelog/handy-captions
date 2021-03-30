@@ -197,7 +197,7 @@
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=1;i<3;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
-						var dd = ii*(maxM - m)*4;
+						var dd = (maxM - m)*4;
 						if (ii==1 && i == 2){
 							pixels[rightOffset + dd + i] = colors100[m % (s*2)][i];
 						}
