@@ -127,9 +127,9 @@ var isDown = false;
 
 curveWorker.onmessage = function(evt){
 	if (evt.data.type == 'inputCurve'){
-		/*for (var i=0;i<evt.data.points.length;i++){
+		for (var i=0;i<evt.data.points.length;i++){
 			drawCurveIn(evt.data.points[i]);
-		}*/
+		}
 	}
 	else if (evt.data.type == 'outputCurve'){
 		drawCurveOut(evt.data.id,evt.data.pd);
@@ -144,6 +144,58 @@ function drawCurveOut(id,pd) {
 	allCurves[id]=pd;
 	createDepthMap();
 }
+function drawCurveIn(pt) {
+	tempDepthMap(pt);
+}
+function tempDepthMap(pt){
+
+
+	var cir = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+	//console.log(id,ids,allCurves);
+	cir.setAttribute('cx',pt[0]);
+	cir.setAttribute('cy',pt[1]);
+	cir.setAttribute('fill','black');
+	cir.setAttribute('stroke','none');
+	cir.setAttribute('r','50');
+
+	document.getElementById('pixelSVG').appendChild(cir);
+	
+	
+	var canvas = document.getElementById('pixelCanvas');
+	var ctx = canvas.getContext("2d");
+	let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
+	var img2 = new Image();
+
+    console.log('hi');
+	img2.onload = function() {
+		//ctx.drawImage(img, 0, 0, 300, 300);
+		ctx.clearRect(0,0,800,600);
+		ctx.drawImage(img2, 0, 0,800,600);
+		
+		var imgData = ctx.getImageData(0,0,800,600).data;
+		var dMap = [];
+		for (var y=0;y<600;y++){
+		  dMap.push([]);
+		  for (var x=0;x<800;x++){
+		  	if (imgData[y*800*4+x*4+3] > 100){
+			  dMap[y].push(1);
+			}
+			else {
+			  dMap[y].push(0);
+			}
+		  }
+		}
+		MagicEye.render({
+			el: 'magiceye',
+			s: 72,
+			depthMap: dMap,
+		  });
+
+	}
+
+	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
+}
+
 function createDepthMap(){
 	
 	document.getElementById('pixelSVG').innerHTML = '';
