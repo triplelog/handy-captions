@@ -130,8 +130,18 @@
           pixels = new Uint8ClampedArray(width * height * 4),
           pixelsOut = new Uint8ClampedArray(width * height * 4 / mul / mul);
 	  const t0 = performance.now();
+	  var yMin = 0;
+	  var yMax = height;
+	  if (rows[1] > -1){
+	  	yMin = rows[0]*mul;
+	  	yMax = rows[1]*mul;
+	  }
+	  
 	  var depthMap = [];
-	  for (y = 0; y < height; y++) {
+	  for (y = 0; y < yMin; y++) {
+        depthMap.push([]);
+      }
+	  for (y = yMin; y < yMax; y++) {
         depthMap.push([]);
         for (x = 0; x < width; x++) {
         	var d = depthMapSmall[Math.floor(y/mul)][Math.floor(x/mul)];
@@ -142,26 +152,8 @@
       console.log(`First part took ${t1 - t0} milliseconds.`);
       // for each row
       
-      var depth0 = {};
-      var right0 = {};
-      var distance1 = {};
-      for (y = 0; y < height; y++) {
-      	depth0[y]={};
-      	right0[y]={};
-      	distance1[y]={};
-      	for (x = 0; x < width; x++) {
-      		depth0[y][x]=0;
-      		right0[y][x]=0;
-      		distance1[y][x]=-1;
-      	}
-      }
-
-	  var yMin = 0;
-	  var yMax = height;
-	  if (rows[1] > -1){
-	  	yMin = rows[0]*mul;
-	  	yMax = rows[1]*mul;
-	  }
+      
+	 
 	  const t2 = performance.now();
 	  console.log(`Second part took ${t2 - t1} milliseconds.`);
       for (y = yMin; y < yMax; y++) {
@@ -297,7 +289,7 @@
       }
       const t3 = performance.now();
       console.log(`First Loop took ${t3 - t2} milliseconds.`);
-      for (y = 0; y < height/mul ; y++) {
+      for (y = yMin/mul; y < yMax/mul ; y++) {
         
         for (x = 0; x < width/mul; x++) {
         	var pixelOffset = (y * width / mul * 4) + (x * 4);
@@ -306,12 +298,11 @@
         	pixelsOut[pixelOffset+3] = 255;
         	for (var i=1;i<3;i++){
         		var v = 0;
-        		var d = 0;
         		for (var ii=0;ii<mul && y*mul+ii<height;ii++){
         			for (var iii=0;iii<mul && x*mul+iii<width;iii++){
         				if (((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i < width * height * 4){
         					v += pixels[((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i];
-        					d += depth0[y * mul + ii][x * mul + iii];
+        					
         				}
         			}
         		}
