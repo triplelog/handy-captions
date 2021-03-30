@@ -161,49 +161,24 @@
 	  }
 	  
       for (y = 0; y < height; y++) {
-      	var ym = (y * (width*2+1)) % 256;
-      	ym = (ym * 5) % 256;
-      	ym = (ym * 5) % 256;
-      	ym = (ym * 5) % 256;
-      	ym = (ym * 5) % 256;
-      	ym = (ym * 5) % 256;
-      	ym = (ym * 5) % 256;
-      	ym = (ym * 5) % 256;
+      	var ym = [];
+      	ym.push(this.helpers.mulberry(y));
+      	ym.push(this.helpers.mulberry(y + height));
+      	ym.push(this.helpers.mulberry(y + 2 * height));
+      	ym.push(this.helpers.mulberry(y + 3 * height));
         var m = 0;
         var colorsFG = [];
 		  for (var i=0;i<s * 2;i++){
 			var c = [0,0,0,255];
-			c[1] = ((ym * (width*2+1) + i)*7 ) % 256;
-			c[1] = (c[1]*7 ) % 256;
-			c[1] = (c[1]*7 ) % 256;
-			c[1] = (c[1]*7 ) % 256;
-			c[1] = (c[1]*7 ) % 256;
-			c[1] = (c[1]*7 ) % 256;
-			
-			c[2] = ((ym * (width*2+1) + i)*11 ) % 256;
-			c[2] = (c[2]*11 ) % 256;
-			c[2] = (c[2]*11 ) % 256;
-			c[2] = (c[2]*11 ) % 256;
-			c[2] = (c[2]*11 ) % 256;
-			c[2] = (c[2]*11 ) % 256;
+			c[1] = this.helpers.mulberry(ym[0] + i) % 256;
+			c[2] = this.helpers.mulberry(ym[1] + i) % 256;
 			colorsFG.push(c);
 		  }
 		var colorsBG = [];
 		  for (var i=0;i<180;i++){
 			var c = [0,0,0,255];
-			c[1] = ((ym * (width*2+1) + i)*13 ) % 256;
-			c[1] = (c[1]*13 ) % 256;
-			c[1] = (c[1]*13 ) % 256;
-			c[1] = (c[1]*13 ) % 256;
-			c[1] = (c[1]*13 ) % 256;
-			c[1] = (c[1]*13 ) % 256;
-			
-			c[2] = ((ym * (width*2+1) + i)*17 ) % 256;
-			c[2] = (c[2]*17 ) % 256;
-			c[2] = (c[2]*17 ) % 256;
-			c[2] = (c[2]*17 ) % 256;
-			c[2] = (c[2]*17 ) % 256;
-			c[2] = (c[2]*17 ) % 256;
+			c[1] = this.helpers.mulberry(ym[2] + i) % 256;
+			c[2] = this.helpers.mulberry(ym[3] + i) % 256;
 			colorsBG.push(c);
 		  }
 		for (x = 0; x < width; x++) {
@@ -365,7 +340,15 @@
           parseInt(result[3], 16),
           255
         ] : null;
-      }
+      },
+       mulberry: function (a) {
+			
+			  var t = a += 0x6D2B79F5;
+			  t = Math.imul(t ^ t >>> 15, t | 1);
+			  t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+			  return ((t ^ t >>> 14) >>> 0) / 4294967296;
+			
+	  }
     }
 
   };
