@@ -179,7 +179,7 @@
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
-		  if (z > 0.5 && m >= maxM - 72){
+		  if (z > 0.5){
 		  	if (m >= maxM - 72){
 				var right = x + 72;
 				var rightOffset = (y * width * 4) + (right * 4);
