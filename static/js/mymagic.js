@@ -160,9 +160,10 @@
 	 
 	  const t2 = performance.now();
 	  console.log(`Second part took ${t2 - t1} milliseconds.`);
+	  var fHalf = 0;
       for (y = yMin; y < yMax; y++) {
       	
-
+		const t00 = performance.now();
         var m = 0;
         var colorsFG = fullColorsFG[y];
 		var colorsBG = fullColorsBG[y];
@@ -182,8 +183,6 @@
 		  	var right = x + s;
 		  	var leftOffset = (y * width * 4) + (left * 4);
 		  	var rightOffset = (y * width * 4) + (right * 4);
-		  	pixels[leftOffset + 0] = 20;
-			pixels[rightOffset + 0] = 20;
 		  	for (var i=1;i<3;i++){
 				pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
 				pixels[rightOffset + i] = colorsFG[x % (s*2)][i];
@@ -191,6 +190,8 @@
 		  	m++;
 		  }
         }
+        const t01 = performance.now();
+        fHalf += t01 - t00;
         var maxM = m;
         var m =0;
         //console.log(maxM);
@@ -277,7 +278,7 @@
        
       }
       const t3 = performance.now();
-      console.log(`First Loop took ${t3 - t2} milliseconds.`);
+      console.log(`First Half of first Loop took ${fHalf} milliseconds.`);
       for (y = yMin/mul; y < yMax/mul ; y++) {
         
         for (x = 0; x < width/mul; x++) {
