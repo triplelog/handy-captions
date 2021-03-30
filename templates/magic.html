@@ -171,6 +171,12 @@ function drawCurveIn(pt) {
 		var dx = Math.sqrt(Math.pow(r,2)/(1+Math.pow(line.m,2)));
 		for (var ii=Math.floor(line.x-1*dx);ii<Math.floor(line.x+dx)+1;ii++){
 			var yi = Math.floor(line.m*(ii-line.x)+line.y);
+			if (yi > 600 || yi <0){
+				continue;
+			}
+			if (ii > 800 || ii <0){
+				continue;
+			}
 			dMap[yi][ii]=1;
 			dMap[yi+1][ii]=1;
 			if (yi < minY || minY == -1){
