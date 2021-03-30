@@ -161,15 +161,16 @@
 		  	for (var i=0;i<4;i++){
 				pixels[leftOffset + i] = colors100[m % 72][i];
 				pixels[rightOffset + i] = colors100[m % 72][i];
+				for (var ii=1;right + ii*100 < width;ii++){
+					pixels[rightOffset + ii*400 + i] = colors100[m % 72][i];
+				}
+				for (var ii=-1;left + ii*100 < width;ii--){
+					pixels[leftOffset + ii*400 + i] = colors100[m % 72][i];
+				}
 		  	}
 		  	m++;
 		  }
-		  else {
-		  	pixels[pixelOffset + 0] = colors100[1][0];
-		  	pixels[pixelOffset + 1] = colors100[1][1];
-		  	pixels[pixelOffset + 2] = colors100[1][2];
-		  	pixels[pixelOffset + 3] = colors100[1][3];
-		  }
+		  
           
         }
 		
