@@ -148,11 +148,11 @@ var lastPoint = [-1,0];
 function drawCurveIn(pt) {
 
 	var r = 25;
-	console.log(pt);
+	//console.log(pt);
 	if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
 		return;
 	}
-	if (lastPoint[0] = -1){
+	if (lastPoint[0] == -1){
 		lastPoint[0] = pt[0];
 		lastPoint[1] = pt[1];
 		return;
