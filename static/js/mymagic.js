@@ -128,7 +128,7 @@
       
       // for each row
       var colors100 = [];
-      for (var i=0;i<100;i++){
+      for (var i=0;i<200;i++){
       	var c = [0,0,0,255];
       	c[1] = Math.floor(Math.random() * 255);
       	c[2] = Math.floor(Math.random() * 255);
@@ -154,18 +154,18 @@
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
 		  if (z > 0.5){
-		  	var left = x - 36;
-		  	var right = x + 36;
+		  	var left = x - 72;
+		  	var right = x + 72;
 		  	var leftOffset = (y * width * 4) + (left * 4);
 		  	var rightOffset = (y * width * 4) + (right * 4);
 		  	for (var i=0;i<4;i++){
-				pixels[leftOffset + i] = colors100[m % 72][i];
-				pixels[rightOffset + i] = colors100[m % 72][i];
-				for (var ii=1;right + ii*100 < width;ii++){
-					pixels[rightOffset + ii*400 + i] = colors100[m % 72][i];
+				pixels[leftOffset + i] = colors100[m % 144][i];
+				pixels[rightOffset + i] = colors100[m % 144][i];
+				for (var ii=1;right + ii*180 < width;ii++){
+					pixels[rightOffset + ii*720 + i] = colors100[m % 144][i];
 				}
-				for (var ii=-1;left + ii*100 > 0;ii--){
-					pixels[leftOffset + ii*400 + i] = colors100[m % 72][i];
+				for (var ii=-1;left + ii*180 > 0;ii--){
+					pixels[leftOffset + ii*720 + i] = colors100[m % 144][i];
 				}
 		  	}
 		  	m++;
@@ -196,22 +196,6 @@
         		}
         		v /= mul;
         		v /= mul;
-        		if (d >= 0){
-        			var vv = 0;
-        			for (var ii=0;ii<2*mul && y*mul+ii<height;ii++){
-						for (var iii=0;iii<2*mul && x*mul+iii<width;iii++){
-							if (((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i < width * height * 4){
-								vv += pixels[((y * mul + ii) * width * 4) + ((x * mul + iii) * 4) + i];
-								
-							}
-						}
-					}
-					vv /= mul;
-        			vv /= mul;
-        			vv /= 4;
-        			v = v/2 + vv/2;
-        		}
-        		
         		
         		pixelsOut[pixelOffset+i] = Math.floor(v);
         	}
