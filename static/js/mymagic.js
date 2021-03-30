@@ -148,6 +148,14 @@
 		c[2] = Math.floor(Math.random() * 255);
 		colorsFGM.push(c);
 	  }
+	  var colorsBGM = [];
+	  for (var i=0;i<180;i++){
+		var c = [0,0,0,255];
+		c[1] = Math.floor(Math.random() * 255);
+		c[2] = Math.floor(Math.random() * 255);
+		colorsBGM.push(c);
+	  }
+	  
       for (y = 0; y < height; y++) {
         var m = 0;
         var colorsFG = [];
@@ -160,7 +168,7 @@
 		var colorsBG = [];
 		  for (var i=0;i<180;i++){
 			var c = [0,0,0,255];
-			c[1] = Math.floor(Math.random() * 255);
+			c[1] = colorsBGM[(i+y)%180][2];
 			c[2] = Math.floor(Math.random() * 255);
 			colorsBG.push(c);
 		  }
