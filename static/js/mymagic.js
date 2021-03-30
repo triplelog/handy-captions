@@ -142,19 +142,19 @@
       	}
       }
       var colorsFGM = [];
-		  for (var i=0;i<150;i++){
-			var c = [0,0,0,255];
-			c[1] = Math.floor(Math.random() * 255);
-			c[2] = Math.floor(Math.random() * 255);
-			colorsFGM.push(c);
-		  }
+	  for (var i=0;i<150;i++){
+		var c = [0,0,0,255];
+		c[1] = Math.floor(Math.random() * 255);
+		c[2] = Math.floor(Math.random() * 255);
+		colorsFGM.push(c);
+	  }
       for (y = 0; y < height; y++) {
         var m = 0;
         var colorsFG = [];
 		  for (var i=0;i<150;i++){
 			var c = [0,0,0,255];
-			c[1] = (colorsFGM[i][1]+y)%255;
-			c[2] = (colorsFGM[i][2]+y)%255;
+			c[1] = colorsFGM[(i+y)%150][1];
+			c[2] = colorsFGM[(i+y)%150][2];
 			colorsFG.push(c);
 		  }
 		var colorsBG = [];
