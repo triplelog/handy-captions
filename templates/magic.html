@@ -145,32 +145,35 @@ function drawCurveOut(id,pd) {
 	createDepthMap();
 }
 var lastPoint = [0,0];
-function drawCurveIn(pts) {
-	var drawME = false;
+function drawCurveIn(pt) {
+
 	var r = 25;
-	for (var i=0;i<pts.length;i++){
-		var pt = pts[i];
-		console.log(pt);
-		if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
-		}
-		else {
-			drawME = true;
-			lastPoint[0] = pt[0];
-			lastPoint[1] = pt[1];
-		}
-		var yi = Math.floor(pt[1]);
-		if (yi < r){yi = r;}
-		if (yi > 600 - r){yi = 600 - r;}
-		var xi = Math.floor(pt[0]);
-		if (xi < r){xi = r;}
-		if (xi > 600 - r){xi = 600 - r;}
-		for (var i=-1*r;i<r+1;i++){
-			for (var ii=-1*r;ii<r+1;ii++){
-				dMap[yi+i][xi+ii]=1;
-			}
+	console.log(pt);
+	if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
+		return;
+	}
+		
+	var m = (lastPoint[1]-pt[1])/(lastPoint[0]-pt[0]);
+	var minX = Math.min(pt[0],lastPoint[0]);
+	var maxX = Math.max(pt[0],lastPoint[0]);
+		
+	for (var i=minX;i<maxX;i++){
+		var line = {};
+		line.m = -1/m;
+		line.x = i;
+		line.y = m*(i-pt[0])+pt[1];
+		var dx = Math.sqrt(Math.pow(r,2)/(1+Math.pow(line.m,2)));
+		for (var ii=Math.floor(-1*dx);ii<Math.floor(dx)+1;ii++){
+			var yi = Math.floor(line.m*(ii-line.x)+line.y);
+			dMap[yi][ii]=1;
+			dMap[yi+1][ii]=1;
 		}
 	}
-	if (!drawME){return;}
+	
+
+	lastPoint[0] = pt[0];
+	lastPoint[1] = pt[1];
+		
 	const t0 = performance.now();
 	MagicEye.render({
 		el: 'magiceye',
@@ -255,7 +258,7 @@ function inputMove(evt) {
 	evt.preventDefault();
 	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
-		drawCurveIn([[evt.clientX,evt.clientY]]);
+		drawCurveIn([evt.clientX,evt.clientY]);
 	}
 	else {
 	}
