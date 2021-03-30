@@ -239,8 +239,8 @@
         			}*/
         			if (right0[y][myChain[i]] > 0){
         				var isBorder = false;
-        				for (var ii=1;ii< 10 && myChain[i] + ii < width;ii++){
-							if (right0[y][myChain[i] + ii] == 0){
+        				for (var ii=1;ii< 5 && myChain[i] + ii < width;ii++){
+							if (right0[y][myChain[i] + ii] == 0 && depth0[y][myChain[i] + ii] == 0){
 								if (rD < lD || lD == -1){
 									distanceToFront = rD;
 								}
@@ -256,8 +256,8 @@
         		else if (myChain[i] == x){
         			if (right0[y][myChain[i]] > 0){
         				var isBorder = false;
-        				for (var ii=1;ii< 10 && myChain[i] + ii < width;ii++){
-							if (right0[y][myChain[i] + ii] == 0){
+        				for (var ii=1;ii< 5 && myChain[i] + ii < width;ii++){
+							if (right0[y][myChain[i] + ii] == 0 && depth0[y][myChain[i] + ii] == 0){
 								distanceToFront = 0;
 								isBorder = true;
 								break;
@@ -282,8 +282,8 @@
         				maxD = i;
         			}*/
         			if (right0[y][myChain[i]] > 0){
-        				for (var ii=1;ii< 10 && myChain[i] + ii < width;ii++){
-							if (right0[y][myChain[i] + ii] == 0){
+        				for (var ii=1;ii< 5 && myChain[i] + ii < width;ii++){
+							if (right0[y][myChain[i] + ii] == 0 && depth0[y][myChain[i] + ii] == 0){
 								maxD = i;
 								break;
 							}
