@@ -193,7 +193,6 @@
 		  		if (setPixels[x - 3*s] && depthMap[y][x - 2*s]<0.5){
 		  			var cr = Math.floor(Math.random() * 255);
 					pixels[leftOffset + i] = cr;
-					pixels[leftOffset + 0] = 20;
 					pixels[rightOffset + i] = cr;
 				}
 				else {
