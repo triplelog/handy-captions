@@ -129,7 +129,7 @@
           mu = (1 / 3), // depth of field (fraction of viewing distance)
           pixels = new Uint8ClampedArray(width * height * 4),
           pixelsOut = new Uint8ClampedArray(width * height * 4 / mul / mul);
-	  
+	  const t0 = performance.now();
 	  var depthMap = [];
 	  for (y = 0; y < height; y++) {
         depthMap.push([]);
@@ -138,7 +138,8 @@
         	depthMap[y].push(d);
         }
       }
-      
+      const t1 = performance.now();
+      console.log(`First part took ${t1 - t0} milliseconds.`);
       // for each row
       
       var depth0 = {};
@@ -155,27 +156,14 @@
       	}
       }
 
-      var colorsFGM = [];
-	  for (var i=0;i<s * 2;i++){
-		var c = [0,0,0,255];
-		c[1] = Math.floor(Math.random() * 255);
-		c[2] = 90 + i;
-		colorsFGM.push(c);
-	  }
-	  var colorsBGM = [];
-	  for (var i=0;i<180;i++){
-		var c = [0,0,0,255];
-		c[1] = Math.floor(Math.random() * 255);
-		c[2] = Math.floor(Math.random() * 255);
-		colorsBGM.push(c);
-	  }
 	  var yMin = 0;
 	  var yMax = height;
 	  if (rows[1] > -1){
 	  	yMin = rows[0]*mul;
 	  	yMax = rows[1]*mul;
 	  }
-	  const t0 = performance.now();
+	  const t2 = performance.now();
+	  console.log(`Second part took ${t2 - t1} milliseconds.`);
       for (y = yMin; y < yMax; y++) {
       	var ym = [];
       	ym.push(this.helpers.mulberry(y));
@@ -307,8 +295,8 @@
 		
        
       }
-      const t1 = performance.now();
-      console.log(`First Loop took ${t1 - t0} milliseconds.`);
+      const t3 = performance.now();
+      console.log(`First Loop took ${t3 - t2} milliseconds.`);
       for (y = 0; y < height/mul ; y++) {
         
         for (x = 0; x < width/mul; x++) {
@@ -337,8 +325,8 @@
         	
         }
       }
-	  const t2 = performance.now();
-      console.log(`Second Loop took ${t2 - t1} milliseconds.`);
+	  const t4 = performance.now();
+      console.log(`Second Loop took ${t4 - t3} milliseconds.`);
       return pixelsOut;
     },
 
