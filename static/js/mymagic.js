@@ -193,7 +193,7 @@
 		  		if (setPixels[x - 3*s] && i == 1 && depthMap[y][x - 2*s]<0.5){
 					pixels[leftOffset + i] = colorsBG[x % 180][i];
 					pixels[leftOffset + 0] = 20;
-					pixels[rightOffset + i] = pixelColor[i];
+					pixels[rightOffset + i] = colorsBG[x % 180][i];
 				}
 				else {
 					pixels[leftOffset + i] = pixelColor[i];
