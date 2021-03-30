@@ -187,11 +187,18 @@
 		  	var right = x + s;
 		  	var leftOffset = (y * width * 4) + (left * 4);
 		  	var rightOffset = (y * width * 4) + (right * 4);
-		  	pixels[leftOffset + 0] = 80;
-			pixels[rightOffset + 0] = 80;
+		  	//pixels[leftOffset + 0] = 50;
+			//pixels[rightOffset + 0] = 50;
 		  	for (var i=1;i<3;i++){
-				pixels[leftOffset + i] = pixelColor[i];
-				pixels[rightOffset + i] = pixelColor[i];
+		  		if (setPixels[left] && i == 1){
+					pixels[leftOffset + i] = colorsBG[x % 180][i];
+					pixels[leftOffset + 0] = 100;
+					pixels[rightOffset + i] = pixelColor[i];
+				}
+				else {
+					pixels[leftOffset + i] = pixelColor[i];
+					pixels[rightOffset + i] = pixelColor[i];
+				}
 				setPixels[left]=true;
 				setPixels[right]=true;
 		  	}
@@ -217,11 +224,11 @@
 						for (var i=1;i<3;i++){
 							if (ii == 1){
 								pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
-								pixels[rightOffset + ii*720 + 0] = 70;
+								pixels[rightOffset + ii*720 + 0] = 0;
 							}
 							else {
 								pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
-								pixels[rightOffset + ii*720 + 0] = 70;
+								pixels[rightOffset + ii*720 + 0] = 0;
 							}
 							
 							
@@ -237,7 +244,7 @@
 						
 							if (ii==1 && i == 2){
 								pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
-								pixels[rightOffset + ii*720 + 0] = 70;
+								pixels[rightOffset + ii*720 + 0] = 0;
 							}
 							else {
 								pixels[rightOffset + ii*720 + i] = colorsBG[(x % 180)][i];
@@ -254,11 +261,11 @@
 						for (var i=1;i<3;i++){
 							if (ii == 1){
 								pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
-								pixels[leftOffset + ii*-720 + 0] = 70;
+								pixels[leftOffset + ii*-720 + 0] = 0;
 							}
 							else {
 								pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
-								pixels[leftOffset + ii*-720 + 0] = 70;
+								pixels[leftOffset + ii*-720 + 0] = 0;
 							}
 						}
 					}
@@ -272,7 +279,7 @@
 						
 							if (ii == 1 && i == 2){
 								pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
-								pixels[leftOffset + ii*-720 + 0] = 70;
+								pixels[leftOffset + ii*-720 + 0] = 0;
 							}
 							else {
 								pixels[leftOffset + ii*-720 + i] = colorsBG[(x % 180)][i];
