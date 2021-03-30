@@ -161,6 +161,7 @@
 	  const t2 = performance.now();
 	  console.log(`Second part took ${t2 - t1} milliseconds.`);
 	  var fHalf = 0;
+	  var fLoop = 0;
       for (y = yMin; y < yMax; y++) {
       	
 		const t00 = performance.now();
@@ -169,9 +170,7 @@
 		var colorsBG = fullColorsBG[y];
 		for (x = 0; x < width; x++) {
 			var pixelOffset = (y * width * 4) + (x * 4);
-			for (var i=0;i<4;i++){
-				pixels[pixelOffset + i]=0;
-			}
+			
 			pixels[pixelOffset + 3]=255;
 		}
 		
@@ -179,13 +178,14 @@
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
 		  if (z > 0.5){
+		    var pixelColor = colorsFG[x % (s*2)];
 		  	var left = x - s;
 		  	var right = x + s;
 		  	var leftOffset = (y * width * 4) + (left * 4);
 		  	var rightOffset = (y * width * 4) + (right * 4);
 		  	for (var i=1;i<3;i++){
-				pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
-				pixels[rightOffset + i] = colorsFG[x % (s*2)][i];
+				pixels[leftOffset + i] = pixelColor[i];
+				pixels[rightOffset + i] = pixelColor[i];
 		  	}
 		  	m++;
 		  }
@@ -274,11 +274,14 @@
 		  
           
         }
+        const t02 = performance.now();
+        fLoop += t02 - t00;
 		
        
       }
       const t3 = performance.now();
       console.log(`First Half of first Loop took ${fHalf} milliseconds.`);
+      console.log(`Full Loop took ${fLoop} milliseconds.`);
       for (y = yMin/mul; y < yMax/mul ; y++) {
         
         for (x = 0; x < width/mul; x++) {
