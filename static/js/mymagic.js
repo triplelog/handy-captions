@@ -197,7 +197,7 @@
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=1;i<3;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
-						var dd = (maxM - m)*4;
+						var dd = 180*4;
 						if (ii==1 && i == 2){
 							pixels[rightOffset + dd + i] = colors100[m % (s*2)][i];
 						}
@@ -227,7 +227,7 @@
 				for (var i=1;i<3;i++){
 					pixels[leftOffset + i] = colors100[m % (s*2)][i];
 					for (var ii=-1;left + ii*180 >= 0;ii--){
-						var dd = (m)*4;
+						var dd = 180*4;
 						if (ii == -1 && i == 2){
 							pixels[leftOffset + dd + i] = colors100[m % (s*2)][i];
 						}
