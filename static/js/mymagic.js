@@ -158,18 +158,18 @@
 			}
 			pixels[pixelOffset + 3]=255;
 		}
-		
+		var s = 72;
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
 		  if (z > 0.5){
-		  	var left = x - 72;
-		  	var right = x + 72;
+		  	var left = x - s;
+		  	var right = x + s;
 		  	var leftOffset = (y * width * 4) + (left * 4);
 		  	var rightOffset = (y * width * 4) + (right * 4);
 		  	for (var i=0;i<4;i++){
-				pixels[leftOffset + i] = colors100[m % 144][i];
-				pixels[rightOffset + i] = colors100[m % 144][i];
+				pixels[leftOffset + i] = colors100[m % (s*2)][i];
+				pixels[rightOffset + i] = colors100[m % (s*2)][i];
 		  	}
 		  	m++;
 		  }
@@ -181,51 +181,51 @@
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
 		  if (z > 0.5){
-		  	if (m >= maxM - 144){
-				var right = x + 72;
+		  	if (m >= maxM - (s*2)){
+				var right = x + s;
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=0;i<4;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
-						pixels[rightOffset + ii*720 + i] = colors100[m % 144][i];
+						pixels[rightOffset + ii*720 + i] = colors100[m % (s*2)][i];
 					}
 				}
 		  	}
 		  	else if (m >= maxM - 180){
-				var right = x + 72;
+				var right = x + s;
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=0;i<4;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
 						if (ii==1){
-							pixels[rightOffset + ii*720 + i] = colors100[m % 144][i]/2+colors100[144 + (m % 50)][i]/2;
+							pixels[rightOffset + ii*720 + i] = colors100[m % (s*2)][i]/2+colors100[(s*2) + (m % 50)][i]/2;
 						}
 						else {
-							pixels[rightOffset + ii*720 + i] = colors100[144 + (m % 50)][i];
+							pixels[rightOffset + ii*720 + i] = colors100[(s*2) + (m % 50)][i];
 						
 						}
 					}
 				}
 		  	}
-		  	if (m < 144){
-				var left = x - 72;
+		  	if (m < (s*2)){
+				var left = x - s;
 				var leftOffset = (y * width * 4) + (left * 4);
 				for (var i=0;i<4;i++){
-					pixels[leftOffset + i] = colors100[m % 144][i];
+					pixels[leftOffset + i] = colors100[m % (s*2)][i];
 					for (var ii=-1;left + ii*180 >= 0;ii--){
 						pixels[leftOffset + ii*720 + i] = colors100[m % 144][i];
 					}
 				}
 		  	}
 		  	else if (m < 180){
-				var left = x - 72;
+				var left = x - s;
 				var leftOffset = (y * width * 4) + (left * 4);
 				for (var i=0;i<4;i++){
-					pixels[leftOffset + i] = colors100[m % 144][i];
+					pixels[leftOffset + i] = colors100[m % (s*2)][i];
 					for (var ii=-1;left + ii*180 >= 0;ii--){
 						if (ii == -1){
-							pixels[leftOffset + ii*720 + i] = colors100[m % 144][i]/2 + colors100[144 + (m % 50)][i]/2;
+							pixels[leftOffset + ii*720 + i] = colors100[m % (s*2)][i]/2 + colors100[(s*2) + (m % 50)][i]/2;
 						}
 						else {
-							pixels[leftOffset + ii*720 + i] = colors100[144 + (m % 50)][i];
+							pixels[leftOffset + ii*720 + i] = colors100[(s*2) + (m % 50)][i];
 						}
 						
 					}
