@@ -153,7 +153,7 @@
         var colorsFG = [];
 		  for (var i=0;i<150;i++){
 			var c = [0,0,0,255];
-			c[1] = colorsFGM[(i+y)%150][1];
+			c[1] = Math.floor(Math.random() * 255);
 			c[2] = colorsFGM[(i+y)%150][2];
 			colorsFG.push(c);
 		  }
