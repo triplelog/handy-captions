@@ -162,13 +162,13 @@
 		  for (var i=0;i<150;i++){
 			var c = [0,0,0,255];
 			c[1] = Math.floor(Math.random() * 255);
-			c[2] = colorsFGM[(i+y)%150][2];
+			c[2] = Math.floor(Math.random() * 255)/2 + colorsFGM[(i+y)%150][2]/2;
 			colorsFG.push(c);
 		  }
 		var colorsBG = [];
 		  for (var i=0;i<180;i++){
 			var c = [0,0,0,255];
-			c[1] = Math.floor(Math.random() * 255)/2 + colorsBGM[(180*height+i-y)%180][2]/2;
+			c[1] = Math.floor(Math.random() * 255);
 			c[2] = Math.floor(Math.random() * 255);
 			colorsBG.push(c);
 		  }
