@@ -58,7 +58,7 @@
           opts.colors[i] = this.helpers.hexToRGBa(opts.colors[i]);
         }
       }
-
+	  const t0 = performance.now();
       pixelData = this.generatePixelData({
         width: width,
         height: height,
@@ -68,7 +68,8 @@
         s: opts.s,
         rows: opts.rows
       });
-      
+      const t1 = performance.now();
+      console.log(`Gen Pixel Data took ${t1 - t0} milliseconds.`);
       
 
       switch (element.tagName) {
@@ -87,6 +88,8 @@
       default:
         throw('MagicEye: el must be either a <canvas> or an <img>');
       }
+      const t2 = performance.now();
+      console.log(`Render To Canvas took ${t2 - t1} milliseconds.`);
 
       return this;
     },
