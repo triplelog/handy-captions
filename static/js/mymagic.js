@@ -224,7 +224,7 @@
 				var left = x - s;
 				var leftOffset = (y * width * 4) + (left * 4);
 				for (var i=1;i<3;i++){
-					pixels[leftOffset + i] = colors100[m % (s*2)][i];
+					pixels[leftOffset + i] = colorsFG[m % (s*2)][i];
 					for (var ii=-1;left + ii*180 >= 0;ii--){
 						pixels[leftOffset + ii*720 + i] = colorsFG[m % (s*2)][i];
 					}
@@ -234,7 +234,7 @@
 				var left = x - s;
 				var leftOffset = (y * width * 4) + (left * 4);
 				for (var i=1;i<3;i++){
-					pixels[leftOffset + i] = colors100[m % (s*2)][i];
+					pixels[leftOffset + i] = colorsFG[m % (s*2)][i];
 					for (var ii=-1;left + ii*180 >= 0;ii--){
 						if (ii == -1 && i == 2){
 							pixels[leftOffset + ii*720 + i] = colorsFG[m % (s*2)][i];
