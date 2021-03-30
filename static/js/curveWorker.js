@@ -6,7 +6,7 @@ onmessage = function(evt){
 	}
 	else if (evt.data.type == "down"){
 		recentPoints.push([evt.data.x,evt.data.y]);
-		myInterval = setInterval(sendPoints, 100);
+		myInterval = setInterval(sendPoints, 200);
 	}
 	else if (evt.data.type == "up"){
 		if (evt.data.x || evt.data.x == 0){
