@@ -318,9 +318,9 @@
         for (x = 0; x < width/mul; x++) {
         	var pixelOffset = (y * width / mul * 4) + (x * 4);
         	var pixelOffsetBig = (y * mul * width * 4) + (x * mul * 4);
-        	pixelsOut[pixelOffset] = 0;
+        	
         	pixelsOut[pixelOffset+3] = 255;
-        	for (var i=1;i<3;i++){
+        	for (var i=0;i<3;i++){
         		var v = 0;
         		for (var ii=0;ii<mul && y*mul+ii<height;ii++){
         			for (var iii=0;iii<mul && x*mul+iii<width;iii++){
