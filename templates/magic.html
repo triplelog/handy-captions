@@ -150,6 +150,7 @@ function drawCurveIn(pts) {
 	var r = 25;
 	for (var i=0;i<pts.length;i++){
 		var pt = pts[i];
+		console.log(pt);
 		if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
 		}
 		else {
