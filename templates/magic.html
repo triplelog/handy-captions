@@ -128,7 +128,7 @@ var isDown = false;
 curveWorker.onmessage = function(evt){
 	if (evt.data.type == 'inputCurve'){
 		
-		drawCurveIn(evt.data.points);
+		//drawCurveIn(evt.data.points);
 		
 	}
 	else if (evt.data.type == 'outputCurve'){
@@ -255,6 +255,7 @@ function inputMove(evt) {
 	evt.preventDefault();
 	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
+		drawCurveIn([[evt.clientX,evt.clientY]]);
 	}
 	else {
 	}
