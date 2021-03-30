@@ -128,10 +128,13 @@
       
       // for each row
       var depth0 = {};
+      var distance1 = {};
       for (y = 0; y < height; y++) {
       	depth0[y]={};
+      	distance1[y]={};
       	for (x = 0; x < width; x++) {
       		depth0[y][x]=0;
+      		distance1[y][x]=-1;
       	}
       }
       
@@ -198,6 +201,57 @@
 		var chain = {};
 		var chainStart = {};
 		for (x = (width - 1); x >= 0; x--) {
+			if (same[x] == x){
+				chain[x] = [x];
+				chainStart[x] = x;
+			}
+			else {
+				if (chain[same[x]]){
+        			chain[same[x]].push(x);
+        			chainStart[x] = same[x];
+        		}
+        		else {
+        			chain[chainStart[same[x]]].push(x);
+        			chainStart[x] = chainStart[same[x]];
+        			//console.log(x,same[x]);
+        		}
+				
+			}
+        }
+        for (x = (width - 1); x >= 0; x--) {
+        	var myChain = chain[chainStart[x]];
+        	var lD = 0;
+        	var rD = 0;
+        	var found = false;
+        	var maxD = 0;
+        	var distanceToFront = -1;
+        	for (var i=0;i<myChain.length;i++){
+        		if (found){
+        			rD++;
+        			if (depth0[y][myChain[i]] > 0){
+        				if (rD < lD){
+        					distanceToFront = rD;
+        				}
+        				break;
+        			}
+        		}
+        		else if (myChain[i] == x){
+        			if (depth0[y][myChain[i]] > 0){
+        				distanceToFront = 0;
+        				break;
+        			}
+        			else {
+        				lD = i - maxD;
+        			}
+        		}
+        		else {
+        			if (depth0[y][myChain[i]] > 0){
+        				maxD++;
+        			}
+        		}
+        	}
+        	distance1[y][x]=distanceToFront;
+        	
 			if (same[x] == x){
 				chain[x] = [x];
 				chainStart[x] = x;
@@ -384,8 +438,13 @@
         			v = v/2 + vv/2;
         		}
         		
+        		
         		pixelsOut[pixelOffset+i] = Math.floor(v);
         	}
+        	if (distance1[y * mul][x * mul] >= 0){
+				pixelsOut[pixelOffset] = 200 - 10*distance1[y * mul][x * mul];
+			}
+			
         	
         }
       }
