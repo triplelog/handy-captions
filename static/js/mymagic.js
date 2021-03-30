@@ -158,7 +158,7 @@
 			}
 			pixels[pixelOffset + 3]=255;
 		}
-		var s = 65;
+		var s = 83;
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
