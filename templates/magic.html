@@ -125,7 +125,7 @@ inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
-
+var isDown = false;
 
 curveWorker.onmessage = function(evt){
 	if (evt.data.type == 'inputCurve'){
