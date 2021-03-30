@@ -190,7 +190,7 @@
 		  	//pixels[leftOffset + 0] = 50;
 			//pixels[rightOffset + 0] = 50;
 		  	for (var i=1;i<3;i++){
-		  		if (setPixels[left] && i == 1){
+		  		if (setPixels[x - 3*s] && i == 1 && depthMap[y][x - 2*s]<0.5){
 					pixels[leftOffset + i] = colorsBG[x % 180][i];
 					pixels[leftOffset + 0] = 100;
 					pixels[rightOffset + i] = pixelColor[i];
