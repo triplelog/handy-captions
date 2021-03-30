@@ -174,28 +174,23 @@
 		  	m++;
 		  }
         }
-        
-        /*for (x = 0; x < width; x++) {
+        var maxM = m;
+        var m =0;
+        for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
-		  if (z > 0.5){
-		  	var left = x - 72;
+		  if (z > 0.5 && m >= maxM - 36){
 		  	var right = x + 72;
-		  	var leftOffset = (y * width * 4) + (left * 4);
 		  	var rightOffset = (y * width * 4) + (right * 4);
 		  	for (var i=0;i<4;i++){
-				pixels[leftOffset + i] = colors100[m % 144][i];
 				pixels[rightOffset + i] = colors100[m % 144][i];
 				for (var ii=1;right + ii*180 < width;ii++){
 					pixels[rightOffset + ii*720 + i] = colors100[m % 144][i];
 				}
-				for (var ii=-1;left + ii*180 > 0;ii--){
-					pixels[leftOffset + ii*720 + i] = colors100[m % 144][i];
-				}
 		  	}
 		  	m++;
 		  }
-        }*/
+        }
         
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
