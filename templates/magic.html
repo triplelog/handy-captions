@@ -127,9 +127,9 @@ var isDown = false;
 
 curveWorker.onmessage = function(evt){
 	if (evt.data.type == 'inputCurve'){
-		for (var i=0;i<evt.data.points.length;i++){
-			drawCurveIn(evt.data.points[i]);
-		}
+		
+		drawCurveIn(evt.data.points);
+		
 	}
 	else if (evt.data.type == 'outputCurve'){
 		drawCurveOut(evt.data.id,evt.data.pd);
@@ -145,26 +145,30 @@ function drawCurveOut(id,pd) {
 	createDepthMap();
 }
 var lastPoint = [0,0];
-function drawCurveIn(pt) {
-	if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
-		return;
-	}
-	else {
-		lastPoint[0] = pt[0];
-		lastPoint[1] = pt[1];
-	}
-	var yi = Math.floor(pt[1]);
-	if (yi < 50){yi = 50;}
-	if (yi > 600 - 50){yi = 600 - 50;}
-	var xi = Math.floor(pt[0]);
-	if (xi < 50){xi = 50;}
-	if (xi > 600 - 50){xi = 600 - 50;}
-	for (var i=-50;i<51;i++){
-		for (var ii=-50;ii<51;ii++){
-			dMap[yi+i][xi+ii]=1;
+function drawCurveIn(pts) {
+	var drawME = false;
+	for (var i=0;i<pts.length;i++){
+		var pt = pts[i];
+		if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
+		}
+		else {
+			drawME = true;
+			lastPoint[0] = pt[0];
+			lastPoint[1] = pt[1];
+		}
+		var yi = Math.floor(pt[1]);
+		if (yi < 50){yi = 50;}
+		if (yi > 600 - 50){yi = 600 - 50;}
+		var xi = Math.floor(pt[0]);
+		if (xi < 50){xi = 50;}
+		if (xi > 600 - 50){xi = 600 - 50;}
+		for (var i=-50;i<51;i++){
+			for (var ii=-50;ii<51;ii++){
+				dMap[yi+i][xi+ii]=1;
+			}
 		}
 	}
-
+	if (!drawME){return;}
 	const t0 = performance.now();
 	MagicEye.render({
 		el: 'magiceye',
