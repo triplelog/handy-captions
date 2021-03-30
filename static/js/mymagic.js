@@ -190,12 +190,12 @@
 		  	//pixels[leftOffset + 0] = 50;
 			//pixels[rightOffset + 0] = 50;
 		  	for (var i=1;i<3;i++){
-		  		if (setPixels[x - 3*s] && depthMap[y][x - 2*s]<0.5){
+		  		if (setPixels[x - 3*s] && i == 1 && depthMap[y][x - 2*s]<0.5){
 		  			var cr = Math.floor(Math.random() * 255);
-					//pixels[leftOffset + i] = cr;
-					//pixels[rightOffset + i] = cr;
-					pixels[leftOffset + i] = pixelColor[i];
-					pixels[rightOffset + i] = pixelColor[i];
+					pixels[leftOffset + i] = cr;
+					pixels[rightOffset + i] = cr;
+					//pixels[leftOffset + i] = pixelColor[i];
+					//pixels[rightOffset + i] = pixelColor[i];
 				}
 				else {
 					pixels[leftOffset + i] = pixelColor[i];
