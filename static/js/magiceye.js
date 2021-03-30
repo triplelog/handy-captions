@@ -220,16 +220,16 @@
         }
         for (x = (width - 1); x >= 0; x--) {
         	var myChain = chain[chainStart[x]];
-        	var lD = 0;
+        	var lD = -1;
         	var rD = 0;
         	var found = false;
-        	var maxD = 0;
+        	var maxD = -1;
         	var distanceToFront = -1;
         	for (var i=0;i<myChain.length;i++){
         		if (found){
         			rD++;
         			if (depth0[y][myChain[i]] > 0){
-        				if (rD < lD){
+        				if (rD < lD || lD == -1){
         					distanceToFront = rD;
         				}
         				break;
@@ -240,7 +240,7 @@
         				distanceToFront = 0;
         				break;
         			}
-        			else {
+        			else if (maxD > -1){
         				lD = i - maxD;
         				distanceToFront = lD;
         			}
