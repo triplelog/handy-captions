@@ -200,8 +200,8 @@
 		  	pixels[leftOffset + 0] = 20;
 			pixels[rightOffset + 0] = 20;
 		  	for (var i=1;i<3;i++){
-				pixels[leftOffset + i] = colorsFG[m % (s*2)][i];
-				pixels[rightOffset + i] = colorsFG[m % (s*2)][i];
+				pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
+				pixels[rightOffset + i] = colorsFG[x % (s*2)][i];
 		  	}
 		  	m++;
 		  }
@@ -218,7 +218,7 @@
 				var rightOffset = (y * width * 4) + (right * 4);
 				for (var i=1;i<3;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
-						pixels[rightOffset + ii*720 + i] = colorsFG[m % (s*2)][i];
+						pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
 					}
 				}
 		  	}
@@ -228,10 +228,10 @@
 				for (var i=1;i<3;i++){
 					for (var ii=1;right + ii*180 < width;ii++){
 						if (ii==1 && i == 2){
-							pixels[rightOffset + ii*720 + i] = colorsFG[m % (s*2)][i];
+							pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
 						}
 						else {
-							pixels[rightOffset + ii*720 + i] = colorsBG[(m % 180)][i];
+							pixels[rightOffset + ii*720 + i] = colorsBG[(x % 180)][i];
 						
 						}
 					}
@@ -241,9 +241,9 @@
 				var left = x - s;
 				var leftOffset = (y * width * 4) + (left * 4);
 				for (var i=1;i<3;i++){
-					pixels[leftOffset + i] = colorsFG[m % (s*2)][i];
+					pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
 					for (var ii=-1;left + ii*180 >= 0;ii--){
-						pixels[leftOffset + ii*720 + i] = colorsFG[m % (s*2)][i];
+						pixels[leftOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
 					}
 				}
 		  	}
@@ -251,13 +251,13 @@
 				var left = x - s;
 				var leftOffset = (y * width * 4) + (left * 4);
 				for (var i=1;i<3;i++){
-					pixels[leftOffset + i] = colorsFG[m % (s*2)][i];
+					pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
 					for (var ii=-1;left + ii*180 >= 0;ii--){
 						if (ii == -1 && i == 2){
-							pixels[leftOffset + ii*720 + i] = colorsFG[m % (s*2)][i];
+							pixels[leftOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
 						}
 						else {
-							pixels[leftOffset + ii*720 + i] = colorsBG[(m % 180)][i];
+							pixels[leftOffset + ii*720 + i] = colorsBG[(x % 180)][i];
 						}
 						
 					}
@@ -273,13 +273,13 @@
 		  if (pixels[pixelOffset + 0] == 0 && pixels[pixelOffset + 1] == 0 && pixels[pixelOffset + 2] == 0){
 		  	
 		  	for (var i=0;i<4;i++){
-				pixels[pixelOffset + i] = colorsBG[(m % 180)][i];
+				pixels[pixelOffset + i] = colorsBG[(x % 180)][i];
 				
 		  	}
 		  	for (var ii=1;x + ii*180 < width;ii++){
 				if (pixels[pixelOffset +ii*720 + 0] == 0 && pixels[pixelOffset+ii*720 + 1] == 0 && pixels[pixelOffset+ii*720 + 2] == 0) {
 					for (var i=0;i<4;i++){
-						pixels[pixelOffset + ii*720 + i] = colorsBG[(m % 180)][i];
+						pixels[pixelOffset + ii*720 + i] = colorsBG[(x % 180)][i];
 					}
 				}
 			}
