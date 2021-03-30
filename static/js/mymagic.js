@@ -215,11 +215,27 @@
 					}
 				}
 		  	}
+		  	else if (m < 180){
+				var left = x - 72;
+				var leftOffset = (y * width * 4) + (left * 4);
+				for (var i=0;i<4;i++){
+					pixels[leftOffset + i] = colors100[m % 144][i];
+					for (var ii=-1;left + ii*180 >= 0;ii--){
+						if (ii == -1){
+							pixels[leftOffset + ii*720 + i] = colors100[m % 144][i]/2 + colors100[144 + (m % 50)][i]/2;
+						}
+						else {
+							pixels[leftOffset + ii*720 + i] = colors100[144 + (m % 50)][i];
+						}
+						
+					}
+				}
+		  	}
 		  	m++;
 		  }
         }
         
-        /*for (x = 0; x < width; x++) {
+        for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           
 		  if (pixels[pixelOffset + 0] == 0 && pixels[pixelOffset + 1] == 0 && pixels[pixelOffset + 2] == 0){
@@ -239,7 +255,7 @@
 		  }
 		  
           
-        }*/
+        }
 		
        
       }
