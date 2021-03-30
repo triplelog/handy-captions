@@ -62,7 +62,7 @@
 	  }
   }
   for (var i=9;i<10;i++){
-	  for (var y=60+i*5;y<60+i*5+400;y++){
+	  for (var y=60+i*5;y<60+i*5+300;y++){
 		  for (var x=210+i*5;x<210+i*5+100;x++){
 		  
 			  dMap[y][x] = (i+1)/10;
@@ -70,7 +70,7 @@
 	  }
   }
   
-  var c=100;
+  var c=75;
   MagicEye.render({
     el: 'magiceye',
     s: 72,
@@ -81,7 +81,7 @@
   
   function reRender() {
 	
-	  c--;
+	  c++;
 	  var dMap = [];
 	  for (var y=0;y<600;y++){
 		  dMap.push([]);
