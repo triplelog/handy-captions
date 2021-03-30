@@ -187,7 +187,7 @@
               frontPoint = [y,x,left,right];
               
             }
-            if (z > 0.5 && x < width - 10){
+            if (z > 0.5 && x < width - 90){
 		  		fronts.push(frontPoint);
 		  		fs[frontPoint[2]]++;
               	fs[frontPoint[3]]++;
