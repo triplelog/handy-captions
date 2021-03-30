@@ -238,7 +238,7 @@
         				break;
         			}*/
         			if (right0[y][myChain[i]] > 0){
-        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] == 0){
+        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] > 0){
 							if (rD < lD || lD == -1){
 								distanceToFront = rD;
 							}
@@ -248,7 +248,7 @@
         		}
         		else if (myChain[i] == x){
         			if (right0[y][myChain[i]] > 0){
-        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] == 0){
+        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] > 0){
 							distanceToFront = 0;
 							break;
 						}
@@ -268,7 +268,7 @@
         				maxD = i;
         			}*/
         			if (right0[y][myChain[i]] > 0){
-        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] == 0){
+        				if (myChain[i] + 1 < width && right0[y][myChain[i] + 1] > 0){
 							maxD = i;
 						}
         			}
