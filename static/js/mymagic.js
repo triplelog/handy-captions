@@ -149,15 +149,16 @@
       }
       
       for (y = 0; y < height; y++) {
-        
+        var m = 0;
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
 		  if (z > 0.5){
-		  	pixels[pixelOffset + 0] = colors100[0][0];
-		  	pixels[pixelOffset + 1] = colors100[0][1];
-		  	pixels[pixelOffset + 2] = colors100[0][2];
-		  	pixels[pixelOffset + 3] = colors100[0][3];
+		  	pixels[pixelOffset + 0] = colors100[m % 72][0];
+		  	pixels[pixelOffset + 1] = colors100[m % 72][1];
+		  	pixels[pixelOffset + 2] = colors100[m % 72][2];
+		  	pixels[pixelOffset + 3] = colors100[m % 72][3];
+		  	m++;
 		  }
 		  else {
 		  	pixels[pixelOffset + 0] = colors100[1][0];
