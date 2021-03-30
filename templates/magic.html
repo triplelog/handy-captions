@@ -147,6 +147,7 @@ function drawCurveOut(id,pd) {
 var lastPoint = [0,0];
 function drawCurveIn(pts) {
 	var drawME = false;
+	var r = 25;
 	for (var i=0;i<pts.length;i++){
 		var pt = pts[i];
 		if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
@@ -157,13 +158,13 @@ function drawCurveIn(pts) {
 			lastPoint[1] = pt[1];
 		}
 		var yi = Math.floor(pt[1]);
-		if (yi < 50){yi = 50;}
-		if (yi > 600 - 50){yi = 600 - 50;}
+		if (yi < r){yi = r;}
+		if (yi > 600 - r){yi = 600 - r;}
 		var xi = Math.floor(pt[0]);
-		if (xi < 50){xi = 50;}
-		if (xi > 600 - 50){xi = 600 - 50;}
-		for (var i=-50;i<51;i++){
-			for (var ii=-50;ii<51;ii++){
+		if (xi < r){xi = r;}
+		if (xi > 600 - r){xi = 600 - r;}
+		for (var i=-1*r;i<r+1;i++){
+			for (var ii=-1*r;ii<r+1;ii++){
 				dMap[yi+i][xi+ii]=1;
 			}
 		}
