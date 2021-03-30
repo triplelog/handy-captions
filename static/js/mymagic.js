@@ -175,6 +175,7 @@
 	  	yMin = rows[0]*mul;
 	  	yMax = rows[1]*mul;
 	  }
+	  const t0 = performance.now();
       for (y = yMin; y < yMax; y++) {
       	var ym = [];
       	ym.push(this.helpers.mulberry(y));
@@ -306,6 +307,8 @@
 		
        
       }
+      const t1 = performance.now();
+      console.log(`First Loop took ${t1 - t0} milliseconds.`);
       for (y = 0; y < height/mul ; y++) {
         
         for (x = 0; x < width/mul; x++) {
@@ -334,7 +337,8 @@
         	
         }
       }
-	  
+	  const t2 = performance.now();
+      console.log(`Second Loop took ${t2 - t1} milliseconds.`);
       return pixelsOut;
     },
 
