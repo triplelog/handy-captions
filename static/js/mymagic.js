@@ -163,7 +163,7 @@
 		  for (var i=0;i<s * 2;i++){
 			var c = [0,0,0,255];
 			c[1] = Math.floor(Math.random() * 255);
-			c[2] = Math.floor(Math.random() * 255)/2 + colorsFGM[(i+y)%(s*2))][2]/2;
+			c[2] = Math.floor(Math.random() * 255)/2 + colorsFGM[(i+y)%(s*2)][2]/2;
 			colorsFG.push(c);
 		  }
 		var colorsBG = [];
