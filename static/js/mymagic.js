@@ -127,13 +127,7 @@
       }
       
       // for each row
-      var colors100 = [];
-      for (var i=0;i<200;i++){
-      	var c = [0,0,0,255];
-      	c[1] = Math.floor(Math.random() * 255);
-      	c[2] = Math.floor(Math.random() * 255);
-      	colors100.push(c);
-      }
+      
       var depth0 = {};
       var right0 = {};
       var distance1 = {};
@@ -150,6 +144,21 @@
       
       for (y = 0; y < height; y++) {
         var m = 0;
+        var colors100 = [];
+		  for (var i=0;i<200;i++){
+			var c = [0,0,0,255];
+			c[1] = Math.floor(Math.random() * 255);
+			c[2] = Math.floor(Math.random() * 255);
+			colors100.push(c);
+		  }
+		for (x = 0; x < width; x++) {
+			var pixelOffset = (y * width * 4) + (x * 4);
+			for (var i=0;i<4;i++){
+				pixels[pixelOffset + i]=0;
+			}
+			pixels[pixelOffset + 3]=255;
+		}
+		
         for (x = 0; x < width; x++) {
 		  var pixelOffset = (y * width * 4) + (x * 4);
           z = depthMap[y][x];
@@ -166,6 +175,24 @@
 				}
 				for (var ii=-1;left + ii*180 > 0;ii--){
 					pixels[leftOffset + ii*720 + i] = colors100[m % 144][i];
+				}
+		  	}
+		  	m++;
+		  }
+		  
+          
+        }
+        for (x = 0; x < width; x++) {
+		  var pixelOffset = (y * width * 4) + (x * 4);
+          
+		  if (pixels[pixelOffset + 0] == 0 && pixels[pixelOffset + 1] == 0 && pixels[pixelOffset + 2] == 0){
+		  	
+		  	for (var i=0;i<4;i++){
+				pixels[pixelOffset + i] = colors100[144 + (m % 50)][i];
+				for (var ii=1;x + ii*180 < width;ii++){
+					if (pixels[pixelOffset +ii*720 + 0] == 0 && pixels[pixelOffset+ii*720 + 1] == 0 && pixels[pixelOffset+ii*720 + 2] == 0) {
+						pixels[pixelOffset + ii*720 + i] = colors100[144 + (m % 50)][i];
+					}
 				}
 		  	}
 		  	m++;
