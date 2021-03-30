@@ -198,6 +198,9 @@
 						pixels[rightOffset + ii*720 + i] = colors100[m % 144][i];
 					}
 				}
+				for (var ii=1;right + ii*180 < width;ii++){
+					pixels[rightOffset + ii*720 + 2] = colors100[144 + (m % 50)][2];
+				}
 		  	}
 		  	if (m < 180 && m >= 36){
 				var left = x - 72;
