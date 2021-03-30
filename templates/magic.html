@@ -144,10 +144,15 @@ function drawCurveOut(id,pd) {
 	allCurves[id]=pd;
 	createDepthMap();
 }
+var lastPoint = [0,0];
 function drawCurveIn(pt) {
-	tempDepthMap(pt);
-}
-function tempDepthMap(pt){
+	if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
+		return;
+	}
+	else {
+		lastPoint[0] = pt[0];
+		lastPoint[1] = pt[1];
+	}
 	var yi = Math.floor(pt[1]);
 	if (yi < 50){yi = 50;}
 	if (yi > 600 - 50){yi = 600 - 50;}
@@ -166,8 +171,9 @@ function tempDepthMap(pt){
 		s: 72,
 		depthMap: dMap,
 	  });
-
 }
+
+
 
 function createDepthMap(){
 	
