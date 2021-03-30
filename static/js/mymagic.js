@@ -168,12 +168,14 @@
         var m = 0;
         var colorsFG = fullColorsFG[y];
 		var colorsBG = fullColorsBG[y];
+		var setPixels = {};
 		for (x = 0; x < width; x++) {
 			var pixelOffset = (y * width * 4) + (x * 4);
 			pixels[pixelOffset + 0]=0;
 			pixels[pixelOffset + 1]=0;
 			pixels[pixelOffset + 2]=0;
 			pixels[pixelOffset + 3]=255;
+			setPixels[x]=false;
 		}
 		
         for (x = 0; x < width; x++) {
@@ -188,6 +190,8 @@
 		  	for (var i=1;i<3;i++){
 				pixels[leftOffset + i] = pixelColor[i];
 				pixels[rightOffset + i] = pixelColor[i];
+				setPixels[left]=true;
+				setPixels[right]=true;
 		  	}
 		  	m++;
 		  }
@@ -205,17 +209,21 @@
 				if (m >= maxM - (s*2)){
 					var right = x + s;
 					var rightOffset = (y * width * 4) + (right * 4);
-					for (var i=1;i<3;i++){
-						if (right + ii*180 < width){
+					if (right + ii*180 < width && !setPixels[right + ii*180]){
+						setPixels[right + ii*180]=true;
+						for (var i=1;i<3;i++){
 							pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
+							
 						}
 					}
 				}
 				else if (m >= maxM - 180){
 					var right = x + s;
 					var rightOffset = (y * width * 4) + (right * 4);
-					for (var i=1;i<3;i++){
-						if (right + ii*180 < width){
+					if (right + ii*180 < width && !setPixels[right + ii*180]){
+						setPixels[right + ii*180]=true;
+						for (var i=1;i<3;i++){
+						
 							if (ii==1 && i == 2){
 								pixels[rightOffset + ii*720 + i] = colorsFG[x % (s*2)][i];
 							}
@@ -229,9 +237,9 @@
 				if (m < (s*2)){
 					var left = x - s;
 					var leftOffset = (y * width * 4) + (left * 4);
-					for (var i=1;i<3;i++){
-						pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
-						if (left + ii*-180 >= 0){
+					if (left + ii*-180 >= 0 && !setPixels[left + ii*-180]){
+						setPixels[left + ii*-180]=true;
+						for (var i=1;i<3;i++){
 							pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
 						}
 					}
@@ -239,9 +247,10 @@
 				else if (m < 180){
 					var left = x - s;
 					var leftOffset = (y * width * 4) + (left * 4);
-					for (var i=1;i<3;i++){
-						pixels[leftOffset + i] = colorsFG[x % (s*2)][i];
-						if (left + ii*-180 >= 0){
+					if (left + ii*-180 >= 0 && !setPixels[left + ii*-180]){
+						setPixels[left + ii*-180]=true;
+						for (var i=1;i<3;i++){
+						
 							if (ii == 1 && i == 2){
 								pixels[leftOffset + ii*-720 + i] = colorsFG[x % (s*2)][i];
 							}
