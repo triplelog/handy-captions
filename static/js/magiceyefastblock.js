@@ -280,27 +280,31 @@
 				var open = true;
 				if (chain[x]){
 					for (var i=0;i<chain[x].length;i++){
-						if (!emojiBlock[y-v] || !emojiBlock[y-v][chain[x][i]]){
+						for (var ii=0;ii<v && chain[x][i]-ii >=0;ii++){
+							if (!emojiBlock[y-v] || !emojiBlock[y-v][chain[x][i] - ii]){
 						
-						}
-						else if (emojiBlock[y-v][chain[x][i]] >= 4){
-							open = false;
-							break;
-						}
-						else {
+							}
+							else if (emojiBlock[y-v][chain[x][i] - ii] >= 4){
+								open = false;
+								break;
+							}
+							else {
 						
+							}
 						}
 					}
 				}
 				else {
-					if (!emojiBlock[y-v] || !emojiBlock[y-v][x]){
+					for (var ii=0;ii<v && x-ii >=0;ii++){
+						if (!emojiBlock[y-v] || !emojiBlock[y-v][x - ii]){
 					
-					}
-					else if (emojiBlock[y-v][x] >= 4){
-						open = false;
-					}
-					else {
+						}
+						else if (emojiBlock[y-v][x - ii] >= 4){
+							open = false;
+						}
+						else {
 					
+						}
 					}
 				}
 				if (open){
