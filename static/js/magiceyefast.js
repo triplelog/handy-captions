@@ -230,10 +230,10 @@
           }
         }
       }
-      var ch = 12;
+      var ch = 8;
       for (y = yMin+5; y < yMax-5; y++) {
 			for (x = 0; x < width; x++) {
-				for (var iii=0;iii<4;iii++){
+				for (var iii=0;iii<3;iii++){
 					var zT = depthMap[y-iii][x];
 					var zB = depthMap[y+iii][x];
 					z = depthMap[y][x];
