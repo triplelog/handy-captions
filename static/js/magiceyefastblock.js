@@ -114,9 +114,9 @@
       		var sz = emojiLocations[y][e];
       		
       		
-      		var cx = e+sz/2;
-      		var cy = y+sz/2;
-      		var r = sz/2;
+      		var cx = parseFloat(e)+parseFloat(sz)/2;
+      		var cy = parseFloat(y)+parseFloat(sz)/2;
+      		var r = parseFloat(sz)/2;
       		if (y < 100){
       			console.log(e,y,sz,cx,cy,r);
       		}
