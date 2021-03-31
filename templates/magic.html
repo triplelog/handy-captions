@@ -32,7 +32,7 @@
 <script src="js/TextDepthMapper.js" type="text/javascript"></script>
 
 
-<canvas id="magiceye" width="800" height="600" >
+<canvas id="magiceye" width="3200" height="2400" >
 </canvas>
 <div class="input">
 
@@ -103,6 +103,8 @@
     el: 'magiceye',
     s: 72,
     fullColors: fullColors,
+    width: 800,
+    height: 600,
     depthMap: dMap
   });
 
@@ -191,6 +193,8 @@ function drawCurveIn(pt) {
 		s: 72,
 		rows: [minY,maxY],
 		fullColors: fullColors,
+		width: 800,
+    	height: 600,
 		depthMap: dMap,
 	  });
 	const t1 = performance.now();
@@ -246,6 +250,8 @@ function createDepthMap(){
 			el: 'magiceye',
 			s: 72,
 			fullColors: fullColors,
+			width: 800,
+    		height: 600,
 			depthMap: dMap,
 		  });
 
