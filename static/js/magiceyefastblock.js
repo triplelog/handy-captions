@@ -215,7 +215,7 @@
             	block = false;
             }
             var xi = x;
-            var maxBlock = 12;
+            var maxBlock = 6;
             while (block){
             	xi--;
             	block = true;
