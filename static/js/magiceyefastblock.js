@@ -320,12 +320,13 @@
 				}
 				
 			}
+			vbn+=2;
 			if (y == 50 && x >700){
 				//console.log(x,y,vbn);
 			}
             var xi = x;
-            var maxBlock = 10 + Math.floor(Math.random() * 13);
-            var minBlock = 4;
+            var maxBlock = 10 + Math.floor(Math.random() * 10);
+            var minBlock = 5;
             while (block){
             	xi--;
             	block = true;
