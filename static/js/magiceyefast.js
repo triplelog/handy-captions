@@ -238,13 +238,13 @@
 				pixelsOut.push(0);
 				pixelsOut.push(0);
 				pixelsOut.push(0);
-				pixelsOut.push(0);
+				pixelsOut.push(255);
 	  		}
 	  		else if (ii%4 == 0 || ii%4 == 3) {
 	  			pixelsOut.push(0);
 				pixelsOut.push(0);
 				pixelsOut.push(0);
-				pixelsOut.push(0);
+				pixelsOut.push(255);
 	  		}
 	  		else {
 	  			pixelsOut.push(pixels[Math.floor(i/4)*width*4+Math.floor(ii/4)*4 + 0]);
