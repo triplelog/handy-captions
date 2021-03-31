@@ -220,7 +220,7 @@
 					vBlock = false;
 				}
 			}
-			if (x > 700){
+			if (x > 600){
 				console.log(y,vBlock);
 			}
             var xi = x;
