@@ -211,7 +211,7 @@
             rgba = colorsFG[x];
             
             var block = true;
-            if (colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
+            if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
             	block = false;
             }
             var xi = x;
