@@ -113,12 +113,17 @@
       		var e = emojis[i];
       		var sz = emojiLocations[y][e];
       		
+      		
+      		var cx = e+sz/2;
+      		var cy = y+sz/2;
+      		var r = sz/2;
       		if (y < 100){
-      			console.log(e,y,sz);
+      			console.log(e,y,sz,cx,cy,r);
       		}
       		context.beginPath();
-      		context.arc(e+sz/2,y+sz/2, sz/2, 0, Math.PI * 2, true);
+      		context.arc(cx,cy, r, 0, Math.PI * 2, true);
       		context.stroke();
+      		context.closePath();
       	}
       }
     },
@@ -475,7 +480,7 @@
 	  	  var emojis = Object.keys(emojiLocations[y]);
 		  for (var i in emojis) {
 		  	var e = emojis[i];
-			console.log(y,e,emojiLocations[y][e]);
+			//console.log(y,e,emojiLocations[y][e]);
 		
 		  }
 	  }
