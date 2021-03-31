@@ -268,7 +268,7 @@
 						}
 					}
 				}
-				if (!setPixels[x - 2*s]){
+				if (!setPixels[x - 3*s]){
 					var left = x - s;
 					var leftOffset = (y * width * 4) + (left * 4);
 					if (left + ii*-180 >= 0 && !setPixels[left + ii*-180]){
@@ -285,7 +285,7 @@
 						}
 					}
 				}
-				else if (!setPixels[x - 180]){
+				else if (!setPixels[x - s - 180]){
 					var left = x - s;
 					var leftOffset = (y * width * 4) + (left * 4);
 					if (left + ii*-180 >= 0 && !setPixels[left + ii*-180]){
