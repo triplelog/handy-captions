@@ -142,7 +142,7 @@
       		}
       		
 			var idx = Math.floor(rc/26);
-			
+			idx = 4;
 			/*context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
 			context.textBaseline = "middle"; 
