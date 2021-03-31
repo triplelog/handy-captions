@@ -58,7 +58,7 @@
         }
       }
 
-      pixelData = this.generatePixelData({
+      var retVal = this.generatePixelData({
         width: width,
         height: height,
         depthMap: depthMap,
@@ -66,10 +66,13 @@
         fullColors: opts.fullColors,
         colors: opts.colors
       });
+      
+      pixelData = retVal[0];
+      var emojiLocations = retVal[1];
 
       switch (element.tagName) {
       case 'CANVAS':
-        this.renderToCanvas(element, pixelData, width, height, opts.rows);
+        this.renderToCanvas(element, pixelData, width, height, opts.rows, emojiLocations);
         break;
 
       case 'IMG':
@@ -87,7 +90,7 @@
       return this;
     },
 
-    renderToCanvas: function (canvas, pixelData, width, height, rows) {
+    renderToCanvas: function (canvas, pixelData, width, height, rows, emojiLocations) {
       var context = canvas.getContext("2d");
       var yMin = 0;
 	  var yMax = height;
@@ -101,6 +104,22 @@
       var imageData = context.createImageData(width, height);
       imageData.data.set(pixelData);
       context.putImageData(imageData, 0, yMin);
+      context.lineWidth = 1;
+      context.strokeStyle = "black";
+      for (var y=yMin;y<yMax;y++){
+      	var emojis = Object.keys(emojiLocations[y]):
+      	for (var i in emojis){
+      		var e = emojis[i];
+      		var sz = emojiLocations[y][e];
+      		
+      		if (y < 100){
+      			console.log(e,y,sz);
+      		}
+      		context.beginPath();
+      		context.arc(e+sz/2,y+sz/2, sz/2, 0, Math.PI * 2, true);
+      		context.stroke();
+      	}
+      }
     },
 
     generatePixelData: function (opts) {
@@ -459,7 +478,7 @@
 		
 		  }
 	  }
-      return pixels;
+      return [pixels,emojiLocations];
     },
 
     helpers: {
