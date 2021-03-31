@@ -289,7 +289,7 @@
 							for (var ii=0;ii<maxBlock;ii++){
 								for (var iii=0;iii<chain[x-ii].length;iii++) {
 									var xx = chain[x-ii][iii];
-									if (opts.fullColors[y-v][xx][0] == opts.fullColors[y-v][x][0] && opts.fullColors[y-v][xx][1] == opts.fullColors[y-v][x][1]){
+									if (opts.fullColors[y-v] && opts.fullColors[y-v][xx][0] == opts.fullColors[y-v][x][0] && opts.fullColors[y-v][xx][1] == opts.fullColors[y-v][x][1]){
 							
 									}
 									else {
