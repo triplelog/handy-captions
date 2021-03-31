@@ -230,7 +230,56 @@
           }
         }
       }
+      
+      for (y = yMin+1; y < yMax-1; y++) {
+			for (x = 0; x < width; x++) {
+				zT = depthMap[y-1][x];
+				zB = depthMap[y+1][x];
+				z = depthMap[y][x];
+				if (z > zT){
+					// stereo separation corresponding to z
+				  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 
+				  // x-values corresponding to left and right eyes
+				  left = Math.round(x - ((sep + (sep & y & 1)) / 2));
+				  right = left + sep;
+
+				  if (0 <= left && right < width) {
+
+					// remove hidden surfaces
+					t = 1;
+					do {
+					  zt = z + (2 * (2 - (mu * z)) * t / (mu * eyeSep));
+					  visible = (depthMap[y][x-t] < zt) && (depthMap[y][x+t] < zt); // false if obscured
+					  t++;
+					} while (visible && zt < 1);
+
+					if (visible) {
+					  // record that left and right pixels are the same
+					  for (k = same[left]; k !== left && k !== right; k = same[left]) {
+						if (k < right) {
+						  left = k;
+						} else {
+						  left = right;
+						  right = k;
+						}
+					  }
+					  pixelLeft = (y * width * 4) + (left * 4);
+					  pixelRight = (y * width * 4) + (right * 4);
+					  pixels[pixelLeft + 0] = 255;
+					  pixels[pixelLeft + 1] = 255;
+					  pixels[pixelLeft + 2] = 255;
+					  pixels[pixelRight + 0] = 255;
+					  pixels[pixelRight + 1] = 255;
+					  pixels[pixelRight + 2] = 255;
+					  
+					}
+					
+					
+				}
+				
+			}
+	  }
       return pixels;
     },
 
