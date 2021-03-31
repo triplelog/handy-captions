@@ -237,8 +237,8 @@
 					var zT = depthMap[y-iii][x];
 					var zB = depthMap[y+iii][x];
 					z = depthMap[y][x];
-					if (z > zT){
-						var ch = Math.round((z-zT)*chMax/(iii+5));
+					if (z > zB){
+						var ch = Math.round((z-zB)*chMax/(iii+5));
 						// stereo separation corresponding to z
 					  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 
@@ -266,8 +266,8 @@
 					  
 					  }
 				    }
-				    if (z > zB){
-				    	var ch = Math.round((z-zB)*chMax/(iii+5));
+				    if (z > zT){
+				    	var ch = Math.round((z-zT)*chMax/(iii+5));
 						// stereo separation corresponding to z
 					  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 
