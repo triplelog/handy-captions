@@ -302,6 +302,12 @@
 								}
 							}
 						}
+						if (y == 200){
+							console.log(vBlock,fullBlock);
+						}
+						if (y == 201){
+							console.log(vBlock,fullBlock);
+						}
 					}
 					
 					for (var ii=0;ii<maxBlock;ii++){
