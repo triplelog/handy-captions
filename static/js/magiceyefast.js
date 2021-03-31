@@ -116,9 +116,15 @@
           eyeSep = Math.round(2.5 * dpi), // eye separation assumed to be 2.5 inches
           mu = (1 / 3), // depth of field (fraction of viewing distance)
           pixels = new Uint8ClampedArray(width * height * 4);
-
+	  
+	  var yMin = 0;
+	  var yMax = height;
+	  if (rows[1] > -1){
+	  	yMin = rows[0];
+	  	yMax = rows[1];
+	  }
       // for each row
-      for (y = 0; y < height; y++) {
+      for (y = yMin; y < yMax; y++) {
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
 
