@@ -94,6 +94,7 @@
       var context = canvas.getContext("2d");
       var yMin = 0;
 	  var yMax = height;
+	  pixelData = new Uint8ClampedArray(width * height * 4);
 	  if (rows[1] > -1){
 	  	yMin = rows[0];
 	  	yMax = rows[1];
