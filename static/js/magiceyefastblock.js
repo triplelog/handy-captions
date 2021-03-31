@@ -220,8 +220,8 @@
 					vBlock = false;
 				}
 			}
-			if (x == 799){
-				console.log(x,y,vBlock);
+			if (x == 799 && y > 5){
+				console.log(x,y,vBlock,opts.fullColors[y-2][x],opts.fullColors[y-1][x],opts.fullColors[y][x]);
 			}
             var xi = x;
             var maxBlock = 16;
