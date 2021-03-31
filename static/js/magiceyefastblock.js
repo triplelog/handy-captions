@@ -220,8 +220,14 @@
             	block = false;
             }
             var vbn = 1;
-            for (var v=2;v<17;v++){
-				if (opts.fullColors[y-v] && (opts.fullColors[y-v][x][0] != opts.fullColors[y-v+1][x][0] || opts.fullColors[y-v][x][1] != opts.fullColors[y-v+1][x][1])){
+            for (var v=1;v<17;v++){
+				//if (opts.fullColors[y-v] && (opts.fullColors[y-v][x][0] != opts.fullColors[y-v+1][x][0] || opts.fullColors[y-v][x][1] != opts.fullColors[y-v+1][x][1])){
+				//	vbn++;
+				//}
+				if (emojiBlock[y-v][x] >= 4){
+				
+				}
+				else {
 					vbn++;
 				}
 			}
@@ -275,6 +281,7 @@
 											pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 											pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
 											opts.fullColors[y-v][xx]=opts.fullColors[y][x];
+											emojiBlock[y-v][xx]=x-xi;
 										}
 									}
 								}
@@ -286,7 +293,7 @@
 							for (var iii=0;iii<chain[x-ii].length;iii++) {
 								var xx = chain[x-ii][iii];
 								opts.fullColors[y][xx]=opts.fullColors[y][x];
-								emojiBlock[y][xx]=true;
+								emojiBlock[y][xx]=1;
 							}
 						}
 						
@@ -311,9 +318,7 @@
 								}
 							}
 						}
-						if (x == 799){
-							console.log(x,y,fullBlock);
-						}
+						
 						if (fullBlock){
 							for (var v=1;v<maxBlock;v++){
 								for (var ii=0;ii<maxBlock;ii++){
@@ -323,6 +328,7 @@
 										pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 										pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
 										opts.fullColors[y-v][xx]=opts.fullColors[y][x];
+										emojiBlock[y-v][xx]=maxBlock;
 									}
 								}
 							}
@@ -334,7 +340,7 @@
 						for (var iii=0;iii<chain[x-ii].length;iii++) {
 							var xx = chain[x-ii][iii];
 							opts.fullColors[y][xx]=opts.fullColors[y][x];
-							emojiBlock[y][xx]=true;
+							emojiBlock[y][xx]=1;
 						}
 					}
 					
