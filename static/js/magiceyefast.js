@@ -230,10 +230,10 @@
           }
         }
       }
-      
+      var ch = 12;
       for (y = yMin+5; y < yMax-5; y++) {
 			for (x = 0; x < width; x++) {
-				for (var iii=0;iii<5;iii++){
+				for (var iii=0;iii<4;iii++){
 					var zT = depthMap[y-iii][x];
 					var zB = depthMap[y+iii][x];
 					z = depthMap[y][x];
@@ -250,12 +250,12 @@
 					
 						  var pixelLeft = (y * width * 4) + (left * 4);
 						  var pixelRight = (y * width * 4) + (right * 4);
-						  pixels[pixelLeft + 0] = pixels[pixelLeft + 0] + 20;
-						  pixels[pixelLeft + 1] = pixels[pixelLeft + 1] + 20;
-						  pixels[pixelLeft + 2] = pixels[pixelLeft + 2] + 20;
-						  pixels[pixelRight + 0] = pixels[pixelRight + 0] + 20;
-						  pixels[pixelRight + 1] = pixels[pixelRight + 1] + 20;
-						  pixels[pixelRight + 2] = pixels[pixelRight + 2] + 20;
+						  pixels[pixelLeft + 0] = pixels[pixelLeft + 0] + ch;
+						  pixels[pixelLeft + 1] = pixels[pixelLeft + 1] + ch;
+						  pixels[pixelLeft + 2] = pixels[pixelLeft + 2] + ch;
+						  pixels[pixelRight + 0] = pixels[pixelRight + 0] + ch;
+						  pixels[pixelRight + 1] = pixels[pixelRight + 1] + ch;
+						  pixels[pixelRight + 2] = pixels[pixelRight + 2] + ch;
 						  if (pixels[pixelLeft + 0] > 255){pixels[pixelLeft + 0] = 255;}
 						  if (pixels[pixelLeft + 1] > 255){pixels[pixelLeft + 1] = 255;}
 						  if (pixels[pixelLeft + 2] > 255){pixels[pixelLeft + 2] = 255;}
@@ -278,12 +278,12 @@
 					
 						  var pixelLeft = (y * width * 4) + (left * 4);
 						  var pixelRight = (y * width * 4) + (right * 4);
-						  pixels[pixelLeft + 0] = pixels[pixelLeft + 0] - 20;
-						  pixels[pixelLeft + 1] = pixels[pixelLeft + 1] - 20;
-						  pixels[pixelLeft + 2] = pixels[pixelLeft + 2] - 20;
-						  pixels[pixelRight + 0] = pixels[pixelRight + 0] - 20;
-						  pixels[pixelRight + 1] = pixels[pixelRight + 1] - 20;
-						  pixels[pixelRight + 2] = pixels[pixelRight + 2] - 20;
+						  pixels[pixelLeft + 0] = pixels[pixelLeft + 0] - ch;
+						  pixels[pixelLeft + 1] = pixels[pixelLeft + 1] - ch;
+						  pixels[pixelLeft + 2] = pixels[pixelLeft + 2] - ch;
+						  pixels[pixelRight + 0] = pixels[pixelRight + 0] - ch;
+						  pixels[pixelRight + 1] = pixels[pixelRight + 1] - ch;
+						  pixels[pixelRight + 2] = pixels[pixelRight + 2] - ch;
 						  if (pixels[pixelLeft + 0] < 0){pixels[pixelLeft + 0] = 0;}
 						  if (pixels[pixelLeft + 1] < 0){pixels[pixelLeft + 1] = 0;}
 						  if (pixels[pixelLeft + 2] < 0){pixels[pixelLeft + 2] = 0;}
