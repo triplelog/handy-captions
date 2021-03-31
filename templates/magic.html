@@ -209,7 +209,7 @@ function createDepthMap(){
 		//console.log(id,ids,allCurves);
 		path.setAttribute('d',allCurves[id]);
 		path.setAttribute('stroke','black');
-		path.setAttribute('stroke-width',100);
+		path.setAttribute('stroke-width',33);
 		path.setAttribute('fill','none');
 		path.id = "bg-"+id;
 		document.getElementById('pixelSVG').appendChild(path);
@@ -230,12 +230,8 @@ function createDepthMap(){
 		for (var y=0;y<600;y++){
 		  dMap.push([]);
 		  for (var x=0;x<800;x++){
-		  	if (imgData[y*800*4+x*4+3] > 100){
-			  dMap[y].push(1);
-			}
-			else {
-			  dMap[y].push(0);
-			}
+		  	
+			dMap[y].push(imgData[y*800*4+x*4+3]/255);
 		  }
 		}
 		MagicEye.render({
