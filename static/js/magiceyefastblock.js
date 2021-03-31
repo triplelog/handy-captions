@@ -131,7 +131,7 @@
 	  	yMax = rows[1];
 	  }
       // for each row
-     
+      var allChains = {};
       for (y = yMin; y < yMax; y++) {
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
@@ -214,6 +214,11 @@
             if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
             	block = false;
             }
+            var vBlock = true;
+			if (opts.fullColors[y-2] && opts.fullColors[y-2][x][0] == opts.fullColors[y-1][x][0] && opts.fullColors[y-2][x][1] == opts.fullColors[y-1][x][1]){
+				vBlock = false;
+			}
+			
             var xi = x;
             var maxBlock = 16;
             var minBlock = 8;
@@ -239,17 +244,71 @@
 				}
 				else {
 					if (xi < x - minBlock){
-						for (var ii=0;ii<x-xi;ii++){
-							colorsFG[x-ii] = rgba;
+						if (vBlock){
+							var fullBlock = true;
+							for (var ii=0;ii<x-xi;ii++){
+								for (var iii=0;iii<chain[x-ii][i];iii++) {
+									var xx = chain[x-ii][i][iii];
+									if (opts.fullColors[y-1][xx][0] == opts.fullColors[y-1][x][0] && opts.fullColors[y-1][xx][1] == opts.fullColors[y-1][x][1]){
+								
+									}
+									else {
+										fullBlock = false;
+									}
+								}
+							}
+							if (fullBlock){
+								for (var ii=0;ii<x-xi;ii++){
+									for (var iii=0;iii<chain[x-ii][i];iii++) {
+										var xx = chain[x-ii][i][iii];
+										pixels[(y-1)*width*4 + xx*4 + 0] = rgba[0];
+										pixels[(y-1)*width*4 + xx*4 + 1] = rgba[1];
+										pixels[(y-1)*width*4 + xx*4 + 2] = rgba[2];
+									}
+								}
+							}
 						}
+						else {
+							for (var ii=0;ii<x-xi;ii++){
+								colorsFG[x-ii] = rgba;
+							}
+						}
+						
 						break;
 					}
 				}
 				
 				if (xi < x - maxBlock){
-					for (var ii=0;ii<maxBlock;ii++){
-						colorsFG[x-ii] = rgba;
+					if (vBlock){
+						var fullBlock = true;
+						for (var ii=0;ii<maxBlock;ii++){
+							for (var iii=0;iii<chain[x-ii][i];iii++) {
+								var xx = chain[x-ii][i][iii];
+								if (opts.fullColors[y-1][xx][0] == opts.fullColors[y-1][x][0] && opts.fullColors[y-1][xx][1] == opts.fullColors[y-1][x][1]){
+							
+								}
+								else {
+									fullBlock = false;
+								}
+							}
+						}
+						if (fullBlock){
+							for (var ii=0;ii<maxBlock;ii++){
+								for (var iii=0;iii<chain[x-ii][i];iii++) {
+									var xx = chain[x-ii][i][iii];
+									pixels[(y-1)*width*4 + xx*4 + 0] = rgba[0];
+									pixels[(y-1)*width*4 + xx*4 + 1] = rgba[1];
+									pixels[(y-1)*width*4 + xx*4 + 2] = rgba[2];
+								}
+							}
+						}
 					}
+					else {
+						for (var ii=0;ii<maxBlock;ii++){
+							colorsFG[x-ii] = rgba;
+						}
+					}
+					
 					break;
 				}
             }
@@ -264,6 +323,7 @@
             }
           }
         }
+        allChains[y]=chain;
       }
       /*var chMax = 25;
       for (y = yMin+4; y < yMax-4; y++) {
