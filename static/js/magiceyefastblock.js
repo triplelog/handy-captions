@@ -215,7 +215,7 @@
             	block = false;
             }
             var xi = x;
-            var maxBlock = 16;
+            var maxBlock = 12;
             while (block){
             	xi--;
 				/*if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
