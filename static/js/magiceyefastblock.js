@@ -122,10 +122,20 @@
       		if (y < 100){
       			console.log(e,y,sz,cx,cy,r);
       		}
-      		context.beginPath();
-      		context.arc(cx,cy, r, 0, Math.PI * 2, true);
-      		context.stroke();
-      		context.closePath();
+      		if (rc < 200){
+				context.beginPath();
+				context.arc(cx,cy, r, 0, Math.PI * 2, true);
+				context.stroke();
+				context.closePath();
+      		}
+      		else {
+				context.font = parseInt(sz) +'px serif';
+				// use these alignment properties for "better" positioning
+				context.textAlign = "center"; 
+				context.textBaseline = "middle"; 
+				// draw the emoji
+				context.fillText('😍', cx, cy);
+			}
       	}
       }
     },
