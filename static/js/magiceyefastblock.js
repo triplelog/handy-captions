@@ -193,6 +193,8 @@
       var allChains = {};
       var emojiBlock = {};
       var emojiLocations = {};
+      var fHalf = 0;
+      var sHalf = 0;
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
       	emojiLocations[y] = {};
@@ -295,7 +297,7 @@
           }
         }
         const t1 = performance.now();
-		console.log(`Setting Pixels took ${t1 - t0} milliseconds.`);
+        fHalf += t1-t0;
 		
 		emojiBlock[y]={};
 		for (x = (width - 1); x >= 0; x--) {
@@ -499,9 +501,12 @@
         }
 		
 		const t2 = performance.now();
-		console.log(`First round of Emojis took ${t2 - t1} milliseconds.`);
+		sHalf += t1-t0;
+		
         allChains[y]=chain;
       }
+      console.log(`Setting Pixels took ${fHalf} milliseconds.`);
+	  console.log(`First round of Emojis took ${sHalf} milliseconds.`);
       /*var chMax = 25;
       for (y = yMin+4; y < yMax-4; y++) {
 			for (x = 0; x < width; x++) {
