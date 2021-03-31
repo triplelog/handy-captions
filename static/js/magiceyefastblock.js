@@ -214,17 +214,20 @@
             if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
             	block = false;
             }
-            var vBlock = true;
+            var vbn = 0;
             for (var v=2;v<8;v++){
-				if (opts.fullColors[y-v] && opts.fullColors[y-v][x][0] == opts.fullColors[y-1][x][0] && opts.fullColors[y-v][x][1] == opts.fullColors[y-1][x][1]){
-					vBlock = false;
+				if (opts.fullColors[y-v] && (opts.fullColors[y-v][x][0] != opts.fullColors[y-v+1][x][0] || opts.fullColors[y-v][x][1] != opts.fullColors[y-v+1][x][1])){
+					vbn++;
 				}
 			}
+			var vBlock = false;
+			if (vbn == 6){vBlock = true;}
+			
 			if (x == 799 && y > 5){
-				console.log(x,y,vBlock,opts.fullColors[y-2][x],opts.fullColors[y-1][x],opts.fullColors[y][x]);
-				console.log(opts.fullColors[y-2]);
-				console.log(opts.fullColors[y-2][x][0] == opts.fullColors[y-1][x][0]);
-				console.log(opts.fullColors[y-2][x][1] == opts.fullColors[y-1][x][1]);
+				console.log(x,y,vBlock);
+				//console.log(opts.fullColors[y-2]);
+				//console.log(opts.fullColors[y-2][x][0] == opts.fullColors[y-1][x][0]);
+				//console.log(opts.fullColors[y-2][x][1] == opts.fullColors[y-1][x][1]);
 			}
             var xi = x;
             var maxBlock = 16;
