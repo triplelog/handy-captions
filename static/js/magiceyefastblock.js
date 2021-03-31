@@ -140,7 +140,7 @@
       		}
       		else {
       			var idx = Math.floor(rc/26);
-				context.font = parseInt(sz * 0.75) +'px serif';
+				context.font = parseInt(sz * 0.85) +'px serif';
 				// use these alignment properties for "better" positioning
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
