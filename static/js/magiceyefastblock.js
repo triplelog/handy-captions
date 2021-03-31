@@ -342,7 +342,7 @@
 			}
             var xi = x;
             var maxBlock = 10 + Math.floor(Math.random() * 10);
-            var minBlock = 5;
+            var minBlock = 3 + Math.floor(Math.random() * 7);
             while (block){
             	xi--;
             	block = true;
