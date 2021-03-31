@@ -266,7 +266,7 @@
 						
 							}
 							else {
-								pixels[rightOffset + ii*720 + i] = pixels[rightOffset + 0*720 + i];
+								pixels[rightOffset + ii*720 + i] = pixels[rightOffset + 1*720 + i];
 							}
 						}
 					}
@@ -303,7 +303,7 @@
 								pixels[leftOffset + ii*-720 + i] = colorsBG[(x % 180)][i];
 							}
 							else {
-								pixels[leftOffset + ii*-720 + i] = pixels[leftOffset + 0*720 + i];
+								pixels[leftOffset + ii*-720 + i] = pixels[leftOffset + 1*-720 + i];
 							}
 						
 						}
