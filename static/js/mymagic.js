@@ -218,7 +218,7 @@
 			  var pixelOffset = (y * width * 4) + (x * 4);
 			  z = depthMap[y][x];
 			  if (z > 0.5){
-				if (m >= maxM - (s*2)){
+				if (!setPixels[x + 2*s]){//m >= maxM - (s*2)){
 					var right = x + s;
 					var rightOffset = (y * width * 4) + (right * 4);
 					if (right + ii*180 < width && !setPixels[right + ii*180]){
@@ -237,7 +237,7 @@
 						}
 					}
 				}
-				else if (m >= maxM - 180){
+				else if (!setPixels[x + 180]){
 					var right = x + s;
 					var rightOffset = (y * width * 4) + (right * 4);
 					if (right + ii*180 < width && !setPixels[right + ii*180]){
@@ -255,7 +255,7 @@
 						}
 					}
 				}
-				if (m < (s*2)){
+				if (!setPixels[x - 2*s]){
 					var left = x - s;
 					var leftOffset = (y * width * 4) + (left * 4);
 					if (left + ii*-180 >= 0 && !setPixels[left + ii*-180]){
@@ -272,7 +272,7 @@
 						}
 					}
 				}
-				else if (m < 180){
+				else if (!setPixels[x - 180]){
 					var left = x - s;
 					var leftOffset = (y * width * 4) + (left * 4);
 					if (left + ii*-180 >= 0 && !setPixels[left + ii*-180]){
