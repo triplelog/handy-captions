@@ -231,37 +231,39 @@
         }
       }
       
-      for (y = yMin+1; y < yMax-1; y++) {
+      for (y = yMin+3; y < yMax-3; y++) {
 			for (x = 0; x < width; x++) {
-				var zT = depthMap[y-1][x];
-				var zB = depthMap[y+1][x];
-				z = depthMap[y][x];
-				if (z > zT){
-					// stereo separation corresponding to z
-				  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
+				for (var iii=0;iii<3;iii++){
+					var zT = depthMap[y-iii][x];
+					var zB = depthMap[y+iii][x];
+					z = depthMap[y][x];
+					if (z > zT){
+						// stereo separation corresponding to z
+					  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 
-				  // x-values corresponding to left and right eyes
-				  left = Math.round(x - ((sep + (sep & y & 1)) / 2));
-				  right = left + sep;
+					  // x-values corresponding to left and right eyes
+					  left = Math.round(x - ((sep + (sep & y & 1)) / 2));
+					  right = left + sep;
 
-				  if (0 <= left && right < width) {
+					  if (0 <= left && right < width) {
 
 					
-					  var pixelLeft = (y * width * 4) + (left * 4);
-					  var pixelRight = (y * width * 4) + (right * 4);
-					  pixels[pixelLeft + 0] = pixels[pixelLeft + 0] + 50;
-					  pixels[pixelLeft + 1] = pixels[pixelLeft + 1] + 50;
-					  pixels[pixelLeft + 2] = pixels[pixelLeft + 2] + 50;
-					  pixels[pixelRight + 0] = pixels[pixelRight + 0] + 50;
-					  pixels[pixelRight + 1] = pixels[pixelRight + 1] + 50;
-					  pixels[pixelRight + 2] = pixels[pixelRight + 2] + 50;
-					  if (pixels[pixelLeft + 0] > 255){pixels[pixelLeft + 0] = 255;}
-					  if (pixels[pixelLeft + 1] > 255){pixels[pixelLeft + 1] = 255;}
-					  if (pixels[pixelLeft + 2] > 255){pixels[pixelLeft + 2] = 255;}
-					  if (pixels[pixelRight + 0] > 255){pixels[pixelRight + 0] = 255;}
-					  if (pixels[pixelRight + 1] > 255){pixels[pixelRight + 1] = 255;}
-					  if (pixels[pixelRight + 2] > 255){pixels[pixelRight + 2] = 255;}
+						  var pixelLeft = (y * width * 4) + (left * 4);
+						  var pixelRight = (y * width * 4) + (right * 4);
+						  pixels[pixelLeft + 0] = pixels[pixelLeft + 0] + 20;
+						  pixels[pixelLeft + 1] = pixels[pixelLeft + 1] + 20;
+						  pixels[pixelLeft + 2] = pixels[pixelLeft + 2] + 20;
+						  pixels[pixelRight + 0] = pixels[pixelRight + 0] + 20;
+						  pixels[pixelRight + 1] = pixels[pixelRight + 1] + 20;
+						  pixels[pixelRight + 2] = pixels[pixelRight + 2] + 20;
+						  if (pixels[pixelLeft + 0] > 255){pixels[pixelLeft + 0] = 255;}
+						  if (pixels[pixelLeft + 1] > 255){pixels[pixelLeft + 1] = 255;}
+						  if (pixels[pixelLeft + 2] > 255){pixels[pixelLeft + 2] = 255;}
+						  if (pixels[pixelRight + 0] > 255){pixels[pixelRight + 0] = 255;}
+						  if (pixels[pixelRight + 1] > 255){pixels[pixelRight + 1] = 255;}
+						  if (pixels[pixelRight + 2] > 255){pixels[pixelRight + 2] = 255;}
 					  
+					  }
 				  }
 					
 					
