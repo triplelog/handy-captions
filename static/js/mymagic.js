@@ -261,9 +261,12 @@
 								pixels[rightOffset + ii*720 + i] = pixels[rightOffset + 0*720 + i];
 								pixels[rightOffset + ii*720 + 0] = 0;
 							}
-							else {
+							else if (ii==1) {
 								pixels[rightOffset + ii*720 + i] = colorsBG[(x % 180)][i];
 						
+							}
+							else {
+								pixels[rightOffset + ii*720 + i] = pixels[rightOffset + 0*720 + i];
 							}
 						}
 					}
