@@ -246,7 +246,7 @@
 					if (xi < x - minBlock){
 						if (vBlock){
 							var fullBlock = true;
-							for (var v=1;v<5;v++){
+							for (var v=1;v<16;v++){
 								fullBlock = true;
 								for (var ii=0;ii<x-xi;ii++){
 									for (var iii=0;iii<chain[x-ii][i];iii++) {
@@ -283,7 +283,7 @@
 				
 				if (xi < x - maxBlock){
 					if (vBlock){
-						for (var v=1;v<5;v++){
+						for (var v=1;v<16;v++){
 							var fullBlock = true;
 							for (var ii=0;ii<maxBlock;ii++){
 								for (var iii=0;iii<chain[x-ii][i];iii++) {
