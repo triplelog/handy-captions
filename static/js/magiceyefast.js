@@ -90,10 +90,18 @@
     },
 
     renderToCanvas: function (canvas, pixelData, width, height, rows) {
-      var context = canvas.getContext("2d"),
-          imageData = context.createImageData(width, height);
+      var context = canvas.getContext("2d");
+      var yMin = 0;
+	  var yMax = height;
+	  if (rows[1] > -1){
+	  	yMin = rows[0];
+	  	yMax = rows[1];
+	  	height = yMax - yMin;
+	  	pixelData = pixelData.slice(yMin*width*4,yMax*width*4);
+	  }
+      var imageData = context.createImageData(width, height);
       imageData.data.set(pixelData);
-      context.putImageData(imageData, 0, 0);
+      context.putImageData(imageData, 0, yMin);
     },
 
     generatePixelData: function (opts) {
@@ -124,6 +132,7 @@
 	  	yMax = rows[1];
 	  }
       // for each row
+     
       for (y = yMin; y < yMax; y++) {
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
