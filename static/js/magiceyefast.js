@@ -231,14 +231,14 @@
         }
       }
       var chMax = 50;
-      for (y = yMin+5; y < yMax-5; y++) {
+      for (y = yMin+10; y < yMax-10; y++) {
 			for (x = 0; x < width; x++) {
-				for (var iii=0;iii<5;iii++){
+				for (var iii=0;iii<10;iii++){
 					var zT = depthMap[y-iii][x];
 					var zB = depthMap[y+iii][x];
 					z = depthMap[y][x];
-					if (z > zB){
-						var ch = Math.round((z-zB)*chMax/(iii+5));
+					if (z > zT){
+						var ch = Math.round((z-zT)*chMax/(iii+5));
 						// stereo separation corresponding to z
 					  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 
@@ -266,8 +266,8 @@
 					  
 					  }
 				    }
-				    if (z > zT){
-				    	var ch = Math.round((z-zT)*chMax/(iii+5));
+				    if (z > zB){
+				    	var ch = Math.round((z-zB)*chMax/(iii+5));
 						// stereo separation corresponding to z
 					  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 
