@@ -194,6 +194,7 @@
 		  			var cr = Math.floor(Math.random() * 255);
 					pixels[leftOffset + i] = cr;
 					pixels[rightOffset + i] = cr;
+					pixels[rightOffset + 0] = 60;
 					//pixels[leftOffset + i] = pixelColor[i];
 					//pixels[rightOffset + i] = pixelColor[i];
 				}
@@ -218,7 +219,7 @@
 			  var pixelOffset = (y * width * 4) + (x * 4);
 			  z = depthMap[y][x];
 			  if (z > 0.5){
-				if (!setPixels[x + 2*s]){//m >= maxM - (s*2)){
+				if (!setPixels[x + 2*s]){
 					var right = x + s;
 					var rightOffset = (y * width * 4) + (right * 4);
 					if (right + ii*180 < width && !setPixels[right + ii*180]){
