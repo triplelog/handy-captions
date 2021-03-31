@@ -287,8 +287,8 @@
             if (emojiBlock[y][x]){
             	block = false;
             }
-            var vbn = 40;
-            for (var v=1;v<40;v++){
+            var vbn = 60;
+            for (var v=1;v<60;v++){
 				
 				if (!emojiLocations[y-v]){
 					if (y-v >= 0){vbn = 0;}
@@ -323,7 +323,7 @@
 							}
 						}
 						else {
-							maxSize = 40;
+							maxSize = 60;
 						}
 						if (maxSize < vbn){
 							vbn = maxSize;
@@ -337,12 +337,10 @@
 				
 			}
 			vbn+=3;
-			if (y == 50 && x >700){
-				//console.log(x,y,vbn);
-			}
+			
             var xi = x;
-            var maxBlock = 8 + Math.floor(Math.random() * 12);
-            var minBlock = 2 + Math.floor(Math.random() * 8);
+            var maxBlock = 12 + Math.floor(Math.random() * 18);
+            var minBlock = 4 + Math.floor(Math.random() * 8);
             var skipP = 0.95;
             if (Math.random() < skipP){
             	block = false;
