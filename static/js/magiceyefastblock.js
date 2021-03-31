@@ -195,9 +195,14 @@
       var emojiLocations = {};
       var fHalf = 0;
       var sHalf = 0;
+      var sameColors = {};
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
       	emojiLocations[y] = {};
+      	sameColors[y]={};
+      	for (x = 0; x < width; x++) {
+          sameColors[y][x] = Math.random();
+        }
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
 
@@ -413,7 +418,7 @@
 								for (var ii=0;ii<x-xi;ii++){
 									for (var iii=0;iii<chain[x-ii].length;iii++) {
 										var xx = chain[x-ii][iii];
-										if (opts.fullColors[y-v] && opts.fullColors[y-v][xx][0] == opts.fullColors[y-v][x][0] && opts.fullColors[y-v][xx][1] == opts.fullColors[y-v][x][1]){
+										if (sameColors[y-v] && sameColors[y-v][xx] == sameColors[y-v][x]){
 								
 										}
 										else {
@@ -430,7 +435,7 @@
 											//pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
 											//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 											//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
-											opts.fullColors[y-v][xx]=opts.fullColors[y][x];
+											sameColors[y-v][xx]=sameColors[y][x];
 											//emojiBlock[y-v][xx]=x-xi;
 										}
 									}
@@ -448,7 +453,7 @@
 							colorsFG[x-ii] = rgba;
 							for (var iii=0;iii<chain[x-ii].length;iii++) {
 								var xx = chain[x-ii][iii];
-								opts.fullColors[y][xx]=opts.fullColors[y][x];
+								sameColors[y][xx]=sameColors[y][x];
 								emojiBlock[y][xx]=1;
 							}
 						}
@@ -465,7 +470,7 @@
 							for (var ii=0;ii<maxBlock;ii++){
 								for (var iii=0;iii<chain[x-ii].length;iii++) {
 									var xx = chain[x-ii][iii];
-									if (opts.fullColors[y-v] && opts.fullColors[y-v][xx][0] == opts.fullColors[y-v][x][0] && opts.fullColors[y-v][xx][1] == opts.fullColors[y-v][x][1]){
+									if (sameColors[y-v] && sameColors[y-v][xx] == sameColors[y-v][x]){
 							
 									}
 									else {
@@ -483,7 +488,7 @@
 										//pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
 										//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 										//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
-										opts.fullColors[y-v][xx]=opts.fullColors[y][x];
+										sameColors[y-v][xx]=sameColors[y][x];
 										//emojiBlock[y-v][xx]=maxBlock;
 									}
 								}
@@ -502,7 +507,7 @@
 						colorsFG[x-ii] = rgba;
 						for (var iii=0;iii<chain[x-ii].length;iii++) {
 							var xx = chain[x-ii][iii];
-							opts.fullColors[y][xx]=opts.fullColors[y][x];
+							sameColors[y][xx]=sameColors[y][x];
 							emojiBlock[y][xx]=1;
 						}
 					}
