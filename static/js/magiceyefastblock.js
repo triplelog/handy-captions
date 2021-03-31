@@ -274,7 +274,7 @@
 				chain[x] = [x];
 			}
 		}
-		const t0 = performance.now();
+		
         for (x = (width - 1); x >= 0; x--) {
           pixelOffset = (y * width * 4) + (x * 4);
           if (same[x] === x) {
@@ -296,8 +296,7 @@
             }
           }
         }
-        const t1 = performance.now();
-        fHalf += t1-t0;
+        
 		
 		emojiBlock[y]={};
 		for (x = (width - 1); x >= 0; x--) {
@@ -313,6 +312,7 @@
             	block = false;
             }
             var vbn = 60;
+            const t0 = performance.now();
             for (var v=0;v<60;v++){
 				
 				if (!emojiLocations[y-v]){
@@ -361,6 +361,8 @@
 				}
 				
 			}
+			const t1 = performance.now();
+        	fHalf += t1-t0;
 			vbn+=3;
 			
             var xi = x;
@@ -496,12 +498,13 @@
 					break;
 				}
             }
+            const t2 = performance.now();
+			sHalf += t2-t1;
             
           }
         }
 		
-		const t2 = performance.now();
-		sHalf += t2-t1;
+		
 		
         allChains[y]=chain;
       }
