@@ -436,6 +436,14 @@
 			}
 	  }
 	  */
+	  for (y = 0; y< 50;y++){
+		  for (x = (width - 1); x >= 0; x--) {
+			if (emojiBlock[y][x]>4){
+				console.log(y,x,emojiBlock[y][x])
+			}
+		
+		  }
+	  }
       return pixels;
     },
 
