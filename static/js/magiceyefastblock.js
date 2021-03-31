@@ -220,8 +220,11 @@
 					vBlock = false;
 				}
 			}
-			if (x > 600){
-				console.log(y,vBlock);
+			if (y == 200){
+				console.log(x,y,vBlock);
+			}
+			else if (y == 201){
+				console.log(x,y,vBlock);
 			}
             var xi = x;
             var maxBlock = 16;
