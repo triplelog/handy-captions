@@ -107,15 +107,15 @@
       context.lineWidth = 1;
       context.strokeStyle = "black";
       var idxToEmoji = [];
-      idxToEmoji.push('😍');
-      idxToEmoji.push('😍');
-      idxToEmoji.push('😍');
-      idxToEmoji.push('😍');
-      idxToEmoji.push('😍');
-      idxToEmoji.push('😍');
-      idxToEmoji.push('😍');
-      idxToEmoji.push('😍');
-      idxToEmoji.push('😍');
+      idxToEmoji.push('😂');
+      idxToEmoji.push('❤️');
+      idxToEmoji.push('✨');
+      idxToEmoji.push('🔥');
+      idxToEmoji.push('💯');
+      idxToEmoji.push('👀');
+      idxToEmoji.push('😡');
+      idxToEmoji.push('🍀');
+      idxToEmoji.push('💩');
       idxToEmoji.push('😍');
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
@@ -132,7 +132,7 @@
       		if (y < 100){
       			console.log(e,y,sz,cx,cy,r);
       		}
-      		if (rc < 20){
+      		if (rc < 0){
 				context.beginPath();
 				context.arc(cx,cy, r, 0, Math.PI * 2, true);
 				context.stroke();
@@ -140,7 +140,7 @@
       		}
       		else {
       			var idx = Math.floor(rc/26);
-				context.font = parseInt(sz) +'px serif';
+				context.font = parseInt(sz * 0.75) +'px serif';
 				// use these alignment properties for "better" positioning
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
