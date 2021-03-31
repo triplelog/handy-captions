@@ -278,34 +278,30 @@
 				//	vbn++;
 				//}
 				var open = true;
+				var emojis = Object.keys(emojiLocations[y-v]);
+				var lx = 
+				
 				if (chain[x]){
-					for (var i=0;i<chain[x].length;i++){
-						for (var ii=0;ii<v && chain[x][i]-ii >=0;ii++){
-							if (!emojiBlock[y-v] || !emojiBlock[y-v][chain[x][i] - ii]){
+					for (var i in emojis){
+						var lx = emojis[i];
+						var ty = y-v;
+						var e = emojiLocations[y-v][lx];
+						var w = parseInt(e.sz);
+						if (w < v){
+							continue;
+						}
 						
-							}
-							else if (emojiBlock[y-v][chain[x][i] - ii] >= 4){
+					
+						for (var i=0;i<chain[x].length;i++){
+							if (lx <= chain[x][i] - v && chain[x][i] <= lx + w){
 								open = false;
-								break;
-							}
-							else {
-						
 							}
 						}
 					}
 				}
 				else {
-					for (var ii=0;ii<v && x-ii >=0;ii++){
-						if (!emojiBlock[y-v] || !emojiBlock[y-v][x - ii]){
-					
-						}
-						else if (emojiBlock[y-v][x - ii] >= 4){
-							open = false;
-						}
-						else {
-					
-						}
-					}
+					vbn = 0;//Maybe need to do something better here with orphans
+					break;
 				}
 				if (open){
 					vbn++;
@@ -364,7 +360,7 @@
 											//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 											//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
 											opts.fullColors[y-v][xx]=opts.fullColors[y][x];
-											emojiBlock[y-v][xx]=x-xi;
+											//emojiBlock[y-v][xx]=x-xi;
 										}
 									}
 								}
@@ -417,7 +413,7 @@
 										//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 										//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
 										opts.fullColors[y-v][xx]=opts.fullColors[y][x];
-										emojiBlock[y-v][xx]=maxBlock;
+										//emojiBlock[y-v][xx]=maxBlock;
 									}
 								}
 							}
