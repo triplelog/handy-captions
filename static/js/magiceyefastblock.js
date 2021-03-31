@@ -209,15 +209,7 @@
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
-            if (chain[x]){
-				var minD = width;
-				for (var i=0;i<chain[x].length;i++){
-					if (Math.abs(chain[x][i]-400)<minD){
-						rgba = colorsFG[chain[x][i]];
-						minD = chain[x][i];
-					}
-				}
-			}
+            
             var block = true;
             if (colorsFG[minD+1][0] == colorsFG[minD][0] && colorsFG[minD+1][1] == colorsFG[minD][1]){
             	block = false;
@@ -239,12 +231,7 @@
 				}*/
 				block = false;
 				if (chain[x] && chain[xi]){
-					for (var i=0;i<chain[xi].length;i++){
-						if (minD == chain[xi][i]+x-xi){
-							block = true;
-							break;
-						}
-					}
+					block = true;
 				}
 				
 				if (block){
