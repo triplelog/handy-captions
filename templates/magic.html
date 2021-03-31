@@ -205,14 +205,16 @@ function createDepthMap(){
 	var ids = Object.keys(allCurves);
 	for (var i in ids){
 		var id = ids[i];
-		var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-		//console.log(id,ids,allCurves);
-		path.setAttribute('d',allCurves[id]);
-		path.setAttribute('stroke','black');
-		path.setAttribute('stroke-width',33);
-		path.setAttribute('fill','none');
-		path.id = "bg-"+id;
-		document.getElementById('pixelSVG').appendChild(path);
+		for (var ii=1;ii<11;ii++){
+			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+			//console.log(id,ids,allCurves);
+			path.setAttribute('d',allCurves[id]);
+			path.setAttribute('stroke','rgba(0,0,0,'+(ii/10)+')');
+			path.setAttribute('stroke-width',110-ii*10);
+			path.setAttribute('fill','none');
+			path.id = "bg-"+id;
+			document.getElementById('pixelSVG').appendChild(path);
+		}
 	}
 	
 	var canvas = document.getElementById('pixelCanvas');
