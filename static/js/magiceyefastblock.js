@@ -266,6 +266,7 @@
 											pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
 											pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 											pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+											opts.fullColors[y-v][xx]=opts.fullColors[y][x];
 										}
 									}
 								}
@@ -303,6 +304,7 @@
 										pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
 										pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 										pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+										opts.fullColors[y-v][xx]=opts.fullColors[y][x];
 									}
 								}
 							}
