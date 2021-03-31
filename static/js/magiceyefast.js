@@ -264,8 +264,8 @@
 						  right = k;
 						}
 					  }
-					  pixelLeft = (y * width * 4) + (left * 4);
-					  pixelRight = (y * width * 4) + (right * 4);
+					  var pixelLeft = (y * width * 4) + (left * 4);
+					  var pixelRight = (y * width * 4) + (right * 4);
 					  pixels[pixelLeft + 0] = 255;
 					  pixels[pixelLeft + 1] = 255;
 					  pixels[pixelLeft + 2] = 255;
