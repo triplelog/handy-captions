@@ -341,7 +341,7 @@
             var xi = x;
             var maxBlock = 12 + Math.floor(Math.random() * 18);
             var minBlock = 4 + Math.floor(Math.random() * 8);
-            var skipP = 0.95;
+            var skipP = 0.5 + vbn/130;
             if (Math.random() < skipP){
             	block = false;
             }
