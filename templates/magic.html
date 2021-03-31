@@ -64,8 +64,8 @@
 			c[2] = mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % 256;
 		}
 		else if (ii%72==0 ){
-			c[1] = (fullColors[i-1][ii][1]+ mulberry(Math.floor(ym[0]/1)*1 + Math.floor(ii/1)*1) % 8 ) % 256;
-			c[2] = (fullColors[i-1][ii][2]+ mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % 8 ) % 256;
+			c[1] = (fullColors[i-1][ii][1]+ mulberry(Math.floor(ym[0]/1)*1 + Math.floor(ii/1)*1) % 32 ) % 256;
+			c[2] = (fullColors[i-1][ii][2]+ mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % 32 ) % 256;
 		}
 		else {
 			c[1] = (colorsFG[ii-1][1]+ mulberry(Math.floor(ym[0]/1)*1 + Math.floor(ii/1)*1) % 16 ) % 256;
