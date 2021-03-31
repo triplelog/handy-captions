@@ -19,8 +19,7 @@
         depthMapper: new MagicEye.DepthMapper(),
         imageType: 'png',
         rows: [0,-1],
-        fullColorsFG: [],
-    	fullColorsBG: [],
+        fullColors: [],
         colors: [
           [255, 255, 255, 255],
           [0, 0, 0, 255]
@@ -64,8 +63,7 @@
         height: height,
         depthMap: depthMap,
         rows: opts.rows,
-        fullColorsFG: opts.fullColorsFG,
-    	fullColorsBG: opts.fullColorsBG,
+        fullColors: opts.fullColors,
         colors: opts.colors
       });
 
@@ -141,9 +139,9 @@
           same[x] = x; // each pixel is initially linked with itself
         }
 		
-		var colorsFG = opts.fullColorsFG[y];
-		var colorsBG = opts.fullColorsBG[y];
+		var colorsFG = opts.fullColors[y];
 		
+		var chain = {};
         // for each column
         for (x = 0; x < width; x++) {
 
@@ -177,6 +175,30 @@
                 }
               }
               same[left] = right;
+              if (chain[right]){
+              	if (chain[left]){
+              		for (var i=0;i<chain[left].length;i++){
+              			chain[right].push(chain[left][i]);
+              		}
+              		delete chain[left];
+              	}
+              	else {
+              		chain[right].push(left);
+              	}
+              }
+              else {
+                chain[right]= [right];
+              	if (chain[left]){
+              		for (var i=0;i<chain[left].length;i++){
+              			chain[right].push(chain[left][i]);
+              		}
+              		delete chain[left];
+              	}
+              	else {
+              		chain[right].push(left);
+              	}
+              }
+              
             }
           }
         }
@@ -186,6 +208,15 @@
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
+            if (chain[x]){
+				var minD = width;
+				for (var i=0;i<chain[x].length;i++){
+					if (Math.abs(chain[x][i]-400)<minD){
+						rgba = colorsFG[chain[x][i]];
+						minD = chain[x][i];
+					}
+				}
+            }
             for (i = 0; i < 4; i++) {
               pixels[pixelOffset + i] = rgba[i];
             }

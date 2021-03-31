@@ -47,8 +47,7 @@
 <script>
 	noise.seed(Math.random());
   var colorChain = {};
-  var fullColorsFG = [];
-  var fullColorsBG = [];
+  var fullColors = [];
   for (var i=0;i<600;i++){
   	colorChain[i]={};
   	var height = 600;
@@ -56,8 +55,6 @@
   	var ym = [];
 	ym.push(mulberry(i));
 	ym.push(mulberry(i + height));
-	ym.push(mulberry(i + 2 * height));
-	ym.push(mulberry(i + 3 * height));
 	var colorsFG = [];
 	  for (var ii=0;ii<800;ii++){
 		var c = [0,0,0,255];
@@ -65,15 +62,8 @@
 		c[2] = mulberry(ym[1] + ii) % 256;
 		colorsFG.push(c);
 	  }
-	var colorsBG = [];
-	  for (var ii=0;ii<800;ii++){
-		var c = [0,0,0,255];
-		c[1] = mulberry(ym[2] + ii) % 256;
-		c[2] = mulberry(ym[3] + ii) % 256;
-		colorsBG.push(c);
-	  }
-	fullColorsFG.push(colorsFG);
-	fullColorsBG.push(colorsBG);
+
+	fullColors.push(colorsFG);
   }
   var dMap = [];
   for (var y=0;y<600;y++){
