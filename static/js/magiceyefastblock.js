@@ -215,8 +215,10 @@
             	block = false;
             }
             var vBlock = true;
-			if (opts.fullColors[y-2] && opts.fullColors[y-2][x][0] == opts.fullColors[y-1][x][0] && opts.fullColors[y-2][x][1] == opts.fullColors[y-1][x][1]){
-				vBlock = false;
+            for (var v=2;v<8;v++){
+				if (opts.fullColors[y-v] && opts.fullColors[y-v][x][0] == opts.fullColors[y-1][x][0] && opts.fullColors[y-v][x][1] == opts.fullColors[y-1][x][1]){
+					vBlock = false;
+				}
 			}
 			
             var xi = x;
