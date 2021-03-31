@@ -292,7 +292,7 @@
 						var maxSize = -1;
 						for (var i=0;i<chain[x].length;i++){
 							if (lx <= chain[x][i]){
-								var mSz = chain[x][i] - lx - w;
+								var mSz = Math.max(chain[x][i] - lx - w,0);
 								if (mSz < maxWidth || maxWidth == -1){
 									maxWidth = mSz;
 								}
