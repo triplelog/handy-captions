@@ -231,9 +231,9 @@
         }
       }
       var chMax = 50;
-      for (y = yMin+10; y < yMax-10; y++) {
+      for (y = yMin+4; y < yMax-4; y++) {
 			for (x = 0; x < width; x++) {
-				for (var iii=0;iii<10;iii++){
+				for (var iii=0;iii<4;iii++){
 					var zT = depthMap[y-iii][x];
 					var zB = depthMap[y+iii][x];
 					z = depthMap[y][x];
