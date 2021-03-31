@@ -307,6 +307,9 @@
 								}
 							}
 						}
+						if (x == 799){
+							console.log(x,y,fullBlock);
+						}
 						if (fullBlock){
 							for (var v=1;v<8;v++){
 								for (var ii=0;ii<maxBlock;ii++){
