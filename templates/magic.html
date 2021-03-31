@@ -203,14 +203,16 @@ function createDepthMap(){
 	
 	document.getElementById('pixelSVG').innerHTML = '';
 	var ids = Object.keys(allCurves);
+	var alphas = [0.1,0.1,0.1,0.1,0.2,0.2,0.2,0.3,0.4,0.5];
+	var widths = [150,130,110,90,70,50,40,30,20,10];
 	for (var i in ids){
 		var id = ids[i];
-		for (var ii=1;ii<11;ii++){
+		for (var ii=0;ii<10;ii++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 			//console.log(id,ids,allCurves);
 			path.setAttribute('d',allCurves[id]);
-			path.setAttribute('stroke','rgba(0,0,0,'+(ii/10)+')');
-			path.setAttribute('stroke-width',210-ii*20);
+			path.setAttribute('stroke','rgba(0,0,0,'+alphas[ii]+')');
+			path.setAttribute('stroke-width',widths[ii]);
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id;
 			document.getElementById('pixelSVG').appendChild(path);
