@@ -110,13 +110,15 @@
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
       	for (var i in emojis){
-      		var e = emojis[i];
-      		var sz = emojiLocations[y][e];
+      		var e = parseInt(emojis[i]);
+      		var sz = parseFloat(emojiLocations[y][e].sz);
+      		var rc = parseInt(emojiLocations[y][e].color);
       		
       		
-      		var cx = parseFloat(e)+parseFloat(sz)/2;
-      		var cy = parseFloat(y)+parseFloat(sz)/2;
-      		var r = parseFloat(sz)/2;
+      		var cx = e+sz/2;
+      		var cy = y+sz/2;
+      		var r = sz/2;
+      		context.strokeStyle = "rgb("+rc+",0,0)";
       		if (y < 100){
       			console.log(e,y,sz,cx,cy,r);
       		}
@@ -318,9 +320,10 @@
 									}
 								}
 							}
+							var rc = Math.floor(Math.random()*255);
 							for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 								if (y-(x-xi)+1>= 0){
-									emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]=(x-xi);
+									emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
 								}
 							}
 						}
@@ -370,9 +373,10 @@
 								}
 							}
 						}
+						var rc = Math.floor(Math.random()*255);
 						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 							if (y-maxBlock+1>= 0){
-								emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]=maxBlock;
+								emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
 							}
 							
 						}
@@ -476,14 +480,7 @@
 			}
 	  }
 	  */
-	  for (y = 50; y< 80;y++){
-	  	  var emojis = Object.keys(emojiLocations[y]);
-		  for (var i in emojis) {
-		  	var e = emojis[i];
-			//console.log(y,e,emojiLocations[y][e]);
-		
-		  }
-	  }
+	  
       return [pixels,emojiLocations];
     },
 
