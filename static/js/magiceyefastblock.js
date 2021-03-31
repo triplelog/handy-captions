@@ -141,7 +141,7 @@
       		}
       		else {
       			var idx = Math.floor(rc/26);
-				context.font = parseInt(sz * 0.85) +'px serif';
+				context.font = parseInt(sz * 0.9) +'px serif';
 				// use these alignment properties for "better" positioning
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
@@ -273,7 +273,7 @@
             	block = false;
             }
             var vbn = 1;
-            for (var v=1;v<17;v++){
+            for (var v=1;v<25;v++){
 				//if (opts.fullColors[y-v] && (opts.fullColors[y-v][x][0] != opts.fullColors[y-v+1][x][0] || opts.fullColors[y-v][x][1] != opts.fullColors[y-v+1][x][1])){
 				//	vbn++;
 				//}
