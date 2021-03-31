@@ -223,7 +223,7 @@
             	block = false;
             }
             var xi = x;
-            var maxBlock = 1 + Math.floor(Math.random() * 10);
+            var maxBlock = 16;
             while (block){
             	xi--;
 				/*if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
