@@ -226,7 +226,7 @@
             var maxBlock = 1 + Math.floor(Math.random() * 10);
             while (block){
             	xi--;
-				if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
+				/*if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
 					for (var i=0;i<chain[x].length;i++){
 						if (chain[x][i] != chain[xi][i]+x-xi){
 							block = false;
@@ -236,7 +236,17 @@
 				}
 				else {
 					block = false;
+				}*/
+				block = false;
+				if (chain[x] && chain[xi]){
+					for (var i=0;i<chain[xi].length;i++){
+						if (minD == chain[xi][i]+x-xi){
+							block = true;
+							break;
+						}
+					}
 				}
+				
 				if (block){
 					
 					colorsFG[minD+xi-x] = rgba;
