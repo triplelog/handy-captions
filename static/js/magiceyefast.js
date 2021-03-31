@@ -233,8 +233,8 @@
       
       for (y = yMin+1; y < yMax-1; y++) {
 			for (x = 0; x < width; x++) {
-				zT = depthMap[y-1][x];
-				zB = depthMap[y+1][x];
+				var zT = depthMap[y-1][x];
+				var zB = depthMap[y+1][x];
 				z = depthMap[y][x];
 				if (z > zT){
 					// stereo separation corresponding to z
