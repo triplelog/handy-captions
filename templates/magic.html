@@ -59,7 +59,7 @@
 	  for (var ii=0;ii<800;ii++){
 		var c = [0,0,0,255];
 		
-		if (ii%400==0 && i%300 == 0){
+		if (ii%400==0 || i%300 == 0){
 			c[1] = mulberry(Math.floor(ym[0]/1)*1 + Math.floor(ii/1)*1) % 256;
 			c[2] = mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % 256;
 		}
@@ -68,7 +68,6 @@
 			c[2] = (fullColors[i-1][ii][2]+ mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % 71 ) % 256;
 		}
 		else {
-			console.log(i,ii);
 			c[1] = (colorsFG[ii-1][1]/2 + fullColors[i-1][ii][1]/2 + mulberry(Math.floor(ym[0]/1)*1 + Math.floor(ii/1)*1) % (ii * 7) ) % 256;
 			c[2] = (colorsFG[ii-1][2]/2 + fullColors[i-1][ii][2]/2 + mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % (ii * 10) ) % 256;
 		}
