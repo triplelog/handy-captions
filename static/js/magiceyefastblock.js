@@ -292,7 +292,9 @@
 								}
 							}
 							for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
-								emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]=(x-xi);
+								if (y-(x-xi)+1>= 0){
+									emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]=(x-xi);
+								}
 							}
 						}
 						
@@ -342,7 +344,10 @@
 							}
 						}
 						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
-							emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]=maxBlock;
+							if (y-maxBlock+1>= 0){
+								emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]=maxBlock;
+							}
+							
 						}
 					}
 					
