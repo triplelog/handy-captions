@@ -222,6 +222,9 @@
 			}
 			if (x == 799 && y > 5){
 				console.log(x,y,vBlock,opts.fullColors[y-2][x],opts.fullColors[y-1][x],opts.fullColors[y][x]);
+				console.log(opts.fullColors[y-2]);
+				console.log(opts.fullColors[y-2][x][0] == opts.fullColors[y-1][x][0]);
+				console.log(opts.fullColors[y-2][x][1] == opts.fullColors[y-1][x][1]);
 			}
             var xi = x;
             var maxBlock = 16;
