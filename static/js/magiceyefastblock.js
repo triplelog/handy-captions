@@ -279,7 +279,7 @@
 				//}
 				var open = true;
 				var emojis = Object.keys(emojiLocations[y-v]);
-				var lx = 
+				
 				
 				if (chain[x]){
 					for (var i in emojis){
