@@ -278,16 +278,29 @@
 				//	vbn++;
 				//}
 				var open = true;
-				for (var i=0;i<chain[x].length;i++){
-					if (!emojiBlock[y-v] || !emojiBlock[y-v][chain[x][i]]){
+				if (chain[x]){
+					for (var i=0;i<chain[x].length;i++){
+						if (!emojiBlock[y-v] || !emojiBlock[y-v][chain[x][i]]){
 						
+						}
+						else if (emojiBlock[y-v][chain[x][i]] >= 4){
+							open = false;
+							break;
+						}
+						else {
+						
+						}
 					}
-					else if (emojiBlock[y-v][chain[x][i]] >= 4){
+				}
+				else {
+					if (!emojiBlock[y-v] || !emojiBlock[y-v][x]){
+					
+					}
+					else if (emojiBlock[y-v][x] >= 4){
 						open = false;
-						break;
 					}
 					else {
-						
+					
 					}
 				}
 				if (open){
