@@ -265,7 +265,7 @@
 					  
 					  }
 				    }
-				    if (z < zB){
+				    if (z > zB){
 						// stereo separation corresponding to z
 					  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
 
