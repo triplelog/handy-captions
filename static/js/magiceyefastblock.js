@@ -278,6 +278,10 @@
 				//	vbn++;
 				//}
 				var open = true;
+				if (!emojiLocations[y-v]){
+					vbn++;
+					continue;
+				}
 				var emojis = Object.keys(emojiLocations[y-v]);
 				
 				
