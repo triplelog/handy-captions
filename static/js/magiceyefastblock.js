@@ -219,6 +219,9 @@
 				}
 			}
             var block = true;
+            if (colorsFG[minD+1][0] == colorsFG[minD][0] && colorsFG[minD+1][1] == colorsFG[minD][1]){
+            	block = false;
+            }
             var xi = x;
             while (block){
             	xi--;
