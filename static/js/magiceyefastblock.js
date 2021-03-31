@@ -132,7 +132,9 @@
 	  }
       // for each row
       var allChains = {};
+      var emojiBlock = {};
       for (y = yMin; y < yMax; y++) {
+      	emojiBlock[y]={};
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
 
@@ -211,7 +213,10 @@
             rgba = colorsFG[x];
             
             var block = true;
-            if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
+            //if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
+            //	block = false;
+            //}
+            if (emojiBlock[y][x]){
             	block = false;
             }
             var vbn = 1;
@@ -281,6 +286,7 @@
 							for (var iii=0;iii<chain[x-ii].length;iii++) {
 								var xx = chain[x-ii][iii];
 								opts.fullColors[y][xx]=opts.fullColors[y][x];
+								emojiBlock[y][xx]=true;
 							}
 						}
 						
@@ -328,6 +334,7 @@
 						for (var iii=0;iii<chain[x-ii].length;iii++) {
 							var xx = chain[x-ii][iii];
 							opts.fullColors[y][xx]=opts.fullColors[y][x];
+							emojiBlock[y][xx]=true;
 						}
 					}
 					
