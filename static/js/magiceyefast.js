@@ -246,24 +246,7 @@
 
 				  if (0 <= left && right < width) {
 
-					// remove hidden surfaces
-					t = 1;
-					do {
-					  zt = z + (2 * (2 - (mu * z)) * t / (mu * eyeSep));
-					  visible = (depthMap[y][x-t] < zt) && (depthMap[y][x+t] < zt); // false if obscured
-					  t++;
-					} while (visible && zt < 1);
-
-					if (visible) {
-					  // record that left and right pixels are the same
-					  for (k = same[left]; k !== left && k !== right; k = same[left]) {
-						if (k < right) {
-						  left = k;
-						} else {
-						  left = right;
-						  right = k;
-						}
-					  }
+					
 					  var pixelLeft = (y * width * 4) + (left * 4);
 					  var pixelRight = (y * width * 4) + (right * 4);
 					  pixels[pixelLeft + 0] = 255;
@@ -273,11 +256,11 @@
 					  pixels[pixelRight + 1] = 255;
 					  pixels[pixelRight + 2] = 255;
 					  
-					}
+				  }
 					
 					
 				}
-				}
+				
 				
 			}
 	  }
