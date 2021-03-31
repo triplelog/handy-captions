@@ -319,16 +319,19 @@
 					if (y-v >= 0 && v>0){vbn = 0;}
 					continue;
 				}
-				var emojis = Object.keys(emojiLocations[y-v]);
+				//var emojis = Object.keys(emojiLocations[y-v]);
 				
 				
 				if (chain[x]){
-					for (var i in emojis){
-						var lx = emojis[i];
+					for (var i in emojiLocations[y-v]){
+						var lx = i;
 						var ty = y-v;
 						var e = emojiLocations[y-v][lx];
 						var w = parseInt(e.sz);
 						var maxHeight = v-w;
+						if (maxHeight>= vbn){
+							continue;
+						}
 						var maxWidth = -1;
 						var maxSize = -1;
 						for (var i=0;i<chain[x].length;i++){
