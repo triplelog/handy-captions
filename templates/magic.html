@@ -59,7 +59,13 @@
 	  for (var ii=0;ii<800;ii++){
 		var c = [0,0,0,255];
 		c[1] = mulberry(Math.floor(ym[0]/1)*1 + Math.floor(ii/1)*1) % 256;
-		c[2] = mulberry(Math.floor(ym[1]/16)*16 + Math.floor(ii/16)*16) % 256;
+		if (ii%72==0){
+			c[2] = mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % 256;
+		}
+		else {
+			c[2] = (colorsFG[ii-1][2]+ mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % 64 ) % 256;
+		}
+		
 		colorsFG.push(c);
 	  }
 

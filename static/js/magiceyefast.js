@@ -98,7 +98,7 @@
 	  	pixelData = pixelData.slice(yMin*width*4,yMax*width*4);
 	  }
 	  if (height == 0){return;}
-      var imageData = context.createImageData(width*4, height*4);
+      var imageData = context.createImageData(width, height);
       imageData.data.set(pixelData);
       context.putImageData(imageData, 0, yMin);
     },
@@ -230,31 +230,8 @@
           }
         }
       }
-	  
-	  var pixelsOut = [];
-	  for (var i=0;i<height*4;i++){
-	  	for (var ii=0;ii<width*4;ii++){
-	  		if (i%4 == 0 || i%4 == 3){
-				pixelsOut.push(0);
-				pixelsOut.push(0);
-				pixelsOut.push(0);
-				pixelsOut.push(255);
-	  		}
-	  		else if (ii%4 == 0 || ii%4 == 3) {
-	  			pixelsOut.push(0);
-				pixelsOut.push(0);
-				pixelsOut.push(0);
-				pixelsOut.push(255);
-	  		}
-	  		else {
-	  			pixelsOut.push(pixels[Math.floor(i/4)*width*4+Math.floor(ii/4)*4 + 0]);
-				pixelsOut.push(pixels[Math.floor(i/4)*width*4+Math.floor(ii/4)*4 + 1]);
-				pixelsOut.push(pixels[Math.floor(i/4)*width*4+Math.floor(ii/4)*4 + 2]);
-				pixelsOut.push(pixels[Math.floor(i/4)*width*4+Math.floor(ii/4)*4 + 3]);
-	  		}
-	  	}
-	  }
-      return pixelsOut;
+
+      return pixels;
     },
 
     helpers: {
