@@ -256,15 +256,20 @@
             }
           }
         }
-
+		
+		for (x = (width - 1); x >= 0; x--) {
+			if (same[x] === x && !chain[x]){
+				chain[x] = [x];
+			}
+		}
         for (x = (width - 1); x >= 0; x--) {
           pixelOffset = (y * width * 4) + (x * 4);
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
-            rgba[0] = 128 + Math.floor(Math.random()*128);
-            rgba[1] = 128 + Math.floor(Math.random()*128);
-            rgba[2] = 128 + Math.floor(Math.random()*128);
+            rgba[0] = 192 + Math.floor(Math.random()*64);
+            rgba[1] = 192 + Math.floor(Math.random()*64);
+            rgba[2] = 192 + Math.floor(Math.random()*64);
             var block = true;
             //if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
             //	block = false;
