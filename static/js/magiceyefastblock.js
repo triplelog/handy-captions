@@ -268,11 +268,11 @@
 								}
 							}
 						}
-						else {
-							for (var ii=0;ii<x-xi;ii++){
-								colorsFG[x-ii] = rgba;
-							}
+						
+						for (var ii=0;ii<x-xi;ii++){
+							colorsFG[x-ii] = rgba;
 						}
+						
 						
 						break;
 					}
@@ -303,10 +303,9 @@
 							}
 						}
 					}
-					else {
-						for (var ii=0;ii<maxBlock;ii++){
-							colorsFG[x-ii] = rgba;
-						}
+					
+					for (var ii=0;ii<maxBlock;ii++){
+						colorsFG[x-ii] = rgba;
 					}
 					
 					break;
