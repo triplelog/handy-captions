@@ -289,8 +289,8 @@
 			}
 			
             var xi = x;
-            var maxBlock = 16;
-            var minBlock = 8;
+            var maxBlock = 20;
+            var minBlock = 4;
             while (block){
             	xi--;
             	block = true;
