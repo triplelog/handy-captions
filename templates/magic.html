@@ -98,12 +98,11 @@
 	  }
   }
   
-  var c=75;
+  
   MagicEye.render({
     el: 'magiceye',
     s: 72,
-    fullColorsFG: fullColorsFG,
-    fullColorsBG: fullColorsBG,
+    fullColors: fullColors,
     depthMap: dMap
   });
 
@@ -191,8 +190,7 @@ function drawCurveIn(pt) {
 		el: 'magiceye',
 		s: 72,
 		rows: [minY,maxY],
-		fullColorsFG: fullColorsFG,
-    	fullColorsBG: fullColorsBG,
+		fullColors: fullColors,
 		depthMap: dMap,
 	  });
 	const t1 = performance.now();
