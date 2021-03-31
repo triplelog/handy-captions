@@ -287,15 +287,27 @@
 						var ty = y-v;
 						var e = emojiLocations[y-v][lx];
 						var w = parseInt(e.sz);
-						var maxSize = v-w;
-					
+						var maxHeight = v-w;
+						var maxWidth = -1;
+						var maxSize = -1;
 						for (var i=0;i<chain[x].length;i++){
 							if (lx <= chain[x][i]){
 								var mSz = chain[x][i] - lx - w;
-								if (mSz < maxSize){
-									maxSize = mSz;
+								if (mSz < maxWidth || maxWidth == -1){
+									maxWidth = mSz;
 								}
 							}
+						}
+						if (maxWidth > -1){
+							if (maxHeight < maxWidth){
+								maxSize = maxWidth;
+							}
+							else {
+								maxSize = maxHeight;
+							}
+						}
+						else {
+							maxSize = 50;
 						}
 						if (maxSize < vbn){
 							vbn = maxSize;
