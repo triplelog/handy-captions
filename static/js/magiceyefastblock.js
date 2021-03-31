@@ -106,8 +106,9 @@
       context.putImageData(imageData, 0, yMin);
       context.lineWidth = 1;
       context.strokeStyle = "black";
+      
       for (var y=yMin;y<yMax;y++){
-      	var emojis = Object.keys(emojiLocations[y]):
+      	var emojis = Object.keys(emojiLocations[y]);
       	for (var i in emojis){
       		var e = emojis[i];
       		var sz = emojiLocations[y][e];
