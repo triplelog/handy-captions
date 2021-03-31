@@ -236,7 +236,7 @@
 				
 				if (block){
 					
-					colorsFG[minD+xi-x] = rgba;
+					colorsFG[xi] = rgba;
 					
 				}
 				if (xi < x - maxBlock){
