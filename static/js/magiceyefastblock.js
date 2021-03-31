@@ -236,10 +236,16 @@
 				
 				if (block){
 					
-					colorsFG[xi] = rgba;
+					//colorsFG[xi] = rgba;
 					
 				}
+				else {
+					rgba = [128,128,128,255];
+				}
 				if (xi < x - maxBlock){
+					for (var ii=0;ii<maxBlock;ii++){
+						colorsFG[x-ii] = rgba;
+					}
 					break;
 				}
             }
