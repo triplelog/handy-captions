@@ -118,7 +118,7 @@
       idxToEmoji.push('🍀');
       idxToEmoji.push('💩');
       idxToEmoji.push('😍');
-      var emojiEl = document.querySelector('emojiLayer');
+      var emojiEl = document.querySelector('.emojiLayer');
       emojiEl.innerHTML = '';
       var divT = document.createElement('div');
 	  divT.style.position = 'absolute';
@@ -136,7 +136,7 @@
       		var cx = e+sz/2;
       		var cy = y+sz/2;
       		var r = sz/2;
-      		context.strokeStyle = "rgb("+rc+",0,0)";
+      		
       		if (y < 100){
       			//console.log(e,y,sz,cx,cy,r);
       		}
