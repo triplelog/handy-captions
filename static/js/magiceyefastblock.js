@@ -275,6 +275,10 @@
 						
 						for (var ii=0;ii<x-xi;ii++){
 							colorsFG[x-ii] = rgba;
+							for (var iii=0;iii<chain[x-ii].length;iii++) {
+								var xx = chain[x-ii][iii];
+								opts.fullColors[y][xx]=opts.fullColors[y][x];
+							}
 						}
 						
 						
