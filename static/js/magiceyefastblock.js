@@ -272,6 +272,7 @@
 				chain[x] = [x];
 			}
 		}
+		const t0 = performance.now();
         for (x = (width - 1); x >= 0; x--) {
           pixelOffset = (y * width * 4) + (x * 4);
           if (same[x] === x) {
@@ -281,6 +282,28 @@
             rgba[1] = 222 + Math.floor(Math.random()*32);
             rgba[2] = 222 + Math.floor(Math.random()*32);
             var block = true;
+            
+            for (i = 0; i < 4; i++) {
+              pixels[pixelOffset + i] = rgba[i];
+            }
+          } else {
+            // constrained pixel, obey constraint
+            pixelOffset = (y * width * 4) + (x * 4);
+            for (i = 0; i < 4; i++) {
+              pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
+            }
+          }
+        }
+        const t1 = performance.now();
+		console.log(`Setting Pixels took ${t1 - t0} milliseconds.`);
+		
+		emojiBlock[y]={};
+		for (x = (width - 1); x >= 0; x--) {
+          pixelOffset = (y * width * 4) + (x * 4);
+          if (same[x] === x) {
+            // set random color
+            
+            var block = true;
             //if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
             //	block = false;
             //}
@@ -288,10 +311,10 @@
             	block = false;
             }
             var vbn = 60;
-            for (var v=1;v<60;v++){
+            for (var v=0;v<60;v++){
 				
 				if (!emojiLocations[y-v]){
-					if (y-v >= 0){vbn = 0;}
+					if (y-v >= 0 && v>0){vbn = 0;}
 					continue;
 				}
 				var emojis = Object.keys(emojiLocations[y-v]);
@@ -471,17 +494,12 @@
 					break;
 				}
             }
-            for (i = 0; i < 4; i++) {
-              pixels[pixelOffset + i] = rgba[i];
-            }
-          } else {
-            // constrained pixel, obey constraint
-            pixelOffset = (y * width * 4) + (x * 4);
-            for (i = 0; i < 4; i++) {
-              pixels[pixelOffset + i] = pixels[(y * width * 4) + (same[x] * 4) + i];
-            }
+            
           }
         }
+		
+		const t2 = performance.now();
+		console.log(`First round of Emojis took ${t2 - t1} milliseconds.`);
         allChains[y]=chain;
       }
       /*var chMax = 25;
