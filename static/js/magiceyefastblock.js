@@ -277,10 +277,11 @@
             if (emojiBlock[y][x]){
             	block = false;
             }
-            var vbn = 50;
-            for (var v=1;v<50;v++){
+            var vbn = 40;
+            for (var v=1;v<40;v++){
 				
 				if (!emojiLocations[y-v]){
+					vbn = 0;
 					continue;
 				}
 				var emojis = Object.keys(emojiLocations[y-v]);
@@ -312,7 +313,7 @@
 							}
 						}
 						else {
-							maxSize = 50;
+							maxSize = 40;
 						}
 						if (maxSize < vbn){
 							vbn = maxSize;
@@ -325,7 +326,7 @@
 				}
 				
 			}
-			vbn+=2;
+			vbn+=3;
 			if (y == 50 && x >700){
 				//console.log(x,y,vbn);
 			}
@@ -385,7 +386,7 @@
 							}
 							var rc = Math.floor(Math.random()*255);
 							for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
-								if (y-(x-xi)+1>= 0){
+								if (y-(x-xi)+1>= yMin){
 									emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
 								}
 							}
@@ -438,7 +439,7 @@
 						}
 						var rc = Math.floor(Math.random()*255);
 						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
-							if (y-maxBlock+1>= 0){
+							if (y-maxBlock+1>= yMin){
 								emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
 							}
 							
