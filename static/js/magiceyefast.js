@@ -249,12 +249,18 @@
 					
 					  var pixelLeft = (y * width * 4) + (left * 4);
 					  var pixelRight = (y * width * 4) + (right * 4);
-					  pixels[pixelLeft + 0] = 255;
-					  pixels[pixelLeft + 1] = 255;
-					  pixels[pixelLeft + 2] = 255;
-					  pixels[pixelRight + 0] = 255;
-					  pixels[pixelRight + 1] = 255;
-					  pixels[pixelRight + 2] = 255;
+					  pixels[pixelLeft + 0] = pixels[pixelLeft + 0] + 50;
+					  pixels[pixelLeft + 1] = pixels[pixelLeft + 1] + 50;
+					  pixels[pixelLeft + 2] = pixels[pixelLeft + 2] + 50;
+					  pixels[pixelRight + 0] = pixels[pixelRight + 0] + 50;
+					  pixels[pixelRight + 1] = pixels[pixelRight + 1] + 50;
+					  pixels[pixelRight + 2] = pixels[pixelRight + 2] + 50;
+					  if (pixels[pixelLeft + 0] > 255){pixels[pixelLeft + 0] = 255;}
+					  if (pixels[pixelLeft + 1] > 255){pixels[pixelLeft + 1] = 255;}
+					  if (pixels[pixelLeft + 2] > 255){pixels[pixelLeft + 2] = 255;}
+					  if (pixels[pixelRight + 0] > 255){pixels[pixelRight + 0] = 255;}
+					  if (pixels[pixelRight + 1] > 255){pixels[pixelRight + 1] = 255;}
+					  if (pixels[pixelRight + 2] > 255){pixels[pixelRight + 2] = 255;}
 					  
 				  }
 					
