@@ -282,9 +282,9 @@
 									for (var ii=0;ii<x-xi;ii++){
 										for (var iii=0;iii<chain[x-ii].length;iii++) {
 											var xx = chain[x-ii][iii];
-											pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
-											pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
-											pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+											//pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
+											//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
+											//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
 											opts.fullColors[y-v][xx]=opts.fullColors[y][x];
 											emojiBlock[y-v][xx]=x-xi;
 										}
@@ -334,9 +334,9 @@
 								for (var ii=0;ii<maxBlock;ii++){
 									for (var iii=0;iii<chain[x-ii].length;iii++) {
 										var xx = chain[x-ii][iii];
-										pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
-										pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
-										pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+										//pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
+										//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
+										//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
 										opts.fullColors[y-v][xx]=opts.fullColors[y][x];
 										emojiBlock[y-v][xx]=maxBlock;
 									}
@@ -450,7 +450,7 @@
 	  }
 	  */
 	  for (y = 50; y< 80;y++){
-	  	var emojis = Object.keys(emojiLocations[y]);
+	  	  var emojis = Object.keys(emojiLocations[y]);
 		  for (var i in emojis) {
 		  	var e = emojis[i];
 			console.log(y,e,emojiLocations[y][e]);
