@@ -343,6 +343,10 @@
             var xi = x;
             var maxBlock = 8 + Math.floor(Math.random() * 12);
             var minBlock = 2 + Math.floor(Math.random() * 8);
+            var skipP = 0.8;
+            if (Math.random() < skipP){
+            	block = false;
+            }
             while (block){
             	xi--;
             	block = true;
