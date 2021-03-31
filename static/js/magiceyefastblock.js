@@ -118,6 +118,13 @@
       idxToEmoji.push('🍀');
       idxToEmoji.push('💩');
       idxToEmoji.push('😍');
+      var emojiEl = document.querySelector('emojiLayer');
+      emojiEl.innerHTML = '';
+      var divT = document.createElement('div');
+	  divT.style.position = 'absolute';
+	  divT.style.textAlign = 'center';
+	  divT.style.display = 'inline-block';
+			
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
       	for (var i in emojis){
@@ -133,21 +140,24 @@
       		if (y < 100){
       			//console.log(e,y,sz,cx,cy,r);
       		}
-      		if (rc < 0){
-				context.beginPath();
-				context.arc(cx,cy, r, 0, Math.PI * 2, true);
-				context.stroke();
-				context.closePath();
-      		}
-      		else {
-      			var idx = Math.floor(rc/26);
-				context.font = parseInt(sz * 0.9) +'px serif';
-				// use these alignment properties for "better" positioning
-				context.textAlign = "center"; 
-				context.textBaseline = "middle"; 
-				// draw the emoji
-				context.fillText(idxToEmoji[idx], cx, cy);
-			}
+      		
+			var idx = Math.floor(rc/26);
+			
+			/*context.font = parseInt(sz * 0.9) +'px serif';
+			context.textAlign = "center"; 
+			context.textBaseline = "middle"; 
+			context.fillText(idxToEmoji[idx], cx, cy);
+			*/
+			
+			var div = divT.cloneNode(true);
+			div.style.left = e;
+			div.style.top = y;
+			div.style.height = sz;
+			div.style.width = sz;
+			div.style.fontSize = sz;
+			div.style.lineHeight = sz;
+			div.innerHTML = idxToEmoji[idx];
+			emojiEl.appendChild(div);
       	}
       }
     },
