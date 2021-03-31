@@ -501,7 +501,7 @@
         }
 		
 		const t2 = performance.now();
-		sHalf += t1-t0;
+		sHalf += t2-t1;
 		
         allChains[y]=chain;
       }
