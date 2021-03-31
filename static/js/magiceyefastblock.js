@@ -220,7 +220,9 @@
 					vBlock = false;
 				}
 			}
-			
+			if (x > 700){
+				console.log(y,vBlock);
+			}
             var xi = x;
             var maxBlock = 16;
             var minBlock = 8;
