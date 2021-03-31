@@ -281,7 +281,7 @@
             for (var v=1;v<40;v++){
 				
 				if (!emojiLocations[y-v]){
-					vbn = 0;
+					if (y-v >= 0){vbn = 0;}
 					continue;
 				}
 				var emojis = Object.keys(emojiLocations[y-v]);
