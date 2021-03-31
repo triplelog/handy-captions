@@ -272,14 +272,10 @@
             if (emojiBlock[y][x]){
             	block = false;
             }
-            var vbn = 1;
-            for (var v=1;v<25;v++){
-				//if (opts.fullColors[y-v] && (opts.fullColors[y-v][x][0] != opts.fullColors[y-v+1][x][0] || opts.fullColors[y-v][x][1] != opts.fullColors[y-v+1][x][1])){
-				//	vbn++;
-				//}
-				var open = true;
+            var vbn = 50;
+            for (var v=1;v<50;v++){
+				
 				if (!emojiLocations[y-v]){
-					vbn++;
 					continue;
 				}
 				var emojis = Object.keys(emojiLocations[y-v]);
@@ -291,15 +287,18 @@
 						var ty = y-v;
 						var e = emojiLocations[y-v][lx];
 						var w = parseInt(e.sz);
-						if (w < v){
-							continue;
-						}
-						
+						var maxSize = v-w;
 					
 						for (var i=0;i<chain[x].length;i++){
-							if (lx <= chain[x][i] - v && chain[x][i] <= lx + w){
-								open = false;
+							if (lx <= chain[x][i]){
+								var mSz = chain[x][i] - lx - w;
+								if (mSz < maxSize){
+									maxSize = mSz;
+								}
 							}
+						}
+						if (maxSize < vbn){
+							vbn = maxSize;
 						}
 					}
 				}
@@ -307,12 +306,7 @@
 					vbn = 0;//Maybe need to do something better here with orphans
 					break;
 				}
-				if (open){
-					vbn++;
-				}
-				else {
-					break;
-				}
+				
 			}
 			
             var xi = x;
