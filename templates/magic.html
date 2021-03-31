@@ -235,7 +235,7 @@ function createDepthMap(){
 		  dMap.push([]);
 		  for (var x=0;x<800;x++){
 		  	
-			dMap[y].push(2*imgData[y*800*4+x*4+3]/255 - 1);
+			dMap[y].push(imgData[y*800*4+x*4+3]/255);
 		  }
 		}
 		MagicEye.render({
