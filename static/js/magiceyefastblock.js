@@ -214,21 +214,13 @@
             if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
             	block = false;
             }
-            var vbn = 0;
-            for (var v=2;v<8;v++){
+            var vbn = 1;
+            for (var v=2;v<17;v++){
 				if (opts.fullColors[y-v] && (opts.fullColors[y-v][x][0] != opts.fullColors[y-v+1][x][0] || opts.fullColors[y-v][x][1] != opts.fullColors[y-v+1][x][1])){
 					vbn++;
 				}
 			}
-			var vBlock = false;
-			if (vbn == 6){vBlock = true;}
 			
-			if (x == 799 && y > 5){
-				console.log(x,y,vBlock);
-				//console.log(opts.fullColors[y-2]);
-				//console.log(opts.fullColors[y-2][x][0] == opts.fullColors[y-1][x][0]);
-				//console.log(opts.fullColors[y-2][x][1] == opts.fullColors[y-1][x][1]);
-			}
             var xi = x;
             var maxBlock = 16;
             var minBlock = 8;
@@ -254,9 +246,9 @@
 				}
 				else {
 					if (xi < x - minBlock){
-						if (vBlock){
+						if (vbn >= x - xi){
 							var fullBlock = true;
-							for (var v=1;v<8;v++){
+							for (var v=1;v<x-xi;v++){
 								for (var ii=0;ii<x-xi;ii++){
 									for (var iii=0;iii<chain[x-ii].length;iii++) {
 										var xx = chain[x-ii][iii];
@@ -270,7 +262,7 @@
 								}
 							}
 							if (fullBlock){
-								for (var v=1;v<8;v++){
+								for (var v=1;v<x-xi;v++){
 									for (var ii=0;ii<x-xi;ii++){
 										for (var iii=0;iii<chain[x-ii].length;iii++) {
 											var xx = chain[x-ii][iii];
@@ -298,9 +290,9 @@
 				}
 				
 				if (xi < x - maxBlock){
-					if (vBlock){
+					if (vbn >= maxBlock){
 						var fullBlock = true;
-						for (var v=1;v<8;v++){
+						for (var v=1;v<maxBlock;v++){
 							for (var ii=0;ii<maxBlock;ii++){
 								for (var iii=0;iii<chain[x-ii].length;iii++) {
 									var xx = chain[x-ii][iii];
@@ -317,7 +309,7 @@
 							console.log(x,y,fullBlock);
 						}
 						if (fullBlock){
-							for (var v=1;v<8;v++){
+							for (var v=1;v<maxBlock;v++){
 								for (var ii=0;ii<maxBlock;ii++){
 									for (var iii=0;iii<chain[x-ii].length;iii++) {
 										var xx = chain[x-ii][iii];
