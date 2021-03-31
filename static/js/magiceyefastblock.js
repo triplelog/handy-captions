@@ -246,24 +246,27 @@
 					if (xi < x - minBlock){
 						if (vBlock){
 							var fullBlock = true;
-							for (var ii=0;ii<x-xi;ii++){
-								for (var iii=0;iii<chain[x-ii][i];iii++) {
-									var xx = chain[x-ii][i][iii];
-									if (opts.fullColors[y-1][xx][0] == opts.fullColors[y-1][x][0] && opts.fullColors[y-1][xx][1] == opts.fullColors[y-1][x][1]){
-								
-									}
-									else {
-										fullBlock = false;
-									}
-								}
-							}
-							if (fullBlock){
+							for (var v=1;v<5;v++){
+								fullBlock = true;
 								for (var ii=0;ii<x-xi;ii++){
 									for (var iii=0;iii<chain[x-ii][i];iii++) {
 										var xx = chain[x-ii][i][iii];
-										pixels[(y-1)*width*4 + xx*4 + 0] = rgba[0];
-										pixels[(y-1)*width*4 + xx*4 + 1] = rgba[1];
-										pixels[(y-1)*width*4 + xx*4 + 2] = rgba[2];
+										if (opts.fullColors[y-v] && opts.fullColors[y-v][xx][0] == opts.fullColors[y-v][x][0] && opts.fullColors[y-v][xx][1] == opts.fullColors[y-v][x][1]){
+								
+										}
+										else {
+											fullBlock = false;
+										}
+									}
+								}
+								if (fullBlock){
+									for (var ii=0;ii<x-xi;ii++){
+										for (var iii=0;iii<chain[x-ii][i];iii++) {
+											var xx = chain[x-ii][i][iii];
+											pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
+											pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
+											pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+										}
 									}
 								}
 							}
@@ -280,33 +283,29 @@
 				
 				if (xi < x - maxBlock){
 					if (vBlock){
-						var fullBlock = true;
-						for (var ii=0;ii<maxBlock;ii++){
-							for (var iii=0;iii<chain[x-ii][i];iii++) {
-								var xx = chain[x-ii][i][iii];
-								if (opts.fullColors[y-1][xx][0] == opts.fullColors[y-1][x][0] && opts.fullColors[y-1][xx][1] == opts.fullColors[y-1][x][1]){
-							
-								}
-								else {
-									fullBlock = false;
-								}
-							}
-						}
-						if (fullBlock){
+						for (var v=1;v<5;v++){
+							var fullBlock = true;
 							for (var ii=0;ii<maxBlock;ii++){
 								for (var iii=0;iii<chain[x-ii][i];iii++) {
 									var xx = chain[x-ii][i][iii];
-									pixels[(y-1)*width*4 + xx*4 + 0] = rgba[0];
-									pixels[(y-1)*width*4 + xx*4 + 1] = rgba[1];
-									pixels[(y-1)*width*4 + xx*4 + 2] = rgba[2];
+									if (opts.fullColors[y-v][xx][0] == opts.fullColors[y-v][x][0] && opts.fullColors[y-v][xx][1] == opts.fullColors[y-v][x][1]){
+							
+									}
+									else {
+										fullBlock = false;
+									}
 								}
 							}
-						}
-						if (y == 200){
-							console.log(vBlock,fullBlock);
-						}
-						if (y == 201){
-							console.log(vBlock,fullBlock);
+							if (fullBlock){
+								for (var ii=0;ii<maxBlock;ii++){
+									for (var iii=0;iii<chain[x-ii][i];iii++) {
+										var xx = chain[x-ii][i][iii];
+										pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
+										pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
+										pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+									}
+								}
+							}
 						}
 					}
 					
