@@ -203,8 +203,8 @@ function createDepthMap(){
 	
 	document.getElementById('pixelSVG').innerHTML = '';
 	var ids = Object.keys(allCurves);
-	var alphas = [0.1,0.1,0.1,0.4,0.5,0.6,0.7,0.8,0.9,1];
-	var widths = [110,90,80,70,60,50,40,30,25,20];
+	var alphas = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1];
+	var widths = [100,90,80,70,60,50,40,35,30,25];
 	for (var i in ids){
 		var id = ids[i];
 		for (var ii=0;ii<10;ii++){
@@ -235,7 +235,7 @@ function createDepthMap(){
 		  dMap.push([]);
 		  for (var x=0;x<800;x++){
 		  	
-			dMap[y].push(-1*imgData[y*800*4+x*4+3]/255);
+			dMap[y].push(2*imgData[y*800*4+x*4+3]/255 - 1);
 		  }
 		}
 		MagicEye.render({
