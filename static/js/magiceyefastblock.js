@@ -281,7 +281,7 @@
 					vbn++;
 				}
 				else if (emojiBlock[y-v][x] >= 4){
-				
+					break;
 				}
 				else {
 					vbn++;
