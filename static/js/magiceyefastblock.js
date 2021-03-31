@@ -213,7 +213,9 @@
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
-            
+            rgba[0] = Math.floor(Math.random()*255);
+            rgba[1] = Math.floor(Math.random()*255);
+            rgba[2] = Math.floor(Math.random()*255);
             var block = true;
             //if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
             //	block = false;
