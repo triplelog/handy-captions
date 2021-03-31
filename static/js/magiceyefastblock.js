@@ -150,12 +150,12 @@
 			*/
 			
 			var div = divT.cloneNode(true);
-			div.style.left = e;
-			div.style.top = y;
-			div.style.height = sz;
-			div.style.width = sz;
-			div.style.fontSize = sz;
-			div.style.lineHeight = sz;
+			div.style.left = e+"px";
+			div.style.top = y+"px";
+			div.style.height = sz+"px";
+			div.style.width = sz+"px";
+			div.style.fontSize = sz+"px";
+			div.style.lineHeight = sz+"px";
 			div.innerHTML = idxToEmoji[idx];
 			emojiEl.appendChild(div);
       	}
