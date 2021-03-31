@@ -280,9 +280,9 @@
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
-            rgba[0] = 222 + Math.floor(Math.random()*32);
-            rgba[1] = 222 + Math.floor(Math.random()*32);
-            rgba[2] = 222 + Math.floor(Math.random()*32);
+            rgba[0] = 192 + Math.floor(Math.random()*64);
+            rgba[1] = 192 + Math.floor(Math.random()*64);
+            rgba[2] = 192 + Math.floor(Math.random()*64);
             var block = true;
             
             for (i = 0; i < 4; i++) {
@@ -314,11 +314,14 @@
             var vbn = 60;
             const t0 = performance.now();
             for (var v=0;v<60;v++){
-				
+				if (v-30 > vbn){
+					break;
+				}
 				if (!emojiLocations[y-v]){
 					if (y-v >= 0 && v>0){vbn = 0;}
 					continue;
 				}
+				
 				//var emojis = Object.keys(emojiLocations[y-v]);
 				
 				
