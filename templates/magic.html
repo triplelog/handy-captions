@@ -218,11 +218,11 @@ function createDepthMap(){
 	
 	document.getElementById('pixelSVG').innerHTML = '';
 	var ids = Object.keys(allCurves);
-	var alphas = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1];
+	var alphas = [0.1,0.2,0.2,0.2,0.2,0.2,0.4,0.6,0.8,1];
 	var w = 40;
 	var widths = [w];
 	for (var i=1;i<10;i++){
-		widths.splice(0,0,w*(1+i/10));
+		widths.splice(0,0,w*(1+i/7));
 	}
 	for (var i in ids){
 		var id = ids[i];
