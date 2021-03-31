@@ -165,7 +165,7 @@
       for (y = yMin; y < yMax; y++) {
       	
 		const t00 = performance.now();
-        var m = 0;
+        
         var colorsFG = fullColorsFG[y];
 		var colorsBG = fullColorsBG[y];
 		var setPixels = {};
@@ -189,32 +189,44 @@
 		  	var rightOffset = (y * width * 4) + (right * 4);
 		  	//pixels[leftOffset + 0] = 50;
 			//pixels[rightOffset + 0] = 50;
+			
 		  	for (var i=1;i<3;i++){
 		  		if (setPixels[x - 3*s] && i == 1 && depthMap[y][x - 2*s]<0.5){
 		  			var cr = Math.floor(Math.random() * 255);
-					pixels[leftOffset + i] = cr;
-					pixels[rightOffset + i] = cr;
-					pixels[rightOffset + 0] = 60;
+		  			if (!setPixels[x - s]){
+						pixels[leftOffset + i] = cr;
+						pixels[rightOffset + i] = cr;
+					}
+					else {
+						pixels[rightOffset + i] = pixels[leftOffset + i];
+					}
+					
+					//pixels[rightOffset + 0] = 60;
 					//pixels[leftOffset + i] = pixelColor[i];
 					//pixels[rightOffset + i] = pixelColor[i];
 				}
 				else {
-					pixels[leftOffset + i] = pixelColor[i];
-					pixels[rightOffset + i] = pixelColor[i];
+					if (!setPixels[x - s]){
+						pixels[leftOffset + i] = pixelColor[i];
+						pixels[rightOffset + i] = pixelColor[i];
+					}
+					else {
+						pixels[rightOffset + i] = pixels[leftOffset + i];
+					}
+					
 				}
-				setPixels[left]=true;
-				setPixels[right]=true;
+				
 		  	}
-		  	m++;
+		  	setPixels[left]=true;
+			setPixels[right]=true;
 		  }
         }
         const t01 = performance.now();
         fHalf += t01 - t00;
-        var maxM = m;
-        var m =0;
+       
         //console.log(maxM);
         for (var ii=1;ii<width / 180;ii++){
-        	m =0;
+        	
 			for (x = 0; x < width; x++) {
 			  var pixelOffset = (y * width * 4) + (x * 4);
 			  z = depthMap[y][x];
@@ -312,7 +324,6 @@
 					}
 				}
 			}
-		  	m++;
 		  }
 		  
           
