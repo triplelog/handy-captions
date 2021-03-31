@@ -230,7 +230,7 @@
           }
         }
       }
-      var chMax = 50;
+      var chMax = 80;
       for (y = yMin+4; y < yMax-4; y++) {
 			for (x = 0; x < width; x++) {
 				for (var iii=0;iii<4;iii++){
