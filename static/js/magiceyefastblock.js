@@ -215,7 +215,8 @@
             	block = false;
             }
             var xi = x;
-            var maxBlock = 6;
+            var maxBlock = 12;
+            var minBlock = 6;
             while (block){
             	xi--;
             	block = true;
@@ -235,6 +236,14 @@
 					
 					//colorsFG[xi] = rgba;
 					
+				}
+				else {
+					if (xi < x - minBlock){
+						for (var ii=0;ii<x-xi;ii++){
+							colorsFG[x-ii] = rgba;
+						}
+						break;
+					}
 				}
 				
 				if (xi < x - maxBlock){
