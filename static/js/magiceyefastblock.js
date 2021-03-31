@@ -220,10 +220,7 @@
 					vBlock = false;
 				}
 			}
-			if (y == 200){
-				console.log(x,y,vBlock);
-			}
-			else if (y == 201){
+			if (x == 799){
 				console.log(x,y,vBlock);
 			}
             var xi = x;
