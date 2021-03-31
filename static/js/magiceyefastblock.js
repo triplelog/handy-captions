@@ -341,8 +341,8 @@
 				//console.log(x,y,vbn);
 			}
             var xi = x;
-            var maxBlock = 10 + Math.floor(Math.random() * 10);
-            var minBlock = 3 + Math.floor(Math.random() * 7);
+            var maxBlock = 8 + Math.floor(Math.random() * 12);
+            var minBlock = 2 + Math.floor(Math.random() * 8);
             while (block){
             	xi--;
             	block = true;
