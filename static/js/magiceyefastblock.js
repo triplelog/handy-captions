@@ -246,8 +246,7 @@
 					if (xi < x - minBlock){
 						if (vBlock){
 							var fullBlock = true;
-							for (var v=1;v<16;v++){
-								fullBlock = true;
+							for (var v=1;v<8;v++){
 								for (var ii=0;ii<x-xi;ii++){
 									for (var iii=0;iii<chain[x-ii].length;iii++) {
 										var xx = chain[x-ii][iii];
@@ -259,7 +258,9 @@
 										}
 									}
 								}
-								if (fullBlock){
+							}
+							if (fullBlock){
+								for (var v=1;v<8;v++){
 									for (var ii=0;ii<x-xi;ii++){
 										for (var iii=0;iii<chain[x-ii].length;iii++) {
 											var xx = chain[x-ii][iii];
@@ -288,8 +289,8 @@
 				
 				if (xi < x - maxBlock){
 					if (vBlock){
-						for (var v=1;v<16;v++){
-							var fullBlock = true;
+						var fullBlock = true;
+						for (var v=1;v<8;v++){
 							for (var ii=0;ii<maxBlock;ii++){
 								for (var iii=0;iii<chain[x-ii].length;iii++) {
 									var xx = chain[x-ii][iii];
@@ -301,7 +302,9 @@
 									}
 								}
 							}
-							if (fullBlock){
+						}
+						if (fullBlock){
+							for (var v=1;v<8;v++){
 								for (var ii=0;ii<maxBlock;ii++){
 									for (var iii=0;iii<chain[x-ii].length;iii++) {
 										var xx = chain[x-ii][iii];
