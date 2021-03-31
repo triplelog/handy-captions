@@ -131,7 +131,7 @@
       		var r = sz/2;
       		context.strokeStyle = "rgb("+rc+",0,0)";
       		if (y < 100){
-      			console.log(e,y,sz,cx,cy,r);
+      			//console.log(e,y,sz,cx,cy,r);
       		}
       		if (rc < 0){
 				context.beginPath();
@@ -277,14 +277,24 @@
 				//if (opts.fullColors[y-v] && (opts.fullColors[y-v][x][0] != opts.fullColors[y-v+1][x][0] || opts.fullColors[y-v][x][1] != opts.fullColors[y-v+1][x][1])){
 				//	vbn++;
 				//}
-				if (!emojiBlock[y-v] || !emojiBlock[y-v][x]){
-					vbn++;
+				var open = true;
+				for (var i=0;i<chain[x].length;i++){
+					if (!emojiBlock[y-v] || !emojiBlock[y-v][chain[x][i]]){
+						
+					}
+					else if (emojiBlock[y-v][chain[x][i]] >= 4){
+						open = false;
+						break;
+					}
+					else {
+						
+					}
 				}
-				else if (emojiBlock[y-v][x] >= 4){
-					break;
+				if (open){
+					vbn++;
 				}
 				else {
-					vbn++;
+					break;
 				}
 			}
 			
