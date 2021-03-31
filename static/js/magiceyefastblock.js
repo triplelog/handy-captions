@@ -218,7 +218,8 @@
             var maxBlock = 12;
             while (block){
             	xi--;
-				/*if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
+            	block = true;
+				if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
 					for (var i=0;i<chain[x].length;i++){
 						if (chain[x][i] != chain[xi][i]+x-xi){
 							block = false;
@@ -228,10 +229,6 @@
 				}
 				else {
 					block = false;
-				}*/
-				block = false;
-				if (chain[x] && chain[xi]){
-					block = true;
 				}
 				
 				if (block){
