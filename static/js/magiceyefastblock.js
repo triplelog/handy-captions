@@ -249,8 +249,8 @@
 							for (var v=1;v<16;v++){
 								fullBlock = true;
 								for (var ii=0;ii<x-xi;ii++){
-									for (var iii=0;iii<chain[x-ii][i];iii++) {
-										var xx = chain[x-ii][i][iii];
+									for (var iii=0;iii<chain[x-ii].length;iii++) {
+										var xx = chain[x-ii][iii];
 										if (opts.fullColors[y-v] && opts.fullColors[y-v][xx][0] == opts.fullColors[y-v][x][0] && opts.fullColors[y-v][xx][1] == opts.fullColors[y-v][x][1]){
 								
 										}
@@ -261,8 +261,8 @@
 								}
 								if (fullBlock){
 									for (var ii=0;ii<x-xi;ii++){
-										for (var iii=0;iii<chain[x-ii][i];iii++) {
-											var xx = chain[x-ii][i][iii];
+										for (var iii=0;iii<chain[x-ii].length;iii++) {
+											var xx = chain[x-ii][iii];
 											pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
 											pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 											pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
@@ -287,8 +287,8 @@
 						for (var v=1;v<16;v++){
 							var fullBlock = true;
 							for (var ii=0;ii<maxBlock;ii++){
-								for (var iii=0;iii<chain[x-ii][i];iii++) {
-									var xx = chain[x-ii][i][iii];
+								for (var iii=0;iii<chain[x-ii].length;iii++) {
+									var xx = chain[x-ii][iii];
 									if (opts.fullColors[y-v][xx][0] == opts.fullColors[y-v][x][0] && opts.fullColors[y-v][xx][1] == opts.fullColors[y-v][x][1]){
 							
 									}
@@ -299,8 +299,8 @@
 							}
 							if (fullBlock){
 								for (var ii=0;ii<maxBlock;ii++){
-									for (var iii=0;iii<chain[x-ii][i];iii++) {
-										var xx = chain[x-ii][i][iii];
+									for (var iii=0;iii<chain[x-ii].length;iii++) {
+										var xx = chain[x-ii][iii];
 										pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
 										pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
 										pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
@@ -313,6 +313,10 @@
 					
 					for (var ii=0;ii<maxBlock;ii++){
 						colorsFG[x-ii] = rgba;
+						for (var iii=0;iii<chain[x-ii].length;iii++) {
+							var xx = chain[x-ii][iii];
+							opts.fullColors[y][xx]=opts.fullColors[y][x];
+						}
 					}
 					
 					break;
