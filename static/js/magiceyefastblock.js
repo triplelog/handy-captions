@@ -133,8 +133,10 @@
       // for each row
       var allChains = {};
       var emojiBlock = {};
+      var emojiLocations = {};
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
+      	emojiLocations[y] = {};
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
 
@@ -289,6 +291,9 @@
 									}
 								}
 							}
+							for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
+								emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]=(x-xi);
+							}
 						}
 						
 						for (var ii=0;ii<x-xi;ii++){
@@ -335,6 +340,9 @@
 									}
 								}
 							}
+						}
+						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
+							emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]=maxBlock;
 						}
 					}
 					
@@ -437,13 +445,10 @@
 	  }
 	  */
 	  for (y = 50; y< 80;y++){
-		  for (x = 700; x < 800; x++) {
-			if (emojiBlock[y][x]>4){
-				console.log(y,x,emojiBlock[y][x])
-			}
-			else {
-				console.log('no',y,x,emojiBlock[y][x])
-			}
+	  	var emojis = Object.keys(emojiLocations[y]);
+		  for (var i in emojis) {
+		  	var e = emojis[i];
+			console.log(y,e,emojiLocations[y][e]);
 		
 		  }
 	  }
