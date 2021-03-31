@@ -233,7 +233,7 @@
       
       for (y = yMin+3; y < yMax-3; y++) {
 			for (x = 0; x < width; x++) {
-				for (var iii=0;iii<3;iii++){
+				for (var iii=0;iii<5;iii++){
 					var zT = depthMap[y-iii][x];
 					var zB = depthMap[y+iii][x];
 					z = depthMap[y][x];
@@ -264,7 +264,35 @@
 						  if (pixels[pixelRight + 2] > 255){pixels[pixelRight + 2] = 255;}
 					  
 					  }
-				  }
+				    }
+				    if (z < zB){
+						// stereo separation corresponding to z
+					  sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
+
+					  // x-values corresponding to left and right eyes
+					  left = Math.round(x - ((sep + (sep & y & 1)) / 2));
+					  right = left + sep;
+
+					  if (0 <= left && right < width) {
+
+					
+						  var pixelLeft = (y * width * 4) + (left * 4);
+						  var pixelRight = (y * width * 4) + (right * 4);
+						  pixels[pixelLeft + 0] = pixels[pixelLeft + 0] - 20;
+						  pixels[pixelLeft + 1] = pixels[pixelLeft + 1] - 20;
+						  pixels[pixelLeft + 2] = pixels[pixelLeft + 2] - 20;
+						  pixels[pixelRight + 0] = pixels[pixelRight + 0] - 20;
+						  pixels[pixelRight + 1] = pixels[pixelRight + 1] - 20;
+						  pixels[pixelRight + 2] = pixels[pixelRight + 2] - 20;
+						  if (pixels[pixelLeft + 0] < 0){pixels[pixelLeft + 0] = 0;}
+						  if (pixels[pixelLeft + 1] < 0){pixels[pixelLeft + 1] = 0;}
+						  if (pixels[pixelLeft + 2] < 0){pixels[pixelLeft + 2] = 0;}
+						  if (pixels[pixelRight + 0] < 0){pixels[pixelRight + 0] = 0;}
+						  if (pixels[pixelRight + 1] < 0){pixels[pixelRight + 1] = 0;}
+						  if (pixels[pixelRight + 2] < 0){pixels[pixelRight + 2] = 0;}
+					  
+					  }
+				    }
 					
 					
 				}
