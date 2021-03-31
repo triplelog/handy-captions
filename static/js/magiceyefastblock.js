@@ -223,6 +223,7 @@
             	block = false;
             }
             var xi = x;
+            var maxBlock = 1 + Math.floor(Math.random() * 10);
             while (block){
             	xi--;
 				if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
@@ -241,7 +242,7 @@
 					colorsFG[minD+xi-x] = rgba;
 					
 				}
-				if (xi < x - 5){
+				if (xi < x - maxBlock){
 					break;
 				}
             }
