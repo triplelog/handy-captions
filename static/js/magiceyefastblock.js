@@ -94,7 +94,7 @@
       var context = canvas.getContext("2d");
       var yMin = 0;
 	  var yMax = height;
-	  pixelData = new Uint8ClampedArray(width * height * 4);
+	  //pixelData = new Uint8ClampedArray(width * height * 4);
 	  if (rows[1] > -1){
 	  	yMin = rows[0];
 	  	yMax = rows[1];
@@ -262,9 +262,9 @@
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
-            rgba[0] = Math.floor(Math.random()*255);
-            rgba[1] = Math.floor(Math.random()*255);
-            rgba[2] = Math.floor(Math.random()*255);
+            rgba[0] = 128 + Math.floor(Math.random()*128);
+            rgba[1] = 128 + Math.floor(Math.random()*128);
+            rgba[2] = 128 + Math.floor(Math.random()*128);
             var block = true;
             //if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
             //	block = false;
