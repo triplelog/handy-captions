@@ -257,7 +257,7 @@
 						setPixels[right + ii*180]=true;
 						for (var i=1;i<3;i++){
 						
-							if (ii==1 && i == 3){
+							if (ii==1 && i == 2){
 								pixels[rightOffset + ii*720 + i] = pixels[rightOffset + 0*720 + i];
 								pixels[rightOffset + ii*720 + 0] = 0;
 							}
