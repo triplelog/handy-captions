@@ -224,7 +224,7 @@
 				//if (opts.fullColors[y-v] && (opts.fullColors[y-v][x][0] != opts.fullColors[y-v+1][x][0] || opts.fullColors[y-v][x][1] != opts.fullColors[y-v+1][x][1])){
 				//	vbn++;
 				//}
-				if (!emojiBlock[y-v][x]){
+				if (!emojiBlock[y-v] || !emojiBlock[y-v][x]){
 					vbn++;
 				}
 				else if (emojiBlock[y-v][x] >= 4){
