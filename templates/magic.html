@@ -280,7 +280,7 @@ function createDepthMap(){
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id;
 			document.getElementById('pixelSVG').appendChild(path);
-			aMap = pathToAngles(aMap,path,50);
+			aMap = pathToAngles(aMap,path,55);
 		}
 	}
 	console.log(aMap[300][300]);
@@ -366,7 +366,7 @@ function mulberry(a) {
 
 function pathToAngles(aMap,path,w){
 	var len = path.getTotalLength();
-	var nLines = 50;
+	var nLines = 100;
 	var lastPoint = path.getPointAtLength(len*1/nLines);
 	lastPoint.x = path.getPointAtLength(0).x - (path.getPointAtLength(len*1/nLines).x - path.getPointAtLength(0).x);
 	lastPoint.y = path.getPointAtLength(0).y - (path.getPointAtLength(len*1/nLines).y - path.getPointAtLength(0).y);
@@ -432,18 +432,6 @@ function pathToAngles(aMap,path,w){
 				var yy2 = Math.floor(yy)+1;
 				
 				
-				var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
-				if (d <= ww){
-					aMap[yy1][xx1]=a;
-					aMap[yy2][xx1]=a;
-					aMap[yy1][xx2]=a;
-					aMap[yy2][xx2]=a;
-					if (xx<305 && xx > 295 && yy < 305 && yy> 295){
-						//console.log(xx,yy);
-					}
-					
-				}
-					
 				
 				if ((yy2 >= y1 && yy1 <= y2) || (yy1 <= y1 && yy2 >= y2)){
 					var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
