@@ -402,21 +402,23 @@ function pathToAngles(aMap,path,w){
 		var cy = (pt.y+pt2.y)/2;
 		
 		for (var ii=-1*w;ii<w+1;ii++){
-			if (cx+ii <0 || cx+ii >=800){
+			var xx = cx+ii;
+			if (xx <1 || xx >=800 - 1){
 				continue;
 			}
 			for (var iii=-1*w;iii<w+1;iii++){
-				if (cy+iii <0 || cy+iii >=600){
+				var yy = cy+iii;
+				if (yy <1 || yy >=600 - 1){
 					continue;
 				}
-				var xx = cx+ii;
-				var yy = cy+iii;
+				
+				
 				var y1 = line1.m*(xx-line1.x)+line1.y;
 				var y2 = line2.m*(xx-line2.x)+line2.y;
 				if ((yy >= y1 && yy <= y2) || (yy <= y1 && yy >= y2)){
 					var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
 					if (d <= ww){
-						aMap[yy][xx]=a;
+						aMap[Math.round(yy)][Math.round(xx)]=a;
 					}
 				}
 			}
