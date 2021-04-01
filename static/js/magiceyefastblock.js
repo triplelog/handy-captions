@@ -202,8 +202,7 @@
       var allChains = {};
       var emojiBlock = {};
       var emojiLocations = {};
-      var fHalf = 0;
-      var sHalf = 0;
+      
       var sameColors = {};
       var allSame = {};
       var allAngles = {};
@@ -1232,8 +1231,7 @@
           }
         }
       }
-      console.log(`Setting Pixels took ${fHalf} milliseconds.`);
-	  console.log(`First round of Emojis took ${sHalf} milliseconds.`);
+      
       /*var chMax = 25;
       for (y = yMin+4; y < yMax-4; y++) {
 			for (x = 0; x < width; x++) {
@@ -1356,7 +1354,7 @@
 					}
 			
 			
-					const t0 = performance.now();
+					
 					for (var v=0;v<60;v++){
 						if (v-maxBlock > vbn + 3){
 							break;
@@ -1411,8 +1409,7 @@
 						}
 				
 					}
-					const t1 = performance.now();
-					fHalf += t1-t0;
+					
 					vbn+=3;
 			
 			
@@ -1557,8 +1554,7 @@
 							break;
 						}
 					}
-					const t2 = performance.now();
-					sHalf += t2-t1;
+					
 			
 				  }
 				}
