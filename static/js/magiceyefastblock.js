@@ -352,17 +352,12 @@
 		
 		emojiBlock[y]={};
 		
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,0.99);
+		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.99);
 		
 		allSame[y]=same;
         allChains[y]=chain;
       }
-      if (allDelays[200]){
-			console.log(Object.keys(allDelays[200]).length);
-		}
-		else {
-			console.log('und');
-		}
+      
       
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
