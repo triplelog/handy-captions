@@ -1331,7 +1331,7 @@
       },
       setEmojis: function(width,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles) {
       		for (x = (width - 1); x >= 0; x--) {
-				  pixelOffset = (y * width * 4) + (x * 4);
+				  
 				  if (same[x] === x) {
 					// set random color
 			
