@@ -624,25 +624,35 @@
 												if (allAngles[yy][chain[x-(x-xi)+1][iii]] > -1){
 													var rct = allAngles[yy][chain[x-(x-xi)+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
 													if (rra[rct]){
-														rra[rct]++;
+														rra[rct].push(chain[x-(x-xi)+1][iii]);
 													}
 													else {
-														rra[rct]=1;
+														rra[rct]=[chain[x-(x-xi)+1][iii]];
 													}
 												}
 											}
 										}
 									}
 									var maxrc = 0;
+									var skipRC = {};
 									for (var k in rra){
-										if (rra[k]>maxrc){
+										if (rra[k].length>maxrc){
 											rc = k;
-											maxrc = rra[k];
+											maxrc = rra[k].length;
+										}
+									}
+									for (var k in rra){
+										if (k != rc){
+											for (var i=0;i<rra[k].length;i++){
+												skipRC[rra[k][i]]=true;
+											}
 										}
 									}
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
-											emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
+											if (!skipRC[chain[x-(x-xi)+1][iii]]){
+												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
+											}
 										}
 									}
 								}
