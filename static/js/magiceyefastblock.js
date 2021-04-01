@@ -357,7 +357,7 @@
 		allSame[y]=same;
         allChains[y]=chain;
       }
-      console.log(allDelays[100]);
+      console.log(allDelays[200]);
       
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
@@ -501,6 +501,7 @@
       setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,skipP) {
       		var angleP = 1;
       		var rAngle = 120;
+      		console.log(allDelays[200]);
       		for (x = (width - 1); x >= 0; x--) {
 				  
 				  if (same[x] === x) {
@@ -639,6 +640,7 @@
 									//rc = allAngles[y][x];
 									var rra ={};
 									var maxDiff = 0;
+									var delay = 0;
 									if (Math.random() < angleP){
 										for (var yy=y;yy>= y-(x-xi)+1 && yy >=yMin;yy--){
 											
@@ -653,6 +655,9 @@
 														rra[rct]=[chain[x-(x-xi)+1][iii]];
 													}
 													yangles.push(parseInt(rct));
+												}
+												if (allDelays[yy] && allDelays[yy][chain[x-(x-xi)+1][iii]] > -1){
+													delay = allDelays[yy][chain[x-(x-xi)+1][iii]];
 												}
 											}
 											for (var iii=0;iii<yangles.length;iii++){
@@ -694,11 +699,8 @@
 											else if (iii == chain[x-(x-xi)+1].length - 2 && chain[x-(x-xi)+1][iii] > 170){
 												op = 0.75;
 											}
-											var delay = 0;
-											if (allDelays[y]){
-												delay = allDelays[y][x];
-												if (!delay){delay = 0;}
-											}
+											
+											if (!delay){delay = 0;}
 											if (delay < 0){delay = 0;}
 											if (delay > 1){delay = 1;}
 											
