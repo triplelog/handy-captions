@@ -586,7 +586,9 @@
 						else {
 							block = false;
 						}
-				
+						if (chain[x].length < 2){
+							block = false;
+						}
 						if (block){
 					
 							//colorsFG[xi] = rgba;
