@@ -386,7 +386,7 @@ function pathToAngles(aMap,path,w){
 		}
 		//var line = {'x':pt.x,'y':pt.y,'m':m};
 		var line1 = {'x':pt.x,'y':pt.y,'m':-1/m};
-		var a1 = Math.atan(line1.m)*180/3.14159;
+		var a1 = Math.atan(-1*line1.m)*180/3.14159;
 		
 		var pt2 = path.getPointAtLength(len*(i+1)/nLines);
 		var m2 = (pt2.y-pt.y)/(pt2.x-pt.x);
@@ -398,16 +398,15 @@ function pathToAngles(aMap,path,w){
 		}
 		//var line = {'x':pt.x,'y':pt.y,'m':m2};
 		var line2 = {'x':pt.x,'y':pt.y,'m':-1/m2};
-		var a2 = Math.atan(line2.m)*180/3.14159;
+		var a2 = Math.atan(-1*line2.m)*180/3.14159;
 		var a = Math.round((a1+a2)/2 - 90);
 		if (a < 0){
 			a = 720 + a;
 		}
 		a = a % 360;
-		a = 305;
 		var cx = (pt.x+pt2.x)/2;
 		var cy = (pt.y+pt2.y)/2;
-		console.log(cx,cy);
+		console.log(cx,cy,a);
 		for (var ii=-1*w;ii<w+1;ii++){
 			var xx = cx+ii;
 			if (xx <2 || xx >=800 - 2){
