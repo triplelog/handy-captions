@@ -132,6 +132,7 @@
       		var sz = parseFloat(emojiLocations[y][e].sz);
       		var rc = parseInt(emojiLocations[y][e].color);
       		var op = parseFloat(emojiLocations[y][e].opacity);
+      		var delay = parseFloat(emojiLocations[y][e].delay);
       		
       		var cx = e+sz/2;
       		var cy = y+sz/2;
@@ -157,7 +158,7 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
-			iDiv.style.animationDelay = (Math.random()*10)+'s';
+			div.style.animationDelay = (delay*10.0)+'s';
 			if (rc < 0){
 				var iDiv = div.querySelector('div');
 				iDiv.innerHTML = idxToEmoji[7];
@@ -686,12 +687,12 @@
 											else if (iii == chain[x-(x-xi)+1].length - 2 && chain[x-(x-xi)+1][iii] > 170){
 												op = 0.75;
 											}
-											
+											var delay = Math.random();
 											if (maxDiff < 135){
-												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc,'opacity':op};
+												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc,'opacity':op,'delay':delay};
 											}
 											else {
-												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':-1,'opacity':op};
+												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':-1,'opacity':op,'delay':delay};
 											}
 										}
 									}
@@ -795,11 +796,12 @@
 										if (iii == chain[x-maxBlock+1].length - 1 && chain[x-maxBlock+1][iii] > 85){
 											op = 0.5;
 										}
+										var delay = Math.random();
 										if (maxDiff < 135){
-											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc,'opacity':op};
+											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc,'opacity':op,'delay':delay};
 										}
 										else {
-											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':-1,'opacity':op};
+											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':-1,'opacity':op,'delay':delay};
 										}
 									}
 							
