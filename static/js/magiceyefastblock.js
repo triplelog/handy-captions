@@ -196,6 +196,7 @@
       var fHalf = 0;
       var sHalf = 0;
       var sameColors = {};
+      var allSame = {};
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
       	emojiLocations[y] = {};
@@ -522,13 +523,14 @@
         }
 		
 		
-		
+		allSame[y]=same;
         allChains[y]=chain;
       }
       
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
       	sameColors[y]={};
+      	same = allSame[y];
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
@@ -753,6 +755,7 @@
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
       	sameColors[y]={};
+      	same = allSame[y];
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
