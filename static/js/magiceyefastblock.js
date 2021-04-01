@@ -654,9 +654,6 @@
 										var angleDiff = (k + 7200 - rc) % 360;
 										if (angleDiff > maxDiff){
 											maxDiff = angleDiff;
-											if (y > 95 && y < 125 && maxDiff >= 45){
-												console.log(y,x,rra,k,rc,allAngles[y]);
-											}
 										}
 									}
 									rc = rc *(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
@@ -725,7 +722,7 @@
 									for (var yy=y;yy>= y-(maxBlock)+1 && yy >=yMin;yy--){
 										for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 											if (allAngles[yy][chain[x-maxBlock+1][iii]] > -1){
-												var rct = allAngles[yy][chain[x-maxBlock+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+												var rct = allAngles[yy][chain[x-maxBlock+1][iii]];
 												if (rra[rct]){
 													rra[rct].push(chain[x-maxBlock+1][iii]);
 												}
@@ -736,24 +733,27 @@
 										}
 									}
 								}
+								
 								var maxrc = 0;
-								var skipRC = {};
+								var maxDiff = 0;
 								for (var k in rra){
 									if (rra[k].length>maxrc){
-										rc = k;
+										rc = parseInt(k);
 										maxrc = rra[k].length;
 									}
 								}
-								for (var k in rra){
-									if (k != rc){
-										for (var i=0;i<rra[k].length;i++){
-											//skipRC[rra[k][i]]=true;
-										}
+								for (var kk in rra){
+									var k = parseInt(k);
+									var angleDiff = (k + 7200 - rc) % 360;
+									if (angleDiff > maxDiff){
+										maxDiff = angleDiff;
 									}
 								}
+								rc = rc *(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+									
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 									if (y-maxBlock+1>= yMin){
-										if (!skipRC[chain[x-maxBlock+1][iii]]){
+										if (maxDiff < 45){
 											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
 										}
 									}
