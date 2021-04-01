@@ -626,8 +626,11 @@
 									var rc = Math.floor(Math.random()*360);
 									//rc = allAngles[y][x];
 									var rra ={};
+									var maxDiff = 0;
 									if (Math.random() < angleP){
 										for (var yy=y;yy>= y-(x-xi)+1 && yy >=yMin;yy--){
+											
+											var yangles = [];
 											for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 												if (allAngles[yy][chain[x-(x-xi)+1][iii]] > -1){
 													var rct = allAngles[yy][chain[x-(x-xi)+1][iii]];
@@ -637,30 +640,33 @@
 													else {
 														rra[rct]=[chain[x-(x-xi)+1][iii]];
 													}
+													yangles.push(parseInt(rct));
 												}
 											}
+											for (var iii=0;iii<yangles.length;iii++){
+												for (var iv=0;iv<yangles.length;iv++){
+													var angleDiff = (yangles[iii] + 7200 - yangles[iv]) % 360;
+													if (angleDiff > maxDiff){
+														maxDiff = angleDiff;
+													}
+												}
+											}
+											
 										}
 									}
 									var maxrc = 0;
-									var maxDiff = 0;
 									for (var k in rra){
 										if (rra[k].length>maxrc){
 											rc = parseInt(k);
 											maxrc = rra[k].length;
 										}
 									}
-									for (var kk in rra){
-										var k = parseInt(kk);
-										var angleDiff = (k + 7200 - rc) % 360;
-										if (angleDiff > maxDiff){
-											maxDiff = angleDiff;
-										}
-									}
+									
 									rc = rc *(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
 									
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
-											if (maxDiff < 45){
+											if (maxDiff < 90){
 												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
 											}
 											else {
@@ -753,7 +759,7 @@
 									
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 									if (y-maxBlock+1>= yMin){
-										if (maxDiff < 45){
+										if (maxDiff < 90){
 											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
 										}
 										else {
