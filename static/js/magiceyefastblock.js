@@ -143,7 +143,7 @@
       		}
       		
 			var idx = Math.floor(rc/26);
-			idx = 10;
+			idx = 3;
 			
 			/*context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
@@ -158,6 +158,7 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
+			div.style.filter = "hue-rotate("+rc+"deg)";
 			div.innerHTML = idxToEmoji[idx];
 			emojiEl.appendChild(div);
       	}
