@@ -488,7 +488,7 @@
       },
       setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,skipP) {
       		var angleP = 1;
-      		var rAngle = 120;
+      		var rAngle = 12;
       		for (x = (width - 1); x >= 0; x--) {
 				  
 				  if (same[x] === x) {
