@@ -412,6 +412,7 @@ function pathToAngles(aMap,path,w){
 		var cx = (pt.x+pt2.x)/2;
 		var cy = (pt.y+pt2.y)/2;
 		//console.log(cx,cy,a);
+		var yPart = {};
 		for (var ii=-1*w;ii<w+1;ii++){
 			var xx = cx+ii;
 			if (xx <2 || xx >=800 - 2){
@@ -437,12 +438,29 @@ function pathToAngles(aMap,path,w){
 					aMap[yy2][xx1]=a;
 					aMap[yy1][xx2]=a;
 					aMap[yy2][xx2]=a;
+					if (yPart[yy1]){
+						yPart[yy1][0]+=a;
+						yPart[yy1][1]+=1;
+					}
+					else {
+						yPart[yy1]=[a,1];
+					}
+					if (yPart[yy2]){
+						yPart[yy2][0]+=a;
+						yPart[yy2][1]+=1;
+					}
+					else {
+						yPart[yy2]=[a,1];
+					}
 					
 					
 				}
 				
 				
 			}
+		}
+		for (var yi in yPart){
+			
 		}
 		lastPoint.x = pt.x;
 		lastPoint.y = pt.y;
@@ -528,6 +546,7 @@ function pathToAngles(aMap,path,w){
 		lastPoint.x = pt.x;
 		lastPoint.y = pt.y;
 	}
+	
 	console.log(aMap[300][300]);
 	return aMap;
 }

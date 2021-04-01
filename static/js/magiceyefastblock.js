@@ -646,6 +646,9 @@
 											for (var iii=0;iii<yangles.length;iii++){
 												for (var iv=0;iv<yangles.length;iv++){
 													var angleDiff = (yangles[iii] + 7200 - yangles[iv]) % 360;
+													if (angleDiff > 180){
+														angleDiff = 360 - angleDiff;
+													}
 													if (angleDiff > maxDiff){
 														maxDiff = angleDiff;
 													}
