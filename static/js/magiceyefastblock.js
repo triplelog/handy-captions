@@ -645,15 +645,16 @@
 									var maxDiff = 0;
 									for (var k in rra){
 										if (rra[k].length>maxrc){
-											rc = k;
+											rc = parseInt(k);
 											maxrc = rra[k].length;
 										}
 									}
-									for (var k in rra){
+									for (var kk in rra){
+										var k = parseInt(k);
 										var angleDiff = (k + 7200 - rc) % 360;
 										if (angleDiff > maxDiff){
 											maxDiff = angleDiff;
-											if (y > 95 && y < 125){
+											if (y > 95 && y < 125 && maxDiff >= 45){
 												console.log(y,x,rra,k,rc,allAngles[y]);
 											}
 										}
