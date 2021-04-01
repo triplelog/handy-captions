@@ -320,7 +320,7 @@
             var vbn = 60;
             
             var xi = x;
-            var maxBlock = 12 + Math.floor(Math.random() * 18);
+            var maxBlock = 16 + Math.floor(Math.random() * 14);
             var minBlock = 4 + Math.floor(Math.random() * 8);
             //var skipP = 0.75 + vbn*(1-.75)/maxBlock;
             //if (skipP > 0.96){skipP = 0.96;}
@@ -525,6 +525,232 @@
 		
 		allSame[y]=same;
         allChains[y]=chain;
+      }
+      
+      for (y = yMin; y < yMax; y++) {
+      	emojiBlock[y]={};
+      	sameColors[y]={};
+      	same = allSame[y];
+      	chain = allChains[y];
+      	for (x = 0; x < width; x++) {
+          sameColors[y][x] = Math.random();
+        }
+		for (x = (width - 1); x >= 0; x--) {
+          pixelOffset = (y * width * 4) + (x * 4);
+          if (same[x] === x) {
+            // set random color
+            
+            var block = true;
+            //if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
+            //	block = false;
+            //}
+            if (emojiBlock[y][x]){
+            	block = false;
+            }
+            var vbn = 60;
+            
+            var xi = x;
+            var maxBlock = 12 + Math.floor(Math.random() * 18);
+            var minBlock = 4 + Math.floor(Math.random() * 6);
+            //var skipP = 0.75 + vbn*(1-.75)/maxBlock;
+            //if (skipP > 0.96){skipP = 0.96;}
+            var skipP = 0.97;
+            if (Math.random() < skipP){
+            	block = false;
+            	continue;
+            }
+            
+            
+            const t0 = performance.now();
+            for (var v=0;v<60;v++){
+				if (v-maxBlock > vbn + 3){
+					break;
+				}
+				if (!emojiLocations[y-v]){
+					if (y-v >= 0 && v>0){vbn = 0;}
+					continue;
+				}
+				
+				//var emojis = Object.keys(emojiLocations[y-v]);
+				
+				
+				if (chain[x]){
+					for (var i in emojiLocations[y-v]){
+						var lx = i;
+						var ty = y-v;
+						var e = emojiLocations[y-v][lx];
+						var w = parseInt(e.sz);
+						var maxHeight = v-w;
+						if (maxHeight>= vbn){
+							continue;
+						}
+						var maxWidth = -1;
+						var maxSize = -1;
+						for (var i=0;i<chain[x].length;i++){
+							if (lx <= chain[x][i]){
+								var mSz = Math.max(chain[x][i] - lx - w,0);
+								if (mSz < maxWidth || maxWidth == -1){
+									maxWidth = mSz;
+								}
+							}
+						}
+						if (maxWidth > -1){
+							if (maxHeight < maxWidth){
+								maxSize = maxWidth;
+							}
+							else {
+								maxSize = maxHeight;
+							}
+						}
+						else {
+							maxSize = 60;
+						}
+						if (maxSize < vbn){
+							vbn = maxSize;
+						}
+					}
+				}
+				else {
+					vbn = 0;//Maybe need to do something better here with orphans
+					break;
+				}
+				
+			}
+			const t1 = performance.now();
+        	fHalf += t1-t0;
+			vbn+=3;
+			
+            
+            while (block){
+            	xi--;
+            	block = true;
+				if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
+					for (var i=0;i<chain[x].length;i++){
+						if (chain[x][i] != chain[xi][i]+x-xi){
+							block = false;
+							break;
+						}
+					}
+				}
+				else {
+					block = false;
+				}
+				
+				if (block){
+					
+					//colorsFG[xi] = rgba;
+					
+				}
+				else {
+					if (xi < x - minBlock){
+						if (vbn >= x - xi){
+							var fullBlock = true;
+							for (var v=1;v<x-xi;v++){
+								for (var ii=0;ii<x-xi;ii++){
+									for (var iii=0;iii<chain[x-ii].length;iii++) {
+										var xx = chain[x-ii][iii];
+										if (sameColors[y-v] && sameColors[y-v][xx] == sameColors[y-v][x]){
+								
+										}
+										else {
+											fullBlock = false;
+										}
+									}
+								}
+							}
+							if (fullBlock){
+								for (var v=1;v<x-xi;v++){
+									for (var ii=0;ii<x-xi;ii++){
+										for (var iii=0;iii<chain[x-ii].length;iii++) {
+											var xx = chain[x-ii][iii];
+											//pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
+											//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
+											//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+											sameColors[y-v][xx]=sameColors[y][x];
+											//emojiBlock[y-v][xx]=x-xi;
+										}
+									}
+								}
+							}
+							var rc = Math.floor(Math.random()*255);
+							for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
+								if (y-(x-xi)+1>= yMin){
+									emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
+								}
+							}
+						}
+						
+						for (var ii=0;ii<x-xi;ii++){
+							colorsFG[x-ii] = rgba;
+							for (var iii=0;iii<chain[x-ii].length;iii++) {
+								var xx = chain[x-ii][iii];
+								sameColors[y][xx]=sameColors[y][x];
+								emojiBlock[y][xx]=1;
+							}
+						}
+						
+						
+						break;
+					}
+				}
+				
+				if (xi < x - maxBlock){
+					if (vbn >= maxBlock){
+						var fullBlock = true;
+						for (var v=1;v<maxBlock;v++){
+							for (var ii=0;ii<maxBlock;ii++){
+								for (var iii=0;iii<chain[x-ii].length;iii++) {
+									var xx = chain[x-ii][iii];
+									if (sameColors[y-v] && sameColors[y-v][xx] == sameColors[y-v][x]){
+							
+									}
+									else {
+										fullBlock = false;
+									}
+								}
+							}
+						}
+						
+						if (fullBlock){
+							for (var v=1;v<maxBlock;v++){
+								for (var ii=0;ii<maxBlock;ii++){
+									for (var iii=0;iii<chain[x-ii].length;iii++) {
+										var xx = chain[x-ii][iii];
+										//pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
+										//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
+										//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+										sameColors[y-v][xx]=sameColors[y][x];
+										//emojiBlock[y-v][xx]=maxBlock;
+									}
+								}
+							}
+						}
+						var rc = Math.floor(Math.random()*255);
+						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
+							if (y-maxBlock+1>= yMin){
+								emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
+							}
+							
+						}
+					}
+					
+					for (var ii=0;ii<maxBlock;ii++){
+						colorsFG[x-ii] = rgba;
+						for (var iii=0;iii<chain[x-ii].length;iii++) {
+							var xx = chain[x-ii][iii];
+							sameColors[y][xx]=sameColors[y][x];
+							emojiBlock[y][xx]=1;
+						}
+					}
+					
+					break;
+				}
+            }
+            const t2 = performance.now();
+			sHalf += t2-t1;
+            
+          }
+        }
       }
       
       for (y = yMin; y < yMax; y++) {
@@ -781,6 +1007,232 @@
             //var skipP = 0.75 + vbn*(1-.75)/maxBlock;
             //if (skipP > 0.96){skipP = 0.96;}
             var skipP = 0.9;
+            if (Math.random() < skipP){
+            	block = false;
+            	continue;
+            }
+            
+            
+            const t0 = performance.now();
+            for (var v=0;v<60;v++){
+				if (v-maxBlock > vbn + 3){
+					break;
+				}
+				if (!emojiLocations[y-v]){
+					if (y-v >= 0 && v>0){vbn = 0;}
+					continue;
+				}
+				
+				//var emojis = Object.keys(emojiLocations[y-v]);
+				
+				
+				if (chain[x]){
+					for (var i in emojiLocations[y-v]){
+						var lx = i;
+						var ty = y-v;
+						var e = emojiLocations[y-v][lx];
+						var w = parseInt(e.sz);
+						var maxHeight = v-w;
+						if (maxHeight>= vbn){
+							continue;
+						}
+						var maxWidth = -1;
+						var maxSize = -1;
+						for (var i=0;i<chain[x].length;i++){
+							if (lx <= chain[x][i]){
+								var mSz = Math.max(chain[x][i] - lx - w,0);
+								if (mSz < maxWidth || maxWidth == -1){
+									maxWidth = mSz;
+								}
+							}
+						}
+						if (maxWidth > -1){
+							if (maxHeight < maxWidth){
+								maxSize = maxWidth;
+							}
+							else {
+								maxSize = maxHeight;
+							}
+						}
+						else {
+							maxSize = 60;
+						}
+						if (maxSize < vbn){
+							vbn = maxSize;
+						}
+					}
+				}
+				else {
+					vbn = 0;//Maybe need to do something better here with orphans
+					break;
+				}
+				
+			}
+			const t1 = performance.now();
+        	fHalf += t1-t0;
+			vbn+=3;
+			
+            
+            while (block){
+            	xi--;
+            	block = true;
+				if (chain[x] && chain[xi] && chain[x].length == chain[xi].length){
+					for (var i=0;i<chain[x].length;i++){
+						if (chain[x][i] != chain[xi][i]+x-xi){
+							block = false;
+							break;
+						}
+					}
+				}
+				else {
+					block = false;
+				}
+				
+				if (block){
+					
+					//colorsFG[xi] = rgba;
+					
+				}
+				else {
+					if (xi < x - minBlock){
+						if (vbn >= x - xi){
+							var fullBlock = true;
+							for (var v=1;v<x-xi;v++){
+								for (var ii=0;ii<x-xi;ii++){
+									for (var iii=0;iii<chain[x-ii].length;iii++) {
+										var xx = chain[x-ii][iii];
+										if (sameColors[y-v] && sameColors[y-v][xx] == sameColors[y-v][x]){
+								
+										}
+										else {
+											fullBlock = false;
+										}
+									}
+								}
+							}
+							if (fullBlock){
+								for (var v=1;v<x-xi;v++){
+									for (var ii=0;ii<x-xi;ii++){
+										for (var iii=0;iii<chain[x-ii].length;iii++) {
+											var xx = chain[x-ii][iii];
+											//pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
+											//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
+											//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+											sameColors[y-v][xx]=sameColors[y][x];
+											//emojiBlock[y-v][xx]=x-xi;
+										}
+									}
+								}
+							}
+							var rc = Math.floor(Math.random()*255);
+							for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
+								if (y-(x-xi)+1>= yMin){
+									emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
+								}
+							}
+						}
+						
+						for (var ii=0;ii<x-xi;ii++){
+							colorsFG[x-ii] = rgba;
+							for (var iii=0;iii<chain[x-ii].length;iii++) {
+								var xx = chain[x-ii][iii];
+								sameColors[y][xx]=sameColors[y][x];
+								emojiBlock[y][xx]=1;
+							}
+						}
+						
+						
+						break;
+					}
+				}
+				
+				if (xi < x - maxBlock){
+					if (vbn >= maxBlock){
+						var fullBlock = true;
+						for (var v=1;v<maxBlock;v++){
+							for (var ii=0;ii<maxBlock;ii++){
+								for (var iii=0;iii<chain[x-ii].length;iii++) {
+									var xx = chain[x-ii][iii];
+									if (sameColors[y-v] && sameColors[y-v][xx] == sameColors[y-v][x]){
+							
+									}
+									else {
+										fullBlock = false;
+									}
+								}
+							}
+						}
+						
+						if (fullBlock){
+							for (var v=1;v<maxBlock;v++){
+								for (var ii=0;ii<maxBlock;ii++){
+									for (var iii=0;iii<chain[x-ii].length;iii++) {
+										var xx = chain[x-ii][iii];
+										//pixels[(y-v)*width*4 + xx*4 + 0] = rgba[0];
+										//pixels[(y-v)*width*4 + xx*4 + 1] = rgba[1];
+										//pixels[(y-v)*width*4 + xx*4 + 2] = rgba[2];
+										sameColors[y-v][xx]=sameColors[y][x];
+										//emojiBlock[y-v][xx]=maxBlock;
+									}
+								}
+							}
+						}
+						var rc = Math.floor(Math.random()*255);
+						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
+							if (y-maxBlock+1>= yMin){
+								emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
+							}
+							
+						}
+					}
+					
+					for (var ii=0;ii<maxBlock;ii++){
+						colorsFG[x-ii] = rgba;
+						for (var iii=0;iii<chain[x-ii].length;iii++) {
+							var xx = chain[x-ii][iii];
+							sameColors[y][xx]=sameColors[y][x];
+							emojiBlock[y][xx]=1;
+						}
+					}
+					
+					break;
+				}
+            }
+            const t2 = performance.now();
+			sHalf += t2-t1;
+            
+          }
+        }
+      }
+      
+      for (y = yMin; y < yMax; y++) {
+      	emojiBlock[y]={};
+      	sameColors[y]={};
+      	same = allSame[y];
+      	chain = allChains[y];
+      	for (x = 0; x < width; x++) {
+          sameColors[y][x] = Math.random();
+        }
+		for (x = (width - 1); x >= 0; x--) {
+          pixelOffset = (y * width * 4) + (x * 4);
+          if (same[x] === x) {
+            // set random color
+            
+            var block = true;
+            //if (colorsFG[x+1] && colorsFG[x+1][0] == colorsFG[x][0] && colorsFG[x+1][1] == colorsFG[x][1]){
+            //	block = false;
+            //}
+            if (emojiBlock[y][x]){
+            	block = false;
+            }
+            var vbn = 60;
+            
+            var xi = x;
+            var maxBlock = 12;
+            var minBlock = 4;
+            //var skipP = 0.75 + vbn*(1-.75)/maxBlock;
+            //if (skipP > 0.96){skipP = 0.96;}
+            var skipP = 0.5;
             if (Math.random() < skipP){
             	block = false;
             	continue;
