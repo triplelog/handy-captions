@@ -212,6 +212,7 @@
       var sameColors = {};
       var allSame = {};
       var allAngles = {};
+      var allDelays = {};
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
       	emojiLocations[y] = {};
