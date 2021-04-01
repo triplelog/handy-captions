@@ -422,7 +422,10 @@ function pathToAngles(aMap,path,w){
 						aMap[Math.floor(yy)+1][Math.floor(xx)]=a;
 						aMap[Math.floor(yy)][Math.floor(xx)+1]=a;
 						aMap[Math.floor(yy)+1][Math.floor(xx)+1]=a;
-						console.log(xx,yy);
+						if (xx<305 && x > 295 && yy < 305 && yy> 295){
+							console.log(xx,yy);
+						}
+						
 					}
 				}
 			}
