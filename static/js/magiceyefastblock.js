@@ -756,6 +756,9 @@
 										if (maxDiff < 45){
 											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
 										}
+										else {
+											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':-1};
+										}
 									}
 							
 								}
