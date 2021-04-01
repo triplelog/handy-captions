@@ -123,7 +123,8 @@
       emojiEl.innerHTML = '';
       var divT = document.createElement('div');
       divT.classList.add('emojiDiv');
-	  
+	  var iDiv = document.createElement('div');
+	  iDiv.style.transform = 'rotate(0deg)';
 			
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
@@ -157,12 +158,14 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
-			if (Math.random() < 0.5){
-				div.style.filter = "invert()";
+			if (rc < 100){
+				//div.style.filter = "invert()";
 				//div.style.animationName = 'chgB2';
 			}
 			//div.style.animationDuration = rc/100+"s";
-			div.innerHTML = idxToEmoji[idx];
+			var iDiv = div.querySelector('div');
+			iDiv.innerHTML = idxToEmoji[idx];
+			iDiv.style.transform = 'rotate('+rc+'deg)';
 			emojiEl.appendChild(div);
       	}
       }
