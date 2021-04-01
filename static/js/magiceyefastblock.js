@@ -125,7 +125,7 @@
       divT.classList.add('emojiDiv');
 	  var iDiv = document.createElement('div');
 	  iDiv.style.transform = 'rotate(0deg)';
-			
+	  divT.appendChild(iDiv);
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
       	for (var i in emojis){
