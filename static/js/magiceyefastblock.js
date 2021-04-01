@@ -615,7 +615,7 @@
 									if (y-(x-xi)+1>= yMin && Math.random() < angleP){
 										for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 											if (allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]] > -1){
-												rc = allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]*3/4 + Math.floor(Math.random()*360/4);
+												rc = allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]*5/6 + Math.floor(Math.random()*360/6 - 30);
 												break;
 											}
 										}
@@ -677,7 +677,7 @@
 								if (y-maxBlock+1>= yMin && Math.random() < angleP){
 									for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 										if (allAngles[y-maxBlock+1][chain[x-maxBlock+1][iii]] > -1){
-											rc = allAngles[y-maxBlock+1][chain[x-maxBlock+1][iii]]*3/4 + Math.floor(Math.random()*360/4);
+											rc = allAngles[y-maxBlock+1][chain[x-maxBlock+1][iii]]*5/6 + Math.floor(Math.random()*360/6 - 30);
 											break;
 										}
 									}
