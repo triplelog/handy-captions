@@ -674,8 +674,14 @@
 											if (iii == 0 && chain[x-(x-xi)+1][iii] < 800 - 85){
 												op = 0.5;
 											}
-											if (iii == chain[x-(x-xi)+1].length - 1 && chain[x-(x-xi)+1][iii] > 85){
+											else if (iii == chain[x-(x-xi)+1].length - 1 && chain[x-(x-xi)+1][iii] > 85){
 												op = 0.5;
+											}
+											else if (iii == 1 && chain[x-(x-xi)+1][iii] < 800 - 170){
+												op = 0.75;
+											}
+											else if (iii == chain[x-(x-xi)+1].length - 2 && chain[x-(x-xi)+1][iii] > 170){
+												op = 0.75;
 											}
 											
 											if (maxDiff < 135){
