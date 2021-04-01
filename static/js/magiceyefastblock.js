@@ -480,6 +480,7 @@
       },
       setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,skipP) {
       		var angleP = 1;
+      		var rAngle = 120;
       		for (x = (width - 1); x >= 0; x--) {
 				  
 				  if (same[x] === x) {
@@ -621,7 +622,7 @@
 										for (var yy=y;yy>= y-(x-xi)+1 && yy >=yMin;yy--){
 											for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 												if (allAngles[yy][chain[x-(x-xi)+1][iii]] > -1){
-													rc = allAngles[yy][chain[x-(x-xi)+1][iii]]*5/6 + Math.floor(Math.random()*360/6 - 30);
+													rc = allAngles[yy][chain[x-(x-xi)+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
 													break;
 												}
 											}
@@ -685,7 +686,7 @@
 									for (var yy=y;yy>= y-(maxBlock)+1 && yy >=yMin;yy--){
 										for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 											if (allAngles[yy][chain[x-maxBlock+1][iii]] > -1){
-												rc = allAngles[yy][chain[x-maxBlock+1][iii]]*5/6 + Math.floor(Math.random()*360/6 - 30);
+												rc = allAngles[yy][chain[x-maxBlock+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
 												break;
 											}
 										}
