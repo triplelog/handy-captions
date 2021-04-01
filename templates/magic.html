@@ -268,6 +268,7 @@ function createDepthMap(){
 			aMap[i].push(Math.floor(Math.random()*360));
 		}
 	}
+	console.log(aMap[300][300]);
 	for (var i in ids){
 		var id = ids[i];
 		for (var ii=9;ii<10;ii++){
@@ -282,7 +283,7 @@ function createDepthMap(){
 			aMap = pathToAngles(aMap,path,50);
 		}
 	}
-	
+	console.log(aMap[300][300]);
 	var canvas = document.getElementById('pixelCanvas');
 	var ctx = canvas.getContext("2d");
 	let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
@@ -430,7 +431,7 @@ function pathToAngles(aMap,path,w){
 					aMap[yy1][xx2]=a;
 					aMap[yy2][xx2]=a;
 					if (xx<305 && xx > 295 && yy < 305 && yy> 295){
-						console.log(xx,yy);
+						//console.log(xx,yy);
 					}
 					
 				}
@@ -444,7 +445,7 @@ function pathToAngles(aMap,path,w){
 						aMap[yy1][xx2]=a;
 						aMap[yy2][xx2]=a;
 						if (xx<305 && xx > 295 && yy < 305 && yy> 295){
-							console.log(xx,yy);
+							//console.log(xx,yy);
 						}
 						
 					}
