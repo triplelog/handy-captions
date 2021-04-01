@@ -818,7 +818,7 @@
 										}
 										
 										
-										if (!delay){delay = 0;
+										if (!delay){delay = 0;}
 										if (delay < 0){delay = 0;}
 										if (delay > 1){delay = 1;}
 										if (maxDiff < 135){
