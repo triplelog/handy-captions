@@ -143,7 +143,7 @@
       		}
       		
 			var idx = Math.floor(rc/26);
-			idx = 3;
+			
 			
 			/*context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
@@ -158,10 +158,10 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
-			div.style.animationDelay = (delay*5.0)+'s';
-			if (delay <0.01 || delay > 0.99){
-				div.style.animationIterationCount = '1';
-			}
+			//div.style.animationDelay = (delay*5.0)+'s';
+			//if (delay <0.01 || delay > 0.99){
+			//	div.style.animationIterationCount = '1';
+			//}
 			if (rc < 0){
 				var iDiv = div.querySelector('div');
 				iDiv.innerHTML = idxToEmoji[7];
@@ -169,7 +169,6 @@
 			}
 			else {
 				var iDiv = div.querySelector('div');
-				idx = 7;
 				iDiv.innerHTML = idxToEmoji[idx];
 				iDiv.style.transform = 'rotate('+rc+'deg)';
 				iDiv.style.opacity = op;
