@@ -127,20 +127,20 @@
   	  dMap.push([]);
 	  for (var x=0;x<800;x++){
 	  	  
-  		  dMap[y].push([0,0]);
+  		  dMap[y].push([0,0,0]);
 	  }
   }
   for (var i=9;i<10;i++){
 	  for (var y=60+i*5;y<60+i*5+200;y++){
 		  for (var x=210+i*5;x<210+i*5+60;x++){
 		  
-			  dMap[y][x] = [(i+1)/10,0];
+			  dMap[y][x] = [(i+1)/10,0,0];
 		  }
 	  }
 	  for (var y=60+i*5+200;y<60+i*5+260;y++){
 		  for (var x=210+i*5;x<210+i*5+360;x++){
 		  
-			  dMap[y][x] = [(i+1)/10,90];
+			  dMap[y][x] = [(i+1)/10,90,0.5];
 		  }
 	  }
   }
@@ -262,10 +262,13 @@ function createDepthMap(){
 		widths.splice(0,0,w*(1+i/7));
 	}
 	var aMap = [];
+	var delayaMap = [];
 	for (var i=0;i<800;i++){
 		aMap.push([]);
+		delayMap.push([]);
 		for (var ii=0;ii<600;ii++){
 			aMap[i].push(Math.floor(Math.random()*360));
+			delayMap[i].push(Math.random());
 		}
 	}
 	console.log(aMap[300][300]);
@@ -280,7 +283,9 @@ function createDepthMap(){
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id;
 			document.getElementById('pixelSVG').appendChild(path);
-			aMap = pathToAngles(aMap,path,55);
+			var retval = pathToAngles(aMap,delayMap,path,55);
+			aMap = retval[0];
+			delayMap = retval[1];
 		}
 	}
 	console.log(aMap[300][300]);
@@ -300,7 +305,7 @@ function createDepthMap(){
 		  dMap.push([]);
 		  for (var x=0;x<800;x++){
 		  	
-			dMap[y].push([imgData[y*800*4+x*4+3]/255,aMap[y][x]]);
+			dMap[y].push([imgData[y*800*4+x*4+3]/255,aMap[y][x],delayMap[y][x]]);
 		  }
 		}
 		MagicEye.render({
@@ -364,14 +369,14 @@ function mulberry(a) {
 			
 }
 
-function pathToAngles(aMap,path,w){
+function pathToAngles(aMap,delayMap,path,w){
 	var len = path.getTotalLength();
 	var nLines = 100;
 	var lastPoint = path.getPointAtLength(len*1/nLines);
 	lastPoint.x = path.getPointAtLength(0).x - (path.getPointAtLength(len*1/nLines).x - path.getPointAtLength(0).x);
 	lastPoint.y = path.getPointAtLength(0).y - (path.getPointAtLength(len*1/nLines).y - path.getPointAtLength(0).y);
-	console.log(lastPoint);
-	console.log(aMap[300][300]);
+	//console.log(lastPoint);
+	//console.log(aMap[300][300]);
 	var ww = Math.pow(w,2);
 	
 	for (var i=0;i<nLines;i++){
@@ -438,6 +443,10 @@ function pathToAngles(aMap,path,w){
 					aMap[yy2][xx1]=a;
 					aMap[yy1][xx2]=a;
 					aMap[yy2][xx2]=a;
+					delayMap[yy1][xx1]=i/nLines;
+					delayMap[yy2][xx1]=i/nLines;
+					delayMap[yy1][xx2]=i/nLines;
+					delayMap[yy2][xx2]=i/nLines;
 					if (yPart[yy1]){
 						yPart[yy1][0]+=a;
 						yPart[yy1][1]+=1;
@@ -535,6 +544,7 @@ function pathToAngles(aMap,path,w){
 						for (var yi=-2;yi<4;yi++){
 							for (var xi=-2;xi<4;xi++){
 								aMap[Math.floor(yy)+yi][Math.floor(xx)+xi]=a;
+								delayMap[Math.floor(yy)+yi][Math.floor(xx)+xi]=i/nLines;
 							}
 						}
 						
@@ -546,9 +556,8 @@ function pathToAngles(aMap,path,w){
 		lastPoint.x = pt.x;
 		lastPoint.y = pt.y;
 	}
-	
-	console.log(aMap[300][300]);
-	return aMap;
+
+	return [aMap,delayMap];
 }
 
 </script>

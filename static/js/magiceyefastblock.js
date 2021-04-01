@@ -217,9 +217,11 @@
       	emojiLocations[y] = {};
       	sameColors[y]={};
       	allAngles[y]={};
+      	allDelays[y]={};
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
           allAngles[y][x] = -1;
+          allDelays[y][x] = -1;
         }
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
@@ -270,6 +272,8 @@
 				}
               	allAngles[y][left] = depthMap[y][x][1];
               	allAngles[y][right] = depthMap[y][x][1];
+              	allDelays[y][left] = depthMap[y][x][2];
+              	allDelays[y][right] = depthMap[y][x][2];
               }
               if (chain[right]){
               	if (chain[left]){
@@ -302,6 +306,8 @@
             		
 					allAngles[y][left] = depthMap[y][x][1];
 					allAngles[y][right] = depthMap[y][x][1];
+					allDelays[y][left] = depthMap[y][x][2];
+              		allDelays[y][right] = depthMap[y][x][2];
                 }
             }
           }
@@ -360,7 +366,7 @@
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,0.99);
+		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.99);
 		
       }
       for (y = yMin; y < yMax; y++) {
@@ -371,7 +377,7 @@
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,0.98);
+		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.98);
 		
       }
       for (y = yMin; y < yMax; y++) {
@@ -382,7 +388,7 @@
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,0.97);
+		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.97);
 		
       }
       for (y = yMin; y < yMax; y++) {
@@ -393,7 +399,7 @@
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,0.96);
+		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.96);
 		
       }
       /*var chMax = 25;
@@ -491,7 +497,7 @@
           255
         ] : null;
       },
-      setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,skipP) {
+      setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,skipP) {
       		var angleP = 1;
       		var rAngle = 120;
       		for (x = (width - 1); x >= 0; x--) {
@@ -687,7 +693,9 @@
 											else if (iii == chain[x-(x-xi)+1].length - 2 && chain[x-(x-xi)+1][iii] > 170){
 												op = 0.75;
 											}
-											var delay = Math.random();
+											var delay = allDelays[y][x];
+											if (delay < 0){delay = 0;}
+											if (delay > 1){delay = 1;}
 											if (maxDiff < 135){
 												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc,'opacity':op,'delay':delay};
 											}
@@ -796,7 +804,9 @@
 										if (iii == chain[x-maxBlock+1].length - 1 && chain[x-maxBlock+1][iii] > 85){
 											op = 0.5;
 										}
-										var delay = Math.random();
+										var delay = allDelays[y][x];
+										if (delay < 0){delay = 0;}
+										if (delay > 1){delay = 1;}
 										if (maxDiff < 135){
 											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc,'opacity':op,'delay':delay};
 										}
