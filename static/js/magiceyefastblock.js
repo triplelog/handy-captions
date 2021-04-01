@@ -323,7 +323,7 @@
 		
 		emojiBlock[y]={};
 		
-		setEmojis(width,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles);
+		this.helpers.setEmojis(width,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles);
 		
 		allSame[y]=same;
         allChains[y]=chain;
