@@ -158,10 +158,10 @@
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
 			if (Math.random() < 0.5){
-				//div.style.filter = "hue-rotate("+(Math.random()*360)+"deg)";
-				div.style.animationName = 'chgB2';
+				div.style.filter = "brightness(0.4)";
+				//div.style.animationName = 'chgB2';
 			}
-			div.style.animationDuration = rc/100+"s";
+			//div.style.animationDuration = rc/100+"s";
 			div.innerHTML = idxToEmoji[idx];
 			emojiEl.appendChild(div);
       	}
