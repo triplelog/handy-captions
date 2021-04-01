@@ -118,6 +118,7 @@
       idxToEmoji.push('🍀');
       idxToEmoji.push('💩');
       idxToEmoji.push('😍');
+      idxToEmoji.push('🏴‍☠️');
       var emojiEl = document.querySelector('.emojiLayer');
       emojiEl.innerHTML = '';
       var divT = document.createElement('div');
@@ -142,7 +143,7 @@
       		}
       		
 			var idx = Math.floor(rc/26);
-			//idx = 3;
+			idx = 10;
 			
 			/*context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
