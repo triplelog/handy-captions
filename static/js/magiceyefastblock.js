@@ -634,7 +634,7 @@
 										}
 									}
 									var maxrc = 0;
-									var skipRC = {};
+									var maxDiff = 0;
 									for (var k in rra){
 										if (rra[k].length>maxrc){
 											rc = k;
@@ -642,22 +642,15 @@
 										}
 									}
 									for (var k in rra){
-										if (k != rc){
-											for (var i=0;i<rra[k].length;i++){
-												skipRC[rra[k][i]]=true;
-											}
+										var angleDiff = (k + 7200 - rc) % 360;
+										if (angleDiff > maxDiff){
+											maxDiff = angleDiff;
 										}
 									}
-									for (var k in rra){
-										if (k == rc){
-											for (var i=0;i<rra[k].length;i++){
-												skipRC[rra[k][i]]=false;
-											}
-										}
-									}
+									
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
-											if (!skipRC[chain[x-(x-xi)+1][iii]]){
+											if (maxDiff < 90){
 												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
 											}
 										}
