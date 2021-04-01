@@ -694,9 +694,14 @@
 											else if (iii == chain[x-(x-xi)+1].length - 2 && chain[x-(x-xi)+1][iii] > 170){
 												op = 0.75;
 											}
-											var delay = allDelays[y][x];
+											var delay = 0;
+											if (allDelays[y]){
+												delay = allDelays[y][x];
+												if (!delay){delay = 0;}
+											}
 											if (delay < 0){delay = 0;}
 											if (delay > 1){delay = 1;}
+											
 											if (maxDiff < 135){
 												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc,'opacity':op,'delay':delay};
 											}
@@ -805,7 +810,11 @@
 										if (iii == chain[x-maxBlock+1].length - 1 && chain[x-maxBlock+1][iii] > 85){
 											op = 0.5;
 										}
-										var delay = allDelays[y][x];
+										var delay = 0;
+										if (allDelays[y]){
+											delay = allDelays[y][x];
+											if (!delay){delay = 0;}
+										}
 										if (delay < 0){delay = 0;}
 										if (delay > 1){delay = 1;}
 										if (maxDiff < 135){
