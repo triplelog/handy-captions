@@ -357,7 +357,7 @@
 		allSame[y]=same;
         allChains[y]=chain;
       }
-      
+      console.log(allDelays[100]);
       
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
