@@ -623,7 +623,7 @@
 										for (var yy=y;yy>= y-(x-xi)+1 && yy >=yMin;yy--){
 											for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 												if (allAngles[yy][chain[x-(x-xi)+1][iii]] > -1){
-													var rct = allAngles[yy][chain[x-(x-xi)+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+													var rct = allAngles[yy][chain[x-(x-xi)+1][iii]];
 													if (rra[rct]){
 														rra[rct].push(chain[x-(x-xi)+1][iii]);
 													}
@@ -648,6 +648,7 @@
 											maxDiff = angleDiff;
 										}
 									}
+									rc = rc *(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
 									
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
