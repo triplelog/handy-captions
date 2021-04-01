@@ -118,35 +118,23 @@
 
 	fullColors.push(colorsFG);
   }
-  var dMap = [];
-  for (var y=0;y<600;y++){
-  	  dMap.push([]);
-	  for (var x=0;x<800;x++){
-	  	  var v = Math.abs(noise.perlin2(x/800,y/600));
-	  	  v *= 2;
-	  	  if (v > 1){v = 1;}
-  		  dMap[y].push(v);
-	  }
-  }
+  
   
 
   
   var dMap = [];
-  var pMap = [];
   for (var y=0;y<600;y++){
   	  dMap.push([]);
-  	  pMap.push([]);
 	  for (var x=0;x<800;x++){
 	  	  
-  		  dMap[y].push(0);
-  		  pMap[y].push(0);
+  		  dMap[y].push([0,0]);
 	  }
   }
   for (var i=9;i<10;i++){
 	  for (var y=60+i*5;y<60+i*5+300;y++){
 		  for (var x=260+i*5;x<260+i*5+100;x++){
 		  
-			  dMap[y][x] = (i+1)/10;
+			  dMap[y][x] = [(i+1)/10,0];
 		  }
 	  }
   }

@@ -228,7 +228,7 @@
         // for each column
         for (x = 0; x < width; x++) {
 
-          z = depthMap[y][x];
+          z = depthMap[y][x][0];
 
           // stereo separation corresponding to z
           sep = Math.round((1 - (mu * z)) * eyeSep / (2 - (mu * z)));
@@ -243,7 +243,7 @@
             t = 1;
             do {
               zt = z + (2 * (2 - (mu * z)) * t / (mu * eyeSep));
-              visible = (depthMap[y][x-t] < zt) && (depthMap[y][x+t] < zt); // false if obscured
+              visible = (depthMap[y][x-t][0] < zt) && (depthMap[y][x+t][0] < zt); // false if obscured
               t++;
             } while (visible && zt < 1);
 
@@ -259,8 +259,8 @@
               }
               same[left] = right;
               if (z > 0.5){
-              	allAngles[y][left] = 0;
-              	allAngles[y][right] = 0;
+              	allAngles[y][left] = depthMap[y][x][1];
+              	allAngles[y][right] = depthMap[y][x][1];
               }
               if (chain[right]){
               	if (chain[left]){
@@ -290,9 +290,9 @@
             }
             else {
             	if (z > 0.5){
-					allAngles[y][left] = 0;
-					allAngles[y][right] = 0;
-				  }
+					allAngles[y][left] = depthMap[y][x][1];
+					allAngles[y][right] = depthMap[y][x][1];
+                }
             }
           }
         }
