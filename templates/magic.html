@@ -280,7 +280,7 @@ function createDepthMap(){
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id;
 			document.getElementById('pixelSVG').appendChild(path);
-			aMap = pathToAngles(aMap,path,50);
+			aMap = pathToAngles(aMap,path,100);
 		}
 	}
 	console.log(aMap[300][300]);
