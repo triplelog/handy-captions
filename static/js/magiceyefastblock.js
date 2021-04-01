@@ -122,7 +122,7 @@
       var emojiEl = document.querySelector('.emojiLayer');
       emojiEl.innerHTML = '';
       var divT = document.createElement('div');
-      div.classList.add('emojiDiv');
+      divT.classList.add('emojiDiv');
 	  
 			
       for (var y=yMin;y<yMax;y++){
