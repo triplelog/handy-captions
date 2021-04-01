@@ -423,6 +423,19 @@ function pathToAngles(aMap,path,w){
 				var yy2 = Math.floor(yy)+1;
 				
 				
+				var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
+				if (d <= ww){
+					aMap[yy1][xx1]=a;
+					aMap[yy2][xx1]=a;
+					aMap[yy1][xx2]=a;
+					aMap[yy2][xx2]=a;
+					if (xx<305 && xx > 295 && yy < 305 && yy> 295){
+						console.log(xx,yy);
+					}
+					
+				}
+					
+				
 				if ((yy2 >= y1 && yy1 <= y2) || (yy1 <= y1 && yy2 >= y2)){
 					var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
 					if (d <= ww){
