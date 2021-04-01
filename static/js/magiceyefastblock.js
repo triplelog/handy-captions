@@ -206,12 +206,15 @@
       var sHalf = 0;
       var sameColors = {};
       var allSame = {};
+      var allAngles = {};
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
       	emojiLocations[y] = {};
       	sameColors[y]={};
+      	allAngles[y]={};
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
+          allAngles[y][x] = -1;
         }
         // max image width (for Uint16Array) is 65536
         same = new Uint16Array(width); // points to a pixel to the right
@@ -256,6 +259,10 @@
                 }
               }
               same[left] = right;
+              if (z > 0.5){
+              	allAngles[y][left] = 0;
+              	allAngles[y][right] = 0;
+              }
               if (chain[right]){
               	if (chain[left]){
               		for (var i=0;i<chain[left].length;i++){
@@ -279,6 +286,7 @@
               		chain[right].push(left);
               	}
               }
+              
               
             }
           }
@@ -451,7 +459,14 @@
 									}
 								}
 							}
-							var rc = Math.floor(Math.random()*255);
+							var rc = Math.floor(Math.random()*360);
+							//rc = allAngles[y][x];
+							for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
+								if (allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]] > -1){
+									rc = allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]];
+									break;
+								}
+							}
 							for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 								if (y-(x-xi)+1>= yMin){
 									emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
@@ -504,7 +519,14 @@
 								}
 							}
 						}
-						var rc = Math.floor(Math.random()*255);
+						var rc = Math.floor(Math.random()*360);
+						//rc = allAngles[y][x];
+						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
+							if (allAngles[y-maxBlock+1][chain[x-maxBlock+1]] > -1){
+								rc = allAngles[y-maxBlock+1][chain[x-maxBlock+1]];
+								break;
+							}
+						}
 						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 							if (y-maxBlock+1>= yMin){
 								emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
