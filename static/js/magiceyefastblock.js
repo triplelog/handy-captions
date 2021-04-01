@@ -158,7 +158,7 @@
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
 			if (Math.random() < 0.5){
-				div.style.filter = "hue-rotate(90deg)";
+				div.style.filter = "invert()";
 				//div.style.animationName = 'chgB2';
 			}
 			//div.style.animationDuration = rc/100+"s";
