@@ -650,7 +650,7 @@
 										}
 									}
 									for (var kk in rra){
-										var k = parseInt(k);
+										var k = parseInt(kk);
 										var angleDiff = (k + 7200 - rc) % 360;
 										if (angleDiff > maxDiff){
 											maxDiff = angleDiff;
@@ -743,7 +743,7 @@
 									}
 								}
 								for (var kk in rra){
-									var k = parseInt(k);
+									var k = parseInt(kk);
 									var angleDiff = (k + 7200 - rc) % 360;
 									if (angleDiff > maxDiff){
 										maxDiff = angleDiff;
