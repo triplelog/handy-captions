@@ -131,7 +131,7 @@
       		var e = parseInt(emojis[i]);
       		var sz = parseFloat(emojiLocations[y][e].sz);
       		var rc = parseInt(emojiLocations[y][e].color);
-      		
+      		var op = parseFloat(emojiLocations[y][e].opacity);
       		
       		var cx = e+sz/2;
       		var cy = y+sz/2;
@@ -165,6 +165,7 @@
 				var iDiv = div.querySelector('div');
 				iDiv.innerHTML = idxToEmoji[idx];
 				iDiv.style.transform = 'rotate('+rc+'deg)';
+				iDiv.style.opacity = op;
 			}
 			
 			emojiEl.appendChild(div);
@@ -586,9 +587,7 @@
 						else {
 							block = false;
 						}
-						if (chain[x].length < 2){
-							block = false;
-						}
+						
 						if (block){
 					
 							//colorsFG[xi] = rgba;
@@ -671,11 +670,19 @@
 									
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
+											var op = 1;
+											if (iii == 0 && chain[x-(x-xi)+1][iii] < 800 - 85){
+												op = 0.5;
+											}
+											if (iii == chain[x-(x-xi)+1].length - 1 && chain[x-(x-xi)+1][iii] > 85){
+												op = 0.5;
+											}
+											
 											if (maxDiff < 135){
-												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
+												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc,'opacity':op};
 											}
 											else {
-												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':-1};
+												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':-1,'opacity':op};
 											}
 										}
 									}
@@ -773,10 +780,10 @@
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 									if (y-maxBlock+1>= yMin){
 										if (maxDiff < 135){
-											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
+											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc,'opacity':1};
 										}
 										else {
-											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':-1};
+											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':-1,'opacity':1};
 										}
 									}
 							
