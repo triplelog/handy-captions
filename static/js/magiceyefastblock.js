@@ -779,11 +779,18 @@
 									
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 									if (y-maxBlock+1>= yMin){
+										var op = 1;
+										if (iii == 0 && chain[x-maxBlock+1][iii] < 800 - 85){
+											op = 0.5;
+										}
+										if (iii == chain[x-maxBlock+1].length - 1 && chain[x-maxBlock+1][iii] > 85){
+											op = 0.5;
+										}
 										if (maxDiff < 135){
-											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc,'opacity':1};
+											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc,'opacity':op};
 										}
 										else {
-											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':-1,'opacity':1};
+											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':-1,'opacity':op};
 										}
 									}
 							
