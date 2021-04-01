@@ -617,15 +617,27 @@
 									}
 									var rc = Math.floor(Math.random()*360);
 									//rc = allAngles[y][x];
-									
+									var rra ={};
 									if (Math.random() < angleP){
 										for (var yy=y;yy>= y-(x-xi)+1 && yy >=yMin;yy--){
 											for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 												if (allAngles[yy][chain[x-(x-xi)+1][iii]] > -1){
-													rc = allAngles[yy][chain[x-(x-xi)+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
-													break;
+													var rct = allAngles[yy][chain[x-(x-xi)+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+													if (rra[rct]){
+														rra[rct]++;
+													}
+													else {
+														rra[rct]=1;
+													}
 												}
 											}
+										}
+									}
+									var maxrc = 0;
+									for (var k in rra){
+										if (rra[k]>maxrc){
+											rc = k;
+											maxrc = rra[k];
 										}
 									}
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
@@ -682,14 +694,27 @@
 								}
 								var rc = Math.floor(Math.random()*360);
 								//rc = allAngles[y][x];
+								var rra ={};
 								if (Math.random() < angleP){
 									for (var yy=y;yy>= y-(maxBlock)+1 && yy >=yMin;yy--){
 										for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 											if (allAngles[yy][chain[x-maxBlock+1][iii]] > -1){
-												rc = allAngles[yy][chain[x-maxBlock+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
-												break;
+												var rct = allAngles[yy][chain[x-maxBlock+1][iii]]*(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+												if (rra[rct]){
+													rra[rct]++;
+												}
+												else {
+													rra[rct]=1;
+												}
 											}
 										}
+									}
+								}
+								var maxrc = 0;
+								for (var k in rra){
+									if (rra[k]>maxrc){
+										rc = k;
+										maxrc = rra[k];
 									}
 								}
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
