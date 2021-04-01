@@ -357,7 +357,7 @@
 		allSame[y]=same;
         allChains[y]=chain;
       }
-      console.log(allDelays[200]);
+      console.log(Object.keys(allDelays[200]).length);
       
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
@@ -501,7 +501,7 @@
       setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,skipP) {
       		var angleP = 1;
       		var rAngle = 120;
-      		console.log(allDelays[200]);
+      		console.log(Object.keys(allDelays[200]).length);
       		for (x = (width - 1); x >= 0; x--) {
 				  
 				  if (same[x] === x) {
