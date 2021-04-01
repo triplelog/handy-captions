@@ -1466,10 +1466,12 @@
 									}
 									var rc = Math.floor(Math.random()*360);
 									//rc = allAngles[y][x];
-									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
-										if (allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]] > -1){
-											rc = allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]];
-											break;
+									if (y-(x-xi)+1>= yMin){
+										for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
+											if (allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]] > -1){
+												rc = allAngles[y-(x-xi)+1][chain[x-(x-xi)+1][iii]];
+												break;
+											}
 										}
 									}
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
