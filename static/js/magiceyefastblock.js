@@ -158,7 +158,7 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
-			div.style.animationDelay = (delay*10.0)+'s';
+			div.style.animationDelay = (delay*5.0)+'s';
 			if (rc < 0){
 				var iDiv = div.querySelector('div');
 				iDiv.innerHTML = idxToEmoji[7];
@@ -700,6 +700,9 @@
 											if (allDelays[y-(x-xi)+1] && allDelays[y-(x-xi)+1][chain[x-(x-xi)+1][iii]] > -1){
 												delay = allDelays[y-(x-xi)+1][chain[x-(x-xi)+1][iii]];
 											}
+											else {
+												delay = 0;
+											}
 											if (!delay){delay = 0;}
 											if (delay < 0){delay = 0;}
 											if (delay > 1){delay = 1;}
@@ -817,6 +820,9 @@
 										
 										if (allDelays[y-maxBlock+1] && allDelays[y-maxBlock+1][chain[x-maxBlock+1][iii]] > -1){
 											delay = allDelays[y-maxBlock+1][chain[x-maxBlock+1][iii]];
+										}
+										else {
+											delay = 0;
 										}
 										if (!delay){delay = 0;}
 										if (delay < 0){delay = 0;}
