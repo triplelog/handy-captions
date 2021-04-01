@@ -366,10 +366,59 @@ function mulberry(a) {
 function pathToAngles(aMap,path,w){
 	var len = path.getTotalLength();
 	var lastPoint = path.getPointAtLength(len*1/100);
+	lastPoint.x = path.getPointAtLength(0).x - (path.getPointAtLength(len*1/100).x - path.getPointAtLength(0).x);
+	lastPoint.y = path.getPointAtLength(0).y - (path.getPointAtLength(len*1/100).y - path.getPointAtLength(0).y);
 	console.log(lastPoint);
+	console.log(aMap[300][300]);
+	var ww = Math.pow(w,2);
 	for (var i=0;i<100;i++){
 		var pt = path.getPointAtLength(len*i/100);
+		
+		var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
+		if (pt.x-lastPoint.x == 0){
+			m = 1000;
+		}
+		if (m == 0){
+			m = 1/1000;
+		}
+		//var line = {'x':pt.x,'y':pt.y,'m':m};
+		var line1 = {'x':pt.x,'y':pt.y,'m':-1/m};
+		var a1 = Math.atan(line1.m)*180/3.14159;
+		
+		var pt2 = path.getPointAtLength(len*(i+1)/100);
+		var m2 = (pt2.y-pt.y)/(pt2.x-pt.x);
+		if (pt2.x-pt.x == 0){
+			m2 = 1000;
+		}
+		if (m2 == 0){
+			m2 = 1/1000;
+		}
+		//var line = {'x':pt.x,'y':pt.y,'m':m2};
+		var line2 = {'x':pt.x,'y':pt.y,'m':-1/m2};
+		var a2 = Math.atan(line2.m)*180/3.14159;
+		var a = (a1+a2)/2;
+		
+		var cx = (pt.x+pt2.x)/2;
+		var cy = (pt.y+pt2.y)/2;
+		
+		for (var ii=-1*w;ii<w+1;ii++){
+			for (var iii=-1*w;iii<w+1;iii++){
+				var xx = cx+ii;
+				var yy = cy+iii;
+				var y1 = line1.m*(xx-line1.x)+line1.y;
+				var y2 = line2.m*(xx-line2.x)+line2.y;
+				if ((yy >= y1 && yy <= y2) || (yy <= y1 && yy >= y2)){
+					var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
+					if (d <= ww){
+						aMap[yy][xx]=a;
+					}
+				}
+			}
+		}
+		lastPoint.x = pt.x;
+		lastPoint.y = pt.y;
 	}
+	console.log(aMap[300][300]);
 	return aMap;
 }
 
