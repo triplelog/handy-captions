@@ -653,6 +653,9 @@
 										var angleDiff = (k + 7200 - rc) % 360;
 										if (angleDiff > maxDiff){
 											maxDiff = angleDiff;
+											if (y > 95 && y < 125){
+												console.log(y,x,rra,k,rc,allAngles[y]);
+											}
 										}
 									}
 									rc = rc *(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
