@@ -488,7 +488,7 @@
       },
       setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,skipP) {
       		var angleP = 1;
-      		var rAngle = 12;
+      		var rAngle = 6;
       		for (x = (width - 1); x >= 0; x--) {
 				  
 				  if (same[x] === x) {
@@ -669,7 +669,7 @@
 									
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
-											if (maxDiff < 90){
+											if (maxDiff < 135){
 												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
 											}
 											else {
@@ -770,7 +770,7 @@
 									
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 									if (y-maxBlock+1>= yMin){
-										if (maxDiff < 90){
+										if (maxDiff < 135){
 											emojiLocations[y-maxBlock+1][chain[x-maxBlock+1][iii]]={'sz':maxBlock,'color':rc};
 										}
 										else {
