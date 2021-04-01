@@ -157,7 +157,10 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
-			div.style.filter = "hue-rotate("+(Math.random()*360)+"deg)";
+			if (Math.random() < 0.5){
+				//div.style.filter = "hue-rotate("+(Math.random()*360)+"deg)";
+				div.style.animationName = 'rotateColor2';
+			}
 			div.style.animationDuration = rc/100+"s";
 			div.innerHTML = idxToEmoji[idx];
 			emojiEl.appendChild(div);
