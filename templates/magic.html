@@ -261,9 +261,16 @@ function createDepthMap(){
 	for (var i=1;i<10;i++){
 		widths.splice(0,0,w*(1+i/7));
 	}
+	var aMap = [];
+	for (var i=0;i<800;i++){
+		aMap.push([]);
+		for (var ii=0;ii<600;ii++){
+			aMap[i].push(Math.floor(Math.random()*360));
+		}
+	}
 	for (var i in ids){
 		var id = ids[i];
-		for (var ii=0;ii<10;ii++){
+		for (var ii=9;ii<10;ii++){
 			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
 			//console.log(id,ids,allCurves);
 			path.setAttribute('d',allCurves[id]);
@@ -272,6 +279,7 @@ function createDepthMap(){
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id;
 			document.getElementById('pixelSVG').appendChild(path);
+			aMap = pathToAngles(aMap,path,widths[ii]);
 		}
 	}
 	
@@ -291,7 +299,7 @@ function createDepthMap(){
 		  dMap.push([]);
 		  for (var x=0;x<800;x++){
 		  	
-			dMap[y].push(imgData[y*800*4+x*4+3]/255);
+			dMap[y].push([imgData[y*800*4+x*4+3]/255,0]);
 		  }
 		}
 		MagicEye.render({
@@ -331,7 +339,7 @@ function inputMove(evt) {
 	evt.preventDefault();
 	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
 		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
-		drawCurveIn([evt.clientX,evt.clientY]);
+		//drawCurveIn([evt.clientX,evt.clientY]);
 	}
 	else {
 	}
@@ -353,6 +361,16 @@ function mulberry(a) {
 	  t ^= t + Math.imul(t ^ t >>> 7, t | 61);
 	  return (t ^ t >>> 14) >>> 0;
 			
+}
+
+function pathToAngles(aMap,path,w){
+	var len = path.getTotalLength();
+	var lastPoint = path.getPointAtLength(len*1/100);
+	console.log(lastPoint);
+	for (var i=0;i<100;i++){
+		var pt = path.getPointAtLength(len*i/100);
+	}
+	return aMap;
 }
 
 </script>
