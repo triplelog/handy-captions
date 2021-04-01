@@ -167,7 +167,7 @@
 				iDiv.style.transform = 'rotate('+rc+'deg)';
 			}
 			
-			emojiEl.appendChild(div);
+			//emojiEl.appendChild(div);
       	}
       }
     },
@@ -316,6 +316,11 @@
             rgba[0] = 192 + Math.floor(Math.random()*64);
             rgba[1] = 192 + Math.floor(Math.random()*64);
             rgba[2] = 192 + Math.floor(Math.random()*64);
+            if (allAngles[y][x] > -1){
+            	rgba[0] = Math.floor(allAngles[y][x]/360*255);
+            	rgba[1] = Math.floor(allAngles[y][x]/360*255);
+            	rgba[2] = Math.floor(allAngles[y][x]/360*255);
+            }
             var block = true;
             
             for (i = 0; i < 4; i++) {
