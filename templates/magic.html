@@ -403,12 +403,12 @@ function pathToAngles(aMap,path,w){
 		
 		for (var ii=-1*w;ii<w+1;ii++){
 			var xx = cx+ii;
-			if (xx <1 || xx >=800 - 1){
+			if (xx <2 || xx >=800 - 2){
 				continue;
 			}
 			for (var iii=-1*w;iii<w+1;iii++){
 				var yy = cy+iii;
-				if (yy <1 || yy >=600 - 1){
+				if (yy <2 || yy >=600 - 2){
 					continue;
 				}
 				
@@ -418,7 +418,11 @@ function pathToAngles(aMap,path,w){
 				if ((yy >= y1 && yy <= y2) || (yy <= y1 && yy >= y2)){
 					var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
 					if (d <= ww){
-						aMap[Math.round(yy)][Math.round(xx)]=a;
+						aMap[Math.floor(yy)][Math.floor(xx)]=a;
+						aMap[Math.floor(yy)+1][Math.floor(xx)]=a;
+						aMap[Math.floor(yy)][Math.floor(xx)+1]=a;
+						aMap[Math.floor(yy)+1][Math.floor(xx)+1]=a;
+						console.log(xx,yy);
 					}
 				}
 			}
