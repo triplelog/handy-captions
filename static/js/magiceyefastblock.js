@@ -531,6 +531,7 @@
       	emojiBlock[y]={};
       	sameColors[y]={};
       	same = allSame[y];
+      	chain = allChains[y];
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
@@ -756,6 +757,7 @@
       	emojiBlock[y]={};
       	sameColors[y]={};
       	same = allSame[y];
+      	chain = allChains[y];
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
