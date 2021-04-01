@@ -1006,7 +1006,7 @@
             var minBlock = 4 + Math.floor(Math.random() * 4);
             //var skipP = 0.75 + vbn*(1-.75)/maxBlock;
             //if (skipP > 0.96){skipP = 0.96;}
-            var skipP = 0.9;
+            var skipP = 0.95;
             if (Math.random() < skipP){
             	block = false;
             	continue;
@@ -1229,10 +1229,10 @@
             
             var xi = x;
             var maxBlock = 12;
-            var minBlock = 4;
+            var minBlock = 6;
             //var skipP = 0.75 + vbn*(1-.75)/maxBlock;
             //if (skipP > 0.96){skipP = 0.96;}
-            var skipP = 0.5;
+            var skipP = 0.95;
             if (Math.random() < skipP){
             	block = false;
             	continue;
