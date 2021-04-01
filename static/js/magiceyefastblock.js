@@ -322,7 +322,7 @@
 		
 		emojiBlock[y]={};
 		
-		this.helpers.setEmojis(width,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles);
+		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles);
 		
 		allSame[y]=same;
         allChains[y]=chain;
@@ -1327,7 +1327,7 @@
           255
         ] : null;
       },
-      setEmojis: function(width,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles) {
+      setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles) {
       		for (x = (width - 1); x >= 0; x--) {
 				  
 				  if (same[x] === x) {
