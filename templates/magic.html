@@ -299,7 +299,7 @@ function createDepthMap(){
 		  dMap.push([]);
 		  for (var x=0;x<800;x++){
 		  	
-			dMap[y].push([imgData[y*800*4+x*4+3]/255,0]);
+			dMap[y].push([imgData[y*800*4+x*4+3]/255,aMap[y][x]]);
 		  }
 		}
 		MagicEye.render({
@@ -396,7 +396,7 @@ function pathToAngles(aMap,path,w){
 		//var line = {'x':pt.x,'y':pt.y,'m':m2};
 		var line2 = {'x':pt.x,'y':pt.y,'m':-1/m2};
 		var a2 = Math.atan(line2.m)*180/3.14159;
-		var a = (a1+a2)/2;
+		var a = Math.round((a1+a2)/2);
 		
 		var cx = (pt.x+pt2.x)/2;
 		var cy = (pt.y+pt2.y)/2;
@@ -422,7 +422,7 @@ function pathToAngles(aMap,path,w){
 						aMap[Math.floor(yy)+1][Math.floor(xx)]=a;
 						aMap[Math.floor(yy)][Math.floor(xx)+1]=a;
 						aMap[Math.floor(yy)+1][Math.floor(xx)+1]=a;
-						if (xx<305 && x > 295 && yy < 305 && yy> 295){
+						if (xx<305 && xx > 295 && yy < 305 && yy> 295){
 							console.log(xx,yy);
 						}
 						
