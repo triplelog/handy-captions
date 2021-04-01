@@ -402,7 +402,13 @@ function pathToAngles(aMap,path,w){
 		var cy = (pt.y+pt2.y)/2;
 		
 		for (var ii=-1*w;ii<w+1;ii++){
+			if (cx+ii <0 || cx+ii >=800){
+				continue;
+			}
 			for (var iii=-1*w;iii<w+1;iii++){
+				if (cy+iii <0 || cy+iii >=600){
+					continue;
+				}
 				var xx = cx+ii;
 				var yy = cy+iii;
 				var y1 = line1.m*(xx-line1.x)+line1.y;
