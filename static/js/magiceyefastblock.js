@@ -313,9 +313,9 @@
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
-            rgba[0] = 192 + Math.floor(Math.random()*64);
-            rgba[1] = 192 + Math.floor(Math.random()*64);
-            rgba[2] = 192 + Math.floor(Math.random()*64);
+            rgba[0] = 128 + Math.floor(Math.random()*128);
+            rgba[1] = 128 + Math.floor(Math.random()*128);
+            rgba[2] = 128 + Math.floor(Math.random()*128);
             /*for (var i=0;i<chain[x].length;i++){
 				if (allAngles[y][chain[x][i]] > -1){
 					rgba[0] = Math.floor(allAngles[y][chain[x][i]]/360*255);
@@ -488,7 +488,7 @@
       },
       setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,skipP) {
       		var angleP = 1;
-      		var rAngle = 6;
+      		var rAngle = 120;
       		for (x = (width - 1); x >= 0; x--) {
 				  
 				  if (same[x] === x) {
@@ -665,7 +665,7 @@
 										}
 									}
 									
-									rc = rc *(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+									rc = rc + Math.floor(Math.random()*360/rAngle - 180/rAngle);
 									
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
@@ -766,7 +766,7 @@
 									}
 								}
 								
-								rc = rc *(rAngle-1)/rAngle + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+								rc = rc + Math.floor(Math.random()*360/rAngle - 180/rAngle);
 									
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 									if (y-maxBlock+1>= yMin){
