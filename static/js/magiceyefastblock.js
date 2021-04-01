@@ -644,7 +644,14 @@
 									for (var k in rra){
 										if (k != rc){
 											for (var i=0;i<rra[k].length;i++){
-												//skipRC[rra[k][i]]=true;
+												skipRC[rra[k][i]]=true;
+											}
+										}
+									}
+									for (var k in rra){
+										if (k == rc){
+											for (var i=0;i<rra[k].length;i++){
+												skipRC[rra[k][i]]=false;
 											}
 										}
 									}
