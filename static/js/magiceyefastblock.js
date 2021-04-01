@@ -259,6 +259,9 @@
               }
               same[left] = right;
               if (z > 0.5){
+              	if (y == 300 && x == 300){
+					console.log(depthMap[y][x][1]);
+				}
               	allAngles[y][left] = depthMap[y][x][1];
               	allAngles[y][right] = depthMap[y][x][1];
               }
@@ -290,6 +293,7 @@
             }
             else {
             	if (z > 0.5){
+            		
 					allAngles[y][left] = depthMap[y][x][1];
 					allAngles[y][right] = depthMap[y][x][1];
                 }
