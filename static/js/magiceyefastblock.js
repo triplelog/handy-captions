@@ -328,6 +328,7 @@
         allChains[y]=chain;
       }
       
+      /*
       for (y = yMin; y < yMax; y++) {
       	emojiBlock[y]={};
       	sameColors[y]={};
@@ -1231,7 +1232,7 @@
           }
         }
       }
-      
+      */
       /*var chMax = 25;
       for (y = yMin+4; y < yMax-4; y++) {
 			for (x = 0; x < width; x++) {
