@@ -124,7 +124,6 @@
       var divT = document.createElement('div');
       divT.classList.add('emojiDiv');
 	  var iDiv = document.createElement('div');
-	  iDiv.style.transform = 'rotate(0deg)';
 	  divT.appendChild(iDiv);
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
@@ -158,14 +157,16 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
-			if (rc < 100){
-				//div.style.filter = "invert()";
-				//div.style.animationName = 'chgB2';
+			if (rc < 0){
+				var iDiv = div.querySelector('div');
+				iDiv.innerHTML = idxToEmoji[7];
 			}
-			//div.style.animationDuration = rc/100+"s";
-			var iDiv = div.querySelector('div');
-			iDiv.innerHTML = idxToEmoji[idx];
-			iDiv.style.transform = 'rotate('+rc+'deg)';
+			else {
+				var iDiv = div.querySelector('div');
+				iDiv.innerHTML = idxToEmoji[idx];
+				iDiv.style.transform = 'rotate('+rc+'deg)';
+			}
+			
 			emojiEl.appendChild(div);
       	}
       }
@@ -650,8 +651,11 @@
 									
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
-											if (maxDiff < 90){
+											if (maxDiff < 45){
 												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':rc};
+											}
+											else {
+												emojiLocations[y-(x-xi)+1][chain[x-(x-xi)+1][iii]]={'sz':(x-xi),'color':-1};
 											}
 										}
 									}
