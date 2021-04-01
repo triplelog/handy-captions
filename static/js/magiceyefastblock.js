@@ -614,7 +614,7 @@
 									//rc = allAngles[y][x];
 									
 									if (Math.random() < angleP){
-										for (var yy=0;yy>= y-(x-xi)+1 && yy >=yMin;yy--){
+										for (var yy=y;yy>= y-(x-xi)+1 && yy >=yMin;yy--){
 											for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 												if (allAngles[yy][chain[x-(x-xi)+1][iii]] > -1){
 													rc = allAngles[yy][chain[x-(x-xi)+1][iii]]*5/6 + Math.floor(Math.random()*360/6 - 30);
@@ -678,7 +678,7 @@
 								var rc = Math.floor(Math.random()*360);
 								//rc = allAngles[y][x];
 								if (Math.random() < angleP){
-									for (var yy=0;yy>= y-(maxBlock)+1 && yy >=yMin;yy--){
+									for (var yy=y;yy>= y-(maxBlock)+1 && yy >=yMin;yy--){
 										for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 											if (allAngles[yy][chain[x-maxBlock+1][iii]] > -1){
 												rc = allAngles[yy][chain[x-maxBlock+1][iii]]*5/6 + Math.floor(Math.random()*360/6 - 30);
