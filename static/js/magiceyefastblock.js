@@ -122,9 +122,8 @@
       var emojiEl = document.querySelector('.emojiLayer');
       emojiEl.innerHTML = '';
       var divT = document.createElement('div');
-	  divT.style.position = 'absolute';
-	  divT.style.textAlign = 'center';
-	  divT.style.display = 'inline-block';
+      div.classList.add('emojiDiv');
+	  
 			
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
@@ -158,7 +157,8 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
-			div.style.filter = "hue-rotate("+rc+"deg)";
+			//div.style.filter = "hue-rotate("+rc+"deg)";
+			div.style.animationDuration = Math.floor(rc/26)+"s";
 			div.innerHTML = idxToEmoji[idx];
 			emojiEl.appendChild(div);
       	}

@@ -31,6 +31,19 @@
 	width: 800px;
 	height: 600px;
 }
+.emojiDiv {
+	position: 'absolute';
+	text-align: 'center';
+	display: 'inline-block';
+	animation-name: 'rotateColor';
+	animation-iteration-count: 'infinite';
+	animation-duration: 1s;
+}
+@keyframes rotateColor {
+  0% {filter: hue-rotate(0deg);}
+  50% {filter: hue-rotate(180deg);}
+  100% {filter: hue-rotate(360deg);}
+}
 
 </style>
 
