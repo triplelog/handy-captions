@@ -279,7 +279,7 @@ function createDepthMap(){
 			path.setAttribute('fill','none');
 			path.id = "bg-"+id;
 			document.getElementById('pixelSVG').appendChild(path);
-			aMap = pathToAngles(aMap,path,widths[ii]);
+			aMap = pathToAngles(aMap,path,10);
 		}
 	}
 	
@@ -408,6 +408,9 @@ function pathToAngles(aMap,path,w){
 			if (xx <2 || xx >=800 - 2){
 				continue;
 			}
+			var y1 = line1.m*(xx-line1.x)+line1.y;
+			var y2 = line2.m*(xx-line2.x)+line2.y;
+			console.log(xx,y1,y2);
 			for (var iii=-1*w;iii<w+1;iii++){
 				var yy = cy+iii;
 				if (yy <2 || yy >=600 - 2){
@@ -415,8 +418,7 @@ function pathToAngles(aMap,path,w){
 				}
 				
 				
-				var y1 = line1.m*(xx-line1.x)+line1.y;
-				var y2 = line2.m*(xx-line2.x)+line2.y;
+				
 				if ((yy >= y1 && yy <= y2) || (yy <= y1 && yy >= y2)){
 					var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
 					if (d <= ww){
