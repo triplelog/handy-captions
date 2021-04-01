@@ -521,10 +521,12 @@
 						}
 						var rc = Math.floor(Math.random()*360);
 						//rc = allAngles[y][x];
-						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
-							if (allAngles[y-maxBlock+1][chain[x-maxBlock+1]] > -1){
-								rc = allAngles[y-maxBlock+1][chain[x-maxBlock+1]];
-								break;
+						if (y-maxBlock+1>= yMin){
+							for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
+								if (allAngles[y-maxBlock+1][chain[x-maxBlock+1]] > -1){
+									rc = allAngles[y-maxBlock+1][chain[x-maxBlock+1]];
+									break;
+								}
 							}
 						}
 						for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
