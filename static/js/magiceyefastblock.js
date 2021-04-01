@@ -697,8 +697,8 @@
 												op = 0.75;
 											}
 											
-											if (allDelays[y-(x-xi)+1] && allDelays[y-(x-xi)+1][chain[y-(x-xi)+1][iii]] > -1){
-												delay = allDelays[y-(x-xi)+1][chain[y-(x-xi)+1][iii]];
+											if (allDelays[y-(x-xi)+1] && allDelays[y-(x-xi)+1][chain[x-(x-xi)+1][iii]] > -1){
+												delay = allDelays[y-(x-xi)+1][chain[x-(x-xi)+1][iii]];
 											}
 											if (!delay){delay = 0;}
 											if (delay < 0){delay = 0;}
