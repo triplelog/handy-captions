@@ -159,7 +159,7 @@
 			div.style.lineHeight = sz+"px";
 			if (Math.random() < 0.5){
 				//div.style.filter = "hue-rotate("+(Math.random()*360)+"deg)";
-				div.style.animationName = 'rotateColor2';
+				div.style.animationName = 'chgB2';
 			}
 			div.style.animationDuration = rc/100+"s";
 			div.innerHTML = idxToEmoji[idx];
