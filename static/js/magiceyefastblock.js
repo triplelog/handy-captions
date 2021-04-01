@@ -159,6 +159,9 @@
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
 			div.style.animationDelay = (delay*5.0)+'s';
+			if (delay <0.01 || delay > 0.99){
+				div.style.animationIterationCount = '1';
+			}
 			if (rc < 0){
 				var iDiv = div.querySelector('div');
 				iDiv.innerHTML = idxToEmoji[7];
