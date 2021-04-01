@@ -157,12 +157,15 @@
 			div.style.width = sz+"px";
 			div.style.fontSize = sz+"px";
 			div.style.lineHeight = sz+"px";
+			iDiv.style.animationDelay = (Math.random()*10)+'s';
 			if (rc < 0){
 				var iDiv = div.querySelector('div');
 				iDiv.innerHTML = idxToEmoji[7];
+				
 			}
 			else {
 				var iDiv = div.querySelector('div');
+				idx = 7;
 				iDiv.innerHTML = idxToEmoji[idx];
 				iDiv.style.transform = 'rotate('+rc+'deg)';
 				iDiv.style.opacity = op;
