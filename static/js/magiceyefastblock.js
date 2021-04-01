@@ -288,6 +288,12 @@
               
               
             }
+            else {
+            	if (z > 0.5){
+					allAngles[y][left] = 0;
+					allAngles[y][right] = 0;
+				  }
+            }
           }
         }
 		
