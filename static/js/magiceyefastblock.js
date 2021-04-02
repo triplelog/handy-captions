@@ -198,7 +198,7 @@
           rows = opts.rows,
           numColors = opts.colors.length,
           same, // points to a pixel to the right
-          dpi = 36, // assuming output of 72 dots per inch
+          dpi = 18, // assuming output of 72 dots per inch
           eyeSep = Math.round(2.5 * dpi), // eye separation assumed to be 2.5 inches
           mu = (1 / 3), // depth of field (fraction of viewing distance)
           pixels = new Uint8ClampedArray(width * height * 4);
