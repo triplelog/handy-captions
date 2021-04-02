@@ -132,15 +132,15 @@
   }
   for (var i=9;i<10;i++){
 	  for (var y=60+i*5;y<60+i*5+200;y++){
-		  for (var x=160+i*5;x<160+i*5+60;x++){
+		  for (var x=210+i*5;x<210+i*5+60;x++){
 		  
-			  dMap[y][x] = [(i+1)/10,0,0];
+			  dMap[Math.floor(y/2)][Math.floor(x/2)] = [(i+1)/10,0,0];
 		  }
 	  }
 	  for (var y=60+i*5+200;y<60+i*5+260;y++){
-		  for (var x=160+i*5;x<160+i*5+360;x++){
+		  for (var x=210+i*5;x<210+i*5+360;x++){
 		  
-			  dMap[y][x] = [(i+1)/10,90,0.5];
+			  dMap[Math.floor(y/2)][Math.floor(x/2)] = [(i+1)/10,90,0.5];
 		  }
 	  }
   }
