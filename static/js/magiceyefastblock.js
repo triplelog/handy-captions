@@ -130,6 +130,7 @@
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
       	for (var i in emojis){
+      		break;
       		var e = parseInt(emojis[i]);
       		var sz = parseFloat(emojiLocations[y][e].sz);
       		var rc = parseInt(emojiLocations[y][e].color);
@@ -330,9 +331,12 @@
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
-            rgba[0] = 192 + Math.floor(Math.random()*64);
-            rgba[1] = 192 + Math.floor(Math.random()*64);
-            rgba[2] = 192 + Math.floor(Math.random()*64);
+            //rgba[0] = 192 + Math.floor(Math.random()*64);
+            //rgba[1] = 192 + Math.floor(Math.random()*64);
+            //rgba[2] = 192 + Math.floor(Math.random()*64);
+            rgba[0] = Math.floor(seeded[0][y][x]*256);
+            rgba[1] = Math.floor(seeded[0][y][x]*256);
+            rgba[2] = Math.floor(seeded[0][y][x]*256);
             /*for (var i=0;i<chain[x].length;i++){
 				if (allAngles[y][chain[x][i]] > -1){
 					rgba[0] = Math.floor(allAngles[y][chain[x][i]]/360*255);
