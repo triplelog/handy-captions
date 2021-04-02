@@ -359,6 +359,9 @@
 		
 		this.helpers.setEmojis(0,seeded,width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.99);
 		
+		if (y == 300){
+			console.log(chain);
+		}
 		allSame[y]=same;
         allChains[y]=chain;
       }
