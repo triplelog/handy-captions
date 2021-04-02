@@ -20,6 +20,7 @@
         imageType: 'png',
         rows: [0,-1],
         fullColors: [],
+        seeded: [],
         colors: [
           [255, 255, 255, 255],
           [0, 0, 0, 255]
@@ -64,6 +65,7 @@
         depthMap: depthMap,
         rows: opts.rows,
         fullColors: opts.fullColors,
+        seeded: opts.seeded,
         colors: opts.colors
       });
       
@@ -520,9 +522,9 @@
 					var vbn = 60;
 			
 					var xi = x;
-					console.log(idx,y,x);
-					console.log(seeded[idx*3]);
-					console.log(seeded[idx*3][y]);
+					//console.log(idx,y,x);
+					//console.log(seeded[idx*3]);
+					//console.log(seeded[idx*3][y]);
 					var maxBlock = 16 + Math.floor(seeded[idx*3][y][x] * 14);
 					var minBlock = 4 + Math.floor(seeded[idx*3+1][y][x] * 8);
 					
