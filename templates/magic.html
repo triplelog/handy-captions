@@ -197,7 +197,7 @@ function reRender() {
 	  for (var y=60 + i*180;y<60+i*180+90;y++){
 		  for (var x=110;x<110+90;x++){
 	  
-			if (1 == skipI % 3 && Math.floor(skipI/3) == i){
+			if (0 == skipI % 3 && Math.floor(skipI/3) == i){
 			  dMap[y][x] = [0,0,0];
 			}
 			else {
@@ -214,7 +214,7 @@ function reRender() {
 		  }
 		  for (var x=470;x<470+90;x++){
 	  
-			if (1 == skipI % 3 && Math.floor(skipI/3) == i){
+			if (2 == skipI % 3 && Math.floor(skipI/3) == i){
 			  dMap[y][x] = [0,0,0];
 			}
 			else {
