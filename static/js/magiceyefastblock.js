@@ -206,6 +206,7 @@
 	  	yMin = rows[0];
 	  	yMax = rows[1];
 	  }
+	  var seeded = opts.seeded;
       // for each row
       var allChains = {};
       var emojiBlock = {};
@@ -354,7 +355,7 @@
 		
 		emojiBlock[y]={};
 		
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.99);
+		this.helpers.setEmojis(0,seeded,width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.99);
 		
 		allSame[y]=same;
         allChains[y]=chain;
@@ -369,7 +370,7 @@
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.99);
+		this.helpers.setEmojis(1,seeded,width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.99);
 		
       }
       for (y = yMin; y < yMax; y++) {
@@ -380,7 +381,7 @@
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.98);
+		this.helpers.setEmojis(2,seeded,width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.98);
 		
       }
       for (y = yMin; y < yMax; y++) {
@@ -391,7 +392,7 @@
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.97);
+		this.helpers.setEmojis(3,seeded,width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.97);
 		
       }
       for (y = yMin; y < yMax; y++) {
@@ -402,7 +403,7 @@
       	for (x = 0; x < width; x++) {
           sameColors[y][x] = Math.random();
         }
-		this.helpers.setEmojis(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.96);
+		this.helpers.setEmojis(4,seeded,width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,0.96);
 		
       }
       /*var chMax = 25;
@@ -500,7 +501,7 @@
           255
         ] : null;
       },
-      setEmojis: function(width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,skipP) {
+      setEmojis: function(idx,seeded,width,yMin,y,same,chain,emojiBlock,emojiLocations,sameColors,allAngles,allDelays,skipP) {
       		var angleP = 1;
       		var rAngle = 120;
       		
@@ -519,11 +520,11 @@
 					var vbn = 60;
 			
 					var xi = x;
-					//var maxBlock = 16 + Math.floor(seeded[idx*3][y][x] * 14);
-					//var minBlock = 4 + Math.floor(seeded[idx*3+1][y][x] * 8);
+					var maxBlock = 16 + Math.floor(seeded[idx*3][y][x] * 14);
+					var minBlock = 4 + Math.floor(seeded[idx*3+1][y][x] * 8);
 					
-					var maxBlock = 16;
-					var minBlock = 4;
+					//var maxBlock = 16;
+					//var minBlock = 4;
 					
 					/*if (seeded[idx*3+2][y][x] < skipP){
 						block = false;

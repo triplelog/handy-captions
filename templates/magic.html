@@ -123,11 +123,21 @@
 
   
   var dMap = [];
+  var seeded = [];
+  for (var idx=0;idx<15;idx++){
+  	seeded.push([]);
+  }
   for (var y=0;y<600;y++){
   	  dMap.push([]);
+  	  for (var idx=0;idx<15;idx++){
+		seeded[idx].push([]);
+	  }
 	  for (var x=0;x<800;x++){
 	  	  
   		  dMap[y].push([0,0,0]);
+  		  for (var idx=0;idx<15;idx++){
+			seeded[idx][y].push((mulberry((y + 600*idx)*width + x) % 1024) / 1024);
+		  }
 	  }
   }
   for (var i=9;i<10;i++){
@@ -150,6 +160,7 @@
     el: 'magiceye',
     s: 72,
     fullColors: fullColors,
+    seeded: seeded,
     depthMap: dMap
   });
 
@@ -310,6 +321,7 @@ function createDepthMap(){
 			el: 'magiceye',
 			s: 72,
 			fullColors: fullColors,
+			seeded: seeded,
 			depthMap: dMap,
 		  });
 
