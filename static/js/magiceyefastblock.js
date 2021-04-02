@@ -327,9 +327,9 @@
           if (same[x] === x) {
             // set random color
             rgba = colorsFG[x];
-            rgba[0] = 128 + Math.floor(Math.random()*128);
-            rgba[1] = 128 + Math.floor(Math.random()*128);
-            rgba[2] = 128 + Math.floor(Math.random()*128);
+            rgba[0] = 192 + Math.floor(Math.random()*64);
+            rgba[1] = 192 + Math.floor(Math.random()*64);
+            rgba[2] = 192 + Math.floor(Math.random()*64);
             /*for (var i=0;i<chain[x].length;i++){
 				if (allAngles[y][chain[x][i]] > -1){
 					rgba[0] = Math.floor(allAngles[y][chain[x][i]]/360*255);
@@ -519,13 +519,16 @@
 					var vbn = 60;
 			
 					var xi = x;
-					var maxBlock = 16 + Math.floor(Math.random() * 14);
-					var minBlock = 4 + Math.floor(Math.random() * 8);
+					//var maxBlock = 16 + Math.floor(seeded[idx*3][y][x] * 14);
+					//var minBlock = 4 + Math.floor(seeded[idx*3+1][y][x] * 8);
 					
-					if (Math.random() < skipP){
+					var maxBlock = 16;
+					var minBlock = 4;
+					
+					/*if (seeded[idx*3+2][y][x] < skipP){
 						block = false;
 						continue;
-					}
+					}*/
 			
 			
 					
