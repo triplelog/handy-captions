@@ -233,8 +233,10 @@ function reRender() {
   
   if (allRendered){
   	for (var i=0;i<9;i++){
-  		var el = document.getElementById('magiceye'+i);
-		el.style.display = "none";
+  		if (i != skipI){
+			var el = document.getElementById('magiceye'+i);
+			el.style.display = "none";
+		}
   	}
   	var el = document.getElementById('magiceye'+skipI);
 	el.style.display = "inline-block";
