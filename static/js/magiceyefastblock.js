@@ -169,7 +169,7 @@
 			}
 			else {
 				var iDiv = div.querySelector('div');
-				iDiv.innerHTML = idxToEmoji[idx];
+				iDiv.innerHTML = idxToEmoji[3];
 				iDiv.style.transform = 'rotate('+rc+'deg)';
 				iDiv.style.opacity = op;
 			}
