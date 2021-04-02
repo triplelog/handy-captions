@@ -94,7 +94,7 @@
 	noise.seed(Math.random());
   var colorChain = {};
   var fullColors = [];
-  var skipI = 0;
+  
   for (var i=0;i<600;i++){
   	colorChain[i]={};
   	var height = 600;
@@ -145,6 +145,7 @@
 		  }
 	  }
   }
+  var skipI = -1;
   reRender();
 
 var allRendered = false;
