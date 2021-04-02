@@ -335,8 +335,8 @@
             //rgba[1] = 192 + Math.floor(Math.random()*64);
             //rgba[2] = 192 + Math.floor(Math.random()*64);
             rgba[0] = Math.floor(seeded[0][y][x]*256);
-            rgba[1] = Math.floor(seeded[0][y][x]*256);
-            rgba[2] = Math.floor(seeded[0][y][x]*256);
+            rgba[1] = Math.floor(seeded[1][y][x]*256);
+            rgba[2] = Math.floor(seeded[2][y][x]*256);
             /*for (var i=0;i<chain[x].length;i++){
 				if (allAngles[y][chain[x][i]] > -1){
 					rgba[0] = Math.floor(allAngles[y][chain[x][i]]/360*255);
