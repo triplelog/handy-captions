@@ -531,10 +531,10 @@
 					//var maxBlock = 16;
 					//var minBlock = 4;
 					
-					/*if (seeded[idx*3+2][y][x] < skipP){
+					if (seeded[idx*3+2][y][x] < skipP){
 						block = false;
 						continue;
-					}*/
+					}
 			
 			
 					
@@ -647,7 +647,7 @@
 											}
 										}
 									}
-									var rc = Math.floor(Math.random()*360);
+									var rc = Math.floor(seeded[idx][y][x]*360);
 									//rc = allAngles[y][x];
 									var rra ={};
 									var maxDiff = 0;
@@ -690,7 +690,7 @@
 										}
 									}
 									
-									rc = rc + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+									rc = rc + Math.floor(seeded[idx][y][x]*360/rAngle - 180/rAngle);
 									
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
@@ -773,7 +773,7 @@
 										}
 									}
 								}
-								var rc = Math.floor(Math.random()*360);
+								var rc = Math.floor(seeded[idx][y][x]*360);
 								//rc = allAngles[y][x];
 								var rra ={};
 								var maxDiff = 0;
@@ -817,7 +817,7 @@
 									}
 								}
 								
-								rc = rc + Math.floor(Math.random()*360/rAngle - 180/rAngle);
+								rc = rc + Math.floor(seeded[idx][y][x]*360/rAngle - 180/rAngle);
 									
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 									if (y-maxBlock+1>= yMin){
