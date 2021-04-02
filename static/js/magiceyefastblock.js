@@ -686,13 +686,13 @@
 									for (var iii=0;iii<chain[x-(x-xi)+1].length;iii++) {
 										if (y-(x-xi)+1>= yMin){
 											var op = 1;
-											if (iii == 0 && chain[x-(x-xi)+1][iii] < 800 - 85){
+											if (iii == 0 && chain[x-(x-xi)+1][iii] < opts.width - 85){
 												op = 0.5;
 											}
 											else if (iii == chain[x-(x-xi)+1].length - 1 && chain[x-(x-xi)+1][iii] > 85){
 												op = 0.5;
 											}
-											else if (iii == 1 && chain[x-(x-xi)+1][iii] < 800 - 170){
+											else if (iii == 1 && chain[x-(x-xi)+1][iii] < opts.width - 170){
 												op = 0.75;
 											}
 											else if (iii == chain[x-(x-xi)+1].length - 2 && chain[x-(x-xi)+1][iii] > 170){
@@ -813,7 +813,7 @@
 								for (var iii=0;iii<chain[x-maxBlock+1].length;iii++) {
 									if (y-maxBlock+1>= yMin){
 										var op = 1;
-										if (iii == 0 && chain[x-maxBlock+1][iii] < 800 - 85){
+										if (iii == 0 && chain[x-maxBlock+1][iii] < opts.width - 85){
 											op = 0.5;
 										}
 										if (iii == chain[x-maxBlock+1].length - 1 && chain[x-maxBlock+1][iii] > 85){
