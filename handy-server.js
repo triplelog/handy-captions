@@ -13,7 +13,6 @@ const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var crypto = require("crypto");
-var Papa = require('papaparse');
 var katex = require('katex');
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/martianmath.com/privkey.pem'),
