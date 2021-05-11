@@ -15,8 +15,8 @@ var nunjucks = require('nunjucks');
 var crypto = require("crypto");
 var katex = require('katex');
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/martianmath.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/martianmath.com/fullchain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/inlinemath.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/inlinemath.com/fullchain.pem')
 };
 const { PerformanceObserver, performance } = require('perf_hooks');
 
