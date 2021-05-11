@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', 
 	
 	function(req, res) {
-		res.write(nunjucks.render('templates/csshole.html',{
+		res.write(nunjucks.render('templates/index.html',{
 		
 		}));
 		res.end();
@@ -49,7 +49,7 @@ app.get('/',
 app.get('/index.html', 
 	
 	function(req, res) {
-		res.write(nunjucks.render('templates/csshole.html',{
+		res.write(nunjucks.render('templates/index.html',{
 		
 		}));
 		res.end();
