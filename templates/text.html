@@ -219,14 +219,16 @@ function inputCancel(evt){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+'cancel';
 	}
 	isDown = false;
-	curveWorker.postMessage({'type':'up','x':evt.clientX/inputW,'y':evt.clientY/inputH});
+	bcr = evt.currentTarget.getBoundingClientRect();
+	curveWorker.postMessage({'type':'up','x':(evt.clientX-bcr.left)/inputW,'y':(evt.clientY-bcr.top)/inputH});
+		
 }
 function inputDown(evt) {
 	evt.preventDefault();
 	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType;
-		console.log(evt.clientY, evt.currentTarget.getBoundingClientRect().top)
-		curveWorker.postMessage({'type':'down','x':evt.clientX/inputW,'y':evt.clientY/inputH});
+		bcr = evt.currentTarget.getBoundingClientRect();
+		curveWorker.postMessage({'type':'down','x':(evt.clientX-bcr.left)/inputW,'y':(evt.clientY-bcr.top)/inputH});
 		isDown = true;
 	}
 	else {
@@ -237,7 +239,9 @@ function inputMove(evt) {
 	evt.preventDefault();
 	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"move";
-		curveWorker.postMessage({'type':'move','x':evt.clientX/inputW,'y':evt.clientY/inputH});
+		bcr = evt.currentTarget.getBoundingClientRect();
+		curveWorker.postMessage({'type':'move','x':(evt.clientX-bcr.left)/inputW,'y':(evt.clientY-bcr.top)/inputH});
+		
 	}
 	else {
 	}
@@ -247,8 +251,9 @@ function inputUp(evt) {
 	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
 		document.getElementById('pointerType').innerHTML = evt.pointerType+"up";
 		isDown = false;
+		bcr = evt.currentTarget.getBoundingClientRect();
+		curveWorker.postMessage({'type':'up','x':(evt.clientX-bcr.left)/inputW,'y':(evt.clientY-bcr.top)/inputH});
 		
-		curveWorker.postMessage({'type':'up','x':evt.clientX/inputW,'y':evt.clientY/inputH});
 	}
 	else {
 	}
