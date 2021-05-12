@@ -18,20 +18,18 @@
 <style>
 
 .input {
-	position: absolute;
+	position: relative;
 	left: 0px;
 	top:0px;
-	display: block;
+	display: inline-block;
 	border: 1px solid black;
 	touch-action: none;
 	
 }
 
 .o2 {
-	position: absolute;
-	left: 50%;
-	top: 0%;
-	display: block;
+	position: relative;
+	display: inline-block;
 	border: 1px solid red;
 	background: gray;
 	/*display: none;*/
@@ -227,7 +225,7 @@ function inputDown(evt) {
 	evt.preventDefault();
 	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
 		document.getElementById('pointerType').innerHTML = evt.pointerType;
-		console.log(evt.clientY/inputH);
+		console.log(evt.clientY, evt.target.clientTop)
 		curveWorker.postMessage({'type':'down','x':evt.clientX/inputW,'y':evt.clientY/inputH});
 		isDown = true;
 	}
