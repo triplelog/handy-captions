@@ -135,10 +135,10 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 						rInt *= 10;
 					}
 					
-					//landValue.push_back(rInt);
-					if (rInt > 0){
-						landValueMap[row*6298+col]=rInt;
-					}
+					landValue.push_back(rInt);
+					//if (rInt > 0){
+					//	landValueMap[row*6298+col]=rInt;
+					//}
 					col++;
 					isDecimal = false;
 					rInt = 0;
@@ -158,11 +158,11 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					rInt *= 10;
 				}
 				
-				if (rInt > 0){
-					landValueMap[row*6298+col]=rInt;
-				}
+				//if (rInt > 0){
+				//	landValueMap[row*6298+col]=rInt;
+				//}
 				col++;
-				//landValue.push_back(rInt);
+				landValue.push_back(rInt);
 			}
 			
 			row++;
@@ -172,7 +172,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
-	row = 7;
+	row = landValue.size();
 	
 
 	
