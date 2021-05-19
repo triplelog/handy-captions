@@ -28,7 +28,7 @@ const User = require('./models/user');
 const UserData = require('./models/userdata');*/
 
 
-var retHello = maincpp.hello(7,3);
+var retHello = maincpp.hello(7,3,2,4,5,4,3,8);
 console.log(retHello);
 
 

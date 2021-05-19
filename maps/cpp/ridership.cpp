@@ -77,14 +77,20 @@ int main(int argc, char *argv[]) {
 }
 */
 
-
+std::vector<int> landValue;
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	v8::Isolate* isolate = info.GetIsolate();
 	v8::Local<v8::Context> context = isolate->GetCurrentContext();
-	int row1 = info[0]->Int32Value(context).FromJust();
-	int row2 = info[1]->Int32Value(context).FromJust();
-	int row = row1 + row2;
+	int sz = info[0]->Int32Value(context).FromJust();
+	int i;
+	int row = 0;
+	for (i=1;i<sz+1;i++){
+		int row1 = info[i]->Int32Value(context).FromJust();
+		row += row1;
+	}
+	
+
 	//v8::String::Utf8Value s(isolate, info[0]);
 	//std::string str(*s);
 	
