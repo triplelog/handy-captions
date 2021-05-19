@@ -114,13 +114,50 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
 	
 	int row = 0;
+	int i;
 	std::ifstream file("maps/usa_pop.csv");
 	if (file.is_open()) {
 		std::string line;
 		while (std::getline(file, line)) {
 			// using printf() in all tests for consistency
 			//printf("%s", line.c_str());
+			char myword[] = line.c_str();
+			int len = strlen(myword);
+			int rInt = 0;
+			bool isDecimal = false;
+			int cols = 0;
+			for (i=0;i<len;i++){
+				if (myword[i] == ','){
+					if (!isDecimal){
+						rInt *= 10;
+					}
+					landValue.push_back(rInt);
+					cols++;
+					isDecimal = false;
+					rInt = 0;
+				}
+				else if (myword[i] == '.'){
+					rInt *= 10;
+					rInt += myword[i+1] - '0';
+					isDecimal = true;
+				}
+				else if (!isDecimal){
+					rInt *= 10;
+					rInt += myword[i] - '0';
+				}
+			}
+			if (len > 0 && myword[len-1] != ','){
+				if (!isDecimal){
+					rInt *= 10;
+				}
+				landValue.push_back(rInt);
+				cols++;
+			}
+			
 			row++;
+			if (row > 100){
+				break;
+			}
 		}
 		file.close();
 	}
