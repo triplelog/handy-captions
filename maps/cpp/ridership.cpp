@@ -147,7 +147,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 						if (col > rightCol){rightCol = col;}
 					}
 					col++;
-					landValue.push_back(rInt);
+					//landValue.push_back(rInt);
 					isDecimal = false;
 					rInt = 0;
 				}
@@ -172,7 +172,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					if (col > rightCol){rightCol = col;}
 				}
 				col++;
-				landValue.push_back(rInt);
+				//landValue.push_back(rInt);
 			}
 			
 			row++;
@@ -206,8 +206,8 @@ void GetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int row = info[0]->Int32Value(context).FromJust();
 	int col = info[1]->Int32Value(context).FromJust();
 	
-	int retInt = landValue[row*6298+col];
-	
+	//int retInt = landValue[row*6298+col];
+	int retInt = 7;
 	
 
 	
