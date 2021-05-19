@@ -18,6 +18,7 @@
 #include <iostream>
 #include <array>
 #include <vector>
+#include <fstream>
 
 
 /*
@@ -110,17 +111,20 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	v8::Isolate* isolate = info.GetIsolate();
 	v8::Local<v8::Context> context = isolate->GetCurrentContext();
 	
-	v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
+	//v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
 	
-	int sz = jsArr->Length();
-	int i;
 	int row = 0;
-	for (i=0;i<1;i++){
-		v8::Local<v8::Value> jsElement = jsArr->Get(i);
-		int row1 = jsElement->Int32Value(context).FromJust();
-		row += row1;
-		landValue.push_back(row1);
+	std::ifstream file("lv.csv");
+	if (file.is_open()) {
+		std::string line;
+		while (std::getline(file, line)) {
+			// using printf() in all tests for consistency
+			//printf("%s", line.c_str());
+			row++;
+		}
+		file.close();
 	}
+
 	
 
 	//v8::String::Utf8Value s(isolate, info[0]);
@@ -132,7 +136,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//info.GetReturnValue().Set(h.ToLocalChecked());
 	
 	
-	info.GetReturnValue().Set(sz);
+	info.GetReturnValue().Set(row);
 }
 
 void Init(v8::Local<v8::Object> exports) {
