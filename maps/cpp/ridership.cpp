@@ -116,7 +116,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int i;
 	int row = 0;
 	for (i=0;i<sz;i++){
-		v8::Local<v8::Value> jsElement = jsArr->Get(i);
+		v8::Local<v8::Value> jsElement = jsArr[i];
 		int row1 = jsElement->Int32Value(context).FromJust();
 		row += row1;
 		landValue.push_back(row1);
