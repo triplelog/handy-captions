@@ -172,7 +172,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
-	//row = landValue.size();
+	row = landValue.size();
 	
 
 	
@@ -196,8 +196,7 @@ void GetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int row = info[0]->Int32Value(context).FromJust();
 	int col = info[1]->Int32Value(context).FromJust();
 	
-	//int retInt = landValue[row*6298+col];
-	int retInt = 7;
+	int retInt = landValue[row*3333+col];
 	
 
 	
