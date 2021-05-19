@@ -82,7 +82,9 @@ int main(int argc, char *argv[]) {
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	v8::Isolate* isolate = info.GetIsolate();
 	v8::Local<v8::Context> context = isolate->GetCurrentContext();
-	int row = info[0]->Int32Value(context).FromJust();
+	int row1 = info[0]->Int32Value(context).FromJust();
+	int row2 = info[1]->Int32Value(context).FromJust();
+	int row = row1 + row2;
 	//v8::String::Utf8Value s(isolate, info[0]);
 	//std::string str(*s);
 	
