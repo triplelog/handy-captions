@@ -122,13 +122,13 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			// using printf() in all tests for consistency
 			//printf("%s", line.c_str());
 			int len = line.length();
-			char myword[len] = line.c_str();
+			
 			
 			int rInt = 0;
 			bool isDecimal = false;
 			int cols = 0;
 			for (i=0;i<len;i++){
-				if (myword[i] == ','){
+				if (line[i] == ','){
 					if (!isDecimal){
 						rInt *= 10;
 					}
@@ -137,17 +137,17 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					isDecimal = false;
 					rInt = 0;
 				}
-				else if (myword[i] == '.'){
+				else if (line[i] == '.' && i < len -1 && line[i+1] != ','){
 					rInt *= 10;
-					rInt += myword[i+1] - '0';
+					rInt += line[i+1] - '0';
 					isDecimal = true;
 				}
 				else if (!isDecimal){
 					rInt *= 10;
-					rInt += myword[i] - '0';
+					rInt += line[i] - '0';
 				}
 			}
-			if (len > 0 && myword[len-1] != ','){
+			if (len > 0 && line[len-1] != ','){
 				if (!isDecimal){
 					rInt *= 10;
 				}
