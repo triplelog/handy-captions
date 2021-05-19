@@ -96,6 +96,6 @@ void Init(v8::Local<v8::Object> exports) {
                    .ToLocalChecked());
 }
 
-NODE_MODULE(helloarray, Init)
+NODE_MODULE(binding, Init)
 
 
