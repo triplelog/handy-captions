@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 */
 
 std::vector<int> landValue;
-std::map<int,int> landValueMap;
+//std::map<int,int> landValueMap;
 
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
@@ -172,7 +172,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
-	row = landValue.size();
+	//row = landValue.size();
 	
 
 	
