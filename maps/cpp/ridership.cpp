@@ -77,15 +77,22 @@ int main(int argc, char *argv[]) {
 }
 */
 
+
+
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
-	//v8::Isolate* isolate = info.GetIsolate();
-	//v8::Local<v8::Context> context = isolate->GetCurrentContext();
-	//int row = info[0]->Int32Value(context).FromJust();
+	v8::Isolate* isolate = info.GetIsolate();
+	v8::Local<v8::Context> context = isolate->GetCurrentContext();
+	int row = info[0]->Int32Value(context).FromJust();
 	//v8::String::Utf8Value s(isolate, info[0]);
 	//std::string str(*s);
-	std::string out("hello world");
-	Nan::MaybeLocal<v8::String> h = Nan::New<v8::String>(out);
-	info.GetReturnValue().Set(h.ToLocalChecked());
+	
+	
+	//std::string out("hello world");
+	//Nan::MaybeLocal<v8::String> h = Nan::New<v8::String>(out);
+	//info.GetReturnValue().Set(h.ToLocalChecked());
+	
+	
+	info.GetReturnValue().Set(row.ToLocalChecked());
 }
 
 void Init(v8::Local<v8::Object> exports) {
