@@ -17,8 +17,8 @@ var nunjucks = require('nunjucks');
 var crypto = require("crypto");
 
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/inlinemath.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/inlinemath.com/fullchain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/martianmath.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/martianmath.com/fullchain.pem')
 };
 
 
@@ -51,7 +51,7 @@ app.get('/',
 
 const server1 = https.createServer(options, app);
 
-server1.listen(12312);
+server1.listen(1337);
 
 const server = https.createServer(options, (req, res) => {
   res.writeHead(200);
