@@ -27,6 +27,12 @@ mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: tr
 const User = require('./models/user');
 const UserData = require('./models/userdata');*/
 
+
+var retHello = maincpp.hello();
+console.log(retHello);
+
+
+
 var express = require('express');
 
 
