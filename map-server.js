@@ -20,7 +20,7 @@ const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/inlinemath.com/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/inlinemath.com/fullchain.pem')
 };
-const { PerformanceObserver, performance } = require('perf_hooks');
+
 
 /*const mongoose = require('mongoose');
 mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
