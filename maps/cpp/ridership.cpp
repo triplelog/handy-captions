@@ -81,18 +81,18 @@ int main(int argc, char *argv[]) {
 std::vector<int> landValue;
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
-	v8::Isolate* isolate = info.GetIsolate();
-	v8::Local<v8::Context> context = isolate->GetCurrentContext();
+	//v8::Isolate* isolate = info.GetIsolate();
+	//v8::Local<v8::Context> context = isolate->GetCurrentContext();
 	
-	v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
+	//v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
 	
-	int sz = info[0]->Int32Value(context).FromJust();
-	int i;
-	int row = 0;
-	for (i=1;i<sz+1;i++){
-		int row1 = info[i]->Int32Value(context).FromJust();
-		row += row1;
-	}
+	//int sz = info[0]->Int32Value(context).FromJust();
+	//int i;
+	//int row = 0;
+	//for (i=1;i<sz+1;i++){
+	//	int row1 = info[i]->Int32Value(context).FromJust();
+	//	row += row1;
+	//}
 	
 
 	//v8::String::Utf8Value s(isolate, info[0]);
@@ -104,7 +104,7 @@ void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//info.GetReturnValue().Set(h.ToLocalChecked());
 	
 	
-	info.GetReturnValue().Set(row);
+	//info.GetReturnValue().Set(row);
 }
 
 void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
