@@ -121,7 +121,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		while (std::getline(file, line)) {
 			// using printf() in all tests for consistency
 			//printf("%s", line.c_str());
-			int len = strlen(line);
+			int len = strlen(line.c_str());
 			char myword[len] = line.c_str();
 			
 			int rInt = 0;
