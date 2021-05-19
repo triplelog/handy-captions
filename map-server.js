@@ -31,8 +31,13 @@ const UserData = require('./models/userdata');*/
 var retHello = maincpp.hello();
 console.log(retHello);
 
-var retGLV = maincpp.getLandValue(700,1500);
-console.log(retGLV);
+for (var i=0;i<14;i++){
+	for (var ii=0;ii<33;ii++){
+		var retGLV = maincpp.getLandValue(i*100,ii*100);
+		console.log(i,ii,retGLV);
+	}
+}
+
 
 var express = require('express');
 
