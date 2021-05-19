@@ -126,7 +126,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	}
 	
 
-    std::ofstream ofs("~/handy-captions/maps/newfile.txt");
+    std::ofstream ofs("./newfile.txt");
     ofs << "this is some text in the new file\n"; 
     ofs.close();
 
