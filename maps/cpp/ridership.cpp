@@ -79,10 +79,8 @@ int main(int argc, char *argv[]) {
 */
 
 std::vector<int> landValue;
-int topRow;
-int botRow;
-int leftCol;
-int rightCol;
+std::map<int,int> landValueMap;
+
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//v8::Isolate* isolate = info.GetIsolate();
@@ -119,10 +117,6 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int row = 0;
 	int i;
-	topRow = -1;
-	botRow = 0;
-	leftCol = -1;
-	rightCol = -1;
 	std::ifstream file("maps/usa_pop.csv");
 	if (file.is_open()) {
 		std::string line;
@@ -140,14 +134,12 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					if (!isDecimal){
 						rInt *= 10;
 					}
+					
+					//landValue.push_back(rInt);
 					if (rInt > 0){
-						//if (topRow == -1){topRow = row;}
-						//botRow = row;
-						//if (leftCol == -1 || col < leftCol){leftCol = col;}
-						if (col > rightCol){rightCol = col;}
+						landValueMap[row*6298+col]=rInt;
 					}
 					col++;
-					//landValue.push_back(rInt);
 					isDecimal = false;
 					rInt = 0;
 				}
@@ -165,11 +157,9 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 				if (!isDecimal){
 					rInt *= 10;
 				}
+				
 				if (rInt > 0){
-					//if (topRow == -1){topRow = row;}
-					//botRow = row;
-					//if (leftCol == -1 || col < leftCol){leftCol = col;}
-					if (col > rightCol){rightCol = col;}
+					landValueMap[row*6298+col]=rInt;
 				}
 				col++;
 				//landValue.push_back(rInt);
@@ -182,7 +172,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
-	row = rightCol;
+	row = 7;
 	
 
 	
