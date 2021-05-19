@@ -18,7 +18,6 @@
 #include <iostream>
 #include <array>
 #include <vector>
-#include <filesystem>
 #include <fstream>
 
 
@@ -126,10 +125,8 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		file.close();
 	}
 	
-	std::filesystem::path path{ "~/handy-captions/maps" }; //creates TestingFolder object on C:
-    path /= "file.txt"; //put something into there
-    
-    std::ofstream ofs(path);
+
+    std::ofstream ofs("~/handy-captions/maps/newfile.txt");
     ofs << "this is some text in the new file\n"; 
     ofs.close();
 
