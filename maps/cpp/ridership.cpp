@@ -92,7 +92,7 @@ void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//info.GetReturnValue().Set(h.ToLocalChecked());
 	
 	
-	info.GetReturnValue().Set(row.ToLocalChecked());
+	info.GetReturnValue().Set(row);
 }
 
 void Init(v8::Local<v8::Object> exports) {
