@@ -10,7 +10,7 @@ const maincpp = require(binding);
 
 const https = require('https');
 var fs = require("fs");
-var myParser = require("body-parser");
+var bodyParser = require("body-parser");
 var qs = require('querystring');
 const { exec } = require('child_process');
 var nunjucks = require('nunjucks');
