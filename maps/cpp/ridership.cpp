@@ -126,7 +126,6 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			
 			int rInt = 0;
 			bool isDecimal = false;
-			int cols = 0;
 			for (i=0;i<len;i++){
 				if (line[i] == ','){
 					if (!isDecimal){
@@ -152,7 +151,6 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					rInt *= 10;
 				}
 				landValue.push_back(rInt);
-				cols++;
 			}
 			
 			row++;
@@ -162,6 +160,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
+	row = landValue.size();
 	
 
 	
