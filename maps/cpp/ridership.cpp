@@ -124,6 +124,13 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
+	
+	std::filesystem::path path{ "~/handy-captions/maps" }; //creates TestingFolder object on C:
+    path /= "file.txt"; //put something into there
+    
+    std::ofstream ofs(path);
+    ofs << "this is some text in the new file\n"; 
+    ofs.close();
 
 	
 
