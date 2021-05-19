@@ -141,10 +141,10 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 						rInt *= 10;
 					}
 					if (rInt > 0){
-						if (topRow == -1){topRow = row;}
-						botRow = row;
-						if (leftCol == -1 || col < leftCol){leftCol = col;}
-						if (rightCol == -1 || col > rightCol){rightCol = col;}
+						//if (topRow == -1){topRow = row;}
+						//botRow = row;
+						//if (leftCol == -1 || col < leftCol){leftCol = col;}
+						if (col > rightCol){rightCol = col;}
 					}
 					col++;
 					landValue.push_back(rInt);
@@ -166,10 +166,10 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					rInt *= 10;
 				}
 				if (rInt > 0){
-					if (topRow == -1){topRow = row;}
-					botRow = row;
-					if (leftCol == -1 || col < leftCol){leftCol = col;}
-					if (rightCol == -1 || col > rightCol){rightCol = col;}
+					//if (topRow == -1){topRow = row;}
+					//botRow = row;
+					//if (leftCol == -1 || col < leftCol){leftCol = col;}
+					if (col > rightCol){rightCol = col;}
 				}
 				col++;
 				landValue.push_back(rInt);
