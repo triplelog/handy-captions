@@ -114,7 +114,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
 	
 	int row = 0;
-	std::ifstream file("lv.csv");
+	std::ifstream file("maps/usa_pop.csv");
 	if (file.is_open()) {
 		std::string line;
 		while (std::getline(file, line)) {
@@ -125,10 +125,6 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		file.close();
 	}
 	
-
-    std::ofstream ofs("./newfile.txt");
-    ofs << "this is some text in the new file\n"; 
-    ofs.close();
 
 	
 
