@@ -132,7 +132,6 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 						rInt *= 10;
 					}
 					landValue.push_back(rInt);
-					cols++;
 					isDecimal = false;
 					rInt = 0;
 				}
