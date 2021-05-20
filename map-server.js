@@ -31,9 +31,9 @@ const UserData = require('./models/userdata');*/
 var retHello = maincpp.hello();//array is 2310 columns and 995 rows
 console.log(retHello);
 
-var ptArray = [[-122.490402, 37.786453,10],[-122.490402, 47.786453,20],[-102.490402, 37.786453,5]];
+//var ptArray = [[-122.490402, 37.786453,10],[-122.490402, 47.786453,20],[-102.490402, 37.786453,5]];
+var ptArray = [];
 
-/*
 double yToLat(double y){
 	double lat = -0.02499999989999999*y + 71.38708322329654;
 }
@@ -48,9 +48,9 @@ for (var i=0;i<995;i++){
 		if (i%200 == 0 && ii%500 == 0){
 			console.log(i,ii,retGLV);
 		}
-		ptArray.append()
+		ptArray.append([0.0249999999*ii - 179.14708263665557,-0.02499999989999999*i + 71.38708322329654,5]);
 	}
-}*/
+}
 
 
 var express = require('express');
