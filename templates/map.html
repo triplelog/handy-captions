@@ -112,7 +112,11 @@ svg.on('mouseup', function (event) {
 
 function pathToGrid(pid){
 	var el = document.getElementById(pid);
-	console.log(el.getTotalLength());
+	var len = el.getTotalLength();
+	console.log(len);
+	for (var i=0;i<len;i+=0.1){
+		console.log(el.getPointAtLength(i));
+	}
 }
 </script>
 </body>
