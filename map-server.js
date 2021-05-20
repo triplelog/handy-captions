@@ -31,9 +31,9 @@ const UserData = require('./models/userdata');*/
 var retHello = maincpp.hello();
 console.log(retHello);
 
-for (var i=0;i<14;i++){
-	for (var ii=0;ii<33;ii++){
-		var retGLV = maincpp.getLandValue(i*100,ii*100);
+for (var i=0;i<4;i++){
+	for (var ii=0;ii<11;ii++){
+		var retGLV = maincpp.getLandValue(i*300,ii*300);
 		console.log(i,ii,retGLV);
 	}
 }
