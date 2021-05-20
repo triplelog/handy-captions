@@ -175,7 +175,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
-	row = totPop;
+	row = totPop/10;
 	
 
 	
