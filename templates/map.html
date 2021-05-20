@@ -41,7 +41,7 @@ var projection = d3.geoAlbersUsa()
 				   .scale([1000]);          // scale things down so see entire US
         
 // Define path generator
-var path = d3.geoAlbersUsa.path().projection(projection);  // tell path generator to use albersUsa projection
+var path = d3.geoPath().projection(projection);  // tell path generator to use albersUsa projection
 
 var svg = d3.select("#canvas-svg")
 			.append("svg")
