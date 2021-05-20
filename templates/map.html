@@ -126,7 +126,7 @@ function pathToGrid(pid){
 		var pt = el.getPointAtLength(Math.min(i+0.1,len));
 		nextDistance = Math.pow((pt.x-lastPoint.x),2)+Math.pow((pt.y-lastPoint.y),2);
 		gridPoint['d']=(lastDistance+nextDistance)/2;
-		gridPath.push(gridPoint);
+		
 		
 		
 		lastPoint.x = pt.x;
@@ -135,10 +135,13 @@ function pathToGrid(pid){
 		
 		if (i+0.1>=len){
 			var pt = el.getPointAtLength(len);
-			var gridPoint = pointToGrid(pt);
-			gridPoint['d']=(lastDistance)/2;
-			gridPath.push(gridPoint);
+			var gridPoint2 = pointToGrid(pt);
+			gridPoint2['d']=(lastDistance)/2+gridPoint['d'];
+			gridPath.push(gridPoint2);
 			break;
+		}
+		else {
+			gridPath.push(gridPoint);
 		}
 	}
 	console.log(gridPath);
