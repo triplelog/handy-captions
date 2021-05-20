@@ -81,7 +81,9 @@ d3.json("/json/us_48.json").then(function(json,error) {
 
 
 svg.on('mousedown', function (event) {
-	console.log(d3.pointer(event));
+	var xy = d3.pointer(event);
+	console.log(xy[0],projection.invert(xy));
+	console.log(xy[1]);
 })
 </script>
 </body>
