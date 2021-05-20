@@ -95,6 +95,7 @@ svg.on('mouseup', function (event) {
 	var xy = d3.pointer(event);
 	var ll = projection.invert(xy);
 	mousePath.push(ll);
+	console.log(mousePath);
 	svg.selectAll("path")
 		.data([mousePath])
 		.enter()
@@ -103,7 +104,7 @@ svg.on('mouseup', function (event) {
 		.style("fill", "none")
 		.style("stroke-width", "3")
 		.style("stroke", function(d) {
-
+			console.log(d);
 			// Get data value
 			var value = d.properties;
 
