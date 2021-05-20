@@ -95,9 +95,12 @@ svg.on('mouseup', function (event) {
 	var xy = d3.pointer(event);
 	var ll = projection.invert(xy);
 	mousePath.push(ll);
-	console.log(mousePath);
+	mouseLS = {
+		"type": "LineString", 
+		"coordinates": mousePath
+	}
 	svg.selectAll("path")
-		.data([mousePath])
+		.data(mouseLS)
 		.enter()
 		.append("path")
 		.attr("d", path)
