@@ -110,11 +110,11 @@ void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 }
 
 double yToLat(double y){
-	double lat = -0.02499999989999999*y + 71.38708322329654;
+	double lat = -0.02499999989999999*(y+2643/3) + 71.38708322329654;
 }
 
 double xToLng(double x){
-	double lng = 0.0249999999*x - 179.14708263665557;
+	double lng = 0.0249999999*(x+6534/3) - 179.14708263665557;
 }
 
 void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
