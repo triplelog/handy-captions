@@ -97,7 +97,8 @@ svg.on('mouseup', function (event) {
 	
 	mouseJson = {"type":"FeatureCollection","features":[{"type":"Feature","id":"01","properties":{"name":"New Path"},"geometry":{"type":"Polygon","coordinates":[mousePath]}},
 	]};
-	var newPath = d3.geoPath(mouseJson.features[0]).projection(projection);
+	var pathGen = d3.geoPath().projection(projection);
+	var newPath = pathGen(mouseJson.features[0]);
 	console.log(newPath);
 	d3.select(this)
 		.append("path")
