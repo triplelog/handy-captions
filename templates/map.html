@@ -84,6 +84,14 @@ svg.on('mousedown', function (event) {
 	var xy = d3.pointer(event);
 	var ll = projection.invert(xy);
 	mousePath = [ll];
+	
+	svg.selectAll("circle")
+		.data(mousePath).enter()
+		.append("circle")
+		.attr("cx", function (d) { if (projection(d)) {return projection(d)[0]} else {return}; })
+		.attr("cy", function (d) { if (projection(d)) {return projection(d)[1]} else {return}; })
+		.attr("r", function (d) { if (projection(d)) {return '20px';} else {return}; })
+		.attr("fill", "blue")
 })
 svg.on('mousemove', function (event) {
 	var xy = d3.pointer(event);
