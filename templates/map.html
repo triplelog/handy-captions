@@ -99,14 +99,21 @@ svg.on('mouseup', function (event) {
 
 	var pathGen = d3.geoPath().projection(projection);
 	var newPath = pathGen(mouseJson);
-	console.log(newPath);
 	d3.select(this)
 		.append("path")
+		.attr("id", "segment-0")
 		.attr("d", newPath)
 		.style("fill", "none")
 		.style("stroke-width", "3")
 		.style("stroke", "rgb(0,0,0)");
+	
+	pathToGrid("segment-0");
 })
+
+function pathToGrid(pid){
+	var el = document.getElementById(pid);
+	console.log(el.getTotalLength());
+}
 </script>
 </body>
 </html>
