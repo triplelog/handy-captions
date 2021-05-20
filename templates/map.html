@@ -80,10 +80,39 @@ d3.json("/json/us_48.json").then(function(json,error) {
 });
 
 
+var mousePath = [];
 svg.on('mousedown', function (event) {
 	var xy = d3.pointer(event);
-	console.log(xy[0],projection.invert(xy));
-	console.log(xy[1]);
+	var ll = projection.invert(xy);
+	mousePath = [ll];
+})
+svg.on('mousemove', function (event) {
+	var xy = d3.pointer(event);
+	var ll = projection.invert(xy);
+	mousePath.push(ll);
+})
+svg.on('mouseup', function (event) {
+	var xy = d3.pointer(event);
+	var ll = projection.invert(xy);
+	mousePath.push(ll);
+	svg.selectAll("path")
+		.data([mousePath])
+		.enter()
+		.append("path")
+		.attr("d", path)
+		.style("fill", "none")
+		.style("stroke-width", "3")
+		.style("stroke", function(d) {
+
+			// Get data value
+			var value = d.properties;
+
+			if (value) {
+				return "rgb(255,255,255)";
+			} else {
+				return "rgb(0,0,0)";
+			}
+	});
 })
 </script>
 </body>
