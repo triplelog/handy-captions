@@ -31,14 +31,26 @@ const UserData = require('./models/userdata');*/
 var retHello = maincpp.hello();//array is 2310 columns and 995 rows
 console.log(retHello);
 
+ptArray = [[-122.490402, 37.786453,10],[-122.490402, 47.786453,20],[-102.490402, 37.786453,5]]
+
+/*
+double yToLat(double y){
+	double lat = -0.02499999989999999*y + 71.38708322329654;
+}
+
+double xToLng(double x){
+	double lng = 0.0249999999*x - 179.14708263665557;
+}
+
 for (var i=0;i<995;i++){
 	for (var ii=0;ii<2310;ii++){
 		var retGLV = maincpp.getLandValue(i,ii);
 		if (i%200 == 0 && ii%500 == 0){
 			console.log(i,ii,retGLV);
 		}
+		ptArray.append()
 	}
-}
+}*/
 
 
 var express = require('express');
@@ -57,7 +69,7 @@ app.get('/',
 	
 	function(req, res) {
 		res.write(nunjucks.render('templates/map.html',{
-		
+			points: ptArray,
 		}));
 		res.end();
 	}
