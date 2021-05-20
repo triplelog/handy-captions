@@ -28,13 +28,15 @@ const User = require('./models/user');
 const UserData = require('./models/userdata');*/
 
 
-var retHello = maincpp.hello();
+var retHello = maincpp.hello();//array is 2310 columns and 995 rows
 console.log(retHello);
 
-for (var i=0;i<4;i++){
-	for (var ii=0;ii<11;ii++){
-		var retGLV = maincpp.getLandValue(i*300,ii*300);
-		console.log(i,ii,retGLV);
+for (var i=0;i<995;i++){
+	for (var ii=0;ii<2310;ii++){
+		var retGLV = maincpp.getLandValue(i,ii);
+		if (i%200 == 0 && ii%500 == 0){
+			console.log(i,ii,retGLV);
+		}
 	}
 }
 
