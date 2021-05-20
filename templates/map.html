@@ -94,13 +94,13 @@ svg.on('mouseup', function (event) {
 	var xy = d3.pointer(event);
 	var ll = projection.invert(xy);
 	mousePath.push(ll);
-	mouseLS = [{
+	mouseJson = {"type":"FeatureCollection","features":[{
 		"type": "LineString", 
 		"coordinates": mousePath
-	}];
-	console.log(mouseLS);
+	}]};
+	console.log(mouseJson);
 	svg.selectAll("path")
-		.data(mouseLS)
+		.data(mouseJson.features)
 		.enter()
 		.append("path")
 		.attr("d", path)
