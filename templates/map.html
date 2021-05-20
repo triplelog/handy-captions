@@ -50,7 +50,6 @@ var svg = d3.select("#canvas-svg")
 
 d3.json("/json/us_48.json").then(function(json,error) {
 	console.log(error);
-	console.log(json);
 	svg.selectAll("path")
 		.data(json.features)
 		.enter()
@@ -99,6 +98,7 @@ svg.on('mouseup', function (event) {
 		"type": "LineString", 
 		"coordinates": mousePath
 	}];
+	console.log(mouseLS);
 	svg.selectAll("path")
 		.data(mouseLS)
 		.enter()
