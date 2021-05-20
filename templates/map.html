@@ -94,10 +94,8 @@ svg.on('mouseup', function (event) {
 	var xy = d3.pointer(event);
 	var ll = projection.invert(xy);
 	mousePath.push(ll);
-	mouseJson = {"type":"FeatureCollection","features":[{
-		"type": "LineString", 
-		"coordinates": mousePath
-	}]};
+	mouseJson = {"type":"FeatureCollection","features":[{"type":"Feature","id":"01","properties":{"name":"New Path"},"geometry":{"type":"Polygon","coordinates":[mousePath]}},
+	]};
 	console.log(mouseJson);
 	svg.selectAll("path")
 		.data(mouseJson.features)
