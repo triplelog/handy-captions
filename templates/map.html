@@ -115,8 +115,18 @@ function pathToGrid(pid){
 	var len = el.getTotalLength();
 	console.log(len);
 	for (var i=0;i<len;i+=0.1){
-		console.log(el.getPointAtLength(i));
+		var xy = [el.getPointAtLength(i).x,el.getPointAtLength(i).y];
+		var ll = projection.invert(xy);
+		console.log(ll);
 	}
+}
+
+function pointToGrid(pt){
+	var xy = [pt.x,pt.y];
+	var ll = projection.invert(xy);
+	var x = (ll[0] + 179.14708263665557)/0.0249999999 - 6534/3;
+	var y = (ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3;
+	console.log(x,y);
 }
 </script>
 </body>
