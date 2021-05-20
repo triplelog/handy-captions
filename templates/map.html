@@ -84,14 +84,6 @@ svg.on('mousedown', function (event) {
 	var xy = d3.pointer(event);
 	var ll = projection.invert(xy);
 	mousePath = [ll];
-	console.log(d3.select(this));
-	
-	d3.select(this)
-		.append("circle")
-		.attr("cx", projection(ll)[0])
-		.attr("cy", projection(ll)[1])
-		.attr("r", '20px')
-		.attr("fill", "blue");
 })
 svg.on('mousemove', function (event) {
 	var xy = d3.pointer(event);
@@ -102,27 +94,17 @@ svg.on('mouseup', function (event) {
 	var xy = d3.pointer(event);
 	var ll = projection.invert(xy);
 	mousePath.push(ll);
+	
 	mouseJson = {"type":"FeatureCollection","features":[{"type":"Feature","id":"01","properties":{"name":"New Path"},"geometry":{"type":"Polygon","coordinates":[mousePath]}},
 	]};
-	console.log(mouseJson);
-	svg.selectAll("path")
-		.data(mouseJson.features)
-		.enter()
+	var newPath = d3.geoPath(mouseJson.features[0]).projection(projection);
+	console.log(newPath);
+	d3.select(this)
 		.append("path")
-		.attr("d", path)
+		.attr("d", newPath)
 		.style("fill", "none")
 		.style("stroke-width", "3")
-		.style("stroke", function(d) {
-			console.log(d);
-			// Get data value
-			var value = d.properties;
-
-			if (value) {
-				return "rgb(255,255,255)";
-			} else {
-				return "rgb(0,0,0)";
-			}
-	});
+		.style("stroke", "rgb(0,0,0)");
 })
 </script>
 </body>
