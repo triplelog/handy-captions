@@ -123,7 +123,7 @@ function pathToGrid(pid){
 	var gridPath = [];
 	for (var i=0;i<len;i+=0.1){
 		var gridPoint = pointToGrid(lastPoint);
-		var pt = el.getPointAtLength(min(i+0.1,len));
+		var pt = el.getPointAtLength(Math.min(i+0.1,len));
 		nextDistance = Math.pow((pt.x-lastPoint.x),2)+Math.pow((pt.y-lastPoint.y),2);
 		gridPoint['d']=(lastDistance+nextDistance)/2;
 		gridPath.push(gridPoint);
