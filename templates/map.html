@@ -95,7 +95,7 @@ svg.on('mouseup', function (event) {
 	var ll = projection.invert(xy);
 	mousePath.push(ll);
 	
-	mouseJson = {"type":"Feature","id":"01","properties":{"name":"New Path"},"geometry":{"type":"LineString","coordinates":[mousePath]}};
+	mouseJson = {"type":"LineString","coordinates":mousePath};
 
 	var pathGen = d3.geoPath().projection(projection);
 	var newPath = pathGen(mouseJson);
