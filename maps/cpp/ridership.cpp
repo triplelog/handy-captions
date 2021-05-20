@@ -116,6 +116,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
 	
 	int row = 0;
+	long totPop = 0;
 	int i;
 	std::ifstream file("maps/usa_pop.csv");
 	if (file.is_open()) {
@@ -136,6 +137,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					}
 					
 					landValue.push_back(rInt);
+					totPop += rInt;
 					//if (rInt > 0){
 					//	landValueMap[row*6298+col]=rInt;
 					//}
@@ -163,6 +165,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 				//}
 				col++;
 				landValue.push_back(rInt);
+				totPop += rInt;
 			}
 			
 			row++;
@@ -172,7 +175,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
-	row = landValue.size();
+	row = totPop;
 	
 
 	
