@@ -85,7 +85,7 @@ svg.on('mousedown', function (event) {
 	var ll = projection.invert(xy);
 	mousePath = [ll];
 	
-	svg.selectAll("circle")
+	this.selectAll("circle")
 		.data(mousePath).enter()
 		.append("circle")
 		.attr("cx", function (d) { if (projection(d)) {console.log(d); return projection(d)[0]} else {return}; })
