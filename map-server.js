@@ -34,13 +34,13 @@ console.log(retHello);
 //var ptArray = [[-122.490402, 37.786453,10],[-122.490402, 47.786453,20],[-102.490402, 37.786453,5]];
 var ptArray = [];
 
-double yToLat(double y){
+/*double yToLat(double y){
 	double lat = -0.02499999989999999*y + 71.38708322329654;
 }
 
 double xToLng(double x){
 	double lng = 0.0249999999*x - 179.14708263665557;
-}
+}*/
 
 for (var i=0;i<995;i++){
 	for (var ii=0;ii<2310;ii++){
