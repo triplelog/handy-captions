@@ -48,8 +48,9 @@ var svg = d3.select("#canvas-svg")
 			.attr("width", width)
 			.attr("height", height);
 
-d3.json("/json/us_48.json", function(error,json) {
+d3.json("/json/us_48.json").then(function(error,json) {
 	console.log(error);
+	console.log(json);
 	svg.selectAll("path")
 		.data(json.features)
 		.enter()
