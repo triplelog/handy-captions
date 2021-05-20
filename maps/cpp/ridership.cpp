@@ -109,6 +109,14 @@ void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//info.GetReturnValue().Set(row);
 }
 
+double yToLat(double y){
+	double lat = -0.02499999989999999*y + 71.38708322329654;
+}
+
+double xToLng(double x){
+	double lng = 0.0249999999*x - 179.14708263665557;
+}
+
 void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	v8::Isolate* isolate = info.GetIsolate();
 	v8::Local<v8::Context> context = isolate->GetCurrentContext();
@@ -118,7 +126,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int row = 0;
 	long totPop = 0;
 	int i;
-	std::ifstream file("maps/usa_pop.csv");
+	std::ifstream file("maps/tocpp/value.csv");
 	if (file.is_open()) {
 		std::string line;
 		while (std::getline(file, line)) {
@@ -199,7 +207,7 @@ void GetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int row = info[0]->Int32Value(context).FromJust();
 	int col = info[1]->Int32Value(context).FromJust();
 	
-	int retInt = landValue[row*3333+col];
+	int retInt = landValue[row*2310+col];
 	
 
 	
