@@ -49,8 +49,7 @@ var svg = d3.select("#canvas-svg")
 
 d3.json("/json/us_48.json", function(error,json) {
 	console.log(error);
-	console.log(json);
-	/*svg.selectAll("path")
+	svg.selectAll("path")
 		.data(json.features)
 		.enter()
 		.append("path")
@@ -67,7 +66,7 @@ d3.json("/json/us_48.json", function(error,json) {
 			} else {
 				return "rgb(213,222,217)";
 			}
-	});	*/	
+	});
 });
 </script>
 </body>
