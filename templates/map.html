@@ -70,7 +70,7 @@ d3.json("/json/us_48.json", function(error,json) {
 	});
 	
 	svg.selectAll("circle")
-		.data({{ points }}).enter()
+		.data({{ points | dump}}).enter()
 		.append("circle")
 		.attr("cx", function (d) { return d[0]; })
 		.attr("cy", function (d) { return d[1]; })
