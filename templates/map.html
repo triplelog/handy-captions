@@ -113,21 +113,43 @@ svg.on('mouseup', function (event) {
 function pathToGrid(pid){
 	var el = document.getElementById(pid);
 	var len = el.getTotalLength();
-	console.log(len);
-	for (var i=0;i<len;i+=0.1){
-		//var xy = [el.getPointAtLength(i).x,el.getPointAtLength(i).y];
-		//var ll = projection.invert(xy);
-		//console.log(ll);
-		pointToGrid(el.getPointAtLength(i));
+	if (len < 1){
+		return;
 	}
+	console.log(len);
+	
+	var lastDistance = 0;
+	var lastPoint = el.getPointAtLength(0);
+	var gridPath = [];
+	for (var i=0;i<len;i+=0.1){
+		var gridPoint = pointToGrid(lastPoint);
+		var pt = el.getPointAtLength(min(i+0.1,len));
+		nextDistance = Math.pow((pt.x-lastPoint.x),2)+Math.pow((pt.y-lastPoint.y),2);
+		gridPoint['d']=(lastDistance+nextDistance)/2;
+		gridPath.push(gridPoint);
+		
+		
+		lastPoint.x = pt.x;
+		lastPoint.y = pt.y;
+		lastDistance = nextDistance;
+		
+		if (i+0.1>=len){
+			var pt = el.getPointAtLength(len);
+			var gridPoint = pointToGrid(pt);
+			gridPoint['d']=(lastDistance)/2;
+			gridPath.push(gridPoint);
+		
+		}
+	}
+	console.log(gridPath);
 }
 
 function pointToGrid(pt){
 	var xy = [pt.x,pt.y];
 	var ll = projection.invert(xy);
-	var x = (ll[0] + 179.14708263665557)/0.0249999999 - 6534/3;
-	var y = (ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3;
-	console.log(x,y);
+	var x = Math.round((ll[0] + 179.14708263665557)/0.0249999999 - 6534/3);
+	var y = Math.round((ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3);
+	return {'x':x,'y':y,'d':0};
 }
 </script>
 </body>
