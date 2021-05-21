@@ -159,7 +159,8 @@ int ridership(std::vector<int> stations) {
 			n /= 500;
 			n *= pops[ii];
 			n /= 10000000;
-			
+			n *= pops[i];
+			n /= (pops[i]+pops[ii]);
 			//int n = 75000000*pops[i]/10000000*pops[ii]/10000000/500/500;//thousands of riders
 			riders += n;
 		}
