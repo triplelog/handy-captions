@@ -12,7 +12,7 @@ function createPD(currentCurve){
 	for (var i=1; i<currentCurve.length - 2; i++){
 		var minD2 = nearestBezier(currentCurve[i-1][0],currentCurve[i][0],currentCurve[i+2][0],currentCurve[i-1][1],currentCurve[i][1],currentCurve[i+2][1], currentCurve[i+1][0], currentCurve[i+1][1]);
 		//console.log(minD2);
-		if (minD2 < 1){
+		if (minD2 < 0.1){
 			currentCurve.splice(i+1,1);
 			i--;
 			continue;
