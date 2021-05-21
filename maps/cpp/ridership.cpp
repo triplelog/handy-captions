@@ -344,7 +344,13 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	}
 	stations = bestStations(stations);
 	
-	info.GetReturnValue().Set(szz);
+	v8::Local<v8::Array> retArr;
+	for (i=0;i<stations.size();i++){
+		retArr->Set(context,i,stations[i]);
+	}
+	
+	
+	info.GetReturnValue().Set(retArr);
 }
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
