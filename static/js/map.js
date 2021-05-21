@@ -9,22 +9,21 @@ function createPD(currentCurve){
 	pd += " " + curveRound(currentCurve[0][1]);
 	curvedPath.push([curveRound(currentCurve[0][0]),curveRound(currentCurve[0][1])]);
 	console.log(currentCurve.length);
-	for (var i=1; i<currentCurve.length - 2; i++){
-		var minD2 = nearestBezier(currentCurve[i-1][0],currentCurve[i][0],currentCurve[i+2][0],currentCurve[i-1][1],currentCurve[i][1],currentCurve[i+2][1], currentCurve[i+1][0], currentCurve[i+1][1]);
-		if (minD2 < 0.01){
-			currentCurve.splice(i+1,1);
-			i--;
-			continue;
+	var initialCL = currentCurve.length;
+	var maxminD2 = 0.01;
+	while (currentCurve.length > initialCL / 3 + 2)
+		for (var i=1; i<currentCurve.length - 2; i++){
+			var minD2 = nearestBezier(currentCurve[i-1][0],currentCurve[i][0],currentCurve[i+2][0],currentCurve[i-1][1],currentCurve[i][1],currentCurve[i+2][1], currentCurve[i+1][0], currentCurve[i+1][1]);
+			if (minD2 < maxminD2){
+				currentCurve.splice(i+1,1);
+				i--;
+				continue;
+			}
 		}
+		maxminD += 0.01;
+		console.log(maxminD, currentCurve.length);
 	}
 	for (var i=1; i<currentCurve.length - 2; i++){
-		var minD2 = nearestBezier(currentCurve[i-1][0],currentCurve[i][0],currentCurve[i+2][0],currentCurve[i-1][1],currentCurve[i][1],currentCurve[i+2][1], currentCurve[i+1][0], currentCurve[i+1][1]);
-		console.log(minD2);
-		if (minD2 < 0.02){
-			currentCurve.splice(i+1,1);
-			i--;
-			continue;
-		}
 		pd += " Q " + curveRound(currentCurve[i][0]);
 		pd += " " + curveRound(currentCurve[i][1]);
 		curvedPath.push([curveRound(currentCurve[i][0]),curveRound(currentCurve[i][1])]);
