@@ -288,11 +288,11 @@ std::vector<int> bestStations(std::vector<int> allStations, int remove) {
 	std::vector<int> stations;
 	for (i=0;i<len;i++){
 		for (ii=0;ii<remove;ii++){
-			if (cut[i] == ii){
+			if (cut[ii] == i){
 				break;
 			}
 			if (ii == remove - 1){
-				stations.push_back(allStations[ii]);
+				stations.push_back(allStations[i]);
 			}
 		}
 		
