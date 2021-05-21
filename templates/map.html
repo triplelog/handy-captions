@@ -285,7 +285,8 @@ function pathToStations(pid){
 				}
 				else {
 					closeStations[ii]={'min':i,'max':i,'avg':i};
-					ell.style.fill = 'rgb(255,0,0)';
+					ell.style.fill = 'rgb('+(255 - closeStations[ii]['avg']*255/len)+',0,'+(closeStations[ii]['avg']*255/len)+')';
+
 				}
 				
 			}
