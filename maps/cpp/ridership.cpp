@@ -425,7 +425,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int riders = ridership(stations);
 	
-	double d = ptDistance(stationList[301],stationList[302]);
+	double d = ptDistance(stationList[300],stationList[302]);
 	
 	info.GetReturnValue().Set(d);
 }
