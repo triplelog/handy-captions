@@ -20,8 +20,8 @@ function createPD(currentCurve){
 				continue;
 			}
 		}
-		maxminD += 0.01;
-		console.log(maxminD, currentCurve.length);
+		maxminD2 += 0.01;
+		console.log(maxminD2, currentCurve.length);
 	}
 	for (var i=1; i<currentCurve.length - 2; i++){
 		pd += " Q " + curveRound(currentCurve[i][0]);
