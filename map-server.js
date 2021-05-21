@@ -168,11 +168,14 @@ wss.on('connection', function connection(ws) {
 		var dm = JSON.parse(message);
 		if (dm.type == 'stations'){
 			var s = dm.stations;
+			
 			console.log(s);
+			var stations = [];
 			for (var i=0;i<s.length;i++){
-				console.log(cityList[s[i]]);
+				console.log(cityList[s[i][0]]);
+				stations.push(parseInt(s[i][0]));
 			}
-			var retStations = maincpp.getStations(s);
+			var retStations = maincpp.getStations(stations);
 			console.log(retStations);
 			for (var i=0;i<retStations.length;i++){
 				console.log(cityList[retStations[i]]);
