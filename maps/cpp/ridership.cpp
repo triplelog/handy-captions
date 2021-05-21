@@ -145,6 +145,66 @@ int radiusValue(int pt, int r) {
 	return total;
 }
 
+int radiusValueClosest(int pt, int r, std::map<int,std::vector<int> > stationDMap, int sidx) {
+	int i; int ii;
+	int total = 0;
+	for (i=-1*r;i<=r;i++){
+		for (ii=-1*r;ii<=r;ii++){
+			int div = 1;
+			if (i*i+ii*ii > (r+1)*(r+1)){
+				continue;
+			}
+			else if (i*i+ii*ii > (r-1)*(r-1)){
+				div = 2;
+			}
+			int x = pt%2310 + i;
+			int y = pt/2310 + ii;
+			if (y*2310 + x < 0){continue;}
+			if (y*2310 + x >= 2310*995){continue;}
+			if (stationDMap.find(y*2310 + x)){
+				if (sidx != stationDMap[y*2310 + x][0]){
+					continue;
+				}
+			}
+			total += population[y*2310 + x]/div;
+		}
+	}
+	return total;
+}
+
+std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::vector<int> > stationDMap, int sidx) {
+	int i; int ii;
+	int total = 0;
+	for (i=-1*r;i<=r;i++){
+		for (ii=-1*r;ii<=r;ii++){
+			int div = 1;
+			if (i*i+ii*ii > (r+1)*(r+1)){
+				continue;
+			}
+			else if (i*i+ii*ii > (r-1)*(r-1)){
+				div = 2;
+			}
+			int x = pt%2310 + i;
+			int y = pt/2310 + ii;
+			if (y*2310 + x < 0){continue;}
+			if (y*2310 + x >= 2310*995){continue;}
+			total += population[y*2310 + x]/div;
+			int d2 = i*i+ii*ii;
+			if (stationDMap.find(y*2310 + x)){
+				if (d2 < stationDMap[y*2310 + x][1]){
+					stationDMap[y*2310 + x][0] = sidx;
+					stationDMap[y*2310 + x][1] = d2;
+				}
+			}
+			else {
+				
+				stationDMap[y*2310 + x] = {sidx, d2};
+			}
+		}
+	}
+	return stationDMap;
+}
+
 double yToLat(double y){
 	double lat = -0.02499999989999999*(y+2643/3) + 71.38708322329654;
 }
@@ -159,8 +219,12 @@ int ridership(std::vector<int> stations) {
 	std::vector<int> pops;
 	std::vector<double> distance;
 	double d = 0;
+	std::map<int,std::vector<int> > stationDMap;
 	for (i=0;i<len;i++){
-		pops.push_back(radiusValue(stationList[stations[i]],25));
+		stationDMap = radiusValueMap(stationList[stations[i]],25,stationDMap,stations[i]);
+	}
+	for (i=0;i<len;i++){
+		pops.push_back(radiusValueClosest(stationList[stations[i]],25,stationDMap,stations[i]));
 		if (i==0){distance.push_back(0);}
 		else {
 			double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
