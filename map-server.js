@@ -109,6 +109,8 @@ for (var i=0;i<cityList.length;i++){
 }
 console.log(cityList.length);
 
+var retStations = maincpp.getStations([0,1]);
+console.log(retStations);
 
 var express = require('express');
 
@@ -150,7 +152,9 @@ wss.on('connection', function connection(ws) {
   	ws.on('message', function incoming(message) {
 		var dm = JSON.parse(message);
 		if (dm.type == 'stations'){
-		
+			
+			
+			
 			var jsonmessage = {'type':'test'};
 			ws.send(JSON.stringify(jsonmessage));
 		}

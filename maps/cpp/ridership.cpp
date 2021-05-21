@@ -107,11 +107,15 @@ int main(int argc, char *argv[]) {
 
 std::vector<int> landValue;
 std::vector<int> population;
+std::vector<int> stations;
 //std::map<int,int> landValueMap;
 
+std::vector<int> bestStations(std::vector<int> allStations) {
+	
+	return allStations;
+}
 
-int radiusValue(int pt) {
-	int r = 7;
+int radiusValue(int pt, int r) {
 	int i; int ii;
 	int total = 0;
 	for (i=-1*r;i<=r;i++){
@@ -305,7 +309,7 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int retInt = population[row*2310+col];
 	
-	int popRadius = radiusValue(row*2310+col);
+	int popRadius = radiusValue(row*2310+col, 7);
 
 	
 
@@ -319,6 +323,20 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	
 	info.GetReturnValue().Set(popRadius);
+}
+
+void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+	v8::Isolate* isolate = info.GetIsolate();
+	v8::Local<v8::Context> context = isolate->GetCurrentContext();
+	
+	v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
+	
+	
+	
+	int sz = jsArr.length;
+	
+	
+	info.GetReturnValue().Set(sz);
 }
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
@@ -341,6 +359,11 @@ void Init(v8::Local<v8::Object> exports) {
   exports->Set(context,
                Nan::New("getPopulation").ToLocalChecked(),
                Nan::New<v8::FunctionTemplate>(GetPopulation)
+                   ->GetFunction(context)
+                   .ToLocalChecked());
+  exports->Set(context,
+               Nan::New("getStations").ToLocalChecked(),
+               Nan::New<v8::FunctionTemplate>(GetStations)
                    ->GetFunction(context)
                    .ToLocalChecked());
     
