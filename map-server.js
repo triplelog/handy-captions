@@ -63,8 +63,11 @@ for (var i=0;i<allCities.length;i++){
 	var retPop = maincpp.getPopulation(y,x);
 	
 	if (retPop >= 1000000){
-		console.log(allCities[i].properties.name,x,y,retPop);
+		//console.log(allCities[i].properties.name,x,y,retPop);
 		cityList.push([ll[0],ll[1],allCities[i].properties.name,retPop]);
+	}
+	else if (allCities[i].properties.name == "spartanburg"){
+		console.log(allCities[i].properties.name,x,y,retPop);
 	}
 }
 console.log(cityList.length);
