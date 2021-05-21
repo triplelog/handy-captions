@@ -79,19 +79,19 @@ for (var i=0;i<cityList.length;i++){
 		var y1 = (cityList[ii][1] - 71.38708322329654)/-0.0249999999 - 2643/3;
 		var d = (x1-x0)*(x1-x0)+(y1-y0)*(y1-y0);
 		if (d < 500 && cityList[i][3] < 2000000){
-			console.log(cityList[i][2],cityList[ii][2]);
+			console.log(cityList[i][2],cityList[ii][2], d, cityList[i][3]);
 			cityList.splice(i,1);
 			i--;
 			break;
 		}
 		else if (d < 100 && cityList[i][3] < 5000000){
-			console.log(cityList[i][2],cityList[ii][2]);
+			console.log(cityList[i][2],cityList[ii][2], d, cityList[i][3]);
 			cityList.splice(i,1);
 			i--;
 			break;
 		}
 		else if (d < 50){
-			console.log(cityList[i][2],cityList[ii][2]);
+			console.log(cityList[i][2],cityList[ii][2], d, cityList[i][3]);
 			cityList.splice(i,1);
 			i--;
 			break;
