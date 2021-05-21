@@ -64,7 +64,7 @@ for (var i=0;i<allCities.length;i++){
 	
 	if (retPop >= 500000){
 		console.log(allCities[i].properties.name,x,y,retPop);
-		cityList.append([ll[0],ll[1],allCities[i].properties.name,retPop]);
+		cityList.push([ll[0],ll[1],allCities[i].properties.name,retPop]);
 	}
 }
 console.log(cityList.length);
