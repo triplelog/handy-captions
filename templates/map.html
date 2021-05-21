@@ -98,6 +98,17 @@ svg.on('mousedown', function (event) {
 		var xy = d3.pointer(event);
 		var ll = projection.invert(xy);
 		mousePath = [ll];
+		var mouseJson = {"type":"LineString","coordinates":mousePath};
+
+		var pathGen = d3.geoPath().projection(projection);
+		var newPath = pathGen(mouseJson);
+		d3.select(this)
+			.append("path")
+			.attr("id", "temp-segment")
+			.attr("d", newPath)
+			.style("fill", "none")
+			.style("stroke-width", "3")
+			.style("stroke", "rgb(0,0,0)");
 	}
 })
 svg.on('mousemove', function (event) {
@@ -105,6 +116,12 @@ svg.on('mousemove', function (event) {
 		var xy = d3.pointer(event);
 		var ll = projection.invert(xy);
 		mousePath.push(ll);
+		var mouseJson = {"type":"LineString","coordinates":mousePath};
+
+		var pathGen = d3.geoPath().projection(projection);
+		var newPath = pathGen(mouseJson);
+		var el = document.getElementById('temp-segment');
+		el.setAttribute("d",newPath);
 	}
 })
 svg.on('mouseup', function (event) {
@@ -150,6 +167,8 @@ svg.on('mouseup', function (event) {
 			.style("stroke", "rgb(0,0,0)");
 	
 		pathToGrid("segment-0");
+		var el = document.getElementById('temp-segment');
+		el.parentNode.removeChild(el);
 	}
 	else if (mode == "station"){
 		var xy = d3.pointer(event);
