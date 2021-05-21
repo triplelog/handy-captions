@@ -1,3 +1,14 @@
+var ws = new WebSocket('wss://sudoubleku.com:8081');
+ws.onopen = function(evt) {
+	//var jsonmessage = {'type':'key'};
+	//jsonmessage.message = tkey;
+	//ws.send(JSON.stringify(jsonmessage));
+}
+ws.onmessage = function(evt){
+	var dm = JSON.parse(evt.data);
+	console.log(dm);
+}
+
 function createPD(currentCurve){
 	if (currentCurve.length < 1){
 		return;

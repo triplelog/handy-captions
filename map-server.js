@@ -149,8 +149,10 @@ wss.on('connection', function connection(ws) {
   	console.log("ws connected");
   	ws.on('message', function incoming(message) {
 		var dm = JSON.parse(message);
-		if (dm.type == 'path'){
-			
+		if (dm.type == 'stations'){
+		
+			var jsonmessage = {'type':'test'};
+			ws.send(JSON.stringify(jsonmessage));
 		}
 		
   	});

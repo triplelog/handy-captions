@@ -299,6 +299,8 @@ function pathToStations(pid){
 	}
 	orderedStations.sort(function(a,b){return a[1] - b[1];});
 	console.log(orderedStations);
+	var jsonmessage = {'type':'stations','stations':orderedStations};
+	ws.send(JSON.stringify(jsonmessage));
 	
 
 }
