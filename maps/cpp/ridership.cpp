@@ -119,7 +119,7 @@ int ptDistance(int pt1, int pt2) {
 	int x2 = pt2%2310;
 	int y2 = pt2/2310;
 	double dd = (x2-x1)*(x2-x1)+(y2-y1)*(y2-y1);
-	double d = sqrt(dd)*3;//distance in km, i believe
+	double d = sqrt(dd)*3/1.4;//distance in km, approx i believe
 	return d;
 }
 
@@ -160,7 +160,7 @@ int ridership(std::vector<int> stations) {
 	std::vector<double> distance;
 	double d = 0;
 	for (i=0;i<len;i++){
-		pops.push_back(radiusValue(stationList[stations[i]],30));
+		pops.push_back(radiusValue(stationList[stations[i]],25));
 		if (i==0){distance.push_back(0);}
 		else {
 			double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
@@ -174,6 +174,8 @@ int ridership(std::vector<int> stations) {
 			double dd = distance[ii] - distance[i];
 			if (dd < 0){dd = -1*dd;}
 			int di = dd;
+			if (di < 500){ di = 500;}
+			
 			long n = pops[i]/2;
 			n *= 15;
 			n /= di;
@@ -425,9 +427,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int riders = ridership(stations);
 	
-	double d = ptDistance(stationList[300],stationList[302]);
 	
-	info.GetReturnValue().Set(d);
+	info.GetReturnValue().Set(retArr);
 }
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {

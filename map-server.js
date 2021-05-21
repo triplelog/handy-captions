@@ -167,7 +167,16 @@ wss.on('connection', function connection(ws) {
   	ws.on('message', function incoming(message) {
 		var dm = JSON.parse(message);
 		if (dm.type == 'stations'){
-			
+			var s = dm.stations;
+			console.log(s);
+			for (var i=0;i<s.length;i++){
+				console.log(cityList[s[i]]);
+			}
+			var retStations = maincpp.getStations(s);
+			console.log(retStations);
+			for (var i=0;i<retStations.length;i++){
+				console.log(cityList[retStations[i]]);
+			}
 			
 			
 			var jsonmessage = {'type':'test'};
