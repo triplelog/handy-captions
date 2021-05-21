@@ -44,6 +44,7 @@ function addStation() {
 function addLine() {
 	mode = "line";
 }
+var cityList = {{ cities | dump | safe }};
 
 var width = 960;
 var height = 500;
@@ -94,7 +95,9 @@ d3.json("/json/us_48.json").then(function(json,error) {
 	svg.selectAll("circle")
 		.data({{ cities | dump | safe}}).enter()
 		.append("circle")
-		.attr("id", function (d) { console.log(d); return "city-"+d[2];})
+		.attr("id", function (d) { return "city-"+d[4];})
+		.attr("data-name", function (d) { return d[2];})
+		.attr("data-pop", function (d) { return d[3];})
 		.attr("cx", function (d) { if (projection([d[0],d[1]])) {return projection([d[0],d[1]])[0]} else {console.log(d,projection([d[0],d[1]])); return}; })
 		.attr("cy", function (d) { if (projection([d[0],d[1]])) {return projection([d[0],d[1]])[1]} else {return}; })
 		.attr("r", '4px')
@@ -165,6 +168,7 @@ svg.on('mouseup', function (event) {
 		curvedPath = createPD(mousePath);
 		
 		
+		
 		for (var i=0;i<curvedPath.length;i++){
 			if (i>0 && i%2 == 1){
 				console.log(i,curvature(curvedPath[i-1],curvedPath[i],curvedPath[i+1]));
@@ -201,6 +205,8 @@ svg.on('mouseup', function (event) {
 		pathToGrid("segment-0");
 		var el = document.getElementById('temp-segment');
 		el.parentNode.removeChild(el);
+		
+		pathToStations("segment-0");
 	}
 	else if (mode == "station"){
 		var xy = d3.pointer(event);
@@ -252,6 +258,29 @@ function pathToGrid(pid){
 		}
 	}
 	console.log(gridPath);
+}
+
+function pathToStations(pid){
+	var el = document.getElementById(pid);
+	var len = el.getTotalLength();
+	if (len < 1){
+		return;
+	}
+	console.log(len);
+	
+	for (var i=0;i<len;i+=0.1){
+		var pt = el.getPointAtLength(i);
+		var ll = projection.invert([pt.x,pt.y]);
+		for (var ii=0;ii<cityList.length;ii++){
+			var llC = [cityList[ii][0],cityList[ii][1]];
+			var d2 = Math.pow(llC[0]-ll[0],2)+Math.pow(llC[1]-ll[1],2);
+			if (d2 < 1){
+				var ell = document.getElementById('city-'+cityList[ii][4]);
+				ell.style.fill = 'red';
+			}
+		}
+	}
+
 }
 
 function pointToGrid(pt){
