@@ -93,6 +93,7 @@ d3.json("/json/us_48.json").then(function(json,error) {
 
 
 var mousePath = [];
+var isDown = false;
 svg.on('mousedown', function (event) {
 	if (mode == "line"){
 		var xy = d3.pointer(event);
@@ -109,10 +110,11 @@ svg.on('mousedown', function (event) {
 			.style("fill", "none")
 			.style("stroke-width", "3")
 			.style("stroke", "rgb(0,0,0)");
+		isDown = true;
 	}
 })
 svg.on('mousemove', function (event) {
-	if (mode == "line"){
+	if (mode == "line" && isDown){
 		var xy = d3.pointer(event);
 		var ll = projection.invert(xy);
 		mousePath.push(ll);
@@ -125,6 +127,7 @@ svg.on('mousemove', function (event) {
 	}
 })
 svg.on('mouseup', function (event) {
+	isDown = false;
 	if (mode == "line"){
 		var xy = d3.pointer(event);
 		var ll = projection.invert(xy);
