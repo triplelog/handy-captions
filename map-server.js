@@ -87,6 +87,7 @@ app.get('/',
 	function(req, res) {
 		res.write(nunjucks.render('templates/map.html',{
 			points: ptArray,
+			cities: cityList,
 		}));
 		res.end();
 	}
