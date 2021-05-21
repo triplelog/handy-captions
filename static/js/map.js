@@ -40,11 +40,22 @@ function createPD(currentCurve){
 }
 
 function curvature(p0,p1,p2){
-	var t = 0.5;
-	var Btxp =  (2*t-2)*p0[0]+(2-4*t)*p1[0]+2*t*p2[0];//derivative of B(t)
-	var Btyp = (2*t-2)*p0[1]+(2-4*t)*p1[1]+2*t*p2[1];//derivative of B(t)
-	var r = Btxp*Btxp+Btyp*Btyp;
-	return r;// distance is in terms of units of p0,p1,p2
+	var d01 = Math.pow(Math.pow(p0[0]-p1[0],2)+Math.pow(p0[1]-p1[1],2),0.5);
+	var d02 = Math.pow(Math.pow(p0[0]-p2[0],2)+Math.pow(p0[1]-p2[1],2),0.5);
+	var d12 = Math.pow(Math.pow(p1[0]-p2[0],2)+Math.pow(p1[1]-p2[1],2),0.5);
+	var d1m = Math.pow(Math.pow(p1[0]-(p2[0]+p0[0])/2,2)+Math.pow(p1[1]-(p2[1]+p0[1])/2,2),0.5);
+	var a = Math.abs(p0[0]*(p1[1]-p2[1])+p1[0]*(p2[1]-p0[1])+p2[0]*(p0[1]-p1[1]))/2;
+	if (a == 0 || d01 == 0 || d02 == 0 || d12 == 0 || d1m == 0){
+		return "inf";
+	}
+	var k = 0;
+	if (d01 > d02/2 && d12 > d02/2){
+		k = Math.pow(d1m,3)/Math.pow(a,2);
+	}
+	else {
+		k = Math.max(a/Math.pow(d01,3),a/Math.pow(d12,3));
+	}
+	return 1/k;
 }
 
 function curveRound(x){
