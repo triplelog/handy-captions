@@ -109,7 +109,7 @@ for (var i=0;i<cityList.length;i++){
 }
 console.log(cityList.length);
 
-var retStations = maincpp.getStations([0,1]);
+var retStations = maincpp.getStations([0,3,5]);
 console.log(retStations);
 
 var express = require('express');

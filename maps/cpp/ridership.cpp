@@ -340,8 +340,9 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	for (i=0;i<sz;i++){
 		szz = jsArr->Get(context,i).ToLocalChecked()->Int32Value(context).FromJust();
 		//szz = jsArr->Get(context,i);
-		//stations.push_back(jsArr->Get(context,i));
+		stations.push_back(szz);
 	}
+	stations = bestStations(stations);
 	
 	info.GetReturnValue().Set(szz);
 }
