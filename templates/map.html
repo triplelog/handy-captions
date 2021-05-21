@@ -93,7 +93,7 @@ d3.json("/json/us_48.json").then(function(json,error) {
 
 d3.json("/json/city_data.json").then(function(json,error) {
 	console.log(error);
-	
+	console.log(json.features);
 	svg.selectAll("circle")
 		.data(json.features).enter()
 		.append("circle")
