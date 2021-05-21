@@ -60,10 +60,14 @@ for (var i=0;i<allCities.length;i++){
 	var ll = allCities[i].geometry.coordinates;//lng,lat
 	var x = Math.round((ll[0] + 179.14708263665557)/0.0249999999 - 6534/3);
 	var y = Math.round((ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3);
-	console.log(allCities[i].properties.name,x,y);
 	var retPop = maincpp.getPopulation(y,x);
-	console.log(allCities[i].properties.name,x,y,retPop);
+	
+	if (retPop >= 500000){
+		console.log(allCities[i].properties.name,x,y,retPop);
+		cityList.append([ll[0],ll[1],allCities[i].properties.name,retPop]);
+	}
 }
+console.log(cityList.length);
 
 
 var express = require('express');
