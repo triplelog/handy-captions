@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
 
 std::vector<int> landValue;
 std::vector<int> population;
-std::vector<int> stations;
+
 //std::map<int,int> landValueMap;
 
 std::vector<int> bestStations(std::vector<int> allStations) {
@@ -334,7 +334,11 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	
 	int sz = jsArr->Length();
-	
+	int i;
+	std::vector<int> stations;
+	for (i=0;i<sz;i++){
+		stations.push_back(jsArr->Get(i));
+	}
 	
 	info.GetReturnValue().Set(sz);
 }
