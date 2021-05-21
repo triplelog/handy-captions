@@ -101,6 +101,8 @@ svg.on('mouseup', function (event) {
 		if (i>0 && i%2 == 1){
 			console.log(i,curvature(curvedPath[i-1],curvedPath[i],curvedPath[i+1]));
 		}
+	}
+	for (var i=0;i<curvedPath.length;i++){
 		curvedPath[i] = projection(curvedPath[i]);
 	}
 	var newPath = "M";
