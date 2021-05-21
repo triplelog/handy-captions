@@ -91,6 +91,17 @@ d3.json("/json/us_48.json").then(function(json,error) {
 		.attr("fill", "red")
 });
 
+d3.json("/json/city_data.json").then(function(json,error) {
+	console.log(error);
+	
+	svg.selectAll("circle")
+		.data(json.features).enter()
+		.append("circle")
+		.attr("cx", function (d) { console.log(d.geometry); console.log(d.geometry.coordinates); console.log(projection(d.geometry.coordinates)); if (projection(d.geometry.coordinates)) {return projection(d)[0]} else {return}; })
+		.attr("cy", function (d) { if (projection(d)) {return projection(d)[1]} else {return}; })
+		.attr("r", function (d) { if (projection(d)) {return '5px';} else {return}; })
+		.attr("fill", "black")
+});
 
 var mousePath = [];
 var isDown = false;
