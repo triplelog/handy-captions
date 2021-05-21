@@ -66,7 +66,7 @@ for (var i=0;i<allCities.length;i++){
 		//console.log(allCities[i].properties.name,x,y,retPop);
 		cityList.push([ll[0],ll[1],allCities[i].properties.name,retPop]);
 	}
-	else if (allCities[i].properties.name == "spartanburg"){
+	else if (allCities[i].properties.name == "Spartanburg"){
 		console.log(allCities[i].properties.name,x,y,retPop);
 	}
 }
