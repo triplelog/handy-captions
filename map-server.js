@@ -73,6 +73,15 @@ for (var i=0;i<allCities.length;i++){
 		console.log(allCities[i].properties.name,x,y,retPop);
 	}
 }
+cityList.sort(function(a,b){return b[3] - a[3];});
+console.log(cityList[0]);
+for (var i=0;i<cityList.length;i++){
+	for (var ii=i+1;ii<cityList.length;ii++){
+		//var x = Math.round((ll[0] + 179.14708263665557)/0.0249999999 - 6534/3);
+		//var y = Math.round((ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3);
+		//var d = 
+	}
+}
 console.log(cityList.length);
 
 
