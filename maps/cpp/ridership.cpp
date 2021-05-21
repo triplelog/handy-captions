@@ -21,6 +21,33 @@
 #include <fstream>
 
 
+/*void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+	//v8::Isolate* isolate = info.GetIsolate();
+	//v8::Local<v8::Context> context = isolate->GetCurrentContext();
+	
+	//v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
+	
+	//int sz = info[0]->Int32Value(context).FromJust();
+	//int i;
+	//int row = 0;
+	//for (i=1;i<sz+1;i++){
+	//	int row1 = info[i]->Int32Value(context).FromJust();
+	//	row += row1;
+	//}
+	
+
+	//v8::String::Utf8Value s(isolate, info[0]);
+	//std::string str(*s);
+	
+	
+	//std::string out("hello world");
+	//Nan::MaybeLocal<v8::String> h = Nan::New<v8::String>(out);
+	//info.GetReturnValue().Set(h.ToLocalChecked());
+	
+	
+	//info.GetReturnValue().Set(row);
+}*/
+
 /*
 unsigned int now; unsigned int start;
 std::vector<int> landValue;
@@ -83,32 +110,19 @@ std::vector<int> population;
 //std::map<int,int> landValueMap;
 
 
-/*void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
-	//v8::Isolate* isolate = info.GetIsolate();
-	//v8::Local<v8::Context> context = isolate->GetCurrentContext();
-	
-	//v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
-	
-	//int sz = info[0]->Int32Value(context).FromJust();
-	//int i;
-	//int row = 0;
-	//for (i=1;i<sz+1;i++){
-	//	int row1 = info[i]->Int32Value(context).FromJust();
-	//	row += row1;
-	//}
-	
-
-	//v8::String::Utf8Value s(isolate, info[0]);
-	//std::string str(*s);
-	
-	
-	//std::string out("hello world");
-	//Nan::MaybeLocal<v8::String> h = Nan::New<v8::String>(out);
-	//info.GetReturnValue().Set(h.ToLocalChecked());
-	
-	
-	//info.GetReturnValue().Set(row);
-}*/
+int radiusValue(int pt) {
+	int r = 20;
+	int i; int ii;
+	int total = 0;
+	for (i=-1*r;i<=r;i++){
+		for (ii=-1*r;ii<=r;ii++){
+			int x = pt%2310 + i;
+			int y = pt/2310 + ii;
+			total += population[y*2310 + x];
+		}
+	}
+	return total;
+}
 
 double yToLat(double y){
 	double lat = -0.02499999989999999*(y+2643/3) + 71.38708322329654;
@@ -282,6 +296,7 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int retInt = population[row*2310+col];
 	
+	int popRadius = radiusValue(row*2310+col)
 
 	
 
@@ -294,7 +309,7 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//info.GetReturnValue().Set(h.ToLocalChecked());
 	
 	
-	info.GetReturnValue().Set(retInt);
+	info.GetReturnValue().Set(popRadius);
 }
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {

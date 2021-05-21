@@ -45,14 +45,21 @@ double xToLng(double x){
 for (var i=0;i<995;i++){
 	for (var ii=0;ii<2310;ii++){
 		var retGLV = maincpp.getLandValue(i,ii);
-		if (i%200 == 0 && ii%500 == 0){
-			console.log(i,ii,retGLV);
-		}
+		//if (i%200 == 0 && ii%500 == 0){
+		//	console.log(i,ii,retGLV);
+		//}
 		if (i%100 == 0 && ii%200 == 0){
 			ptArray.push([0.0249999999*(ii+6534/3) - 179.14708263665557,-0.02499999989999999*(i+2643/3) + 71.38708322329654,retGLV/100]);
 		}
 	}
 }
+
+var ll = [-84.3880,33.749];//lng,lat
+var x = Math.round((ll[0] + 179.14708263665557)/0.0249999999 - 6534/3);
+var y = Math.round((ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3);
+console.log(x,y);
+var retPop = maincpp.getPopulation(x,y);
+console.log(retPop);
 
 
 var express = require('express');
