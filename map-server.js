@@ -62,24 +62,25 @@ for (var i=0;i<allCities.length;i++){
 	var y = Math.round((ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3);
 	var retPop = maincpp.getPopulation(y,x);
 	
-	if (allCities[i].properties.name == "Spartanburg"){
-		console.log(allCities[i].properties.name,x,y,retPop);
-	}
+
 	if (retPop >= 1000000){
 		//console.log(allCities[i].properties.name,x,y,retPop);
 		cityList.push([ll[0],ll[1],allCities[i].properties.name,retPop]);
 	}
-	else if (allCities[i].properties.name == "Spartanburg"){
-		console.log(allCities[i].properties.name,x,y,retPop);
-	}
+
 }
-cityList.sort(function(a,b){return b[3] - a[3];});
+cityList.sort(function(a,b){return a[3] - b[3];});
 console.log(cityList[0]);
 for (var i=0;i<cityList.length;i++){
+	var x0 = (cityList[i][0] + 179.14708263665557)/0.0249999999 - 6534/3;
+	var y0 = (cityList[i][1] - 71.38708322329654)/-0.0249999999 - 2643/3;
 	for (var ii=i+1;ii<cityList.length;ii++){
-		//var x = Math.round((ll[0] + 179.14708263665557)/0.0249999999 - 6534/3);
-		//var y = Math.round((ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3);
-		//var d = 
+		var x1 = (cityList[ii][0] + 179.14708263665557)/0.0249999999 - 6534/3;
+		var y1 = (cityList[ii][1] - 71.38708322329654)/-0.0249999999 - 2643/3;
+		var d = (x1-x0)*(x1-x0)+(y1-y0)*(y1-y0);
+		if (d < 100){
+			console.log(cityList[i][2],cityList[ii][2]);
+		}
 	}
 }
 console.log(cityList.length);
