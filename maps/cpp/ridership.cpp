@@ -294,7 +294,7 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//info.GetReturnValue().Set(h.ToLocalChecked());
 	
 	
-	info.GetPopulation().Set(retInt);
+	info.GetReturnValue().Set(retInt);
 }
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
