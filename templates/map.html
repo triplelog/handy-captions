@@ -171,7 +171,7 @@ svg.on('mouseup', function (event) {
 		
 		for (var i=0;i<curvedPath.length;i++){
 			if (i>0 && i%2 == 1){
-				console.log(i,curvature(curvedPath[i-1],curvedPath[i],curvedPath[i+1]));
+				//console.log(i,curvature(curvedPath[i-1],curvedPath[i],curvedPath[i+1]));
 			}
 		}
 		for (var i=0;i<curvedPath.length;i++){
@@ -257,7 +257,7 @@ function pathToGrid(pid){
 			gridPath.push(gridPoint);
 		}
 	}
-	console.log(gridPath);
+	//console.log(gridPath);
 }
 
 function pathToStations(pid){
@@ -279,6 +279,7 @@ function pathToStations(pid){
 				var ell = document.getElementById('city-'+cityList[ii][4]);
 				
 				if (closeStations[ii]){
+					console.log(i,ii);
 					closeStations[ii]['max']=i;
 					closeStations[ii]['avg']=(i+closeStations['min'])/2;
 					ell.style.fill = 'rgb('+(255 - closeStations[ii]['avg']*255/len)+',0,'+(closeStations[ii]['avg']*255/len)+')';
