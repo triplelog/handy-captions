@@ -145,7 +145,7 @@ double xToLng(double x){
 
 int ridership(std::vector<int> stations) {
 	int len = stations.size();
-	int i; int ii; int riders = 0;
+	int i; int ii; long riders = 0;
 	std::vector<int> pops;
 	for (i=0;i<len;i++){
 		pops.push_back(radiusValue(stationList[stations[i]],30));
@@ -153,11 +153,18 @@ int ridership(std::vector<int> stations) {
 	for (i=0;i<len;i++){
 		for (ii=0;ii<len;ii++){
 			if (ii == i){continue;}
-			int n = 75000000*pops[i]/10000000*pops[ii]/10000000/500;//thousands of riders
-			riders += n;
+			long n = 75000000*pops[i];
+			nn /= 10000000;
+			nn *= pops[ii];
+			nn /= 10000000;
+			nn /= 500;
+			nn /= 500;
+			//int n = 75000000*pops[i]/10000000*pops[ii]/10000000/500/500;//thousands of riders
+			riders += nn;
 		}
 	}
-	return pops[1];
+	int ret = riders;
+	return ret;
 }
 
 std::vector<int> bestStations(std::vector<int> allStations) {
