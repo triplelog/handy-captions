@@ -116,12 +116,15 @@ for (var i=0;i<cityList.length;i++){
 	else {
 		cppList += '}';
 	}
+	if (i >= 300){
+		console.log(cityList[i]);
+	}
 }
 
-console.log(cppList);
+//console.log(cppList);
 console.log(cityList.length);
 
-var retStations = maincpp.getStations([0,3,5]);
+var retStations = maincpp.getStations([301,302]);
 console.log(retStations);
 
 var express = require('express');
