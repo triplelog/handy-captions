@@ -94,8 +94,9 @@ d3.json("/json/us_48.json").then(function(json,error) {
 d3.json("/json/city_data.json").then(function(json,error) {
 	console.log(error);
 	console.log(json.features);
+	var pts = [[-110,35],[-100,30]];
 	svg.selectAll("circle")
-		.data(json.features).enter()
+		.data(pts).enter()
 		.append("circle")
 		.attr("cx", function (d) { console.log(d.geometry); console.log(d.geometry.coordinates); console.log(projection(d.geometry.coordinates)); if (projection(d.geometry.coordinates)) {return projection(d)[0]} else {return}; })
 		.attr("cy", function (d) { if (projection(d)) {return projection(d)[1]} else {return}; })
