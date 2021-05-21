@@ -46,7 +46,7 @@ function curvature(p0,p1,p2){
 	var d1m = Math.pow(Math.pow(p1[0]-(p2[0]+p0[0])/2,2)+Math.pow(p1[1]-(p2[1]+p0[1])/2,2),0.5);
 	var a = Math.abs(p0[0]*(p1[1]-p2[1])+p1[0]*(p2[1]-p0[1])+p2[0]*(p0[1]-p1[1]))/2;
 	if (a == 0 || d01 == 0 || d02 == 0 || d12 == 0 || d1m == 0){
-		return "inf";
+		return [p0,p1,p2];//"inf";
 	}
 	var k = 0;
 	if (d01 > d02/2 && d12 > d02/2){
