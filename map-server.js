@@ -104,13 +104,20 @@ for (var i=0;i<cityList.length;i++){
 		}
 	}
 }
-var cppList = [];
+var cppList = "{";
 for (var i=0;i<cityList.length;i++){
 	cityList[i].push(i);
 	var x0 = Math.round((cityList[i][0] + 179.14708263665557)/0.0249999999 - 6534/3);
 	var y0 = Math.round((cityList[i][1] - 71.38708322329654)/-0.0249999999 - 2643/3);
-	cppList.push(y0*2310+x0);
+	cppList += y0*2310+x0;
+	if (i<cityList.length-1){
+		cppList += ', ';
+	}
+	else {
+		cppList += '}';
+	}
 }
+
 console.log(cppList);
 console.log(cityList.length);
 
