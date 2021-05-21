@@ -334,13 +334,15 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	
 	int sz = jsArr->Length();
+	int szz = -1;
 	int i;
 	std::vector<int> stations;
 	for (i=0;i<sz;i++){
-		stations.push_back(jsArr->Get(context,i));
+		szz = jsArr->Get(context,i);
+		//stations.push_back(jsArr->Get(context,i));
 	}
 	
-	info.GetReturnValue().Set(sz);
+	info.GetReturnValue().Set(szz);
 }
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
