@@ -99,7 +99,7 @@ svg.on('mouseup', function (event) {
 	curvedPath = createPD(mousePath);
 	var newPath = "M";
 	newPath += curvedPath[0][0]+" "+curvedPath[0][1];
-	for (var i=1;i<curvedPath.length();i++){
+	for (var i=1;i<curvedPath.length;i++){
 		if (i%2 == 1){
 			newPath += " Q ";
 			newPath += curvedPath[i][0]+" "+curvedPath[i][1];
