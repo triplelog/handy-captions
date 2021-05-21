@@ -116,11 +116,18 @@ int radiusValue(int pt) {
 	int total = 0;
 	for (i=-1*r;i<=r;i++){
 		for (ii=-1*r;ii<=r;ii++){
+			int div = 1;
+			if (i*i+ii*ii > (r+1)*(r+1)){
+				continue;
+			}
+			else if (i*i+ii*ii > (r-1)*(r-1)){
+				div = 2;
+			}
 			int x = pt%2310 + i;
 			int y = pt/2310 + ii;
 			if (y*2310 + x < 0){continue;}
 			if (y*2310 + x >= 2310*995){continue;}
-			total += population[y*2310 + x];
+			total += population[y*2310 + x]/div;
 		}
 	}
 	return total;
