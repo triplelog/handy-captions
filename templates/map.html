@@ -96,12 +96,15 @@ d3.json("/json/city_data.json").then(function(json,error) {
 	console.log(json.features);
 	var pts = [[-110,35],[-100,30]];
 	for (var i=0;i<json.features.length;i++){
-		svg.selectAll("circle")
-			.append("circle")
-			.attr("cx", function (d) { console.log(d.geometry); console.log(d.geometry.coordinates); console.log(projection(d.geometry.coordinates)); if (projection(d.geometry.coordinates)) {return projection(d)[0]} else {return}; })
-			.attr("cy", function (d) { if (projection(d)) {return projection(d)[1]} else {return}; })
-			.attr("r", function (d) { if (projection(d)) {return '5px';} else {return}; })
-			.attr("fill", "black");
+		var xy = projection(json.features[i].geometry.coordinates);
+		if (xy){
+			svg.selectAll("circle")
+				.append("circle")
+				.attr("cx", xy[0] )
+				.attr("cy", xy[1])
+				.attr("r", '5px')
+				.attr("fill", "black");
+		}
 	}
 });
 
