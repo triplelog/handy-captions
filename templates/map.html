@@ -97,12 +97,11 @@ d3.json("/json/city_data.json").then(function(json,error) {
 	var pts = [[-110,35],[-100,30]];
 	for (var i=0;i<3;i++){
 		var xy = projection(json.features[i].geometry.coordinates);
-		console.log(json.features[i].geometry.coordinates,xy);
+		//console.log(json.features[i].geometry.coordinates,xy);
 		
 		if (xy){
-			console.log(json.features[i].geometry.coordinates,xy);
-			svg.selectAll("circle")
-				.append("circle")
+			console.log(xy);
+			svg.append("circle")
 				.attr("cx", xy[0] )
 				.attr("cy", xy[1])
 				.attr("r", '5px')
