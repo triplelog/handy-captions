@@ -35,7 +35,7 @@
 <script src="../js/map.js"></script>
 
 <script>
-var mode = "station";
+var mode = "line";
 var stations = [];
 
 function addStation() {
@@ -268,6 +268,7 @@ function pathToStations(pid){
 	}
 	console.log(len);
 	
+	var closeStations = {};
 	for (var i=0;i<len;i+=0.1){
 		var pt = el.getPointAtLength(i);
 		var ll = projection.invert([pt.x,pt.y]);
@@ -276,7 +277,17 @@ function pathToStations(pid){
 			var d2 = Math.pow(llC[0]-ll[0],2)+Math.pow(llC[1]-ll[1],2);
 			if (d2 < 1){
 				var ell = document.getElementById('city-'+cityList[ii][4]);
-				ell.style.fill = 'red';
+				
+				if (closeStations[ii]){
+					closeStations[ii]['max']=i;
+					closeStations[ii]['avg']=(i+closeStations['min'])/2;
+					ell.style.fill = 'rgb('+(255 - closeStations[ii]['avg']*255/len)+',0,'+(closeStations[ii]['avg']*255/len)+')';
+				}
+				else {
+					closeStations[ii]={'min':i,'max':i,'avg':i};
+					ell.style.fill = 'rgb(255,0,0)';
+				}
+				
 			}
 		}
 	}
