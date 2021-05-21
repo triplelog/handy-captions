@@ -344,9 +344,9 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	}
 	stations = bestStations(stations);
 	
-	v8::Local<v8::Array> retArr;
+	v8::Local<v8::Array> retArr = v8::Array::New(stations.size());
 	for (i=0;i<stations.size();i++){
-		retArr->Set(context,i,stations[i]);
+		retArr->Set(context,v8::Number::New(i), v8::Number::New(stations[i]));
 	}
 	
 	
