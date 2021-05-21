@@ -111,7 +111,7 @@ std::vector<int> population;
 
 
 int radiusValue(int pt) {
-	int r = 10;
+	int r = 7;
 	int i; int ii;
 	int total = 0;
 	for (i=-1*r;i<=r;i++){
