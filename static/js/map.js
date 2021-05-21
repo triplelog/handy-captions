@@ -11,7 +11,9 @@ function createPD(currentCurve){
 	console.log(currentCurve.length);
 	var initialCL = currentCurve.length;
 	var maxminD2 = 0.005;
-	while (currentCurve.length > initialCL / 4 + 5){
+	var maxCL = initialCL / 4 + 5;
+	maxCL = 25;
+	while (currentCurve.length > maxCL){
 		for (var i=1; i<currentCurve.length - 2; i++){
 			var minD2 = nearestBezier(currentCurve[i-1][0],currentCurve[i][0],currentCurve[i+2][0],currentCurve[i-1][1],currentCurve[i][1],currentCurve[i+2][1], currentCurve[i+1][0], currentCurve[i+1][1]);
 			if (minD2 < maxminD2){
