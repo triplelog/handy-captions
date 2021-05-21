@@ -82,12 +82,14 @@ d3.json("/json/us_48.json").then(function(json,error) {
 			}
 	});
 	
-	svg.data({{ points | dump | safe}}).enter()
+	
+	/*svg.selectAll("circle")
+		.data({{ points | dump | safe}}).enter()
 		.append("circle")
 		.attr("cx", function (d) { if (projection(d)) {return projection(d)[0]} else {return}; })
 		.attr("cy", function (d) { if (projection(d)) {return projection(d)[1]} else {return}; })
 		.attr("r", function (d) { if (projection(d)) {return d[2]+'px';} else {return}; })
-		.attr("fill", "red");
+		.attr("fill", "red");*/
 	
 	svg.data({{ cities | dump | safe}}).enter()
 		.append("circle")
