@@ -37,6 +37,14 @@
 <script>
 var mode = "station";
 var stations = [];
+
+function addStation() {
+	mode = "station";
+}
+function addLine() {
+	mode = "line";
+}
+
 var width = 960;
 var height = 500;
 
@@ -152,7 +160,7 @@ svg.on('mouseup', function (event) {
 			.style("stroke-width", "0")
 			.style("cx", xy[0])
 			.style("cy", xy[1])
-			.style("r", "10px");
+			.style("r", "6px");
 	}
 })
 
