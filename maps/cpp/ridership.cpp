@@ -405,7 +405,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
 	
-	
+	int max = info[1]->Int32Value(context).FromJust();
 	
 	int sz = jsArr->Length();
 	int szz = -1;
@@ -416,7 +416,9 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		//szz = jsArr->Get(context,i);
 		stations.push_back(szz);
 	}
-	stations = bestStations(stations);
+	while (stations.size() > max){
+		stations = bestStations(stations);
+	}
 	
 	v8::Local<v8::Array> retArr = v8::Array::New(isolate,stations.size());
 	for (i=0;i<stations.size();i++){

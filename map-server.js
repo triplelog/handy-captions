@@ -169,17 +169,15 @@ wss.on('connection', function connection(ws) {
 		if (dm.type == 'stations'){
 			var s = dm.stations;
 			
-			console.log(s);
+			
 			var stations = [];
 			for (var i=0;i<s.length;i++){
 				console.log(cityList[s[i][0]]);
 				stations.push(parseInt(s[i][0]));
 			}
-			var retStations = maincpp.getStations(stations);
+			var retStations = maincpp.getStations(stations,4);
 			console.log(retStations);
-			for (var i=0;i<retStations.length;i++){
-				console.log(cityList[retStations[i]]);
-			}
+			
 			
 			
 			var jsonmessage = {'type':'test'};
