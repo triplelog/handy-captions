@@ -100,6 +100,7 @@ d3.json("/json/city_data.json").then(function(json,error) {
 		console.log(json.features[i].geometry.coordinates,xy);
 		
 		if (xy){
+			console.log(json.features[i].geometry.coordinates,xy);
 			svg.selectAll("circle")
 				.append("circle")
 				.attr("cx", xy[0] )
