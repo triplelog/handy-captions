@@ -58,7 +58,7 @@ var ll = [-84.3880,33.749];//lng,lat
 var x = Math.round((ll[0] + 179.14708263665557)/0.0249999999 - 6534/3);
 var y = Math.round((ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3);
 console.log(x,y);
-var retPop = maincpp.getPopulation(x,y);
+var retPop = maincpp.getPopulation(y,x);
 console.log(retPop);
 
 
