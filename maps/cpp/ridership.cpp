@@ -338,7 +338,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int i;
 	std::vector<int> stations;
 	for (i=0;i<sz;i++){
-		szz = jsArr->Get(context,i)->NumberValue();
+		szz = jsArr->Get(context,i)->Uint32Value();
 		//szz = jsArr->Get(context,i).FromJust();
 		//stations.push_back(jsArr->Get(context,i));
 	}
