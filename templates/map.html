@@ -281,7 +281,7 @@ function pathToStations(pid){
 				
 				if (closeStations[ii]){
 					closeStations[ii]['max']=i;
-					closeStations[ii]['avg']=(i+closeStations['min'])/2;
+					closeStations[ii]['avg']=(i+closeStations[ii]['min'])/2;
 					ell.style.fill = 'rgb('+(255 - closeStations[ii]['avg']*255/len)+',0,'+(closeStations[ii]['avg']*255/len)+')';
 				}
 				else {
@@ -295,7 +295,7 @@ function pathToStations(pid){
 	}
 	var orderedStations = [];
 	for (key in closeStations){
-		orderedStations.push([key,closeStations[key]['avg'],cityList[key]]);
+		orderedStations.push([key,closeStations[key]['avg'],cityList[key][2]]);
 	}
 	orderedStations.sort(function(a,b){return a[1] - b[1];});
 	console.log(orderedStations);
