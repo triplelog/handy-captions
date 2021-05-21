@@ -333,7 +333,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	
 	
-	int sz = jsArr.size();
+	int sz = jsArr.length;
 	
 	
 	info.GetReturnValue().Set(sz);
