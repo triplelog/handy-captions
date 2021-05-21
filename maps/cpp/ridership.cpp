@@ -161,7 +161,7 @@ int radiusValueClosest(int pt, int r, std::map<int,std::vector<int> > stationDMa
 			int y = pt/2310 + ii;
 			if (y*2310 + x < 0){continue;}
 			if (y*2310 + x >= 2310*995){continue;}
-			if (stationDMap.find(y*2310 + x)){
+			if (stationDMap.find(y*2310 + x) != stationDMap.end()){
 				if (sidx != stationDMap[y*2310 + x][0]){
 					continue;
 				}
@@ -190,7 +190,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			if (y*2310 + x >= 2310*995){continue;}
 			total += population[y*2310 + x]/div;
 			int d2 = i*i+ii*ii;
-			if (stationDMap.find(y*2310 + x)){
+			if (stationDMap.find(y*2310 + x) != stationDMap.end()){
 				if (d2 < stationDMap[y*2310 + x][1]){
 					stationDMap[y*2310 + x][0] = sidx;
 					stationDMap[y*2310 + x][1] = d2;
