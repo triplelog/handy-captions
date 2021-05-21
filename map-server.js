@@ -175,7 +175,7 @@ wss.on('connection', function connection(ws) {
 				console.log(cityList[s[i][0]]);
 				stations.push(parseInt(s[i][0]));
 			}
-			var retStations = maincpp.getStations(stations,4);
+			var retStations = maincpp.getStations(stations,10);
 			console.log(retStations);
 			
 			

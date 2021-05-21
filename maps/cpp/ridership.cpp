@@ -221,10 +221,10 @@ int ridership(std::vector<int> stations) {
 	double d = 0;
 	std::map<int,std::vector<int> > stationDMap;
 	for (i=0;i<len;i++){
-		stationDMap = radiusValueMap(stationList[stations[i]],25,stationDMap,stations[i]);
+		stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
 	}
 	for (i=0;i<len;i++){
-		pops.push_back(radiusValueClosest(stationList[stations[i]],25,stationDMap,stations[i]));
+		pops.push_back(radiusValueClosest(stationList[stations[i]],20,stationDMap,stations[i]));
 		if (i==0){distance.push_back(0);}
 		else {
 			double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
@@ -256,11 +256,15 @@ int ridership(std::vector<int> stations) {
 	return ret;
 }
 
-std::vector<int> bestStations(std::vector<int> allStations) {
+std::vector<int> bestStations(std::vector<int> allStations, int remove) {
 	int len = allStations.size();
-	int i; int ii;
-	int maxRiders = 0;
-	int cut = 0;
+	int i; int ii; int iii;
+	std::vector<int> maxRiders;
+	std::vector<int> cut;
+	for (i=0;i<remove;i++){
+		maxRiders.push_back(0);
+		cut.push_back(i);
+	}
 	for (i=0;i<len;i++){
 		std::vector<int> stations;
 		for (ii=0;ii<len;ii++){
@@ -269,16 +273,29 @@ std::vector<int> bestStations(std::vector<int> allStations) {
 			}
 		}
 		int riders = ridership(stations);
-		if (riders > maxRiders){
-			maxRiders = riders;
-			cut = i;
+		for (ii=0;ii<remove;ii++){
+			if (riders > maxRiders[ii]){
+				for (iii=ii+1;iii<remove;iii++){
+					maxRiders[iii]=maxRiders[iii-1];
+					cut[iii]=cut[iii-1];
+				}
+				maxRiders[ii] = riders;
+				cut[ii] = i;
+				break;
+			}
 		}
 	}
 	std::vector<int> stations;
-	for (ii=0;ii<len;ii++){
-		if (cut != ii){
-			stations.push_back(allStations[ii]);
+	for (i=0;i<len;i++){
+		for (ii=0;ii<remove;ii++){
+			if (cut[i] == ii){
+				break;
+			}
+			if (ii == remove - 1){
+				stations.push_back(allStations[ii]);
+			}
 		}
+		
 	}
 	return stations;
 }
@@ -480,8 +497,17 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		//szz = jsArr->Get(context,i);
 		stations.push_back(szz);
 	}
+	while (stations.size() > max + 20){
+		stations = bestStations(stations,5);
+	}
+	while (stations.size() > max + 10){
+		stations = bestStations(stations,3);
+	}
+	while (stations.size() > max + 5){
+		stations = bestStations(stations,2);
+	}
 	while (stations.size() > max){
-		stations = bestStations(stations);
+		stations = bestStations(stations,1);
 	}
 	
 	v8::Local<v8::Array> retArr = v8::Array::New(isolate,stations.size());
