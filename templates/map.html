@@ -97,6 +97,9 @@ svg.on('mouseup', function (event) {
 	mousePath.push(ll);
 	
 	curvedPath = createPD(mousePath);
+	for (var i=0;i<curvedPath.length;i++){
+		curvedPath[i] = projection(curvedPath[i]);
+	}
 	var newPath = "M";
 	newPath += curvedPath[0][0]+" "+curvedPath[0][1];
 	for (var i=1;i<curvedPath.length;i++){
