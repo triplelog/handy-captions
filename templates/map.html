@@ -114,6 +114,8 @@ svg.on('mouseup', function (event) {
 		mousePath.push(ll);
 	
 		curvedPath = createPD(mousePath);
+		
+		
 		for (var i=0;i<curvedPath.length;i++){
 			if (i>0 && i%2 == 1){
 				console.log(i,curvature(curvedPath[i-1],curvedPath[i],curvedPath[i+1]));

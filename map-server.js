@@ -28,8 +28,8 @@ const User = require('./models/user');
 const UserData = require('./models/userdata');*/
 
 
-var retHello = maincpp.hello();//array is 2310 columns and 995 rows
-console.log(retHello);
+maincpp.hello();//array is 2310 columns and 995 rows
+
 
 //var ptArray = [[-122.490402, 37.786453,10],[-122.490402, 47.786453,20],[-102.490402, 37.786453,5]];
 var ptArray = [];
@@ -48,7 +48,7 @@ for (var i=0;i<995;i++){
 		if (i%200 == 0 && ii%500 == 0){
 			console.log(i,ii,retGLV);
 		}
-		if (i%500 == 0 && ii%1000 == 0){
+		if (i%100 == 0 && ii%200 == 0){
 			ptArray.push([0.0249999999*(ii+6534/3) - 179.14708263665557,-0.02499999989999999*(i+2643/3) + 71.38708322329654,retGLV/100]);
 		}
 	}

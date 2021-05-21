@@ -79,10 +79,11 @@ int main(int argc, char *argv[]) {
 */
 
 std::vector<int> landValue;
+std::vector<int> population;
 //std::map<int,int> landValueMap;
 
 
-void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+/*void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	//v8::Isolate* isolate = info.GetIsolate();
 	//v8::Local<v8::Context> context = isolate->GetCurrentContext();
 	
@@ -107,7 +108,7 @@ void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	
 	//info.GetReturnValue().Set(row);
-}
+}*/
 
 double yToLat(double y){
 	double lat = -0.02499999989999999*(y+2643/3) + 71.38708322329654;
@@ -117,11 +118,73 @@ double xToLng(double x){
 	double lng = 0.0249999999*(x+6534/3) - 179.14708263665557;
 }
 
-void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
-	v8::Isolate* isolate = info.GetIsolate();
-	v8::Local<v8::Context> context = isolate->GetCurrentContext();
-	
-	//v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
+void SetPopulation() {
+
+	int row = 0;
+	long totPop = 0;
+	int i;
+	std::ifstream file("maps/tocpp/pop.csv");
+	if (file.is_open()) {
+		std::string line;
+		while (std::getline(file, line)) {
+			// using printf() in all tests for consistency
+			//printf("%s", line.c_str());
+			int len = line.length();
+			
+			
+			int rInt = 0;
+			int col = 0;
+			bool isDecimal = false;
+			for (i=0;i<len;i++){
+				if (line[i] == ','){
+					if (!isDecimal){
+						rInt *= 10;
+					}
+					
+					population.push_back(rInt);
+					totPop += rInt;
+					//if (rInt > 0){
+					//	landValueMap[row*6298+col]=rInt;
+					//}
+					col++;
+					isDecimal = false;
+					rInt = 0;
+				}
+				else if (line[i] == '.' && i < len -1 && line[i+1] != ','){
+					rInt *= 10;
+					rInt += line[i+1] - '0';
+					isDecimal = true;
+				}
+				else if (!isDecimal){
+					rInt *= 10;
+					rInt += line[i] - '0';
+				}
+			}
+			if (len > 0 && line[len-1] != ','){
+				if (!isDecimal){
+					rInt *= 10;
+				}
+				
+				//if (rInt > 0){
+				//	landValueMap[row*6298+col]=rInt;
+				//}
+				col++;
+				population.push_back(rInt);
+				totPop += rInt;
+			}
+			
+			row++;
+			//if (row > 100){
+			//	break;
+			//}
+		}
+		file.close();
+	}
+
+}
+
+void SetLandValue() {
+
 	
 	int row = 0;
 	long totPop = 0;
@@ -183,21 +246,7 @@ void SetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		}
 		file.close();
 	}
-	row = totPop/10;
-	
 
-	
-
-	//v8::String::Utf8Value s(isolate, info[0]);
-	//std::string str(*s);
-	
-	
-	//std::string out("hello world");
-	//Nan::MaybeLocal<v8::String> h = Nan::New<v8::String>(out);
-	//info.GetReturnValue().Set(h.ToLocalChecked());
-	
-	
-	info.GetReturnValue().Set(row);
 }
 
 void GetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
@@ -223,16 +272,51 @@ void GetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	info.GetReturnValue().Set(retInt);
 }
+
+void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+	v8::Isolate* isolate = info.GetIsolate();
+	v8::Local<v8::Context> context = isolate->GetCurrentContext();
+	
+	int row = info[0]->Int32Value(context).FromJust();
+	int col = info[1]->Int32Value(context).FromJust();
+	
+	int retInt = population[row*2310+col];
+	
+
+	
+
+	//v8::String::Utf8Value s(isolate, info[0]);
+	//std::string str(*s);
+	
+	
+	//std::string out("hello world");
+	//Nan::MaybeLocal<v8::String> h = Nan::New<v8::String>(out);
+	//info.GetReturnValue().Set(h.ToLocalChecked());
+	
+	
+	info.GetPopulation().Set(retInt);
+}
+
+void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
+	SetLandValue();
+	SetPopulation();
+}
+
 void Init(v8::Local<v8::Object> exports) {
   v8::Local<v8::Context> context = exports->CreationContext();
   exports->Set(context,
                Nan::New("hello").ToLocalChecked(),
-               Nan::New<v8::FunctionTemplate>(SetLandValue)
+               Nan::New<v8::FunctionTemplate>(Hello)
                    ->GetFunction(context)
                    .ToLocalChecked());
   exports->Set(context,
                Nan::New("getLandValue").ToLocalChecked(),
                Nan::New<v8::FunctionTemplate>(GetLandValue)
+                   ->GetFunction(context)
+                   .ToLocalChecked());
+  exports->Set(context,
+               Nan::New("getPopulation").ToLocalChecked(),
+               Nan::New<v8::FunctionTemplate>(GetPopulation)
                    ->GetFunction(context)
                    .ToLocalChecked());
     
