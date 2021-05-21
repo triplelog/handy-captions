@@ -157,7 +157,7 @@ int ridership(std::vector<int> stations) {
 			riders += n;
 		}
 	}
-	return pops[0];
+	return pops[1];
 }
 
 std::vector<int> bestStations(std::vector<int> allStations) {
