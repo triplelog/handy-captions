@@ -80,11 +80,15 @@ for (var i=0;i<cityList.length;i++){
 		var d = (x1-x0)*(x1-x0)+(y1-y0)*(y1-y0);
 		if (d < 400 && cityList[i][3] < 10000000){
 			console.log(cityList[i][2],cityList[ii][2]);
-			
+			cityList.splice(i,1);
+			i--;
+			break;
 		}
 		else if (d < 100){
 			console.log(cityList[i][2],cityList[ii][2]);
-			
+			cityList.splice(i,1);
+			i--;
+			break;
 		}
 	}
 }
