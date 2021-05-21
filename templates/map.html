@@ -21,6 +21,8 @@
 </head>
 <body style="overflow:hidden; margin: 0px;">
 <div class="container">
+	<button onclick="addStation()">Station</button>
+	<button onclick="addLine()">Line</button>
 	<div id="canvas-svg"></div>
 	
 	
@@ -33,6 +35,8 @@
 <script src="../js/map.js"></script>
 
 <script>
+var mode = "station";
+var stations = [];
 var width = 960;
 var height = 500;
 
@@ -82,55 +86,74 @@ d3.json("/json/us_48.json").then(function(json,error) {
 
 var mousePath = [];
 svg.on('mousedown', function (event) {
-	var xy = d3.pointer(event);
-	var ll = projection.invert(xy);
-	mousePath = [ll];
+	if (mode == "line"){
+		var xy = d3.pointer(event);
+		var ll = projection.invert(xy);
+		mousePath = [ll];
+	}
 })
 svg.on('mousemove', function (event) {
-	var xy = d3.pointer(event);
-	var ll = projection.invert(xy);
-	mousePath.push(ll);
+	if (mode == "line"){
+		var xy = d3.pointer(event);
+		var ll = projection.invert(xy);
+		mousePath.push(ll);
+	}
 })
 svg.on('mouseup', function (event) {
-	var xy = d3.pointer(event);
-	var ll = projection.invert(xy);
-	mousePath.push(ll);
+	if (mode == "line"){
+		var xy = d3.pointer(event);
+		var ll = projection.invert(xy);
+		mousePath.push(ll);
 	
-	curvedPath = createPD(mousePath);
-	for (var i=0;i<curvedPath.length;i++){
-		if (i>0 && i%2 == 1){
-			console.log(i,curvature(curvedPath[i-1],curvedPath[i],curvedPath[i+1]));
+		curvedPath = createPD(mousePath);
+		for (var i=0;i<curvedPath.length;i++){
+			if (i>0 && i%2 == 1){
+				console.log(i,curvature(curvedPath[i-1],curvedPath[i],curvedPath[i+1]));
+			}
 		}
-	}
-	for (var i=0;i<curvedPath.length;i++){
-		curvedPath[i] = projection(curvedPath[i]);
-	}
-	var newPath = "M";
-	newPath += curvedPath[0][0]+" "+curvedPath[0][1];
-	for (var i=1;i<curvedPath.length;i++){
-		if (i%2 == 1){
-			newPath += " Q ";
-			newPath += curvedPath[i][0]+" "+curvedPath[i][1];
+		for (var i=0;i<curvedPath.length;i++){
+			curvedPath[i] = projection(curvedPath[i]);
 		}
-		else {
-			newPath += " ";
-			newPath += curvedPath[i][0]+" "+curvedPath[i][1];
+		var newPath = "M";
+		newPath += curvedPath[0][0]+" "+curvedPath[0][1];
+		for (var i=1;i<curvedPath.length;i++){
+			if (i%2 == 1){
+				newPath += " Q ";
+				newPath += curvedPath[i][0]+" "+curvedPath[i][1];
+			}
+			else {
+				newPath += " ";
+				newPath += curvedPath[i][0]+" "+curvedPath[i][1];
+			}
 		}
-	}
 	
-	//mouseJson = {"type":"LineString","coordinates":mousePath};
+		//mouseJson = {"type":"LineString","coordinates":mousePath};
 
-	//var pathGen = d3.geoPath().projection(projection);
-	//var newPath = pathGen(mouseJson);
-	d3.select(this)
-		.append("path")
-		.attr("id", "segment-0")
-		.attr("d", newPath)
-		.style("fill", "none")
-		.style("stroke-width", "3")
-		.style("stroke", "rgb(0,0,0)");
+		//var pathGen = d3.geoPath().projection(projection);
+		//var newPath = pathGen(mouseJson);
+		d3.select(this)
+			.append("path")
+			.attr("id", "segment-0")
+			.attr("d", newPath)
+			.style("fill", "none")
+			.style("stroke-width", "3")
+			.style("stroke", "rgb(0,0,0)");
 	
-	pathToGrid("segment-0");
+		pathToGrid("segment-0");
+	}
+	else if (mode == "station"){
+		var xy = d3.pointer(event);
+		var ll = projection.invert(xy);
+		stations.push(ll);
+		d3.select(this)
+			.append("circle")
+			.attr("id", "station-"+stations.length)
+			.style("fill", "rgb(0,0,0)")
+			.style("stroke-width", "0")
+			.style("cx", xy[0])
+			.style("cy", xy[1])
+			.style("r", "10px");
+	}
 })
 
 function pathToGrid(pid){
