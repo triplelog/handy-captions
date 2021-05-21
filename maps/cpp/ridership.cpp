@@ -112,6 +112,16 @@ std::vector<int> stationList;
 //std::map<int,int> landValueMap;
 
 
+int ptDistance(int pt1, int pt2) {
+
+	int x1 = pt1%2310;
+	int y1 = pt1/2310;
+	int x2 = pt2%2310;
+	int y2 = pt2/2310;
+	double dd = (x2-x1)*(x2-x1)+(y2-y1)*(y2-y1);
+	double d = sqrt(dd)*3;//distance in km, i believe
+	return d;
+}
 
 int radiusValue(int pt, int r) {
 	int i; int ii;
@@ -147,16 +157,27 @@ int ridership(std::vector<int> stations) {
 	int len = stations.size();
 	int i; int ii; long riders = 0;
 	std::vector<int> pops;
+	std::vector<double> distance;
+	double d = 0;
 	for (i=0;i<len;i++){
 		pops.push_back(radiusValue(stationList[stations[i]],30));
+		if (i==0){distance.push_back(0);}
+		else {
+			double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
+			d += dd;
+			distance.push_back(d);
+		}
 	}
 	for (i=0;i<len;i++){
 		for (ii=0;ii<len;ii++){
 			if (ii == i){continue;}
+			double dd = distance[ii] - distance[i];
+			if (dd < 0){dd = -1*dd;}
+			int di = dd;
 			long n = pops[i]/2;
 			n *= 15;
-			n /= 500;
-			n /= 500;
+			n /= di;
+			n /= di;
 			n *= pops[ii];
 			n /= 10000000;
 			n *= pops[i];
