@@ -107,13 +107,11 @@ int main(int argc, char *argv[]) {
 
 std::vector<int> landValue;
 std::vector<int> population;
+std::vector<int> stationList;
 
 //std::map<int,int> landValueMap;
 
-std::vector<int> bestStations(std::vector<int> allStations) {
-	
-	return allStations;
-}
+
 
 int radiusValue(int pt, int r) {
 	int i; int ii;
@@ -143,6 +141,20 @@ double yToLat(double y){
 
 double xToLng(double x){
 	double lng = 0.0249999999*(x+6534/3) - 179.14708263665557;
+}
+
+int ridership(std::vector<int> stations) {
+	int len = stations.size();
+	int i;
+	std::vector<int> pops;
+	for (i=0;i<len;i++){
+		pops.push_back(radiusValue(stationList[stations[i]],30));
+	}
+}
+
+std::vector<int> bestStations(std::vector<int> allStations) {
+	
+	return allStations;
 }
 
 void SetPopulation() {
@@ -358,6 +370,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	SetLandValue();
 	SetPopulation();
+	stationList = {};
 }
 
 void Init(v8::Local<v8::Object> exports) {
