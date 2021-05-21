@@ -30,6 +30,7 @@
 
 
 <script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="../js/map.js"></script>
 
 <script>
 var width = 960;
@@ -95,10 +96,24 @@ svg.on('mouseup', function (event) {
 	var ll = projection.invert(xy);
 	mousePath.push(ll);
 	
-	mouseJson = {"type":"LineString","coordinates":mousePath};
+	curvedPath = createPD(mousePath);
+	var newPath = "M";
+	newPath += curvedPath[0][0]+" "+curvedPath[0][1];
+	for (var i=1;i<curvedPath.length();i++){
+		if (i%2 == 1){
+			newPath += " Q ";
+			newPath += curvedPath[i][0]+" "+curvedPath[i][1];
+		}
+		else {
+			newPath += " ";
+			newPath += curvedPath[i][0]+" "+curvedPath[i][1];
+		}
+	}
+	
+	//mouseJson = {"type":"LineString","coordinates":mousePath};
 
-	var pathGen = d3.geoPath().projection(projection);
-	var newPath = pathGen(mouseJson);
+	//var pathGen = d3.geoPath().projection(projection);
+	//var newPath = pathGen(mouseJson);
 	d3.select(this)
 		.append("path")
 		.attr("id", "segment-0")
