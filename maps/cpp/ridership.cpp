@@ -337,7 +337,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int i;
 	std::vector<int> stations;
 	for (i=0;i<sz;i++){
-		stations.push_back(jsArr->Get(i));
+		stations.push_back(jsArr->CloneElementAt(i));
 	}
 	
 	info.GetReturnValue().Set(sz);
