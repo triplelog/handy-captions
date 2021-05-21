@@ -154,11 +154,11 @@ int ridership(std::vector<int> stations) {
 		for (ii=0;ii<len;ii++){
 			if (ii == i){continue;}
 			long n = 75000000*pops[i];
-			nn /= 10000000;
-			nn *= pops[ii];
-			nn /= 10000000;
-			nn /= 500;
-			nn /= 500;
+			n /= 10000000;
+			n *= pops[ii];
+			n /= 10000000;
+			n /= 500;
+			n /= 500;
 			//int n = 75000000*pops[i]/10000000*pops[ii]/10000000/500/500;//thousands of riders
 			riders += nn;
 		}
