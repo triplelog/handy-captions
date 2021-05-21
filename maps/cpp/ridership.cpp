@@ -170,8 +170,30 @@ int ridership(std::vector<int> stations) {
 }
 
 std::vector<int> bestStations(std::vector<int> allStations) {
-	
-	return allStations;
+	int len = allStations.size();
+	int i; int ii;
+	int maxRiders = 0;
+	int cut = 0;
+	for (i=0;i<len;i++){
+		std::vector<int> stations;
+		for (ii=0;ii<len;ii++){
+			if (i != ii){
+				stations.push_back(allStations[ii]);
+			}
+		}
+		int riders = ridership(stations);
+		if (riders > maxRiders){
+			maxRiders = riders;
+			cut = i;
+		}
+	}
+	std::vector<int> stations;
+	for (ii=0;ii<len;ii++){
+		if (cut != ii){
+			stations.push_back(allStations[ii]);
+		}
+	}
+	return stations;
 }
 
 void SetPopulation() {

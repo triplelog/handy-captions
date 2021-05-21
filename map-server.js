@@ -124,7 +124,7 @@ for (var i=0;i<cityList.length;i++){
 //console.log(cppList);
 console.log(cityList.length);
 
-var retStations = maincpp.getStations([301,302]);
+var retStations = maincpp.getStations([300,301,302]);
 console.log(retStations);
 
 var express = require('express');
