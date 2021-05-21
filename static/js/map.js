@@ -10,8 +10,8 @@ function createPD(currentCurve){
 	curvedPath.push([curveRound(currentCurve[0][0]),curveRound(currentCurve[0][1])]);
 	console.log(currentCurve.length);
 	var initialCL = currentCurve.length;
-	var maxminD2 = 0.01;
-	while (currentCurve.length > initialCL / 3 + 2){
+	var maxminD2 = 0.005;
+	while (currentCurve.length > initialCL / 4 + 5){
 		for (var i=1; i<currentCurve.length - 2; i++){
 			var minD2 = nearestBezier(currentCurve[i-1][0],currentCurve[i][0],currentCurve[i+2][0],currentCurve[i-1][1],currentCurve[i][1],currentCurve[i+2][1], currentCurve[i+1][0], currentCurve[i+1][1]);
 			if (minD2 < maxminD2){
@@ -20,7 +20,7 @@ function createPD(currentCurve){
 				continue;
 			}
 		}
-		maxminD2 += 0.01;
+		maxminD2 += 0.005;
 		console.log(maxminD2, currentCurve.length);
 	}
 	for (var i=1; i<currentCurve.length - 2; i++){
