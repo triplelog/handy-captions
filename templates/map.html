@@ -95,16 +95,17 @@ d3.json("/json/city_data.json").then(function(json,error) {
 	console.log(error);
 	console.log(json.features);
 	var pts = [[-110,35],[-100,30]];
-	for (var i=0;i<3;i++){
+	for (var i=0;i<json.features.length;i++){
 		var xy = projection(json.features[i].geometry.coordinates);
 		//console.log(json.features[i].geometry.coordinates,xy);
 		
 		if (xy){
-			console.log(xy);
+			//console.log(xy);
 			svg.append("circle")
+				.attr("id", "city-"+json.features[i].properties.name)
 				.attr("cx", xy[0] )
 				.attr("cy", xy[1])
-				.attr("r", '5px')
+				.attr("r", '4px')
 				.attr("fill", "black");
 		}
 	}
