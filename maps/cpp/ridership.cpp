@@ -633,6 +633,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
     for (it = stationDMap.begin(); it != stationDMap.end(); it++){
 		(*stationDMapPointer)[it->first] = it->second;
 	}
+	unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    time1 += now4 - now3;
 	
 	if (stations.size() > max){
 		while (stations.size() > max + 20){
