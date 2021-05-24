@@ -198,10 +198,10 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 	std::ofstream logFile("logfile.txt");
 	
 	//logFile << d3;
-	logFile << lat1;
-	logFile << lng1;
+	logFile << lat1 << " , ";
+	logFile << lng1 << " , ";
 	double dd3 = haversine(lat1,lng1,lat1+1,lng1+1);
-	logFile << dd3;
+	logFile << dd3 << " , ";
 	//logFile << lng2;
 	for (i=-1*rRC;i<=rRC;i++){
 		for (ii=-1*rRC;ii<=rRC;ii++){
@@ -632,8 +632,8 @@ void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	for (i=0;i<sz;i++){
 		int x1 = stationList[i]%geoCols;
 		int y1 = stationList[i]/geoCols;
-		int lat1 = yToLat(y1);
-		int lng1 = xToLng(x1);
+		double lat1 = yToLat(y1);
+		double lng1 = xToLng(x1);
 		stationListLL.push_back(lat1);//latitude
 		stationListLL.push_back(lng1);//longitude
 	}
