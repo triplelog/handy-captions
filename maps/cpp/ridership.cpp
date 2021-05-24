@@ -181,7 +181,7 @@ int radiusValueClosest(int pt, int r, std::map<int,std::vector<int> > stationDMa
 }
 
 std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::vector<int> > stationDMap, int sidx) {
-	int i; int ii;
+	int i; int ii; int iii; int iiii;
 	for (i=-1*r;i<=r;i++){
 		for (ii=-1*r;ii<=r;ii++){
 			
@@ -198,11 +198,29 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 				div = 2;
 			}
 			if (stationDMap.find(y*2310 + x) != stationDMap.end()){
-				if (d2 < stationDMap[y*2310 + x][1]){
-					stationDMap[y*2310 + x][0] = sidx;
-					stationDMap[y*2310 + x][1] = d2;
-					stationDMap[y*2310 + x][2] = population[y*2310 + x]/div;
+				int sz = stationDMap[y*2310 + x].size()/3;
+				for (iii=0;iii<sz;iii++){
+					if (d2 < stationDMap[y*2310 + x][iii*3+1]){
+						stationDMap[y*2310 + x].push_back(stationDMap[y*2310 + x][(sz-1)*3]);
+						stationDMap[y*2310 + x].push_back(stationDMap[y*2310 + x][(sz-1)*3+1]);
+						stationDMap[y*2310 + x].push_back(stationDMap[y*2310 + x][(sz-1)*3+2]);
+						for (iiii=iii+1;iiii<sz;iiii++){
+							stationDMap[y*2310 + x][iiii*3+0] = stationDMap[y*2310 + x][(iiii-1)*3+0];
+							stationDMap[y*2310 + x][iiii*3+1] = stationDMap[y*2310 + x][(iiii-1)*3+1];
+							stationDMap[y*2310 + x][iiii*3+2] = stationDMap[y*2310 + x][(iiii-1)*3+2];
+						}
+						stationDMap[y*2310 + x][iii*3+0] = sidx;
+						stationDMap[y*2310 + x][iii*3+1] = d2;
+						stationDMap[y*2310 + x][iii*3+2] = population[y*2310 + x]/div;
+						break;
+					}
+					if (iii==sz-1){
+						stationDMap[y*2310 + x].push_back(sidx);
+						stationDMap[y*2310 + x].push_back(d2);
+						stationDMap[y*2310 + x].push_back(population[y*2310 + x]/div);
+					}
 				}
+				
 			}
 			else {
 				stationDMap[y*2310 + x] = {sidx, d2,population[y*2310 + x]/div};
