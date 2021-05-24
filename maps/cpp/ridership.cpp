@@ -319,8 +319,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 			distance.push_back(d);
 		}
 	}
-	unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    
+	
 	for (i=0;i<len;i++){
 		for (ii=0;ii<len;ii++){
 			if (ii == i){continue;}
@@ -341,10 +340,8 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 			riders += n;
 		}
 	}
-	unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    time1 += now2 - now1;
-    time2 += now3 - now2;
-    time3 += now4 - now3;
+	time1 += now2 - now1;
+    
 	int ret = riders;
 	return ret;
 }
@@ -354,6 +351,10 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 	int i; int ii; int iii;
 	std::vector<int> maxRiders;
 	std::vector<int> cut;
+	
+	unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    
+    
 	for (i=0;i<remove;i++){
 		maxRiders.push_back(0);
 		cut.push_back(i);
@@ -391,6 +392,9 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		}
 		
 	}
+	
+	unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    time2 += now3 - now2;
 	return stations;
 }
 
@@ -589,7 +593,9 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	std::vector<int> stations;
 	std::map<int,std::vector<int> > stationDMap;
 	std::map<int,int > firstPops;
-
+	
+	unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    time2 += now3 - now2;
 	for (i=0;i<sz;i++){
 		szz = jsArr->Get(context,i).ToLocalChecked()->Int32Value(context).FromJust();
 		stations.push_back(szz);
@@ -603,6 +609,9 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
 		firstPops[it->second[0]]+=it->second[2];
 	}
+	unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    time3 += now3 - now2;
+    
 	if (stations.size() > max){
 		while (stations.size() > max + 20){
 			stations = bestStations(stations,stationDMap,firstPops,4);
