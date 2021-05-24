@@ -331,7 +331,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> >* statio
 	return ret;
 }
 
-int capital(std::vector<int> stations){
+int capitalCosts(std::vector<int> stations){
 	int len = stations.size();
 	int i; int ii;
 	double d = 0;
@@ -804,7 +804,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 				}
 			}
 			int riders = profit(stations,stationDMapPointer, firstPops);
-			int capital = capital(stations);
+			int capital = capitalCosts(stations);
 			logfile << riders << " and " << capital << "\n";
 		}
 	}
