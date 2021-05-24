@@ -108,21 +108,47 @@ int main(int argc, char *argv[]) {
 std::vector<int> landValue;
 std::vector<int> population;
 std::vector<int> stationList;
+std::vector<double> stationListLL;
 int time1;
 int time2;
 int time3;
+int geoRows;
+int geoCols;
+int startRow;
+int startCol;
 //std::map<int,int> landValueMap;
 
 
 int ptDistance(int pt1, int pt2) {
 
-	int x1 = pt1%2310;
-	int y1 = pt1/2310;
-	int x2 = pt2%2310;
-	int y2 = pt2/2310;
+	int x1 = pt1%geoCols;
+	int y1 = pt1/geoCols;
+	int x2 = pt2%geoCols;
+	int y2 = pt2/geoCols;
 	double dd = (x2-x1)*(x2-x1)+(y2-y1)*(y2-y1);
 	double d = sqrt(dd)*3/1.4;//distance in km, approx i believe
 	return d;
+}
+
+static double haversine(double lat1, double lon1, double lat2, double lon2) {
+	// distance between latitudes
+	// and longitudes
+	double dLat = (lat2 - lat1) *
+				  M_PI / 180.0;
+	double dLon = (lon2 - lon1) *
+				  M_PI / 180.0;
+
+	// convert to radians
+	lat1 = (lat1) * M_PI / 180.0;
+	lat2 = (lat2) * M_PI / 180.0;
+
+	// apply formulae
+	double a = pow(sin(dLat / 2), 2) +
+			   pow(sin(dLon / 2), 2) *
+			   cos(lat1) * cos(lat2);
+	double rad = 6371;
+	double c = 2 * asin(sqrt(a));
+	return rad * c;
 }
 
 int radiusValue(int pt, int r) {
@@ -137,11 +163,11 @@ int radiusValue(int pt, int r) {
 			else if (i*i+ii*ii > (r-1)*(r-1)){
 				div = 2;
 			}
-			int x = pt%2310 + i;
-			int y = pt/2310 + ii;
-			if (y*2310 + x < 0){continue;}
-			if (y*2310 + x >= 2310*995){continue;}
-			total += population[y*2310 + x]/div;
+			int x = pt%geoCols + i;
+			int y = pt/geoCols + ii;
+			if (y*geoCols + x < 0){continue;}
+			if (y*geoCols + x >= geoCols*geoRows){continue;}
+			total += population[y*geoCols + x]/div;
 		}
 	}
 	return total;
@@ -159,20 +185,20 @@ int radiusValueClosest(int pt, int r, std::map<int,std::vector<int> > stationDMa
 			else if (i*i+ii*ii > (r-1)*(r-1)){
 				div = 2;
 			}
-			int x = pt%2310 + i;
-			int y = pt/2310 + ii;
-			if (y*2310 + x < 0){continue;}
-			if (y*2310 + x >= 2310*995){continue;}
-			if (stationDMap.find(y*2310 + x) != stationDMap.end()){
-				if (sidx != stationDMap[y*2310 + x][0]){
+			int x = pt%geoCols + i;
+			int y = pt/geoCols + ii;
+			if (y*geoCols + x < 0){continue;}
+			if (y*geoCols + x >= geoCols*geoRows){continue;}
+			if (stationDMap.find(y*geoCols + x) != stationDMap.end()){
+				if (sidx != stationDMap[y*geoCols + x][0]){
 					continue;
 				}
 				else {
-					total += stationDMap[y*2310 + x][2];
+					total += stationDMap[y*geoCols + x][2];
 				}
 			}
 			else {
-				total += population[y*2310 + x]/div;
+				total += population[y*geoCols + x]/div;
 			}
 			
 		}
@@ -185,10 +211,10 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 	for (i=-1*r;i<=r;i++){
 		for (ii=-1*r;ii<=r;ii++){
 			
-			int x = pt%2310 + i;
-			int y = pt/2310 + ii;
-			if (y*2310 + x < 0){continue;}
-			if (y*2310 + x >= 2310*995){continue;}
+			int x = pt%geoCols + i;
+			int y = pt/geoCols + ii;
+			if (y*geoCols + x < 0){continue;}
+			if (y*geoCols + x >= geoCols*geoRows){continue;}
 			int d2 = i*i+ii*ii;
 			int div = 1;
 			if (d2 > (r+1)*(r+1)){
@@ -197,33 +223,33 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			else if (d2 > (r-1)*(r-1)){
 				div = 2;
 			}
-			if (stationDMap.find(y*2310 + x) != stationDMap.end()){
-				int sz = stationDMap[y*2310 + x].size()/3;
+			if (stationDMap.find(y*geoCols + x) != stationDMap.end()){
+				int sz = stationDMap[y*geoCols + x].size()/3;
 				for (iii=0;iii<sz;iii++){
-					if (d2 < stationDMap[y*2310 + x][iii*3+1]){
-						stationDMap[y*2310 + x].push_back(stationDMap[y*2310 + x][(sz-1)*3]);
-						stationDMap[y*2310 + x].push_back(stationDMap[y*2310 + x][(sz-1)*3+1]);
-						stationDMap[y*2310 + x].push_back(stationDMap[y*2310 + x][(sz-1)*3+2]);
+					if (d2 < stationDMap[y*geoCols + x][iii*3+1]){
+						stationDMap[y*geoCols + x].push_back(stationDMap[y*geoCols + x][(sz-1)*3]);
+						stationDMap[y*geoCols + x].push_back(stationDMap[y*geoCols + x][(sz-1)*3+1]);
+						stationDMap[y*geoCols + x].push_back(stationDMap[y*geoCols + x][(sz-1)*3+2]);
 						for (iiii=iii+1;iiii<sz;iiii++){
-							stationDMap[y*2310 + x][iiii*3+0] = stationDMap[y*2310 + x][(iiii-1)*3+0];
-							stationDMap[y*2310 + x][iiii*3+1] = stationDMap[y*2310 + x][(iiii-1)*3+1];
-							stationDMap[y*2310 + x][iiii*3+2] = stationDMap[y*2310 + x][(iiii-1)*3+2];
+							stationDMap[y*geoCols + x][iiii*3+0] = stationDMap[y*geoCols + x][(iiii-1)*3+0];
+							stationDMap[y*geoCols + x][iiii*3+1] = stationDMap[y*geoCols + x][(iiii-1)*3+1];
+							stationDMap[y*geoCols + x][iiii*3+2] = stationDMap[y*geoCols + x][(iiii-1)*3+2];
 						}
-						stationDMap[y*2310 + x][iii*3+0] = sidx;
-						stationDMap[y*2310 + x][iii*3+1] = d2;
-						stationDMap[y*2310 + x][iii*3+2] = population[y*2310 + x]/div;
+						stationDMap[y*geoCols + x][iii*3+0] = sidx;
+						stationDMap[y*geoCols + x][iii*3+1] = d2;
+						stationDMap[y*geoCols + x][iii*3+2] = population[y*geoCols + x]/div;
 						break;
 					}
 					if (iii==sz-1){
-						stationDMap[y*2310 + x].push_back(sidx);
-						stationDMap[y*2310 + x].push_back(d2);
-						stationDMap[y*2310 + x].push_back(population[y*2310 + x]/div);
+						stationDMap[y*geoCols + x].push_back(sidx);
+						stationDMap[y*geoCols + x].push_back(d2);
+						stationDMap[y*geoCols + x].push_back(population[y*geoCols + x]/div);
 					}
 				}
 				
 			}
 			else {
-				stationDMap[y*2310 + x] = {sidx, d2,population[y*2310 + x]/div};
+				stationDMap[y*geoCols + x] = {sidx, d2,population[y*geoCols + x]/div};
 			}
 		}
 	}
@@ -231,11 +257,11 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 }
 
 double yToLat(double y){
-	double lat = -0.02499999989999999*(y+2643/3) + 71.38708322329654;
+	double lat = -0.02499999989999999*(y+startRow) + 71.38708322329654;
 }
 
 double xToLng(double x){
-	double lng = 0.0249999999*(x+6534/3) - 179.14708263665557;
+	double lng = 0.0249999999*(x+startCol) - 179.14708263665557;
 }
 
 int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap) {
@@ -246,14 +272,13 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	double d = 0;
 	std::map<int,int > idxToIdx;
 	
-	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    
+	
     for (i=0;i<len;i++){
 		//stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
 		pops.push_back(0);
 		idxToIdx[stations[i]]=i;
 	}
-	unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     std::map<int, std::vector<int>>::iterator it;
 
 	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
@@ -265,12 +290,14 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 			}
 		}
 	}
+    unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
 	for (i=0;i<len;i++){
 		//pops.push_back(radiusValueClosest(stationList[stations[i]],20,stationDMap,stations[i]));
 		if (i==0){distance.push_back(0);}
 		else {
-			double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
+			//double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
+			double dd = haversine(stationListLL[stations[i]*2+0],stationListLL[stations[i]*2+1],stationListLL[stations[i-1]*2+0],stationListLL[stations[i-1]*2+1]);
 			d += dd;
 			distance.push_back(d);
 		}
@@ -488,7 +515,7 @@ void GetLandValue(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int row = info[0]->Int32Value(context).FromJust();
 	int col = info[1]->Int32Value(context).FromJust();
 	
-	int retInt = landValue[row*2310+col];
+	int retInt = landValue[row*geoCols+col];
 	
 
 	
@@ -512,9 +539,9 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int row = info[0]->Int32Value(context).FromJust();
 	int col = info[1]->Int32Value(context).FromJust();
 	
-	int retInt = population[row*2310+col];
+	int retInt = population[row*geoCols+col];
 	
-	int popRadius = radiusValue(row*2310+col, 7);
+	int popRadius = radiusValue(row*geoCols+col, 7);
 
 	
 
@@ -590,9 +617,22 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	time1 = 0; time2 = 0; time3 = 0;
+	geoRows = 995;
+	geoCols = 2310;
+	startRow = 2643/3;
+	startCol = 6534/3;
 	SetLandValue();
 	SetPopulation();
 	stationList = {1472696, 1345901, 861079, 231428, 916251, 796327, 1654930, 236577, 1669110, 488269, 1293158, 1366261, 849342, 1011303, 514158, 1678632, 421748, 634072, 900380, 1666926, 1264320, 1428628, 889464, 1713367, 1644032, 1828569, 1135417, 1403967, 155087, 1365700, 1018123, 794203, 636544, 1144980, 239234, 942031, 1564869, 452509, 489855, 1013470, 1531896, 1754722, 545667, 1558138, 579479, 330976, 1558243, 1048279, 352341, 495629, 810902, 1350931, 1601734, 1775642, 950056, 551410, 944007, 944447, 1292502, 1024133, 254268, 1106002, 1132345, 55528, 567488, 821478, 1768409, 649183, 1541173, 1113589, 944913, 1207514, 1576137, 926011, 962255, 1333040, 1526243, 674161, 741304, 528858, 1260684, 900469, 952881, 856160, 1272393, 883822, 1379269, 1491436, 1571976, 1819033, 1424613, 1782234, 828493, 1450202, 669374, 1334581, 713630, 1648132, 685081, 229806, 708891, 1186524, 736541, 527001, 800661, 1272186, 537039, 1821975, 1306065, 1230142, 1171292, 1729013, 1439457, 1119830, 447298, 655294, 1052536, 1572337, 1900533, 1863607, 1930536, 1865872, 472692, 291282, 2167868, 1687379, 1203725, 1399420, 1727036, 1604883, 1563149, 1251242, 1752479, 489784, 710708, 657465, 729016, 1770767, 1323153, 764062, 1022909, 408937, 2147706, 813906, 1458523, 1747977, 1999242, 2019948, 791141, 2027645, 870479, 1967574, 1579110, 588380, 1558177, 653059, 1355183, 613756, 1126225, 1007240, 588199, 1356232, 766193, 1470868, 863566, 1352645, 1533318, 722786, 157371, 719905, 1417782, 435538, 1322898, 1761390, 648274, 1226077, 1370126, 842752, 1045728, 658156, 1493363, 1239791, 584062, 531639, 768966, 583532, 1230716, 751259, 1235371, 843672, 757430, 621115, 1341492, 635093, 1448883, 1747702, 719653, 1624657, 1081228, 908025, 1463745, 1077555, 713125, 2036797, 743582, 768647, 978498, 671985, 891316, 810468, 623525, 1997521, 1492554, 1902867, 198747, 592921, 888660, 950621, 1053496, 129460, 1949062, 620736, 2101503, 1225451, 847458, 574763, 1308854, 1791632, 724494, 1221197, 704321, 970996, 678286, 1090415, 600123, 1293827, 1759631, 1318088, 1092210, 1285447, 751897, 699751, 2140119, 1029508, 1166747, 792841, 948304, 1585212, 731680, 703696, 2092333, 1317422, 1156937, 944090, 1253862, 888581, 826458, 1424566, 1981359, 992368, 583591, 166414, 650775, 1309215, 1765918, 1821462, 894766, 867918, 1409396, 1537244, 2136217, 995739, 1541877, 1474298, 405508, 1436122, 1062697, 1928273, 355821, 1425562, 930543, 1113534, 2147772, 1071931, 1530334, 1543384, 1837498, 890138, 1807594, 782801, 1448645, 2180109, 1462735, 678310, 651255, 1215439, 1439392, 967487, 865921, 801281, 696788, 1420911, 796669};
+	int sz = stationList.size();
+	int i;
+	for (i=0;i<sz;i++){
+		int x1 = stationList[i]%geoCols;
+		int y1 = stationList[i]/geoCols;
+		stationListLL.push_back(yToLat(y1));//latitude
+		stationListLL.push_back(xToLng(x1));//longitude
+	}
+	
 }
 
 void Init(v8::Local<v8::Object> exports) {
