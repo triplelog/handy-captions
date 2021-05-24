@@ -655,19 +655,19 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			}
 		}
 		while (stations.size() > max + 10){
-			stations = bestStations(stations,stationDMap,firstPops,3);
+			stations = bestStations(stations,stationDMapPointer,firstPops,3);
 			std::map<int,int > idxToIdx;
 			int sz2 = stations.size();
 			for (i=0;i<sz2;i++){
 				idxToIdx[stations[i]]=i;
 			}
-			for (it = stationDMap.begin(); it != stationDMap.end(); ){
+			for (it = stationDMapPointer->begin(); it != stationDMapPointer->end(); ){
 				while (it->second.size() > 0 && idxToIdx.find(it->second[0]) == idxToIdx.end()){
 					it->second.erase(it->second.begin(),it->second.begin()+3);
 					firstPops[it->second[0]]+=it->second[2];
 				}
 				if (it->second.size() < 3){
-					it = stationDMap.erase(it);
+					it = stationDMapPointer->erase(it);
 				}
 				else {
 					++it;
@@ -675,19 +675,19 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			}
 		}
 		while (stations.size() > max + 5){
-			stations = bestStations(stations,stationDMap,firstPops,2);
+			stations = bestStations(stations,stationDMapPointer,firstPops,2);
 			std::map<int,int > idxToIdx;
 			int sz2 = stations.size();
 			for (i=0;i<sz2;i++){
 				idxToIdx[stations[i]]=i;
 			}
-			for (it = stationDMap.begin(); it != stationDMap.end(); ){
+			for (it = stationDMapPointer->begin(); it != stationDMapPointer->end(); ){
 				while (it->second.size() > 0 && idxToIdx.find(it->second[0]) == idxToIdx.end()){
 					it->second.erase(it->second.begin(),it->second.begin()+3);
 					firstPops[it->second[0]]+=it->second[2];
 				}
 				if (it->second.size() < 3){
-					it = stationDMap.erase(it);
+					it = stationDMapPointer->erase(it);
 				}
 				else {
 					++it;
