@@ -269,9 +269,8 @@ double proftPerPassenger() {
 	return std::max(1.0,std::min(50.0,rev-cost));
 }
 
-int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap, std::map<int,int > firstPops) {
-	unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    
+int ridership(std::vector<int> stations, const std::map<int,std::vector<int> > stationDMap, const std::map<int,int > firstPops) {
+	
 	int len = stations.size();
 	int i; int ii; double riders = 0;
 	std::vector<int> pops;
@@ -345,7 +344,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 		}
 	}
 	time1 += now2 - now1;
-    time2 += now1-now3;
+    
     
 	int ret = riders;
 	return ret;
@@ -378,6 +377,8 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
     
 		int riders = ridership(stations,stationDMap, firstPops);
 		
+		unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    	time2 += now3-now2;
 		for (ii=0;ii<remove;ii++){
 			if (riders > maxRiders[ii]){
 				for (iii=ii+1;iii<remove;iii++){
