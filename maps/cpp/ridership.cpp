@@ -597,7 +597,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		//add ability to only recount people with multiple stations nearby
 	}
 	
-
+	std::map<int, std::vector<int> >::iterator it;
+	
 	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
 		int sz2 = it->second.size()/3;
 		firstPops[it->second[0]]+=it->second[2];
