@@ -207,7 +207,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			if (d2 > (r+1)*(r+1)){
 				continue;
 			}
-			else if (d2 > (r-1)*(r-1)){
+			else if (d3 > (r-1)*(r-1)){
 				div = 2;
 			}
 			if (stationDMap.find(y*geoCols + x) != stationDMap.end()){
