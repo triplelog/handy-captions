@@ -361,7 +361,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 	
 	for (i=0;i<len;i++){
 		
-		
+		std::vector<int> stations;
 		for (ii=0;ii<len;ii++){
 			if (i != ii){
 				stations.push_back(allStations[ii]);
