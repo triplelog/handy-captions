@@ -125,7 +125,7 @@ for (var i=0;i<cityList.length;i++){
 	}
 }
 
-console.log(cppList);
+//console.log(cppList);
 console.log(cityList.length);
 
 var retStations = maincpp.getStations([300,301,302]);
