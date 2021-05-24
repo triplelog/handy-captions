@@ -316,7 +316,7 @@ std::vector<int> bestStations(std::vector<int> allStations, int remove) {
 	}
 	std::map<int,std::vector<int> > stationDMap;
 	for (i=0;i<len;i++){
-		stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
+		stationDMap = radiusValueMap(stationList[allStations[i]],20,stationDMap,allStations[i]);
 	}
 	for (i=0;i<len;i++){
 		std::vector<int> stations;
