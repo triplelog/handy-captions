@@ -158,12 +158,12 @@ static double haversine(double lat1, double lon1, double lat2, double lon2) {
 }
 
 double yToLat(double y){
-	double lat = -0.02499999989999999*(y+startRow) + 71.38708322329654;
+	double lat = -0.0083333333*(y+startRow) + 71.38708322329654;
 	return lat;
 }
 
 double xToLng(double x){
-	double lng = 0.0249999999*(x+startCol) - 179.14708263665557;
+	double lng = 0.0083333333*(x+startCol) - 179.14708263665557;
 	return lng;
 }
 

@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+maps/tocpp/income.csv
+maps/tocpp/labor.csv
+maps/tocpp/pop.csv
+maps/tocpp/elevation.csv
+maps/tocpp/accomodations.csv
+maps/tocpp/value.csv

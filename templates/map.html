@@ -308,8 +308,8 @@ function pathToStations(pid){
 function pointToGrid(pt){
 	var xy = [pt.x,pt.y];
 	var ll = projection.invert(xy);
-	var x = Math.round((ll[0] + 179.14708263665557)/0.0249999999 - 6534/3);
-	var y = Math.round((ll[1] - 71.38708322329654)/-0.0249999999 - 2643/3);
+	var x = Math.round((ll[0] + 179.14708263665557)/0.0083333333 - 6534);
+	var y = Math.round((ll[1] - 71.38708322329654)/-0.0083333333 - 2643);
 	return {'x':x,'y':y,'d':0};
 }
 </script>
