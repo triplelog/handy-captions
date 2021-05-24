@@ -202,7 +202,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			double dd3 = haversine(lat1,lng1,lat2,lng2);
 			int d2 = round(pow(dd3,2));
 			//int d2 = round(pow(haversine(lat1,lng1,lat2,lng2),2));
-			//int d2 = i*i+ii*ii;
+			int d3 = i*i+ii*ii;
 			int div = 1;
 			if (d2 > (r+1)*(r+1)){
 				continue;
@@ -213,7 +213,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			if (stationDMap.find(y*geoCols + x) != stationDMap.end()){
 				int sz = stationDMap[y*geoCols + x].size()/3;
 				for (iii=0;iii<sz;iii++){
-					if (d2 < stationDMap[y*geoCols + x][iii*3+1]){
+					if (d3 < stationDMap[y*geoCols + x][iii*3+1]){
 						stationDMap[y*geoCols + x].push_back(stationDMap[y*geoCols + x][(sz-1)*3]);
 						stationDMap[y*geoCols + x].push_back(stationDMap[y*geoCols + x][(sz-1)*3+1]);
 						stationDMap[y*geoCols + x].push_back(stationDMap[y*geoCols + x][(sz-1)*3+2]);
@@ -223,20 +223,20 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 							stationDMap[y*geoCols + x][iiii*3+2] = stationDMap[y*geoCols + x][(iiii-1)*3+2];
 						}
 						stationDMap[y*geoCols + x][iii*3+0] = sidx;
-						stationDMap[y*geoCols + x][iii*3+1] = d2;
+						stationDMap[y*geoCols + x][iii*3+1] = d3;
 						stationDMap[y*geoCols + x][iii*3+2] = population[y*geoCols + x]/div;
 						break;
 					}
 					if (iii==sz-1){
 						stationDMap[y*geoCols + x].push_back(sidx);
-						stationDMap[y*geoCols + x].push_back(d2);
+						stationDMap[y*geoCols + x].push_back(d3);
 						stationDMap[y*geoCols + x].push_back(population[y*geoCols + x]/div);
 					}
 				}
 				
 			}
 			else {
-				stationDMap[y*geoCols + x] = {sidx, d2,population[y*geoCols + x]/div};
+				stationDMap[y*geoCols + x] = {sidx, d3,population[y*geoCols + x]/div};
 			}
 		}
 	}
