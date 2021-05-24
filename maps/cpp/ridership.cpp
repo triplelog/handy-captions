@@ -290,27 +290,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> >* statio
 	
 	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
-    std::map<int, std::vector<int> >::const_iterator it;
-	int sz;
-	unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    		time2 += now4-now1;
-	for (it = stationDMap->begin(); it != stationDMap->end(); it++){
-		//unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    		
-		if (idxToIdx.find(it->second[0]) == idxToIdx.end()){
-			
-			sz = it->second.size()/3;
-		
-			for (i=1;i<sz;i++){
-				if (idxToIdx.find(it->second[i*3+0]) != idxToIdx.end()){
-					pops[idxToIdx[it->second[i*3+0]]]+=it->second[i*3+2];
-					break;
-				}
-			}
-			
-		}
-		
-	}
+    
     unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
 	for (i=0;i<len;i++){
@@ -350,12 +330,12 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> >* statio
 	return ret;
 }
 
-std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::vector<int> >* stationDMap, std::map<int,int > firstPops, int remove) {
+std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::vector<int> >* stationDMap, const std::map<int,int > firstPops, int remove) {
 	int len = allStations.size();
 	int i; int ii; int iii;
 	std::vector<int> maxRiders;
 	std::vector<int> cut;
-	
+	std::map<int,int > idxToIdx;
 	
     
 	for (i=0;i<remove;i++){
@@ -363,6 +343,32 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		cut.push_back(i);
 	}
 	
+	std::vector<int, std::vector<int> > pops;
+	for (i=0;i<len;i++){
+		idxToIdx[allStations[i]]=i;
+		std::vector<int> popRow;
+    	for (ii=0;ii<len;ii++){
+			int p = firstPops.at(stations[ii]);
+			popRow.push_back(p);
+		}
+		pops.push_back(popRow);
+	}
+	std::map<int, std::vector<int> >::const_iterator it;
+	int sz;
+	unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	for (it = stationDMap->begin(); it != stationDMap->end(); it++){
+		//unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    	
+		if (it->second.size() > 5 && idxToIdx.find(it->second[0]) == idxToIdx.end()){
+			ii = it->second[0];
+			i = it->second[3];
+			pops[ii][i]+=it->second[5];
+			
+		}
+		
+	}
+	unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	time2 += now4 - now3;
 	for (i=0;i<len;i++){
 		
 		std::vector<int> stations;
@@ -375,7 +381,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		
     	//unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
-		int riders = ridership(stations,stationDMap, firstPops);
+		int riders = ridership(stations,stationDMap, pops[i]);
 		
 		
 		for (ii=0;ii<remove;ii++){
