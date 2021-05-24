@@ -74,7 +74,7 @@ for (var i=0;i<allCities.length;i++){
 
 }
 cityList.sort(function(a,b){return a[3] - b[3];});
-
+console.log(cityList);
 for (var i=0;i<cityList.length;i++){
 	var x0 = (cityList[i][0] + 179.14708263665557)/0.0083333333 - startCol;
 	var y0 = (cityList[i][1] - 71.38708322329654)/-0.0083333333 - startRow;
@@ -125,7 +125,7 @@ for (var i=0;i<cityList.length;i++){
 	}
 }
 
-console.log(cppList);
+//console.log(cppList);
 console.log(cityList.length);
 
 var retStations = maincpp.getStations([300,301,302]);
