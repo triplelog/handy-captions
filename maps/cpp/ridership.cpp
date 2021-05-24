@@ -266,7 +266,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 double proftPerPassenger() {
 	double rev = 1;
 	double cost = 0;
-	return std::max(1,std::min(50,rev-cost));
+	return std::max(1.0,std::min(50.0,rev-cost));
 }
 
 int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap, std::map<int,int > firstPops) {
