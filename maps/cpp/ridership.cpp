@@ -277,12 +277,14 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	double d = 0;
 	std::map<int,int > idxToIdx;
 	
-	std::ofstream logfile = "logfile.txt";
+	std::ofstream logfile;
+	logfile.open("logfile.txt");
     for (i=0;i<len;i++){
     	logfile << firstPops[stations[i]] << " " << stations[i] << "\n";
 		pops.push_back(firstPops[stations[i]]);
 		idxToIdx[stations[i]]=i;
 	}
+	logfile.close();
 	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     std::map<int, std::vector<int> >::iterator it;
 
