@@ -785,7 +785,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			}
 			int riders = profit(stations,stationDMapPointer, firstPops);
 			int capital = capitalCosts(stations);
-			logfile << riders << " and " << capital << " and " << riders/20/capital << "\n";
+			logfile << riders << " and " << capital << " and " << riders/20/(capital+1) << "\n";
 		}
 		while (stations.size() > max){
 			stations = bestStations(stations,stationDMapPointer,firstPops,1);
@@ -808,7 +808,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			}
 			int riders = profit(stations,stationDMapPointer, firstPops);
 			int capital = capitalCosts(stations);
-			logfile << riders << " and " << capital << " and " << riders/20/capital << "\n";
+			logfile << riders << " and " << capital << " and " << riders/20/(capital+1) << "\n";
 		}
 	}
 	logfile.close();
