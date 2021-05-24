@@ -282,7 +282,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	//logfile.open("logfile.txt");
     for (i=0;i<len;i++){
     	//logfile << firstPops[stations[i]] << " " << stationListLL[stations[i]*2+0] << " " << stationListLL[stations[i]*2+1] << "\n";
-		int p = firstPops[stations[i]];
+		int p = firstPops.at(stations[i]);
 		pops.push_back(p);
 		idxToIdx[stations[i]]=i;
 	}
