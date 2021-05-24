@@ -342,7 +342,7 @@ int capitalCosts(std::vector<int> stations){
 		else {
 			//double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
 			double dd = haversine(stationListLL[stations[i]*2+0],stationListLL[stations[i]*2+1],stationListLL[stations[i-1]*2+0],stationListLL[stations[i-1]*2+1]);
-			d += dd;
+			d += dd*20;
 		}
 	}
 	int capital = d;
@@ -437,7 +437,6 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 	}
 	std::map<int, std::vector<int> >::const_iterator it;
 	int sz;
-	unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	for (it = stationDMap->begin(); it != stationDMap->end(); it++){
 		//unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     	
@@ -449,8 +448,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		}
 		
 	}
-	unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-	time2 += now4 - now3;
+	
 	for (i=0;i<len;i++){
 		
 		std::vector<int> stations;
@@ -464,7 +462,11 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
     	//unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
 		int riders = profit(stations,stationDMap, pops[allStations[i]]);
-		
+		unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	
+		int capital = capitalCosts(stations);
+		unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		time2 += now4 - now3;
 		
 		for (ii=0;ii<remove;ii++){
 			if (riders > maxRiders[ii]){
@@ -785,7 +787,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			}
 			int riders = profit(stations,stationDMapPointer, firstPops);
 			int capital = capitalCosts(stations);
-			logfile << riders << " and " << capital << " and " << riders/20/(capital+1) << "\n";
+			logfile << riders << " and " << capital << " and " << riders/(capital+1) << "\n";
 		}
 		while (stations.size() > max){
 			stations = bestStations(stations,stationDMapPointer,firstPops,1);
@@ -808,7 +810,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			}
 			int riders = profit(stations,stationDMapPointer, firstPops);
 			int capital = capitalCosts(stations);
-			logfile << riders << " and " << capital << " and " << riders/20/(capital+1) << "\n";
+			logfile << riders << " and " << capital << " and " << riders/(capital+1) << "\n";
 		}
 	}
 	logfile.close();
