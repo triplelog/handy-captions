@@ -348,7 +348,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		idxToIdx[allStations[i]]=i;
 		std::vector<int> popRow;
     	for (ii=0;ii<len;ii++){
-			int p = firstPops.at(stations[ii]);
+			int p = firstPops.at(allStations[ii]);
 			popRow.push_back(p);
 		}
 		pops.push_back(popRow);
