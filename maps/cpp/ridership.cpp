@@ -238,19 +238,18 @@ double xToLng(double x){
 	double lng = 0.0249999999*(x+6534/3) - 179.14708263665557;
 }
 
-int ridership(std::vector<int> stations) {
+int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap) {
 	int len = stations.size();
 	int i; int ii; long riders = 0;
 	std::vector<int> pops;
 	std::vector<double> distance;
 	double d = 0;
-	std::map<int,std::vector<int> > stationDMap;
 	std::map<int,int > idxToIdx;
 	
 	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
     for (i=0;i<len;i++){
-		stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
+		//stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
 		pops.push_back(0);
 		idxToIdx[stations[i]]=i;
 	}
@@ -315,6 +314,10 @@ std::vector<int> bestStations(std::vector<int> allStations, int remove) {
 		maxRiders.push_back(0);
 		cut.push_back(i);
 	}
+	std::map<int,std::vector<int> > stationDMap;
+	for (i=0;i<len;i++){
+		stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
+	}
 	for (i=0;i<len;i++){
 		std::vector<int> stations;
 		for (ii=0;ii<len;ii++){
@@ -322,7 +325,7 @@ std::vector<int> bestStations(std::vector<int> allStations, int remove) {
 				stations.push_back(allStations[ii]);
 			}
 		}
-		int riders = ridership(stations);
+		int riders = ridership(stations,stationDMap);
 		for (ii=0;ii<remove;ii++){
 			if (riders > maxRiders[ii]){
 				for (iii=ii+1;iii<remove;iii++){
