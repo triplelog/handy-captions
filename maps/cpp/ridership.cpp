@@ -619,8 +619,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 
 void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	time1 = 0; time2 = 0; time3 = 0;
-	geoRows = 995*3;
-	geoCols = 2310*3;
+	geoRows = 5625-2643+1;
+	geoCols = 13461-6534+1;
 	startRow = 2643;
 	startCol = 6534;
 	SetLandValue();
