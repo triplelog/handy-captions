@@ -28,10 +28,10 @@ const User = require('./models/user');
 const UserData = require('./models/userdata');*/
 
 
-var geoRows = 995;
-var geoCols = 2310;
-var startRow = 2643/3;
-var startCol = 6534/3;
+var geoRows = 995*3;
+var geoCols = 2310*3;
+var startRow = 2643;
+var startCol = 6534;
 maincpp.hello();//array is 2310 columns and 995 rows
 
 
