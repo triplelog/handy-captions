@@ -173,49 +173,23 @@ int radiusValue(int pt, int r) {
 	return total;
 }
 
-int radiusValueClosest(int pt, int r, std::map<int,std::vector<int> > stationDMap, int sidx) {
-	int i; int ii;
-	int total = 0;
-	for (i=-1*r;i<=r;i++){
-		for (ii=-1*r;ii<=r;ii++){
-			int div = 1;
-			if (i*i+ii*ii > (r+1)*(r+1)){
-				continue;
-			}
-			else if (i*i+ii*ii > (r-1)*(r-1)){
-				div = 2;
-			}
-			int x = pt%geoCols + i;
-			int y = pt/geoCols + ii;
-			if (y*geoCols + x < 0){continue;}
-			if (y*geoCols + x >= geoCols*geoRows){continue;}
-			if (stationDMap.find(y*geoCols + x) != stationDMap.end()){
-				if (sidx != stationDMap[y*geoCols + x][0]){
-					continue;
-				}
-				else {
-					total += stationDMap[y*geoCols + x][2];
-				}
-			}
-			else {
-				total += population[y*geoCols + x]/div;
-			}
-			
-		}
-	}
-	return total;
-}
 
 std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::vector<int> > stationDMap, int sidx) {
 	int i; int ii; int iii; int iiii;
-	for (i=-1*r;i<=r;i++){
-		for (ii=-1*r;ii<=r;ii++){
+	int rRC = r * 2;
+	double lat1 = stationListLL[sidx*2+0];
+	double lng1 = stationListLL[sidx*2+1];
+	for (i=-1*rRC;i<=rRC;i++){
+		for (ii=-1*rRC;ii<=rRC;ii++){
 			
 			int x = pt%geoCols + i;
 			int y = pt/geoCols + ii;
 			if (y*geoCols + x < 0){continue;}
 			if (y*geoCols + x >= geoCols*geoRows){continue;}
-			int d2 = i*i+ii*ii;
+			double lat2 = yToLat(y);
+			double lng2 = xToLng(x);
+			int d2 = round(pow(haversine(lat1,lng1,lng1,lng2),2));
+			//int d2 = i*i+ii*ii;
 			int div = 1;
 			if (d2 > (r+1)*(r+1)){
 				continue;
@@ -281,13 +255,14 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 		idxToIdx[stations[i]]=i;
 	}
 	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    std::map<int, std::vector<int>>::iterator it;
+    std::map<int, std::vector<int> >::iterator it;
 
 	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
-		int sz = it->second.size()/3;
+		std::vector<int> its = it->second;
+		int sz = its.size()/3;
 		for (i=0;i<sz;i++){
-			if (idxToIdx.find(it->second[i*3+0]) != idxToIdx.end()){
-				pops[idxToIdx[it->second[i*3+0]]]+=it->second[i*3+2];
+			if (idxToIdx.find(its[i*3+0]) != idxToIdx.end()){
+				pops[idxToIdx[its[i*3+0]]]+=its[i*3+2];
 				break;
 			}
 		}
@@ -295,7 +270,6 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
     unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
 	for (i=0;i<len;i++){
-		//pops.push_back(radiusValueClosest(stationList[stations[i]],20,stationDMap,stations[i]));
 		if (i==0){distance.push_back(0);}
 		else {
 			//double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
@@ -577,7 +551,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		szz = jsArr->Get(context,i).ToLocalChecked()->Int32Value(context).FromJust();
 		//szz = jsArr->Get(context,i);
 		stations.push_back(szz);
-		stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
+		stationDMap = radiusValueMap(stationList[stations[i]],50,stationDMap,stations[i]);
 	}
 	while (stations.size() > max + 20){
 		stations = bestStations(stations,stationDMap,5);
