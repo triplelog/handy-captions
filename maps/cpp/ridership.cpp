@@ -606,6 +606,23 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	if (stations.size() > max){
 		while (stations.size() > max + 20){
 			stations = bestStations(stations,stationDMap,firstPops,4);
+			std::map<int,int > idxToIdx;
+			int sz2 = stations.size();
+			for (i=0;i<sz2;i++){
+				idxToIdx[stations[i]]=i;
+			}
+			for (it = stationDMap.begin(); it != stationDMap.end(); ){
+				while (it->second.size() > 0 && idxToIdx.find(it->second[0]) == idxToIdx.end()){
+					it->second.erase(it->second.begin(),it->second.begin()+3);
+					firstPops[it->second[0]]+=it->second[2];
+				}
+				if (it->second.size() < 3){
+					it = stationDMap.erase(it);
+				}
+				else {
+					++it;
+				}
+			}
 		}
 		while (stations.size() > max + 10){
 			stations = bestStations(stations,stationDMap,firstPops,3);
