@@ -269,7 +269,7 @@ double proftPerPassenger() {
 	return std::max(1.0,std::min(50.0,rev-cost));
 }
 
-int ridership(std::vector<int> stations, const std::map<int,std::vector<int> > stationDMap, const std::map<int,int > firstPops) {
+int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap, const std::map<int,int > firstPops) {
 	
 	int len = stations.size();
 	int i; int ii; double riders = 0;
@@ -282,7 +282,8 @@ int ridership(std::vector<int> stations, const std::map<int,std::vector<int> > s
 	//logfile.open("logfile.txt");
     for (i=0;i<len;i++){
     	//logfile << firstPops[stations[i]] << " " << stationListLL[stations[i]*2+0] << " " << stationListLL[stations[i]*2+1] << "\n";
-		pops.push_back(firstPops[stations[i]]);
+		int p = firstPops[stations[i]];
+		pops.push_back(p);
 		idxToIdx[stations[i]]=i;
 	}
 	//logfile.close();
