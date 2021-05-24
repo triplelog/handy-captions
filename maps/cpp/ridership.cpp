@@ -167,8 +167,14 @@ int radiusValueClosest(int pt, int r, std::map<int,std::vector<int> > stationDMa
 				if (sidx != stationDMap[y*2310 + x][0]){
 					continue;
 				}
+				else {
+					total += stationDMap[y*2310 + x][2];
+				}
 			}
-			total += population[y*2310 + x]/div;
+			else {
+				total += population[y*2310 + x]/div;
+			}
+			
 		}
 	}
 	return total;
@@ -176,31 +182,30 @@ int radiusValueClosest(int pt, int r, std::map<int,std::vector<int> > stationDMa
 
 std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::vector<int> > stationDMap, int sidx) {
 	int i; int ii;
-	int total = 0;
 	for (i=-1*r;i<=r;i++){
 		for (ii=-1*r;ii<=r;ii++){
-			int div = 1;
-			if (i*i+ii*ii > (r+1)*(r+1)){
-				continue;
-			}
-			else if (i*i+ii*ii > (r-1)*(r-1)){
-				div = 2;
-			}
+			
 			int x = pt%2310 + i;
 			int y = pt/2310 + ii;
 			if (y*2310 + x < 0){continue;}
 			if (y*2310 + x >= 2310*995){continue;}
-			total += population[y*2310 + x]/div;
 			int d2 = i*i+ii*ii;
+			int div = 1;
+			if (d2 > (r+1)*(r+1)){
+				continue;
+			}
+			else if (d2 > (r-1)*(r-1)){
+				div = 2;
+			}
 			if (stationDMap.find(y*2310 + x) != stationDMap.end()){
 				if (d2 < stationDMap[y*2310 + x][1]){
 					stationDMap[y*2310 + x][0] = sidx;
 					stationDMap[y*2310 + x][1] = d2;
+					stationDMap[y*2310 + x][2] = population[y*2310 + x]/div;
 				}
 			}
 			else {
-				
-				stationDMap[y*2310 + x] = {sidx, d2};
+				stationDMap[y*2310 + x] = {sidx, d2,population[y*2310 + x]/div};
 			}
 		}
 	}
