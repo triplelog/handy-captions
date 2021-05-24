@@ -277,8 +277,9 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	double d = 0;
 	std::map<int,int > idxToIdx;
 	
-	
+	std::ofstream logfile = "logfile.txt";
     for (i=0;i<len;i++){
+    	logfile << firstPops[stations[i]] << " " << stations[i] << "\n";
 		pops.push_back(firstPops[stations[i]]);
 		idxToIdx[stations[i]]=i;
 	}
@@ -555,7 +556,7 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int retInt = population[row*geoCols+col];
 	
-	int popRadius = radiusValue(row*geoCols+col, 20);
+	int popRadius = radiusValue(row*geoCols+col, 50);
 
 	
 
@@ -585,7 +586,6 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int i;
 	std::vector<int> stations;
 	std::map<int,std::vector<int> > stationDMap;
-	std::map<int,int > idxToIdx;
 	std::map<int,int > firstPops;
 
 	for (i=0;i<sz;i++){
@@ -593,14 +593,12 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		stations.push_back(szz);
 		stationDMap = radiusValueMap(stationList[stations[i]],r,stationDMap,stations[i]);
 		firstPops[stations[i]]=0;
-		idxToIdx[stations[i]]=i;
 		//add ability to only recount people with multiple stations nearby
 	}
 	
 	std::map<int, std::vector<int> >::iterator it;
 	
 	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
-		int sz2 = it->second.size()/3;
 		firstPops[it->second[0]]+=it->second[2];
 	}
 	if (stations.size() > max){
