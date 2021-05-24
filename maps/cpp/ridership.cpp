@@ -260,11 +260,19 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
     std::map<int, std::vector<int> >::iterator it;
 
 	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
-		std::vector<int> its = it->second;
+		/*std::vector<int> its = it->second;
 		int sz = its.size()/3;
 		for (i=0;i<sz;i++){
 			if (idxToIdx.find(its[i*3+0]) != idxToIdx.end()){
 				pops[idxToIdx[its[i*3+0]]]+=its[i*3+2];
+				break;
+			}
+		}*/
+		
+		int sz = it->second.size()/3;
+		for (i=0;i<sz;i++){
+			if (idxToIdx.find(it->second[i*3+0]) != idxToIdx.end()){
+				pops[idxToIdx[it->second[i*3+0]]]+=it->second[i*3+2];
 				break;
 			}
 		}
