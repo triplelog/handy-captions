@@ -202,7 +202,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			double dd3 = haversine(lat1,lng1,lat2,lng2);
 			int d3 = round(pow(dd3,2));
 			//int d2 = round(pow(haversine(lat1,lng1,lat2,lng2),2));
-			int d2 = i*i+ii*ii;
+			//int d2 = i*i+ii*ii;
 			int div = 1;
 			if (d2 > (r+1)*(r+1)){
 				continue;
