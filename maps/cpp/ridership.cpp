@@ -269,7 +269,7 @@ double proftPerPassenger() {
 	return std::max(1.0,std::min(50.0,rev-cost));
 }
 
-int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap, const std::map<int,int > firstPops) {
+int ridership(std::vector<int> stations, const std::map<int,std::vector<int> > stationDMap, const std::map<int,int > firstPops) {
 	
 	int len = stations.size();
 	int i; int ii; double riders = 0;
