@@ -199,6 +199,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			if (y*geoCols + x >= geoCols*geoRows){continue;}
 			double lat2 = yToLat(y);
 			double lng2 = xToLng(x);
+			int d2 = round(haversine(lat1,lng1,lat2,lng2));
 			//int d2 = round(pow(haversine(lat1,lng1,lat2,lng2),2));
 			int d2 = i*i+ii*ii;
 			int div = 1;
