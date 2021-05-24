@@ -277,14 +277,15 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	double d = 0;
 	std::map<int,int > idxToIdx;
 	
-	std::ofstream logfile;
-	logfile.open("logfile.txt");
+	//std::ofstream logfile;
+	//logfile.open("logfile.txt");
     for (i=0;i<len;i++){
-    	logfile << firstPops[stations[i]] << " " << stationListLL[stations[i]*2+0] << " " << stationListLL[stations[i]*2+1] << "\n";
+    	//logfile << firstPops[stations[i]] << " " << stationListLL[stations[i]*2+0] << " " << stationListLL[stations[i]*2+1] << "\n";
 		pops.push_back(firstPops[stations[i]]);
 		idxToIdx[stations[i]]=i;
 	}
-	logfile.close();
+	//logfile.close();
+	
 	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     std::map<int, std::vector<int> >::iterator it;
 
@@ -352,7 +353,8 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 	std::vector<int> maxRiders;
 	std::vector<int> cut;
 	
-	
+	unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    
     
 	for (i=0;i<remove;i++){
 		maxRiders.push_back(0);
@@ -371,8 +373,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		
     
 		int riders = ridership(stations,stationDMap, firstPops);
-		unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    
+		
 		for (ii=0;ii<remove;ii++){
 			if (riders > maxRiders[ii]){
 				for (iii=ii+1;iii<remove;iii++){
@@ -384,8 +385,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 				break;
 			}
 		}
-		unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    	time2 += now3 - now2;
+		
 	}
 	std::vector<int> stations;
 	for (i=0;i<len;i++){
@@ -399,7 +399,8 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		}
 		
 	}
-	
+	unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    time2 += now3-now2;
 	
 	return stations;
 }
