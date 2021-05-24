@@ -392,6 +392,7 @@ int profit(std::vector<int> stations, std::map<int,std::vector<int> >* stationDM
 			int di = dd;
 			if (di < 500){ di = 500;}
 			
+			di = 20*(ii-i-1)+250+dd;
 			double n = pops[i]/2;
 			n *= 15;
 			n /= di;
@@ -760,7 +761,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 				}
 			}
 			int riders = profit(stations,stationDMapPointer, firstPops);
-			logfile << riders << "\n";
+			int capital = capitalCosts(stations);
+			logfile << riders << " and " << capital << "\n";
 		}
 		while (stations.size() > max + 5){
 			stations = bestStations(stations,stationDMapPointer,firstPops,2);
@@ -782,7 +784,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 				}
 			}
 			int riders = profit(stations,stationDMapPointer, firstPops);
-			logfile << riders << "\n";
+			int capital = capitalCosts(stations);
+			logfile << riders << " and " << capital << " and " << riders/20/capital << "\n";
 		}
 		while (stations.size() > max){
 			stations = bestStations(stations,stationDMapPointer,firstPops,1);
@@ -805,7 +808,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			}
 			int riders = profit(stations,stationDMapPointer, firstPops);
 			int capital = capitalCosts(stations);
-			logfile << riders << " and " << capital << "\n";
+			logfile << riders << " and " << capital << " and " << riders/20/capital << "\n";
 		}
 	}
 	logfile.close();
