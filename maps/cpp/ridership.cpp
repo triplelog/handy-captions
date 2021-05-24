@@ -292,7 +292,7 @@ int ridership(std::vector<int> stations, const std::map<int,std::vector<int> >* 
 
     std::map<int, std::vector<int> >::const_iterator it;
 
-	for (it = *stationDMap.begin(); it != *stationDMap.end(); it++){
+	for (it = stationDMap->begin(); it != stationDMap->end(); it++){
 		std::vector<int> its = it->second;
 		if (idxToIdx.find(its[0]) == idxToIdx.end()){
 			int sz = its.size()/3;
