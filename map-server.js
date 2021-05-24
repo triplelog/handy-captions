@@ -71,6 +71,9 @@ for (var i=0;i<allCities.length;i++){
 		console.log(allCities[i].properties.name,x,y,retPop);
 		cityList.push([ll[0],ll[1],x,y,allCities[i].properties.name,retPop]);
 	}
+	else {
+		console.log(allCities[i].properties.name,x,y,retPop);
+	}
 
 }
 cityList.sort(function(a,b){return a[3] - b[3];});
