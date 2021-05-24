@@ -231,13 +231,16 @@ int ridership(std::vector<int> stations) {
 	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
     for (i=0;i<len;i++){
-		stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
+		stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,i);
 		pops.push_back(0);
 	}
 	unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    for (auto const& [key, val] : stationDMap) {
-		pops[val[0]]+=val[2];
+    std::map<int, std::vector<int>>::iterator it;
+
+	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
+		pops[it->second[0]]+=it->second[2];
 	}
+    
 	for (i=0;i<len;i++){
 		//pops.push_back(radiusValueClosest(stationList[stations[i]],20,stationDMap,stations[i]));
 		if (i==0){distance.push_back(0);}
