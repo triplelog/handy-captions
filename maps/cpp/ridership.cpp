@@ -381,7 +381,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		
     	//unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
-		int riders = ridership(stations,stationDMap, pops[i]);
+		int riders = ridership(stations,stationDMap, pops[allStations[i]]);
 		
 		
 		for (ii=0;ii<remove;ii++){
