@@ -280,7 +280,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	std::ofstream logfile;
 	logfile.open("logfile.txt");
     for (i=0;i<len;i++){
-    	logfile << firstPops[stations[i]] << " " << stations[i] << "\n";
+    	logfile << firstPops[stations[i]] << " " << stationListLL[stations[i]*2+0] << " " << stationListLL[stations[i]*2+1] << "\n";
 		pops.push_back(firstPops[stations[i]]);
 		idxToIdx[stations[i]]=i;
 	}
@@ -558,7 +558,7 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int retInt = population[row*geoCols+col];
 	
-	int popRadius = radiusValue(row*geoCols+col, 50);
+	int popRadius = radiusValue(row*geoCols+col, 15);
 
 	
 
