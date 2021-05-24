@@ -189,6 +189,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 	int rRC = r * 2;
 	double lat1 = stationListLL[sidx*2+0];
 	double lng1 = stationListLL[sidx*2+1];
+
 	for (i=-1*rRC;i<=rRC;i++){
 		for (ii=-1*rRC;ii<=rRC;ii++){
 			
@@ -196,10 +197,10 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			int y = pt/geoCols + ii;
 			if (y*geoCols + x < 0){continue;}
 			if (y*geoCols + x >= geoCols*geoRows){continue;}
-			double lat2 = yToLat(y);
-			double lng2 = xToLng(x);
-			int d2 = round(pow(haversine(lat1,lng1,lat2,lng2),2));
-			//int d2 = i*i+ii*ii;
+			//double lat2 = yToLat(y);
+			//double lng2 = xToLng(x);
+			//int d2 = round(pow(haversine(lat1,lng1,lat2,lng2),2));
+			int d2 = i*i+ii*ii;
 			int div = 1;
 			if (d2 > (r+1)*(r+1)){
 				continue;
@@ -252,7 +253,6 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	
 	
     for (i=0;i<len;i++){
-		//stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
 		pops.push_back(0);
 		idxToIdx[stations[i]]=i;
 	}
