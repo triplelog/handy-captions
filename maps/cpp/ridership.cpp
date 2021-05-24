@@ -543,7 +543,7 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int retInt = population[row*geoCols+col];
 	
-	int popRadius = radiusValue(row*geoCols+col, 21);
+	int popRadius = radiusValue(row*geoCols+col, 0);
 
 	
 
