@@ -207,9 +207,9 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			double lat2 = yToLat(y);
 			double lng2 = xToLng(x);
 			double dd3 = haversine(lat1,lng1,lat2,lng2);
-			int d2 = round(pow(dd3,2));
+			int d3 = round(pow(dd3,2));
 			//int d2 = round(pow(haversine(lat1,lng1,lat2,lng2),2));
-			int d3 = i*i+ii*ii;
+			//int d3 = i*i+ii*ii;
 			int div = 1;
 			if (d3 > (r+1)*(r+1)){
 				continue;
@@ -313,8 +313,8 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 			n /= di;
 			n *= pops[ii];
 			n /= 10000000;
-			n *= pops[i];
-			n /= (pops[i]+pops[ii]);
+			//n *= pops[i];
+			//n /= (pops[i]+pops[ii]);
 			//int n = 75000000*pops[i]/10000000*pops[ii]/10000000/500/500;//thousands of riders
 			riders += n;
 		}
