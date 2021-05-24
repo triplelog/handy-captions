@@ -292,8 +292,10 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> >* statio
 
     std::map<int, std::vector<int> >::const_iterator it;
 	int sz;
+	unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    		time2 += now4-now1;
 	for (it = stationDMap->begin(); it != stationDMap->end(); it++){
-		unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		//unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     		
 		if (idxToIdx.find(it->second[0]) == idxToIdx.end()){
 			
@@ -307,8 +309,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> >* statio
 			}
 			
 		}
-		unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    		time2 += now4-now3;
+		
 	}
     unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
