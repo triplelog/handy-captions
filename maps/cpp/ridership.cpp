@@ -595,7 +595,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	std::map<int,int > firstPops;
 	
 	unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    time2 += now3 - now2;
+
 	for (i=0;i<sz;i++){
 		szz = jsArr->Get(context,i).ToLocalChecked()->Int32Value(context).FromJust();
 		stations.push_back(szz);
