@@ -269,7 +269,7 @@ double proftPerPassenger() {
 	return std::max(1.0,std::min(50.0,rev-cost));
 }
 
-int ridership(std::vector<int> stations, const std::map<int,std::vector<int> >* stationDMap, const std::map<int,int > firstPops) {
+int ridership(std::vector<int> stations, std::map<int,std::vector<int> >* stationDMap, const std::map<int,int > firstPops) {
 	
 	int len = stations.size();
 	int i; int ii; double riders = 0;
@@ -354,7 +354,7 @@ int ridership(std::vector<int> stations, const std::map<int,std::vector<int> >* 
 	return ret;
 }
 
-std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::vector<int> > stationDMap, std::map<int,int > firstPops, int remove) {
+std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::vector<int> >* stationDMap, std::map<int,int > firstPops, int remove) {
 	int len = allStations.size();
 	int i; int ii; int iii;
 	std::vector<int> maxRiders;
@@ -627,6 +627,12 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	unsigned long long now3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     time3 += now3 - now2;
     
+    std::map<int,std::vector<int> > * stationDMapPointer = new std::map<int,std::vector<int> >();
+    
+    for (it = stationDMap.begin(); it != stationDMap.end(); it++){
+		(*stationDMapPointer)[it->first] = it->second;
+	}
+	
 	if (stations.size() > max){
 		while (stations.size() > max + 20){
 			stations = bestStations(stations,stationDMap,firstPops,4);
@@ -635,13 +641,13 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			for (i=0;i<sz2;i++){
 				idxToIdx[stations[i]]=i;
 			}
-			for (it = stationDMap.begin(); it != stationDMap.end(); ){
+			for (it = stationDMapPointer->begin(); it != stationDMapPointer->end(); ){
 				while (it->second.size() > 0 && idxToIdx.find(it->second[0]) == idxToIdx.end()){
 					it->second.erase(it->second.begin(),it->second.begin()+3);
 					firstPops[it->second[0]]+=it->second[2];
 				}
 				if (it->second.size() < 3){
-					it = stationDMap.erase(it);
+					it = stationDMapPointer->erase(it);
 				}
 				else {
 					++it;
