@@ -582,7 +582,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		retArr->Set(context,xi,xxi);
 	}
 	
-	int riders = ridership(stations);
+	//int riders = ridership(stations);
 	
 	
 	info.GetReturnValue().Set(retArr);
