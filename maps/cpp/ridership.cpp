@@ -201,8 +201,9 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			
 			int x = pt%geoCols + i;
 			int y = pt/geoCols + ii;
-			if (y*geoCols + x < 0){continue;}
-			if (y*geoCols + x >= geoCols*geoRows){continue;}
+			if (x < 0 || y < 0 || x >= geoCols || y >= geoRows){continue;}
+			//if (y*geoCols + x < 0){continue;}
+			//if (y*geoCols + x >= geoCols*geoRows){continue;}
 			double lat2 = yToLat(y);
 			double lng2 = xToLng(x);
 			double dd3 = haversine(lat1,lng1,lat2,lng2);
