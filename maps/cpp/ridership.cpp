@@ -269,7 +269,7 @@ double proftPerPassenger() {
 	return std::max(1.0,std::min(50.0,rev-cost));
 }
 
-int ridership(std::vector<int> stations, const std::map<int,std::vector<int> > stationDMap, const std::map<int,int > firstPops) {
+int ridership(std::vector<int> stations, const std::map<int,std::vector<int> >* stationDMap, const std::map<int,int > firstPops) {
 	
 	int len = stations.size();
 	int i; int ii; double riders = 0;
@@ -292,15 +292,18 @@ int ridership(std::vector<int> stations, const std::map<int,std::vector<int> > s
 
     std::map<int, std::vector<int> >::const_iterator it;
 
-	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
-		/*std::vector<int> its = it->second;
-		int sz = its.size()/3;
-		for (i=0;i<sz;i++){
-			if (idxToIdx.find(its[i*3+0]) != idxToIdx.end()){
-				pops[idxToIdx[its[i*3+0]]]+=its[i*3+2];
-				break;
+	for (it = *stationDMap.begin(); it != *stationDMap.end(); it++){
+		std::vector<int> its = it->second;
+		if (idxToIdx.find(its[0]) == idxToIdx.end()){
+			int sz = its.size()/3;
+			for (i=1;i<sz;i++){
+				if (idxToIdx.find(its[i*3+0]) != idxToIdx.end()){
+					pops[idxToIdx[its[i*3+0]]]+=its[i*3+2];
+					break;
+				}
 			}
-		}*/
+		}
+		/*
 		if (idxToIdx.find(it->second[0]) == idxToIdx.end()){
 			int sz = it->second.size()/3;
 		
@@ -310,7 +313,7 @@ int ridership(std::vector<int> stations, const std::map<int,std::vector<int> > s
 					break;
 				}
 			}
-		}
+		}*/
 	}
     unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
