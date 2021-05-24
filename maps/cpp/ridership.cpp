@@ -290,7 +290,7 @@ int ridership(std::vector<int> stations, const std::map<int,std::vector<int> > s
 	
 	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
-    std::map<int, std::vector<int> >::iterator it;
+    std::map<int, std::vector<int> >::const_iterator it;
 
 	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
 		/*std::vector<int> its = it->second;
