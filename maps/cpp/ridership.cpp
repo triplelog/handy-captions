@@ -263,9 +263,10 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 }
 
 
-double proftPerPassenger() {
-	double rev = 1;
-	double cost = 0;
+double proftPerPassenger(int d, int dc) {
+	double rev = 0.14*dc;
+	double cost = 0.07*d;
+	
 	return std::max(1.0,std::min(50.0,rev-cost));
 }
 
@@ -330,6 +331,68 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> >* statio
 	return ret;
 }
 
+int profit(std::vector<int> stations, std::map<int,std::vector<int> >* stationDMap, const std::map<int,int > firstPops) {
+	
+	int len = stations.size();
+	int i; int ii;
+	double riders = 0;
+	double profit = 0;
+	std::vector<int> pops;
+	std::vector<double> distance;
+	double d = 0;
+
+	//std::ofstream logfile;
+	//logfile.open("logfile.txt");
+    for (i=0;i<len;i++){
+    	//logfile << firstPops[stations[i]] << " " << stationListLL[stations[i]*2+0] << " " << stationListLL[stations[i]*2+1] << "\n";
+		int p = firstPops.at(stations[i]);
+		pops.push_back(p);
+	}
+	//logfile.close();
+	
+	
+	for (i=0;i<len;i++){
+		if (i==0){distance.push_back(0);}
+		else {
+			//double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
+			double dd = haversine(stationListLL[stations[i]*2+0],stationListLL[stations[i]*2+1],stationListLL[stations[i-1]*2+0],stationListLL[stations[i-1]*2+1]);
+			d += dd;
+			distance.push_back(d);
+		}
+	}
+	
+	for (i=0;i<len;i++){
+		for (ii=0;ii<len;ii++){
+			if (ii == i){continue;}
+			double dd = distance[ii] - distance[i];
+			unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+			double dc = haversine(stationListLL[stations[i]*2+0],stationListLL[stations[i]*2+1],stationListLL[stations[ii]*2+0],stationListLL[stations[ii]*2+1]);
+			unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+			time1 += now2 - now1;
+			if (dd < 0){dd = -1*dd;}
+			int di = dd;
+			if (di < 500){ di = 500;}
+			
+			double n = pops[i]/2;
+			n *= 15;
+			n /= di;
+			n /= di;
+			n *= pops[ii];
+			n /= 10000000;
+			n *= pops[i];
+			n /= (pops[i]+pops[ii]);
+			//int n = 75000000*pops[i]/10000000*pops[ii]/10000000/500/500;//thousands of riders
+			profit += n*profitPerPassenger(dd,dc);
+		}
+	}
+	
+    
+    
+	int ret = profit;
+	return ret;
+}
+
 std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::vector<int> >* stationDMap, const std::map<int,int > firstPops, int remove) {
 	int len = allStations.size();
 	int i; int ii; int iii;
@@ -381,7 +444,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 		
     	//unsigned long long now2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
-		int riders = ridership(stations,stationDMap, pops[allStations[i]]);
+		int riders = profit(stations,stationDMap, pops[allStations[i]]);
 		
 		
 		for (ii=0;ii<remove;ii++){
@@ -633,8 +696,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
     for (it = stationDMap.begin(); it != stationDMap.end(); it++){
 		(*stationDMapPointer)[it->first] = it->second;
 	}
-	unsigned long long now4 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    time1 += now4 - now3;
+	
 	
 	if (stations.size() > max){
 		while (stations.size() > max + 20){
