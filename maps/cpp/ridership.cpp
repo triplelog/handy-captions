@@ -170,19 +170,31 @@ double xToLng(double x){
 int radiusValue(int pt, int r) {
 	int i; int ii;
 	int total = 0;
-	for (i=-1*r;i<=r;i++){
-		for (ii=-1*r;ii<=r;ii++){
-			int div = 1;
-			if (i*i+ii*ii > (r+1)*(r+1)){
-				continue;
-			}
-			else if (i*i+ii*ii > (r-1)*(r-1)){
-				div = 2;
-			}
+	int rRC = r * 2;
+	int x1 = pt%geoCols;
+	int y1 = pt/geoCols;
+	double lat1 = yToLat(y1);
+	double lng1 = xToLng(x1);
+	for (i=-1*rRC;i<=rRC;i++){
+		for (ii=-1*rRC;ii<=rRC;ii++){
+			
 			int x = pt%geoCols + i;
 			int y = pt/geoCols + ii;
-			if (y*geoCols + x < 0){continue;}
-			if (y*geoCols + x >= geoCols*geoRows){continue;}
+			if (x < 0 || y < 0 || x >= geoCols || y >= geoRows){continue;}
+			//if (y*geoCols + x < 0){continue;}
+			//if (y*geoCols + x >= geoCols*geoRows){continue;}
+			double lat2 = yToLat(y);
+			double lng2 = xToLng(x);
+			double dd3 = haversine(lat1,lng1,lat2,lng2);
+			int d3 = round(pow(dd3,2));
+			int div = 1;
+			if (d3 > (r+1)*(r+1)){
+				continue;
+			}
+			else if (d3 > (r-1)*(r-1)){
+				div = 2;
+			}
+			
 			total += population[y*geoCols + x]/div;
 		}
 	}
@@ -195,14 +207,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 	int rRC = r * 2;
 	double lat1 = stationListLL[sidx*2+0];
 	double lng1 = stationListLL[sidx*2+1];
-	std::ofstream logFile("logfile.txt");
 	
-	//logFile << d3;
-	logFile << lat1 << " , ";
-	logFile << lng1 << " , ";
-	double dd3 = haversine(lat1,lng1,lat1+1,lng1+1);
-	logFile << dd3 << " , ";
-	//logFile << lng2;
 	for (i=-1*rRC;i<=rRC;i++){
 		for (ii=-1*rRC;ii<=rRC;ii++){
 			
@@ -258,10 +263,15 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 }
 
 
+double proftPerPassenger() {
+	double rev = 1;
+	double cost = 0;
+	return std::max(1,std::min(50,rev-cost));
+}
 
-int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap) {
+int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap, std::map<int,int > firstPops) {
 	int len = stations.size();
-	int i; int ii; long riders = 0;
+	int i; int ii; double riders = 0;
 	std::vector<int> pops;
 	std::vector<double> distance;
 	double d = 0;
@@ -269,7 +279,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	
 	
     for (i=0;i<len;i++){
-		pops.push_back(0);
+		pops.push_back(firstPops[stations[i]]);
 		idxToIdx[stations[i]]=i;
 	}
 	unsigned long long now1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
@@ -284,12 +294,14 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 				break;
 			}
 		}*/
+		if (idxToIdx.find(it->second[0]) == idxToIdx.end()){
+			int sz = it->second.size()/3;
 		
-		int sz = it->second.size()/3;
-		for (i=0;i<sz;i++){
-			if (idxToIdx.find(it->second[i*3+0]) != idxToIdx.end()){
-				pops[idxToIdx[it->second[i*3+0]]]+=it->second[i*3+2];
-				break;
+			for (i=1;i<sz;i++){
+				if (idxToIdx.find(it->second[i*3+0]) != idxToIdx.end()){
+					pops[idxToIdx[it->second[i*3+0]]]+=it->second[i*3+2];
+					break;
+				}
 			}
 		}
 	}
@@ -314,7 +326,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 			int di = dd;
 			if (di < 500){ di = 500;}
 			
-			long n = pops[i]/2;
+			double n = pops[i]/2;
 			n *= 15;
 			n /= di;
 			n /= di;
@@ -334,7 +346,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	return ret;
 }
 
-std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::vector<int> > stationDMap, int remove) {
+std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::vector<int> > stationDMap, std::map<int,int > firstPops, int remove) {
 	int len = allStations.size();
 	int i; int ii; int iii;
 	std::vector<int> maxRiders;
@@ -351,7 +363,7 @@ std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::ve
 				stations.push_back(allStations[ii]);
 			}
 		}
-		int riders = ridership(stations,stationDMap);
+		int riders = ridership(stations,stationDMap, firstPops);
 		for (ii=0;ii<remove;ii++){
 			if (riders > maxRiders[ii]){
 				for (iii=ii+1;iii<remove;iii++){
@@ -543,7 +555,7 @@ void GetPopulation(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	int retInt = population[row*geoCols+col];
 	
-	int popRadius = radiusValue(row*geoCols+col, 0);
+	int popRadius = radiusValue(row*geoCols+col, 20);
 
 	
 
@@ -566,30 +578,43 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	v8::Local<v8::Array> jsArr = v8::Local<v8::Array>::Cast(info[0]);
 	
 	int max = info[1]->Int32Value(context).FromJust();
+	int r = info[2]->Int32Value(context).FromJust();
 	
 	int sz = jsArr->Length();
 	int szz = -1;
 	int i;
 	std::vector<int> stations;
 	std::map<int,std::vector<int> > stationDMap;
+	std::map<int,int > idxToIdx;
+	std::map<int,int > firstPops;
 
 	for (i=0;i<sz;i++){
 		szz = jsArr->Get(context,i).ToLocalChecked()->Int32Value(context).FromJust();
-		//szz = jsArr->Get(context,i);
 		stations.push_back(szz);
-		stationDMap = radiusValueMap(stationList[stations[i]],50,stationDMap,stations[i]);
+		stationDMap = radiusValueMap(stationList[stations[i]],r,stationDMap,stations[i]);
+		firstPops[stations[i]]=0;
+		idxToIdx[stations[i]]=i;
+		//add ability to only recount people with multiple stations nearby
 	}
-	while (stations.size() > max + 20){
-		stations = bestStations(stations,stationDMap,5);
+	
+
+	for (it = stationDMap.begin(); it != stationDMap.end(); it++){
+		int sz2 = it->second.size()/3;
+		firstPops[it->second[0]]+=it->second[2];
 	}
-	while (stations.size() > max + 10){
-		stations = bestStations(stations,stationDMap,3);
-	}
-	while (stations.size() > max + 5){
-		stations = bestStations(stations,stationDMap,2);
-	}
-	while (stations.size() > max){
-		stations = bestStations(stations,stationDMap,1);
+	if (stations.size() > max){
+		while (stations.size() > max + 20){
+			stations = bestStations(stations,stationDMap,firstPops,4);
+		}
+		while (stations.size() > max + 10){
+			stations = bestStations(stations,stationDMap,firstPops,3);
+		}
+		while (stations.size() > max + 5){
+			stations = bestStations(stations,stationDMap,firstPops,2);
+		}
+		while (stations.size() > max){
+			stations = bestStations(stations,stationDMap,firstPops,1);
+		}
 	}
 	
 	
