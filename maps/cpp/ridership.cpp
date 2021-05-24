@@ -258,10 +258,12 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 
 double yToLat(double y){
 	double lat = -0.02499999989999999*(y+startRow) + 71.38708322329654;
+	return lat;
 }
 
 double xToLng(double x){
 	double lng = 0.0249999999*(x+startCol) - 179.14708263665557;
+	return lng;
 }
 
 int ridership(std::vector<int> stations, std::map<int,std::vector<int> > stationDMap) {
@@ -631,6 +633,7 @@ void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		int x1 = stationList[i]%geoCols;
 		int y1 = stationList[i]/geoCols;
 		int lat1 = yToLat(y1);
+		int lng1 = xToLng(x1);
 		//stationListLL.push_back(yToLat(y1));//latitude
 		//stationListLL.push_back(xToLng(x1));//longitude
 	}
