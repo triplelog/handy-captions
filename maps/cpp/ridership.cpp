@@ -630,6 +630,7 @@ void Hello(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	for (i=0;i<sz;i++){
 		int x1 = stationList[i]%geoCols;
 		int y1 = stationList[i]/geoCols;
+		int lat1 = yToLat(y1);
 		//stationListLL.push_back(yToLat(y1));//latitude
 		//stationListLL.push_back(xToLng(x1));//longitude
 	}
