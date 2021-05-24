@@ -331,6 +331,24 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> >* statio
 	return ret;
 }
 
+int capital(std::vector<int> stations){
+	int len = stations.size();
+	int i; int ii;
+	double d = 0;
+
+	
+	for (i=0;i<len;i++){
+		if (i==0){}
+		else {
+			//double dd = ptDistance(stationList[stations[i]],stationList[stations[i-1]]);
+			double dd = haversine(stationListLL[stations[i]*2+0],stationListLL[stations[i]*2+1],stationListLL[stations[i-1]*2+0],stationListLL[stations[i-1]*2+1]);
+			d += dd;
+		}
+	}
+	int capital = d;
+	return capital;
+}
+
 int profit(std::vector<int> stations, std::map<int,std::vector<int> >* stationDMap, const std::map<int,int > firstPops) {
 	
 	int len = stations.size();
@@ -697,7 +715,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		(*stationDMapPointer)[it->first] = it->second;
 	}
 	
-	
+	std::ofstream logfile;
+	logfile.open("logfile.txt");
 	if (stations.size() > max){
 		while (stations.size() > max + 20){
 			stations = bestStations(stations,stationDMapPointer,firstPops,4);
@@ -718,6 +737,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					++it;
 				}
 			}
+			int riders = profit(stations,stationDMapPointer, firstPops);
+			logfile << riders << "\n";
 		}
 		while (stations.size() > max + 10){
 			stations = bestStations(stations,stationDMapPointer,firstPops,3);
@@ -738,6 +759,8 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					++it;
 				}
 			}
+			int riders = profit(stations,stationDMapPointer, firstPops);
+			logfile << riders << "\n";
 		}
 		while (stations.size() > max + 5){
 			stations = bestStations(stations,stationDMapPointer,firstPops,2);
@@ -758,11 +781,34 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 					++it;
 				}
 			}
+			int riders = profit(stations,stationDMapPointer, firstPops);
+			logfile << riders << "\n";
 		}
 		while (stations.size() > max){
 			stations = bestStations(stations,stationDMapPointer,firstPops,1);
+			std::map<int,int > idxToIdx;
+			int sz2 = stations.size();
+			for (i=0;i<sz2;i++){
+				idxToIdx[stations[i]]=i;
+			}
+			for (it = stationDMapPointer->begin(); it != stationDMapPointer->end(); ){
+				while (it->second.size() > 0 && idxToIdx.find(it->second[0]) == idxToIdx.end()){
+					it->second.erase(it->second.begin(),it->second.begin()+3);
+					firstPops[it->second[0]]+=it->second[2];
+				}
+				if (it->second.size() < 3){
+					it = stationDMapPointer->erase(it);
+				}
+				else {
+					++it;
+				}
+			}
+			int riders = profit(stations,stationDMapPointer, firstPops);
+			int capital = capital(stations);
+			logfile << riders << " and " << capital << "\n";
 		}
 	}
+	logfile.close();
 	
 	
 	v8::Local<v8::Array> retArr = v8::Array::New(isolate,stations.size());
