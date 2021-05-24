@@ -39,7 +39,7 @@ maincpp.hello();//array is 2310 columns and 995 rows
 var ptArray = [];
 
 /*double yToLat(double y){
-	double lat = -0.02499999989999999*y + 71.38708322329654;
+	double lat = -0.0083333333*y + 71.38708322329654;
 }
 
 double xToLng(double x){
@@ -53,7 +53,7 @@ for (var i=0;i<geoRows;i++){
 		//	console.log(i,ii,retGLV);
 		//}
 		if (i%100 == 0 && ii%200 == 0){
-			ptArray.push([0.0083333333*(ii+startCol) - 179.14708263665557,-0.02499999989999999*(i+startRow) + 71.38708322329654,retGLV/100]);
+			ptArray.push([0.0083333333*(ii+startCol) - 179.14708263665557,-0.0083333333*(i+startRow) + 71.38708322329654,retGLV/100]);
 		}
 	}
 }
