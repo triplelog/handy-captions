@@ -635,7 +635,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	
 	if (stations.size() > max){
 		while (stations.size() > max + 20){
-			stations = bestStations(stations,stationDMap,firstPops,4);
+			stations = bestStations(stations,stationDMapPointer,firstPops,4);
 			std::map<int,int > idxToIdx;
 			int sz2 = stations.size();
 			for (i=0;i<sz2;i++){
