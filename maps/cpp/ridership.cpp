@@ -695,7 +695,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 			}
 		}
 		while (stations.size() > max){
-			stations = bestStations(stations,stationDMap,firstPops,1);
+			stations = bestStations(stations,stationDMapPointer,firstPops,1);
 		}
 	}
 	
