@@ -172,7 +172,7 @@ wss.on('connection', function connection(ws) {
 			
 			var stations = [];
 			for (var i=0;i<s.length;i++){
-				//console.log(cityList[s[i][0]]);
+				console.log(cityList[s[i][0]]);
 				stations.push(parseInt(s[i][0]));
 			}
 			var retStations = maincpp.getStations(stations,10);

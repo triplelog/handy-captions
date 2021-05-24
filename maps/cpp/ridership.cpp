@@ -305,7 +305,7 @@ int ridership(std::vector<int> stations, std::map<int,std::vector<int> > station
 	return ret;
 }
 
-std::vector<int> bestStations(std::vector<int> allStations, int remove) {
+std::vector<int> bestStations(std::vector<int> allStations, std::map<int,std::vector<int> > stationDMap, int remove) {
 	int len = allStations.size();
 	int i; int ii; int iii;
 	std::vector<int> maxRiders;
@@ -314,10 +314,7 @@ std::vector<int> bestStations(std::vector<int> allStations, int remove) {
 		maxRiders.push_back(0);
 		cut.push_back(i);
 	}
-	std::map<int,std::vector<int> > stationDMap;
-	for (i=0;i<len;i++){
-		stationDMap = radiusValueMap(stationList[allStations[i]],20,stationDMap,allStations[i]);
-	}
+	
 	for (i=0;i<len;i++){
 		std::vector<int> stations;
 		for (ii=0;ii<len;ii++){
@@ -545,22 +542,25 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 	int szz = -1;
 	int i;
 	std::vector<int> stations;
+	std::map<int,std::vector<int> > stationDMap;
+
 	for (i=0;i<sz;i++){
 		szz = jsArr->Get(context,i).ToLocalChecked()->Int32Value(context).FromJust();
 		//szz = jsArr->Get(context,i);
 		stations.push_back(szz);
+		stationDMap = radiusValueMap(stationList[stations[i]],20,stationDMap,stations[i]);
 	}
 	while (stations.size() > max + 20){
-		stations = bestStations(stations,5);
+		stations = bestStations(stations,stationDMap,5);
 	}
 	while (stations.size() > max + 10){
-		stations = bestStations(stations,3);
+		stations = bestStations(stations,stationDMap,3);
 	}
 	while (stations.size() > max + 5){
-		stations = bestStations(stations,2);
+		stations = bestStations(stations,stationDMap,2);
 	}
 	while (stations.size() > max){
-		stations = bestStations(stations,1);
+		stations = bestStations(stations,stationDMap,1);
 	}
 	
 	
@@ -582,7 +582,7 @@ void GetStations(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 		retArr->Set(context,xi,xxi);
 	}
 	
-	//int riders = ridership(stations);
+	//int riders = ridership(stations,stationDMap);
 	
 	
 	info.GetReturnValue().Set(retArr);
