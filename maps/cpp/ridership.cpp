@@ -195,7 +195,14 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 	int rRC = r * 2;
 	double lat1 = stationListLL[sidx*2+0];
 	double lng1 = stationListLL[sidx*2+1];
-
+	std::ofstream logFile("logfile.txt");
+	int d3 = round(pow(dd3,2));
+	//logFile << d3;
+	logFile << lat1;
+	logFile << lng1;
+	double dd3 = haversine(lat1,lng1,lat1+1,lng1+1);
+	logFile << dd3;
+	//logFile << lng2;
 	for (i=-1*rRC;i<=rRC;i++){
 		for (ii=-1*rRC;ii<=rRC;ii++){
 			
@@ -206,10 +213,10 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 			//if (y*geoCols + x >= geoCols*geoRows){continue;}
 			double lat2 = yToLat(y);
 			double lng2 = xToLng(x);
-			double dd3 = haversine(lat1,lng1,lat2,lng2);
-			int d3 = round(pow(dd3,2));
+			//double dd3 = haversine(lat1,lng1,lat2,lng2);
+			
 			//int d2 = round(pow(haversine(lat1,lng1,lat2,lng2),2));
-			//int d3 = i*i+ii*ii;
+			int d3 = i*i+ii*ii;
 			int div = 1;
 			if (d3 > (r+1)*(r+1)){
 				continue;
