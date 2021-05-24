@@ -263,7 +263,7 @@ std::map<int,std::vector<int> > radiusValueMap(int pt, int r, std::map<int,std::
 }
 
 
-double proftPerPassenger(int d, int dc) {
+double profitPerPassenger(int d, int dc) {
 	double rev = 0.14*dc;
 	double cost = 0.07*d;
 	
