@@ -38,7 +38,7 @@ function divideWords(strokes) {
 		
 		
 		for (var i=0;i<minmaxArray.length;i++){
-			console.log(minmaxArray[i]);
+			//console.log(minmaxArray[i]);
 			mmStrokes = [{'x':minmaxArray[i][0],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+80}];
 			addStroke(mmStrokes,'gray');
 		}
@@ -46,7 +46,7 @@ function divideWords(strokes) {
 		
 	}
 	for (var i=0;i<strokes.length;i++){
-		
+		console.log(i,wordMap[i]);
 		var line = wordMap[i].line;
 		var id = lineInfo[line].length-1;
 		for (var ii=0;ii<lineInfo[line].length;ii++){
@@ -56,6 +56,7 @@ function divideWords(strokes) {
 				break;
 			}
 		}
+		console.log(id);
 		
 		addStroke(strokes[i],'rgb('+(id*255/lineInfo[line].length)+',0,0)');
 	}
