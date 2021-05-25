@@ -141,7 +141,7 @@ function divideWords(strokes) {
 				}
 				
 			}
-			var pd = "M"+word['minX']+" 240 L"+word['maxX']+" 240";
+			var pd = "M"+word['minX']+" 160 L"+word['maxX']+" 160";
 			var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 			path.setAttributeNS(null,"d",pd);
 			path.setAttributeNS(null,"stroke","black");
@@ -233,12 +233,14 @@ function makeLink(id,addLink=false) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
 	if (addLink){
-		console.log(id,addLink);
 		makeUnderline(id);
-		el.setAttribute("onclick",addLink);
+		el.setAttribute("onclick","window.location.href='"+addLink+"'");
+		el.classList.add('wordLink');
 	}
 	else{
 		makeUnderline(id,false);
+		el.removeAttribute("onclick");
+		el.classList.remove('wordLink');
 	}
 }
 
@@ -246,7 +248,6 @@ function makeUnderline(id,addUnderline=true) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
 	if (addUnderline){
-		console.log(id,el.querySelector(".underline"));
 		el.querySelector(".underline").style.display="inline-block";
 	}
 	else{
