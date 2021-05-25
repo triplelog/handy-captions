@@ -41,7 +41,7 @@ function divideWords(strokes) {
 		var minmaxArray = combineMinmax(strokesInfo[line]);
 		
 		
-		for (var i=0;i<minmaxArray;i++){
+		for (var i=0;i<minmaxArray.length;i++){
 			console.log(minmaxArray[i]);
 			mmStrokes = [{'x':minmaxArray[i][0],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+80}];
 			addStroke(mmStrokes,'gray');
