@@ -326,7 +326,7 @@ function editUp(evt){
 		if (x < wordIds[key]['left'] || x > wordIds[key]['left']+wordIds[key]['width']){
 			continue;
 		}
-		if (y < wordIds[key]['top'] || y > wordIds[key]['top']+160){
+		if (y < wordIds[key]['top'] || y > wordIds[key]['top']+640){
 			continue;
 		}
 		makeColor(key,"red");
