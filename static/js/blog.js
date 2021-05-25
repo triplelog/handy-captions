@@ -1,6 +1,6 @@
 function divideWords(strokes) {
 	strokesInfo = {};
-	words = {};
+	wordMap = {};
 	for (var i=0;i<strokes.length;i++){
 		sInfo = {};
 		sumY = 0;
@@ -20,13 +20,9 @@ function divideWords(strokes) {
 		}
 		if (nY >0){
 			line = Math.floor((sumY/nY)/400);
-			if (line == 0){
-				addStroke(strokes[i],'blue');
-			}
-			else if (line == 1){
-				addStroke(strokes[i],'green');
-			}
+			
 			words[line]={};
+			wordMap[i]={minX:minmaxX[0],line:line};
 			if (strokesInfo[line]){
 				strokesInfo[line].push(minmaxX);
 			}
@@ -36,6 +32,7 @@ function divideWords(strokes) {
 		}
 	}
 	var spaceLength = 80;
+	var lineInfo = {};
 	for (line in strokesInfo){
 		console.log(line,strokesInfo[line]);
 		var minmaxArray = combineMinmax(strokesInfo[line]);
@@ -46,7 +43,22 @@ function divideWords(strokes) {
 			mmStrokes = [{'x':minmaxArray[i][0],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+80}];
 			addStroke(mmStrokes,'gray');
 		}
+		lineInfo[line]=minmaxArray;
 		
+	}
+	for (var i=0;i<strokes.length;i++){
+		
+		var line = wordMap[i].line;
+		var id = lineInfo[line].length-1;
+		for (var ii=0;ii<lineInfo[line].length;ii++){
+			var mmA = lineInfo[line][ii][0];
+			if (wordMap[i].minX <= mmA){
+				id = ii;
+				break;
+			}
+		}
+		
+		addStroke(strokes[i],'rgb('+(id*255/lineInfo[line].length)+',0,0)');
 	}
 	
 }
@@ -73,6 +85,7 @@ function combineMinmax(minmaxArray) {
 			}
 		}
 	}
+	minmaxArray.sort(function(a,b){return a[0] - b[0];});
 	return minmaxArray;
 }
 
