@@ -32,6 +32,15 @@ const User = require('./models/user');
 const UserData = require('./models/userdata');*/
 
 
+async function quickstart() {
+
+
+  // Performs label detection on the image file
+  const [result] = await client.labelDetection('./static/img/lincoln.jpg');
+  const labels = result.labelAnnotations;
+  console.log('Labels:');
+  labels.forEach(label => console.log(label.description));
+}
 
 
 var express = require('express');
@@ -49,10 +58,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', 
 	
 	function(req, res) {
-		const [result] = await client.labelDetection('./static/img/lincoln.jpg');
-	    const labels = result.labelAnnotations;
-	    console.log('Labels:');
-	   labels.forEach(label => console.log(label.description));
+		quickstart();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
 		}));
