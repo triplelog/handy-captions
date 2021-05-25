@@ -123,7 +123,7 @@ function divideWords(strokes) {
 				buffer.style.width = "1px";
 				buffer.style.height = "320px";
 				buffer.style.flexGrow = "100";
-				buffer.style.border = "1px solid black";
+				buffer.style.border = "0px solid black";
 				outEl.appendChild(buffer);
 				
 			
@@ -134,7 +134,7 @@ function divideWords(strokes) {
 				buffer.style.width = "1px";
 				buffer.style.height = "320px";
 				buffer.style.flexGrow = "100";
-				buffer.style.border = "1px solid black";
+				buffer.style.border = "0px solid black";
 				outEl.appendChild(buffer);
 				
 				var newLine = document.createElement("div");
@@ -203,7 +203,7 @@ function divideWords(strokes) {
 			buffer.style.width = "4px";
 			buffer.style.height = "320px";
 			buffer.style.flexGrow = "1";
-			buffer.style.border = "1px solid black";
+			buffer.style.border = "0px solid black";
 			outEl.appendChild(buffer);
 		}    
 		
