@@ -234,13 +234,19 @@ function makeLink(id,addLink=false) {
 	if (!el){return;}
 	if (addLink){
 		makeUnderline(id);
-		el.setAttribute("onclick","window.location.href='"+addLink+"'");
-		el.classList.add('wordLink');
+		var svg = el.querySelector('svg').cloneNode(true);
+		el.removeChild(el.querySelector('svg'));
+		var a = document.createElement('a');
+		a.setAttribute('href',addLink);
+		a.appendChild(svg);
+		el.appendChild(a);
 	}
 	else{
 		makeUnderline(id,false);
-		el.removeAttribute("onclick");
-		el.classList.remove('wordLink');
+		var a = el.querySelector('a');
+		var svg = el.querySelector('svg').cloneNode(true);
+		el.removeChild(el.querySelector('a'));
+		el.appendChild(svg);
 	}
 }
 
