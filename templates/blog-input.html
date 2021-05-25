@@ -20,26 +20,42 @@
 .bgDoc {
 	position: absolute;
 	left: 0px;
-	top: 0px;
+	top: 100px;
 }
 
 .fgBoxes {
 	position: absolute;
 	left: 0px;
+	top: 100px;
+}
+.input {
+	position: absolute;
+	left: 0px;
 	top: 0px;
+	display: inline-block;
+	height: 100px;
+	width: 400px;
+}
+.output {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	display: inline-block;
+	height: 100px;
+	width: 400px;
 }
 
 </style>
 </head>
 <body>
 
-<div class="input">
+<div id="input" class="input">
 	
 </div>
 
-	<canvas class="output" width="300px" height="300px">
+<canvas id="output" class="output" width="400px" height="100px">
 		
-	</canvas>
+</canvas>
 <div class="o2" >
 	<img class="bgDoc" src="../img/lincoln.jpg" />
 	<svg class="fgBoxes" width="2511px" height="3159px" viewBox="0 0 2511 3159" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -69,6 +85,52 @@
 <script>
 
 
+var inputEl = document.getElementById("input");
+inputEl.addEventListener('pointerdown',inputDown);
+inputEl.addEventListener('pointermove',inputMove);
+inputEl.addEventListener('pointercancel',inputCancel);
+inputEl.addEventListener('pointerup',inputUp);
+var canvasEl = document.getElementById("output");
+var ctx = canvasEl.getContext("2d");
+
+var strokes = [];
+var isDown = false;
+var currentStroke = [];
+function inputDown(e) {
+	isDown = true;
+	currentStroke.push({'x':evt.clientX,'y':evt.clientY});
+}
+function inputMove(e) {
+	if (isDown){
+		currentStroke.push({'x':evt.clientX,'y':evt.clientY});
+	}
+}
+function inputUp(e) {
+	if (isDown){
+		currentStroke.push({'x':evt.clientX,'y':evt.clientY});
+	}
+	strokes.push(currentStroke);
+	addStroke(currentStroke);
+	isDown = false;
+	currentStroke = [];
+}
+function inputCancel(e) {
+	isDown = false;
+	currentStroke = [];
+}
+
+
+function addStroke(stroke) {
+	if (stroke.length < 2){
+		return;
+	}
+	ctx.beginPath();
+	ctx.moveTo(stroke[0].x,stroke[0].y);
+	for (var i=1;i<stroke.length;i++){
+		ctx.lineTo(stroke[i].x,stroke[i].y);
+	}
+	ctx.stroke();
+}
 </script>
 </body>
 </html>
