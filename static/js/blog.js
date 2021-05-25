@@ -127,7 +127,7 @@ function divideWords(strokes) {
 				
 				var newLine = document.createElement("div");
 				newLine.style.width = "100%";
-				newLine.style.flexGrow = "1";
+				newLine.style.flexGrow = "1000";
 				outEl.appendChild(newLine);
 				
 				break;
