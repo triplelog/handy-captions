@@ -107,7 +107,7 @@ function divideWords(strokes) {
 			var width = word['width']+176;
 			var height = word['maxY'] - word['minY']+16;
 			var viewBox = '';
-			viewBox += (word['minX']-8)+" ";
+			viewBox += (word['minX']-88)+" ";
 			viewBox += (word['minY']-8)+" ";
 			viewBox += (width+176)+" ";
 			viewBox += (height+16);
@@ -141,9 +141,11 @@ function divideWords(strokes) {
 			
 			
 			outEl.appendChild(el);
-			//var buffer = document.createElement("div");
-			//buffer.style.width = "160px";
-			//outEl.appendChild(buffer);
+			var buffer = document.createElement("div");
+			buffer.style.width = "4px";
+			buffer.style.flexGrow = "1";
+			buffer.style.border = "1px solid black";
+			outEl.appendChild(buffer);
 			//left += word['width']+160;
 		}    
 		
