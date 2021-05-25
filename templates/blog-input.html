@@ -17,6 +17,9 @@
 
 <style>
 
+body {
+	touch-action: none;
+}
 .bgDoc {
 	position: absolute;
 	left: 0px;
@@ -36,7 +39,7 @@
 	height: 200px;
 	width: 800px;
 	border: 1px solid black;
-	touch-action: none;
+	
 }
 .output {
 	position: absolute;
@@ -55,8 +58,11 @@
 	left: 0px;
 	top: 250px;
 	display: inline-block;
-	height: 200px;
-	width: 800px;
+	height: 800px;
+	width: 3200px;
+	border: 1px solid black;
+	transform-origin: 0 0;
+    transform: scale(0.25,0.25);
 }
 
 </style>

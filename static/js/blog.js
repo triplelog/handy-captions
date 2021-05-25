@@ -98,8 +98,33 @@ function divideWords(strokes) {
 	}
 	for (line in adjWords){
 		console.log(adjWords[line]);
-		var el = document.createElement("div");
-		outEl.appendChild(el);
+		var left = 0;
+		for (var wIdx in adjWords[line]){
+			var word = adjWords[line][wIdx];
+			
+			var el = document.createElement("div");
+			var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+			var width = word['maxX'] - word['minX'];
+			var height = word['maxY'] - word['minY'];
+			var viewBox = '';
+			viewBox += word['minX']+" ";
+			viewBox += word['minY']+" ";
+			viewBox += width+" ";
+			viewBox += height;
+			svg.setAttribute('width', width);
+			svg.setAttribute('height', height);
+			svg.setAttribute('viewBox', viewBox);
+			svg.setAttribute('style', 'border: 1px solid black');
+			svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+			
+			el.style.left = left+"px";
+			el.style.display = "inline-block";
+			el.style.position = "absolute";
+			el.style.top = word['top']+"px";
+			el.appendChild(svg);
+			outEl.appendChild(el);
+		}    
+		
 	}
 	
 }
