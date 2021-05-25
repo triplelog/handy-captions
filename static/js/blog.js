@@ -53,7 +53,7 @@ function divideWords(strokes) {
 			//console.log(minmaxArray[i]);
 			mmStrokes = [{'x':minmaxArray[i][0],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+80}];
 			addStroke(mmStrokes,'gray');
-			adjWords[line][i]={'left':minmaxArray[i][0],'top':line*400+80,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:160,strokes:[]};
+			adjWords[line][i]={'left':minmaxArray[i][0],'width':minmaxArray[i][1]-minmaxArray[i][0],'top':line*400+80,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:160,strokes:[]};
 		}
 		lineInfo[line]=minmaxArray;
 		
@@ -117,12 +117,29 @@ function divideWords(strokes) {
 			svg.setAttribute('style', 'border: 1px solid black');
 			svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
 			
+			for (var i=0;i<word['strokes'].length;i++) {
+				var s = word['strokes'][i];
+				if (s.length > 1){
+					var pd = "M"+s[0].x+" "+s[0].y;
+					for (var ii=1;ii<s.length;ii++) {
+						pd += " L"+s[ii].x+" "+s[ii].y;
+					}
+					var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+					path.setAttributeNS(null,"d",pd);
+					path.setAttributeNS(null,"stroke","black");
+					path.setAttributeNS(null,"stroke-width","15");
+					path.setAttributeNS(null,"fill","none");
+					svg.appendChild(path);
+				}
+				
+			}
 			el.style.left = left+"px";
 			el.style.display = "inline-block";
 			el.style.position = "absolute";
 			el.style.top = word['top']+"px";
 			el.appendChild(svg);
 			outEl.appendChild(el);
+			left += word['width']+100;
 		}    
 		
 	}
