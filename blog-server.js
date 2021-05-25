@@ -97,6 +97,7 @@ function readJson() {
 		console.error(err)
 		return
 	  }
+	  var svg = "";
 	  var document = JSON.parse(data);
 	  for (var i=0;i<document.pages.length;i++){
 	  	//console.log(JSON.stringify(document.pages[i]));
@@ -105,16 +106,20 @@ function readJson() {
 	  			for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words.length;iiii++){
 	  				//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox);
 	  				var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox.vertices);
-	  				console.log(pd);
+	  				svg += '<path d="'+pd+'" fill="none" stroke="red" stroke-width="2" />';
+	  				//console.log(pd);
+	  				for (var iiiii=0;iiiii<document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols.length;iiiii++){
+						//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols[iiiii].text);
+						var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols[iiiii].boundingBox.vertices);
+						svg += '<path d="'+pd+'" fill="none" stroke="red" stroke-width="2" />';
+						//console.log(pd);
+					}
 	  			}
-	  			/*for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols.length;iiii++){
-	  				console.log(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].text);
-	  				var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].boundingBox.vertices);
-	  				console.log(pd);
-	  			}*/
+	  			
 	  		}
 	  	}
 	  }
+	  console.log(svg);
   });
 }
 

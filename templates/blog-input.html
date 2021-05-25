@@ -157,7 +157,7 @@ function addStroke(stroke) {
 	}
 	ctx.lineWidth = 15;
 	ctx.beginPath();
-	ctx.moveTo(stroke[0].x,stroke[0].y);
+	ctx.moveTo(stroke[0].x*4,stroke[0].y*4);
 	for (var i=1;i<stroke.length;i++){
 		ctx.lineTo(stroke[i].x*4,stroke[i].y*4);
 	}
@@ -165,7 +165,7 @@ function addStroke(stroke) {
 }
 
 function downloadImage() {
-	var dataURL = canvasEl.toDataURL('image/png');
+	var dataURL = canvasEl.toDataURL('image/jpg');
 	var imgEl = document.getElementById('imgOutput');
 	imgEl.src = dataURL;
 	//ws.send(dataURL);
