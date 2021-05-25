@@ -65,13 +65,14 @@ function divideWords(strokes) {
 		var id = lineInfo[line].length-1;
 		for (var ii=0;ii<lineInfo[line].length-1;ii++){
 			var mmA = (lineInfo[line][ii][1]+lineInfo[line][ii+1][0])/2;
+			console.log(mmA);
 			if (wordMap[i].minX <= mmA){
 				id = ii;
 				break;
 			}
 		}
 		var adjStrokes = [];
-		for (var ii=0;ii<strokes[i][ii].length;ii++){
+		for (var ii=0;ii<strokes[i].length;ii++){
 			var x = strokes[i][ii].x - adjWords[line][id]['left'];
 			var y = strokes[i][ii].y - adjWords[line][id]['top'];
 			if (x > adjWords[line][id]['maxX']){
