@@ -30,7 +30,54 @@ mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: tr
 const User = require('./models/user');
 const UserData = require('./models/userdata');*/
 
+async function fromWS64(b64) {
 
+  // Creates a client
+  const client = new vision.ImageAnnotatorClient();
+
+
+  var encoded = b64;
+  console.log(encoded);
+  const request = {
+      "image": {
+        "content": encoded
+      },
+      "features": [
+        {
+          "type": "DOCUMENT_TEXT_DETECTION"
+        }
+      ],
+      "imageContext": {
+        "languageHints": ["en-t-i0-handwrit"]
+      }
+    };
+  client.annotateImage(request).then(response => {
+    // doThingsWith(response);
+    //console.log(JSON.stringify(response[0].textAnnotations));
+    fs.writeFile('./blog/out/test3.json', JSON.stringify(response[0].fullTextAnnotation), err => {
+	  if (err) {
+		console.error(err)
+		return
+	  }
+	  //file written successfully
+    });
+  })
+  .catch(err => {
+    console.error(err);
+  });
+  
+ /* console.log(JSON.stringify(result));
+  const document = result.fullTextAnnotation;
+  
+  fs.writeFile('./blog/out/test2.json', JSON.stringify(document), err => {
+	  if (err) {
+		console.error(err)
+		return
+	  }
+	  //file written successfully
+  });
+  console.log(document.pages[0].blocks);*/
+}
 async function quickstart(filen) {
 
   // Creates a client
@@ -141,11 +188,7 @@ app.get('/',
 	function(req, res) {
 		//quickstart();
 		//quickstart("./static/img/test.jpg");
-		var imageFile = fs.readFileSync("./static/img/test.jpg");
-
-		  // Convert the image data to a Buffer and base64 encode it.
-		  var encoded = Buffer.from(imageFile).toString('base64');
-		  console.log(encoded);
+		
 		readJson();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
@@ -172,7 +215,7 @@ wss.on('connection', function connection(ws) {
   		var dm = JSON.parse(message);
   		if (dm.type == "image"){
   			var base64Data = dm.image.substr(22,);
-  			
+  			fromWS64(base64Data);
   			/*require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
 			  console.log(err);
 			  quickstart("./out.png");
