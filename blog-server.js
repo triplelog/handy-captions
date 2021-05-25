@@ -128,7 +128,7 @@ app.get('/',
 	
 	function(req, res) {
 		//quickstart();
-		quickstart("./out.png");
+		quickstart("./static/img/test.jpg");
 		//readJson();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
