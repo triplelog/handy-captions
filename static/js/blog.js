@@ -154,6 +154,7 @@ function divideWords(strokes) {
 	}
 	var buffer = document.createElement("div");
 	buffer.style.width = "4px";
+	buffer.style.height = "400px";
 	buffer.style.flexGrow = "100";
 	buffer.style.border = "1px solid black";
 	outEl.appendChild(buffer);
