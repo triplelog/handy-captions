@@ -1,6 +1,9 @@
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
+	adjWords = {};
+	var outEl = document.getElementById("finalOutput");
+	outEl.innerHTML = "";
 	for (var i=0;i<strokes.length;i++){
 		sInfo = {};
 		sumY = 0;
@@ -27,7 +30,7 @@ function divideWords(strokes) {
 	}
 		if (nY >0){
 			line = Math.floor((sumY/nY)/400);
-			
+			adjWords[line]={};
 			wordMap[i]={avgX:(fminmaxX[0]+fminmaxX[1])/2,line:line};
 			if (strokesInfo[line]){
 				strokesInfo[line].push(minmaxX);
@@ -48,6 +51,7 @@ function divideWords(strokes) {
 			//console.log(minmaxArray[i]);
 			mmStrokes = [{'x':minmaxArray[i][0],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+80}];
 			addStroke(mmStrokes,'gray');
+			adjWords[line][i]={'left':minmaxArray[i][0],'top':line*400+80,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:160,strokes:[]};
 		}
 		lineInfo[line]=minmaxArray;
 		
@@ -64,9 +68,36 @@ function divideWords(strokes) {
 				break;
 			}
 		}
+		var adjStrokes = [];
+		for (var ii=0;ii<strokes[i][ii].length;ii++){
+			var x = strokes[i][ii].x - adjWords[line][id]['left'];
+			var y = strokes[i][ii].y - adjWords[line][id]['top'];
+			if (x > adjWords[line][id]['maxX']){
+				adjWords[line][id]['maxX'] = x;
+			}
+			if (x < adjWords[line][id]['minX']){
+				adjWords[line][id]['minX'] = x;
+			}
+			if (y > adjWords[line][id]['maxY']){
+				adjWords[line][id]['maxY'] = y;
+			}
+			if (y < adjWords[line][id]['minY']){
+				adjWords[line][id]['minY'] = y;
+			}
+			adjStrokes.push({x:x,y:y});
+		}
+		adjWords[line][id]['strokes'].push(adjStrokes);
+		
 		console.log(id);
 		
 		addStroke(strokes[i],'rgb('+(id*255/lineInfo[line].length)+',0,0)');
+		
+		
+	}
+	for (line in adjWords){
+		console.log(adjWords[line]);
+		var el = document.createElement("div");
+		outEl.appendChild(el);
 	}
 	
 }
