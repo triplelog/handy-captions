@@ -323,10 +323,10 @@ function editUp(evt){
 	console.log(x,y);
 	for (key in wordIds){
 		var bb = wordIds[key]['minX']
-		if (x < wordIds[key]['minX'] || x > wordIds[key]['maxX']){
+		if (x < wordIds[key]['left'] || x > wordIds[key]['left']+wordIds[key]['width']){
 			continue;
 		}
-		if (y < wordIds[key]['minY'] || y > wordIds[key]['maxY']){
+		if (y < wordIds[key]['top'] || y > wordIds[key]['top']+160){
 			continue;
 		}
 		makeColor(key,"red");
