@@ -51,7 +51,7 @@ function divideWords(strokes) {
 		var line = wordMap[i].line;
 		var id = lineInfo[line].length-1;
 		for (var ii=0;ii<lineInfo[line].length;ii++){
-			var mmA = lineInfo[line][ii][0];
+			var mmA = lineInfo[line][ii][1];
 			if (wordMap[i].minX <= mmA){
 				id = ii;
 				break;
