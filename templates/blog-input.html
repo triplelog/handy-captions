@@ -20,23 +20,13 @@
 body {
 	touch-action: none;
 }
-.bgDoc {
-	position: absolute;
-	left: 0px;
-	top: 450px;
-}
 
-.fgBoxes {
-	position: absolute;
-	left: 0px;
-	top: 450px;
-}
 .input {
 	position: absolute;
 	left: 0px;
 	top: 50px;
 	display: inline-block;
-	height: 200px;
+	height: 300px;
 	width: 800px;
 	border: 1px solid black;
 	
@@ -46,7 +36,7 @@ body {
 	left: 0px;
 	top: 50px;
 	display: inline-block;
-	height: 800px;
+	height: 1200px;
 	width: 3200px;
 	border: 1px solid black;
 	pointer-events: none;
@@ -56,8 +46,8 @@ body {
 #finalOutput {
 	position: absolute;
 	left: 0px;
-	top: 250px;
-	height: 800px;
+	top: 350px;
+	height: 1200px;
 	width: 3200px;
 	border: 1px solid black;
 	transform-origin: 0 0;
@@ -76,20 +66,27 @@ body {
 <body>
 
 <div id="input" class="input">
-	<svg class="ruled" width="800px" height="200px" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<svg class="ruled" width="800px" height="300px" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<path d="M0 30 L 400 30" fill="none" stroke="blue" stroke-width="1" />
 		<path d="M0 20 L 400 20" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
 		<path d="M0 10 L 400 10" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
 		<path d="M0 40 L 400 40" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
+		
 		<path d="M0 50 L 400 50" fill="none" stroke="black" stroke-width="2" />
 		<path d="M0 80 L 400 80" fill="none" stroke="blue" stroke-width="1" />
 		<path d="M0 70 L 400 70" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
 		<path d="M0 60 L 400 60" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
 		<path d="M0 90 L 400 90" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
+		
+		<path d="M0 100 L 400 100" fill="none" stroke="black" stroke-width="2" />
+		<path d="M0 130 L 400 130" fill="none" stroke="blue" stroke-width="1" />
+		<path d="M0 120 L 400 120" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
+		<path d="M0 110 L 400 110" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
+		<path d="M0 140 L 400 140" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
 	</svg>
 </div>
 
-<canvas id="output" class="output" width="3200px" height="800px">
+<canvas id="output" class="output" width="3200px" height="1200px">
 		
 </canvas>
 
@@ -97,13 +94,7 @@ body {
 
 </div>
 
-<!--<div class="o2" >
-	<img class="bgDoc" src="../img/out3.jpg" width="800px" height="200px" />
-	<svg class="fgBoxes" width="800px" height="200px" viewBox="0 0 3200 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<path d="M 247 24 607 22 609 286 249 288Z" fill="none" stroke="red" stroke-width="4" /><path d="M 247 25 316 25 318 288 249 288Z" fill="none" stroke="green" stroke-width="2" /><path d="M 317 24 404 23 406 286 319 287Z" fill="none" stroke="green" stroke-width="2" /><path d="M 447 23 536 22 538 285 449 286Z" fill="none" stroke="green" stroke-width="2" /><path d="M 539 23 607 23 609 286 541 286Z" fill="none" stroke="green" stroke-width="2" /><path d="M 946 20 1043 19 1045 283 948 284Z" fill="none" stroke="red" stroke-width="4" /><path d="M 946 21 992 21 994 284 948 284Z" fill="none" stroke="green" stroke-width="2" /><path d="M 997 20 1043 20 1045 283 999 283Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1351 18 1429 18 1431 281 1353 281Z" fill="none" stroke="red" stroke-width="4" /><path d="M 1351 18 1429 18 1431 281 1353 281Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1646 16 1795 15 1797 278 1648 279Z" fill="none" stroke="red" stroke-width="4" /><path d="M 1646 16 1714 16 1716 279 1648 279Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1727 16 1795 16 1797 279 1729 279Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1672 31 2212 25 2216 408 1676 414Z" fill="none" stroke="red" stroke-width="4" /><path d="M 1672 31 1734 30 1738 413 1676 414Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1736 30 1823 29 1827 412 1740 413Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1856 29 1935 28 1939 411 1860 412Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1936 28 2007 27 2011 410 1940 411Z" fill="none" stroke="green" stroke-width="2" /><path d="M 2010 27 2094 26 2098 409 2014 410Z" fill="none" stroke="green" stroke-width="2" /><path d="M 2115 26 2212 25 2216 408 2119 409Z" fill="none" stroke="green" stroke-width="2" /><path d="M 2595 20 2982 16 2986 400 2599 404Z" fill="none" stroke="red" stroke-width="4" /><path d="M 2595 21 2660 20 2664 403 2599 404Z" fill="none" stroke="green" stroke-width="2" /><path d="M 2666 20 2734 19 2738 402 2670 403Z" fill="none" stroke="green" stroke-width="2" /><path d="M 2730 19 2830 18 2834 401 2734 402Z" fill="none" stroke="green" stroke-width="2" /><path d="M 2867 18 2982 17 2986 400 2871 401Z" fill="none" stroke="green" stroke-width="2" /><path d="M 109 396 690 381 698 701 117 716Z" fill="none" stroke="red" stroke-width="4" /><path d="M 109 397 242 394 250 712 117 716Z" fill="none" stroke="green" stroke-width="2" /><path d="M 274 392 395 389 403 708 282 711Z" fill="none" stroke="green" stroke-width="2" /><path d="M 403 389 524 386 532 705 411 708Z" fill="none" stroke="green" stroke-width="2" /><path d="M 557 385 690 382 698 700 565 704Z" fill="none" stroke="green" stroke-width="2" /><path d="M 761 380 1368 364 1376 683 769 699Z" fill="none" stroke="red" stroke-width="4" /><path d="M 761 380 997 374 1005 693 769 699Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1095 371 1241 367 1249 686 1103 690Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1197 369 1266 367 1274 686 1205 688Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1286 366 1368 364 1376 683 1294 685Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1758 354 2257 341 2265 660 1766 673Z" fill="none" stroke="red" stroke-width="4" /><path d="M 1758 354 1917 350 1925 669 1766 673Z" fill="none" stroke="green" stroke-width="2" /><path d="M 1958 349 2104 345 2112 664 1966 668Z" fill="none" stroke="green" stroke-width="2" /><path d="M 2124 345 2257 342 2265 660 2132 664Z" fill="none" stroke="green" stroke-width="2" /><path d="M 2302 340 2381 338 2389 657 2310 659Z" fill="none" stroke="red" stroke-width="4" /><path d="M 2302 340 2381 338 2389 657 2310 659Z" fill="none" stroke="green" stroke-width="2" />
-		
-	</svg>
-</div>-->
+
 <div class="tools">
 	<select>
 		<option value="heart">Heart</option>
