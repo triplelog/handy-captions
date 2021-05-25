@@ -42,10 +42,11 @@
 	left: 0px;
 	top: 50px;
 	display: inline-block;
-	height: 100px;
-	width: 800px;
+	height: 300px;
+	width: 2400px;
 	border: 1px solid black;
 	pointer-events: none;
+	transform: scale(0.25,0.25);
 }
 #imgOutput {
 	position: absolute;
@@ -64,7 +65,7 @@
 	
 </div>
 
-<canvas id="output" class="output" width="800px" height="100px">
+<canvas id="output" class="output" width="3200px" height="400px">
 		
 </canvas>
 <img id="imgOutput" src="" width="800px" height="100px" />
@@ -150,13 +151,14 @@ function inputCancel(evt) {
 
 
 function addStroke(stroke) {
-	if (stroke.length < 2){
+	if (stroke.length < 1){
 		return;
 	}
+	ctx.lineWidth = 15;
 	ctx.beginPath();
 	ctx.moveTo(stroke[0].x,stroke[0].y);
 	for (var i=1;i<stroke.length;i++){
-		ctx.lineTo(stroke[i].x,stroke[i].y);
+		ctx.lineTo(stroke[i].x*4,stroke[i].y*4);
 	}
 	ctx.stroke();
 }
