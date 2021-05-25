@@ -190,7 +190,7 @@ function divideWords(strokes) {
 			el.setAttribute('id','word-'+idArray[wordIdx]);
 			el.style.strokeWidth=notBoldWidth;
 			el.style.stroke=defaultColor;
-			wordIds[wordIdx]=word;
+			wordIds[idArray[wordIdx]]=word;
 			wordIdx++;
 			el.appendChild(svg);
 			
