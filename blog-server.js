@@ -186,7 +186,7 @@ app.get('/',
 		//quickstart();
 		//quickstart("./static/img/test.jpg");
 		
-		readJson();
+		//readJson();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
 		}));

@@ -20,6 +20,7 @@ function divideWords(strokes) {
 		}
 		if (nY >0){
 			line = Math.floor((sumY/nY)/200);
+			console.log(line,sumY,nY);
 			if (line == 0){
 				addStroke(strokes[i],'blue');
 			}
