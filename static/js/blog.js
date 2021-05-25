@@ -13,7 +13,7 @@ function divideWords(strokes) {
 		for (var ii=0;ii<strokes[i].length;ii++){
 			sumY += strokes[i][ii].y;
 			nY += 1;
-			if (strokes[i][ii].y%400 > 120 && strokes[i][ii].y%400 < 280){
+			if (strokes[i][ii].y%400 > 0 && strokes[i][ii].y%400 < 400){
 				if (minmaxX[0]==-1 || strokes[i][ii].x < minmaxX[0]){
 					minmaxX[0] = strokes[i][ii].x;
 				}
@@ -98,13 +98,13 @@ function divideWords(strokes) {
 	}
 	for (line in adjWords){
 		console.log(adjWords[line]);
-		var left = 0;
+		var left = 50;
 		for (var wIdx in adjWords[line]){
 			var word = adjWords[line][wIdx];
 			
 			var el = document.createElement("div");
 			var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-			var width = word['maxX'] - word['minX'];
+			var width = word['width'];
 			var height = word['maxY'] - word['minY'];
 			var viewBox = '';
 			viewBox += word['minX']+" ";
@@ -133,12 +133,17 @@ function divideWords(strokes) {
 				}
 				
 			}
-			el.style.left = left+"px";
-			el.style.display = "inline-block";
-			el.style.position = "absolute";
-			el.style.top = word['top']+"px";
+			//el.style.left = left+"px";
+			//el.style.display = "inline-block";
+			//el.style.position = "absolute";
+			//el.style.top = word['top']+"px";
 			el.appendChild(svg);
+			
+			
 			outEl.appendChild(el);
+			var buffer = document.createElement("div");
+			buffer.style.width = "100px";
+			outEl.appendChild(buffer);
 			left += word['width']+100;
 		}    
 		
