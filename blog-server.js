@@ -58,7 +58,7 @@ function bbToPath(bb){
 	return pd;
 }
 function readJson() {
-	fs.readFile('./blog/out/lincoln.json', 'utf8', (err, data) => {
+	fs.readFile('./blog/out/test.json', 'utf8', (err, data) => {
 	  if (err) {
 		console.error(err)
 		return
@@ -68,9 +68,9 @@ function readJson() {
 	  	for (var ii=0;ii<5;ii++){//document.pages[i].blocks.length;ii++){
 	  		for (var iii=0;iii<Math.min(5,document.pages[i].blocks[ii].paragraphs.length);iii++){
 	  			for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols.length;iiii++){
-	  				//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].text);
+	  				console.log(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].text);
 	  				var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].boundingBox.vertices);
-	  				//console.log(pd);
+	  				console.log(pd);
 	  			}
 	  		}
 	  	}
