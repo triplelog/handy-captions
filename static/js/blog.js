@@ -104,17 +104,17 @@ function divideWords(strokes) {
 			
 			var el = document.createElement("div");
 			var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-			var width = word['width'];
-			var height = word['maxY'] - word['minY'];
+			var width = word['width']+16;
+			var height = word['maxY'] - word['minY']+16;
 			var viewBox = '';
-			viewBox += word['minX']+" ";
-			viewBox += word['minY']+" ";
-			viewBox += width+" ";
-			viewBox += height;
+			viewBox += (word['minX']-8)+" ";
+			viewBox += (word['minY']-8)+" ";
+			viewBox += (width+16)+" ";
+			viewBox += (height+16);
 			svg.setAttribute('width', width);
 			svg.setAttribute('height', height);
 			svg.setAttribute('viewBox', viewBox);
-			svg.setAttribute('style', 'border: 1px solid black');
+			//svg.setAttribute('style', 'border: 1px solid black');
 			svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
 			
 			for (var i=0;i<word['strokes'].length;i++) {
@@ -142,9 +142,9 @@ function divideWords(strokes) {
 			
 			outEl.appendChild(el);
 			var buffer = document.createElement("div");
-			buffer.style.width = "100px";
+			buffer.style.width = "160px";
 			outEl.appendChild(buffer);
-			left += word['width']+100;
+			//left += word['width']+160;
 		}    
 		
 	}
