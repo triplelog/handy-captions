@@ -171,7 +171,7 @@ function downloadImage() {
 	var imgEl = document.getElementById('imgOutput');
 	imgEl.src = dataURL;
 	//ws.send(dataURL);
-	var jsonmessage = {"type":"image",'image':dataURL};
+	var jsonmessage = {"type":"image",'image':dataURL,'strokes':strokes};
 	ws.send(JSON.stringify(jsonmessage));
 }
 </script>

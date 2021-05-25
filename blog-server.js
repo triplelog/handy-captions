@@ -203,7 +203,10 @@ wss.on('connection', function connection(ws) {
   		if (dm.type == "image"){
   			var base64Data = dm.image.substr(22,);
   			fromWS64(base64Data);
-  			require("fs").writeFile("static/img/out3.jpg", base64Data, 'base64', function(err) {
+  			fs.writeFile("static/img/out3.jpg", base64Data, 'base64', function(err) {
+			  console.log(err);
+			});
+			fs.writeFile("blog/out/strokes3.json", JSON.stringify(dm.strokes), function(err) {
 			  console.log(err);
 			});
   		}
