@@ -6,6 +6,7 @@ function divideWords(strokes) {
 		sumY = 0;
 		nY = 0;
 		minmaxX = [-1,-1];
+		fminmaxX = [-1,-1];
 		for (var ii=0;ii<strokes[i].length;ii++){
 			sumY += strokes[i][ii].y;
 			nY += 1;
@@ -17,11 +18,17 @@ function divideWords(strokes) {
 					minmaxX[1] = strokes[i][ii].x;
 				}
 			}
-		}
+			if (fminmaxX[0]==-1 || strokes[i][ii].x < fminmaxX[0]){
+				fminmaxX[0] = strokes[i][ii].x;
+			}
+			if (fminmaxX[1]==-1 || strokes[i][ii].x > fminmaxX[1]){
+				fminmaxX[1] = strokes[i][ii].x;
+			}
+	}
 		if (nY >0){
 			line = Math.floor((sumY/nY)/400);
 			
-			wordMap[i]={minX:minmaxX[0],line:line};
+			wordMap[i]={avgX:(fminmaxX[0]+fminmaxX[1])/2,line:line};
 			if (strokesInfo[line]){
 				strokesInfo[line].push(minmaxX);
 			}
@@ -50,8 +57,8 @@ function divideWords(strokes) {
 		console.log(i,wordMap[i]);
 		var line = wordMap[i].line;
 		var id = lineInfo[line].length-1;
-		for (var ii=0;ii<lineInfo[line].length;ii++){
-			var mmA = lineInfo[line][ii][1];
+		for (var ii=0;ii<lineInfo[line].length-1;ii++){
+			var mmA = (lineInfo[line][ii][1]+lineInfo[line][ii+1][1])/2;
 			if (wordMap[i].minX <= mmA){
 				id = ii;
 				break;
