@@ -92,7 +92,7 @@ function bbToPath(bb){
 	return pd;
 }
 function readJson() {
-	fs.readFile('./blog/out/test.json', 'utf8', (err, data) => {
+	fs.readFile('./blog/out/test2.json', 'utf8', (err, data) => {
 	  if (err) {
 		console.error(err)
 		return
@@ -115,7 +115,6 @@ function readJson() {
 	  		}
 	  	}
 	  }
-	  //file written successfully
   });
 }
 
@@ -135,8 +134,8 @@ app.get('/',
 	
 	function(req, res) {
 		//quickstart();
-		quickstart("./static/img/test.jpg");
-		//readJson();
+		//quickstart("./static/img/test.jpg");
+		readJson();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
 		}));
