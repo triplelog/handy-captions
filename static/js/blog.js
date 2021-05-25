@@ -33,7 +33,7 @@ function divideWords(strokes) {
 	var spaceLength = 80;
 	var lineInfo = {};
 	for (line in strokesInfo){
-		console.log(line,strokesInfo[line]);
+		//console.log(line,strokesInfo[line]);
 		var minmaxArray = combineMinmax(strokesInfo[line]);
 		
 		
@@ -45,6 +45,7 @@ function divideWords(strokes) {
 		lineInfo[line]=minmaxArray;
 		
 	}
+	console.log(lineInfo);
 	for (var i=0;i<strokes.length;i++){
 		console.log(i,wordMap[i]);
 		var line = wordMap[i].line;
