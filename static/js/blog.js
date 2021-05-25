@@ -213,7 +213,7 @@ function makeBold(id,addBold=true) {
 function makeItalics(id,addItalics=true) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
-	if (addBold){
+	if (addItalics){
 		el.style.transform="skewX(-30deg)";
 	}
 	else{
