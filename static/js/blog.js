@@ -178,6 +178,10 @@ function divideWords(strokes) {
 		makeLink(key,"https://espn.com");
 		break;
 	}
+	for (key in wordIds){
+		makeLink(key,false);
+		break;
+	}
 	
 }
 
