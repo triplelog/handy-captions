@@ -57,7 +57,14 @@ async function quickstart(filen) {
     };
   client.annotateImage(request).then(response => {
     // doThingsWith(response);
-    console.log(JSON.stringify(response[0].textAnnotations));
+    //console.log(JSON.stringify(response[0].textAnnotations));
+    fs.writeFile('./blog/out/test2.json', JSON.stringify(response[0].fullTextAnnotation), err => {
+	  if (err) {
+		console.error(err)
+		return
+	  }
+	  //file written successfully
+    });
   })
   .catch(err => {
     console.error(err);
