@@ -38,14 +38,25 @@ async function quickstart(filen) {
   // Performs label detection on the image file
   
   const request = {
-	  image: {source: {imageUri: filen}},
-	  features: [],
-  };
-  const [result] = await client.documentTextDetection(request);
+      "image": {
+        "source": {
+          "imageUri": filen
+        }
+      },
+      "features": [
+        {
+          "type": "DOCUMENT_TEXT_DETECTION"
+        }
+      ],
+      "imageContext": {
+        "languageHints": ["en-t-i0-handwrit"]
+      }
+    };
+  const [result] = await client.annotateImage(request);
   console.log(JSON.stringify(result));
   const document = result.fullTextAnnotation;
   
-  fs.writeFile('./blog/out/test.json', JSON.stringify(document), err => {
+  fs.writeFile('./blog/out/test2.json', JSON.stringify(document), err => {
 	  if (err) {
 		console.error(err)
 		return
@@ -108,7 +119,7 @@ app.get('/',
 	function(req, res) {
 		//quickstart();
 		quickstart("./out.png");
-		readJson();
+		//readJson();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
 		}));
