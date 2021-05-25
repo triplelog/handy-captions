@@ -106,7 +106,42 @@ function divideWords(strokes) {
 	}
 	var idArray = new Uint32Array(wordCount);
 	var wordIdx = 0;
-	for (line in adjWords){
+	for (var line=0;line<1000;line++){
+		if (!adjWords[line]){
+			var next = -1;
+			for (var i=line+1;i<1000;i++){
+				if (adjWords[i]){
+					next = i;
+					break;
+				}
+			}
+			if (next == -1){
+				var buffer = document.createElement("div");
+				buffer.style.width = "4px";
+				buffer.style.height = "320px";
+				buffer.style.flexGrow = "100";
+				buffer.style.border = "1px solid black";
+				outEl.appendChild(buffer);
+				break;
+			}
+			else {
+				var buffer = document.createElement("div");
+				buffer.style.width = "4px";
+				buffer.style.height = "320px";
+				buffer.style.flexGrow = "100";
+				buffer.style.border = "1px solid black";
+				outEl.appendChild(buffer);
+				
+				var newLine = document.createElement("div");
+				newLine.style.width = "100%";
+				newLine.style.height = "320px";
+				buffer.style.flexGrow = "1";
+				outEl.appendChild(buffer);
+				line = next -1;
+			}
+			continue;
+		}
+		
 		console.log(adjWords[line]);
 		
 		for (var wIdx in adjWords[line]){
@@ -168,12 +203,7 @@ function divideWords(strokes) {
 		}    
 		
 	}
-	var buffer = document.createElement("div");
-	buffer.style.width = "4px";
-	buffer.style.height = "320px";
-	buffer.style.flexGrow = "100";
-	buffer.style.border = "1px solid black";
-	outEl.appendChild(buffer);
+	
 	for (key in wordIds){
 		makeColor(key,"red");
 		break;
