@@ -141,6 +141,7 @@ function readJson() {
 	  				//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox);
 	  				var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox.vertices);
 	  				svg += '<path d="'+pd+'" fill="none" stroke="red" stroke-width="4" />';
+	  				console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii]);
 	  				//console.log(pd);
 	  				for (var iiiii=0;iiiii<document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols.length;iiiii++){
 						//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols[iiiii].text);
