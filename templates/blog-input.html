@@ -100,16 +100,25 @@ var isDown = false;
 var currentStroke = [];
 function inputDown(evt) {
 	isDown = true;
-	currentStroke.push({'x':evt.clientX,'y':evt.clientY});
+	var bcr = evt.currentTarget.getBoundingClientRect();
+	var x = evt.clientX-bcr.left;
+	var y = evt.clientY-bcr.top;
+	currentStroke.push({'x':x,'y':y});
 }
 function inputMove(evt) {
 	if (isDown){
-		currentStroke.push({'x':evt.clientX,'y':evt.clientY});
+		var bcr = evt.currentTarget.getBoundingClientRect();
+		var x = evt.clientX-bcr.left;
+		var y = evt.clientY-bcr.top;
+		currentStroke.push({'x':x,'y':y});
 	}
 }
 function inputUp(evt) {
 	if (isDown){
-		currentStroke.push({'x':evt.clientX,'y':evt.clientY});
+		var bcr = evt.currentTarget.getBoundingClientRect();
+		var x = evt.clientX-bcr.left;
+		var y = evt.clientY-bcr.top;
+		currentStroke.push({'x':x,'y':y});
 	}
 	strokes.push(currentStroke);
 	addStroke(currentStroke);
