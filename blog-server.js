@@ -119,12 +119,21 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
   	console.log("ws connected");
   	ws.on('message', function incoming(message) {
-		if (message.substr(0,22) == "data:image/png;base64,"){
+  		var dm = JSON.parse(message);
+  		if (dm.type == "image"){
+  			var base64Data = dm.image.substr(22,);
+  			console.log(base64Data);
+  			
+  			require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
+			  console.log(err);
+			});
+  		}
+		/*if (message.substr(0,22) == "data:image/png;base64,"){
 			console.log("image");
 		}
 		else {
 			console.log(JSON.parse(message));
-		}
+		}*/
 		
   	});
 });
