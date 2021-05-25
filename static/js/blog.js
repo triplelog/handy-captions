@@ -233,6 +233,7 @@ function makeLink(id,addLink=false) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
 	if (addLink){
+		console.log(id,addLink);
 		makeUnderline(id);
 		el.setAttribute("onclick",addLink);
 	}
@@ -245,6 +246,7 @@ function makeUnderline(id,addUnderline=true) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
 	if (addUnderline){
+		console.log(id,el.querySelector(".underline"));
 		el.querySelector(".underline").style.display="inline-block";
 	}
 	else{
