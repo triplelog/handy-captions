@@ -36,8 +36,8 @@ async function quickstart() {
 
 
   // Performs label detection on the image file
-  const [result] = await client.document_text_detection('./static/img/lincoln.jpg');
-  const document = result.full_text_annotation;
+  const [result] = await client.documentTextDetection('./static/img/lincoln.jpg');
+  const document = result.fullTextAnnotation;
   console.log(document);
   console.log(document.pages);
 }
