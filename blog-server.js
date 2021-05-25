@@ -42,6 +42,7 @@ async function quickstart(filen) {
 
   // Convert the image data to a Buffer and base64 encode it.
   var encoded = Buffer.from(imageFile).toString('base64');
+  console.log(encoded);
   const request = {
       "image": {
         "content": encoded
