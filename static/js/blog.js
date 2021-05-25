@@ -119,22 +119,18 @@ function divideWords(strokes) {
 			}
 			if (next == -1){
 				var buffer = document.createElement("div");
-				buffer.style.width = "4px";
+				buffer.style.width = "1px";
 				buffer.style.height = "320px";
 				buffer.style.flexGrow = "100";
 				buffer.style.border = "1px solid black";
 				outEl.appendChild(buffer);
 				
-				var newLine = document.createElement("div");
-				newLine.style.width = "100%";
-				newLine.style.flexGrow = "1000";
-				outEl.appendChild(newLine);
-				
+			
 				break;
 			}
 			else {
 				var buffer = document.createElement("div");
-				buffer.style.width = "4px";
+				buffer.style.width = "1px";
 				buffer.style.height = "320px";
 				buffer.style.flexGrow = "100";
 				buffer.style.border = "1px solid black";
@@ -308,5 +304,17 @@ function makeColor(id,addColor=false) {
 	else{
 		el.style.stroke=defaultColor;
 	}
+}
+
+function editMode(){
+	if (isEdit){isEdit = false;}
+	else {isEdit = true;}
+}
+
+function editUp(evt){
+	if (!isEdit){
+		return;
+	}
+	console.log(evt.target);
 }
 

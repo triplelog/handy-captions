@@ -47,7 +47,6 @@ body {
 	position: absolute;
 	left: 0px;
 	top: 50px;
-	height: 2000px;
 	width: 3200px;
 	border: 1px solid black;
 	transform-origin: 0 0;
@@ -110,18 +109,10 @@ body {
 
 
 <div class="tools">
-	<select>
-		<option value="heart">Heart</option>
-		<option value="cloud">Cloud</option>
-		<option value="cloud">Animal</option>
-		<option value="cloud">Star</option>
-	</select>
-	<input type="radio" >Monochrome</input>
-	<input type="radio" >Opacity</input>
+	<button onclick="editMode();">Edit</button>
 	<button onclick="swapMode();">Mode</button>
 	<button onclick="grabWords();">Group</button>
-	<button onclick="downloadImage();">Download</button>
-	<a id="downloadLink" download="a.png" href="">Download</a>
+	<!--<button onclick="downloadImage();">Download</button>-->
 </div>
 <script src="../js/blog.js"></script>
 <script>
@@ -143,13 +134,18 @@ inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
+inputEl.addEventListener('pointerup',editUp);
 var canvasEl = document.getElementById("output");
 var ctx = canvasEl.getContext("2d");
 
 var strokes = [];
 var isDown = false;
+var isEdit = false;
 var currentStroke = [];
 function inputDown(evt) {
+	if (isEdit){
+		return;
+	}
 	isDown = true;
 	var bcr = evt.currentTarget.getBoundingClientRect();
 	var x = evt.clientX-bcr.left;
