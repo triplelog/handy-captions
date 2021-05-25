@@ -320,7 +320,7 @@ function editUp(evt){
 	var bcr = evt.currentTarget.getBoundingClientRect();
 	var x = evt.clientX-bcr.left;
 	var y = evt.clientY-bcr.top;
-	
+	console.log(x,y);
 	for (key in wordIds){
 		var bb = wordIds[key]['minX']
 		if (x < wordIds[key]['minX'] || x > wordIds[key]['maxX']){
@@ -331,6 +331,7 @@ function editUp(evt){
 		}
 		makeColor(key,"red");
 		console.log(key);
+		console.log(wordIds[key]);
 		break;
 
 	}
