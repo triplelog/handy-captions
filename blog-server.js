@@ -122,10 +122,10 @@ wss.on('connection', function connection(ws) {
   		if (dm.type == "image"){
   			var base64Data = dm.image.substr(22,);
   			
-  			require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
+  			/*require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
 			  console.log(err);
 			  quickstart("./out.png");
-			});
+			});*/
   		}
 		
   	});
