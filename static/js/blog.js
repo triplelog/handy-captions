@@ -141,6 +141,14 @@ function divideWords(strokes) {
 				}
 				
 			}
+			var pd = "M"+word['minX']+" 240 L"+word['maxX']+" 240";
+			var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+			path.setAttributeNS(null,"d",pd);
+			path.setAttributeNS(null,"stroke","black");
+			path.setAttributeNS(null,"fill","none");
+			path.classList.add("underline");
+			path.style.display = "none";
+			svg.appendChild(path);
 			
 			el.style.height = "320px";
 			el.setAttribute('id','word-'+idArray[wordIdx]);
@@ -167,7 +175,7 @@ function divideWords(strokes) {
 	buffer.style.border = "1px solid black";
 	outEl.appendChild(buffer);
 	for (key in wordIds){
-		makeItalics(key);
+		makeLink(key,"https://espn.com");
 		break;
 	}
 	
@@ -214,11 +222,33 @@ function makeItalics(id,addItalics=true) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
 	if (addItalics){
-		el.style.transform="skewX(-30deg)";
+		el.style.transform="skewX(-36deg)";
 	}
 	else{
 		el.style.transform="none";
 	}
 }
 
+function makeLink(id,addLink=false) {
+	var el = document.getElementById('word-'+id);
+	if (!el){return;}
+	if (addLink){
+		makeUnderline(id);
+		el.setAttribute("onclick",addLink);
+	}
+	else{
+		makeUnderline(id,false);
+	}
+}
+
+function makeUnderline(id,addUnderline=true) {
+	var el = document.getElementById('word-'+id);
+	if (!el){return;}
+	if (addUnderline){
+		el.querySelector(".underline").style.display="inline-block";
+	}
+	else{
+		el.querySelector(".underline").style.display="none";
+	}
+}
 
