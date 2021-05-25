@@ -167,7 +167,7 @@ function divideWords(strokes) {
 	buffer.style.border = "1px solid black";
 	outEl.appendChild(buffer);
 	for (key in wordIds){
-		makeBold(key);
+		makeItalics(key);
 		break;
 	}
 	
@@ -214,7 +214,7 @@ function makeItalics(id,addItalics=true) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
 	if (addBold){
-		el.style.transform="skewX(15deg)";
+		el.style.transform="skewX(-30deg)";
 	}
 	else{
 		el.style.transform="none";
