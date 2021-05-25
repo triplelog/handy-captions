@@ -9,7 +9,7 @@ function divideWords(strokes) {
 		for (var ii=0;ii<strokes[i].length;ii++){
 			sumY += strokes[i][ii].y;
 			nY += 1;
-			if (strokes[i][ii].y%200 > 60 && strokes[i][ii].y%200 < 140){
+			if (strokes[i][ii].y%400 > 120 && strokes[i][ii].y%400 < 280){
 				if (minmaxX[0]==-1 || strokes[i][ii].x < minmaxX[0]){
 					minmaxX[0] = strokes[i][ii].x;
 				}
@@ -19,7 +19,7 @@ function divideWords(strokes) {
 			}
 		}
 		if (nY >0){
-			line = Math.floor((sumY/nY)/200);
+			line = Math.floor((sumY/nY)/400);
 			console.log(line,sumY,nY);
 			if (line == 0){
 				addStroke(strokes[i],'blue');
