@@ -52,32 +52,19 @@ async function fromWS64(b64) {
       }
     };
   client.annotateImage(request).then(response => {
-    // doThingsWith(response);
-    //console.log(JSON.stringify(response[0].textAnnotations));
     fs.writeFile('./blog/out/test3.json', JSON.stringify(response[0].fullTextAnnotation), err => {
 	  if (err) {
 		console.error(err)
 		return
 	  }
-	  //file written successfully
     });
   })
   .catch(err => {
     console.error(err);
   });
-  
- /* console.log(JSON.stringify(result));
-  const document = result.fullTextAnnotation;
-  
-  fs.writeFile('./blog/out/test2.json', JSON.stringify(document), err => {
-	  if (err) {
-		console.error(err)
-		return
-	  }
-	  //file written successfully
-  });
-  console.log(document.pages[0].blocks);*/
+
 }
+
 async function quickstart(filen) {
 
   // Creates a client
@@ -140,7 +127,7 @@ function bbToPath(bb){
 	return pd;
 }
 function readJson() {
-	fs.readFile('./blog/out/test2.json', 'utf8', (err, data) => {
+	fs.readFile('./blog/out/test3.json', 'utf8', (err, data) => {
 	  if (err) {
 		console.error(err)
 		return
@@ -216,10 +203,9 @@ wss.on('connection', function connection(ws) {
   		if (dm.type == "image"){
   			var base64Data = dm.image.substr(22,);
   			fromWS64(base64Data);
-  			/*require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
+  			require("fs").writeFile("static/img/out3.jpg", base64Data, 'base64', function(err) {
 			  console.log(err);
-			  quickstart("./out.png");
-			});*/
+			});
   		}
 		
   	});
