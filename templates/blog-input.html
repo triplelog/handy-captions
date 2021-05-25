@@ -96,16 +96,16 @@ var ctx = canvasEl.getContext("2d");
 var strokes = [];
 var isDown = false;
 var currentStroke = [];
-function inputDown(e) {
+function inputDown(evt) {
 	isDown = true;
 	currentStroke.push({'x':evt.clientX,'y':evt.clientY});
 }
-function inputMove(e) {
+function inputMove(evt) {
 	if (isDown){
 		currentStroke.push({'x':evt.clientX,'y':evt.clientY});
 	}
 }
-function inputUp(e) {
+function inputUp(evt) {
 	if (isDown){
 		currentStroke.push({'x':evt.clientX,'y':evt.clientY});
 	}
@@ -114,7 +114,7 @@ function inputUp(e) {
 	isDown = false;
 	currentStroke = [];
 }
-function inputCancel(e) {
+function inputCancel(evt) {
 	isDown = false;
 	currentStroke = [];
 }
