@@ -5,7 +5,11 @@ const assert = require('assert');
 const binding = require.resolve(`./maps/build/Release/binding`);
 const maincpp = require(binding);
 //const postfix = require('./postfix.js');
+// Imports the Google Cloud client library
+const vision = require('@google-cloud/vision');
 
+// Creates a client
+const client = new vision.ImageAnnotatorClient();
 
 
 const https = require('https');
@@ -45,9 +49,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', 
 	
 	function(req, res) {
+		const [result] = await client.labelDetection('./static/img/lincoln.jpg');
+	    const labels = result.labelAnnotations;
+	    console.log('Labels:');
+	   labels.forEach(label => console.log(label.description));
 		res.write(nunjucks.render('templates/blog-input.html',{
-			points: ptArray,
-			cities: cityList,
+			
 		}));
 		res.end();
 	}
