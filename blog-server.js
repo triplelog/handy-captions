@@ -50,6 +50,21 @@ async function quickstart() {
   console.log(document.pages[0].blocks);
 }
 
+function readJson() {
+	fs.readFile('./blog/out/lincoln.json', 'utf8', (err, data) => {
+	  if (err) {
+		console.error(err)
+		return
+	  }
+	  var document = JSON.parse(data);
+	  for (var i=0;i<document.pages.length;i++){
+	  	for (var ii=0;ii<5;ii++){//document.pages[i].blocks.length;ii++){
+	  		console.log(document.pages[i].blocks[ii]);
+	  	}
+	  }
+	  //file written successfully
+  });
+}
 
 var express = require('express');
 
@@ -66,7 +81,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', 
 	
 	function(req, res) {
-		quickstart();
+		//quickstart();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
 		}));
