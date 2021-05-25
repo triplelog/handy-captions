@@ -334,7 +334,7 @@ function editUp(evt){
 			
 		if (selectedWords[key]){
 			addStroke(mmStrokes,'gray');
-			delete selectedWords.key;
+			delete selectedWords[key];
 		}
 		else {
 			addStroke(mmStrokes,'red');
