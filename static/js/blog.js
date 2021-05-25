@@ -124,6 +124,12 @@ function divideWords(strokes) {
 				buffer.style.flexGrow = "100";
 				buffer.style.border = "1px solid black";
 				outEl.appendChild(buffer);
+				
+				var newLine = document.createElement("div");
+				newLine.style.width = "100%";
+				newLine.style.flexGrow = "1";
+				outEl.appendChild(newLine);
+				
 				break;
 			}
 			else {
