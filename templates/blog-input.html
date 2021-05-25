@@ -20,13 +20,13 @@
 .bgDoc {
 	position: absolute;
 	left: 0px;
-	top: 150px;
+	top: 250px;
 }
 
 .fgBoxes {
 	position: absolute;
 	left: 0px;
-	top: 150px;
+	top: 250px;
 }
 .input {
 	position: absolute;
@@ -34,7 +34,7 @@
 	top: 50px;
 	display: inline-block;
 	height: 100px;
-	width: 400px;
+	width: 800px;
 	border: 1px solid black;
 }
 .output {
@@ -43,9 +43,17 @@
 	top: 50px;
 	display: inline-block;
 	height: 100px;
-	width: 400px;
+	width: 800px;
 	border: 1px solid black;
 	pointer-events: none;
+}
+#imgOutput {
+	position: absolute;
+	left: 0px;
+	top: 150px;
+	display: inline-block;
+	height: 100px;
+	width: 800px;
 }
 
 </style>
@@ -56,9 +64,10 @@
 	
 </div>
 
-<canvas id="output" class="output" width="400px" height="100px">
+<canvas id="output" class="output" width="800px" height="100px">
 		
 </canvas>
+<img id="imgOutput" src="" width="800px" height="100px" />
 <div class="o2" >
 	<img class="bgDoc" src="../img/lincoln.jpg" />
 	<svg class="fgBoxes" width="2511px" height="3159px" viewBox="0 0 2511 3159" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -142,6 +151,12 @@ function addStroke(stroke) {
 		ctx.lineTo(stroke[i].x,stroke[i].y);
 	}
 	ctx.stroke();
+}
+
+function downloadImage() {
+	var dataURL = canvasEl.toDataURL('image/png');
+	var imgEl = document.getElementById('imgOutput');
+	imgEl.src = dataURL;
 }
 </script>
 </body>
