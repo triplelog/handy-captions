@@ -50,6 +50,14 @@ async function quickstart() {
   console.log(document.pages[0].blocks);
 }
 
+function bbToPath(bb){
+	var pd = "M";
+	for (var i=0;i<bb.length;i++){
+		pd += " "+bb[i].x+" "+bb[i].y;
+	}
+	pd += "Z";
+	return pd;
+}
 function readJson() {
 	fs.readFile('./blog/out/lincoln.json', 'utf8', (err, data) => {
 	  if (err) {
@@ -62,7 +70,8 @@ function readJson() {
 	  		for (var iii=0;iii<Math.min(5,document.pages[i].blocks[ii].paragraphs.length);iii++){
 	  			for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols.length;iiii++){
 	  				console.log(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].text);
-	  				console.log(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].boundingBox);
+	  				var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].boundingBox.vertices);
+	  				console.log(pd);
 	  			}
 	  		}
 	  	}
