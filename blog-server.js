@@ -60,7 +60,7 @@ function readJson() {
 	  for (var i=0;i<document.pages.length;i++){
 	  	for (var ii=0;ii<5;ii++){//document.pages[i].blocks.length;ii++){
 	  		for (var iii=0;iii<Math.min(5,document.pages[i].blocks[ii].paragraphs.length);iii++){
-	  			console.log(document.pages[i].blocks[ii].paragraphs[iii].words[0]);
+	  			console.log(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols);
 	  		}
 	  	}
 	  }
