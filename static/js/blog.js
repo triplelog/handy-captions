@@ -1,4 +1,6 @@
 var wordIds = {};
+var boldWidth = "30";
+var notBoldWidth = "20";
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
@@ -142,7 +144,7 @@ function divideWords(strokes) {
 			
 			el.style.height = "320px";
 			el.setAttribute('id','word-'+idArray[wordIdx]);
-			el.style.strokeWidth="20";
+			el.style.strokeWidth=notBoldWidth;
 			wordIds[wordIdx]=word;
 			wordIdx++;
 			el.appendChild(svg);
@@ -197,10 +199,26 @@ function combineMinmax(minmaxArray) {
 	return minmaxArray;
 }
 
-function makeBold(id) {
+function makeBold(id,addBold=true) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
-	el.style.strokeWidth="50";
+	if (addBold){
+		el.style.strokeWidth=boldWidth;
+	}
+	else{
+		el.style.strokeWidth=notBoldWidth;
+	}
+}
+
+function makeItalics(id,addItalics=true) {
+	var el = document.getElementById('word-'+id);
+	if (!el){return;}
+	if (addBold){
+		el.style.transform="skewX(15deg)";
+	}
+	else{
+		el.style.transform="none";
+	}
 }
 
 
