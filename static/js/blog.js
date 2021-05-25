@@ -198,7 +198,8 @@ function combineMinmax(minmaxArray) {
 }
 
 function makeBold(id) {
-	var el = document.getElementById(id);
+	var el = document.getElementById('word-'+id);
+	if (!el){return;}
 	el.style.strokeWidth="50";
 }
 
