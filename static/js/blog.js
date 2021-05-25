@@ -137,6 +137,7 @@ function divideWords(strokes) {
 			//el.style.display = "inline-block";
 			//el.style.position = "absolute";
 			//el.style.top = word['top']+"px";
+			el.style.height = "400px";
 			el.appendChild(svg);
 			
 			
