@@ -136,7 +136,6 @@ function divideWords(strokes) {
 					}
 					var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 					path.setAttributeNS(null,"d",pd);
-					path.setAttributeNS(null,"stroke","black");
 					path.setAttributeNS(null,"fill","none");
 					svg.appendChild(path);
 				}
