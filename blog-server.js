@@ -141,6 +141,11 @@ app.get('/',
 	function(req, res) {
 		//quickstart();
 		//quickstart("./static/img/test.jpg");
+		var imageFile = fs.readFileSync("./static/img/test.jpg");
+
+		  // Convert the image data to a Buffer and base64 encode it.
+		  var encoded = Buffer.from(imageFile).toString('base64');
+		  console.log(encoded);
 		readJson();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
