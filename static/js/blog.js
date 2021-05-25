@@ -105,6 +105,8 @@ function divideWords(strokes) {
 		
 	}
 	var idArray = new Uint32Array(wordCount);
+	let cryptoObj = window.crypto || window.msCrypto;
+	window.crypto.getRandomValues(idArray);
 	var wordIdx = 0;
 	for (var line=0;line<1000;line++){
 		if (!adjWords[line]){
@@ -135,8 +137,8 @@ function divideWords(strokes) {
 				var newLine = document.createElement("div");
 				newLine.style.width = "100%";
 				newLine.style.height = "320px";
-				buffer.style.flexGrow = "1";
-				outEl.appendChild(buffer);
+				newLine.style.flexGrow = "1";
+				outEl.appendChild(newLine);
 				line = next -1;
 			}
 			continue;
