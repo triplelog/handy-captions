@@ -1,6 +1,7 @@
 var wordIds = {};
 var boldWidth = "30";
 var notBoldWidth = "20";
+var defaultColor = "black";
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
@@ -144,7 +145,6 @@ function divideWords(strokes) {
 			var pd = "M"+word['minX']+" 160 L"+word['maxX']+" 160";
 			var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 			path.setAttributeNS(null,"d",pd);
-			path.setAttributeNS(null,"stroke","black");
 			path.setAttributeNS(null,"fill","none");
 			path.classList.add("underline");
 			path.style.display = "none";
@@ -153,6 +153,7 @@ function divideWords(strokes) {
 			el.style.height = "320px";
 			el.setAttribute('id','word-'+idArray[wordIdx]);
 			el.style.strokeWidth=notBoldWidth;
+			el.style.stroke=defaultColor;
 			wordIds[wordIdx]=word;
 			wordIdx++;
 			el.appendChild(svg);
@@ -175,11 +176,7 @@ function divideWords(strokes) {
 	buffer.style.border = "1px solid black";
 	outEl.appendChild(buffer);
 	for (key in wordIds){
-		makeLink(key,"https://espn.com");
-		break;
-	}
-	for (key in wordIds){
-		makeLink(key,false);
+		makeColor(key,"red");
 		break;
 	}
 	
@@ -262,6 +259,17 @@ function makeUnderline(id,addUnderline=true) {
 	}
 	else{
 		el.querySelector(".underline").style.display="none";
+	}
+}
+
+function makeColor(id,addColor=false) {
+	var el = document.getElementById('word-'+id);
+	if (!el){return;}
+	if (addColor){
+		el.style.stroke=addColor;
+	}
+	else{
+		el.style.stroke=defaultColor;
 	}
 }
 
