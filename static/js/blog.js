@@ -208,10 +208,6 @@ function divideWords(strokes) {
 		
 	}
 	
-	for (key in wordIds){
-		makeColor(key,"red");
-		break;
-	}
 	
 }
 
@@ -321,6 +317,24 @@ function editUp(evt){
 	if (!isEdit){
 		return;
 	}
-	console.log(evt.target);
+	var bcr = evt.currentTarget.getBoundingClientRect();
+	var x = evt.clientX-bcr.left;
+	var y = evt.clientY-bcr.top;
+	
+	for (key in wordIds){
+		var bb = wordIds[key]['minX']
+		if (x < wordIds[key]['minX'] || x > wordIds[key]['maxX']){
+			continue;
+		}
+		if (y < wordIds[key]['minY'] || y > wordIds[key]['maxY']){
+			continue;
+		}
+		makeColor(key,"red");
+		console.log(key);
+		break;
+
+	}
+	
+	
 }
 
