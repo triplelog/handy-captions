@@ -82,6 +82,7 @@ app.get('/',
 	
 	function(req, res) {
 		//quickstart();
+		readJson();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
 		}));
