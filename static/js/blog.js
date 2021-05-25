@@ -6,6 +6,7 @@ function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
 	adjWords = {};
+	wordIds = {};
 	var outEl = document.getElementById("finalOutput");
 	outEl.innerHTML = "";
 	
@@ -313,6 +314,7 @@ function editMode(){
 	}
 }
 
+var selectedWords = {};
 function editUp(evt){
 	if (!isEdit){
 		return;
@@ -320,7 +322,6 @@ function editUp(evt){
 	var bcr = evt.currentTarget.getBoundingClientRect();
 	var x = (evt.clientX-bcr.left)*4;
 	var y = (evt.clientY-bcr.top)*4;
-	console.log(x,y);
 	for (key in wordIds){
 		var bb = wordIds[key]['minX']
 		if (x < wordIds[key]['left'] || x > wordIds[key]['left']+wordIds[key]['width']){
@@ -329,9 +330,16 @@ function editUp(evt){
 		if (y < wordIds[key]['top'] || y > wordIds[key]['top']+160){
 			continue;
 		}
-		makeColor(key,"red");
-		console.log(key);
-		console.log(wordIds[key]);
+		mmStrokes = [{'x':wordIds[key]['left'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']+160},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']+160},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']}];
+			
+		if (selectedWords[key]){
+			addStroke(mmStrokes,'gray');
+			selectedWords[key]=false;
+		}
+		else {
+			addStroke(mmStrokes,'red');
+			selectedWords[key]=true;
+		}
 		break;
 
 	}
