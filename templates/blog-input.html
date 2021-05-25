@@ -96,6 +96,17 @@
 </div>
 <script>
 
+var ws = new WebSocket('wss://sudoubleku.com:8081');
+ws.onopen = function(evt) {
+	//var jsonmessage = {'type':'key'};
+	//jsonmessage.message = tkey;
+	//ws.send(JSON.stringify(jsonmessage));
+}
+ws.onmessage = function(evt){
+	var dm = JSON.parse(evt.data);
+	console.log(dm);
+}
+
 
 var inputEl = document.getElementById("input");
 inputEl.addEventListener('pointerdown',inputDown);
@@ -157,6 +168,7 @@ function downloadImage() {
 	var dataURL = canvasEl.toDataURL('image/png');
 	var imgEl = document.getElementById('imgOutput');
 	imgEl.src = dataURL;
+	ws.send(dataURL);
 }
 </script>
 </body>

@@ -119,24 +119,7 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
   	console.log("ws connected");
   	ws.on('message', function incoming(message) {
-		var dm = JSON.parse(message);
-		if (dm.type == 'stations'){
-			var s = dm.stations;
-			
-			
-			var stations = [];
-			for (var i=0;i<s.length;i++){
-				console.log(cityList[s[i][0]]);
-				stations.push(parseInt(s[i][0]));
-			}
-			var retStations = maincpp.getStations(stations,10,50);//stationList,max # stations, radius for pop
-			console.log(retStations);
-			
-			
-			
-			var jsonmessage = {'type':'test'};
-			ws.send(JSON.stringify(jsonmessage));
-		}
+		console.log(message);
 		
   	});
 });
