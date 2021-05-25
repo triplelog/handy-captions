@@ -134,7 +134,8 @@ inputEl.addEventListener('pointerdown',inputDown);
 inputEl.addEventListener('pointermove',inputMove);
 inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
-inputEl.addEventListener('pointerup',editUp);
+var outputEl = document.getElementById("output");
+outputEl.addEventListener('pointerup',editUp);
 var canvasEl = document.getElementById("output");
 var ctx = canvasEl.getContext("2d");
 

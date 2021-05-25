@@ -307,8 +307,14 @@ function makeColor(id,addColor=false) {
 }
 
 function editMode(){
-	if (isEdit){isEdit = false;}
-	else {isEdit = true;}
+	if (isEdit){
+		isEdit = false;
+		outputEl.style.pointerEvents = "none";
+	}
+	else {
+		isEdit = true;
+		outputEl.style.pointerEvents = "all";
+	}
 }
 
 function editUp(evt){
