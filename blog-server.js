@@ -57,7 +57,7 @@ async function quickstart(filen) {
     };
   client.annotateImage(request).then(response => {
     // doThingsWith(response);
-    console.log(JSON.stringify(response.textAnnotations));
+    console.log(JSON.stringify(response[0].textAnnotations));
   })
   .catch(err => {
     console.error(err);
