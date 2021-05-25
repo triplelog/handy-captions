@@ -20,7 +20,6 @@ function divideWords(strokes) {
 		}
 		if (nY >0){
 			line = Math.floor((sumY/nY)/400);
-			console.log(line,sumY,nY);
 			if (line == 0){
 				addStroke(strokes[i],'blue');
 			}
@@ -40,13 +39,20 @@ function divideWords(strokes) {
 	for (line in strokesInfo){
 		console.log(line,strokesInfo[line]);
 		var minmaxArray = combineMinmax(strokesInfo[line]);
-		console.log(minmaxArray);
+		
+		
+		for (var i=0;i<minmaxArray;i++){
+			console.log(minmaxArray[i]);
+			mmStrokes = [{'x':minmaxArray[i][0],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+80}];
+			addStroke(mmStrokes,'gray');
+		}
+		
 	}
 	
 }
 
 function combineMinmax(minmaxArray) {
-	var spaceLength = 80;
+	var spaceLength = 100;
 	var finished = false;
 	while (!finished){
 		finished = true;
