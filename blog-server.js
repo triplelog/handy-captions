@@ -37,7 +37,6 @@ async function fromWS64(b64) {
 
 
   var encoded = b64;
-  console.log(encoded);
   const request = {
       "image": {
         "content": encoded
