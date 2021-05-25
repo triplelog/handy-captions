@@ -348,29 +348,43 @@ function editUp(evt){
 }
 function boldButton() {
 	for (key in selectedWords){
-		makeBold(key);
+		if (key){
+			makeBold(key);
+		}
 	}
 }
 function italicsButton() {
 	for (key in selectedWords){
-		makeItalics(key);
+		if (key){
+			makeItalics(key);
+		}
+		
 	}
 }
 function underlineButton() {
 	for (key in selectedWords){
-		makeUnderline(key);
+		
+		if (key){
+			makeUnderline(key);
+		}
 	}
 }
 function linkButton() {
 	var linkURL = document.getElementById('linkURL').value;
 	for (key in selectedWords){
-		makeLink(key,linkURL);
+		
+		if (key){
+			makeLink(key,linkURL);
+		}
 	}
 }
 function colorButton() {
 	var color = document.getElementById('colorName').value;
 	for (key in selectedWords){
-		makeColor(key,color);
+		
+		if (key){
+			makeColor(key,color);
+		}
 	}
 }
 
