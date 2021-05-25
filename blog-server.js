@@ -8,8 +8,7 @@ const maincpp = require(binding);
 // Imports the Google Cloud client library
 const vision = require('@google-cloud/vision');
 
-// Creates a client
-const client = new vision.ImageAnnotatorClient();
+
 
 
 const https = require('https');
@@ -34,9 +33,16 @@ const UserData = require('./models/userdata');*/
 
 async function quickstart(filen) {
 
-
+  // Creates a client
+  const client = new vision.ImageAnnotatorClient();
   // Performs label detection on the image file
-  const [result] = await client.documentTextDetection(filen);
+  
+  const request = {
+	  image: {source: {imageUri: filen}},
+	  features: [],
+  };
+  const [result] = await client.documentTextDetection(request);
+  console.log(JSON.stringify(result));
   const document = result.fullTextAnnotation;
   
   fs.writeFile('./blog/out/test.json', JSON.stringify(document), err => {
@@ -101,6 +107,7 @@ app.get('/',
 	
 	function(req, res) {
 		//quickstart();
+		quickstart("./out.png");
 		readJson();
 		res.write(nunjucks.render('templates/blog-input.html',{
 			
