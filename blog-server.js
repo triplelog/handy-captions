@@ -52,8 +52,15 @@ async function quickstart(filen) {
         "languageHints": ["en-t-i0-handwrit"]
       }
     };
-  const [result] = await client.annotateImage(request);
-  console.log(JSON.stringify(result));
+  client.annotateImage(request).then(response => {
+    // doThingsWith(response);
+    console.log(response);
+  })
+  .catch(err => {
+    console.error(err);
+  });
+  
+ /* console.log(JSON.stringify(result));
   const document = result.fullTextAnnotation;
   
   fs.writeFile('./blog/out/test2.json', JSON.stringify(document), err => {
@@ -63,7 +70,7 @@ async function quickstart(filen) {
 	  }
 	  //file written successfully
   });
-  console.log(document.pages[0].blocks);
+  console.log(document.pages[0].blocks);*/
 }
 
 function bbToPath(bb){
