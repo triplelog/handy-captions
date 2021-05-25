@@ -131,30 +131,40 @@ function readJson() {
 		console.error(err)
 		return
 	  }
-	  var svg = "";
-	  var document = JSON.parse(data);
-	  for (var i=0;i<document.pages.length;i++){
-	  	//console.log(JSON.stringify(document.pages[i]));
-	  	for (var ii=0;ii<document.pages[i].blocks.length;ii++){//document.pages[i].blocks.length;ii++){
-	  		for (var iii=0;iii<document.pages[i].blocks[ii].paragraphs.length;iii++){
-	  			for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words.length;iiii++){
-	  				//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox);
-	  				var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox.vertices);
-	  				svg += '<path d="'+pd+'" fill="none" stroke="red" stroke-width="4" />';
-	  				console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii]);
-	  				//console.log(pd);
-	  				for (var iiiii=0;iiiii<document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols.length;iiiii++){
-						//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols[iiiii].text);
-						var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols[iiiii].boundingBox.vertices);
-						svg += '<path d="'+pd+'" fill="none" stroke="green" stroke-width="2" />';
+	  fs.readFile('./blog/out/strokes3.json', 'utf8', (err, dataStrokes) => {
+		  if (err) {
+			console.error(err)
+			return
+		  }
+		  var svg = "";
+		  var letterBoxes = [];
+		  var strokeToLetter = {};
+		  var document = JSON.parse(data);
+		  for (var i=0;i<document.pages.length;i++){
+			//console.log(JSON.stringify(document.pages[i]));
+			for (var ii=0;ii<document.pages[i].blocks.length;ii++){//document.pages[i].blocks.length;ii++){
+				for (var iii=0;iii<document.pages[i].blocks[ii].paragraphs.length;iii++){
+					for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words.length;iiii++){
+						//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox);
+						var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox.vertices);
+						svg += '<path d="'+pd+'" fill="none" stroke="red" stroke-width="4" />';
+						console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii]);
 						//console.log(pd);
+						for (var iiiii=0;iiiii<document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols.length;iiiii++){
+							//console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols[iiiii].text);
+							var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols[iiiii].boundingBox.vertices);
+							svg += '<path d="'+pd+'" fill="none" stroke="green" stroke-width="2" />';
+							letterBoxes.push(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].symbols[iiiii].boundingBox.vertices);
+							//console.log(pd);
+						}
 					}
-	  			}
-	  			
-	  		}
-	  	}
-	  }
-	  console.log(svg);
+				
+				}
+			}
+		  }
+		  
+		  console.log(svg);
+	  });	
   });
 }
 
