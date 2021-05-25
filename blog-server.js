@@ -32,15 +32,14 @@ const User = require('./models/user');
 const UserData = require('./models/userdata');*/
 
 
-async function quickstart() {
+async function quickstart(filen) {
 
 
   // Performs label detection on the image file
-  const [result] = await client.documentTextDetection('./static/img/lincoln.jpg');
+  const [result] = await client.documentTextDetection(filen);
   const document = result.fullTextAnnotation;
-  console.log(document);
   
-  fs.writeFile('./blog/out/lincoln.json', JSON.stringify(document), err => {
+  fs.writeFile('./blog/out/test.json', JSON.stringify(document), err => {
 	  if (err) {
 		console.error(err)
 		return
@@ -122,18 +121,12 @@ wss.on('connection', function connection(ws) {
   		var dm = JSON.parse(message);
   		if (dm.type == "image"){
   			var base64Data = dm.image.substr(22,);
-  			console.log(base64Data);
   			
   			require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
 			  console.log(err);
+			  quickstart("./out.png");
 			});
   		}
-		/*if (message.substr(0,22) == "data:image/png;base64,"){
-			console.log("image");
-		}
-		else {
-			console.log(JSON.parse(message));
-		}*/
 		
   	});
 });
