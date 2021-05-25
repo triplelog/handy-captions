@@ -97,7 +97,7 @@
 	<input type="radio" >Monochrome</input>
 	<input type="radio" >Opacity</input>
 	<button onclick="heart();">Heart</button>
-	<button onclick="selectGroup();">Group</button>
+	<button onclick="grabWords();">Group</button>
 	<button onclick="downloadImage();">Download</button>
 	<a id="downloadLink" download="a.png" href="">Download</a>
 </div>
@@ -150,7 +150,7 @@ function inputUp(evt) {
 		currentStroke.push({'x':x*4,'y':y*4});
 	}
 	strokes.push(currentStroke);
-	addStroke(currentStroke);
+	addStroke(currentStroke,'black');
 	isDown = false;
 	currentStroke = [];
 }
@@ -160,7 +160,8 @@ function inputCancel(evt) {
 }
 
 
-function addStroke(stroke) {
+function addStroke(stroke,color) {
+	ctx.strokeStyle = color;
 	if (stroke.length < 1){
 		return;
 	}
@@ -175,8 +176,12 @@ function addStroke(stroke) {
 		ctx.lineTo(stroke[i].x,stroke[i].y);
 	}
 	ctx.stroke();
+	
 }
 
+function grabWords(){
+	divideWords(strokes);
+}
 function downloadImage() {
 	var dataURL = canvasEl.toDataURL('image/jpg');
 	var imgEl = document.getElementById('imgOutput');

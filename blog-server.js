@@ -212,7 +212,7 @@ wss.on('connection', function connection(ws) {
   		var dm = JSON.parse(message);
   		if (dm.type == "image"){
   			var base64Data = dm.image.substr(22,);
-  			fromWS64(base64Data);
+  			//fromWS64(base64Data);
   			fs.writeFile("static/img/out3.jpg", base64Data, 'base64', function(err) {
 			  console.log(err);
 			});
