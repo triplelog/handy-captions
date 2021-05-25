@@ -39,16 +39,15 @@ async function quickstart() {
   const [result] = await client.documentTextDetection('./static/img/lincoln.jpg');
   const document = result.fullTextAnnotation;
   console.log(document);
-  for (page in document.pages){
-  	console.log(page.blocks);
-  }
+  
   fs.writeFile('./blog/out/lincoln.json', JSON.stringify(document), err => {
 	  if (err) {
 		console.error(err)
 		return
 	  }
 	  //file written successfully
-  })
+  });
+  console.log(document.pages[0].blocks);
 }
 
 
