@@ -119,7 +119,12 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
   	console.log("ws connected");
   	ws.on('message', function incoming(message) {
-		console.log(message);
+		if (message.substr(0,22) == "data:image/png;base64,"){
+			console.log("image");
+		}
+		else {
+			console.log(JSON.parse(message));
+		}
 		
   	});
 });
