@@ -67,11 +67,16 @@ function readJson() {
 	  for (var i=0;i<document.pages.length;i++){
 	  	for (var ii=0;ii<Math.min(5,document.pages[i].blocks.length);ii++){//document.pages[i].blocks.length;ii++){
 	  		for (var iii=0;iii<Math.min(5,document.pages[i].blocks[ii].paragraphs.length);iii++){
-	  			for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols.length;iiii++){
+	  			for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words.length;iiii++){
+	  				console.log(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox;
+	  				var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[iiii].boundingBox.vertices);
+	  				console.log(pd);
+	  			}
+	  			/*for (var iiii=0;iiii<document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols.length;iiii++){
 	  				console.log(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].text);
 	  				var pd = bbToPath(document.pages[i].blocks[ii].paragraphs[iii].words[0].symbols[iiii].boundingBox.vertices);
 	  				console.log(pd);
-	  			}
+	  			}*/
 	  		}
 	  	}
 	  }
