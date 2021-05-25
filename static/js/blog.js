@@ -137,14 +137,14 @@ function divideWords(strokes) {
 			//el.style.display = "inline-block";
 			//el.style.position = "absolute";
 			//el.style.top = word['top']+"px";
-			el.style.height = "400px";
+			el.style.height = "320px";
 			el.appendChild(svg);
 			
 			
 			outEl.appendChild(el);
 			var buffer = document.createElement("div");
 			buffer.style.width = "4px";
-			buffer.style.height = "400px";
+			buffer.style.height = "320px";
 			buffer.style.flexGrow = "1";
 			buffer.style.border = "1px solid black";
 			outEl.appendChild(buffer);
@@ -154,7 +154,7 @@ function divideWords(strokes) {
 	}
 	var buffer = document.createElement("div");
 	buffer.style.width = "4px";
-	buffer.style.height = "400px";
+	buffer.style.height = "320px";
 	buffer.style.flexGrow = "100";
 	buffer.style.border = "1px solid black";
 	outEl.appendChild(buffer);
