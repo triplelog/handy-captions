@@ -21,7 +21,6 @@ function divideWords(strokes) {
 		if (nY >0){
 			line = Math.floor((sumY/nY)/400);
 			
-			words[line]={};
 			wordMap[i]={minX:minmaxX[0],line:line};
 			if (strokesInfo[line]){
 				strokesInfo[line].push(minmaxX);
