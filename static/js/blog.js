@@ -151,6 +151,7 @@ function divideWords(strokes) {
 				currentList++;
 			}
 			else if (listList[line]==1 && currentList > 0){//new nesting
+				ulEl[currentList].appendChild(pEl);
 				currentList++;
 				ulEl[currentList]=document.createElement("ul");
 				pEl = document.createElement("li");
