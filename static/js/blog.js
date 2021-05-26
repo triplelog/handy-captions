@@ -280,7 +280,6 @@ function makeBold(id,addBold=true) {
 		el.style.strokeWidth=notBoldWidth;
 	}
 	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash]=el.cloneNode(true);
 }
 
 function makeItalics(id,addItalics=true) {
