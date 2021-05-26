@@ -7,6 +7,7 @@ function divideWords(strokes) {
 	wordMap = {};
 	adjWords = {};
 	wordIds = {};
+	var xMul = 800/outputEl.getBoundingClientRect().width;
 	var outEl = document.getElementById("finalOutput");
 	outEl.innerHTML = "";
 	
@@ -20,18 +21,18 @@ function divideWords(strokes) {
 			sumY += strokes[i][ii].y;
 			nY += 1;
 			if (strokes[i][ii].y%100 > 0 && strokes[i][ii].y%100 < 100){
-				if (minmaxX[0]==-1 || strokes[i][ii].x < minmaxX[0]){
-					minmaxX[0] = strokes[i][ii].x;
+				if (minmaxX[0]==-1 || strokes[i][ii].x*xMul < minmaxX[0]){
+					minmaxX[0] = strokes[i][ii].x*xMul;
 				}
-				if (minmaxX[1]==-1 || strokes[i][ii].x > minmaxX[1]){
-					minmaxX[1] = strokes[i][ii].x;
+				if (minmaxX[1]==-1 || strokes[i][ii].x*xMul > minmaxX[1]){
+					minmaxX[1] = strokes[i][ii].x*xMul;
 				}
 			}
-			if (fminmaxX[0]==-1 || strokes[i][ii].x < fminmaxX[0]){
-				fminmaxX[0] = strokes[i][ii].x;
+			if (fminmaxX[0]==-1 || strokes[i][ii].x*xMul < fminmaxX[0]){
+				fminmaxX[0] = strokes[i][ii].x*xMul;
 			}
-			if (fminmaxX[1]==-1 || strokes[i][ii].x > fminmaxX[1]){
-				fminmaxX[1] = strokes[i][ii].x;
+			if (fminmaxX[1]==-1 || strokes[i][ii].x*xMul > fminmaxX[1]){
+				fminmaxX[1] = strokes[i][ii].x*xMul;
 			}
 		}
 		if (nY >0){
@@ -80,7 +81,7 @@ function divideWords(strokes) {
 		}
 		var adjStrokes = [];
 		for (var ii=0;ii<strokes[i].length;ii++){
-			var x = strokes[i][ii].x - adjWords[line][id]['left'];
+			var x = strokes[i][ii].x*xMul - adjWords[line][id]['left'];
 			var y = strokes[i][ii].y - adjWords[line][id]['top'];
 			if (x > adjWords[line][id]['maxX']){
 				adjWords[line][id]['maxX'] = x;
