@@ -340,6 +340,8 @@ function editMode(){
 }
 
 var selectedWords = {};
+var lists = {};
+var quotes = {};
 function editUp(evt){
 	if (!isEdit){
 		return;
@@ -348,6 +350,7 @@ function editUp(evt){
 	var xMul = 800/outputEl.getBoundingClientRect().width;
 	var x = (evt.clientX-bcr.left)*xMul;
 	var y = (evt.clientY-bcr.top);
+	var sKey = false;
 	for (key in wordIds){
 		var bb = wordIds[key]['minX']
 		if (x < wordIds[key]['left'] || x > wordIds[key]['left']+wordIds[key]['width']){
@@ -356,6 +359,61 @@ function editUp(evt){
 		if (y < wordIds[key]['top'] || y > wordIds[key]['top']+40){
 			continue;
 		}
+		sKey = key;
+		break;
+
+	}
+	
+	if (sKey && isEdit == "quote"){
+		var qid = 0;
+		for (key in quotes){
+			if (quotes[key]['selected']== true){
+				qid = key;
+				quotes[key]['end']=sKey;
+				break;
+				
+			}
+			else {
+				qid=key+1;
+			}
+		}
+		if (quotes[qid]){
+			quotes[qid]['end']=sKey;
+			quotes[qid]['keys']=[];
+			var start = {'x':wordIds[quotes[qid]['start']]['left'],'y':wordIds[quotes[qid]['start']]['top']};
+			var end = {'x':wordIds[quotes[qid]['end']]['left'],'y':wordIds[quotes[qid]['end']]['top']};
+			for (key in wordIds){
+				if (start.y < wordIds[key]['top'] && end.y > wordIds[key]['top']){
+					
+				}
+				else if (start.y < end.y && start.y == wordIds[key]['top'] && start.x <= wordIds[key]['left']){
+					
+				}
+				else if (start.y < end.y && end.y == wordIds[key]['top'] && end.x >= wordIds[key]['left']) {
+				
+				}
+				else if (start.y == end.y && end.y == wordIds[key]['top'] && end.x >= wordIds[key]['left'] && start.x <= wordIds[key]['left']) {
+				
+				}
+				else {
+					continue;
+				}
+				quotes[qid]['keys'].push(key);
+
+			}
+			console.log(quotes[qid]['keys']);
+		}
+		else {
+			quotes[qid]={'selected':true,'start':sKey,'end':sKey,'keys':[]};
+		}
+		
+		
+	}
+	else if (sKey && isEdit == "list"){
+	
+	}
+	else if (sKey){
+		var key = sKey;
 		mmStrokes = [{'x':wordIds[key]['left'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']}];
 			
 		if (selectedWords[key]){
@@ -366,9 +424,9 @@ function editUp(evt){
 			addBorder(mmStrokes,'red');
 			selectedWords[key]=true;
 		}
-		break;
-
 	}
+	
+	
 	
 	
 }
@@ -421,4 +479,10 @@ function sizeButton() {
 			makeFontSize(key,size);
 		}
 	}
+}
+function quoteButton() {
+	isEdit = "quote";
+}
+function listButton() {
+	isEdit = "list";
 }
