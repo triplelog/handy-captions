@@ -406,4 +406,12 @@ function colorButton() {
 		}
 	}
 }
-
+function sizeButton() {
+	var size = document.getElementById('fontSize').value;
+	for (key in selectedWords){
+		
+		if (key){
+			makeFontSize(key,size);
+		}
+	}
+}
