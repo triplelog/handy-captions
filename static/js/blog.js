@@ -280,6 +280,7 @@ function makeBold(id,addBold=true) {
 		el.style.strokeWidth=notBoldWidth;
 	}
 	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]=el.cloneNode(true);
 }
 
 function makeItalics(id,addItalics=true) {
@@ -291,6 +292,8 @@ function makeItalics(id,addItalics=true) {
 	else{
 		el.style.transform="none";
 	}
+	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]=el.cloneNode(true);
 }
 
 function makeLink(id,addLink=false) {
@@ -312,6 +315,8 @@ function makeLink(id,addLink=false) {
 		el.removeChild(el.querySelector('a'));
 		el.appendChild(svg);
 	}
+	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]=el.cloneNode(true);
 }
 
 function makeUnderline(id,addUnderline=true) {
@@ -323,6 +328,8 @@ function makeUnderline(id,addUnderline=true) {
 	else{
 		el.querySelector(".underline").style.display="none";
 	}
+	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]=el.cloneNode(true);
 }
 
 function makeColor(id,addColor=false) {
@@ -334,6 +341,8 @@ function makeColor(id,addColor=false) {
 	else{
 		el.style.stroke=defaultColor;
 	}
+	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]=el.cloneNode(true);
 }
 function makeQuotes(quotes) {
 	var quoteEls = document.querySelectorAll('blockquote');
@@ -394,6 +403,8 @@ function makeQuotes(quotes) {
 		}
 		
 	}
+	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]=el.cloneNode(true);
 	
 }
 
@@ -417,6 +428,9 @@ function makeFontSize(id,size=false) {
 	else{
 		
 	}
+	var el = document.getElementById('word-'+id);
+	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]=el.cloneNode(true);
 }
 
 
