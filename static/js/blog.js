@@ -305,6 +305,22 @@ function makeColor(id,addColor=false) {
 		el.style.stroke=defaultColor;
 	}
 }
+function makeQuotes(quotes) {
+	for (key in quotes){
+		var quoteEl = document.createElement("div");
+		var startEl = document.getElementById('word-'+quotes[key]['start']);
+		startEl.parentNode.insertBefore(quoteEl,startEl);
+		for (var i=0;i<quotes[key]['keys'].length;i++){
+			var id = quotes[key]['keys'][i];
+			var el = document.getElementById('word-'+id);
+			var el2 = el.cloneNode(true);
+			el.parentNode.removeChild(el);
+			quoteEl.appendChild(el2);
+		}
+		
+	}
+	
+}
 
 
 
@@ -370,6 +386,7 @@ function editUp(evt){
 			if (quotes[key]['selected']== true){
 				qid = key;
 				quotes[key]['end']=sKey;
+				quotes[key]['selected']== false;
 				break;
 				
 			}
@@ -398,10 +415,15 @@ function editUp(evt){
 				else {
 					continue;
 				}
+				for (key2 in quotes){
+					if (key2 != qid && (quotes[key2]['start'] == key || quotes[key2]['end'] == key)){
+						delete quotes[key2];
+					}
+				}
 				quotes[qid]['keys'].push(key);
 
 			}
-			console.log(quotes[qid]['keys']);
+			makeQuotes(quotes);
 		}
 		else {
 			quotes[qid]={'selected':true,'start':sKey,'end':sKey,'keys':[]};
