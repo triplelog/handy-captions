@@ -129,16 +129,44 @@ function divideWords(strokes) {
 				}
 			}
 			if (next == -1){
+				if (currentList > 0){//kill list
+					ulEl[currentList].appendChild(pEl);
+					while (currentList > 0){
+						currentList--;
+						if (currentList == 0){
+							outEl.appendChild(ulEl[1]);
+						}
+						else {
+							ulEl[currentList].appendChild(ulEl[currentList+1]);
+						}
+					}
+				}
+				else {
+					outEl.appendChild(pEl);
+				}
 				
-				outEl.appendChild(pEl);
 			
 				break;
 			}
 			else {
-				
-				outEl.appendChild(pEl);
+				if (currentList > 0){//kill list
+					ulEl[currentList].appendChild(pEl);
+					while (currentList > 0){
+						currentList--;
+						if (currentList == 0){
+							outEl.appendChild(ulEl[1]);
+						}
+						else {
+							ulEl[currentList].appendChild(ulEl[currentList+1]);
+						}
+					}
+				}
+				else {
+					outEl.appendChild(pEl);
+				}
 				pEl = document.createElement("p");
 				line = next -1;
+				
 			}
 			continue;
 		}
