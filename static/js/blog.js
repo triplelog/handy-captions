@@ -308,7 +308,7 @@ function makeColor(id,addColor=false) {
 function makeQuotes(quotes) {
 	for (key in quotes){
 		console.log(quotes[key]);
-		var quoteEl = document.createElement("div");
+		var quoteEl = document.createElement("blockquote");
 		var startEl = document.getElementById('word-'+quotes[key]['start']);
 		startEl.parentNode.insertBefore(quoteEl,startEl);
 		for (var i=0;i<quotes[key]['keys'].length;i++){
