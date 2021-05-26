@@ -311,9 +311,22 @@ function makeQuotes(quotes) {
 		var quoteEl = document.createElement("blockquote");
 		var startEl = document.getElementById('word-'+quotes[key]['start']);
 		startEl.parentNode.insertBefore(quoteEl,startEl);
-		for (var i=0;i<quotes[key]['keys'].length;i++){
-			var id = quotes[key]['keys'][i];
-			var el = document.getElementById('word-'+id);
+		var notEnd = true;
+		if (quotes[key]['start'] == quotes[key]['end']){
+			notEnd = false;
+		}
+		var el = startEl;
+		while (notEnd){
+			var oldEl = el;
+			var el = el.nextSibling;
+			var el2 = oldEl.cloneNode(true);
+			oldEl.parentNode.removeChild(oldEl);
+			quoteEl.appendChild(el2);
+			if (!el || el.id == 'word-'+quotes[key]['end']){
+				notEnd = false;
+			}
+		}
+		if (el){
 			var el2 = el.cloneNode(true);
 			el.parentNode.removeChild(el);
 			quoteEl.appendChild(el2);
@@ -387,7 +400,7 @@ function editUp(evt){
 		}
 		if (quotes[qid]){
 			quotes[qid]['end']=sKey;
-			quotes[qid]['keys']=[];
+			//quotes[qid]['keys']=[];
 			console.log(quotes);
 			var start = {'x':wordIds[quotes[qid]['start']]['left'],'y':wordIds[quotes[qid]['start']]['top']};
 			var end = {'x':wordIds[quotes[qid]['end']]['left'],'y':wordIds[quotes[qid]['end']]['top']};
@@ -412,14 +425,13 @@ function editUp(evt){
 						delete quotes[key2];
 					}
 				}
-				quotes[qid]['keys'].push(key);
+				//quotes[qid]['keys'].push(key);
 
 			}
-			console.log(quotes);
 			makeQuotes(quotes);
 		}
 		else {
-			quotes[qid]={'selected':true,'start':sKey,'end':sKey,'keys':[]};
+			quotes[qid]={'selected':true,'start':sKey,'end':sKey};
 		}
 		
 		
