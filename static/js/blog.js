@@ -7,6 +7,7 @@ function divideWords(strokes) {
 	wordMap = {};
 	adjWords = {};
 	wordIds = {};
+	selectedWords = {};
 	var xMul = 800/outputEl.getBoundingClientRect().width;
 	var outEl = document.getElementById("finalOutput");
 	outEl.innerHTML = "";
