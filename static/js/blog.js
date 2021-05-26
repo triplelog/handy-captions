@@ -162,10 +162,19 @@ function divideWords(strokes) {
 					currentList--;
 					console.log(ii,currentList,ulEl[currentList+1]);
 					console.log(ulEl[currentList]);
-					ulEl[currentList].appendChild(ulEl[currentList+1]);
+					if (currentList == 0){
+						outEl.appendChild(ulEl[1]);
+					}
+					else {
+						ulEl[currentList].appendChild(ulEl[currentList+1]);
+					}
 				}
-				pEl = document.createElement("li");
-				
+				if (currentList == 0){
+					pEl = document.createElement("p");
+				}
+				else {
+					pEl = document.createElement("li");
+				}
 			}
 			else if (listList[line]<0 && currentList == 1){//List ends
 				ulEl[1].appendChild(pEl);
