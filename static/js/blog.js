@@ -613,14 +613,23 @@ function addLine(id) {
 			}
 		}
 	}
+	var maxLine = 0;
 	for (i in borders){
 		var line = parseInt(i.split('-')[0]);
-		if ( line > id){
-			var newBorder = [];
-			for (var ii=0;ii<borders[i].length;ii++){
-				newBorder.push({x:borders[i][ii].x,y:borders[i][ii].y+100});
+		if ( line > maxLine){
+			maxLine= line;
+		}
+	}
+	for (var iii=maxLine;iii>id;iii--){
+		for (i in borders){
+			var line = parseInt(i.split('-')[0]);
+			if ( line == iii){
+				var newBorder = [];
+				for (var ii=0;ii<borders[i].length;ii++){
+					newBorder.push({x:borders[i][ii].x,y:borders[i][ii].y+100});
+				}
+				addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray")
 			}
-			addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray")
 		}
 	}
 	var newParagraphs = {};
@@ -660,18 +669,27 @@ function removeLine(id) {
 			}
 		}
 	}
+	var maxLine = 0;
 	for (i in borders){
 		var line = parseInt(i.split('-')[0]);
-		if ( line == id){
-			borders[i]=[];
-			addBorder(false,i,(line+1)+"-"+i.split('-')[1],"gray")
+		if ( line > maxLine){
+			maxLine= line;
 		}
-		else if ( line > id){
-			var newBorder = [];
-			for (var ii=0;ii<borders[i].length;ii++){
-				newBorder.push({x:borders[i][ii].x,y:borders[i][ii].y-100});
+	}
+	for (var iii=id;iii<=maxLine;iii++){
+		for (i in borders){
+			var line = parseInt(i.split('-')[0]);
+			if ( line == id && line == iii){
+				borders[i]=[];
+				addBorder(false,i,i,"gray")
 			}
-			addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray")
+			else if ( line == iii){
+				var newBorder = [];
+				for (var ii=0;ii<borders[i].length;ii++){
+					newBorder.push({x:borders[i][ii].x,y:borders[i][ii].y-100});
+				}
+				addBorder(newBorder,i,(line-1)+"-"+i.split('-')[1],"gray")
+			}
 		}
 	}
 	var newParagraphs = {};
@@ -690,6 +708,9 @@ function removeLine(id) {
 }
 function addParagraph(id) {
 	displaySettings['paragraphs'][id]=true;
+}
+function removeParagraph(id) {
+	delete displaySettings['paragraphs'][id];
 }
 
 function clearBorders() {
