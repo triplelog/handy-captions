@@ -759,7 +759,7 @@ function hashStrokes(strokes) {
 	var str = "str";
 	for (var i=0;i<strokes.length;i++){
 		for (var ii=0;ii<strokes[i].length;ii++){
-			str += stroke[i][ii].x+"-"+stroke[i][ii].y+"-";
+			str += strokes[i][ii].x+"-"+strokes[i][ii].y+"-";
 		}
 	}
 	return cyrb53(str);
