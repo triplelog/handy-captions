@@ -160,6 +160,9 @@ function divideWords(strokes) {
 			viewBox += (height);
 			svg.setAttribute('width', width);
 			svg.setAttribute('height', height);
+			svg.setAttribute('data-minY', word['minY']);
+			svg.style.top = (word['minY']-2)+"px";
+			svg.style.position = "relative";
 			svg.setAttribute('viewBox', viewBox);
 			//svg.setAttribute('style', 'border: 1px solid black');
 			svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
@@ -308,14 +311,15 @@ function makeFontSize(id,size=false) {
 	var svg = document.getElementById('word-'+id).querySelector("svg");
 	if (!svg){return;}
 	if (size){
-		var w = svg.getAttribute('data-width') || svg.getAttribute('width');
-		var h = svg.getAttribute('data-height') || svg.getAttribute('height');
+		var w = parseFloat(svg.getAttribute('data-width')) || parseFloat(svg.getAttribute('width'));
+		var h = parseFloat(svg.getAttribute('data-height')) || parseFloat(svg.getAttribute('height'));
 		svg.setAttribute('width', w*parseFloat(size));
 		svg.setAttribute('height', h*parseFloat(size));
 		svg.setAttribute('data-width', w);
 		svg.setAttribute('data-height', h);
-		svg.style.top = (h - h*parseFloat(size))+"px";
-		svg.style.position = "relative";
+		var baselineD = 60+parseFloat(svg.getAttribute('data-minY'));
+		var newblD = parseFloat(size)*baselineD;
+		svg.style.top = (60 - newblD)+"px";
 	}
 	else{
 		
