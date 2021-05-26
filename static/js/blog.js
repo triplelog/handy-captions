@@ -5,6 +5,7 @@ var defaultColor = "black";
 var displaySettings = {'paragraphs':{}};
 var borders = {};
 var wordsHashed = {};
+var listList = {};
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
@@ -60,6 +61,7 @@ function divideWords(strokes) {
 	var spaceLength = 20;
 	var lineInfo = {};
 	var wordCount = 0;
+	var ulEl = [false,document.createElement("ul"),document.createElement("ul"),document.createElement("ul"),document.createElement("ul")];
 	for (line in strokesInfo){
 		//console.log(line,strokesInfo[line]);
 		var minmaxArray = combineMinmax(strokesInfo[line]);
@@ -116,6 +118,7 @@ function divideWords(strokes) {
 	let cryptoObj = window.crypto || window.msCrypto;
 	window.crypto.getRandomValues(idArray);
 	var wordIdx = 0;
+	var currentList = 0;
 	for (var line=0;line<1000;line++){
 		if (!adjWords[line]){
 			var next = -1;
@@ -126,35 +129,56 @@ function divideWords(strokes) {
 				}
 			}
 			if (next == -1){
-				/*var buffer = document.createElement("div");
-				buffer.style.width = "1px";
-				buffer.style.height = "80px";
-				buffer.style.flexGrow = "100";
-				buffer.style.border = "0px solid black";
-				outEl.appendChild(buffer);*/
+				
 				outEl.appendChild(pEl);
 			
 				break;
 			}
 			else {
-				/*var buffer = document.createElement("div");
-				buffer.style.width = "1px";
-				buffer.style.height = "80px";
-				buffer.style.flexGrow = "100";
-				buffer.style.border = "0px solid black";
-				outEl.appendChild(buffer);*/
 				
-				/*var newLine = document.createElement("div");
-				newLine.style.width = "100%";
-				newLine.style.height = "80px";
-				//newLine.style.flexGrow = "1";
-				newLine.style.display = "inline-block";
-				outEl.appendChild(newLine);*/
 				outEl.appendChild(pEl);
 				pEl = document.createElement("p");
 				line = next -1;
 			}
 			continue;
+		}
+		else if (currentList > 0 || listList[line]==1){
+			console.log(line,currentList,listList[line]);
+			if (listList[line]==1 && currentList == 0){//start of new list
+				outEl.appendChild(pEl);
+				pEl = document.createElement("li");
+				ulEl[1]=document.createElement("ul");
+				currentList++;
+			}
+			else if (listList[line]==1 && currentList > 0){//new nesting
+				currentList++;
+				ulEl[currentList]=document.createElement("ul");
+				pEl = document.createElement("li");
+				
+			}
+			else if (listList[line]<0 && currentList > 1){//nesting ends
+				ulEl[currentList].appendChild(pEl);
+				for (var ii=0;ii<-1*listList[line];ii++){
+					currentList--;
+					ulEl[currentList].appendChild(ulEl[currentList+1]);
+				}
+				pEl = document.createElement("li");
+				
+			}
+			else if (listList[line]<0 && currentList == 1){//List ends
+				ulEl[1].appendChild(pEl);
+				outEl.appendChild(ulEl[1]);
+				pEl = document.createElement("p");
+				currentList--;
+			}
+			else if (listList[line]==2 && currentList > 0){//continuation of last line
+				
+			}
+			else if (currentList > 0){//new item
+				ulEl[currentList].appendChild(pEl);
+				pEl = document.createElement("p");
+			}
+			console.log(ulEl);
 		}
 		else if (displaySettings['paragraphs'][line-1]) {
 			
@@ -684,6 +708,7 @@ function addLine(id) {
 	for (i in newParagraphs){
 		displaySettings['paragraphs'][i]=true;
 	}
+	//TODO: update Lists
 }
 function removeLine(id) {
 	for (var i=0;i<strokes.length;i++){
@@ -755,6 +780,7 @@ function removeLine(id) {
 	for (i in newParagraphs){
 		displaySettings['paragraphs'][i]=true;
 	}
+	//TODO: update Lists
 }
 function addParagraph(id) {
 	displaySettings['paragraphs'][id]=true;
@@ -766,6 +792,21 @@ function removeParagraph(id) {
 function clearBorders() {
 	
 	borders = {};
+}
+function rightList(id){
+	listLists[id]=1;
+}
+function leftList(id){
+	if (listLists[id] && listLists[id] < 0){
+		listLists[id]--;
+	}
+	else {
+		listLists[id]=-1;
+	}
+	
+}
+function continueList(id){
+	listLists[id]=2;
 }
 
 function hashStrokes(strokes) {
