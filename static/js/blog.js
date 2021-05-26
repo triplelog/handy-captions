@@ -360,9 +360,11 @@ var selectedWords = {};
 var lists = {};
 var quotes = {};
 function editUp(evt){
+	console.log(isEdit);
 	if (!isEdit){
 		return;
 	}
+	console.log(isEdit);
 	var bcr = evt.currentTarget.getBoundingClientRect();
 	var xMul = 800/outputEl.getBoundingClientRect().width;
 	var x = (evt.clientX-bcr.left)*xMul;
