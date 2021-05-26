@@ -150,10 +150,10 @@ function divideWords(strokes) {
 			
 			var el = document.createElement("div");
 			var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-			var width = word['width']+44;
+			var width = word['width']+4;
 			var height = word['maxY'] - word['minY']+4;
 			var viewBox = '';
-			viewBox += (word['minX']-22)+" ";
+			viewBox += (word['minX']-2)+" ";
 			viewBox += (word['minY']-2)+" ";
 			viewBox += (width)+" ";
 			viewBox += (height);
