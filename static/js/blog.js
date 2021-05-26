@@ -345,26 +345,15 @@ function makeFontSize(id,size=false) {
 	}
 }
 
-function editMode(){
-	if (isEdit){
-		isEdit = false;
-		outputEl.style.pointerEvents = "none";
-	}
-	else {
-		isEdit = true;
-		outputEl.style.pointerEvents = "all";
-	}
-}
+
 
 var selectedWords = {};
 var lists = {};
 var quotes = {};
 function editUp(evt){
-	console.log(isEdit);
 	if (!isEdit){
 		return;
 	}
-	console.log(isEdit);
 	var bcr = evt.currentTarget.getBoundingClientRect();
 	var xMul = 800/outputEl.getBoundingClientRect().width;
 	var x = (evt.clientX-bcr.left)*xMul;
@@ -382,9 +371,7 @@ function editUp(evt){
 		break;
 
 	}
-	console.log(sKey,isEdit);
 	if (sKey && isEdit == "quote"){
-		console.log(sKey);
 		var qid = 0;
 		for (key in quotes){
 			if (quotes[key]['selected']== true){
@@ -508,10 +495,21 @@ function sizeButton() {
 		}
 	}
 }
+function editMode(){
+	if (isEdit){
+		isEdit = false;
+		outputEl.style.pointerEvents = "none";
+	}
+	else {
+		isEdit = true;
+		outputEl.style.pointerEvents = "all";
+	}
+}
 function quoteButton() {
 	isEdit = "quote";
-	console.log(isEdit);
+	outputEl.style.pointerEvents = "all";
 }
 function listButton() {
 	isEdit = "list";
+	outputEl.style.pointerEvents = "all";
 }
