@@ -183,7 +183,7 @@ function inputUp(evt) {
 		currentStroke.push({'x':x,'y':y});
 	}
 	strokes.push(currentStroke);
-	addStroke(currentStroke,'black');
+	addStroke(currentStroke,strokes.length-1,'black');
 	isDown = false;
 	currentStroke = [];
 }
@@ -193,8 +193,15 @@ function inputCancel(evt) {
 }
 
 
-function addStroke(stroke,color) {
-	var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+function addStroke(stroke,idx,color) {
+	var path = document.getElementById('stroke-'+idx);
+	var newPath = true;
+	if (path){
+		newPath = false;
+	}
+	else {
+		path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+	}
 	var xMul = 800/outputEl.getBoundingClientRect().width;
 	
 	var pd = "M";
@@ -218,10 +225,13 @@ function addStroke(stroke,color) {
 
 	
 	path.setAttributeNS(null,"d",pd);
-	path.setAttributeNS(null,"stroke",color);
-	path.setAttributeNS(null,"stroke-width","4");
-	path.setAttributeNS(null,"fill","none");
-	outputEl.appendChild(path);
+	if (newPath){
+		path.setAttributeNS(null,"id","stroke-"+idx);
+		path.setAttributeNS(null,"stroke",color);
+		path.setAttributeNS(null,"stroke-width","4");
+		path.setAttributeNS(null,"fill","none");
+		outputEl.appendChild(path);
+	}
 	
 }
 function addBorder(stroke,color) {

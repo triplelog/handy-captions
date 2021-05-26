@@ -603,7 +603,7 @@ function addLine(id) {
 				for (var ii=0;ii<strokes[i].length;ii++){
 					strokes[i][ii].y += 100;
 				}
-				addStroke(strokes[i],"black");
+				addStroke(strokes[i],i,"black");
 			}
 		}
 	}
