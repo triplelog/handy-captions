@@ -755,10 +755,12 @@ function clearBorders() {
 	borders = {};
 }
 
-function hashStrokes(stroke) {
+function hashStrokes(strokes) {
 	var str = "str";
-	for (var i=0;i<stroke.length;i++){
-		str += stroke[i].x+"-"+stroke[i].y+"-";
+	for (var i=0;i<strokes.length;i++){
+		for (var ii=0;ii<strokes[i].length;ii++){
+			str += stroke[i][ii].x+"-"+stroke[i][ii].y+"-";
+		}
 	}
 	return cyrb53(str);
 }
