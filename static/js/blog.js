@@ -380,8 +380,9 @@ function editUp(evt){
 		break;
 
 	}
-	
+	console.log(sKey,isEdit);
 	if (sKey && isEdit == "quote"){
+		console.log(sKey);
 		var qid = 0;
 		for (key in quotes){
 			if (quotes[key]['selected']== true){
