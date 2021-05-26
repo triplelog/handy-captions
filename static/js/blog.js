@@ -4,6 +4,7 @@ var notBoldWidth = "5";
 var defaultColor = "black";
 var displaySettings = {'paragraphs':{}};
 var borders = {};
+var wordsHashed = {};
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
@@ -78,6 +79,9 @@ function divideWords(strokes) {
 	console.log(lineInfo);
 	
 	for (var i=0;i<strokes.length;i++){
+		if (strokes[i].length==0){
+			continue;
+		}
 		var line = wordMap[i].line;
 		var id = lineInfo[line].length-1;
 		for (var ii=0;ii<lineInfo[line].length-1;ii++){
@@ -163,66 +167,72 @@ function divideWords(strokes) {
 		for (var wIdx in adjWords[line]){
 			var word = adjWords[line][wIdx];
 			
-			var el = document.createElement("div");
-			var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-			var width = word['width']+4;
-			var height = word['maxY'] - word['minY']+4;
-			var viewBox = '';
-			viewBox += (word['minX']-2)+" ";
-			viewBox += (word['minY']-2)+" ";
-			viewBox += (width)+" ";
-			viewBox += (height);
-			svg.setAttribute('width', width);
-			svg.setAttribute('height', height);
-			svg.setAttribute('data-blp', (40-word['minY']+2)/(height));
-			svg.setAttribute('data-top', 20+word['minY']-2);
-			svg.style.top = (20+word['minY']-2)+"px";
-			svg.style.position = "relative";
-			svg.setAttribute('viewBox', viewBox);
-			//svg.setAttribute('style', 'border: 1px solid black');
-			svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+			var hash = hashStrokes(word['strokes']);
 			
-			for (var i=0;i<word['strokes'].length;i++) {
-				var s = word['strokes'][i];
-				if (s.length > 1){
-					var pd = "M"+s[0].x+" "+s[0].y;
-					for (var ii=1;ii<s.length;ii++) {
-						pd += " L"+s[ii].x+" "+s[ii].y;
-					}
-					var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-					path.setAttributeNS(null,"d",pd);
-					path.setAttributeNS(null,"fill","none");
-					svg.appendChild(path);
-				}
-				
+			if (wordsHashed[hash]){
+				var el = wordsHashed[hash];
+				pEl.appendChild(el);
 			}
-			var pd = "M"+word['minX']+" 40 L"+word['maxX']+" 40";
-			var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-			path.setAttributeNS(null,"d",pd);
-			path.setAttributeNS(null,"fill","none");
-			path.classList.add("underline");
-			path.style.display = "none";
-			svg.appendChild(path);
+			else {
 			
-			el.style.height = "80px";
-			el.setAttribute('id','word-'+idArray[wordIdx]);
-			el.style.strokeWidth=notBoldWidth;
-			el.style.stroke=defaultColor;
-			el.style.display = "inline-block";
-			el.style.marginRight = "25px";
-			wordIds[idArray[wordIdx]]=word;
-			wordIdx++;
-			el.appendChild(svg);
+				var el = document.createElement("div");
+				var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+				var width = word['width']+4;
+				var height = word['maxY'] - word['minY']+4;
+				var viewBox = '';
+				viewBox += (word['minX']-2)+" ";
+				viewBox += (word['minY']-2)+" ";
+				viewBox += (width)+" ";
+				viewBox += (height);
+				svg.setAttribute('width', width);
+				svg.setAttribute('height', height);
+				svg.setAttribute('data-blp', (40-word['minY']+2)/(height));
+				svg.setAttribute('data-top', 20+word['minY']-2);
+				svg.style.top = (20+word['minY']-2)+"px";
+				svg.style.position = "relative";
+				svg.setAttribute('viewBox', viewBox);
+				//svg.setAttribute('style', 'border: 1px solid black');
+				svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
 			
 			
-			//outEl.appendChild(el);
-			pEl.appendChild(el);
-			/*var buffer = document.createElement("div");
-			buffer.style.width = "1px";
-			buffer.style.height = "80px";
-			buffer.style.flexGrow = "1";
-			buffer.style.border = "0px solid black";
-			outEl.appendChild(buffer);*/
+				for (var i=0;i<word['strokes'].length;i++) {
+					var s = word['strokes'][i];
+					if (s.length > 1){
+						var pd = "M"+s[0].x+" "+s[0].y;
+						for (var ii=1;ii<s.length;ii++) {
+							pd += " L"+s[ii].x+" "+s[ii].y;
+						}
+						var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+						path.setAttributeNS(null,"d",pd);
+						path.setAttributeNS(null,"fill","none");
+						svg.appendChild(path);
+					}
+				
+				}
+				var pd = "M"+word['minX']+" 40 L"+word['maxX']+" 40";
+				var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+				path.setAttributeNS(null,"d",pd);
+				path.setAttributeNS(null,"fill","none");
+				path.classList.add("underline");
+				path.style.display = "none";
+				svg.appendChild(path);
+			
+				el.style.height = "80px";
+				el.setAttribute('id','word-'+idArray[wordIdx]);
+				el.setAttribute('data-hash',hash);
+				el.style.strokeWidth=notBoldWidth;
+				el.style.stroke=defaultColor;
+				el.style.display = "inline-block";
+				el.style.marginRight = "25px";
+				wordIds[idArray[wordIdx]]=word;
+				wordIdx++;
+				el.appendChild(svg);
+			
+			
+				//outEl.appendChild(el);
+				pEl.appendChild(el);
+				wordsHashed[hash]=el.cloneNode(true);
+			}
 		}    
 		
 	}
@@ -265,6 +275,8 @@ function makeBold(id,addBold=true) {
 	else{
 		el.style.strokeWidth=notBoldWidth;
 	}
+	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]=el.cloneNode(true);
 }
 
 function makeItalics(id,addItalics=true) {
@@ -738,3 +750,22 @@ function clearBorders() {
 	
 	borders = {};
 }
+
+function hashStrokes(stroke) {
+	var str = "str";
+	for (var i=0;i<stroke.length;i++){
+		str += stroke[i].x+"-"+stroke[i].y+"-";
+	}
+	return cyrb53(str);
+}
+const cyrb53 = function(str, seed = 0) {
+    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+    for (let i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1>>>16), 2246822507) ^ Math.imul(h2 ^ (h2>>>13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
+    return 4294967296 * (2097151 & h2) + (h1>>>0);
+};
