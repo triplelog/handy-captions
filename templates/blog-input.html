@@ -75,13 +75,21 @@ blockquote:before {
   vertical-align: -0.4em;
 }
 
-
+.lineButtons {
+	position: absolute;
+	left: 0px;
+}
 
 </style>
 </head>
 <body>
 
 <div id="input" class="input">
+	{% for i in range(0,5) %}
+		<div id="line-{{ i }}" class="lineButtons" style="top: {{ 50*i + 45 }}px;">
+			<button onclick="addLine({{ i }})">+</button><button onclick="addParagraph({{ i }})">P</button>
+		</div>
+	{% endfor %}
 	<svg class="ruled" preserveAspectRatio="none" height="500px" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		
 		{% for i in range(0,5) %}
