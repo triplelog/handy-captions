@@ -165,23 +165,23 @@ function inputCancel(evt) {
 
 function addStroke(stroke,color) {
 	var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-	
+	var xMul = 800/outputEl.getBoundingClientRect().width;
 	
 	var pd = "M";
 	if (stroke.length < 1){
 		return;
 	}
 	else if (stroke.length < 2){
-		pd += (stroke[0].x-2)+" "+(stroke[0].y-2);
-		pd += " "+(stroke[0].x-2)+" "+(stroke[0].y+2);
-		pd += " "+(stroke[0].x+2)+" "+(stroke[0].y+2);
-		pd += " "+(stroke[0].x+2)+" "+(stroke[0].y-2);
+		pd += (stroke[0].x*xMul-2)+" "+(stroke[0].y-2);
+		pd += " "+(stroke[0].x*xMul-2)+" "+(stroke[0].y+2);
+		pd += " "+(stroke[0].x*xMul+2)+" "+(stroke[0].y+2);
+		pd += " "+(stroke[0].x*xMul+2)+" "+(stroke[0].y-2);
 		pd += "Z";
 	}
 	else {
-		pd += stroke[0].x+" "+stroke[0].y;
+		pd += stroke[0].x*xMul+" "+stroke[0].y;
 		for (var i=1;i<stroke.length;i++){
-			pd += " "+stroke[i].x+" "+stroke[i].y;
+			pd += " "+stroke[i].x*xMul+" "+stroke[i].y;
 		}
 	}
 
