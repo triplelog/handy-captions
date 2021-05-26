@@ -304,16 +304,16 @@ function makeColor(id,addColor=false) {
 
 
 function makeFontSize(id,size=false) {
-	var el = document.getElementById('word-'+id).querySelector("svg");
-	if (!el){return;}
+	var svg = document.getElementById('word-'+id).querySelector("svg");
+	if (!svg){return;}
 	if (size){
 		var w = svg.getAttribute('data-width') || svg.getAttribute('width');
 		var h = svg.getAttribute('data-height') || svg.getAttribute('height');
-		svg.setAttribute('width', w*size);
-		svg.setAttribute('height', h*size);
+		svg.setAttribute('width', w*parseFloat(size));
+		svg.setAttribute('height', h*parseFloat(size));
 		svg.setAttribute('data-width', w);
 		svg.setAttribute('data-height', h);
-		svg.style.top = (h - h*size)+"px";
+		svg.style.top = (h - h*parseFloat(size))+"px";
 		svg.style.position = "absolute";
 	}
 	else{
