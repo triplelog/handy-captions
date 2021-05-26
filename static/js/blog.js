@@ -306,9 +306,39 @@ function makeColor(id,addColor=false) {
 	}
 }
 function makeQuotes(quotes) {
+	var quoteEls = document.querySelectorAll('blockquote');
+	for (var i=0;i<quoteEls.length;i++){
+		var deleteQuote = true;
+		for (key in quotes){
+			if (quoteEls[i].getAttribute('data-start')==quotes[key]['start'] && quoteEls[i].getAttribute('data-end')==quotes[key]['end']){
+				deleteQuote = false;
+				break;
+			}
+		}
+		if (deleteQuote){
+			var mainEl = 
+			var els = quoteEls[i].querySelectorAll('svg');
+			for (var ii=0;ii<els.length;ii++){
+				var el = els[ii].cloneNode(true);
+				quoteEls[i].parentNode.insertBefore(el,quoteEls[i]);
+			}
+			quoteEls[i].parentNode.removeChild(quoteEls[i]);
+		}
+	}
 	for (key in quotes){
-		console.log(quotes[key]);
+		var skipQuote = false;
+		for (var i=0;i<quoteEls.length;i++){
+			if (quoteEls[i].getAttribute('data-start')==quotes[key]['start'] && quoteEls[i].getAttribute('data-end')==quotes[key]['end']){
+				skipQuote = true;
+				break;
+			}
+		}
+		if (skipQuote){
+			continue;
+		}
 		var quoteEl = document.createElement("blockquote");
+		quoteEl.setAttribute('data-start',quotes[key]['start']);
+		quoteEl.setAttribute('data-end',quotes[key]['end']);
 		var startEl = document.getElementById('word-'+quotes[key]['start']);
 		startEl.parentNode.insertBefore(quoteEl,startEl);
 		var notEnd = true;
