@@ -590,7 +590,23 @@ function listButton() {
 	outputEl.style.pointerEvents = "all";
 }
 function addLine(id) {
-
+	for (var i=0;i<strokes.length;i++){
+		sumY = 0;
+		nY = 0;
+		for (var ii=0;ii<strokes[i].length;ii++){
+			sumY += strokes[i][ii].y;
+			nY += 1;
+		}
+		if (nY >0){
+			line = Math.floor((sumY/nY)/100);
+			if (line > id){
+				for (var ii=0;ii<strokes[i].length;ii++){
+					strokes[i][ii].y += 100;
+				}
+				addStroke(strokes[i],"black");
+			}
+		}
+	}
 }
 function addParagraph(id) {
 	displaySettings['paragraphs'][id]=true;
