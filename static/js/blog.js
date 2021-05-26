@@ -316,10 +316,12 @@ function makeQuotes(quotes) {
 			}
 		}
 		if (deleteQuote){
-			var els = quoteEls[i].querySelectorAll('svg');
+			var els = quoteEls[i].querySelectorAll('div');
 			for (var ii=0;ii<els.length;ii++){
-				var el = els[ii].cloneNode(true);
-				quoteEls[i].parentNode.insertBefore(el,quoteEls[i]);
+				if (els[ii].id && els[ii].id.substr(0,5) == "word-"){
+					var el = els[ii].cloneNode(true);
+					quoteEls[i].parentNode.insertBefore(el,quoteEls[i]);
+				}
 			}
 			quoteEls[i].parentNode.removeChild(quoteEls[i]);
 		}
