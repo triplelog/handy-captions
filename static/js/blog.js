@@ -2,6 +2,7 @@ var wordIds = {};
 var boldWidth = "8";
 var notBoldWidth = "5";
 var defaultColor = "black";
+var displaySettings = {'paragraphs':{}};
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
@@ -11,7 +12,7 @@ function divideWords(strokes) {
 	var xMul = 800/outputEl.getBoundingClientRect().width;
 	var outEl = document.getElementById("finalOutput");
 	outEl.innerHTML = "";
-	
+	var pEl = document.createElement("p");
 	for (var i=0;i<strokes.length;i++){
 		sInfo = {};
 		sumY = 0;
@@ -133,15 +134,22 @@ function divideWords(strokes) {
 				buffer.style.border = "0px solid black";
 				outEl.appendChild(buffer);*/
 				
-				var newLine = document.createElement("div");
+				/*var newLine = document.createElement("div");
 				newLine.style.width = "100%";
 				newLine.style.height = "80px";
 				//newLine.style.flexGrow = "1";
 				newLine.style.display = "inline-block";
-				outEl.appendChild(newLine);
+				outEl.appendChild(newLine);*/
+				outEl.appendChild(pEl);
+				pEl = document.createElement("p");
 				line = next -1;
 			}
 			continue;
+		}
+		else if (displaySettings['paragraphs'][line-1]) {
+			
+			outEl.appendChild(pEl);
+			pEl = document.createElement("p");
 		}
 		
 		console.log(adjWords[line]);
@@ -201,7 +209,8 @@ function divideWords(strokes) {
 			el.appendChild(svg);
 			
 			
-			outEl.appendChild(el);
+			//outEl.appendChild(el);
+			pEl.appendChild(el);
 			/*var buffer = document.createElement("div");
 			buffer.style.width = "1px";
 			buffer.style.height = "80px";
@@ -579,4 +588,10 @@ function quoteButton() {
 function listButton() {
 	isEdit = "list";
 	outputEl.style.pointerEvents = "all";
+}
+function addLine(id) {
+
+}
+function addParagraph(id) {
+	
 }
