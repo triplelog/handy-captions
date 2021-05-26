@@ -160,8 +160,9 @@ function divideWords(strokes) {
 			viewBox += (height);
 			svg.setAttribute('width', width);
 			svg.setAttribute('height', height);
-			svg.setAttribute('data-minY', word['minY']);
-			svg.style.top = (30+word['minY']-2)+"px";
+			svg.setAttribute('data-blp', (40+word['minY']+2)/(height));
+			svg.setAttribute('data-top', 20+word['minY']-2);
+			svg.style.top = (20+word['minY']-2)+"px";
 			svg.style.position = "relative";
 			svg.setAttribute('viewBox', viewBox);
 			//svg.setAttribute('style', 'border: 1px solid black');
@@ -317,9 +318,10 @@ function makeFontSize(id,size=false) {
 		svg.setAttribute('height', h*parseFloat(size));
 		svg.setAttribute('data-width', w);
 		svg.setAttribute('data-height', h);
-		var baselineD = 60-parseFloat(svg.getAttribute('data-minY'));
-		var newblD = parseFloat(size)*baselineD;
-		svg.style.top = (90 - newblD)+"px";
+		var blHO = h*parseFloat(svg.getAttribute('data-blp'));
+		var blHN = h*parseFloat(size)*parseFloat(svg.getAttribute('data-blp'));
+		var topDiff = blHO-blHN;
+		svg.style.top = (topDiff+parseFloat(svg.getAttribute('data-top')))+"px";
 	}
 	else{
 		
