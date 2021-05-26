@@ -398,6 +398,7 @@ function editUp(evt){
 		if (quotes[qid]){
 			quotes[qid]['end']=sKey;
 			quotes[qid]['keys']=[];
+			console.log(quotes);
 			var start = {'x':wordIds[quotes[qid]['start']]['left'],'y':wordIds[quotes[qid]['start']]['top']};
 			var end = {'x':wordIds[quotes[qid]['end']]['left'],'y':wordIds[quotes[qid]['end']]['top']};
 			for (key in wordIds){
@@ -424,6 +425,7 @@ function editUp(evt){
 				quotes[qid]['keys'].push(key);
 
 			}
+			console.log(quotes);
 			makeQuotes(quotes);
 		}
 		else {
