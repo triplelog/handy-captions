@@ -3,6 +3,7 @@ var boldWidth = "8";
 var notBoldWidth = "5";
 var defaultColor = "black";
 var displaySettings = {'paragraphs':{}};
+var borders = {};
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
@@ -12,6 +13,7 @@ function divideWords(strokes) {
 	var xMul = 800/outputEl.getBoundingClientRect().width;
 	var outEl = document.getElementById("finalOutput");
 	outEl.innerHTML = "";
+	clearBorders();
 	var pEl = document.createElement("p");
 	for (var i=0;i<strokes.length;i++){
 		sInfo = {};
@@ -62,8 +64,9 @@ function divideWords(strokes) {
 		for (var i=0;i<minmaxArray.length;i++){
 			//console.log(minmaxArray[i]);
 			mmStrokes = [{'x':minmaxArray[i][0],'y':line*100+20},{'x':minmaxArray[i][0],'y':line*100+60},{'x':minmaxArray[i][1],'y':line*100+60},{'x':minmaxArray[i][1],'y':line*100+20},{'x':minmaxArray[i][0],'y':line*100+20}];
-			addBorder(mmStrokes,'gray');
-			adjWords[line][i]={'left':minmaxArray[i][0],'width':minmaxArray[i][1]-minmaxArray[i][0],'top':line*100+20,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:40,strokes:[]};
+			addBorder(mmStrokes,line+"-"+i,line+"-"+i,'gray');
+			borders[line+"-"+i]=mmStrokes;
+			adjWords[line][i]={'borderKey':line+"-"+i,'left':minmaxArray[i][0],'width':minmaxArray[i][1]-minmaxArray[i][0],'top':line*100+20,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:40,strokes:[]};
 			wordCount++;
 		}
 		lineInfo[line]=minmaxArray;
@@ -508,11 +511,11 @@ function editUp(evt){
 		mmStrokes = [{'x':wordIds[key]['left'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']}];
 			
 		if (selectedWords[key]){
-			addBorder(mmStrokes,'gray');
+			addBorder(mmStrokes,wordIds[key]['borderKey'],wordIds[key]['borderKey'],'gray');
 			delete selectedWords[key];
 		}
 		else {
-			addBorder(mmStrokes,'red');
+			addBorder(mmStrokes,wordIds[key]['borderKey'],wordIds[key]['borderKey'],'red');
 			selectedWords[key]=true;
 		}
 	}
@@ -607,7 +610,22 @@ function addLine(id) {
 			}
 		}
 	}
+	for (i in borders){
+		var line = parseInt(i.split('-')[0]);
+		if ( line > id){
+			var newBorder = [];
+			for (var ii=0;ii<borders[i].length;ii++){
+				newBorder.push({x:borders[i].x,y:borders[i].y+100});
+			}
+			addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray")
+		}
+	}
 }
 function addParagraph(id) {
 	displaySettings['paragraphs'][id]=true;
+}
+
+function clearBorders() {
+	
+	borders = {};
 }
