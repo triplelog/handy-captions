@@ -419,7 +419,7 @@ function editUp(evt){
 			if (quotes[key]['selected']== true){
 				qid = key;
 				quotes[key]['end']=sKey;
-				quotes[key]['selected']== false;
+				quotes[key]['selected']= false;
 				break;
 				
 			}
