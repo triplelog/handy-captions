@@ -207,10 +207,18 @@ function addStroke(stroke,idx,color) {
 	var newPath = true;
 	if (path){
 		newPath = false;
+		if (!stroke){
+			path.parentNode.removeChild(path);
+			return;
+		}
 	}
 	else {
+		if (!stroke){
+			return;
+		}
 		path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	}
+	
 	var xMul = 800/outputEl.getBoundingClientRect().width;
 	
 	var pd = "M";
@@ -248,8 +256,15 @@ function addBorder(stroke,idx,nidx,color) {
 	var newPath = true;
 	if (path){
 		newPath = false;
+		if (!stroke){
+			path.parentNode.removeChild(path);
+			return;
+		}
 	}
 	else {
+		if (!stroke){
+			return;
+		}
 		path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	}
 

@@ -16,6 +16,9 @@ function divideWords(strokes) {
 	clearBorders();
 	var pEl = document.createElement("p");
 	for (var i=0;i<strokes.length;i++){
+		if (strokes[i].length==0){
+			continue;
+		}
 		sInfo = {};
 		sumY = 0;
 		nY = 0;
@@ -619,6 +622,70 @@ function addLine(id) {
 			}
 			addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray")
 		}
+	}
+	var newParagraphs = {};
+	for (i in displaySettings['paragraphs']){
+		if (i > id){
+			newParagraphs[i+1]=true;
+		}
+		else {
+			newParagraphs[i]=true;
+		}
+	}
+	displaySettings['paragraphs'] = {};
+	for (i in newParagraphs){
+		displaySettings['paragraphs'][i]=true;
+	}
+}
+function removeLine(id) {
+	for (var i=0;i<strokes.length;i++){
+		sumY = 0;
+		nY = 0;
+		for (var ii=0;ii<strokes[i].length;ii++){
+			sumY += strokes[i][ii].y;
+			nY += 1;
+		}
+		if (nY >0){
+			line = Math.floor((sumY/nY)/100);
+			if (line == id){
+				
+				addStroke(false,i,"black");
+				strokes[i]=[];
+			}
+			else if (line > id){
+				for (var ii=0;ii<strokes[i].length;ii++){
+					strokes[i][ii].y -= 100;
+				}
+				addStroke(strokes[i],i,"black");
+			}
+		}
+	}
+	for (i in borders){
+		var line = parseInt(i.split('-')[0]);
+		if ( line == id){
+			borders[i]=[];
+			addBorder(false,i,(line+1)+"-"+i.split('-')[1],"gray")
+		}
+		else if ( line > id){
+			var newBorder = [];
+			for (var ii=0;ii<borders[i].length;ii++){
+				newBorder.push({x:borders[i][ii].x,y:borders[i][ii].y-100});
+			}
+			addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray")
+		}
+	}
+	var newParagraphs = {};
+	for (i in displaySettings['paragraphs']){
+		if (i >= id){
+			newParagraphs[i-1]=true;
+		}
+		else {
+			newParagraphs[i]=true;
+		}
+	}
+	displaySettings['paragraphs'] = {};
+	for (i in newParagraphs){
+		displaySettings['paragraphs'][i]=true;
 	}
 }
 function addParagraph(id) {
