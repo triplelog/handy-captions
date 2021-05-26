@@ -68,7 +68,7 @@ body {
 <body>
 
 <div id="input" class="input">
-	<svg class="ruled" preserveAspectRatio="xMinYMin meet" height="500px" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<svg class="ruled" preserveAspectRatio="none" height="500px" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		
 		{% for i in range(0,5) %}
 			<path d="M0 {{ i*50 + 30 }} L 400 {{ i*50 + 30 }}" fill="none" stroke="blue" stroke-width="1" />
@@ -81,7 +81,7 @@ body {
 	</svg>
 </div>
 
-<canvas id="output" class="output">
+<canvas id="output" class="output" width="100%" height="2000px">
 		
 </canvas>
 
