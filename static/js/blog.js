@@ -593,5 +593,5 @@ function addLine(id) {
 
 }
 function addParagraph(id) {
-	
+	displaySettings['paragraphs'][id]=true;
 }
