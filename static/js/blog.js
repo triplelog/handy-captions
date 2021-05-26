@@ -172,6 +172,8 @@ function divideWords(strokes) {
 			if (wordsHashed[hash]){
 				var el = wordsHashed[hash];
 				pEl.appendChild(el);
+				wordIds[idArray[wordIdx]]=word;
+				wordIdx++;
 			}
 			else {
 			
