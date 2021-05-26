@@ -213,7 +213,7 @@ function divideWords(strokes) {
 }
 
 function combineMinmax(minmaxArray) {
-	var spaceLength = 100;
+	var spaceLength = 20;
 	var finished = false;
 	while (!finished){
 		finished = true;
