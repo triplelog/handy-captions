@@ -122,7 +122,7 @@ function divideWords(strokes) {
 				buffer.style.flexGrow = "100";
 				buffer.style.border = "0px solid black";
 				outEl.appendChild(buffer);*/
-				
+				outEl.appendChild(pEl);
 			
 				break;
 			}
