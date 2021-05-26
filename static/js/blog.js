@@ -508,6 +508,7 @@ function sizeButton() {
 }
 function quoteButton() {
 	isEdit = "quote";
+	console.log(isEdit);
 }
 function listButton() {
 	isEdit = "list";
