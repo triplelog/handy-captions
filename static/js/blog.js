@@ -160,6 +160,8 @@ function divideWords(strokes) {
 				ulEl[currentList].appendChild(pEl);
 				for (var ii=0;ii<-1*listList[line];ii++){
 					currentList--;
+					console.log(ii,currentList,ulEl[currentList+1]);
+					console.log(ulEl[currentList]);
 					ulEl[currentList].appendChild(ulEl[currentList+1]);
 				}
 				pEl = document.createElement("li");
