@@ -162,7 +162,7 @@ function divideWords(strokes) {
 			pEl = document.createElement("p");
 		}
 		
-		console.log(adjWords[line]);
+		//console.log(adjWords[line]);
 		
 		for (var wIdx in adjWords[line]){
 			var word = adjWords[line][wIdx];
@@ -533,7 +533,6 @@ function editUp(evt){
 			delete selectedWords[key];
 		}
 		else {
-			console.log(mmStrokes,key);
 			addBorder(mmStrokes,wordIds[key]['borderKey'],wordIds[key]['borderKey'],'red');
 			selectedWords[key]=true;
 		}
