@@ -316,7 +316,6 @@ function makeQuotes(quotes) {
 			}
 		}
 		if (deleteQuote){
-			var mainEl = 
 			var els = quoteEls[i].querySelectorAll('svg');
 			for (var ii=0;ii<els.length;ii++){
 				var el = els[ii].cloneNode(true);
