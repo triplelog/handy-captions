@@ -794,19 +794,19 @@ function clearBorders() {
 	borders = {};
 }
 function rightList(id){
-	listLists[id]=1;
+	listList[id]=1;
 }
 function leftList(id){
-	if (listLists[id] && listLists[id] < 0){
-		listLists[id]--;
+	if (listList[id] && listList[id] < 0){
+		listList[id]--;
 	}
 	else {
-		listLists[id]=-1;
+		listList[id]=-1;
 	}
 	
 }
 function continueList(id){
-	listLists[id]=2;
+	listList[id]=2;
 }
 
 function hashStrokes(strokes) {
