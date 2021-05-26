@@ -315,7 +315,8 @@ function editUp(evt){
 		return;
 	}
 	var bcr = evt.currentTarget.getBoundingClientRect();
-	var x = (evt.clientX-bcr.left);
+	var xMul = 800/outputEl.getBoundingClientRect().width;
+	var x = (evt.clientX-bcr.left)*xMul;
 	var y = (evt.clientY-bcr.top);
 	for (key in wordIds){
 		var bb = wordIds[key]['minX']
