@@ -1,6 +1,6 @@
 var wordIds = {};
-var boldWidth = "30";
-var notBoldWidth = "20";
+var boldWidth = "8";
+var notBoldWidth = "5";
 var defaultColor = "black";
 function divideWords(strokes) {
 	strokesInfo = {};
@@ -19,7 +19,7 @@ function divideWords(strokes) {
 		for (var ii=0;ii<strokes[i].length;ii++){
 			sumY += strokes[i][ii].y;
 			nY += 1;
-			if (strokes[i][ii].y%400 > 0 && strokes[i][ii].y%400 < 400){
+			if (strokes[i][ii].y%100 > 0 && strokes[i][ii].y%100 < 100){
 				if (minmaxX[0]==-1 || strokes[i][ii].x < minmaxX[0]){
 					minmaxX[0] = strokes[i][ii].x;
 				}
@@ -35,7 +35,7 @@ function divideWords(strokes) {
 			}
 		}
 		if (nY >0){
-			line = Math.floor((sumY/nY)/400);
+			line = Math.floor((sumY/nY)/100);
 			adjWords[line]={};
 			wordMap[i]={avgX:(fminmaxX[0]+fminmaxX[1])/2,line:line};
 			if (minmaxX[0] >= 0){
@@ -48,7 +48,7 @@ function divideWords(strokes) {
 			}
 		}
 	}
-	var spaceLength = 80;
+	var spaceLength = 20;
 	var lineInfo = {};
 	var wordCount = 0;
 	for (line in strokesInfo){
@@ -58,9 +58,9 @@ function divideWords(strokes) {
 		
 		for (var i=0;i<minmaxArray.length;i++){
 			//console.log(minmaxArray[i]);
-			mmStrokes = [{'x':minmaxArray[i][0],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+240},{'x':minmaxArray[i][1],'y':line*400+80},{'x':minmaxArray[i][0],'y':line*400+80}];
+			mmStrokes = [{'x':minmaxArray[i][0],'y':line*100+20},{'x':minmaxArray[i][0],'y':line*100+60},{'x':minmaxArray[i][1],'y':line*100+60},{'x':minmaxArray[i][1],'y':line*100+20},{'x':minmaxArray[i][0],'y':line*100+20}];
 			addStroke(mmStrokes,'gray');
-			adjWords[line][i]={'left':minmaxArray[i][0],'width':minmaxArray[i][1]-minmaxArray[i][0],'top':line*400+80,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:160,strokes:[]};
+			adjWords[line][i]={'left':minmaxArray[i][0],'width':minmaxArray[i][1]-minmaxArray[i][0],'top':line*100+20,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:40,strokes:[]};
 			wordCount++;
 		}
 		lineInfo[line]=minmaxArray;
@@ -121,7 +121,7 @@ function divideWords(strokes) {
 			if (next == -1){
 				var buffer = document.createElement("div");
 				buffer.style.width = "1px";
-				buffer.style.height = "320px";
+				buffer.style.height = "80px";
 				buffer.style.flexGrow = "100";
 				buffer.style.border = "0px solid black";
 				outEl.appendChild(buffer);
@@ -132,14 +132,14 @@ function divideWords(strokes) {
 			else {
 				var buffer = document.createElement("div");
 				buffer.style.width = "1px";
-				buffer.style.height = "320px";
+				buffer.style.height = "80px";
 				buffer.style.flexGrow = "100";
 				buffer.style.border = "0px solid black";
 				outEl.appendChild(buffer);
 				
 				var newLine = document.createElement("div");
 				newLine.style.width = "100%";
-				newLine.style.height = "320px";
+				newLine.style.height = "80px";
 				newLine.style.flexGrow = "1";
 				outEl.appendChild(newLine);
 				line = next -1;
@@ -154,11 +154,11 @@ function divideWords(strokes) {
 			
 			var el = document.createElement("div");
 			var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-			var width = word['width']+176;
-			var height = word['maxY'] - word['minY']+16;
+			var width = word['width']+44;
+			var height = word['maxY'] - word['minY']+4;
 			var viewBox = '';
-			viewBox += (word['minX']-88)+" ";
-			viewBox += (word['minY']-8)+" ";
+			viewBox += (word['minX']-22)+" ";
+			viewBox += (word['minY']-2)+" ";
 			viewBox += (width)+" ";
 			viewBox += (height);
 			svg.setAttribute('width', width);
@@ -181,7 +181,7 @@ function divideWords(strokes) {
 				}
 				
 			}
-			var pd = "M"+word['minX']+" 160 L"+word['maxX']+" 160";
+			var pd = "M"+word['minX']+" 40 L"+word['maxX']+" 40";
 			var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 			path.setAttributeNS(null,"d",pd);
 			path.setAttributeNS(null,"fill","none");
@@ -189,7 +189,7 @@ function divideWords(strokes) {
 			path.style.display = "none";
 			svg.appendChild(path);
 			
-			el.style.height = "320px";
+			el.style.height = "80px";
 			el.setAttribute('id','word-'+idArray[wordIdx]);
 			el.style.strokeWidth=notBoldWidth;
 			el.style.stroke=defaultColor;
@@ -200,8 +200,8 @@ function divideWords(strokes) {
 			
 			outEl.appendChild(el);
 			var buffer = document.createElement("div");
-			buffer.style.width = "4px";
-			buffer.style.height = "320px";
+			buffer.style.width = "1px";
+			buffer.style.height = "80px";
 			buffer.style.flexGrow = "1";
 			buffer.style.border = "0px solid black";
 			outEl.appendChild(buffer);
@@ -320,17 +320,17 @@ function editUp(evt){
 		return;
 	}
 	var bcr = evt.currentTarget.getBoundingClientRect();
-	var x = (evt.clientX-bcr.left)*4;
-	var y = (evt.clientY-bcr.top)*4;
+	var x = (evt.clientX-bcr.left);
+	var y = (evt.clientY-bcr.top);
 	for (key in wordIds){
 		var bb = wordIds[key]['minX']
 		if (x < wordIds[key]['left'] || x > wordIds[key]['left']+wordIds[key]['width']){
 			continue;
 		}
-		if (y < wordIds[key]['top'] || y > wordIds[key]['top']+160){
+		if (y < wordIds[key]['top'] || y > wordIds[key]['top']+40){
 			continue;
 		}
-		mmStrokes = [{'x':wordIds[key]['left'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']+160},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']+160},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']}];
+		mmStrokes = [{'x':wordIds[key]['left'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']}];
 			
 		if (selectedWords[key]){
 			addStroke(mmStrokes,'gray');
