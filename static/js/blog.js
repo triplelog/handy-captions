@@ -533,6 +533,7 @@ function editUp(evt){
 			delete selectedWords[key];
 		}
 		else {
+			console.log(mmStrokes,key);
 			addBorder(mmStrokes,wordIds[key]['borderKey'],wordIds[key]['borderKey'],'red');
 			selectedWords[key]=true;
 		}
