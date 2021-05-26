@@ -160,7 +160,7 @@ function divideWords(strokes) {
 			viewBox += (height);
 			svg.setAttribute('width', width);
 			svg.setAttribute('height', height);
-			svg.setAttribute('data-blp', (40+word['minY']+2)/(height));
+			svg.setAttribute('data-blp', (40-word['minY']+2)/(height));
 			svg.setAttribute('data-top', 20+word['minY']-2);
 			svg.style.top = (20+word['minY']-2)+"px";
 			svg.style.position = "relative";
