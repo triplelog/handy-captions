@@ -171,9 +171,10 @@ function divideWords(strokes) {
 			
 			if (wordsHashed[hash]){
 				var el = wordsHashed[hash];
-				pEl.appendChild(el);
 				wordIds[idArray[wordIdx]]=word;
+				el.setAttribute('id','word-'+idArray[wordIdx]);
 				wordIdx++;
+				pEl.appendChild(el);
 			}
 			else {
 			
