@@ -194,6 +194,36 @@ function addStroke(stroke,color) {
 	outputEl.appendChild(path);
 	
 }
+function addBorder(stroke,color) {
+	var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+	
+	var pd = "M";
+	if (stroke.length < 1){
+		return;
+	}
+	else if (stroke.length < 2){
+		pd += (stroke[0].x-2)+" "+(stroke[0].y-2);
+		pd += " "+(stroke[0].x-2)+" "+(stroke[0].y+2);
+		pd += " "+(stroke[0].x+2)+" "+(stroke[0].y+2);
+		pd += " "+(stroke[0].x+2)+" "+(stroke[0].y-2);
+		pd += "Z";
+	}
+	else {
+		pd += stroke[0].x+" "+stroke[0].y;
+		for (var i=1;i<stroke.length;i++){
+			pd += " "+stroke[i].x+" "+stroke[i].y;
+		}
+	}
+
+
+	
+	path.setAttributeNS(null,"d",pd);
+	path.setAttributeNS(null,"stroke",color);
+	path.setAttributeNS(null,"stroke-width","2");
+	path.setAttributeNS(null,"fill","none");
+	outputEl.appendChild(path);
+	
+}
 
 function grabWords(){
 	divideWords(strokes);

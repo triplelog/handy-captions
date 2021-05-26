@@ -60,7 +60,7 @@ function divideWords(strokes) {
 		for (var i=0;i<minmaxArray.length;i++){
 			//console.log(minmaxArray[i]);
 			mmStrokes = [{'x':minmaxArray[i][0],'y':line*100+20},{'x':minmaxArray[i][0],'y':line*100+60},{'x':minmaxArray[i][1],'y':line*100+60},{'x':minmaxArray[i][1],'y':line*100+20},{'x':minmaxArray[i][0],'y':line*100+20}];
-			addStroke(mmStrokes,'gray');
+			addBorder(mmStrokes,'gray');
 			adjWords[line][i]={'left':minmaxArray[i][0],'width':minmaxArray[i][1]-minmaxArray[i][0],'top':line*100+20,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:40,strokes:[]};
 			wordCount++;
 		}
@@ -97,13 +97,7 @@ function divideWords(strokes) {
 			}
 			adjStrokes.push({x:x,y:y});
 		}
-		console.log(adjStrokes);
 		adjWords[line][id]['strokes'].push(adjStrokes);
-		
-		console.log(id);
-		
-		addStroke(strokes[i],'rgb('+(id*255/lineInfo[line].length)+',0,0)');
-		
 		
 	}
 	var idArray = new Uint32Array(wordCount);
@@ -334,11 +328,11 @@ function editUp(evt){
 		mmStrokes = [{'x':wordIds[key]['left'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']}];
 			
 		if (selectedWords[key]){
-			addStroke(mmStrokes,'gray');
+			addBorder(mmStrokes,'gray');
 			delete selectedWords[key];
 		}
 		else {
-			addStroke(mmStrokes,'red');
+			addBorder(mmStrokes,'red');
 			selectedWords[key]=true;
 		}
 		break;
