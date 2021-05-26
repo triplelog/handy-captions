@@ -620,6 +620,10 @@ function addLine(id) {
 			maxLine= line;
 		}
 	}
+	var newBorders = {};
+	for (i in borders){
+		newBorders[i]=borders[i];
+	}
 	for (var iii=maxLine;iii>id;iii--){
 		for (i in borders){
 			var line = parseInt(i.split('-')[0]);
@@ -628,9 +632,15 @@ function addLine(id) {
 				for (var ii=0;ii<borders[i].length;ii++){
 					newBorder.push({x:borders[i][ii].x,y:borders[i][ii].y+100});
 				}
-				addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray")
+				addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray");
+				newBorders[(line+1)+"-"+i.split('-')[1]]=newBorder;
+				delete newBorders[i];
 			}
 		}
+	}
+	borders = {};
+	for (i in newBorders){
+		borders[i]=newBorders[i];
 	}
 	var newParagraphs = {};
 	for (i in displaySettings['paragraphs']){
@@ -669,6 +679,10 @@ function removeLine(id) {
 			}
 		}
 	}
+	var newBorders = {};
+	for (i in borders){
+		newBorders[i]=borders[i];
+	}
 	var maxLine = 0;
 	for (i in borders){
 		var line = parseInt(i.split('-')[0]);
@@ -681,16 +695,23 @@ function removeLine(id) {
 			var line = parseInt(i.split('-')[0]);
 			if ( line == id && line == iii){
 				borders[i]=[];
-				addBorder(false,i,i,"gray")
+				addBorder(false,i,i,"gray");
+				delete newBorders[i];
 			}
 			else if ( line == iii){
 				var newBorder = [];
 				for (var ii=0;ii<borders[i].length;ii++){
 					newBorder.push({x:borders[i][ii].x,y:borders[i][ii].y-100});
 				}
-				addBorder(newBorder,i,(line-1)+"-"+i.split('-')[1],"gray")
+				addBorder(newBorder,i,(line-1)+"-"+i.split('-')[1],"gray");
+				newBorders[(line-1)+"-"+i.split('-')[1]]=newBorder;
+				delete newBorders[i];
 			}
 		}
+	}
+	borders = {};
+	for (i in newBorders){
+		borders[i]=newBorders[i];
 	}
 	var newParagraphs = {};
 	for (i in displaySettings['paragraphs']){
