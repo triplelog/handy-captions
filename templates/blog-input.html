@@ -28,7 +28,6 @@ body {
 	display: inline-block;
 	height: 500px;
 	width: 800px;
-	border: 1px solid black;
 	
 }
 .output {
@@ -68,34 +67,15 @@ body {
 
 <div id="input" class="input">
 	<svg class="ruled" width="800px" height="500px" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<path d="M0 30 L 400 30" fill="none" stroke="blue" stroke-width="1" />
-		<path d="M0 20 L 400 20" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 10 L 400 10" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 40 L 400 40" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
 		
-		<path d="M0 50 L 400 50" fill="none" stroke="black" stroke-width="2" />
-		<path d="M0 80 L 400 80" fill="none" stroke="blue" stroke-width="1" />
-		<path d="M0 70 L 400 70" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 60 L 400 60" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 90 L 400 90" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
+		{% for i in range(0,5) %}
+			<path d="M0 {{ i*50 + 30 }} L 400 {{ i*50 + 30 }}" fill="none" stroke="blue" stroke-width="1" />
+			<path d="M0 {{ i*50 + 20 }} L 400 {{ i*50 + 20 }}" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
+			<path d="M0 {{ i*50 + 10 }} L 400 {{ i*50 + 10 }}" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
+			<path d="M0 {{ i*50 + 40 }} L 400 {{ i*50 + 40 }}" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
+			<path d="M0 {{ i*50 + 5 }} L 400 {{ i*50 + 5 }} 400 {{ i*50 + 45 }} 0 {{ i*50 + 45 }}Z" fill="none" stroke="black" stroke-width="1" />
+		{% endfor %}
 		
-		<path d="M0 100 L 400 100" fill="none" stroke="black" stroke-width="2" />
-		<path d="M0 130 L 400 130" fill="none" stroke="blue" stroke-width="1" />
-		<path d="M0 120 L 400 120" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 110 L 400 110" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 140 L 400 140" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		
-		<path d="M0 150 L 400 150" fill="none" stroke="black" stroke-width="2" />
-		<path d="M0 180 L 400 180" fill="none" stroke="blue" stroke-width="1" />
-		<path d="M0 170 L 400 170" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 160 L 400 160" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 190 L 400 190" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		
-		<path d="M0 200 L 400 200" fill="none" stroke="black" stroke-width="2" />
-		<path d="M0 230 L 400 230" fill="none" stroke="blue" stroke-width="1" />
-		<path d="M0 220 L 400 220" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 210 L 400 210" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
-		<path d="M0 240 L 400 240" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="1 1" />
 	</svg>
 </div>
 
