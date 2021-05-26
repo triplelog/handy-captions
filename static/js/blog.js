@@ -314,7 +314,7 @@ function makeFontSize(id,size=false) {
 		svg.setAttribute('data-width', w);
 		svg.setAttribute('data-height', h);
 		svg.style.top = (h - h*parseFloat(size))+"px";
-		svg.style.position = "absolute";
+		svg.style.position = "relative";
 	}
 	else{
 		
