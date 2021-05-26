@@ -615,9 +615,8 @@ function addLine(id) {
 		if ( line > id){
 			var newBorder = [];
 			for (var ii=0;ii<borders[i].length;ii++){
-				newBorder.push({x:borders[i].x,y:borders[i].y+100});
+				newBorder.push({x:borders[i][ii].x,y:borders[i][ii].y+100});
 			}
-			console.log(borders[i],newBorder);
 			addBorder(newBorder,i,(line+1)+"-"+i.split('-')[1],"gray")
 		}
 	}
