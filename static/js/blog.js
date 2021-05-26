@@ -114,28 +114,29 @@ function divideWords(strokes) {
 				}
 			}
 			if (next == -1){
-				var buffer = document.createElement("div");
+				/*var buffer = document.createElement("div");
 				buffer.style.width = "1px";
 				buffer.style.height = "80px";
 				buffer.style.flexGrow = "100";
 				buffer.style.border = "0px solid black";
-				outEl.appendChild(buffer);
+				outEl.appendChild(buffer);*/
 				
 			
 				break;
 			}
 			else {
-				var buffer = document.createElement("div");
+				/*var buffer = document.createElement("div");
 				buffer.style.width = "1px";
 				buffer.style.height = "80px";
 				buffer.style.flexGrow = "100";
 				buffer.style.border = "0px solid black";
-				outEl.appendChild(buffer);
+				outEl.appendChild(buffer);*/
 				
 				var newLine = document.createElement("div");
 				newLine.style.width = "100%";
 				newLine.style.height = "80px";
-				newLine.style.flexGrow = "1";
+				//newLine.style.flexGrow = "1";
+				newLine.style.display = "inline-block";
 				outEl.appendChild(newLine);
 				line = next -1;
 			}
@@ -188,18 +189,20 @@ function divideWords(strokes) {
 			el.setAttribute('id','word-'+idArray[wordIdx]);
 			el.style.strokeWidth=notBoldWidth;
 			el.style.stroke=defaultColor;
+			el.style.display = "inline-block";
+			el.style.marginRight = "25px";
 			wordIds[idArray[wordIdx]]=word;
 			wordIdx++;
 			el.appendChild(svg);
 			
 			
 			outEl.appendChild(el);
-			var buffer = document.createElement("div");
+			/*var buffer = document.createElement("div");
 			buffer.style.width = "1px";
 			buffer.style.height = "80px";
 			buffer.style.flexGrow = "1";
 			buffer.style.border = "0px solid black";
-			outEl.appendChild(buffer);
+			outEl.appendChild(buffer);*/
 		}    
 		
 	}
@@ -295,6 +298,26 @@ function makeColor(id,addColor=false) {
 	}
 	else{
 		el.style.stroke=defaultColor;
+	}
+}
+
+
+
+function makeFontSize(id,size=false) {
+	var el = document.getElementById('word-'+id).querySelector("svg");
+	if (!el){return;}
+	if (size){
+		var w = svg.getAttribute('data-width') || svg.getAttribute('width');
+		var h = svg.getAttribute('data-height') || svg.getAttribute('height');
+		svg.setAttribute('width', w*size);
+		svg.setAttribute('height', h*size);
+		svg.setAttribute('data-width', w);
+		svg.setAttribute('data-height', h);
+		svg.style.top = (h - h*size)+"px";
+		svg.style.position = "absolute";
+	}
+	else{
+		
 	}
 }
 
