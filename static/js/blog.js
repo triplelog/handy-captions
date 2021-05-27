@@ -970,8 +970,9 @@ function createPD(currentCurve){
 	return pd;
 }
 function curveRound(x){
-	var xx = x*10;
-	return Math.round(xx)/10;
+	//var xx = x*10;
+	//return Math.round(xx)/10;
+	return Math.round(x);
 }
 function nearestBezier(a,b,c,d,e,f,x,y){
 	//a,b,c are x-coordinates of 3 bezierpoints

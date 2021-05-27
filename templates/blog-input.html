@@ -123,6 +123,7 @@ blockquote:before {
 	<button onclick="grabWords();">Group</button>
 	<button onclick="swapMode();">Mode</button>
 	<button onclick="save();">Save</button>
+	<button onclick="load();">Load</button>
 	<button onclick="showNewButtons();">ShowNew</button>
 	<button onclick="showListButtons();">ShowList</button>
 	<button onclick="editMode();">Edit</button>
@@ -137,6 +138,7 @@ blockquote:before {
 	<input type="text" id="linkURL"></input>
 	<button onclick="sizeButton();">Size</button>
 	<input type="text" id="fontSize"></input>
+	<span id="strLength"></span>
 	<!--<button onclick="downloadImage();">Download</button>-->
 </div>
 <script src="../js/blog.js"></script>
@@ -357,6 +359,8 @@ function swapMode() {
 		var el3 = document.getElementById("finalOutput");
 		el2.style.display = "none";
 		el3.style.display = "block";
+		var len = el3.outerHTML.length;
+		document.getElementById("strLength").innerHTML = len;
 	}
 	else {
 		el.style.display = "inline-block";
