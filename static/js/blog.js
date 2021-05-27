@@ -634,9 +634,6 @@ function editUp(evt){
 		
 		
 	}
-	else if (sKey && isEdit == "list"){
-	
-	}
 	else if (sKey){
 		var key = sKey;
 		mmStrokes = [{'x':wordIds[key]['left'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']}];
@@ -719,10 +716,7 @@ function quoteButton() {
 	isEdit = "quote";
 	outputEl.style.pointerEvents = "all";
 }
-function listButton() {
-	isEdit = "list";
-	outputEl.style.pointerEvents = "all";
-}
+
 function addLine(id) {
 	addVertical();
 	for (var i=0;i<strokes.length;i++){
@@ -921,9 +915,9 @@ function simplifyStroke(currentCurve){
 	newStroke.push({x:currentCurve[0].x,y:currentCurve[0].y});
 	var initialCL = currentCurve.length;
 	var maxminD2 = 0.02;
-	var maxCL = initialCL / 2 + 5;
+	var maxCL = initialCL + 5;
 	//maxCL = 25;
-	console.log(initialCL);
+	//console.log(initialCL);
 	while (currentCurve.length > maxCL){
 		var minDiff = -1;
 		for (var i=1; i<currentCurve.length - 2; i++){
