@@ -150,7 +150,12 @@ ws.onopen = function(evt) {
 }
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
-	console.log(dm);
+	if (dm.type == "load"){
+		wordsHashed = dm.wordsHashed;
+		strokes = dm.strokes;
+		displaySettings = dm.displaySettings;
+		divideWords(strokes);
+	}
 }
 
 

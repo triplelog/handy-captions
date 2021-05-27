@@ -850,6 +850,11 @@ function save() {
 	ws.send(JSON.stringify(jsonmessage));
 }
 
+function load() {
+	var jsonmessage = {type:'load'};
+	ws.send(JSON.stringify(jsonmessage));
+}
+
 function hashStrokes(strokes) {
 	var str = "str";
 	for (var i=0;i<strokes.length;i++){

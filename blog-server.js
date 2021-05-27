@@ -206,6 +206,8 @@ const server = https.createServer(options, (req, res) => {
 const WebSocket = require('ws');
 //const wss = new WebSocket.Server({ port: 8080 , origin: 'http://tabdn.com'});
 const wss = new WebSocket.Server({ server });
+
+var savedJSON = {};
 wss.on('connection', function connection(ws) {
   	console.log("ws connected");
   	ws.on('message', function incoming(message) {
@@ -221,7 +223,12 @@ wss.on('connection', function connection(ws) {
 			});
   		}
   		else if (dm.type == "save"){
+  			dm.type = "load";
   			console.log(JSON.stringify(dm).length);
+  			savedJSON = JSON.stringify(dm);
+  		}
+  		else if (dm.type == "load"){
+  			ws.send(savedJSON);
   		}
 		
   	});
