@@ -185,6 +185,16 @@ function inputMove(evt) {
 		var y = evt.clientY-bcr.top;
 		currentStroke.push({'x':x,'y':y});
 	}
+	var isGood = false;
+	for (var i=0;i<currentStroke.length;i++){
+		if (currentStroke[i].y%100 >= 20 && currentStroke[i].y%100 <= 80){
+			isGood = true;
+			break;
+		}
+	}
+	if (isGood){
+		addStroke(currentStroke,strokes.length,'black');
+	}
 }
 function inputUp(evt) {
 	if (isDown){

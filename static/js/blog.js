@@ -189,8 +189,6 @@ function divideWords(strokes) {
 				ulEl[currentList].appendChild(pEl);
 				for (var ii=0;ii<-1*listList[line];ii++){
 					currentList--;
-					console.log(ii,currentList,ulEl[currentList+1]);
-					console.log(ulEl[currentList]);
 					if (currentList == 0){
 						outEl.appendChild(ulEl[1]);
 					}
@@ -216,9 +214,8 @@ function divideWords(strokes) {
 			}
 			else if (currentList > 0){//new item
 				ulEl[currentList].appendChild(pEl);
-				pEl = document.createElement("p");
+				pEl = document.createElement("li");
 			}
-			console.log(ulEl);
 		}
 		else if (displaySettings['paragraphs'][line-1]) {
 			
@@ -266,10 +263,11 @@ function divideWords(strokes) {
 				for (var i=0;i<word['strokes'].length;i++) {
 					var s = word['strokes'][i];
 					if (s.length > 1){
-						var pd = "M"+s[0].x+" "+s[0].y;
+						var pd = createPD(s);
+						/*var pd = "M"+s[0].x+" "+s[0].y;
 						for (var ii=1;ii<s.length;ii++) {
 							pd += " L"+s[ii].x+" "+s[ii].y;
-						}
+						}*/
 						var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 						path.setAttributeNS(null,"d",pd);
 						path.setAttributeNS(null,"fill","none");
@@ -869,3 +867,78 @@ const cyrb53 = function(str, seed = 0) {
     h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
     return 4294967296 * (2097151 & h2) + (h1>>>0);
 };
+function createPD(currentCurve){
+	var pd = "M"; 
+	var curvedPath = [];
+	pd += " " + curveRound(currentCurve[0].x);
+	pd += " " + curveRound(currentCurve[0].y);
+	curvedPath.push([curveRound(currentCurve[0].x),curveRound(currentCurve[0].y)]);
+	console.log(currentCurve.length);
+	var initialCL = currentCurve.length;
+	var maxminD2 = 0.005;
+	var maxCL = initialCL / 4 + 5;
+	maxCL = 25;
+	console.log(initialCL);
+	while (currentCurve.length > maxCL){
+		for (var i=1; i<currentCurve.length - 2; i++){
+			var minD2 = nearestBezier(currentCurve[i-1].x,currentCurve[i].x,currentCurve[i+2].x,currentCurve[i-1].y,currentCurve[i].y,currentCurve[i+2].y, currentCurve[i+1].x, currentCurve[i+1].y);
+			console.log(minD2);
+			if (minD2 < maxminD2){
+				currentCurve.splice(i+1,1);
+				i--;
+				continue;
+			}
+			
+		}
+		maxminD2 += 0.005;
+	}
+	for (var i=1; i<currentCurve.length - 2; i++){
+		pd += " Q " + curveRound(currentCurve[i].x);
+		pd += " " + curveRound(currentCurve[i].y);
+		var xc = (currentCurve[i].x + currentCurve[i+1].x) / 2;
+		var yc = (currentCurve[i].y + currentCurve[i+1].y) / 2;
+		pd += " " + curveRound(xc);
+		pd += " " + curveRound(yc);
+	}
+	if (currentCurve.length > 1){
+		pd += " Q " + curveRound(currentCurve[currentCurve.length - 2].x);
+		pd += " " + curveRound(currentCurve[currentCurve.length - 2].y);
+	}
+	pd += " " + curveRound(currentCurve[currentCurve.length - 1].x);
+	pd += " " + curveRound(currentCurve[currentCurve.length - 1].y);
+	
+	return pd;
+}
+function curveRound(x){
+	var xx = x*10;
+	return Math.round(xx)/10;
+}
+function nearestBezier(a,b,c,d,e,f,x,y){
+	//a,b,c are x-coordinates of 3 bezierpoints
+	//d,e,f are y-coordinates
+	//x,y are coordinates of point to match
+	/*var aa = 4*a^2-16*a*b+8*a*c + 16*b^2 - 16*b*c + 4*c^2 + 4*d^2 - 16*d*e + 8*d*f + 16*e^2 - 16*e*f + 4*f^2;
+	var bb = -12*a^2 + 36*a*b - 12*a*c - 24*b^2 + 12*b*c - 12*d^2 + 36*d*e - 12*d*f - 24*e^2 + 12*e*f;
+	var cc = 12*a^2 - 24*a*b + 4*a*c - 4*a*x + 8*b^2 + 8*b*x - 4*c*x + 12*d^2 - 24*d*e + 4*d*f - 4*d*y + 8*e^2 +8*e*y - 4*f*y;
+	var dd = -4*a^2  + 4*a*b + 4*a*x - 4*b*x  - 4*d^2 + 4*d*e + 4*d*y - 4*e*y;
+	
+	var p = -1*bb/(3*aa);
+	var q = p^3 + (bb*cc - 3*aa*dd)/(6*aa^2);
+	var r = cc/(3*aa);
+	
+	var t = Math.pow(q+(q^2+(r-p^2)^3)^.5,.3333) + Math.pow(q-(q^2+(r-p^2)^3)^.5,.3333) + p;*/
+	var min = [0,0];
+	for (var i=0;i<9;i++){
+		var t = 0.125*i;
+		var d2 = Math.pow(Math.pow(1-t,2)*a+2*t*(1-t)*b+t*t*c - x,2) + Math.pow(Math.pow(1-t,2)*d+2*t*(1-t)*e+t*t*f - y,2);
+		if (i==0){
+			min[1] = d2;
+		}
+		else if (d2 < min[1]){
+			min[1] = d2;
+			min[0] = i;
+		}
+	}
+	return d2;
+	
+}
