@@ -873,24 +873,28 @@ function createPD(currentCurve){
 	pd += " " + curveRound(currentCurve[0].x);
 	pd += " " + curveRound(currentCurve[0].y);
 	curvedPath.push([curveRound(currentCurve[0].x),curveRound(currentCurve[0].y)]);
-	console.log(currentCurve.length);
 	var initialCL = currentCurve.length;
-	var maxminD2 = 0.05;
+	var maxminD2 = 0.02;
 	var maxCL = initialCL / 4 + 5;
 	//maxCL = 25;
 	console.log(initialCL);
 	while (currentCurve.length > maxCL){
+		var minDiff = -1;
 		for (var i=1; i<currentCurve.length - 2; i++){
 			var minD2 = nearestBezier(currentCurve[i-1].x,currentCurve[i].x,currentCurve[i+2].x,currentCurve[i-1].y,currentCurve[i].y,currentCurve[i+2].y, currentCurve[i+1].x, currentCurve[i+1].y);
 			//console.log(minD2);
 			if (minD2 < maxminD2){
 				currentCurve.splice(i+1,1);
 				i--;
+				if (currentCurve.length < maxCL){break;}
 				continue;
+			}
+			else if (minD2 - maxminD2 < minDiff || minDiff == -1){
+				minDiff = minD2 - maxminD2;
 			}
 			
 		}
-		maxminD2 += 0.05;
+		maxminD2 += Math.max(0.02,minDiff+0.02);
 	}
 	for (var i=1; i<currentCurve.length - 2; i++){
 		pd += " Q " + curveRound(currentCurve[i].x);
