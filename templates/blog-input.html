@@ -383,6 +383,9 @@ function addVertical() {
 	console.log("adding line");
 	maxHeight += 100;
 	inputEl.style.height = maxHeight+"px";
+	var svgOut = document.querySelector("svg.output");
+	svgOut.setAttributeNS(null,'height',maxHeight+"px");
+	svgOut.setAttributeNS(null,'viewBox','0 0 800 '+(maxHeight));
 	var svg = document.querySelector("svg.ruled");
 	svg.setAttributeNS(null,'height',maxHeight+"px");
 	svg.setAttributeNS(null,'viewBox','0 0 400 '+(maxHeight/2));
