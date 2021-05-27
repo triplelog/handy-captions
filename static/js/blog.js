@@ -882,7 +882,7 @@ function simplifyStroke(currentCurve){
 	newStroke.push({x:currentCurve[0].x,y:currentCurve[0].y});
 	var initialCL = currentCurve.length;
 	var maxminD2 = 0.02;
-	var maxCL = initialCL / 4 + 5;
+	var maxCL = initialCL / 2 + 5;
 	//maxCL = 25;
 	console.log(initialCL);
 	while (currentCurve.length > maxCL){
