@@ -111,9 +111,9 @@ function divideWords(strokes) {
 		adjWords[line][id]['strokes'].push(adjStrokes);
 		
 	}
-	var idArray = new Uint32Array(wordCount);
-	let cryptoObj = window.crypto || window.msCrypto;
-	window.crypto.getRandomValues(idArray);
+	//var idArray = new Uint32Array(wordCount);
+	//let cryptoObj = window.crypto || window.msCrypto;
+	//window.crypto.getRandomValues(idArray);
 	var wordIdx = 0;
 	var currentList = 0;
 	for (var line=0;line<1000;line++){
@@ -231,8 +231,8 @@ function divideWords(strokes) {
 				console.log("hashed",hash,word);
 				var el = wordsHashed[hash].el;
 				console.log(el);
-				wordIds[idArray[wordIdx]]=word;
-				el.setAttribute('id','word-'+idArray[wordIdx]);
+				wordIds[hash]=word;
+				el.setAttribute('id','word-'+hash);
 				wordIdx++;
 				pEl.appendChild(el);
 			}
@@ -282,13 +282,13 @@ function divideWords(strokes) {
 				svg.appendChild(path);
 			
 				el.style.height = "80px";
-				el.setAttribute('id','word-'+idArray[wordIdx]);
+				el.setAttribute('id','word-'+hash);
 				el.setAttribute('data-hash',hash);
 				el.style.strokeWidth=displaySettings.notBoldWidth;
 				el.style.stroke=displaySettings.defaultColor;
 				el.style.display = "inline-block";
 				el.style.marginRight = "25px";
-				wordIds[idArray[wordIdx]]=word;
+				wordIds[hash]=word;
 				wordIdx++;
 				el.appendChild(svg);
 			
@@ -297,12 +297,12 @@ function divideWords(strokes) {
 				pEl.appendChild(el);
 				if (wordsHashed[hash]){
 					wordsHashed[hash].el=el.cloneNode(true);
-					if (wordsHashed[hash].data.bold){makeBold(el,idArray[wordIdx]);}
-					if (wordsHashed[hash].data.italics){makeItalics(el,idArray[wordIdx]);}
-					if (wordsHashed[hash].data.link){makeLink(el,idArray[wordIdx],wordsHashed[hash].data.link);}
-					if (wordsHashed[hash].data.underline){makeUnderline(el,idArray[wordIdx]);}
-					if (wordsHashed[hash].data.color){makeColor(el,idArray[wordIdx],wordsHashed[hash].data.color);}
-					if (wordsHashed[hash].data.size){makeFontSize(el,idArray[wordIdx],wordsHashed[hash].data.size);}
+					if (wordsHashed[hash].data.bold){makeBold(el,hash);}
+					if (wordsHashed[hash].data.italics){makeItalics(el,hash);}
+					if (wordsHashed[hash].data.link){makeLink(el,hash,wordsHashed[hash].data.link);}
+					if (wordsHashed[hash].data.underline){makeUnderline(el,hash);}
+					if (wordsHashed[hash].data.color){makeColor(el,hash,wordsHashed[hash].data.color);}
+					if (wordsHashed[hash].data.size){makeFontSize(el,hash,wordsHashed[hash].data.size);}
 				}
 				else {
 					wordsHashed[hash]={el:el.cloneNode(true),data:{}};
