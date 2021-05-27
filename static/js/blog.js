@@ -230,6 +230,7 @@ function divideWords(strokes) {
 			if (wordsHashed[hash]){
 				console.log("hashed",hash,word);
 				var el = wordsHashed[hash];
+				console.log(el);
 				wordIds[idArray[wordIdx]]=word;
 				el.setAttribute('id','word-'+idArray[wordIdx]);
 				wordIdx++;
