@@ -299,7 +299,10 @@ function divideWords(strokes) {
 					console.log(wordsHashed[hash]);
 					wordsHashed[hash].el=el.cloneNode(true);
 					
-					if (wordsHashed[hash].data.bold){makeBold(idArray[wordIdx]);}
+					if (wordsHashed[hash].data.bold){
+						console.log(wordsHashed[hash].data.bold);
+						el.style.strokeWidth=displaySettings.boldWidth;
+					}
 				}
 				else {
 					wordsHashed[hash]={el:el.cloneNode(true),data:{}};
