@@ -388,7 +388,7 @@ function addVertical() {
 	svg.setAttributeNS(null,'viewBox','0 0 400 '+(maxHeight/2));
 	
 	var ii = (maxHeight-100)/2;
-	for (var i=0;i<50;i+=10) {
+	for (var i=10;i<50;i+=10) {
 		var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 		var pd = "M0 "+(ii + i)+" L400 "+(ii + i);
 		path.setAttributeNS(null,'d',pd);
