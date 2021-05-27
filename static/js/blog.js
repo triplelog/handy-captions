@@ -91,7 +91,9 @@ function divideWords(strokes) {
 			}
 		}
 		var adjStrokes = [];
+		adjWords[line][id]['sidx']=i;
 		for (var ii=0;ii<strokes[i].length;ii++){
+			
 			var x = strokes[i][ii].x*xMul - adjWords[line][id]['left'];
 			var y = strokes[i][ii].y - adjWords[line][id]['top'];
 			if (x > adjWords[line][id]['maxX']){
@@ -261,7 +263,7 @@ function divideWords(strokes) {
 				for (var i=0;i<word['strokes'].length;i++) {
 					var s = word['strokes'][i];
 					if (s.length > 1){
-						var pd = createPD(s);
+						var pd = createPD(s,word['sidx']);
 						/*var pd = "M"+s[0].x+" "+s[0].y;
 						for (var ii=1;ii<s.length;ii++) {
 							pd += " L"+s[ii].x+" "+s[ii].y;
@@ -924,7 +926,7 @@ function createPD(currentCurve,sidx){
 	pd += " " + curveRound(currentCurve[currentCurve.length - 1].x);
 	pd += " " + curveRound(currentCurve[currentCurve.length - 1].y);
 	newStrokes.push({x:currentCurve[currentCurve.length - 1].x,y:currentCurve[currentCurve.length - 1].y});
-	//strokes[sidx]=newStrokes;
+	strokes[sidx]=newStrokes;
 	return pd;
 }
 function curveRound(x){
