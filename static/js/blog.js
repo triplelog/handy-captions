@@ -1,11 +1,8 @@
 var wordIds = {};
-var boldWidth = "6";
-var notBoldWidth = "3";
-var defaultColor = "black";
-var displaySettings = {'paragraphs':{}};
+
 var borders = {};
 var wordsHashed = {};
-var listList = {};
+var displaySettings = {'paragraphs':{},defaultColor:'black',notBoldWidth:"3",boldWidth:"6",listList:{}};
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
@@ -170,24 +167,24 @@ function divideWords(strokes) {
 			}
 			continue;
 		}
-		else if (currentList > 0 || listList[line]==1){
-			console.log(line,currentList,listList[line]);
-			if (listList[line]==1 && currentList == 0){//start of new list
+		else if (currentList > 0 || displaySettings.listList[line]==1){
+			console.log(line,currentList,displaySettings.listList[line]);
+			if (displaySettings.listList[line]==1 && currentList == 0){//start of new list
 				outEl.appendChild(pEl);
 				pEl = document.createElement("li");
 				ulEl[1]=document.createElement("ul");
 				currentList++;
 			}
-			else if (listList[line]==1 && currentList > 0){//new nesting
+			else if (displaySettings.listList[line]==1 && currentList > 0){//new nesting
 				ulEl[currentList].appendChild(pEl);
 				currentList++;
 				ulEl[currentList]=document.createElement("ul");
 				pEl = document.createElement("li");
 				
 			}
-			else if (listList[line]<0 && currentList > 1){//nesting ends
+			else if (displaySettings.listList[line]<0 && currentList > 1){//nesting ends
 				ulEl[currentList].appendChild(pEl);
-				for (var ii=0;ii<-1*listList[line];ii++){
+				for (var ii=0;ii<-1*displaySettings.listList[line];ii++){
 					currentList--;
 					if (currentList == 0){
 						outEl.appendChild(ulEl[1]);
@@ -203,13 +200,13 @@ function divideWords(strokes) {
 					pEl = document.createElement("li");
 				}
 			}
-			else if (listList[line]<0 && currentList == 1){//List ends
+			else if (displaySettings.listList[line]<0 && currentList == 1){//List ends
 				ulEl[1].appendChild(pEl);
 				outEl.appendChild(ulEl[1]);
 				pEl = document.createElement("p");
 				currentList--;
 			}
-			else if (listList[line]==2 && currentList > 0){//continuation of last line
+			else if (displaySettings.listList[line]==2 && currentList > 0){//continuation of last line
 				
 			}
 			else if (currentList > 0){//new item
@@ -286,8 +283,8 @@ function divideWords(strokes) {
 				el.style.height = "80px";
 				el.setAttribute('id','word-'+idArray[wordIdx]);
 				el.setAttribute('data-hash',hash);
-				el.style.strokeWidth=notBoldWidth;
-				el.style.stroke=defaultColor;
+				el.style.strokeWidth=displaySettings.notBoldWidth;
+				el.style.stroke=displaySettings.defaultColor;
 				el.style.display = "inline-block";
 				el.style.marginRight = "25px";
 				wordIds[idArray[wordIdx]]=word;
@@ -336,10 +333,10 @@ function makeBold(id,addBold=true) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
 	if (addBold){
-		el.style.strokeWidth=boldWidth;
+		el.style.strokeWidth=displaySettings.boldWidth;
 	}
 	else{
-		el.style.strokeWidth=notBoldWidth;
+		el.style.strokeWidth=displaySettings.notBoldWidth;
 	}
 	var hash = el.getAttribute('data-hash');
 	wordsHashed[hash]=el.cloneNode(true);
@@ -401,7 +398,7 @@ function makeColor(id,addColor=false) {
 		el.style.stroke=addColor;
 	}
 	else{
-		el.style.stroke=defaultColor;
+		el.style.stroke=displaySettings.defaultColor;
 	}
 	var hash = el.getAttribute('data-hash');
 	wordsHashed[hash]=el.cloneNode(true);
@@ -834,19 +831,23 @@ function clearBorders() {
 	borders = {};
 }
 function rightList(id){
-	listList[id]=1;
+	displaySettings.listList[id]=1;
 }
 function leftList(id){
-	if (listList[id] && listList[id] < 0){
-		listList[id]--;
+	if (displaySettings.listList[id] && displaySettings.listList[id] < 0){
+		displaySettings.listList[id]--;
 	}
 	else {
-		listList[id]=-1;
+		displaySettings.listList[id]=-1;
 	}
 	
 }
 function continueList(id){
-	listList[id]=2;
+	displaySettings.listList[id]=2;
+}
+function save() {
+	var jsonmessage = {type:'save',displaySettings:displaySettings,strokes:strokes,wordsHashed:wordsHashed};
+	ws.send(JSON.stringify(jsonmessage));
 }
 
 function hashStrokes(strokes) {

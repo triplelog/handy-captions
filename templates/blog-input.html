@@ -26,7 +26,6 @@ body {
 	left: 0px;
 	top: 50px;
 	display: inline-block;
-	height: 500px;
 	width: 100%;
 	
 }
@@ -35,7 +34,6 @@ body {
 	left: 0px;
 	top: 50px;
 	display: inline-block;
-	height: 500px;
 	width: 100%;
 	pointer-events: none;
 }
@@ -88,14 +86,14 @@ blockquote:before {
 </head>
 <body>
 
-<div id="input" class="input">
+<div id="input" class="input" style="height: 500px;">
 	{% for i in range(0,5) %}
-		<div id="line-{{ i }}" class="newButtons" style="top: {{ 100*i + 90 }}px; display: block;">
+		<div id="line-{{ i }}" class="newButtons" style="top: {{ 100*i + 90 }}px; display: none;">
 			<button onclick="addLine({{ i }})">+</button><button onclick="addParagraph({{ i }})">P</button><button onclick="removeLine({{ i }})">-</button><button onclick="removeParagraph({{ i }})">-P</button>
 		</div>
 	{% endfor %}
 	{% for i in range(0,5) %}
-		<div id="line-{{ i }}" class="listButtons" style="top: {{ 100*i + 90 }}px; display: block;">
+		<div id="line-{{ i }}" class="listButtons" style="top: {{ 100*i + 90 }}px; display: none;">
 			<button onclick="rightList({{ i }})">-></button><button onclick="leftList({{ i }})"><-</button><button onclick="continueList({{ i }})">/</button>
 		</div>
 	{% endfor %}
@@ -124,6 +122,7 @@ blockquote:before {
 <div class="tools">
 	<button onclick="grabWords();">Group</button>
 	<button onclick="swapMode();">Mode</button>
+	<button onclick="save();">Save</button>
 	<button onclick="showNewButtons();">ShowNew</button>
 	<button onclick="showListButtons();">ShowList</button>
 	<button onclick="editMode();">Edit</button>
@@ -408,6 +407,7 @@ function addVertical() {
 	path.setAttributeNS(null,'stroke-width',"1");
 	path.setAttributeNS(null,'stroke',"black");
 	svg.appendChild(path);
+	//TODO: add para and list buttons
 }
 </script>
 </body>

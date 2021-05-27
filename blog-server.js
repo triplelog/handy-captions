@@ -220,6 +220,9 @@ wss.on('connection', function connection(ws) {
 			  console.log(err);
 			});
   		}
+  		else if (dm.type == "save"){
+  			console.log(JSON.stringify(dm).length);
+  		}
 		
   	});
 });
