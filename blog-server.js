@@ -226,7 +226,7 @@ wss.on('connection', function connection(ws) {
   			dm.type = "load";
   			console.log(JSON.stringify(dm).length);
   			savedJSON = JSON.stringify(dm);
-  			//console.log(savedJSON);
+  			console.log(savedJSON);
   		}
   		else if (dm.type == "load"){
   			ws.send(savedJSON);

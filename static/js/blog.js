@@ -296,7 +296,9 @@ function divideWords(strokes) {
 				//outEl.appendChild(el);
 				pEl.appendChild(el);
 				if (wordsHashed[hash]){
+					console.log(wordsHashed[hash]);
 					wordsHashed[hash].el=el.cloneNode(true);
+					
 					if (wordsHashed[hash].data.bold){makeBold(idArray[wordIdx]);}
 				}
 				else {
