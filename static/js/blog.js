@@ -687,6 +687,7 @@ function listButton() {
 	outputEl.style.pointerEvents = "all";
 }
 function addLine(id) {
+	addVertical();
 	for (var i=0;i<strokes.length;i++){
 		sumY = 0;
 		nY = 0;
@@ -746,6 +747,7 @@ function addLine(id) {
 	for (i in newParagraphs){
 		displaySettings['paragraphs'][i]=true;
 	}
+	
 	//TODO: update Lists
 }
 function removeLine(id) {

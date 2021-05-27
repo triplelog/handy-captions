@@ -168,6 +168,7 @@ var strokes = [];
 var isDown = false;
 var isEdit = false;
 var currentStroke = [];
+var maxHeight = 500;
 function inputDown(evt) {
 	if (isEdit){
 		return;
@@ -258,7 +259,7 @@ function addStroke(stroke,idx,color) {
 		for (var i=1;i<stroke.length;i++){
 			pd += " "+stroke[i].x*xMul+" "+stroke[i].y;
 		}
-		if (stroke[0].y > 300){
+		if (stroke[0].y > maxHeight - 200){
 			addVertical();
 		}
 	}
@@ -380,7 +381,11 @@ function showListButtons() {
 }
 function addVertical() {
 	console.log("adding line");
-	inputEl.style.height = parseInt(inputEl.style.height)+100+"px";
+	maxHeight += 100;
+	inputEl.style.height = maxHeight+"px";
+	var svg = document.querySelector("svg.ruled");
+	svg.setAttributeNS(null,'height',maxHeight+"px");
+	svg.setAttributeNS(null,'viewBox','0 0 400 '+(maxHeight/2));
 }
 </script>
 </body>
