@@ -2,7 +2,7 @@ var wordIds = {};
 
 var borders = {};
 var wordsHashed = {};
-var displaySettings = {'paragraphs':{},defaultColor:'black',notBoldWidth:"3",boldWidth:"6",listList:{}};
+var displaySettings = {'paragraphs':{},defaultColor:'black',notBoldWidth:"3",boldWidth:"6",listList:{},quotes:{};};
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
@@ -296,13 +296,13 @@ function divideWords(strokes) {
 				//outEl.appendChild(el);
 				pEl.appendChild(el);
 				if (wordsHashed[hash]){
-					console.log(wordsHashed[hash]);
 					wordsHashed[hash].el=el.cloneNode(true);
-					
-					if (wordsHashed[hash].data.bold){
-						console.log(wordsHashed[hash].data.bold);
-						el.style.strokeWidth=displaySettings.boldWidth;
-					}
+					if (wordsHashed[hash].data.bold){makeBold(el,idArray[wordIdx]);}
+					if (wordsHashed[hash].data.italics){makeItalics(el,idArray[wordIdx]);}
+					if (wordsHashed[hash].data.link){makeLink(el,idArray[wordIdx],wordsHashed[hash].data.link);}
+					if (wordsHashed[hash].data.underline){makeUnderline(el,idArray[wordIdx]);}
+					if (wordsHashed[hash].data.color){makeUnderline(el,idArray[wordIdx],wordsHashed[hash].data.color);}
+					if (wordsHashed[hash].data.size){makeUnderline(el,idArray[wordIdx],wordsHashed[hash].data.size);}
 				}
 				else {
 					wordsHashed[hash]={el:el.cloneNode(true),data:{}};
@@ -342,8 +342,10 @@ function combineMinmax(minmaxArray) {
 	return minmaxArray;
 }
 
-function makeBold(id,addBold=true) {
-	var el = document.getElementById('word-'+id);
+function makeBold(el,id,addBold=true) {
+	if (!el){
+		el = document.getElementById('word-'+id);
+	}
 	if (!el){return;}
 	var hash = el.getAttribute('data-hash');
 	if (addBold){
@@ -358,67 +360,112 @@ function makeBold(id,addBold=true) {
 	
 }
 
-function makeItalics(id,addItalics=true) {
-	var el = document.getElementById('word-'+id);
+function makeItalics(el,id,addItalics=true) {
+	if (!el){
+		el = document.getElementById('word-'+id);
+	}
 	if (!el){return;}
+	var hash = el.getAttribute('data-hash');
 	if (addItalics){
 		el.style.transform="skewX(-36deg)";
+		wordsHashed[hash].data.italics=true;
 	}
 	else{
 		el.style.transform="none";
+		wordsHashed[hash].data.italics=false;
 	}
-	var hash = el.getAttribute('data-hash');
 	wordsHashed[hash].el=el.cloneNode(true);
 }
 
-function makeLink(id,addLink=false) {
-	var el = document.getElementById('word-'+id);
+function makeLink(el,id,addLink=false) {
+	if (!el){
+		el = document.getElementById('word-'+id);
+	}
 	if (!el){return;}
+	var hash = el.getAttribute('data-hash');
 	if (addLink){
-		makeUnderline(id);
+		makeUnderline(el,id);
 		var svg = el.querySelector('svg').cloneNode(true);
 		el.removeChild(el.querySelector('svg'));
 		var a = document.createElement('a');
 		a.setAttribute('href',addLink);
 		a.appendChild(svg);
 		el.appendChild(a);
+		wordsHashed[hash].data.link=addLink;
 	}
 	else{
-		makeUnderline(id,false);
+		makeUnderline(el,id,false);
 		var a = el.querySelector('a');
 		var svg = el.querySelector('svg').cloneNode(true);
 		el.removeChild(el.querySelector('a'));
 		el.appendChild(svg);
+		wordsHashed[hash].data.link=false;
 	}
-	var hash = el.getAttribute('data-hash');
 	wordsHashed[hash].el=el.cloneNode(true);
 }
 
-function makeUnderline(id,addUnderline=true) {
-	var el = document.getElementById('word-'+id);
+function makeUnderline(el,id,addUnderline=true) {
+	if (!el){
+		el = document.getElementById('word-'+id);
+	}
 	if (!el){return;}
+	var hash = el.getAttribute('data-hash');
 	if (addUnderline){
 		el.querySelector(".underline").style.display="inline-block";
+		wordsHashed[hash].data.underline=true;
 	}
 	else{
 		el.querySelector(".underline").style.display="none";
+		wordsHashed[hash].data.underline=false;
 	}
-	var hash = el.getAttribute('data-hash');
 	wordsHashed[hash].el=el.cloneNode(true);
 }
 
-function makeColor(id,addColor=false) {
-	var el = document.getElementById('word-'+id);
+function makeColor(el,id,addColor=false) {
+	if (!el){
+		el = document.getElementById('word-'+id);
+	}
 	if (!el){return;}
+	var hash = el.getAttribute('data-hash');
 	if (addColor){
 		el.style.stroke=addColor;
+		wordsHashed[hash].data.color=addColor;
 	}
 	else{
 		el.style.stroke=displaySettings.defaultColor;
+		wordsHashed[hash].data.color=false;
 	}
-	var hash = el.getAttribute('data-hash');
+	
 	wordsHashed[hash].el=el.cloneNode(true);
 }
+
+function makeFontSize(el,id,size=false) {
+	if (!el){
+		el = document.getElementById('word-'+id);
+	}
+	var svg = el.querySelector("svg");
+	if (!svg){return;}
+	var hash = el.getAttribute('data-hash');
+	if (size){
+		var w = parseFloat(svg.getAttribute('data-width')) || parseFloat(svg.getAttribute('width'));
+		var h = parseFloat(svg.getAttribute('data-height')) || parseFloat(svg.getAttribute('height'));
+		svg.setAttribute('width', w*parseFloat(size));
+		svg.setAttribute('height', h*parseFloat(size));
+		svg.setAttribute('data-width', w);
+		svg.setAttribute('data-height', h);
+		var blHO = h*parseFloat(svg.getAttribute('data-blp'));
+		var blHN = h*parseFloat(size)*parseFloat(svg.getAttribute('data-blp'));
+		var topDiff = blHO-blHN;
+		svg.style.top = (topDiff+parseFloat(svg.getAttribute('data-top')))+"px";
+		wordsHashed[hash].data.size=size;
+	}
+	else{
+		wordsHashed[hash].data.size=false;
+	}
+
+	wordsHashed[hash].el=el.cloneNode(true);
+}
+
 function makeQuotes(quotes) {
 	var quoteEls = document.querySelectorAll('blockquote');
 	for (var i=0;i<quoteEls.length;i++){
@@ -485,34 +532,13 @@ function makeQuotes(quotes) {
 
 
 
-function makeFontSize(id,size=false) {
-	var svg = document.getElementById('word-'+id).querySelector("svg");
-	if (!svg){return;}
-	if (size){
-		var w = parseFloat(svg.getAttribute('data-width')) || parseFloat(svg.getAttribute('width'));
-		var h = parseFloat(svg.getAttribute('data-height')) || parseFloat(svg.getAttribute('height'));
-		svg.setAttribute('width', w*parseFloat(size));
-		svg.setAttribute('height', h*parseFloat(size));
-		svg.setAttribute('data-width', w);
-		svg.setAttribute('data-height', h);
-		var blHO = h*parseFloat(svg.getAttribute('data-blp'));
-		var blHN = h*parseFloat(size)*parseFloat(svg.getAttribute('data-blp'));
-		var topDiff = blHO-blHN;
-		svg.style.top = (topDiff+parseFloat(svg.getAttribute('data-top')))+"px";
-	}
-	else{
-		
-	}
-	var el = document.getElementById('word-'+id);
-	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash].el=el.cloneNode(true);
-}
+
 
 
 
 var selectedWords = {};
 var lists = {};
-var quotes = {};
+
 function editUp(evt){
 	if (!isEdit){
 		return;
@@ -536,11 +562,11 @@ function editUp(evt){
 	}
 	if (sKey && isEdit == "quote"){
 		var qid = 0;
-		for (key in quotes){
-			if (quotes[key]['selected']== true){
+		for (key in displaySettings.quotes){
+			if (displaySettings.quotes[key]['selected']== true){
 				qid = key;
-				quotes[key]['end']=sKey;
-				quotes[key]['selected']= false;
+				displaySettings.quotes[key]['end']=sKey;
+				displaySettings.quotes[key]['selected']= false;
 				break;
 				
 			}
@@ -548,12 +574,12 @@ function editUp(evt){
 				qid=key+1;
 			}
 		}
-		if (quotes[qid]){
-			quotes[qid]['end']=sKey;
-			//quotes[qid]['keys']=[];
+		if (displaySettings.quotes[qid]){
+			displaySettings.quotes[qid]['end']=sKey;
+			//displaySettings.quotes[qid]['keys']=[];
 			
-			var start = {'x':wordIds[quotes[qid]['start']]['left'],'y':wordIds[quotes[qid]['start']]['top']};
-			var end = {'x':wordIds[quotes[qid]['end']]['left'],'y':wordIds[quotes[qid]['end']]['top']};
+			var start = {'x':wordIds[displaySettings.quotes[qid]['start']]['left'],'y':wordIds[displaySettings.quotes[qid]['start']]['top']};
+			var end = {'x':wordIds[displaySettings.quotes[qid]['end']]['left'],'y':wordIds[displaySettings.quotes[qid]['end']]['top']};
 			for (key in wordIds){
 				if (start.y < wordIds[key]['top'] && end.y > wordIds[key]['top']){
 					
@@ -570,17 +596,17 @@ function editUp(evt){
 				else {
 					continue;
 				}
-				for (key2 in quotes){
-					if (key2 != qid && (quotes[key2]['start'] == key || quotes[key2]['end'] == key)){
-						delete quotes[key2];
+				for (key2 in displaySettings.quotes){
+					if (key2 != qid && (displaySettings.quotes[key2]['start'] == key || displaySettings.quotes[key2]['end'] == key)){
+						delete displaySettings.quotes[key2];
 					}
 				}
-				//quotes[qid]['keys'].push(key);
+				//displaySettings.quotes[qid]['keys'].push(key);
 
 			}
-			for (key2 in quotes){
-				var start2 = {'x':wordIds[quotes[key2]['start']]['left'],'y':wordIds[quotes[key2]['start']]['top']};
-				var end2 = {'x':wordIds[quotes[key2]['end']]['left'],'y':wordIds[quotes[key2]['end']]['top']};
+			for (key2 in displaySettings.quotes){
+				var start2 = {'x':wordIds[displaySettings.quotes[key2]['start']]['left'],'y':wordIds[displaySettings.quotes[key2]['start']]['top']};
+				var end2 = {'x':wordIds[displaySettings.quotes[key2]['end']]['left'],'y':wordIds[displaySettings.quotes[key2]['end']]['top']};
 			
 				if (start2.y < start.y && end2.y > start.y){
 					
@@ -598,14 +624,14 @@ function editUp(evt){
 					continue;
 				}
 				if (key2 != qid){
-					delete quotes[key2];
+					delete displaySettings.quotes[key2];
 				}
 			}
-			console.log(quotes);
-			makeQuotes(quotes);
+			console.log(displaySettings.quotes);
+			makeQuotes(displaySettings.quotes);
 		}
 		else {
-			quotes[qid]={'selected':true,'start':sKey,'end':sKey};
+			displaySettings.quotes[qid]={'selected':true,'start':sKey,'end':sKey};
 		}
 		
 		
@@ -634,14 +660,14 @@ function editUp(evt){
 function boldButton() {
 	for (key in selectedWords){
 		if (key){
-			makeBold(key);
+			makeBold(false,key);
 		}
 	}
 }
 function italicsButton() {
 	for (key in selectedWords){
 		if (key){
-			makeItalics(key);
+			makeItalics(false,key);
 		}
 		
 	}
@@ -650,7 +676,7 @@ function underlineButton() {
 	for (key in selectedWords){
 		
 		if (key){
-			makeUnderline(key);
+			makeUnderline(false,key);
 		}
 	}
 }
@@ -659,7 +685,7 @@ function linkButton() {
 	for (key in selectedWords){
 		
 		if (key){
-			makeLink(key,linkURL);
+			makeLink(false,key,linkURL);
 		}
 	}
 }
@@ -668,7 +694,7 @@ function colorButton() {
 	for (key in selectedWords){
 		
 		if (key){
-			makeColor(key,color);
+			makeColor(false,key,color);
 		}
 	}
 }
@@ -677,7 +703,7 @@ function sizeButton() {
 	for (key in selectedWords){
 		
 		if (key){
-			makeFontSize(key,size);
+			makeFontSize(false,key,size);
 		}
 	}
 }
