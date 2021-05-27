@@ -227,7 +227,7 @@ function divideWords(strokes) {
 			
 			var hash = hashStrokes(word['strokes']);
 			
-			if (wordsHashed[hash] && wordsHashed[hash] != {}){
+			if (wordsHashed[hash] && Object.keys(wordsHashed[hash]).length > 0){
 				console.log("hashed",hash,word);
 				var el = wordsHashed[hash];
 				console.log(el);
