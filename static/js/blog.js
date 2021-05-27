@@ -876,7 +876,7 @@ const cyrb53 = function(str, seed = 0) {
     h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
     return 4294967296 * (2097151 & h2) + (h1>>>0);
 };
-function createPD(currentCurve){
+function createPD(currentCurve,sidx){
 	var pd = "M"; 
 	var curvedPath = [];
 	pd += " " + curveRound(currentCurve[0].x);
@@ -887,6 +887,7 @@ function createPD(currentCurve){
 	var maxCL = initialCL / 4 + 5;
 	//maxCL = 25;
 	console.log(initialCL);
+	
 	while (currentCurve.length > maxCL){
 		var minDiff = -1;
 		for (var i=1; i<currentCurve.length - 2; i++){
@@ -905,6 +906,7 @@ function createPD(currentCurve){
 		}
 		maxminD2 += Math.max(0.02,minDiff+0.02);
 	}
+	var newStrokes = [{x:currentCurve[0].x,y:currentCurve[0].y}];
 	for (var i=1; i<currentCurve.length - 2; i++){
 		pd += " Q " + curveRound(currentCurve[i].x);
 		pd += " " + curveRound(currentCurve[i].y);
@@ -912,14 +914,17 @@ function createPD(currentCurve){
 		var yc = (currentCurve[i].y + currentCurve[i+1].y) / 2;
 		pd += " " + curveRound(xc);
 		pd += " " + curveRound(yc);
+		newStrokes.push({x:currentCurve[i].x,y:currentCurve[i].y});
 	}
 	if (currentCurve.length > 1){
 		pd += " Q " + curveRound(currentCurve[currentCurve.length - 2].x);
 		pd += " " + curveRound(currentCurve[currentCurve.length - 2].y);
+		newStrokes.push({x:currentCurve[currentCurve.length - 2].x,y:currentCurve[currentCurve.length - 2].y});
 	}
 	pd += " " + curveRound(currentCurve[currentCurve.length - 1].x);
 	pd += " " + curveRound(currentCurve[currentCurve.length - 1].y);
-	
+	newStrokes.push({x:currentCurve[currentCurve.length - 1].x,y:currentCurve[currentCurve.length - 1].y});
+	//strokes[sidx]=newStrokes;
 	return pd;
 }
 function curveRound(x){

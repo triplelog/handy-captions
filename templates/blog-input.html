@@ -182,15 +182,15 @@ function inputDown(evt) {
 	}
 	isDown = true;
 	var bcr = evt.currentTarget.getBoundingClientRect();
-	var x = evt.clientX-bcr.left;
-	var y = evt.clientY-bcr.top;
+	var x = Math.round((evt.clientX-bcr.left)*1000)/1000;
+	var y = Math.round((evt.clientY-bcr.top)*1000)/1000;
 	currentStroke.push({'x':x,'y':y});
 }
 function inputMove(evt) {
 	if (isDown){
 		var bcr = evt.currentTarget.getBoundingClientRect();
-		var x = evt.clientX-bcr.left;
-		var y = evt.clientY-bcr.top;
+		var x = Math.round((evt.clientX-bcr.left)*1000)/1000;
+		var y = Math.round((evt.clientY-bcr.top)*1000)/1000;
 		currentStroke.push({'x':x,'y':y});
 	}
 	var isGood = false;
@@ -207,8 +207,8 @@ function inputMove(evt) {
 function inputUp(evt) {
 	if (isDown){
 		var bcr = evt.currentTarget.getBoundingClientRect();
-		var x = evt.clientX-bcr.left;
-		var y = evt.clientY-bcr.top;
+		var x = Math.round((evt.clientX-bcr.left)*1000)/1000;
+		var y = Math.round((evt.clientY-bcr.top)*1000)/1000;
 		currentStroke.push({'x':x,'y':y});
 	}
 	var isGood = false;
