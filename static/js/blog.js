@@ -227,9 +227,9 @@ function divideWords(strokes) {
 			
 			var hash = hashStrokes(word['strokes']);
 			
-			if (wordsHashed[hash] && Object.keys(wordsHashed[hash]).length > 0){
+			if (wordsHashed[hash] && Object.keys(wordsHashed[hash].el).length > 0){
 				console.log("hashed",hash,word);
-				var el = wordsHashed[hash];
+				var el = wordsHashed[hash].el;
 				console.log(el);
 				wordIds[idArray[wordIdx]]=word;
 				el.setAttribute('id','word-'+idArray[wordIdx]);
@@ -295,7 +295,14 @@ function divideWords(strokes) {
 			
 				//outEl.appendChild(el);
 				pEl.appendChild(el);
-				wordsHashed[hash]=el.cloneNode(true);
+				if (wordsHashed[hash]){
+					wordsHashed[hash].el=el.cloneNode(true);
+					if (wordsHasded[hash].data.bold){makeBold(idArray[wordIdx]);}
+				}
+				else {
+					wordsHashed[hash]={el:el.cloneNode(true),data:{}};
+				}
+				
 			}
 		}    
 		
@@ -333,14 +340,17 @@ function combineMinmax(minmaxArray) {
 function makeBold(id,addBold=true) {
 	var el = document.getElementById('word-'+id);
 	if (!el){return;}
+	var hash = el.getAttribute('data-hash');
 	if (addBold){
 		el.style.strokeWidth=displaySettings.boldWidth;
+		wordsHashed[hash].data.bold=true;
 	}
 	else{
 		el.style.strokeWidth=displaySettings.notBoldWidth;
+		wordsHashed[hash].data.bold=false;
 	}
-	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash]=el.cloneNode(true);
+	wordsHashed[hash].el=el.cloneNode(true);
+	
 }
 
 function makeItalics(id,addItalics=true) {
@@ -353,7 +363,7 @@ function makeItalics(id,addItalics=true) {
 		el.style.transform="none";
 	}
 	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash]=el.cloneNode(true);
+	wordsHashed[hash].el=el.cloneNode(true);
 }
 
 function makeLink(id,addLink=false) {
@@ -376,7 +386,7 @@ function makeLink(id,addLink=false) {
 		el.appendChild(svg);
 	}
 	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash]=el.cloneNode(true);
+	wordsHashed[hash].el=el.cloneNode(true);
 }
 
 function makeUnderline(id,addUnderline=true) {
@@ -389,7 +399,7 @@ function makeUnderline(id,addUnderline=true) {
 		el.querySelector(".underline").style.display="none";
 	}
 	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash]=el.cloneNode(true);
+	wordsHashed[hash].el=el.cloneNode(true);
 }
 
 function makeColor(id,addColor=false) {
@@ -402,7 +412,7 @@ function makeColor(id,addColor=false) {
 		el.style.stroke=displaySettings.defaultColor;
 	}
 	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash]=el.cloneNode(true);
+	wordsHashed[hash].el=el.cloneNode(true);
 }
 function makeQuotes(quotes) {
 	var quoteEls = document.querySelectorAll('blockquote');
@@ -464,7 +474,7 @@ function makeQuotes(quotes) {
 		
 	}
 	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash]=el.cloneNode(true);
+	wordsHashed[hash].el=el.cloneNode(true);
 	
 }
 
@@ -490,7 +500,7 @@ function makeFontSize(id,size=false) {
 	}
 	var el = document.getElementById('word-'+id);
 	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash]=el.cloneNode(true);
+	wordsHashed[hash].el=el.cloneNode(true);
 }
 
 
