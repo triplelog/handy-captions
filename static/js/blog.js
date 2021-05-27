@@ -91,9 +91,7 @@ function divideWords(strokes) {
 			}
 		}
 		var adjStrokes = [];
-		adjWords[line][id]['sidx']=i;
 		for (var ii=0;ii<strokes[i].length;ii++){
-			
 			var x = strokes[i][ii].x*xMul - adjWords[line][id]['left'];
 			var y = strokes[i][ii].y - adjWords[line][id]['top'];
 			if (x > adjWords[line][id]['maxX']){
@@ -263,7 +261,7 @@ function divideWords(strokes) {
 				for (var i=0;i<word['strokes'].length;i++) {
 					var s = word['strokes'][i];
 					if (s.length > 1){
-						var pd = createPD(s,word['sidx']);
+						var pd = createPD(s);
 						/*var pd = "M"+s[0].x+" "+s[0].y;
 						for (var ii=1;ii<s.length;ii++) {
 							pd += " L"+s[ii].x+" "+s[ii].y;
@@ -858,11 +856,11 @@ function load() {
 	ws.send(JSON.stringify(jsonmessage));
 }
 
-function hashStrokes(strokes) {
+function hashStrokes(stroke) {
 	var str = "str";
-	for (var i=0;i<strokes.length;i++){
-		for (var ii=0;ii<strokes[i].length;ii++){
-			str += strokes[i][ii].x+"-"+strokes[i][ii].y+"-";
+	for (var i=0;i<stroke.length;i++){
+		for (var ii=0;ii<stroke[i].length;ii++){
+			str += stroke[i][ii].x+"-"+stroke[i][ii].y+"-";
 		}
 	}
 	return cyrb53(str);
@@ -878,18 +876,15 @@ const cyrb53 = function(str, seed = 0) {
     h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
     return 4294967296 * (2097151 & h2) + (h1>>>0);
 };
-function createPD(currentCurve,sidx){
-	var pd = "M"; 
-	var curvedPath = [];
-	pd += " " + curveRound(currentCurve[0].x);
-	pd += " " + curveRound(currentCurve[0].y);
-	curvedPath.push([curveRound(currentCurve[0].x),curveRound(currentCurve[0].y)]);
+function simplifyStroke(currentCurve){
+
+	var newStroke = [];
+	newStroke.push({x:currentCurve[0].x,y:currentCurve[0].y});
 	var initialCL = currentCurve.length;
 	var maxminD2 = 0.02;
 	var maxCL = initialCL / 4 + 5;
 	//maxCL = 25;
 	console.log(initialCL);
-	
 	while (currentCurve.length > maxCL){
 		var minDiff = -1;
 		for (var i=1; i<currentCurve.length - 2; i++){
@@ -908,7 +903,16 @@ function createPD(currentCurve,sidx){
 		}
 		maxminD2 += Math.max(0.02,minDiff+0.02);
 	}
-	var newStrokes = [{x:currentCurve[0].x,y:currentCurve[0].y}];
+	for (var i=1; i<currentCurve.length; i++){
+		newStroke.push({x:currentCurve[i].x,y:currentCurve[i].y});
+	}
+	return newStroke;
+}
+function createPD(currentCurve){
+	var pd = "M"; 
+	pd += " " + curveRound(currentCurve[0].x);
+	pd += " " + curveRound(currentCurve[0].y);
+	
 	for (var i=1; i<currentCurve.length - 2; i++){
 		pd += " Q " + curveRound(currentCurve[i].x);
 		pd += " " + curveRound(currentCurve[i].y);
@@ -916,17 +920,14 @@ function createPD(currentCurve,sidx){
 		var yc = (currentCurve[i].y + currentCurve[i+1].y) / 2;
 		pd += " " + curveRound(xc);
 		pd += " " + curveRound(yc);
-		newStrokes.push({x:currentCurve[i].x,y:currentCurve[i].y});
 	}
 	if (currentCurve.length > 1){
 		pd += " Q " + curveRound(currentCurve[currentCurve.length - 2].x);
 		pd += " " + curveRound(currentCurve[currentCurve.length - 2].y);
-		newStrokes.push({x:currentCurve[currentCurve.length - 2].x,y:currentCurve[currentCurve.length - 2].y});
 	}
 	pd += " " + curveRound(currentCurve[currentCurve.length - 1].x);
 	pd += " " + curveRound(currentCurve[currentCurve.length - 1].y);
-	newStrokes.push({x:currentCurve[currentCurve.length - 1].x,y:currentCurve[currentCurve.length - 1].y});
-	strokes[sidx]=newStrokes;
+	
 	return pd;
 }
 function curveRound(x){

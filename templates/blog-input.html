@@ -219,6 +219,7 @@ function inputUp(evt) {
 		}
 	}
 	if (isGood){
+		currentStroke = simplifyStroke(currentStroke);
 		strokes.push(currentStroke);
 		addStroke(currentStroke,strokes.length-1,'black');
 	}
