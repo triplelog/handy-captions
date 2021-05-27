@@ -301,8 +301,8 @@ function divideWords(strokes) {
 					if (wordsHashed[hash].data.italics){makeItalics(el,idArray[wordIdx]);}
 					if (wordsHashed[hash].data.link){makeLink(el,idArray[wordIdx],wordsHashed[hash].data.link);}
 					if (wordsHashed[hash].data.underline){makeUnderline(el,idArray[wordIdx]);}
-					if (wordsHashed[hash].data.color){makeUnderline(el,idArray[wordIdx],wordsHashed[hash].data.color);}
-					if (wordsHashed[hash].data.size){makeUnderline(el,idArray[wordIdx],wordsHashed[hash].data.size);}
+					if (wordsHashed[hash].data.color){makeColor(el,idArray[wordIdx],wordsHashed[hash].data.color);}
+					if (wordsHashed[hash].data.size){makeFontSize(el,idArray[wordIdx],wordsHashed[hash].data.size);}
 				}
 				else {
 					wordsHashed[hash]={el:el.cloneNode(true),data:{}};
@@ -525,8 +525,6 @@ function makeQuotes(quotes) {
 		}
 		
 	}
-	var hash = el.getAttribute('data-hash');
-	wordsHashed[hash].el=el.cloneNode(true);
 	
 }
 
