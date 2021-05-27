@@ -1,6 +1,6 @@
 var wordIds = {};
-var boldWidth = "8";
-var notBoldWidth = "5";
+var boldWidth = "6";
+var notBoldWidth = "3";
 var defaultColor = "black";
 var displaySettings = {'paragraphs':{}};
 var borders = {};
@@ -875,14 +875,14 @@ function createPD(currentCurve){
 	curvedPath.push([curveRound(currentCurve[0].x),curveRound(currentCurve[0].y)]);
 	console.log(currentCurve.length);
 	var initialCL = currentCurve.length;
-	var maxminD2 = 0.005;
+	var maxminD2 = 0.05;
 	var maxCL = initialCL / 4 + 5;
-	maxCL = 25;
+	//maxCL = 25;
 	console.log(initialCL);
 	while (currentCurve.length > maxCL){
 		for (var i=1; i<currentCurve.length - 2; i++){
 			var minD2 = nearestBezier(currentCurve[i-1].x,currentCurve[i].x,currentCurve[i+2].x,currentCurve[i-1].y,currentCurve[i].y,currentCurve[i+2].y, currentCurve[i+1].x, currentCurve[i+1].y);
-			console.log(minD2);
+			//console.log(minD2);
 			if (minD2 < maxminD2){
 				currentCurve.splice(i+1,1);
 				i--;
@@ -890,7 +890,7 @@ function createPD(currentCurve){
 			}
 			
 		}
-		maxminD2 += 0.005;
+		maxminD2 += 0.05;
 	}
 	for (var i=1; i<currentCurve.length - 2; i++){
 		pd += " Q " + curveRound(currentCurve[i].x);
