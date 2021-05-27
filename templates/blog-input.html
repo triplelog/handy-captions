@@ -154,6 +154,9 @@ ws.onmessage = function(evt){
 		wordsHashed = dm.wordsHashed;
 		strokes = dm.strokes;
 		displaySettings = dm.displaySettings;
+		for (var i=0;i<strokes.length;i++){
+			addStroke(strokes[i],i,"black");
+		}
 		divideWords(strokes);
 	}
 }
