@@ -13,10 +13,9 @@ const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var crypto = require("crypto");
-var katex = require('katex');
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/inlinemath.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/inlinemath.com/fullchain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/digitizer.fun/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/digitizer.fun/fullchain.pem')
 };
 const { PerformanceObserver, performance } = require('perf_hooks');
 
