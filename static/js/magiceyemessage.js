@@ -137,7 +137,7 @@
 				context.font = parseInt(36) +'px serif';
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
-				context.fillText(idxToWord[Math.floor(y/48)-1], cx, y);
+				context.fillText(idxToWord[Math.floor(y/48)], cx, y);
 			}
 			
 			xd = 72;
@@ -148,7 +148,7 @@
 				//context.fillText("-", cx, y  - 28);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
-				context.fillText(idxToWord2[Math.floor(y/48)-1], cx + 36, y + 28); 
+				context.fillText(idxToWord2[Math.floor(y/48)], cx + 36, y + 28); 
 				//context.fillText("-", cx, y - 24);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
