@@ -144,7 +144,19 @@
 				context.font = parseInt(36) +'px serif';
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
-				context.fillText("-", cx, y + 18);
+				context.fillText("-", cx, y + 20);
+			}
+			for (var cx=0;cx< 800;cx+=xd){
+				context.font = parseInt(36) +'px serif';
+				context.textAlign = "center"; 
+				context.textBaseline = "middle"; 
+				context.fillText("-", cx, y + 24);
+			}
+			for (var cx=0;cx< 800;cx+=xd){
+				context.font = parseInt(36) +'px serif';
+				context.textAlign = "center"; 
+				context.textBaseline = "middle"; 
+				context.fillText("-", cx, y + 28);
 			}
       	}
       }
