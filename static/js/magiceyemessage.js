@@ -129,12 +129,12 @@
 	  var iDiv = document.createElement('div');
 	  divT.appendChild(iDiv);
       for (var y=yMin;y<yMax;y++){
-      	if (y == 30){
-      		for (var cx=0;cx< 800;cx+=40){
+      	if (y > 0 && y < 300 && y % 30 == 0){
+      		for (var cx=0;cx< 800;cx+=72){
 				context.font = parseInt(36) +'px serif';
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
-				context.fillText(idxToWord[0], cx, 30);
+				context.fillText(idxToWord[Math.floor(y/30)-1], cx, y);
 			}
       	}
       }
