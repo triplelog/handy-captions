@@ -105,7 +105,7 @@
 	  }
 	  if (height == 0){return;}
       var imageData = context.createImageData(width, height);
-      imageData.data.set(pixelData);
+      //imageData.data.set(pixelData);
       context.putImageData(imageData, 0, yMin);
       context.lineWidth = 1;
       context.strokeStyle = "black";
