@@ -139,7 +139,7 @@
 				context.textBaseline = "middle"; 
 				context.fillText(idxToWord[Math.floor(y/42)], cx, y);
 				context.font = parseInt(12) +'px serif';
-				context.fillText(idxToEmoji[3], cx + 30, y);
+				//context.fillText(idxToEmoji[3], cx + 30, y);
 				//context.fillText(idxToEmoji[3], cx + 40, y);
 			}
 			
@@ -152,7 +152,7 @@
 			}
 			for (var cx=0;cx< 800;cx+=xd){
 				context.font = parseInt(12) +'px serif';
-				context.fillText("+", cx + 0, y + 21); 
+				context.fillText(idxToEmoji[3], cx + 0, y + 21); 
 				//context.fillText("-", cx + 36, y + 21); 
 				//context.fillText(idxToEmoji[1], cx + 60, y + 21); 
 				context.font = parseInt(24) +'px serif';
