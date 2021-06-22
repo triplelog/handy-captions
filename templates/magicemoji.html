@@ -148,34 +148,16 @@
 var allRendered = false;
 function reRender() {
 
-  var order = [[0,0],[0,1],[0,2],[1,2],[2,2],[2,1],[2,0],[1,0]]
   for (var i=0;i<3;i++){
 	  for (var y=60 + i*180;y<60+i*180+90;y++){
 		  for (var x=110;x<110+90;x++){
-	  
-			if (order[skipI][0] == i && order[skipI][1] == 0){
-			  dMap[y][x] = [0,0,0];
-			}
-			else {
 			  dMap[y][x] = [1,0,0];
-			}
 		  }
 		  for (var x=290;x<290+90;x++){
-	  		if (i == 1 || (order[skipI][0] == i && order[skipI][1] == 1) ){
-			  dMap[y][x] = [0,0,0];
-			}
-			else {
 			  dMap[y][x] = [1,0,0];
-			}
 		  }
 		  for (var x=470;x<470+90;x++){
-	  
-			if (order[skipI][0] == i && order[skipI][1] == 2){
-			  dMap[y][x] = [0,0,0];
-			}
-			else {
 			  dMap[y][x] = [1,0,0];
-			}
 		  }
 	  }
   }
