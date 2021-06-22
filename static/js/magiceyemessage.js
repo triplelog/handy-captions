@@ -130,25 +130,25 @@
 	  var iDiv = document.createElement('div');
 	  divT.appendChild(iDiv);
       for (var y=yMin;y<yMax;y++){
-      	if (y > 0 && y <= 640 && y % 48 == 0){
+      	if (y <= 640 && y % 48 == 0){
       		//var xd = 60 + (y % 96) / 4;
       		var xd = 60;
       		for (var cx=0;cx< 800;cx+=xd){
 				context.font = parseInt(36) +'px serif';
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
-				context.fillText(idxToWord[Math.floor(y/48)-1], cx, y - 48);
+				context.fillText(idxToWord[Math.floor(y/48)-1], cx, y);
 			}
 			
 			xd = 72;
-			context.font = parseInt(24) +'px serif';
+			context.font = parseInt(36) +'px serif';
 			context.textAlign = "center"; 
 			context.textBaseline = "middle";
       		for (var cx=0;cx< 800;cx+=xd){
 				//context.fillText("-", cx, y  - 28);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
-				context.fillText(idxToWord2[Math.floor(y/48)-1], cx + 36, y - 20); 
+				context.fillText(idxToWord2[Math.floor(y/48)-1], cx + 36, y + 28); 
 				//context.fillText("-", cx, y - 24);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
