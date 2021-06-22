@@ -140,7 +140,7 @@
 			}
 			
 			xd = 72;
-			context.font = parseInt(36) +'px serif';
+			context.font = parseInt(24) +'px serif';
 			context.textAlign = "center"; 
 			context.textBaseline = "middle";
       		for (var cx=0;cx< 800;cx+=xd){
