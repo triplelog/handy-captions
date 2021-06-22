@@ -137,7 +137,7 @@
 				context.font = parseInt(36) +'px serif';
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
-				context.fillText(idxToWord[Math.floor(y/48)-1], cx, y - 24);
+				context.fillText(idxToWord[Math.floor(y/48)-1], cx, y - 48);
 			}
 			
 			xd = 72;
@@ -145,14 +145,14 @@
 			context.textAlign = "center"; 
 			context.textBaseline = "middle";
       		for (var cx=0;cx< 800;cx+=xd){
-				context.fillText("-", cx, y  - 4);
+				//context.fillText("-", cx, y  - 28);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
-				context.fillText(idxToWord2[Math.floor(y/48)-1], cx + 36, y + 4); 
-				context.fillText("-", cx, y);
+				context.fillText(idxToWord2[Math.floor(y/48)-1], cx + 36, y - 20); 
+				//context.fillText("-", cx, y - 24);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
-				context.fillText("-", cx, y + 4);
+				//context.fillText("-", cx, y - 20);
 			}
       	}
       }
