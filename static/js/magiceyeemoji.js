@@ -148,11 +148,11 @@
 			var idx = Math.floor(rc/37);
 			
 			
-			/*context.font = parseInt(sz * 0.9) +'px serif';
+			context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
 			context.textBaseline = "middle"; 
 			context.fillText(idxToEmoji[idx], cx, cy);
-			*/
+			
 			
 			var div = divT.cloneNode(true);
 			div.style.left = e+"px";
