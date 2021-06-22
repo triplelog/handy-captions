@@ -153,7 +153,7 @@
 			for (var cx=0;cx< 800;cx+=xd){
 				context.font = parseInt(12) +'px serif';
 				context.fillText("+", cx + 0, y + 21); 
-				context.fillText("-", cx + 36, y + 21); 
+				//context.fillText("-", cx + 36, y + 21); 
 				//context.fillText(idxToEmoji[1], cx + 60, y + 21); 
 				context.font = parseInt(24) +'px serif';
 				//context.fillText(idxToWord2[Math.floor(y/42)], cx + 36, y + 21);
