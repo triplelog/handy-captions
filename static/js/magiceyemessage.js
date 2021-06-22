@@ -130,7 +130,7 @@
 	  divT.appendChild(iDiv);
       for (var y=yMin;y<yMax;y++){
       	if (y > 0 && y <= 420 && y % 36 == 0){
-      		var xd = 60 + Math.floor(y/36)-1;
+      		var xd = 60 + 12 * (y % 72);
       		
       		for (var cx=0;cx< 800;cx+=xd){
 				context.font = parseInt(36) +'px serif';
