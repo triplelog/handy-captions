@@ -68,7 +68,7 @@
         seeded: opts.seeded,
         colors: opts.colors
       });
-      console.log(retVal);
+      
       pixelData = retVal[0];
       var emojiLocations = retVal[1];
 
@@ -127,8 +127,10 @@
       divT.classList.add('emojiDiv');
 	  var iDiv = document.createElement('div');
 	  divT.appendChild(iDiv);
+	  console.log(emojiLocations);
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
+      	console.log(y,emojiLocations[y]);
       	for (var i in emojis){
       		break;
       		var e = parseInt(emojis[i]);
