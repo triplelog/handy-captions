@@ -146,7 +146,7 @@
       		}
       		
 			var idx = Math.floor(rc/37);
-			
+			console.log(rc,idx);
 			context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
 			context.textBaseline = "middle"; 
