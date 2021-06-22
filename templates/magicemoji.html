@@ -1,0 +1,615 @@
+<!doctype html>
+<html>
+<head>
+<title>MagicEye.js Text Example</title>
+<style>
+.magiceye {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: inline-block;
+}
+	
+.input {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: inline-block;
+	width: 800px;
+	height: 600px;
+	opacity: 0;
+}
+#pixelCanvas {
+	opacity: 0;
+	pointer-events: none;
+}
+.emojiLayer {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: inline-block;
+	width: 800px;
+	height: 600px;
+}
+.emojiDiv {
+	position: absolute;
+	text-align: center;
+	display: inline-block;
+	/*animation-name: rotateColor;
+	animation-iteration-count: infinite;
+	animation-duration: 5s;
+	animation-timing-function: linear;*/
+}
+@keyframes rotateColor {
+  0% {filter: hue-rotate(0deg);}
+  15% {filter: hue-rotate(180deg);}
+  30% {filter: hue-rotate(0deg);}
+  100% {filter: hue-rotate(0deg);}
+}
+@keyframes rotateColor2 {
+  0% {filter: hue-rotate(180deg);}
+  49% {filter: hue-rotate(360deg);}
+  51% {filter: hue-rotate(0deg);}
+  100% {filter: hue-rotate(180deg);}
+}
+@keyframes chgB1 {
+  0% {filter: brightness(.4);}
+  50% {filter: brightness(1);}
+  100% {filter: brightness(.4);}
+}
+@keyframes chgB2 {
+  0% {filter: brightness(1);}
+  50% {filter: brightness(.4);}
+  100% {filter: brightness(1);}
+}
+
+</style>
+
+</head>
+<body>
+<script src="js/magiceyefast.js" type="text/javascript"></script>
+<script src="js/TextDepthMapper.js" type="text/javascript"></script>
+
+
+<canvas id="magiceye" width="800" height="600" >
+</canvas>
+
+<div class="emojiLayer">
+
+</div>
+<div class="input">
+
+</div>
+<svg style="display: none;" id="pixelSVG" viewBox="0 0 800 600" width="800" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+</svg>
+<canvas id="pixelCanvas" width="800" height="600">
+</canvas>
+<button style="position:absolute; left:800px; top:0px;" onclick="reRender()">Again</button>
+
+<script src='js/perlin.js'></script>
+<script>
+	noise.seed(Math.random());
+  var colorChain = {};
+  var fullColors = [];
+  
+  for (var i=0;i<600;i++){
+  	colorChain[i]={};
+  	var height = 600;
+  	var s = 72;
+  	var ym = [];
+	ym.push(mulberry(i));
+	ym.push(mulberry(i + height));
+	ym.push(mulberry(i + 2*height));
+	var colorsFG = [];
+	  for (var ii=0;ii<800;ii++){
+		var c = [0,0,0,255];
+		
+		if (ii%200==0 || i%150 == 0){
+			c[0] = mulberry(Math.floor(ym[0]/1)*1 + Math.floor(ii/1)*1) % 256;
+			c[1] = mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % 256;
+			c[2] = mulberry(Math.floor(ym[2]/1)*1 + Math.floor(ii/1)*1) % 256;
+		}
+		else {
+			c[0] = (colorsFG[ii-1][0]/2 + fullColors[i-1][ii][0]/2 + mulberry(Math.floor(ym[0]/1)*1 + Math.floor(ii/1)*1) % ( (ii%75) + 31) ) % 256;
+			c[1] = (colorsFG[ii-1][1]/2 + fullColors[i-1][ii][1]/2 + mulberry(Math.floor(ym[1]/1)*1 + Math.floor(ii/1)*1) % ( (ii%50) + 51) ) % 256;
+			c[2] = (colorsFG[ii-1][2]/2 + fullColors[i-1][ii][2]/2 + mulberry(Math.floor(ym[2]/1)*1 + Math.floor(ii/1)*1) % ((ii%25) * 2 + 43) ) % 256;
+		}
+		
+		colorsFG.push(c);
+	  }
+
+	fullColors.push(colorsFG);
+  }
+  
+  
+
+  
+  var dMap = [];
+  var seeded = [];
+  for (var idx=0;idx<15;idx++){
+  	seeded.push([]);
+  }
+  for (var y=0;y<600;y++){
+  	  dMap.push([]);
+  	  for (var idx=0;idx<15;idx++){
+		seeded[idx].push([]);
+	  }
+	  for (var x=0;x<800;x++){
+	  	  
+  		  dMap[y].push([0,0,0]);
+  		  for (var idx=0;idx<15;idx++){
+			seeded[idx][y].push((mulberry((y + 600*idx)*800 + x) % 1024) / 1024);
+		  }
+	  }
+  }
+  var skipI = -1;
+  reRender();
+
+var allRendered = false;
+function reRender() {
+	skipI++;
+	if (skipI > 7){
+		allRendered = true;
+	}
+	skipI = skipI %8;
+  var order = [[0,0],[0,1],[0,2],[1,2],[2,2],[2,1],[2,0],[1,0]]
+  for (var i=0;i<3;i++){
+	  for (var y=60 + i*180;y<60+i*180+90;y++){
+		  for (var x=110;x<110+90;x++){
+	  
+			if (order[skipI][0] == i && order[skipI][1] == 0){
+			  dMap[y][x] = [0,0,0];
+			}
+			else {
+			  dMap[y][x] = [1,0,0];
+			}
+		  }
+		  for (var x=290;x<290+90;x++){
+	  		if (i == 1 || (order[skipI][0] == i && order[skipI][1] == 1) ){
+			  dMap[y][x] = [0,0,0];
+			}
+			else {
+			  dMap[y][x] = [1,0,0];
+			}
+		  }
+		  for (var x=470;x<470+90;x++){
+	  
+			if (order[skipI][0] == i && order[skipI][1] == 2){
+			  dMap[y][x] = [0,0,0];
+			}
+			else {
+			  dMap[y][x] = [1,0,0];
+			}
+		  }
+	  }
+  }
+  
+  if (allRendered){
+  	for (var i=0;i<8;i++){
+  		if (i != skipI){
+			var el = document.getElementById('magiceye'+i);
+			el.style.display = "none";
+		}
+  	}
+  	var el = document.getElementById('magiceye'+skipI);
+	el.style.display = "inline-block";
+	console.log(el);
+	console.log(skipI);
+  }
+  else {
+	  MagicEye.render({
+		el: 'magiceye'+skipI,
+		s: 72,
+		fullColors: fullColors,
+		seeded: seeded,
+		depthMap: dMap
+	  });
+	  var el = document.getElementById('magiceye'+skipI);
+	  el.style.display = "inline-block";
+  }
+}
+
+
+var curveWorker = new Worker('js/curveWorker.js');
+var inputEl = document.querySelector('.input');
+inputEl.addEventListener('pointerdown',inputDown);
+inputEl.addEventListener('pointermove',inputMove);
+inputEl.addEventListener('pointercancel',inputCancel);
+inputEl.addEventListener('pointerup',inputUp);
+var isDown = false;
+
+curveWorker.onmessage = function(evt){
+	if (evt.data.type == 'inputCurve'){
+		
+		//drawCurveIn(evt.data.points);
+		
+	}
+	else if (evt.data.type == 'outputCurve'){
+		drawCurveOut(evt.data.id,evt.data.pd);
+		//console.log(evt.data.pd);
+	}
+	else if (evt.data.type == 'convexHull'){
+		//drawConvexHull(evt.data.pdArray);
+	}
+}
+var allCurves = {};
+function drawCurveOut(id,pd) {
+	allCurves[id]=pd;
+	createDepthMap();
+}
+var lastPoint = [-1,0];
+function drawCurveIn(pt) {
+
+	var r = 50;
+	//console.log(pt);
+	if (Math.abs(pt[0] - lastPoint[0]) < 10 && Math.abs(pt[1] - lastPoint[1]) < 10) {
+		return;
+	}
+	if (lastPoint[0] == -1){
+		lastPoint[0] = pt[0];
+		lastPoint[1] = pt[1];
+		return;
+	}	
+	var m = (lastPoint[1]-pt[1])/(lastPoint[0]-pt[0]);
+	var minX = Math.min(pt[0],lastPoint[0]);
+	var maxX = Math.max(pt[0],lastPoint[0]);
+	
+	var minY = -1;
+	var maxY = -1;
+	for (var i=minX;i<maxX;i++){
+		var line = {};
+		line.m = -1/m;
+		line.x = i;
+		line.y = m*(i-pt[0])+pt[1];
+		var dx = Math.sqrt(Math.pow(r,2)/(1+Math.pow(line.m,2)));
+		for (var ii=Math.floor(line.x-1*dx);ii<Math.floor(line.x+dx)+1;ii++){
+			var yi = Math.floor(line.m*(ii-line.x)+line.y);
+			if (yi > 600 || yi <0){
+				continue;
+			}
+			if (ii > 800 || ii <0){
+				continue;
+			}
+			dMap[yi][ii]=1;
+			dMap[yi+1][ii]=1;
+			if (yi < minY || minY == -1){
+				minY = yi;
+			}
+			if (yi > maxY || maxY == -1){
+				maxY = yi;
+			}
+		}
+	}
+	
+
+	lastPoint[0] = pt[0];
+	lastPoint[1] = pt[1];
+	console.log(minY,maxY);
+	const t0 = performance.now();
+	MagicEye.render({
+		el: 'magiceye',
+		s: 72,
+		rows: [minY,maxY],
+		fullColors: fullColors,
+		width: 800,
+    	height: 600,
+		depthMap: dMap,
+	  });
+	const t1 = performance.now();
+	console.log(`Magic Eye took ${t1 - t0} milliseconds.`);
+}
+
+
+
+function createDepthMap(){
+	
+	document.getElementById('pixelSVG').innerHTML = '';
+	var ids = Object.keys(allCurves);
+	var alphas = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1];
+	var alphas = [0,0,0,0,0,0,0,0,0,1]
+	var w = 50;
+	var widths = [w];
+	for (var i=1;i<10;i++){
+		widths.splice(0,0,w*(1+i/7));
+	}
+	var aMap = [];
+	var delayMap = [];
+	for (var i=0;i<800;i++){
+		aMap.push([]);
+		delayMap.push([]);
+		for (var ii=0;ii<600;ii++){
+			aMap[i].push(Math.floor(Math.random()*360));
+			delayMap[i].push(Math.random());
+		}
+	}
+	console.log(aMap[300][300]);
+	for (var i in ids){
+		var id = ids[i];
+		for (var ii=9;ii<10;ii++){
+			var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+			//console.log(id,ids,allCurves);
+			path.setAttribute('d',allCurves[id]);
+			path.setAttribute('stroke','rgba(0,0,0,'+alphas[ii]+')');
+			path.setAttribute('stroke-width',widths[ii]);
+			path.setAttribute('fill','none');
+			path.id = "bg-"+id;
+			document.getElementById('pixelSVG').appendChild(path);
+			var retval = pathToAngles(aMap,delayMap,path,55);
+			aMap = retval[0];
+			delayMap = retval[1];
+		}
+	}
+	console.log(aMap[300][300]);
+	var canvas = document.getElementById('pixelCanvas');
+	var ctx = canvas.getContext("2d");
+	let clonedSvgElement = document.getElementById("pixelSVG").cloneNode(true);
+	var img2 = new Image();
+
+	img2.onload = function() {
+		//ctx.drawImage(img, 0, 0, 300, 300);
+		ctx.clearRect(0,0,800,600);
+		ctx.drawImage(img2, 0, 0,800,600);
+		
+		var imgData = ctx.getImageData(0,0,800,600).data;
+		dMap = [];
+		for (var y=0;y<600;y++){
+		  dMap.push([]);
+		  for (var x=0;x<800;x++){
+		  	
+			dMap[y].push([imgData[y*800*4+x*4+3]/255,aMap[y][x],delayMap[y][x]]);
+		  }
+		}
+		MagicEye.render({
+			el: 'magiceye',
+			s: 72,
+			fullColors: fullColors,
+			seeded: seeded,
+			depthMap: dMap,
+		  });
+
+	}
+
+	img2.src = "data:image/svg+xml;base64," + window.btoa(clonedSvgElement.outerHTML);
+}
+
+function inputCancel(evt){
+	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
+		evt.preventDefault();
+	}
+	isDown = false;
+	curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+}
+function inputDown(evt) {
+	evt.preventDefault();
+	if (evt.pointerType == 'pen' || evt.pointerType == 'mouse'){
+		curveWorker.postMessage({'type':'down','x':evt.clientX,'y':evt.clientY});
+		lastPoint[0] = evt.clientX;
+		lastPoint[1] = evt.clientY;
+		isDown = true;
+	}
+	else {
+		//document.getElementById('pointerType').innerHTML = evt.pointerType;
+	}
+}
+function inputMove(evt) {
+	evt.preventDefault();
+	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
+		curveWorker.postMessage({'type':'move','x':evt.clientX,'y':evt.clientY});
+		//drawCurveIn([evt.clientX,evt.clientY]);
+	}
+	else {
+	}
+}
+function inputUp(evt) {
+	evt.preventDefault();
+	if (isDown && (evt.pointerType == 'pen' || evt.pointerType == 'mouse')){
+		isDown = false;
+		
+		curveWorker.postMessage({'type':'up','x':evt.clientX,'y':evt.clientY});
+	}
+	else {
+	}
+}
+function mulberry(a) {
+			
+	  var t = a += 0x6D2B79F5;
+	  t = Math.imul(t ^ t >>> 15, t | 1);
+	  t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+	  return (t ^ t >>> 14) >>> 0;
+			
+}
+
+function pathToAngles(aMap,delayMap,path,w){
+	var len = path.getTotalLength();
+	var nLines = 100;
+	var lastPoint = path.getPointAtLength(len*1/nLines);
+	lastPoint.x = path.getPointAtLength(0).x - (path.getPointAtLength(len*1/nLines).x - path.getPointAtLength(0).x);
+	lastPoint.y = path.getPointAtLength(0).y - (path.getPointAtLength(len*1/nLines).y - path.getPointAtLength(0).y);
+	//console.log(lastPoint);
+	//console.log(aMap[300][300]);
+	var ww = Math.pow(w,2);
+	
+	for (var i=0;i<nLines;i++){
+		var pt = path.getPointAtLength(len*i/nLines);
+		
+		var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
+		if (pt.x-lastPoint.x == 0){
+			m = 1000;
+		}
+		if (m == 0){
+			m = 1/1000;
+		}
+		//var line = {'x':pt.x,'y':pt.y,'m':m};
+		var line1 = {'x':pt.x,'y':pt.y,'m':-1/m};
+		//var a1 = Math.atan(-1*line1.m)*180/3.14159;
+		
+		var pt2 = path.getPointAtLength(len*(i+1)/nLines);
+		var m2 = (pt2.y-pt.y)/(pt2.x-pt.x);
+		if (pt2.x-pt.x == 0){
+			m2 = 1000;
+		}
+		if (m2 == 0){
+			m2 = 1/1000;
+		}
+		//var line = {'x':pt.x,'y':pt.y,'m':m2};
+		var line2 = {'x':pt.x,'y':pt.y,'m':-1/m2};
+		//var a2 = Math.atan(-1*line2.m)*180/3.14159;
+		var a = Math.atan(-1*m)*180/3.14159;
+		a = Math.round(90 - a);
+		if (pt2.x < pt.x){
+			a = 180 + a;
+		}
+		if (a < 0){
+			a = 720 + a;
+		}
+		a = a % 360;
+		
+		var cx = (pt.x+pt2.x)/2;
+		var cy = (pt.y+pt2.y)/2;
+		//console.log(cx,cy,a);
+		var yPart = {};
+		for (var ii=-1*w;ii<w+1;ii++){
+			var xx = cx+ii;
+			if (xx <2 || xx >=800 - 2){
+				continue;
+			}
+			var y1 = line1.m*(xx-line1.x)+line1.y;
+			var y2 = line2.m*(xx-line2.x)+line2.y;
+			//console.log(xx,y1,y2);
+			var xx1 = Math.floor(xx);
+			var xx2 = Math.floor(xx)+1;
+			for (var iii=-1*w;iii<w+1;iii++){
+				var yy = cy+iii;
+				if (yy <2 || yy >=600 - 2){
+					continue;
+				}
+				
+				var yy1 = Math.floor(yy);
+				var yy2 = Math.floor(yy)+1;
+				
+				var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
+				if (d <= ww){
+					aMap[yy1][xx1]=a;
+					aMap[yy2][xx1]=a;
+					aMap[yy1][xx2]=a;
+					aMap[yy2][xx2]=a;
+					delayMap[yy1][xx1]=i/nLines;
+					delayMap[yy2][xx1]=i/nLines;
+					delayMap[yy1][xx2]=i/nLines;
+					delayMap[yy2][xx2]=i/nLines;
+					if (yPart[yy1]){
+						yPart[yy1][0]+=a;
+						yPart[yy1][1]+=1;
+					}
+					else {
+						yPart[yy1]=[a,1];
+					}
+					if (yPart[yy2]){
+						yPart[yy2][0]+=a;
+						yPart[yy2][1]+=1;
+					}
+					else {
+						yPart[yy2]=[a,1];
+					}
+					
+					
+				}
+				
+				
+			}
+		}
+		for (var yi in yPart){
+			
+		}
+		lastPoint.x = pt.x;
+		lastPoint.y = pt.y;
+	}
+	
+	var lastPoint = path.getPointAtLength(len*1/nLines);
+	lastPoint.x = path.getPointAtLength(0).x - (path.getPointAtLength(len*1/nLines).x - path.getPointAtLength(0).x);
+	lastPoint.y = path.getPointAtLength(0).y - (path.getPointAtLength(len*1/nLines).y - path.getPointAtLength(0).y);
+	
+	for (var i=0;i<nLines;i++){
+		var pt = path.getPointAtLength(len*i/nLines);
+		
+		var m = (pt.y-lastPoint.y)/(pt.x-lastPoint.x);
+		if (pt.x-lastPoint.x == 0){
+			m = 1000;
+		}
+		if (m == 0){
+			m = 1/1000;
+		}
+		//var line = {'x':pt.x,'y':pt.y,'m':m};
+		var line1 = {'x':pt.x,'y':pt.y,'m':-1/m};
+		//var a1 = Math.atan(-1*line1.m)*180/3.14159;
+		
+		var pt2 = path.getPointAtLength(len*(i+1)/nLines);
+		var m2 = (pt2.y-pt.y)/(pt2.x-pt.x);
+		if (pt2.x-pt.x == 0){
+			m2 = 1000;
+		}
+		if (m2 == 0){
+			m2 = 1/1000;
+		}
+		//var line = {'x':pt.x,'y':pt.y,'m':m2};
+		var line2 = {'x':pt.x,'y':pt.y,'m':-1/m2};
+		//var a2 = Math.atan(-1*line2.m)*180/3.14159;
+		var a = Math.atan(-1*m)*180/3.14159;
+		a = Math.round(90 - a);
+		if (pt2.x < pt.x){
+			a = 180 + a;
+		}
+		if (a < 0){
+			a = 720 + a;
+		}
+		a = a % 360;
+		
+		var cx = (pt.x+pt2.x)/2;
+		var cy = (pt.y+pt2.y)/2;
+		//console.log(cx,cy,a);
+		for (var ii=-1*w;ii<w+1;ii++){
+			var xx = cx+ii;
+			if (xx <2 || xx >=800 - 2){
+				continue;
+			}
+			var y1 = line1.m*(xx-line1.x)+line1.y;
+			var y2 = line2.m*(xx-line2.x)+line2.y;
+			//console.log(xx,y1,y2);
+			var xx1 = Math.floor(xx);
+			var xx2 = Math.floor(xx)+1;
+			for (var iii=-1*w;iii<w+1;iii++){
+				var yy = cy+iii;
+				if (yy <2 || yy >=600 - 2){
+					continue;
+				}
+				
+				var yy1 = Math.floor(yy);
+				var yy2 = Math.floor(yy)+1;
+				
+				
+				
+				if ((yy2 >= y1 -1 && yy1 <= y2 +1) || (yy1 <= y1+1 && yy2 >= y2-1)){
+					var d = Math.pow(xx-cx,2)+Math.pow(yy-cy,2);
+					if (d <= ww){
+						for (var yi=-2;yi<4;yi++){
+							for (var xi=-2;xi<4;xi++){
+								aMap[Math.floor(yy)+yi][Math.floor(xx)+xi]=a;
+								delayMap[Math.floor(yy)+yi][Math.floor(xx)+xi]=i/nLines;
+							}
+						}
+						
+						
+					}
+				}
+			}
+		}
+		lastPoint.x = pt.x;
+		lastPoint.y = pt.y;
+	}
+
+	return [aMap,delayMap];
+}
+
+</script>
+</body>
+</html>

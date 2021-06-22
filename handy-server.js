@@ -63,7 +63,15 @@ app.get('/magic.html',
 		res.end();
 	}
 );
-
+app.get('/magicmaker', 
+	
+	function(req, res) {
+		res.write(nunjucks.render('templates/magicemoji.html',{
+		
+		}));
+		res.end();
+	}
+);
 app.post('/save.html', 
 	function(req, res) {
 		var content = req.body.svg;
