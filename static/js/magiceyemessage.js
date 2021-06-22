@@ -130,7 +130,7 @@
 	  var iDiv = document.createElement('div');
 	  divT.appendChild(iDiv);
       for (var y=yMin;y<yMax;y++){
-      	if (y <= 640 && y % 42 == 0){
+      	if (y < 13*42 && y % 42 == 0){
       		//var xd = 60 + (y % 96) / 4;
       		var xd = 60;
       		for (var cx=0;cx< 800;cx+=xd){
