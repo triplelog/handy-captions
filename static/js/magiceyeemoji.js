@@ -68,7 +68,7 @@
         seeded: opts.seeded,
         colors: opts.colors
       });
-      
+      console.log(retval);
       pixelData = retVal[0];
       var emojiLocations = retVal[1];
 
