@@ -127,12 +127,10 @@
       divT.classList.add('emojiDiv');
 	  var iDiv = document.createElement('div');
 	  divT.appendChild(iDiv);
-	  console.log(emojiLocations);
       for (var y=yMin;y<yMax;y++){
       	var emojis = Object.keys(emojiLocations[y]);
-      	console.log(y,emojiLocations[y]);
       	for (var i in emojis){
-      		break;
+      		
       		var e = parseInt(emojis[i]);
       		var sz = parseFloat(emojiLocations[y][e].sz);
       		var rc = parseInt(emojiLocations[y][e].color);
@@ -149,7 +147,6 @@
       		
 			var idx = Math.floor(rc/37);
 			
-			console.log(i,idx,cx,cy,idxToEmoji[idx]);
 			context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
 			context.textBaseline = "middle"; 
