@@ -147,11 +147,7 @@
 
 var allRendered = false;
 function reRender() {
-	skipI++;
-	if (skipI > 7){
-		allRendered = true;
-	}
-	skipI = skipI %8;
+
   var order = [[0,0],[0,1],[0,2],[1,2],[2,2],[2,1],[2,0],[1,0]]
   for (var i=0;i<3;i++){
 	  for (var y=60 + i*180;y<60+i*180+90;y++){
@@ -185,26 +181,20 @@ function reRender() {
   }
   
   if (allRendered){
-  	for (var i=0;i<8;i++){
-  		if (i != skipI){
-			var el = document.getElementById('magiceye'+i);
-			el.style.display = "none";
-		}
-  	}
-  	var el = document.getElementById('magiceye'+skipI);
+  	
+  	var el = document.getElementById('magiceye');
 	el.style.display = "inline-block";
 	console.log(el);
-	console.log(skipI);
   }
   else {
 	  MagicEye.render({
-		el: 'magiceye'+skipI,
+		el: 'magiceye',
 		s: 72,
 		fullColors: fullColors,
 		seeded: seeded,
 		depthMap: dMap
 	  });
-	  var el = document.getElementById('magiceye'+skipI);
+	  var el = document.getElementById('magiceye');
 	  el.style.display = "inline-block";
   }
 }
