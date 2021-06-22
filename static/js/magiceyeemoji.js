@@ -121,7 +121,7 @@
       idxToEmoji.push('💩');
       idxToEmoji.push('😍');
       idxToEmoji.push('🏴‍☠️');
-      var idxToWord = ["C","o","m","i","n","g"," ","S","o","o","n"];
+      var idxToWord = ["C","o","m","i","n","g","S","o","o","n"];
       var emojiEl = document.querySelector('.emojiLayer');
       emojiEl.innerHTML = '';
       var divT = document.createElement('div');
@@ -149,7 +149,7 @@
       		if (rc < 0){rc = 0;}
 			var idx = Math.floor(rc/37);
 			
-			idx = Math.floor(y*11/600);
+			idx = Math.floor(y*10/200) % 10;
 			
 			context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
