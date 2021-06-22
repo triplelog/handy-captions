@@ -144,7 +144,7 @@
 				context.font = parseInt(36) +'px serif';
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
-				context.fillText("-", cx, y + 36);
+				context.fillText("-", cx, y + 18);
 			}
       	}
       }
