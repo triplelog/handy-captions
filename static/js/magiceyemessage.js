@@ -130,10 +130,8 @@
 	  divT.appendChild(iDiv);
       for (var y=yMin;y<yMax;y++){
       	if (y > 0 && y <= 420 && y % 36 == 0){
-      		var xd = 72;
-      		if (y == 36){
-      			xd = 54;
-      		}
+      		var xd = 60 + Math.floor(y/36)-1;
+      		
       		for (var cx=0;cx< 800;cx+=xd){
 				context.font = parseInt(36) +'px serif';
 				context.textAlign = "center"; 
