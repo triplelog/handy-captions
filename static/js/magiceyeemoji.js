@@ -148,6 +148,7 @@
       		if (rc < 0){rc = 0;}
 			var idx = Math.floor(rc/37);
 			
+			idx = 3;
 			context.font = parseInt(sz * 0.9) +'px serif';
 			context.textAlign = "center"; 
 			context.textBaseline = "middle"; 
