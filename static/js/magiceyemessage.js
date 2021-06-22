@@ -138,7 +138,9 @@
 				context.textAlign = "center"; 
 				context.textBaseline = "middle"; 
 				context.fillText(idxToWord[Math.floor(y/42)], cx, y);
-				context.fillText(idxToEmoji[3], cx + 36, y);
+				context.font = parseInt(12) +'px serif';
+				context.fillText(idxToEmoji[3], cx + 20, y);
+				context.fillText(idxToEmoji[3], cx + 40, y);
 			}
 			
 			xd = 72;
@@ -149,7 +151,10 @@
 				//context.fillText("-", cx, y  - 28);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
-				context.fillText(idxToEmoji[1], cx, y + 21); 
+				context.font = parseInt(12) +'px serif';
+				context.fillText(idxToEmoji[1], cx + 12, y + 21); 
+				context.fillText(idxToEmoji[1], cx + 60, y + 21); 
+				context.font = parseInt(24) +'px serif';
 				context.fillText(idxToWord2[Math.floor(y/42)], cx + 36, y + 21);
 				//context.fillText("-", cx, y - 24);
 			}
