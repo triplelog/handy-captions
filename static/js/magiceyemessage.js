@@ -147,7 +147,7 @@
 				context.fillText("-", cx, y + 20);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
-				context.fillText("+", cx + 36, y + 24); 
+				context.fillText(idxToEmoji[Math.floor(y/48)-1], cx + 36, y + 24); 
 				context.fillText("-", cx, y + 24);
 			}
 			for (var cx=0;cx< 800;cx+=xd){
