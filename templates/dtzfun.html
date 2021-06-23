@@ -45,7 +45,7 @@ walls = [{id:"wall-0",v:[[0,0],[0,100],[100,100],[90,20],[0,0]]}];
 nWalls = 0;
 addWall(walls[0]);
 
-tempWall = {id:"wall-t",v:[]};
+tempWall = {id:"wall-t",v:[],initial:false};
 r = 3;
 balls = [{id:"ball-0",x:50,y:50,a:-1,el:document.getElementById("ball-0")}];
 balls.push({id:"ball-1",x:50,y:20,a:2,el:document.getElementById("ball-1")});
@@ -225,6 +225,7 @@ function pmove(evt){
 		var x = Math.round((evt.clientX-bcr.left)/bcr.width*1000)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1000)/10;
 		tempWall.v.push([x,y]);
+		cleanWall(tempWall);
 	}
 }
 function pup(evt){
@@ -241,6 +242,31 @@ function pup(evt){
 		addWall(newWall);
 		
 		
+	}
+}
+
+
+
+function cleanWall(wall){
+	if (!wall.initial){
+		for (var ii=0;ii<wall.v.length;ii++){
+			var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
+			var c = collision(pt);
+			if (c.d <= r){
+				wall.v.splice(0,ii);
+				wall.initial = true;
+				return;
+				break;
+			}
+		}
+	}
+	
+	for (var ii=1;ii<wall.v.length-1;ii++){
+		var d = Math.pow(wall.v[ii][0]-wall.v[ii-1][0],2)+Math.pow(wall.v[ii][1]-wall.v[ii-1][1],2);
+		if (d < 2){
+			wall.v.splice(ii,1);
+			ii--;
+		}
 	}
 }
 </script>
