@@ -408,7 +408,7 @@ function cleanWall(wall){
 					var pc = collisionPoint(line1,line2);
 					wall.v[0][0] = pc[0]; 
 					wall.v[0][1] = pc[1];
-					wall.initial.push({wall1:c.wall,edge:c.edge,pt:pc});
+					wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
 				}
 				return;
 				break;
