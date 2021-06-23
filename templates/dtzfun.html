@@ -50,7 +50,7 @@ function addWall(wall) {
 	var svg = document.getElementById("borderSVG");
 	var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	var pd = "M";
-	for (var ii=1;ii<wall.v.length;ii++){
+	for (var ii=0;ii<wall.v.length;ii++){
 		pd += wall.v[ii][0]+","+wall.v[ii][1]+" ";
 	}
 	path.setAttributeNS(null,'d',pd);
@@ -59,27 +59,39 @@ function addWall(wall) {
 	path.setAttributeNS(null,'stroke-width',"1");
 	svg.appendChild(path);
 }
+function updateWall(wall) {
+	makeEdgesOne(wall);
+	var path = document.getElementById(wall.id);
+	var pd = "M";
+	for (var ii=0;ii<wall.v.length;ii++){
+		pd += wall.v[ii][0]+","+wall.v[ii][1]+" ";
+	}
+	path.setAttributeNS(null,'d',pd);
+}
+function makeEdgesOne(wall){
+	wall.e = [];
+	for (var ii=1;ii<wall.v.length;ii++){
+		var edge = [];
+		if (wall.v[ii][0]-wall.v[ii-1][0] == 0){
+			edge.push("inf");
+		}
+		else {
+			edge.push((wall.v[ii][1]-wall.v[ii-1][1])/(wall.v[ii][0]-wall.v[ii-1][0]));
+		}
+		if (wall.v[ii][1]-wall.v[ii-1][1] == 0){
+			edge.push("inf");
+		}
+		else {
+			edge.push(-1*(wall.v[ii][0]-wall.v[ii-1][0])/(wall.v[ii][1]-wall.v[ii-1][1]));
+		}
+		edge.push(wall.v[ii-1]);
+		edge.push(wall.v[ii]);
+		wall.e.push(edge);
+	}
+}
 function makeEdges(){
 	for (var i=0;i<nWalls;i++){
-		walls[i].e = [];
-		for (var ii=1;ii<walls[i].v.length;ii++){
-			var edge = [];
-			if (walls[i].v[ii][0]-walls[i].v[ii-1][0] == 0){
-				edge.push("inf");
-			}
-			else {
-				edge.push((walls[i].v[ii][1]-walls[i].v[ii-1][1])/(walls[i].v[ii][0]-walls[i].v[ii-1][0]));
-			}
-			if (walls[i].v[ii][1]-walls[i].v[ii-1][1] == 0){
-				edge.push("inf");
-			}
-			else {
-				edge.push(-1*(walls[i].v[ii][0]-walls[i].v[ii-1][0])/(walls[i].v[ii][1]-walls[i].v[ii-1][1]));
-			}
-			edge.push(walls[i].v[ii-1]);
-			edge.push(walls[i].v[ii]);
-			walls[i].e.push(edge);
-		}
+		makeEdgesOne(walls[i]);
 	}
 }
 
@@ -130,7 +142,7 @@ function collision(pt){
 }
 
 function move(timestamp) {
-	if (start === undefined){
+	if (!start){
 		start = timestamp;
 		old = timestamp;
 		window.requestAnimationFrame(move);
