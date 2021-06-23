@@ -229,6 +229,34 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 	for (var ii=1;ii<wall.v.length;ii++){
 		wall.v[ii][2]=[oldRegion,newRegion];
 	}
+	
+	var leftWall = {v:[]};
+	if (initial.wall == end.wall){
+		if (initial.edge > end.edge){
+			leftWall.v = walls[initial.wall].v.slice(0,end.edge+1);
+			for (var ii=wall.v.length-1;ii>=0;ii--){
+				leftWall.v.push(wall.v[ii]);
+			}
+			leftWall += walls[initial.wall].v.slice(initial.edge);
+		}
+		else if (initial.edge < end.edge){
+		
+		}
+		else {
+			
+		}
+	}
+	console.log(leftWall.v);
+	
+}
+/*
+function updateRegions(wall,initial,end,oldRegion,newRegion) {
+	initial.pt.push([oldRegion,newRegion]);
+	end.pt.push([oldRegion,newRegion]);
+	var endPoints = [initial.pt,end.pt];
+	for (var ii=1;ii<wall.v.length;ii++){
+		wall.v[ii][2]=[oldRegion,newRegion];
+	}
 	if (initial.wall == end.wall){
 		if (initial.edge > end.edge){
 			walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
@@ -412,7 +440,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 	console.log(walls);
 	
 }
-
+*/
 function updateTest(){
 	walls[0].v[3]=[70,20];
 	updateWall(walls[0]);
