@@ -219,8 +219,20 @@ function move(timestamp) {
 window.requestAnimationFrame(move);
 
 
-function updateRegions(wall,initial,end) {
-
+function updateRegions(wall,initialArr,endArr) {
+	var initial = initialArr[0];
+	var end = endArr[0];
+	for (var i=0;i<initialArr.length;i++){
+		for (var ii=0;ii<endArr.length;ii++){
+			console.log(initialArr[i].wall,endArr[ii].wall);
+			if (initialArr[i].wall == endArr[ii].wall){
+				initial = initialArr[i];
+				end = endArr[ii];
+				i = initialArr.length + 10;
+				break;
+			}
+		}
+	}
 	console.log(initial.pt);
 	console.log(end.pt);
 	var leftWall = {v:[]};
@@ -374,19 +386,30 @@ function cleanWall(wall){
 	if (!wall.initial){
 		for (var ii=0;ii<wall.v.length;ii++){
 			var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
-			var c = collision(pt);
-			if (c.d <= r*r){
+			var cc = {wall:0,edge:0,d:r*r+1};
+			var wcs = [];
+			for (var i=0;i<nWalls;i++){
+				var c = collisionOne(pt,walls[i],cc,i);
+				if (c.d <= r*r){
+					wcs.push(c);
+				}
+			}
+			if (wcs.length > 0){
 				//set to intersection point
-				wall.v.splice(0,ii);
 				
-				var m1 = walls[c.wall].e[c.edge][1];
-				var m2 = walls[c.wall].e[c.edge][0];
-				var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
-				var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
-				var pc = collisionPoint(line1,line2);
-				wall.v[0][0] = pc[0]; 
-				wall.v[0][1] = pc[1];
-				wall.initial = {wall:c.wall,edge:c.edge,pt:pc};
+				wall.v.splice(0,ii);
+				wall.initial = [];
+				for (var i=0;i<wcs.length;i++){
+					var c = wcs[i]
+					var m1 = walls[c.wall].e[c.edge][1];
+					var m2 = walls[c.wall].e[c.edge][0];
+					var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
+					var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
+					var pc = collisionPoint(line1,line2);
+					wall.v[0][0] = pc[0]; 
+					wall.v[0][1] = pc[1];
+					wall.initial.push({wall1:c.wall,edge:c.edge,pt:pc});
+				}
 				return;
 				break;
 			}
@@ -401,18 +424,30 @@ function cleanWall(wall){
 				wall.v[ii][2] = d;
 				totald += d;
 				if (totald > r*r*2){
-					var c = collision(pt,false);
-					if (c.d <= r*r){
+					var cc = {wall:0,edge:0,d:r*r+1};
+					var wcs = [];
+					for (var i=0;i<nWalls;i++){
+						var c = collisionOne(pt,walls[i],cc,i);
+						if (c.d <= r*r){
+							wcs.push(c);
+						}
+					}
+					if (wcs.length > 0){
+						//set to intersection point
 						wall.v[ii][2] = -1;
-						var m1 = walls[c.wall].e[c.edge][1];
-						var m2 = walls[c.wall].e[c.edge][0];
-						var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
-						var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
-						var pc = collisionPoint(line1,line2);
-						wall.end = {wall:c.wall,edge:c.edge,pt:pc};
-						wall.v[ii][0] = pc[0]; 
-						wall.v[ii][1] = pc[1];
-						wall.v = wall.v.slice(0,ii+1);
+						wall.end = [];
+						for (var i=0;i<wcs.length;i++){
+							var c = wcs[i]
+							var m1 = walls[c.wall].e[c.edge][1];
+							var m2 = walls[c.wall].e[c.edge][0];
+							var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
+							var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
+							var pc = collisionPoint(line1,line2);
+							wall.end.push({wall:c.wall,edge:c.edge,pt:pc});
+							wall.v[ii][0] = pc[0]; 
+							wall.v[ii][1] = pc[1];
+							wall.v = wall.v.slice(0,ii+1);
+						}
 						console.log("end");
 						return "end";
 					}
