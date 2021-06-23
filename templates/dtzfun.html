@@ -282,7 +282,20 @@ function pup(evt){
 	}
 }
 
-
+function collisionPoint(line1,line2){
+	if (line1.m == "inf"){
+		line1.m = 1000;
+	}
+	if (line2.m == "inf"){
+		line2.m = 1000;
+	}
+	if (line1.m == line2.m){
+		return [line1.pt.x,line1.pt.y];
+	}
+	var xc = (line2.pt.y-line1.pt.y+line1.pt.x*line1.m-line2.pt.x*line2.m)/(line1.m-line2.m);
+	var yc = line1.m*(xc-line1.pt.x)+lin1.pt.y;
+	return [xc,yc];
+}
 
 function cleanWall(wall){
 
@@ -294,6 +307,13 @@ function cleanWall(wall){
 				//set to intersection point
 				wall.v.splice(0,ii);
 				wall.initial = true;
+				var m1 = walls[c.wall].e[c.edge][1];
+				var m2 = walls[c.wall].e[c.edge][0];
+				var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
+				var line2 = {pt:{x:walls[c.wall].e[c.edge][2],y:walls[c.wall].e[c.edge][3]},m:m2};
+				var pc = collisionPoint(line1,line2);
+				wall.v[0][0] = pc[0]; 
+				wall.v[0][1] = pc[1]; 
 				return;
 				break;
 			}
