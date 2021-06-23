@@ -70,7 +70,7 @@ function makeEdges(){
 
 function collision(pt){
 	var minD = r+1;
-	var c = {wall:0,edge:0,d:0};
+	var c = {wall:0,edge:0,d:minD};
 	for (var i=0;i<nWalls;i++){
 		for (var ii=0;ii<walls[i].e.length;ii++){
 			var d = r+1;
@@ -98,7 +98,7 @@ function collision(pt){
 					d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
 				}
 			}
-			console.log(pt,d);
+			//console.log(pt,d);
 			if (d<minD){
 				minD=d;
 				c.wall = i;
