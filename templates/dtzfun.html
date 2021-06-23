@@ -333,6 +333,14 @@ function cleanWall(wall){
 					if (c.d <= r*r){
 						wall.end = true;
 						wall.v[ii][2] = -1;
+						var m1 = walls[c.wall].e[c.edge][1];
+						var m2 = walls[c.wall].e[c.edge][0];
+						var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
+						var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
+						var pc = collisionPoint(line1,line2);
+						wall.v[ii][0] = pc[0]; 
+						wall.v[ii][1] = pc[1];
+						wall.v = wall.v.slice(0,ii+1);
 						console.log("end");
 						return "end";
 					}
