@@ -425,16 +425,16 @@ function pup(evt){
 		var bcr = evt.currentTarget.getBoundingClientRect();
 		var x = Math.round((evt.clientX-bcr.left)/bcr.width*1200 - 100)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
-		tempWall.v.push([x,y,0]);
+		//tempWall.v.push([x,y,0]);
 		console.log(tempWall);
 		isDown = false;
 		
-		var newWall = {id:"wall-"+nWalls,v:tempWall.v};
+		/*var newWall = {id:"wall-"+nWalls,v:tempWall.v};
 		walls.push(newWall);
 		addWall(newWall);
 		tempWall.v = [];
 		tempWall.e = [];
-		tempWall.initial = false;
+		tempWall.initial = false;*/
 		
 		
 	}
