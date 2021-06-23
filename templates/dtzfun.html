@@ -80,6 +80,14 @@ function updateWall(wall) {
 	}
 	path.setAttributeNS(null,'d',pd);
 }
+function updateTemp() {
+	var path = document.getElementById("wall-t");
+	var pd = "M";
+	for (var ii=0;ii<tempWall.v.length;ii++){
+		pd += tempWall.v[ii][0]+","+tempWall.v[ii][1]+" ";
+	}
+	path.setAttributeNS(null,'d',pd);
+}
 function makeEdgesOne(wall){
 	wall.e = [];
 	for (var ii=1;ii<wall.v.length;ii++){
@@ -226,6 +234,7 @@ function pmove(evt){
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1000)/10;
 		tempWall.v.push([x,y]);
 		cleanWall(tempWall);
+		updateTemp();
 	}
 }
 function pup(evt){
