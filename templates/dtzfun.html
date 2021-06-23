@@ -234,7 +234,9 @@ function pmove(evt){
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1000)/10;
 		tempWall.v.push([x,y]);
 		cleanWall(tempWall);
-		updateTemp();
+		if (tempWall.initial){
+			updateTemp();
+		}
 	}
 }
 function pup(evt){
@@ -249,6 +251,8 @@ function pup(evt){
 		var newWall = {id:"wall-"+nWalls,v:tempWall.v};
 		walls.push(newWall);
 		addWall(newWall);
+		tempWall.v = [];
+		tempWall.initial = false;
 		
 		
 	}
