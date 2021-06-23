@@ -35,7 +35,7 @@
 
 <script>
 walls = [{id:"wall-0",v:[[0,0],[0,100],[100,100],[90,20],[0,0]]}];
-nWalls = 1;
+nWalls = 0;
 makeEdges();
 addWall(walls[0]);
 r = 3;
@@ -58,6 +58,7 @@ function addWall(wall) {
 	path.setAttributeNS(null,'stroke',"red");
 	path.setAttributeNS(null,'stroke-width',"1");
 	svg.appendChild(path);
+	nWalls+=1;
 }
 function updateWall(wall) {
 	makeEdgesOne(wall);
@@ -155,7 +156,7 @@ function move(timestamp) {
 		var y = balls[i].y+Math.sin(balls[i].a)*elapsed/40;
 		
 		var c = collision({x:x,y:y});
-		if (c.d < r){
+		if (c.d <= r){
 			console.log(c);
 			var m = walls[c.wall].e[c.edge][0];
 			var b = Math.atan(m);
@@ -186,6 +187,9 @@ window.requestAnimationFrame(move);
 function updateTest(){
 	walls[0].v[3]=[70,20];
 	updateWall(walls[0]);
+	
+	var newWall = {id:"wall-1",v:[[0,100],[70,20]]};
+	addWall(newWall);
 	start = 0;
 	window.requestAnimationFrame(move);
 }
