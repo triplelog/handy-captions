@@ -225,11 +225,17 @@ function updateRegions(wall,initial,end) {
 	console.log(end.pt);
 	var leftWall = {v:[]};
 	var rightWall = {v:[]};
+	end.pt[0] = Math.round(end.pt[0]*10)/10;
+	end.pt[1] = Math.round(end.pt[1]*10)/10;
+	initial.pt[0] = Math.round(initial.pt[0]*10)/10;
+	initial.pt[1] = Math.round(initial.pt[1]*10)/10;
 	if (initial.wall == end.wall){
 		if (initial.edge > end.edge){
 			leftWall.v = walls[initial.wall].v.slice(0,end.edge+1);
 			for (var ii=wall.v.length-1;ii>=0;ii--){
-				leftWall.v.push(wall.v[ii]);
+				var x = Math.round(wall.v[ii][0]*10)/10;
+				var y = Math.round(wall.v[ii][1]*10)/10;
+				leftWall.v.push([x,y]);
 			}
 			for (var ii=initial.edge+1;ii<walls[initial.wall].v.length;ii++){
 				leftWall.v.push(walls[initial.wall].v[ii]);
@@ -238,13 +244,17 @@ function updateRegions(wall,initial,end) {
 			rightWall.v = walls[initial.wall].v.slice(end.edge+1,initial.edge+1);
 			rightWall.v.splice(0,0,end.pt);
 			for (var ii=0;ii<wall.v.length;ii++){
-				rightWall.v.push(wall.v[ii]);
+				var x = Math.round(wall.v[ii][0]*10)/10;
+				var y = Math.round(wall.v[ii][1]*10)/10;
+				rightWall.v.push([x,y]);
 			}
 		}
 		else if (initial.edge < end.edge){
 			leftWall.v = walls[initial.wall].v.slice(0,initial.edge+1);
 			for (var ii=0;ii<wall.v.length;ii++){
-				leftWall.v.push(wall.v[ii]);
+				var x = Math.round(wall.v[ii][0]*10)/10;
+				var y = Math.round(wall.v[ii][1]*10)/10;
+				leftWall.v.push([x,y]);
 			}
 			for (var ii=end.edge+1;ii<walls[initial.wall].v.length;ii++){
 				leftWall.v.push(walls[initial.wall].v[ii]);
@@ -253,7 +263,9 @@ function updateRegions(wall,initial,end) {
 			rightWall.v = walls[initial.wall].v.slice(initial.edge+1,end.edge+1);
 			rightWall.v.splice(0,0,initial.pt);
 			for (var ii=wall.v.length-1;ii>=0;ii--){
-				rightWall.v.push(wall.v[ii]);
+				var x = Math.round(wall.v[ii][0]*10)/10;
+				var y = Math.round(wall.v[ii][1]*10)/10;
+				rightWall.v.push([x,y]);
 			}
 		}
 		else {
