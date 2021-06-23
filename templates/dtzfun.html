@@ -246,10 +246,19 @@ function pmove(evt){
 		var x = Math.round((evt.clientX-bcr.left)/bcr.width*1200 - 100)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
 		tempWall.v.push([x,y,0]);
-		cleanWall(tempWall);
+		var end = cleanWall(tempWall);
 		if (tempWall.initial){
 			makeEdgesOne(tempWall);
 			updateTemp();
+		}
+		if (end == "end"){
+			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
+			walls.push(newWall);
+			addWall(newWall);
+			tempWall.v = [];
+			tempWall.e = [];
+			tempWall.initial = false;
+			isDown = false;
 		}
 	}
 }
@@ -304,6 +313,7 @@ function cleanWall(wall){
 						wall.end = true;
 						wall.v[ii][2] = -1;
 						console.log("end");
+						return "end";
 					}
 				}
 			}
@@ -326,7 +336,7 @@ function cleanWall(wall){
 			ii--;
 		}
 	}
-	console.log(wall.v);
+	//console.log(wall.v);
 }
 </script>
 </body>
