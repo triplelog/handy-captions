@@ -107,8 +107,10 @@ function collision(pt){
 			}
 		}
 	}
+
 	return c;
 }
+
 function move(timestamp) {
 	if (start === undefined){
 		start = timestamp;
@@ -125,7 +127,7 @@ function move(timestamp) {
 		var c = collision({x:x,y:y});
 		if (c.d < r){
 			console.log(c);
-			return;
+			balls[i].a = 1;
 		}
 		balls[i].el.setAttribute("cx",x);
 		balls[i].el.setAttribute("cy",y);
