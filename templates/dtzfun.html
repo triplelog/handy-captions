@@ -288,25 +288,25 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 					
 					if (x1 == initial.pt[0] && y1 == inital.pt[1]){
 						newRegionPoints[x2]={};
-						newRegionPoints[x2][y2] = {id:newRegion};
+						newRegionPoints[x2][y2] = newRegion;
 					}
 					else if (x1 == end.pt[0] && y1 == end.pt[1]){
 						newRegionPoints[x2]={};
-						newRegionPoints[x2][y2] = {id:newRegion};
+						newRegionPoints[x2][y2] = newRegion;
 					}
 					else if (x2 == initial.pt[0] && y2 == inital.pt[1]){
 						newRegionPoints[x1]={};
-						newRegionPoints[x1][y1] = {id:newRegion};
+						newRegionPoints[x1][y1] = newRegion;
 					}
 					else if (x2 == end.pt[0] && y2 == end.pt[1]){
 						newRegionPoints[x1]={};
-						newRegionPoints[x1][y1] = {id:newRegion};
+						newRegionPoints[x1][y1] = newRegion;
 					}
 					else {
 						newRegionPoints[x1]={};
-						newRegionPoints[x1][y1] = {id:newRegion};
+						newRegionPoints[x1][y1] = newRegion;
 						newRegionPoints[x2]={};
-						newRegionPoints[x2][y2] = {id:newRegion};
+						newRegionPoints[x2][y2] = newRegion;
 					}
 				}
 				else {
@@ -317,7 +317,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 						}
 						else {
 							newRegionPoints[x2]={};
-							newRegionPoints[x2][y2] = {id:newRegion};
+							newRegionPoints[x2][y2] = newRegion;
 						}
 					}
 					else if (newRegionPoints[x2] && newRegionPoints[x2][y2]){
@@ -327,7 +327,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 						}
 						else {
 							newRegionPoints[x1]={};
-							newRegionPoints[x1][y1] = {id:newRegion};
+							newRegionPoints[x1][y1] = newRegion;
 						}
 					}
 				}
@@ -350,7 +350,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 					}
 					else {
 						newRegionPoints[x1]={};
-						newRegionPoints[x1][y1] = {id:oldRegion};
+						newRegionPoints[x1][y1] = oldRegion;
 					}
 				}
 				else if (newRegionPoints[x2] && !newRegionPoints[x2][y2]){
@@ -360,7 +360,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 					}
 					else {
 						newRegionPoints[x2]={};
-						newRegionPoints[x2][y2] = {id:oldRegion};
+						newRegionPoints[x2][y2] = oldRegion;
 					}
 				}
 			}
@@ -410,7 +410,8 @@ function pmove(evt){
 			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
 			walls.push(newWall);
 			addWall(newWall);
-			
+			var oldRegion = 1;
+			var newRegion = 2;
 			updateRegions(newWall,tempWall.initial,tempWall.end,oldRegion,newRegion);
 			
 			tempWall.v = [];
