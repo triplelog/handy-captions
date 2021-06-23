@@ -222,6 +222,7 @@ window.requestAnimationFrame(move);
 function updateRegions(wall,initialArr,endArr) {
 	var initial = initialArr[0];
 	var end = endArr[0];
+	console.log(initialArr,endArr);
 	for (var i=0;i<initialArr.length;i++){
 		for (var ii=0;ii<endArr.length;ii++){
 			console.log(initialArr[i].wall,endArr[ii].wall);
