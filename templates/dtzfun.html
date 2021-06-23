@@ -243,7 +243,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 		}
 		else if (initial.edge < end.edge){
 			leftWall.v = walls[initial.wall].v.slice(0,initial.edge+1);
-			for (var ii=wall.v.length-1;ii>=0;ii--){
+			for (var ii=0;ii<wall.v.length;ii++){
 				leftWall.v.push(wall.v[ii]);
 			}
 			for (var ii=end.edge+1;ii<walls[initial.wall].v.length;ii++){
@@ -251,8 +251,8 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 			}
 			
 			rightWall.v = walls[initial.wall].v.slice(initial.edge+1,end.edge+1);
-			rightWall.v.splice(0,0,end.pt);
-			for (var ii=0;ii<wall.v.length;ii++){
+			rightWall.v.splice(0,0,initial.pt);
+			for (var ii=wall.v.length-1;ii>=0;ii--){
 				rightWall.v.push(wall.v[ii]);
 			}
 		}
