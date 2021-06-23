@@ -155,11 +155,11 @@ function collisionOne(pt,wall,c,i){
 	return c;
 }
 
-function collision(pt){
+function collision(pt,temp=true){
 
 	var c = {wall:0,edge:0,d:r*r+1};
 	
-	if (tempWall.initial){
+	if (temp && tempWall.initial){
 		c = collisionOne(pt,tempWall,c,-1);
 		if (c.d <= r*r){
 			console.log(c);
@@ -299,7 +299,7 @@ function cleanWall(wall){
 				wall.v[ii][2] = d;
 				totald += d;
 				if (totald > r*r*2){
-					var c = collision(pt);
+					var c = collision(pt,false);
 					if (c.d <= r*r){
 						wall.end = true;
 						wall.v[ii][2] = -1;
@@ -315,7 +315,7 @@ function cleanWall(wall){
 	for (var ii=1;ii<wall.v.length-1;ii++){
 		//var d = Math.pow(wall.v[ii][0]-wall.v[ii-1][0],2)+Math.pow(wall.v[ii][1]-wall.v[ii-1][1],2);
 		var d = wall.v[ii][2];
-		if (d == 0){
+		if (d <= 0){
 			d = Math.pow(wall.v[ii][0]-wall.v[ii-1][0],2)+Math.pow(wall.v[ii][1]-wall.v[ii-1][1],2);
 		}
 		if (d > 0 && d < 9){
