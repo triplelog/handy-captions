@@ -41,7 +41,7 @@ svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
 svg.addEventListener("pointerup",pup);
 
-walls = [{id:"wall-0",v:[[0,0],[0,50],[0,100],[100,100],[90,20],[9,2],[0,0]]}];
+walls = [{id:"wall-0",balls:[0,1],v:[[0,0],[0,50],[0,100],[100,100],[90,20],[9,2],[0,0]]}];
 nWalls = 0;
 addWall(walls[0]);
 
@@ -227,14 +227,32 @@ function move(timestamp) {
 
 window.requestAnimationFrame(move);
 
-function ballRegion(pt){
+function ballRegion(pt,bid,myWalls=false){
 	let dp = svg.createSVGPoint();
 	dp.x = pt[0];
 	dp.y = pt[1];
-	for (var i=0;i<nWalls;i++){
-		var el = document.getElementById(walls[i].id);
-		var isInside = el.isPointInFill(dp);
-		console.log(i,isInside);
+	if (!myWalls){
+		for (var i=0;i<nWalls;i++){
+			var el = document.getElementById(walls[i].id);
+			var isInside = el.isPointInFill(dp);
+			console.log(i,isInside);
+			if (isInside){
+				balls[bid].region=i;
+				break;
+			}
+		}
+	}
+	else {
+		for (var i=0;i<myWalls.length;i++){
+			var wid = myWalls[i];
+			var el = document.getElementById(walls[wid].id);
+			var isInside = el.isPointInFill(dp);
+			console.log(wid,isInside);
+			if (isInside){
+				balls[bid].region=wid;
+				break;
+			}
+		}
 	}
 }
 
@@ -308,13 +326,24 @@ function updateRegions(wall,initialArr,endArr) {
 	}
 	console.log(leftWall.v);
 	console.log(rightWall.v);
+	var oldBalls = walls[initial.wall].balls;
 	walls[initial.wall].v = leftWall.v;
 	updateWall(walls[initial.wall]);
 	walls[nWalls-1].v = rightWall.v;
 	updateWall(walls[nWalls-1]);
-	for (var i=0;i<nBalls;i++){
-		var pt = [balls[i].x,balls[i].y];
-		ballRegion(pt);
+	
+	walls[initial.wall].balls = [];
+	walls[nWalls-1].balls = [];
+	for (var i=0;i<oldBalls.length;i++){
+		var bid = oldBalls[i];
+		var pt = [balls[bid].x,balls[bid].y];
+		ballRegion(pt,bid,[initial.wall,nWalls-1]);
+		if (balls[bid].region==nWalls-1){
+			walls[nWalls-1].balls.push(bid);
+		}
+		else {
+			walls[initial.wall].balls.push(bid);
+		}
 	}
 	
 }
