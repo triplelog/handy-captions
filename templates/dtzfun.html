@@ -34,8 +34,21 @@
 
 <script>
 walls = [];
-balls = [{id:"ball-0",x:50,y:50,a:45}];
+balls = [{id:"ball-0",x:50,y:50,a:45,el:document.getElementById("ball-0")}];
 
+let start;
+
+function move(timestamp) {
+	if (start === undefined){start = timestamp;}
+	const elapsed = timestamp - start;
+	balls[0].el.setAttribute("cx",50+elapsed/40);
+	
+	if (elapsed < 2000) {
+		window.requestAnimationFrame(move);
+	}
+}
+
+window.requestAnimationFrame(move);
 </script>
 </body>
 </html>
