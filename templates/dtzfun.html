@@ -229,6 +229,8 @@ function updateRegions(wall,initial,end) {
 	end.pt[1] = Math.round(end.pt[1]*10)/10;
 	initial.pt[0] = Math.round(initial.pt[0]*10)/10;
 	initial.pt[1] = Math.round(initial.pt[1]*10)/10;
+	console.log(initial);
+	console.log(end);
 	if (initial.wall == end.wall){
 		if (initial.edge > end.edge){
 			leftWall.v = walls[initial.wall].v.slice(0,end.edge+1);
@@ -322,9 +324,7 @@ function pmove(evt){
 			//console.log(newWall);
 			//console.log(walls);
 			addWall(newWall);
-			var oldRegion = 1;
-			var newRegion = 2;
-			updateRegions(newWall,tempWall.initial,tempWall.end,oldRegion,newRegion);
+			updateRegions(newWall,tempWall.initial,tempWall.end);
 			
 			tempWall.v = [];
 			tempWall.e = [];
