@@ -345,6 +345,14 @@ function updateRegions(wall,initialArr,endArr) {
 			walls[initial.wall].balls.push(bid);
 		}
 	}
+	if (walls[initial.wall].balls.length == 0){
+		var path = document.getElementById("wall-"+initial.wall);
+		path.setAttributeNS(null,'fill',"gray");
+	}
+	else if (walls[nWalls-1].balls.length == 0){
+		var path = document.getElementById("wall-"+(nWalls-1));
+		path.setAttributeNS(null,'fill',"gray");
+	}
 	
 }
 
