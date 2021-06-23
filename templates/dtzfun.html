@@ -101,6 +101,8 @@ function makeEdges(){
 function collision(pt){
 	var minD = r+1;
 	var c = {wall:0,edge:0,d:minD};
+	console.log(nWalls);
+	console.log(walls);
 	for (var i=0;i<nWalls;i++){
 		for (var ii=0;ii<walls[i].e.length;ii++){
 			var d = r+1;
