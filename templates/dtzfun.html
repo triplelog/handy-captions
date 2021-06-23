@@ -57,9 +57,6 @@ let start;
 let old;
 
 
-function makeRegions(wall,){
-	
-}
 
 function addWall(wall) {
 	
@@ -276,8 +273,10 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 	}
 	
 	var newRegionPoints = {};
+	console.log(nWalls);
 	for (var i=0;i<nWalls-1;i++){
 		var wall2 = walls[i];
+		console.log(wall2);
 		for (var ii=0;ii<wall2.e.length;ii++){
 			if (wall2.e[ii][4][0] == oldRegion || wall2.e[ii][4][1] == oldRegion){
 				var x1 = wall2.e[ii][2][0];
