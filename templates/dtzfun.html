@@ -159,9 +159,11 @@ function collision(pt){
 
 	var c = {wall:0,edge:0,d:r+1};
 	
-	c = collisionOne(pt,tempWall,c);
-	if (c.d <= r){
-		console.log(c);
+	if (tempWall.initial){
+		c = collisionOne(pt,tempWall,c);
+		if (c.d <= r){
+			console.log(c);
+		}
 	}
 	for (var i=0;i<nWalls;i++){
 		c = collisionOne(pt,walls[i],c);
@@ -239,8 +241,8 @@ function pmove(evt){
 		tempWall.v.push([x,y]);
 		cleanWall(tempWall);
 		if (tempWall.initial){
-			updateTemp();
 			makeEdgesOne(tempWall);
+			updateTemp();
 		}
 	}
 }
