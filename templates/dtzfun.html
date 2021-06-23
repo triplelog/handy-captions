@@ -210,6 +210,7 @@ function move(timestamp) {
 				}
 			}
 		}
+		
 		balls[i].el.setAttribute("cx",x);
 		balls[i].el.setAttribute("cy",y);
 		
@@ -226,6 +227,14 @@ function move(timestamp) {
 
 window.requestAnimationFrame(move);
 
+function ballRegion(pt){
+	var dp = newDOMPoint(pt[0],pt[1]);
+	for (var i=0;i<nWalls;i++){
+		var el = document.getElementById(walls[i].id);
+		var isInside = el.isPointInFill(dp);
+		console.log(i,isInside);
+	}
+}
 
 function updateRegions(wall,initialArr,endArr) {
 	var initial = initialArr[0];
@@ -301,6 +310,10 @@ function updateRegions(wall,initialArr,endArr) {
 	updateWall(walls[initial.wall]);
 	walls[nWalls-1].v = rightWall.v;
 	updateWall(walls[nWalls-1]);
+	for (var i=0;i<nBalls;i++){
+		var pt = [balls[i].x,balls[i].y];
+		ballRegion(pt);
+	}
 	
 }
 
