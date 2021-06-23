@@ -37,7 +37,7 @@
 walls = [{id:"wall-0",v:[[0,0],[0,100],[100,100],[90,20],[0,0]]}];
 nWalls = 0;
 addWall(walls[0]);
-makeEdges();
+
 
 r = 3;
 balls = [{id:"ball-0",x:50,y:50,a:-1,el:document.getElementById("ball-0")}];
@@ -60,6 +60,7 @@ function addWall(wall) {
 	path.setAttributeNS(null,'stroke-width',"1");
 	svg.appendChild(path);
 	nWalls+=1;
+	makeEdgesOne(wall);
 }
 function updateWall(wall) {
 	makeEdgesOne(wall);
