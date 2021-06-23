@@ -223,7 +223,8 @@ window.requestAnimationFrame(move);
 
 var regions = [{id:0,edges:[[0,0],[0,1],[0,2],[0,3]]}];
 function updateRegions(wall,initial,end,oldRegion,newRegion) {
-	
+	initial.pt.push([oldRegion,newRegion]);
+	end.pt.push([oldRegion,newRegion]);
 	var endPoints = [initial.pt,end.pt];
 	for (var ii=1;ii<wall.v.length;ii++){
 		wall.v[ii][2]=[oldRegion,newRegion];
