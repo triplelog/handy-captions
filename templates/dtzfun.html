@@ -238,14 +238,14 @@ function pdown(evt){
 	var bcr = evt.currentTarget.getBoundingClientRect();
 	var x = Math.round((evt.clientX-bcr.left)/bcr.width*1000)/10;
 	var y = Math.round((evt.clientY-bcr.top)/bcr.height*1000)/10;
-	tempWall.v = [[x,y]];
+	tempWall.v = [[x,y,0]];
 }
 function pmove(evt){
 	if (isDown){
 		var bcr = evt.currentTarget.getBoundingClientRect();
 		var x = Math.round((evt.clientX-bcr.left)/bcr.width*1000)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1000)/10;
-		tempWall.v.push([x,y]);
+		tempWall.v.push([x,y,0]);
 		cleanWall(tempWall);
 		if (tempWall.initial){
 			makeEdgesOne(tempWall);
@@ -258,7 +258,7 @@ function pup(evt){
 		var bcr = evt.currentTarget.getBoundingClientRect();
 		var x = Math.round((evt.clientX-bcr.left)/bcr.width*1000)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1000)/10;
-		tempWall.v.push([x,y]);
+		tempWall.v.push([x,y,0]);
 		console.log(tempWall);
 		isDown = false;
 		
@@ -292,22 +292,31 @@ function cleanWall(wall){
 	else {// look for end
 		var totald = 0;
 		for (var ii=1;ii<wall.v.length;ii++){
-			var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
-			var d = Math.pow(pt.x-wall.v[ii-1][0],2)+Math.pow(pt.x-wall.v[ii-1][0],2);
-			totald += d;
-			if (totald > r*r*2){
-				var c = collision(pt);
-				if (c.d <= r*r){
-					wall.end = true;
-					console.log("end");
+			if (wall.v[ii][2] == 0){
+				var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
+				var d = Math.pow(pt.x-wall.v[ii-1][0],2)+Math.pow(pt.x-wall.v[ii-1][0],2);
+				wall.v[ii][2] = d;
+				totald += d;
+				if (totald > r*r*2){
+					var c = collision(pt);
+					if (c.d <= r*r){
+						wall.end = true;
+						wall.v[ii][2] = -1;
+						console.log("end");
+					}
 				}
+			}
+			else if (wall.v[ii][2] > 0){
+				totald += wall.v[ii][2];
 			}
 		}
 	}
 		
 	for (var ii=1;ii<wall.v.length-1;ii++){
-		var d = Math.pow(wall.v[ii][0]-wall.v[ii-1][0],2)+Math.pow(wall.v[ii][1]-wall.v[ii-1][1],2);
-		if (d < 2){
+		//var d = Math.pow(wall.v[ii][0]-wall.v[ii-1][0],2)+Math.pow(wall.v[ii][1]-wall.v[ii-1][1],2);
+		var d = wall.v[ii][2];
+		if (d > 0 && d < 4){
+			wall.v[ii+1][2]+=d;
 			wall.v.splice(ii,1);
 			ii--;
 		}
