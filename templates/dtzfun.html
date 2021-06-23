@@ -322,7 +322,9 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 						else if (x2 == end.pt[0] && y2 == end.pt[1]){
 						}
 						else {
-							newRegionPoints[x2]={};
+							if (!newRegionPoints[x2]){
+								newRegionPoints[x2]={};
+							}
 							newRegionPoints[x2][y2] = newRegion;
 						}
 					}
@@ -332,7 +334,9 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 						else if (x1 == end.pt[0] && y1 == end.pt[1]){
 						}
 						else {
-							newRegionPoints[x1]={};
+							if (!newRegionPoints[x1]){
+								newRegionPoints[x1]={};
+							}
 							newRegionPoints[x1][y1] = newRegion;
 						}
 					}
