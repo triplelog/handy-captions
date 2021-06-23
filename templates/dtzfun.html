@@ -44,9 +44,7 @@ svg.addEventListener("pointerup",pup);
 walls = [{id:"wall-0",v:[[0,0],[0,50],[0,100],[100,100],[90,20],[9,2],[0,0]]}];
 nWalls = 0;
 addWall(walls[0]);
-for (var ii=1;ii<walls[0].v.length;ii++){
-	walls[0].v[ii][2]=[0,1];
-}
+
 
 tempWall = {id:"wall-t",v:[],initial:false};
 r = 3;
@@ -109,7 +107,6 @@ function makeEdgesOne(wall){
 		}
 		edge.push(wall.v[ii-1]);
 		edge.push(wall.v[ii]);
-		edge.push(wall.v[ii][2]);
 		wall.e.push(edge);
 	}
 }
@@ -223,22 +220,24 @@ window.requestAnimationFrame(move);
 
 var regions = [{id:0,edges:[[0,0],[0,1],[0,2],[0,3]]}];
 function updateRegions(wall,initial,end,oldRegion,newRegion) {
-	initial.pt.push([oldRegion,newRegion]);
-	end.pt.push([oldRegion,newRegion]);
-	var endPoints = [initial.pt,end.pt];
-	for (var ii=1;ii<wall.v.length;ii++){
-		wall.v[ii][2]=[oldRegion,newRegion];
-	}
-	
+
+	console.log(initial.pt);
+	console.log(end.pt);
 	var leftWall = {v:[]};
+	var rightWall = {v:[]};
 	if (initial.wall == end.wall){
 		if (initial.edge > end.edge){
 			leftWall.v = walls[initial.wall].v.slice(0,end.edge+1);
 			for (var ii=wall.v.length-1;ii>=0;ii--){
 				leftWall.v.push(wall.v[ii]);
 			}
-			for (var ii=initial.edge;ii<walls[initial.wall].v.length;ii++){
+			for (var ii=initial.edge+1;ii<walls[initial.wall].v.length;ii++){
 				leftWall.v.push(walls[initial.wall].v[ii]);
+			}
+			
+			rightWall.v = walls[initial.wall].v.slice(end.edge+1,initial.edge+1);
+			for (var ii=0;ii<wall.v.length;ii++){
+				rightWall.v.push(wall.v[ii]);
 			}
 		}
 		else if (initial.edge < end.edge){
@@ -249,6 +248,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 		}
 	}
 	console.log(leftWall.v);
+	console.log(rightWall.v);
 	
 }
 /*
