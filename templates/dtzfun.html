@@ -53,6 +53,7 @@ function addWall(wall) {
 	for (var ii=0;ii<wall.v.length;ii++){
 		pd += wall.v[ii][0]+","+wall.v[ii][1]+" ";
 	}
+	path.id = wall.id;
 	path.setAttributeNS(null,'d',pd);
 	path.setAttributeNS(null,'fill',"none");
 	path.setAttributeNS(null,'stroke',"red");
