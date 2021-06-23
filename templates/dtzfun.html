@@ -375,7 +375,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 		for (var x in toAssign){
 			var remy = [];
 			for (var y in toAssign[x]){
-				if (newRegionPoints[x][y]==newRegion){
+				if (newRegionPoints[x] && newRegionPoints[x][y]==newRegion){
 					if (!newRegionPoints[toAssign[x][y][0]]){
 						newRegionPoints[toAssign[x][y][0]] = {};
 					}
