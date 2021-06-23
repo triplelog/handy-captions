@@ -394,7 +394,20 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 		}
 	}
 	console.log(toAssign);
-	
+	for (var x in toAssign){
+		for (var y in toAssign[x]){
+			if (newRegionPoints[x] && newRegionPoints[x][y]==newRegion){
+				
+			}
+			else {
+				if (!newRegionPoints[toAssign[x][y][0]]){
+					newRegionPoints[toAssign[x][y][0]]={};
+				}
+				newRegionPoints[toAssign[x][y][0]][toAssign[x][y][1]]=oldRegion;
+				
+			}
+		}
+	}
 	console.log(newRegionPoints);
 	console.log(walls);
 	
