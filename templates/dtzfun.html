@@ -405,7 +405,7 @@ function pmove(evt){
 			updateTemp();
 		}
 		if (end == "end"){
-			
+			isDown = false;
 			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
 			walls.push(newWall);
 			console.log(newWall);
@@ -418,7 +418,7 @@ function pmove(evt){
 			tempWall.v = [];
 			tempWall.e = [];
 			tempWall.initial = false;
-			isDown = false;
+			
 		}
 	}
 }
