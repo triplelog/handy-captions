@@ -285,8 +285,8 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 				var y1 = wall2.e[ii][2][1];
 				var x2 = wall2.e[ii][3][0];
 				var y2 = wall2.e[ii][3][1];
-				if (newRegionPoints.length == 0){
-					
+				if (!newRegionPoints){
+					console.log(x1,y1,x2,y2,initial.pt,end.pt)
 					if (x1 == initial.pt[0] && y1 == initial.pt[1]){
 						newRegionPoints[x2]={};
 						newRegionPoints[x2][y2] = newRegion;
