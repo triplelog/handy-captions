@@ -26,7 +26,7 @@
 <body>
 
 <div class="game">
-	<svg id="borderSVG" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<svg id="borderSVG" viewBox="-10 -10 120 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		
 		<circle id="ball-0" cx="50" cy="50" r="3" fill="#CCF" stroke="black" stroke-width="0" />
 		<circle id="ball-1" cx="50" cy="20" r="3" fill="#CCF" stroke="black" stroke-width="0" />
@@ -115,48 +115,56 @@ function makeEdges(){
 	}
 }
 
-function collision(pt){
-	var minD = r+1;
-	var c = {wall:0,edge:0,d:minD};
-
-	for (var i=0;i<nWalls;i++){
-		for (var ii=0;ii<walls[i].e.length;ii++){
-			var d = r+1;
-			if (pt.x < Math.min(walls[i].e[ii][2][0]-r,walls[i].e[ii][3][0]-r)) {
-				//no collision
+function collisionOne(pt,wall,c){
+	for (var ii=0;ii<wall.e.length;ii++){
+		var d = r+1;
+		if (pt.x < Math.min(wall.e[ii][2][0]-r,wall.e[ii][3][0]-r)) {
+			//no collision
+		}
+		else if (pt.x > Math.max(wall.e[ii][2][0]+r,wall.e[ii][3][0]+r)) {
+			//no collision
+		}
+		else if (pt.y < Math.min(wall.e[ii][2][1]-r,wall.e[ii][3][1]-r)) {
+			//no collision
+		}
+		else if (pt.y > Math.max(wall.e[ii][2][1]+r,wall.e[ii][3][1]+r)) {
+			//no collision
+		}
+		else {
+			var pm = wall.e[ii][1];//perpendicular slope of edge
+			
+			if (pm == "inf"){
+				d = Math.pow(wall.e[ii][2][1]-pt.y,2);
 			}
-			else if (pt.x > Math.max(walls[i].e[ii][2][0]+r,walls[i].e[ii][3][0]+r)) {
-				//no collision
-			}
-			else if (pt.y < Math.min(walls[i].e[ii][2][1]-r,walls[i].e[ii][3][1]-r)) {
-				//no collision
-			}
-			else if (pt.y > Math.max(walls[i].e[ii][2][1]+r,walls[i].e[ii][3][1]+r)) {
-				//no collision
+			else if (wall.e[ii][0] == "inf"){
+				d = Math.pow(wall.e[ii][2][0]-pt.x,2);
 			}
 			else {
-				var pm = walls[i].e[ii][1];//perpendicular slope of edge
-				
-				if (pm == "inf"){
-					d = Math.pow(walls[i].e[ii][2][1]-pt.y,2);
-				}
-				else if (walls[i].e[ii][0] == "inf"){
-					d = Math.pow(walls[i].e[ii][2][0]-pt.x,2);
-				}
-				else {
-					var xc = (walls[i].e[ii][2][1]-pt.y+pt.x*pm-walls[i].e[ii][2][0]*walls[i].e[ii][0])/(pm-walls[i].e[ii][0]);
-					var yc = pm*(xc-pt.x)+pt.y;
-					d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
-				}
-			}
-			//console.log(pt,d);
-			if (d<minD){
-				minD=d;
-				c.wall = i;
-				c.edge = ii;
-				c.d = d;
+				var xc = (wall.e[ii][2][1]-pt.y+pt.x*pm-wall.e[ii][2][0]*wall.e[ii][0])/(pm-wall.e[ii][0]);
+				var yc = pm*(xc-pt.x)+pt.y;
+				d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
 			}
 		}
+		//console.log(pt,d);
+		if (d<c.d){
+			c.wall = i;
+			c.edge = ii;
+			c.d = d;
+		}
+	}
+	return c;
+}
+
+function collision(pt){
+
+	var c = {wall:0,edge:0,d:r+1};
+	
+	c = collisionOne(pt,tempWall,c);
+	if (c.d <= r){
+		console.log(c);
+	}
+	for (var i=0;i<nWalls;i++){
+		c = collisionOne(pt,walls[i],c);
 	}
 
 	return c;
@@ -177,16 +185,12 @@ function move(timestamp) {
 		
 		var c = collision({x:x,y:y});
 		if (c.d <= r){
-			console.log(c);
 			var m = walls[c.wall].e[c.edge][0];
 			var b = Math.atan(m);
 			if (m == "inf"){
 				b = Math.PI/2;
 			}
-			console.log(m);
-			console.log(b);
 			balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
-			console.log(balls[i].a);
 		}
 		balls[i].el.setAttribute("cx",x);
 		balls[i].el.setAttribute("cy",y);
@@ -236,6 +240,7 @@ function pmove(evt){
 		cleanWall(tempWall);
 		if (tempWall.initial){
 			updateTemp();
+			makeEdgesOne(tempWall);
 		}
 	}
 }
@@ -252,6 +257,7 @@ function pup(evt){
 		walls.push(newWall);
 		addWall(newWall);
 		tempWall.v = [];
+		tempWall.e = [];
 		tempWall.initial = false;
 		
 		
