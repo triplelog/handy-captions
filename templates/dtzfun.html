@@ -306,12 +306,15 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 					else {
 						newRegionPoints[x1]={};
 						newRegionPoints[x1][y1] = newRegion;
-						newRegionPoints[x2]={};
+						if (x1 != x2){
+							newRegionPoints[x2]={};
+						}
 						newRegionPoints[x2][y2] = newRegion;
 					}
 					newRegionPoints['started']=true;
 				}
 				else {
+					console.log(newRegionPoints[x1],newRegionPoints[x2]);
 					if (newRegionPoints[x1] && newRegionPoints[x1][y1]){
 						if (x2 == initial.pt[0] && y2 == initial.pt[1]){
 						}
