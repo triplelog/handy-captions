@@ -231,12 +231,12 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 		wall.e[ii][4]=[oldRegion,newRegion];
 	}
 	if (initial.wall == end.wall){
-		if (inital.edge > end.edge){
+		if (initial.edge > end.edge){
 			walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
 			walls[end.wall].v.splice(end.edge+1,0,end.pt);
 			makeEdgesOne(walls[initial.wall]);
 		}
-		else if (inital.edge < end.edge){
+		else if (initial.edge < end.edge){
 			walls[end.wall].v.splice(end.edge+1,0,end.pt);
 			walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
 			makeEdgesOne(walls[initial.wall]);
@@ -286,7 +286,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 				var y2 = wall2.e[ii][3][1];
 				if (newRegionPoints.length == 0){
 					
-					if (x1 == initial.pt[0] && y1 == inital.pt[1]){
+					if (x1 == initial.pt[0] && y1 == initial.pt[1]){
 						newRegionPoints[x2]={};
 						newRegionPoints[x2][y2] = newRegion;
 					}
@@ -294,7 +294,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 						newRegionPoints[x2]={};
 						newRegionPoints[x2][y2] = newRegion;
 					}
-					else if (x2 == initial.pt[0] && y2 == inital.pt[1]){
+					else if (x2 == initial.pt[0] && y2 == initial.pt[1]){
 						newRegionPoints[x1]={};
 						newRegionPoints[x1][y1] = newRegion;
 					}
@@ -311,7 +311,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 				}
 				else {
 					if (newRegionPoints[x1] && newRegionPoints[x1][y1]){
-						if (x2 == initial.pt[0] && y2 == inital.pt[1]){
+						if (x2 == initial.pt[0] && y2 == initial.pt[1]){
 						}
 						else if (x2 == end.pt[0] && y2 == end.pt[1]){
 						}
@@ -321,7 +321,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 						}
 					}
 					else if (newRegionPoints[x2] && newRegionPoints[x2][y2]){
-						if (x1 == initial.pt[0] && y1 == inital.pt[1]){
+						if (x1 == initial.pt[0] && y1 == initial.pt[1]){
 						}
 						else if (x1 == end.pt[0] && y1 == end.pt[1]){
 						}
@@ -344,7 +344,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 				var y2 = wall2.e[ii][3][1];
 				
 				if (newRegionPoints[x1] && !newRegionPoints[x1][y1]){
-					if (x1 == initial.pt[0] && y1 == inital.pt[1]){
+					if (x1 == initial.pt[0] && y1 == initial.pt[1]){
 					}
 					else if (x1 == end.pt[0] && y1 == end.pt[1]){
 					}
@@ -354,7 +354,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 					}
 				}
 				else if (newRegionPoints[x2] && !newRegionPoints[x2][y2]){
-					if (x2 == initial.pt[0] && y2 == inital.pt[1]){
+					if (x2 == initial.pt[0] && y2 == initial.pt[1]){
 					}
 					else if (x2 == end.pt[0] && y2 == end.pt[1]){
 					}
