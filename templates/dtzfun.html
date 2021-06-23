@@ -35,6 +35,12 @@
 </div>
 
 <script>
+
+var svg = document.getElementById("borderSVG");
+svg.addEventListener("pointerdown",pdown);
+svg.addEventListener("pointermove",pmove);
+svg.addEventListener("pointerup",pup);
+
 walls = [{id:"wall-0",v:[[0,0],[0,100],[100,100],[90,20],[0,0]]}];
 nWalls = 0;
 addWall(walls[0]);
@@ -46,10 +52,7 @@ balls.push({id:"ball-1",x:50,y:20,a:2,el:document.getElementById("ball-1")});
 nBalls = 2;
 let start;
 let old;
-var svg = document.getElementById("borderSVG");
-svg.addEventListener("pointerdown",pdown);
-svg.addEventListener("pointermove",pmove);
-svg.addEventListener("pointerup",pup);
+
 
 
 function addWall(wall) {
