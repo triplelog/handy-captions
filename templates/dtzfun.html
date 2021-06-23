@@ -228,7 +228,9 @@ function move(timestamp) {
 window.requestAnimationFrame(move);
 
 function ballRegion(pt){
-	var dp = new DOMPoint(pt[0],pt[1]);
+	let dp = svg.createSVGPoint();
+	dp.x = pt[0];
+	dp.y = pt[1];
 	for (var i=0;i<nWalls;i++){
 		var el = document.getElementById(walls[i].id);
 		var isInside = el.isPointInFill(dp);
