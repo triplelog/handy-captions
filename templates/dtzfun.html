@@ -218,10 +218,51 @@ function move(timestamp) {
 window.requestAnimationFrame(move);
 
 function updateRegions(initial,end) {
-	walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
-	makeEdgesOne(walls[initial.wall]);
-	walls[end.wall].v.splice(end.edge+1,0,end.pt);
-	makeEdgesOne(walls[initial.wall]);
+	if (initial.wall == end.wall){
+		if (inital.edge > end.edge){
+			walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
+			walls[end.wall].v.splice(end.edge+1,0,end.pt);
+			makeEdgesOne(walls[initial.wall]);
+		}
+		else if (inital.edge < end.edge){
+			walls[end.wall].v.splice(end.edge+1,0,end.pt);
+			walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
+			makeEdgesOne(walls[initial.wall]);
+		}
+		else {
+			if (walls[end.wall].v[end.edge][0] < walls[end.wall].v[end.edge+1][0]){
+				if (end.pt[0] > initial.pt[0]){ //initial to left of end
+					walls[end.wall].v.splice(end.edge+1,0,end.pt);
+					walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
+					makeEdgesOne(walls[initial.wall]);
+				}
+				else {
+					walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
+					walls[end.wall].v.splice(end.edge+1,0,end.pt);
+					makeEdgesOne(walls[initial.wall]);
+				}
+			}
+			else {
+				if (end.pt[0] > initial.pt[0]){
+					walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
+					walls[end.wall].v.splice(end.edge+1,0,end.pt);
+					makeEdgesOne(walls[initial.wall]);
+				}
+				else {
+					walls[end.wall].v.splice(end.edge+1,0,end.pt);
+					walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
+					makeEdgesOne(walls[initial.wall]);
+				}
+			}
+		}
+	}
+	else {
+		walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
+		makeEdgesOne(walls[initial.wall]);
+		walls[end.wall].v.splice(end.edge+1,0,end.pt);
+		makeEdgesOne(walls[initial.wall]);
+	}
+	
 	console.log(walls);
 	
 }
