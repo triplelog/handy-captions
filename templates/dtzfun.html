@@ -408,6 +408,8 @@ function pmove(evt){
 			
 			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
 			walls.push(newWall);
+			console.log(newWall);
+			console.log(walls);
 			addWall(newWall);
 			var oldRegion = 1;
 			var newRegion = 2;
