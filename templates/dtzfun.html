@@ -44,6 +44,9 @@ svg.addEventListener("pointerup",pup);
 walls = [{id:"wall-0",v:[[0,0],[0,100],[100,100],[90,20],[0,0]]}];
 nWalls = 0;
 addWall(walls[0]);
+for (var ii=0;ii<walls[0].e.length;ii++){
+	walls[0].e[ii][4]=[0,1];
+}
 
 tempWall = {id:"wall-t",v:[],initial:false};
 r = 3;
@@ -54,6 +57,9 @@ let start;
 let old;
 
 
+function makeRegions(wall,){
+	
+}
 
 function addWall(wall) {
 	
@@ -217,7 +223,13 @@ function move(timestamp) {
 
 window.requestAnimationFrame(move);
 
-function updateRegions(initial,end) {
+var regions = [{id:0,edges:[[0,0],[0,1],[0,2],[0,3]]}];
+function updateRegions(wall,initial,end,oldRegion,newRegion) {
+	
+	var endPoints = [initial.pt,end.pt];
+	for (var ii=0;ii<wall.e.length;ii++){
+		wall.e[ii][4]=[oldRegion,newRegion];
+	}
 	if (initial.wall == end.wall){
 		if (inital.edge > end.edge){
 			walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
@@ -263,6 +275,98 @@ function updateRegions(initial,end) {
 		makeEdgesOne(walls[initial.wall]);
 	}
 	
+	var newRegionPoints = {};
+	for (var i=0;i<nWalls-1;i++){
+		var wall2 = walls[i];
+		for (var ii=0;ii<wall2.e.length;ii++){
+			if (wall2.e[ii][4][0] == oldRegion || wall2.e[ii][4][1] == oldRegion){
+				var x1 = wall2.e[ii][2][0];
+				var y1 = wall2.e[ii][2][1];
+				var x2 = wall2.e[ii][3][0];
+				var y2 = wall2.e[ii][3][1];
+				if (newRegionPoints.length == 0){
+					
+					if (x1 == initial.pt[0] && y1 == inital.pt[1]){
+						newRegionPoints[x2]={};
+						newRegionPoints[x2][y2] = {id:newRegion};
+					}
+					else if (x1 == end.pt[0] && y1 == end.pt[1]){
+						newRegionPoints[x2]={};
+						newRegionPoints[x2][y2] = {id:newRegion};
+					}
+					else if (x2 == initial.pt[0] && y2 == inital.pt[1]){
+						newRegionPoints[x1]={};
+						newRegionPoints[x1][y1] = {id:newRegion};
+					}
+					else if (x2 == end.pt[0] && y2 == end.pt[1]){
+						newRegionPoints[x1]={};
+						newRegionPoints[x1][y1] = {id:newRegion};
+					}
+					else {
+						newRegionPoints[x1]={};
+						newRegionPoints[x1][y1] = {id:newRegion};
+						newRegionPoints[x2]={};
+						newRegionPoints[x2][y2] = {id:newRegion};
+					}
+				}
+				else {
+					if (newRegionPoints[x1] && newRegionPoints[x1][y1]){
+						if (x2 == initial.pt[0] && y2 == inital.pt[1]){
+						}
+						else if (x2 == end.pt[0] && y2 == end.pt[1]){
+						}
+						else {
+							newRegionPoints[x2]={};
+							newRegionPoints[x2][y2] = {id:newRegion};
+						}
+					}
+					else if (newRegionPoints[x2] && newRegionPoints[x2][y2]){
+						if (x1 == initial.pt[0] && y1 == inital.pt[1]){
+						}
+						else if (x1 == end.pt[0] && y1 == end.pt[1]){
+						}
+						else {
+							newRegionPoints[x1]={};
+							newRegionPoints[x1][y1] = {id:newRegion};
+						}
+					}
+				}
+			}
+		}
+	}
+	for (var i=0;i<nWalls-1;i++){
+		var wall2 = walls[i];
+		for (var ii=0;ii<wall2.e.length;ii++){
+			if (wall2.e[ii][4][0] == oldRegion || wall2.e[ii][4][1] == oldRegion){
+				var x1 = wall2.e[ii][2][0];
+				var y1 = wall2.e[ii][2][1];
+				var x2 = wall2.e[ii][3][0];
+				var y2 = wall2.e[ii][3][1];
+				
+				if (newRegionPoints[x1] && !newRegionPoints[x1][y1]){
+					if (x1 == initial.pt[0] && y1 == inital.pt[1]){
+					}
+					else if (x1 == end.pt[0] && y1 == end.pt[1]){
+					}
+					else {
+						newRegionPoints[x1]={};
+						newRegionPoints[x1][y1] = {id:oldRegion};
+					}
+				}
+				else if (newRegionPoints[x2] && !newRegionPoints[x2][y2]){
+					if (x2 == initial.pt[0] && y2 == inital.pt[1]){
+					}
+					else if (x2 == end.pt[0] && y2 == end.pt[1]){
+					}
+					else {
+						newRegionPoints[x2]={};
+						newRegionPoints[x2][y2] = {id:oldRegion};
+					}
+				}
+			}
+		}
+	}
+	console.log(newRegionPoints);
 	console.log(walls);
 	
 }
@@ -307,7 +411,7 @@ function pmove(evt){
 			walls.push(newWall);
 			addWall(newWall);
 			
-			updateRegions(tempWall.initial,tempWall.end);
+			updateRegions(newWall,tempWall.initial,tempWall.end,oldRegion,newRegion);
 			
 			tempWall.v = [];
 			tempWall.e = [];
