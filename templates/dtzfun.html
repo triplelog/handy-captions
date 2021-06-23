@@ -294,7 +294,7 @@ function cleanWall(wall){
 		for (var ii=1;ii<wall.v.length;ii++){
 			if (wall.v[ii][2] == 0){
 				var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
-				var d = Math.pow(pt.x-wall.v[ii-1][0],2)+Math.pow(pt.x-wall.v[ii-1][0],2);
+				var d = Math.pow(pt.x-wall.v[ii-1][0],2)+Math.pow(pt.y-wall.v[ii-1][1],2);
 				wall.v[ii][2] = d;
 				totald += d;
 				if (totald > r*r*2){
