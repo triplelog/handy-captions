@@ -15,7 +15,7 @@
 #borderSVG {
 	width: 50vh;
 	height: 50vh;
-	margin: auto;
+	left: calc(30vw - 25vh);
 	top: 5vh;
 	position: absolute;
 }
@@ -235,6 +235,12 @@ function pup(evt){
 		tempWall.v.push([x,y]);
 		console.log(tempWall);
 		isDown = false;
+		
+		var newWall = {id:"wall-"+nWalls,v:tempWall.v};
+		walls.push(newWall);
+		addWall(newWall);
+		
+		
 	}
 }
 </script>
