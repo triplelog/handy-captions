@@ -293,7 +293,7 @@ function collisionPoint(line1,line2){
 		return [line1.pt.x,line1.pt.y];
 	}
 	var xc = (line2.pt.y-line1.pt.y+line1.pt.x*line1.m-line2.pt.x*line2.m)/(line1.m-line2.m);
-	var yc = line1.m*(xc-line1.pt.x)+lin1.pt.y;
+	var yc = line1.m*(xc-line1.pt.x)+line1.pt.y;
 	return [xc,yc];
 }
 
