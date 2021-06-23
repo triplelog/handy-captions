@@ -72,6 +72,16 @@ app.get('/magicmaker',
 		res.end();
 	}
 );
+app.get('/game', 
+	function(req, res) {
+		res.write(nunjucks.render('templates/dtzfun.html',{
+		
+		}));
+		res.end();
+	}
+);
+
+
 app.post('/save.html', 
 	function(req, res) {
 		var content = req.body.svg;
