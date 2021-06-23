@@ -319,7 +319,12 @@ function cleanWall(wall){
 			d = Math.pow(wall.v[ii][0]-wall.v[ii-1][0],2)+Math.pow(wall.v[ii][1]-wall.v[ii-1][1],2);
 		}
 		if (d > 0 && d < 3){
-			wall.v[ii+1][2]+=d;
+			if (wall.v[ii+1][2] > 0){
+				wall.v[ii+1][2]+=d;
+			}
+			else {
+				wall.v[ii+1][2]=d+Math.pow(wall.v[ii][0]-wall.v[ii+1][0],2)+Math.pow(wall.v[ii][1]-wall.v[ii+1][1],2);
+			}
 			wall.v.splice(ii,1);
 			ii--;
 		}
