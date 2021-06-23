@@ -35,24 +35,32 @@
 
 <script>
 walls = [];
-balls = [{id:"ball-0",x:50,y:50,a:1,el:document.getElementById("ball-0")}];
-balls.push({id:"ball-1",x:50,y:20,a:-1,el:document.getElementById("ball-1")});
+balls = [{id:"ball-0",x:50,y:50,a:-1,el:document.getElementById("ball-0")}];
+balls.push({id:"ball-1",x:50,y:20,a:2,el:document.getElementById("ball-1")});
 nBalls = 2;
 let start;
-
+let old;
 function move(timestamp) {
-	if (start === undefined){start = timestamp;}
-	const elapsed = timestamp - start;
+	if (start === undefined){
+		start = timestamp;
+		old = timestamp;
+		window.requestAnimationFrame(move);
+		return;
+	}
+	const elapsed = timestamp - old;
+	old = timestamp;
 	for (var i=0;i<2;i++){
 		var x = balls[i].x+Math.cos(balls[i].a)*elapsed/40;
 		balls[i].el.setAttribute("cx",x);
+		balls[i].x = x;
 		var y = balls[i].y+Math.sin(balls[i].a)*elapsed/40;
 		balls[i].el.setAttribute("cy",y);
+		balls[i].y = y;
 	}
 	
 	
 	
-	if (elapsed < 2000) {
+	if (timestamp - start < 2000) {
 		window.requestAnimationFrame(move);
 	}
 }
