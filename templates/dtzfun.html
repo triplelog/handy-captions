@@ -276,6 +276,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 	
 	var newRegionPoints = {'started':false};
 	console.log(nWalls);
+	var toAssign = {};
 	for (var i=0;i<nWalls-1;i++){
 		var wall2 = walls[i];
 		console.log(wall2);
@@ -335,10 +336,38 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 							newRegionPoints[x1][y1] = newRegion;
 						}
 					}
+					else {
+						if (x1 == initial.pt[0] && y1 == initial.pt[1]){
+						}
+						else if (x1 == end.pt[0] && y1 == end.pt[1]){
+						}
+						else if (x2 == initial.pt[0] && y2 == initial.pt[1]){
+						}
+						else if (x2 == end.pt[0] && y2 == end.pt[1]){
+						}
+						else {
+							if (toAssign[x1]){
+								toAssign[x1][y1] = [x2,y2];
+							}
+							else {
+								toAssign[x1] = {};
+								toAssign[x1][y1] = [x2,y2];
+							}
+							if (toAssign[x2]){
+								toAssign[x2][y2] = [x1,y1];
+							}
+							else {
+								toAssign[x2] = {};
+								toAssign[x2][y2] = [x1,y1];
+							}
+						}
+						
+					}
 				}
 			}
 		}
 	}
+	console.log(toAssign);
 	for (var i=0;i<nWalls-1;i++){
 		var wall2 = walls[i];
 		for (var ii=0;ii<wall2.v.length-1;ii++){
