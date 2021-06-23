@@ -93,6 +93,9 @@ function collision(pt){
 				if (pm == "inf"){
 					d = Math.pow(walls[i].e[ii][2][1]-pt.y,2);
 				}
+				else if (walls[i].e[ii][0] == "inf"){
+					d = Math.pow(walls[i].e[ii][2][0]-pt.x,2);
+				}
 				else {
 					var xc = (walls[i].e[ii][2][1]-pt.y+pt.x*pm-walls[i].e[ii][2][0]*walls[i].e[ii][0])/(pm-walls[i].e[ii][0]);
 					var yc = pm*(xc-pt.x)+pt.y;
