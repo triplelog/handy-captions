@@ -29,19 +29,28 @@
 	<svg id="borderSVG" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<path d="M0,0 0,100 100,100 100,0Z" fill="none" stroke="red" stroke-width="1" />
 		<circle id="ball-0" cx="50" cy="50" r="3" fill="#CCF" stroke="black" stroke-width="0.5" />
+		<circle id="ball-1" cx="50" cy="20" r="3" fill="#CCF" stroke="black" stroke-width="0.5" />
 	</svg>
 </div>
 
 <script>
 walls = [];
-balls = [{id:"ball-0",x:50,y:50,a:45,el:document.getElementById("ball-0")}];
-
+balls = [{id:"ball-0",x:50,y:50,a:1,el:document.getElementById("ball-0")}];
+balls.push({id:"ball-1",x:50,y:20,a:-1,el:document.getElementById("ball-1")});
+nBalls = 2;
 let start;
 
 function move(timestamp) {
 	if (start === undefined){start = timestamp;}
 	const elapsed = timestamp - start;
-	balls[0].el.setAttribute("cx",50+elapsed/40);
+	for (var i=0;i<2;i++){
+		var x = balls[i].x+Math.cos(balls[i].a)*elapsed/40;
+		balls[i].el.setAttribute("cx",x);
+		var y = balls[i].y+Math.sin(balls[i].a)*elapsed/40;
+		balls[i].el.setAttribute("cy",y);
+	}
+	
+	
 	
 	if (elapsed < 2000) {
 		window.requestAnimationFrame(move);
