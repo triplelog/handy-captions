@@ -242,6 +242,7 @@ function pdown(evt){
 }
 function pmove(evt){
 	if (isDown){
+		console.log("hi");
 		var bcr = evt.currentTarget.getBoundingClientRect();
 		var x = Math.round((evt.clientX-bcr.left)/bcr.width*1000)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1000)/10;
