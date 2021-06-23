@@ -276,6 +276,7 @@ function pup(evt){
 
 
 function cleanWall(wall){
+	console.log(wall);
 	if (!wall.initial){
 		for (var ii=0;ii<wall.v.length;ii++){
 			var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
@@ -311,7 +312,7 @@ function cleanWall(wall){
 			}
 		}
 	}
-		
+	console.log(wall);
 	for (var ii=1;ii<wall.v.length-1;ii++){
 		//var d = Math.pow(wall.v[ii][0]-wall.v[ii-1][0],2)+Math.pow(wall.v[ii][1]-wall.v[ii-1][1],2);
 		var d = wall.v[ii][2];
