@@ -128,7 +128,12 @@ function move(timestamp) {
 		var c = collision({x:x,y:y});
 		if (c.d < r){
 			console.log(c);
-			balls[i].a = 1;
+			var m = walls[c.wall].e[c.edge][0];
+			console.log(m);
+			var b = Math.atan(m);
+			console.log(b);
+			balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
+			console.log(balls[i].a);
 		}
 		balls[i].el.setAttribute("cx",x);
 		balls[i].el.setAttribute("cy",y);
