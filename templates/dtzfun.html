@@ -369,7 +369,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 	}
 	var moreAssigns = true;
 	console.log(toAssign);
-	console.log(newRegionPoints);
+	console.log(JSON.stringify(newRegionPoints));
 	while (moreAssigns){
 		moreAssigns = false;
 		for (var x in toAssign){
