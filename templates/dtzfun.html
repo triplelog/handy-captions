@@ -393,6 +393,7 @@ function cleanWall(wall){
 				var c = collisionOne(pt,walls[i],cc,i);
 				if (c.d <= r*r){
 					wcs.push(c);
+					console.log(c.wall);
 				}
 			}
 			if (wcs.length > 0){
@@ -401,7 +402,7 @@ function cleanWall(wall){
 				wall.v.splice(0,ii);
 				wall.initial = [];
 				for (var i=0;i<wcs.length;i++){
-					var c = wcs[i]
+					var c = wcs[i];
 					var m1 = walls[c.wall].e[c.edge][1];
 					var m2 = walls[c.wall].e[c.edge][0];
 					var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
