@@ -69,6 +69,8 @@ function makeEdges(){
 }
 
 function collision(pt){
+	var minD = r+1;
+	var c = {wall:0,edge:0,d:0};
 	for (var i=0;i<nWalls;i++){
 		for (var ii=0;ii<walls[i].e.length;ii++){
 			var d = r+1;
@@ -97,8 +99,15 @@ function collision(pt){
 				}
 			}
 			console.log(pt,d);
+			if (d<minD){
+				minD=d;
+				c.wall = i;
+				c.edge = ii;
+				c.d = d;
+			}
 		}
 	}
+	return c;
 }
 function move(timestamp) {
 	if (start === undefined){
@@ -113,14 +122,17 @@ function move(timestamp) {
 		var x = balls[i].x+Math.cos(balls[i].a)*elapsed/40;
 		var y = balls[i].y+Math.sin(balls[i].a)*elapsed/40;
 		
-		collision({x:x,y:y});
+		var c = collision({x:x,y:y});
+		if (c.d < r){
+			console.log(c);
+			return;
+		}
 		balls[i].el.setAttribute("cx",x);
 		balls[i].el.setAttribute("cy",y);
 		
 		balls[i].x = x;
 		balls[i].y = y;
 	}
-	return;
 	
 	
 	
