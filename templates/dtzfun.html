@@ -163,6 +163,7 @@ function collision(pt){
 		c = collisionOne(pt,tempWall,c,-1);
 		if (c.d <= r){
 			console.log(c);
+			return c;
 		}
 	}
 	for (var i=0;i<nWalls;i++){
@@ -187,12 +188,18 @@ function move(timestamp) {
 		
 		var c = collision({x:x,y:y});
 		if (c.d <= r){
-			var m = walls[c.wall].e[c.edge][0];
-			var b = Math.atan(m);
-			if (m == "inf"){
-				b = Math.PI/2;
+			if (c.wall == -1){
+				console.log("You lose a life!");
+				return;
 			}
-			balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
+			else {
+				var m = walls[c.wall].e[c.edge][0];
+				var b = Math.atan(m);
+				if (m == "inf"){
+					b = Math.PI/2;
+				}
+				balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
+			}
 		}
 		balls[i].el.setAttribute("cx",x);
 		balls[i].el.setAttribute("cy",y);
