@@ -30,6 +30,7 @@
 		
 		<circle id="ball-0" cx="50" cy="50" r="3" fill="#CCF" stroke="black" stroke-width="0" />
 		<circle id="ball-1" cx="50" cy="20" r="3" fill="#CCF" stroke="black" stroke-width="0" />
+		<path id="wall-t" d="" fill="none" stroke="black" stroke-width="1"></path>
 	</svg>
 </div>
 
@@ -38,16 +39,21 @@ walls = [{id:"wall-0",v:[[0,0],[0,100],[100,100],[90,20],[0,0]]}];
 nWalls = 0;
 addWall(walls[0]);
 
-
+tempWall = {id:"wall-t",v:[]};
 r = 3;
 balls = [{id:"ball-0",x:50,y:50,a:-1,el:document.getElementById("ball-0")}];
 balls.push({id:"ball-1",x:50,y:20,a:2,el:document.getElementById("ball-1")});
 nBalls = 2;
 let start;
 let old;
+var svg = document.getElementById("borderSVG");
+svg.addEventListener("pointerdown",pdown);
+svg.addEventListener("pointermove",pmove);
+svg.addEventListener("pointerup",pup);
+
 
 function addWall(wall) {
-	var svg = document.getElementById("borderSVG");
+	
 	var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	var pd = "M";
 	for (var ii=0;ii<wall.v.length;ii++){
@@ -200,6 +206,33 @@ function updateTest(){
 	
 	start = 0;
 	window.requestAnimationFrame(move);
+}
+
+isDown = false;
+function pdown(evt){
+	isDown = true;
+	var bcr = evt.currentTarget.getBoundingClientRect();
+	var x = Math.round((evt.clientX-bcr.left)*1000)/1000;
+	var y = Math.round((evt.clientY-bcr.top)*1000)/1000;
+	tempWall.v = [[x,y]];
+}
+function pmove(evt){
+	if (isDown){
+		var bcr = evt.currentTarget.getBoundingClientRect();
+		var x = Math.round((evt.clientX-bcr.left)*1000)/1000;
+		var y = Math.round((evt.clientY-bcr.top)*1000)/1000;
+		tempWall.v.push([x,y]);
+	}
+}
+function pup(evt){
+	if (isDown){
+		var bcr = evt.currentTarget.getBoundingClientRect();
+		var x = Math.round((evt.clientX-bcr.left)*1000)/1000;
+		var y = Math.round((evt.clientY-bcr.top)*1000)/1000;
+		tempWall.v.push([x,y]);
+		console.log(tempWall);
+		isDown = false;
+	}
 }
 </script>
 </body>
