@@ -218,8 +218,8 @@ function move(timestamp) {
 
 window.requestAnimationFrame(move);
 
-var regions = [{id:0,edges:[[0,0],[0,1],[0,2],[0,3]]}];
-function updateRegions(wall,initial,end,oldRegion,newRegion) {
+
+function updateRegions(wall,initial,end) {
 
 	console.log(initial.pt);
 	console.log(end.pt);
@@ -262,200 +262,13 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 	}
 	console.log(leftWall.v);
 	console.log(rightWall.v);
+	walls[initial.wall].v = leftWall.v;
+	updateWall(walls[initial.wall]);
+	walls[nWalls-1].v = rightWall.v;
+	updateWall(walls[nWalls-1]);
 	
 }
-/*
-function updateRegions(wall,initial,end,oldRegion,newRegion) {
-	initial.pt.push([oldRegion,newRegion]);
-	end.pt.push([oldRegion,newRegion]);
-	var endPoints = [initial.pt,end.pt];
-	for (var ii=1;ii<wall.v.length;ii++){
-		wall.v[ii][2]=[oldRegion,newRegion];
-	}
-	if (initial.wall == end.wall){
-		if (initial.edge > end.edge){
-			walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
-			walls[end.wall].v.splice(end.edge+1,0,end.pt);
-			makeEdgesOne(walls[initial.wall]);
-		}
-		else if (initial.edge < end.edge){
-			walls[end.wall].v.splice(end.edge+1,0,end.pt);
-			walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
-			makeEdgesOne(walls[initial.wall]);
-		}
-		else {
-			if (walls[end.wall].v[end.edge][0] < walls[end.wall].v[end.edge+1][0]){
-				if (end.pt[0] > initial.pt[0]){ //initial to left of end
-					walls[end.wall].v.splice(end.edge+1,0,end.pt);
-					walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
-					makeEdgesOne(walls[initial.wall]);
-				}
-				else {
-					walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
-					walls[end.wall].v.splice(end.edge+1,0,end.pt);
-					makeEdgesOne(walls[initial.wall]);
-				}
-			}
-			else {
-				if (end.pt[0] > initial.pt[0]){
-					walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
-					walls[end.wall].v.splice(end.edge+1,0,end.pt);
-					makeEdgesOne(walls[initial.wall]);
-				}
-				else {
-					walls[end.wall].v.splice(end.edge+1,0,end.pt);
-					walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
-					makeEdgesOne(walls[initial.wall]);
-				}
-			}
-		}
-	}
-	else {
-		walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
-		makeEdgesOne(walls[initial.wall]);
-		walls[end.wall].v.splice(end.edge+1,0,end.pt);
-		makeEdgesOne(walls[end.wall]);
-	}
-	
-	var newRegionPoints = {'started':false};
-	console.log(nWalls);
-	var toAssign = {};
-	for (var i=0;i<nWalls-1;i++){
-		var wall2 = walls[i];
-		console.log(wall2);
-		for (var ii=0;ii<wall2.v.length-1;ii++){
-			if (wall2.v[ii+1][2][0] == oldRegion || wall2.v[ii+1][2][1] == oldRegion){
-				var x1 = wall2.e[ii][2][0];
-				var y1 = wall2.e[ii][2][1];
-				var x2 = wall2.e[ii][3][0];
-				var y2 = wall2.e[ii][3][1];
-				if (!newRegionPoints.started){
-					console.log(x1,y1,x2,y2,initial.pt,end.pt)
-					if (x1 == initial.pt[0] && y1 == initial.pt[1]){
-						newRegionPoints[x2]={};
-						newRegionPoints[x2][y2] = newRegion;
-					}
-					else if (x1 == end.pt[0] && y1 == end.pt[1]){
-						newRegionPoints[x2]={};
-						newRegionPoints[x2][y2] = newRegion;
-					}
-					else if (x2 == initial.pt[0] && y2 == initial.pt[1]){
-						newRegionPoints[x1]={};
-						newRegionPoints[x1][y1] = newRegion;
-					}
-					else if (x2 == end.pt[0] && y2 == end.pt[1]){
-						newRegionPoints[x1]={};
-						newRegionPoints[x1][y1] = newRegion;
-					}
-					else {
-						newRegionPoints[x1]={};
-						newRegionPoints[x1][y1] = newRegion;
-						if (x1 != x2){
-							newRegionPoints[x2]={};
-						}
-						newRegionPoints[x2][y2] = newRegion;
-					}
-					newRegionPoints['started']=true;
-				}
-				else {
-					console.log(newRegionPoints[x1],newRegionPoints[x2]);
-					if (newRegionPoints[x1] && newRegionPoints[x1][y1]){
-						if (x2 == initial.pt[0] && y2 == initial.pt[1]){
-						}
-						else if (x2 == end.pt[0] && y2 == end.pt[1]){
-						}
-						else {
-							if (!newRegionPoints[x2]){
-								newRegionPoints[x2]={};
-							}
-							newRegionPoints[x2][y2] = newRegion;
-						}
-					}
-					else if (newRegionPoints[x2] && newRegionPoints[x2][y2]){
-						if (x1 == initial.pt[0] && y1 == initial.pt[1]){
-						}
-						else if (x1 == end.pt[0] && y1 == end.pt[1]){
-						}
-						else {
-							if (!newRegionPoints[x1]){
-								newRegionPoints[x1]={};
-							}
-							newRegionPoints[x1][y1] = newRegion;
-						}
-					}
-					else {
-						if (x1 == initial.pt[0] && y1 == initial.pt[1]){
-						}
-						else if (x1 == end.pt[0] && y1 == end.pt[1]){
-						}
-						else if (x2 == initial.pt[0] && y2 == initial.pt[1]){
-						}
-						else if (x2 == end.pt[0] && y2 == end.pt[1]){
-						}
-						else {
-							if (toAssign[x1]){
-								toAssign[x1][y1] = [x2,y2];
-							}
-							else {
-								toAssign[x1] = {};
-								toAssign[x1][y1] = [x2,y2];
-							}
-							if (toAssign[x2]){
-								toAssign[x2][y2] = [x1,y1];
-							}
-							else {
-								toAssign[x2] = {};
-								toAssign[x2][y2] = [x1,y1];
-							}
-						}
-						
-					}
-				}
-			}
-		}
-	}
-	var moreAssigns = true;
-	console.log(toAssign);
-	console.log(JSON.stringify(newRegionPoints));
-	while (moreAssigns){
-		moreAssigns = false;
-		for (var x in toAssign){
-			var remy = [];
-			for (var y in toAssign[x]){
-				if (newRegionPoints[x] && newRegionPoints[x][y]==newRegion){
-					if (!newRegionPoints[toAssign[x][y][0]]){
-						newRegionPoints[toAssign[x][y][0]] = {};
-					}
-					newRegionPoints[toAssign[x][y][0]][toAssign[x][y][1]]=newRegion;
-					moreAssigns = true;
-					remy.push(y);
-				}
-			}
-			for (var i=0;i<remy.length;i++){
-				delete toAssign[x][remy[i]];
-			}
-		}
-	}
-	console.log(toAssign);
-	for (var x in toAssign){
-		for (var y in toAssign[x]){
-			if (newRegionPoints[x] && newRegionPoints[x][y]==newRegion){
-				
-			}
-			else {
-				if (!newRegionPoints[toAssign[x][y][0]]){
-					newRegionPoints[toAssign[x][y][0]]={};
-				}
-				newRegionPoints[toAssign[x][y][0]][toAssign[x][y][1]]=oldRegion;
-				
-			}
-		}
-	}
-	console.log(newRegionPoints);
-	console.log(walls);
-	
-}
-*/
+
 function updateTest(){
 	walls[0].v[3]=[70,20];
 	updateWall(walls[0]);
@@ -494,8 +307,8 @@ function pmove(evt){
 			isDown = false;
 			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
 			walls.push(newWall);
-			console.log(newWall);
-			console.log(walls);
+			//console.log(newWall);
+			//console.log(walls);
 			addWall(newWall);
 			var oldRegion = 1;
 			var newRegion = 2;
