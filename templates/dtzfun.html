@@ -271,7 +271,7 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 		walls[initial.wall].v.splice(initial.edge+1,0,initial.pt);
 		makeEdgesOne(walls[initial.wall]);
 		walls[end.wall].v.splice(end.edge+1,0,end.pt);
-		makeEdgesOne(walls[initial.wall]);
+		makeEdgesOne(walls[end.wall]);
 	}
 	
 	var newRegionPoints = {'started':false};
