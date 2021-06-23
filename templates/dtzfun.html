@@ -237,7 +237,9 @@ function updateRegions(wall,initial,end,oldRegion,newRegion) {
 			for (var ii=wall.v.length-1;ii>=0;ii--){
 				leftWall.v.push(wall.v[ii]);
 			}
-			leftWall.v += walls[initial.wall].v.slice(initial.edge);
+			for (var ii=initial.edge;ii<walls[initial.wall].v.length;ii++){
+				leftWall.v.push(walls[initial.wall].v[ii]);
+			}
 		}
 		else if (initial.edge < end.edge){
 		
