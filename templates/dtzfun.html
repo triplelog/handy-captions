@@ -390,6 +390,7 @@ function cleanWall(wall){
 			var cc = {wall:0,edge:0,d:r*r+1};
 			var wcs = [];
 			for (var i=0;i<nWalls;i++){
+				cc = {wall:0,edge:0,d:r*r+1};
 				var c = collisionOne(pt,walls[i],cc,i);
 				if (c.d <= r*r){
 					wcs.push(c);
