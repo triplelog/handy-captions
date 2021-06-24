@@ -74,14 +74,14 @@ app.get('/magicmaker',
 );
 
 function pathToPoints(path) {
-	pSplit = pSplit.replace(/,/g," ");
-	pSplit = pSplit.replace(/M /g,"M");
-	pSplit = pSplit.replace(/ M/g,"M");
-	pSplit = pSplit.replace(/M/g," M ");
-	pSplit = pSplit.replace(/Z /g,"Z");
-	pSplit = pSplit.replace(/ Z/g,"Z");
-	pSplit = pSplit.replace(/Z/g," Z ");
-	pSplit.trim();
+	path = path.replace(/,/g," ");
+	path = path.replace(/M /g,"M");
+	path = path.replace(/ M/g,"M");
+	path = path.replace(/M/g," M ");
+	path = path.replace(/Z /g,"Z");
+	path = path.replace(/ Z/g,"Z");
+	path = path.replace(/Z/g," Z ");
+	path.trim();
 	var pSplit = path.split(" ").slice(1);
 	if (pSplit[pSplit.length-1] == "Z" || pSplit[pSplit.length-1] == "z"){
 		pSplit.splice(pSplit.length-1,1);
