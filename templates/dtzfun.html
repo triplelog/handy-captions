@@ -100,6 +100,9 @@ function updateWall(wall) {
 function updateTemp() {
 	var path = document.getElementById("wall-t");
 	var pd = "M";
+	if (tempWall.v.length == 0){
+		pd += "0,0";
+	}
 	for (var ii=0;ii<tempWall.v.length;ii++){
 		pd += tempWall.v[ii][0]+","+tempWall.v[ii][1]+" ";
 	}
