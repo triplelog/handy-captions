@@ -216,6 +216,7 @@ app.get('/game',
 			console.log(def);
 			console.log(req.query.p);
 			var p = req.query.p.toString();
+			console.log(p);
 			path = zlib.inflateSync(new Buffer.from(p, 'base64')).toString();
 			
 		}
