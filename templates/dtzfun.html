@@ -39,7 +39,9 @@ svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
 svg.addEventListener("pointerup",pup);
 
-walls = [{id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[90,20],[9,2],[0,0]]}];
+
+//walls = [{id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[90,20],[9,2],[0,0]]}];
+walls = [{{ bigwall | dump | safe }}];
 balls = [];
 nBalls = 0;
 addBall(0);
@@ -64,7 +66,7 @@ function addBall(bid) {
 	var x = Math.round(25 + Math.random()*50);
 	var y = Math.round(25 + Math.random()*50);
 	var a = Math.random()*2*Math.PI;
-	var s = Math.round(20 + Math.random()*60);
+	var s = Math.round(20 + Math.random()*50);
 	
 	
 	var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
