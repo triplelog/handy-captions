@@ -508,10 +508,10 @@ function removeLoops(wall){
 
 			var pc = collisionPoint(line1,line2);
 			if (pc[0]<=wall.e[i][2][0] && pc[0]>=wall.e[i][3][0]){
-				console.log(i,ii,line1,line2,pc);
+				console.log(wall.e.length,i,ii,line1,line2,pc);
 			}
 			else if (pc[0]<=wall.e[i][3][0] && pc[0]>=wall.e[i][2][0]){
-				console.log(i,ii,line1,line2,pc);
+				console.log(wall.e.length,i,ii,line1,line2,pc);
 			}
 			
 		}
