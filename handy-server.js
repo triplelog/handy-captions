@@ -74,6 +74,14 @@ app.get('/magicmaker',
 );
 
 function pathToPoints(path) {
+	pSplit = pSplit.replace(/,/g," ");
+	pSplit = pSplit.replace(/M /g,"M");
+	pSplit = pSplit.replace(/ M/g,"M");
+	pSplit = pSplit.replace(/M/g," M ");
+	pSplit = pSplit.replace(/Z /g,"Z");
+	pSplit = pSplit.replace(/ Z/g,"Z");
+	pSplit = pSplit.replace(/Z/g," Z ");
+	pSplit.trim();
 	var pSplit = path.split(" ").slice(1);
 	if (pSplit[pSplit.length-1] == "Z" || pSplit[pSplit.length-1] == "z"){
 		pSplit.splice(pSplit.length-1,1);
@@ -202,11 +210,15 @@ app.get('/game',
 		if (req.query && req.query.s){
 			shape = req.query.s;
 		}
+		else if (req.query && req.query.p){
+			shape = zlib.inflateSync(new Buffer.from(req.query.p, 'base64')).toString();
+			
+		}
 		var path = jsonShapes[shape];
-		var deflated = zlib.deflateSync(path).toString('base64');
-		console.log(deflated);
-		var inflated = zlib.inflateSync(new Buffer.from(def, 'base64')).toString();
-		console.log(inflated);
+		//var deflated = zlib.deflateSync(path).toString('base64');
+		//console.log(deflated);
+		//var inflated = zlib.inflateSync(new Buffer.from(def, 'base64')).toString();
+		//console.log(inflated);
 		var retval = pathToPoints(path);
 		res.write(nunjucks.render('templates/dtzfun.html',{
 			//bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
