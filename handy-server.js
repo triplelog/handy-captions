@@ -73,6 +73,57 @@ app.get('/magicmaker',
 	}
 );
 
+function pathToPoints(path) {
+	var pSplit = path.split(" ").slice(1);
+	if (pSplit[pSplit.length-1] == "Z" || pSplit[pSplit.length-1] == "z"){
+		pSplit.splice(pSplit.length-1,1);
+		pSplit.push(pSplit[0]);
+		pSplit.push(pSplit[1]);
+	}
+	else if (pSplit[pSplit.length-2] != pSplit[0] || pSplit[pSplit.length-1] != pSplit[1]){
+		pSplit.push(pSplit[0]);
+		pSplit.push(pSplit[1]);
+	}
+	
+	var points = [];
+	var box = {top:0,bottom:0,left:0,right:0};
+	var d = 0;
+	var lp = [];
+	for (var i=0;i<pSplit.length/2;i++){
+		var point = [parseFloat(pSplit[2*i]),parseFloat(pSplit[2*i+1])];
+		if (i==0){
+			box.top=point[1];
+			box.bottom=point[1];
+			box.left=point[0];
+			box.right=point[0];
+		}
+		else {
+			d += Math.pow(Math.pow(point[0]-lp[0],2)+Math.pow(point[1]-lp[1],2),0.5);
+			if (point[1]<box.bottom) {
+				box.bottom=point[1];
+			}
+			if (point[1]>box.top) {
+				box.top=point[1];
+			}
+			if (point[0]<box.left) {
+				box.left=point[0];
+			}
+			if (point[0]>box.right) {
+				box.right=point[0];
+			}
+		}
+		points.push(point);
+		lp = point;
+	}
+	var width = (box.right-box.left)/(box.top-box.bottom)*100;
+	
+	for (var i=0;i<points.length;i++){
+		points[i][0]=(points[i][0]-box.left)/(box.right-box.left)*width;
+		points[i][1]=(points[i][1]-box.bottom)/(box.top-box.bottom)*100;
+	}
+	return [points,width,d];
+}
+
 var jsonShapes = {};
 var shapes = fs.readFileSync('./shapes/stateborders.csv', 'utf8').split("\r");
 //console.log(shapes[0]);
@@ -112,25 +163,32 @@ for (var i=1;i<shapes.length;i++){
 	if (sp.length < 6){continue;}
 
 	var paths = [];
-	var path = "";
-	for (var ii=0;ii<sp[5].length;ii++){
-		if (sp[5][ii]=="M"){
-			if (path.length > 0){
-				paths.push(path);
+	
+	for (var iii=5;iii<sp.length;iii++){
+		var path = "";
+		for (var ii=0;ii<sp[iii].length;ii++){
+			if (sp[iii][ii]=="M"){
+				if (path.length > 0){
+					paths.push(path);
+				}
+				path = "M";
 			}
-			path = "M";
+			else {
+				path += sp[iii][ii];
+			}
 		}
-		else {
-			path += sp[5][ii];
+		if (path.length > 0){
+			paths.push(path);
 		}
 	}
-	if (path.length > 0){
-		paths.push(path);
-	}
+	
 	var path = "";
+	var maxD = 0;
 	for (var ii=0;ii<paths.length;ii++){
-		if (paths[ii].length > path.length){
+		var d = pathToPoints(paths[ii])[2];
+		if (d > maxD){
 			path = paths[ii];
+			maxD = d;
 		}
 	}
 	jsonShapes[sp[1]]=path;
@@ -144,53 +202,11 @@ app.get('/game',
 			shape = req.query.s;
 		}
 		var path = jsonShapes[shape];
-		var pSplit = path.split(" ").slice(1);
-		if (pSplit[pSplit.length-1] == "Z" || pSplit[pSplit.length-1] == "z"){
-			pSplit.splice(pSplit.length-1,1);
-			pSplit.push(pSplit[0]);
-			pSplit.push(pSplit[1]);
-		}
-		else if (pSplit[pSplit.length-2] != pSplit[0] || pSplit[pSplit.length-1] != pSplit[1]){
-			pSplit.push(pSplit[0]);
-			pSplit.push(pSplit[1]);
-		}
-		
-		var points = [];
-		var box = {top:0,bottom:0,left:0,right:0};
-		for (var i=0;i<pSplit.length/2;i++){
-			var point = [parseFloat(pSplit[2*i]),parseFloat(pSplit[2*i+1])];
-			if (i==0){
-				box.top=point[1];
-				box.bottom=point[1];
-				box.left=point[0];
-				box.right=point[0];
-			}
-			else {
-				if (point[1]<box.bottom) {
-					box.bottom=point[1];
-				}
-				if (point[1]>box.top) {
-					box.top=point[1];
-				}
-				if (point[0]<box.left) {
-					box.left=point[0];
-				}
-				if (point[0]>box.right) {
-					box.right=point[0];
-				}
-			}
-			points.push(point);
-		}
-		var width = (box.right-box.left)/(box.top-box.bottom)*100;
-		
-		for (var i=0;i<points.length;i++){
-			points[i][0]=(points[i][0]-box.left)/(box.right-box.left)*width;
-			points[i][1]=(points[i][1]-box.bottom)/(box.top-box.bottom)*100;
-		}
+		var retval = pathToPoints(path);
 		res.write(nunjucks.render('templates/dtzfun.html',{
 			//bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
-			bigwall: {id:"wall-0",balls:[],v:points},
-			width: width,
+			bigwall: {id:"wall-0",balls:[],v:retval[0]},
+			width: retval[1],
 		}));
 		res.end();
 	}
