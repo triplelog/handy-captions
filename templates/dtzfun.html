@@ -42,6 +42,9 @@ img {
 
 <script>
 
+winpct = 70;
+var maxTime = 1000000;
+var outlineWall = {{ bigwall | dump | safe }};
 var svg = document.getElementById("borderSVG");
 svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
@@ -49,28 +52,49 @@ svg.addEventListener("pointerup",pup);
 
 
 r = 2;
-walls = [{{ bigwall | dump | safe }}];
+walls = [outlineWall];
 nWalls = 0;
-addWall(walls[0],true);
-removeLoops(walls[0]);
-updateWall(walls[0]);
 balls = [];
-nBalls = 0;
-addBall(0);
-addBall(1);
-addBall(2);
+nBalls = 3;
+isDown = false;
 
 var filledArea = 0;
 var totalArea = area(walls[0].v);
 var showAll = false;
-
-
 
 tempWall = {id:"wall-t",v:[],initial:false};
 
 let start;
 let old;
 
+resetGame();
+
+function resetGame(){
+	r = 2;
+	walls = [outlineWall];
+	nWalls = 0;
+	addWall(walls[0],true);
+	removeLoops(walls[0]);
+	updateWall(walls[0]);
+	balls = [];
+	for (var i=0;i<nBalls;i++){
+		addBall(i);
+	}
+	isDown = false;
+
+	var filledArea = 0;
+	var totalArea = area(walls[0].v);
+	var showAll = false;
+
+
+
+	tempWall = {id:"wall-t",v:[],initial:false};
+
+	let start;
+	let old;
+
+	window.requestAnimationFrame(move);
+}
 
 function addBall(bid) {
 	walls[0].balls.push(bid);
@@ -112,7 +136,7 @@ function addBall(bid) {
 	circle.setAttributeNS(null,'stroke-width',"0.1");
 	svg.appendChild(circle);
 	balls.push({id:"ball-"+bid,region:0,x:x,y:y,a:a,s:s,el:document.getElementById("ball-"+bid)});
-	nBalls+=1;
+
 }
 
 function addWall(wall,outline=false) {
@@ -272,7 +296,7 @@ function collision(pt,wid=-1){
 	return c;
 }
 
-var maxTime = 1000000;
+
 function move(timestamp) {
 	if (!start){
 		start = timestamp;
@@ -354,7 +378,7 @@ function move(timestamp) {
 	}
 }
 
-window.requestAnimationFrame(move);
+
 
 function ballRegion(pt,bid,myWalls=false){
 	let dp = svg.createSVGPoint();
@@ -518,6 +542,10 @@ function updateRegions(wall,initialArr,endArr) {
 		filledArea += area(walls[nWalls-1].v);
 	}
 	console.log(filledArea,totalArea,filledArea*100/totalArea);
+	if (filledArea*100/totalArea > winpct){
+		nBalls = 4;
+		resetGame();
+	}
 }
 
 function showInfo(){
@@ -531,7 +559,7 @@ function updateTest(){
 	window.requestAnimationFrame(move);
 }
 
-isDown = false;
+
 function pdown(evt){
 	isDown = true;
 	var bcr = evt.currentTarget.getBoundingClientRect();
