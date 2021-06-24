@@ -356,6 +356,7 @@ function ballRegion(pt,bid,myWalls=false){
 			console.log(i,isInside);
 			if (isInside){
 				balls[bid].region=i;
+				return i;
 				break;
 			}
 		}
@@ -368,6 +369,7 @@ function ballRegion(pt,bid,myWalls=false){
 			if (isInside){
 				if (bid >= 0){
 					balls[bid].region=wid;
+					return wid;
 				}
 				else {
 					return wid;
