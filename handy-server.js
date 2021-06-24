@@ -202,6 +202,8 @@ app.get('/game',
 			shape = req.query.s;
 		}
 		var path = jsonShapes[shape];
+		var deflated = zlib.deflateSync(path).toString('base64');
+		console.log(deflated);
 		var retval = pathToPoints(path);
 		res.write(nunjucks.render('templates/dtzfun.html',{
 			//bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
