@@ -61,11 +61,11 @@ let old;
 
 function addBall(bid) {
 	walls[0].balls.push(bid);
-	var x = 25 + Math.random()*50;
-	var y = 25 + Math.random()*50;
+	var x = Math.round(25 + Math.random()*50);
+	var y = Math.round(25 + Math.random()*50);
 	var a = Math.random()*2*Math.PI;
-	var s = 20 + Math.random()*60;
-	balls.push({id:"ball-"+bid,region:0,x:x,y:y,a:a,s:s,el:document.getElementById("ball-"+bid)});
+	var s = Math.round(20 + Math.random()*60);
+	
 	
 	var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 	circle.id = "ball-"+bid;
@@ -76,7 +76,7 @@ function addBall(bid) {
 	circle.setAttributeNS(null,'stroke',"red");
 	circle.setAttributeNS(null,'stroke-width',"0.1");
 	svg.appendChild(circle);
-	
+	balls.push({id:"ball-"+bid,region:0,x:x,y:y,a:a,s:s,el:document.getElementById("ball-"+bid)});
 	nBalls+=1;
 }
 
