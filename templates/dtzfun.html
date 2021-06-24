@@ -505,6 +505,8 @@ function pmove(evt){
 		}
 		if (end == "end"){
 			isDown = false;
+			var ret = findStart(tempWall,true);
+			
 			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
 			
 			updateRegions(newWall,tempWall.initial,tempWall.end);
@@ -552,7 +554,8 @@ function collisionPoint(line1,line2){
 	return [xc,yc];
 }
 
-function findStart(wall){
+function findStart(wall,lastHit=false){
+	var hits = [];
 	for (var ii=0;ii<wall.v.length;ii++){
 		var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
 		var cc = {wall:0,edge:0,d:r*r+1};
@@ -567,23 +570,45 @@ function findStart(wall){
 			}
 		}
 		if (wcs.length > 0){
-			//set to intersection point
-			
-			wall.v.splice(0,ii);
-			wall.initial = [];
-			for (var i=0;i<wcs.length;i++){
-				var c = wcs[i];
-				var m1 = walls[c.wall].e[c.edge][1];
-				var m2 = walls[c.wall].e[c.edge][0];
-				var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
-				var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
-				var pc = collisionPoint(line1,line2);
-				wall.v[0][0] = pc[0]; 
-				wall.v[0][1] = pc[1];
-				wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
+			if (lastHit){
+				hits.push(ii);
 			}
-			return 1;
+			else {
+				//set to intersection point
+			
+				wall.v.splice(0,ii);
+				wall.initial = [];
+				for (var i=0;i<wcs.length;i++){
+					var c = wcs[i];
+					var m1 = walls[c.wall].e[c.edge][1];
+					var m2 = walls[c.wall].e[c.edge][0];
+					var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
+					var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
+					var pc = collisionPoint(line1,line2);
+					wall.v[0][0] = pc[0]; 
+					wall.v[0][1] = pc[1];
+					wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
+				}
+				return 1;
+			}
 		}
+	}
+	if (lastHit){
+		var ii = hits[hits.length-1];
+		wall.v.splice(0,ii);
+		wall.initial = [];
+		for (var i=0;i<wcs.length;i++){
+			var c = wcs[i];
+			var m1 = walls[c.wall].e[c.edge][1];
+			var m2 = walls[c.wall].e[c.edge][0];
+			var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
+			var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
+			var pc = collisionPoint(line1,line2);
+			wall.v[0][0] = pc[0]; 
+			wall.v[0][1] = pc[1];
+			wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
+		}
+		return 1;
 	}
 }
 function cleanWall(wall){
