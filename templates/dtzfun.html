@@ -536,6 +536,7 @@ function updateRegions(wall,initialArr,endArr) {
 	}
 	if (leftWall.v.length < 2 || rightWall.v.length < 2){
 		walls.pop();
+		nWalls--;
 		return;
 	}
 	var oldBalls = walls[initial.wall].balls;
