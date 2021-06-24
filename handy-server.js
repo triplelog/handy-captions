@@ -81,7 +81,8 @@ function pathToPoints(path) {
 	path = path.replace(/Z /g,"Z");
 	path = path.replace(/ Z/g,"Z");
 	path = path.replace(/Z/g," Z ");
-	path.trim();
+	path = path.trim();
+	console.log(path);
 	var pSplit = path.split(" ").slice(1);
 	if (pSplit[pSplit.length-1] == "Z" || pSplit[pSplit.length-1] == "z"){
 		pSplit.splice(pSplit.length-1,1);
