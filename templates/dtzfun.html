@@ -523,7 +523,19 @@ function removeLoops(wall){
 			else if (pc[0]<=wall.e[ii][3][0] && pc[0]>=wall.e[ii][2][0]){
 				bothInt++;
 			}
-			if (bothInt == 2){
+			if (pc[1]<=wall.e[i][2][1] && pc[1]>=wall.e[i][3][1]){
+				bothInt++;
+			}
+			else if (pc[1]<=wall.e[i][3][1] && pc[1]>=wall.e[i][2][1]){
+				bothInt++;
+			}
+			if (pc[1]<=wall.e[ii][2][1] && pc[1]>=wall.e[ii][3][1]){
+				bothInt++;
+			}
+			else if (pc[1]<=wall.e[ii][3][1] && pc[1]>=wall.e[ii][2][1]){
+				bothInt++;
+			}
+			if (bothInt == 4){
 				
 				var dd = 0;
 				var td = 0;
