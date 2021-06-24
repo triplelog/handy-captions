@@ -524,7 +524,7 @@ function removeLoops(wall){
 				bothInt++;
 			}
 			if (bothInt == 2){
-				console.log(wall.e.length,i,ii,wall.e[i],wall.e[ii],line1,line2,pc);
+				
 				var dd = 0;
 				var td = 0;
 				for (var iii=0;iii<wall.e.length;iii++){
@@ -540,7 +540,7 @@ function removeLoops(wall){
 				else {
 					wall.v.splice(ii,i-ii);
 				}
-				
+				console.log(wall.e.length,i,ii,dd,td,wall.e[i],wall.e[ii],line1,line2,pc);
 				removeLoops(wall);
 				return;
 			}
