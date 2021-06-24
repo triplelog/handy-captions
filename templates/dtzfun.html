@@ -556,7 +556,26 @@ function cleanWall(wall){
 						cc = {wall:0,edge:0,d:r*r+1};
 						var c = collisionOne(pt,walls[i],cc,i);
 						if (c.d <= r*r){
-							wcs.push(c);
+							for (var iii=0;iii<wall.initial.length;iii++){
+								if (wall.initial[iii].wall == c.wall){
+									var dd = 0;
+									if (c.edge < wall.initial[iii].edge){
+										for (var iv=c.edge;iv<wall.initial[iii].edge;iv++){
+											dd += Math.pow(walls[c.wall].v[iv+1][0]-walls[c.wall].v[iv][0],2)+Math.pow(walls[c.wall].v[iv+1][1]-walls[c.wall].v[iv][1],2);
+										}
+									}
+									else if (c.edge > wall.initial[iii].edge){
+										for (var iv=wall.initial[iii].edge;iv<c.edge;iv++){
+											dd += Math.pow(walls[c.wall].v[iv+1][0]-walls[c.wall].v[iv][0],2)+Math.pow(walls[c.wall].v[iv+1][1]-walls[c.wall].v[iv][1],2);
+										}
+									}
+									if (dd > r*r*25){
+										wcs.push(c);
+										break;
+									}
+								}
+							}
+							
 						}
 					}
 					if (wcs.length > 0){
