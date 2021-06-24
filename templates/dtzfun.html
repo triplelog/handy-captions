@@ -51,7 +51,7 @@ svg.addEventListener("pointerup",pup);
 r = 2;
 walls = [{{ bigwall | dump | safe }}];
 nWalls = 0;
-addWall(walls[0]);
+addWall(walls[0],true);
 removeLoops(walls[0]);
 updateWall(walls[0]);
 balls = [];
@@ -115,7 +115,7 @@ function addBall(bid) {
 	nBalls+=1;
 }
 
-function addWall(wall) {
+function addWall(wall,outline=false) {
 	
 	var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	var pd = "M";
@@ -126,11 +126,25 @@ function addWall(wall) {
 	path.setAttributeNS(null,'d',pd);
 	path.setAttributeNS(null,'fill',"white");
 	path.setAttributeNS(null,'stroke',"red");
-	path.setAttributeNS(null,'stroke-width',"1");
+	path.setAttributeNS(null,'stroke-width',"0.5");
 	var wt = document.getElementById("wall-t");
 	svg.insertBefore(path,wt);
 	nWalls+=1;
 	makeEdgesOne(wall);
+	if (outline){
+		var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+		var pd = "M";
+		for (var ii=0;ii<wall.v.length;ii++){
+			pd += wall.v[ii][0]+","+wall.v[ii][1]+" ";
+		}
+		path.id = "outline";
+		path.setAttributeNS(null,'d',pd);
+		path.setAttributeNS(null,'fill',"none");
+		path.setAttributeNS(null,'stroke',"red");
+		path.setAttributeNS(null,'stroke-width',"1");
+		var wt = document.getElementById("wall-t");
+		svg.insertBefore(path,wt);
+	}
 }
 function updateWall(wall) {
 	makeEdgesOne(wall);
@@ -475,11 +489,13 @@ function updateRegions(wall,initialArr,endArr) {
 	if (walls[initial.wall].balls.length == 0){
 		var path = document.getElementById("wall-"+initial.wall);
 		path.setAttributeNS(null,'fill',"none");
+		path.setAttributeNS(null,'stroke',"none");
 		filledArea += area(walls[initial.wall].v);
 	}
 	else if (walls[nWalls-1].balls.length == 0){
 		var path = document.getElementById("wall-"+(nWalls-1));
 		path.setAttributeNS(null,'fill',"none");
+		path.setAttributeNS(null,'stroke',"none");
 		filledArea += area(walls[nWalls-1].v);
 	}
 	console.log(filledArea,totalArea,filledArea*100/totalArea);
