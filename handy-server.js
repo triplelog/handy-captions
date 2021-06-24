@@ -221,7 +221,9 @@ app.get('/game',
 		//console.log(deflated);
 		//var inflated = zlib.inflateSync(new Buffer.from(def, 'base64')).toString();
 		//console.log(inflated);
+		console.log(path);
 		var retval = pathToPoints(path);
+		console.log(retval[0]);
 		res.write(nunjucks.render('templates/dtzfun.html',{
 			//bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
 			bigwall: {id:"wall-0",balls:[],v:retval[0]},
