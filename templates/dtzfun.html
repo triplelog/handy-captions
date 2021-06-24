@@ -82,10 +82,11 @@ function addBall(bid) {
 		var cc = {wall:0,edge:0,d:r*r+1};
 		var c = collisionOne({x:x,y:y},walls[0],cc,0);
 		if (c.d <= r*r*2){
+			console.log(c);
 			region = -1;
 		}
 		counter++;
-		if (counter > 100){
+		if (counter > 10){
 			console.log("no luck placing balls in region");
 			break;
 		}
