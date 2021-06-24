@@ -211,7 +211,7 @@ app.get('/game',
 			shape = req.query.s;
 		}
 		else if (req.query && req.query.p){
-			shape = zlib.inflateSync(new Buffer.from(req.query.p, 'base64')).toString();
+			shape = zlib.inflateSync(new Buffer.from(def, 'base64')).toString();
 			
 		}
 		var path = jsonShapes[shape];
