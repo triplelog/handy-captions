@@ -33,6 +33,10 @@ img {
 <body>
 <button onclick="showInfo()">Show</button>
 <button onclick="nextRound()">Next</button>
+<span> Pct: </span>
+<span id="pctDone">0</span>
+<span> Lives: </span>
+<span id="lives">3</span>
 <div class="game">
 	<img src="img/lemur.jpg">
 	<svg id="borderSVG" viewBox="-10 -10 {{ width + 20 }} 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -47,12 +51,15 @@ winpct = 70;
 var maxTime = 1000000;
 var outlineWall = {{ bigwall | dump | safe }};
 var svg = document.getElementById("borderSVG");
+var pctEl = document.getElementById("pctDone");
+var livesEl = document.getElementById("lives");
 svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
 svg.addEventListener("pointerup",pup);
 
 
 r = 2;
+var lives = 3;
 var walls;
 nWalls = 0;
 balls = [];
@@ -73,6 +80,7 @@ resetGame();
 
 function resetGame(){
 	svg.innerHTML = '<path id="wall-t" d="" fill="white" stroke="black" stroke-width="1"></path>';
+	pctEl.textContent = "0";
 	r = 2;
 	walls = [{id:"wall-0",balls:[],v:outlineWall}];
 	nWalls = 0;
@@ -299,7 +307,22 @@ function collision(pt,wid=-1){
 	return c;
 }
 
-
+function loseLife() {
+	console.log("You lose a life!");
+	lives--;
+	if (lives < 0){
+		kill = true;
+	}
+	else {
+		livesEl.textContent = lives;
+		isDown = false;
+		
+		tempWall.v = [];
+		tempWall.e = [];
+		tempWall.initial = false;
+		updateTemp();
+	}
+}
 function move(timestamp) {
 	if (kill){
 		return;
@@ -319,7 +342,8 @@ function move(timestamp) {
 		var c = collision({x:x,y:y},wid);
 		if (c.d <= r*r){
 			if (c.wall == -1){
-				console.log("You lose a life!");
+				
+				loseLife();
 				return;
 			}
 			else {
@@ -463,16 +487,12 @@ function updateRegions(wall,initialArr,endArr) {
 		return;
 	}
 	
-	console.log(initial.pt);
-	console.log(end.pt);
 	var leftWall = {v:[]};
 	var rightWall = {v:[]};
 	end.pt[0] = Math.round(end.pt[0]*10)/10;
 	end.pt[1] = Math.round(end.pt[1]*10)/10;
 	initial.pt[0] = Math.round(initial.pt[0]*10)/10;
 	initial.pt[1] = Math.round(initial.pt[1]*10)/10;
-	console.log(initial);
-	console.log(end);
 	if (initial.wall == end.wall){
 		if (initial.edge > end.edge){
 			leftWall.v = walls[initial.wall].v.slice(0,end.edge+1);
@@ -548,6 +568,7 @@ function updateRegions(wall,initialArr,endArr) {
 		filledArea += area(walls[nWalls-1].v);
 	}
 	console.log(filledArea,totalArea,filledArea*100/totalArea);
+	pctEl.textContent = Math.round(filledArea*1000/totalArea)/10;
 	if (filledArea*100/totalArea > winpct){
 		kill = true;
 	}
