@@ -594,6 +594,7 @@ function findStart(wall,lastHit=false){
 		}
 	}
 	if (lastHit){
+		console.log(hits);
 		var ii = hits[hits.length-1];
 		wall.v.splice(0,ii);
 		wall.initial = [];
