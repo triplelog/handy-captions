@@ -294,6 +294,7 @@ function move(timestamp) {
 				else if (balls[i].a < -2*Math.PI){
 					balls[i].a += 2*Math.PI;
 				}
+				balls[i].a += -0.25 + Math.random()*0.5;
 			}
 		}
 		
