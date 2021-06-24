@@ -78,6 +78,7 @@ const shapes = fs.readFileSync('./shapes/stateborders.csv', 'utf8').split("\r");
 console.log(shapes[0]);
 for (var i=1;i<shapes.length;i++){
 	var sp = shapes[i].split(",");
+	if (sp.length < 4){continue;}
 	jsonShapes[sp[1]]=sp[3];
 	console.log(sp[1]);
 	var paths = [];
