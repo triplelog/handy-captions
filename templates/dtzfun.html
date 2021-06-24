@@ -492,6 +492,25 @@ function pdown(evt){
 	var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
 	tempWall.v = [[x,y,0]];
 }
+function removeLoops(wall){
+	makeEdgesOne(wall);
+	var lines = {};
+	for (var i=0;i<wall.e.length;i++){
+		var line1 = {pt:{x:wall.e[i][2][0],y:wall.e[i][2][1]},m:wall.e[i][0]};
+		lines[i]=line1;
+	}
+	for (var i=0;i<wall.e.length;i++){
+		
+		var line1 = lines[i];
+										
+		for (var ii=0;ii<i;ii++){
+			var line2 = lines[ii];
+
+			var pc = collisionPoint(line1,line2);
+			console.log(line1,line2,pc);
+		}
+	}
+}
 function pmove(evt){
 	if (isDown){
 		var bcr = evt.currentTarget.getBoundingClientRect();
@@ -506,7 +525,7 @@ function pmove(evt){
 		if (end == "end"){
 			isDown = false;
 			var ret = findStart(tempWall,true);
-			
+			removeLoops(tempWall);
 			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
 			
 			updateRegions(newWall,tempWall.initial,tempWall.end);
