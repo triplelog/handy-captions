@@ -67,7 +67,7 @@ function addBall(bid) {
 	var x = Math.round(Math.random()*{{ width }});
 	var y = Math.round(Math.random()*100);
 	var a = Math.random()*2*Math.PI;
-	var s = Math.round(20 + Math.random()*50);
+	var s = Math.round(20 + Math.random()*40);
 	var region = ballRegion([x,y],-1,[0]);
 	var cc = {wall:0,edge:0,d:r*r+1};
 	var c = collisionOne({x:x,y:y},walls[0],cc,0);

@@ -76,7 +76,7 @@ app.get('/game',
 	function(req, res) {
 		
 		res.write(nunjucks.render('templates/dtzfun.html',{
-			bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[90,20],[9,2],[0,0]]},
+			bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
 			width: 200,
 		}));
 		res.end();
