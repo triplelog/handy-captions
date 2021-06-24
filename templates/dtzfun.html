@@ -81,7 +81,7 @@ function addBall(bid) {
 		region = ballRegion([x,y],-1,[0]);
 		var cc = {wall:0,edge:0,d:r*r+1};
 		var c = collisionOne({x:x,y:y},walls[0],cc,0);
-		if (c.d <= r*r*2){
+		if (c.d <= r*r){
 			console.log(c);
 			region = -1;
 		}
