@@ -5,18 +5,18 @@
 <style>
 .game {
 	margin: auto;
-	width: 60vw;
-	height: 60vh;
-	left: 20vw;
-	top: 20vh;
+	width: 70vw;
+	height: 70vh;
+	left: 15vw;
+	top: 15vh;
 	position: absolute;
 	border: 1px solid black;
 }
 #borderSVG {
-	width: 50vh;
+	width: 100vh;
 	height: 50vh;
-	left: calc(30vw - 25vh);
-	top: 5vh;
+	left: calc(35vw - 50vh);
+	top: 10vh;
 	position: absolute;
 }
 
@@ -26,7 +26,7 @@
 <body>
 <button onclick="showInfo()">Show</button>
 <div class="game">
-	<svg id="borderSVG" viewBox="-10 -10 120 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<svg id="borderSVG" viewBox="-10 -10 120 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
 		<path id="wall-t" d="" fill="none" stroke="black" stroke-width="1"></path>
 	</svg>
