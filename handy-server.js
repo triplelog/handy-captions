@@ -80,7 +80,29 @@ for (var i=1;i<shapes.length;i++){
 	var sp = shapes[i].split(",");
 	jsonShapes[sp[1]]=sp[3];
 	console.log(sp[1]);
-	console.log(sp[3].split("M").length);
+	var paths = [];
+	var path = "";
+	for (var ii=0;ii<sp[3].length;ii++){
+		if (sp[3][ii]=="M"){
+			if (path.length > 0){
+				paths.push(path);
+			}
+			path = "M";
+		}
+		else {
+			path += sp[3][ii];
+		}
+	}
+	if (path.length > 0){
+		paths.push(path);
+	}
+	var path = "";
+	for (var ii=0;ii<paths.length;ii++){
+		if (paths[ii].length > path.length){
+			path = paths[ii];
+		}
+	}
+	console.log(path.length);
 }
 app.get('/game', 
 	function(req, res) {
