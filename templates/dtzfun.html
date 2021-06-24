@@ -595,7 +595,10 @@ function findStart(wall,lastHit=false){
 	}
 	if (lastHit){
 		console.log(hits);
-		var ii = hits[hits.length-1];
+		var ii = hits[0];
+		if (hits.length > 1){
+			ii = hits[hits.length-2];
+		}
 		wall.v.splice(0,ii);
 		wall.initial = [];
 		for (var i=0;i<wcs.length;i++){
