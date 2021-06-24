@@ -525,7 +525,22 @@ function removeLoops(wall){
 			}
 			if (bothInt == 2){
 				console.log(wall.e.length,i,ii,wall.e[i],wall.e[ii],line1,line2,pc);
-				wall.v.splice(ii,i-ii);
+				var dd = 0;
+				var td = 0;
+				for (var iii=0;iii<wall.e.length;iii++){
+					td += Math.pow( Math.pow(wall.v[iii+1][0]-wall.v[iii][0],2)+Math.pow(wall.v[iii+1][1]-wall.v[iii][1],2) , 0.5);
+					if (iii >= ii && iii < i){
+						dd += Math.pow( Math.pow(wall.v[iii+1][0]-wall.v[iii][0],2)+Math.pow(wall.v[iii+1][1]-wall.v[iii][1],2) , 0.5);
+					
+					}
+				}
+				if (dd > td/2){
+					wall.v = wall.v.slice(ii,i);
+				}
+				else {
+					wall.v.splice(ii,i-ii);
+				}
+				
 				removeLoops(wall);
 				return;
 			}
