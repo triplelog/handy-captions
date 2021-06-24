@@ -36,7 +36,7 @@ img {
 	<img src="img/lemur.jpg">
 	<svg id="borderSVG" viewBox="-10 -10 {{ width + 20 }} 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-		<path id="wall-t" d="" fill="none" stroke="black" stroke-width="1"></path>
+		<path id="wall-t" d="" fill="white" stroke="black" stroke-width="1"></path>
 	</svg>
 </div>
 
@@ -124,7 +124,7 @@ function addWall(wall) {
 	}
 	path.id = wall.id;
 	path.setAttributeNS(null,'d',pd);
-	path.setAttributeNS(null,'fill',"none");
+	path.setAttributeNS(null,'fill',"white");
 	path.setAttributeNS(null,'stroke',"red");
 	path.setAttributeNS(null,'stroke-width',"1");
 	svg.appendChild(path);
@@ -473,12 +473,12 @@ function updateRegions(wall,initialArr,endArr) {
 	}
 	if (walls[initial.wall].balls.length == 0){
 		var path = document.getElementById("wall-"+initial.wall);
-		path.setAttributeNS(null,'fill',"gray");
+		path.setAttributeNS(null,'fill',"none");
 		filledArea += area(walls[initial.wall].v);
 	}
 	else if (walls[nWalls-1].balls.length == 0){
 		var path = document.getElementById("wall-"+(nWalls-1));
-		path.setAttributeNS(null,'fill',"gray");
+		path.setAttributeNS(null,'fill',"none");
 		filledArea += area(walls[nWalls-1].v);
 	}
 	console.log(filledArea,totalArea,filledArea*100/totalArea);
