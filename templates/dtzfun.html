@@ -42,13 +42,14 @@ svg.addEventListener("pointerup",pup);
 
 //walls = [{id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[90,20],[9,2],[0,0]]}];
 walls = [{{ bigwall | dump | safe }}];
+nWalls = 0;
 addWall(walls[0]);
 balls = [];
 nBalls = 0;
 addBall(0);
 addBall(1);
 addBall(2);
-nWalls = 0;
+
 var filledArea = 0;
 var totalArea = area(walls[0].v);
 var showAll = false;
