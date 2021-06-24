@@ -24,7 +24,7 @@
 
 </head>
 <body>
-
+<button onclick="showInfo()">Show</button>
 <div class="game">
 	<svg id="borderSVG" viewBox="-10 -10 120 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		
@@ -181,6 +181,7 @@ function collision(pt,wid=-1){
 	return c;
 }
 
+var maxTime = 1000000;
 function move(timestamp) {
 	if (!start){
 		start = timestamp;
@@ -202,6 +203,9 @@ function move(timestamp) {
 			}
 			else {
 				var m = walls[c.wall].e[c.edge][0];
+				if (showAll){
+					console.log(m,Math.atan(m),balls[i].a);
+				}
 				var b = Math.atan(m);
 				if (m == "inf"){
 					b = Math.PI/2;
@@ -227,7 +231,7 @@ function move(timestamp) {
 	
 	
 	
-	if (timestamp - start < 100000) {
+	if (timestamp - start < maxTime) {
 		window.requestAnimationFrame(move);
 	}
 }
@@ -254,7 +258,6 @@ function ballRegion(pt,bid,myWalls=false){
 			var wid = myWalls[i];
 			var el = document.getElementById(walls[wid].id);
 			var isInside = el.isPointInFill(dp);
-			console.log(wid,isInside);
 			if (isInside){
 				balls[bid].region=wid;
 				break;
@@ -342,8 +345,6 @@ function updateRegions(wall,initialArr,endArr) {
 			
 		}
 	}
-	console.log(leftWall.v);
-	console.log(rightWall.v);
 	var oldBalls = walls[initial.wall].balls;
 	walls[initial.wall].v = leftWall.v;
 	updateWall(walls[initial.wall]);
@@ -376,17 +377,13 @@ function updateRegions(wall,initialArr,endArr) {
 	console.log(filledArea,totalArea,filledArea*100/totalArea);
 }
 
+function showInfo(){
+	showAll = true;
+	start = 0;
+	maxTime = 1000;
+}
 function updateTest(){
-	walls[0].v[3]=[70,20];
-	updateWall(walls[0]);
-	
-	var newWall = {id:"wall-1",v:[[0,100],[70,20]]};
-	walls.push(newWall);
-	addWall(newWall);
-	
-	console.log(nWalls);
-	console.log(walls);
-	
+
 	start = 0;
 	window.requestAnimationFrame(move);
 }
