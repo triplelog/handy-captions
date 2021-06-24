@@ -599,6 +599,7 @@ function findStart(wall,lastHit=false){
 		if (hits.length > 1){
 			ii = hits[hits.length-2];
 		}
+		console.log(ii);
 		wall.v.splice(0,ii);
 		wall.initial = [];
 		for (var i=0;i<wcs.length;i++){
@@ -612,6 +613,7 @@ function findStart(wall,lastHit=false){
 			wall.v[0][1] = pc[1];
 			wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
 		}
+		console.log(wall);
 		return 1;
 	}
 }
