@@ -53,7 +53,8 @@ tempWall = {id:"wall-t",v:[],initial:false};
 r = 3;
 balls = [{id:"ball-0",region:0,x:50,y:50,a:-1,el:document.getElementById("ball-0")}];
 balls.push({id:"ball-1",region:0,x:50,y:20,a:2,el:document.getElementById("ball-1")});
-nBalls = 2;
+balls.push({id:"ball-1",region:0,x:50,y:70,a:0,el:document.getElementById("ball-1")});
+nBalls = 3;
 let start;
 let old;
 
@@ -542,7 +543,7 @@ function cleanWall(wall){
 				var d = Math.pow(pt.x-wall.v[ii-1][0],2)+Math.pow(pt.y-wall.v[ii-1][1],2);
 				wall.v[ii][2] = d;
 				totald += d;
-				if (totald > r*r*9){
+				if (totald > r*r*4){
 					var cc = {wall:0,edge:0,d:r*r+1};
 					var wcs = [];
 					for (var i=0;i<nWalls;i++){
