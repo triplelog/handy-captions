@@ -503,7 +503,7 @@ function removeLoops(wall){
 		
 		var line1 = lines[i];
 										
-		for (var ii=0;ii<i;ii++){
+		for (var ii=0;ii<i-1;ii++){
 			var line2 = lines[ii];
 
 			var pc = collisionPoint(line1,line2);
