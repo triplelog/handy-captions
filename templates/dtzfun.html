@@ -552,41 +552,46 @@ function collisionPoint(line1,line2){
 	return [xc,yc];
 }
 
+function findStart(wall){
+	for (var ii=0;ii<wall.v.length;ii++){
+		var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
+		var cc = {wall:0,edge:0,d:r*r+1};
+		var wcs = [];
+		for (var i=0;i<nWalls;i++){
+			cc = {wall:0,edge:0,d:r*r+1};
+			var c = collisionOne(pt,walls[i],cc,i);
+			if (c.d <= r*r){
+				wcs.push(c);
+				console.log(c.wall);
+				console.log(JSON.stringify(cc));
+			}
+		}
+		if (wcs.length > 0){
+			//set to intersection point
+			
+			wall.v.splice(0,ii);
+			wall.initial = [];
+			for (var i=0;i<wcs.length;i++){
+				var c = wcs[i];
+				var m1 = walls[c.wall].e[c.edge][1];
+				var m2 = walls[c.wall].e[c.edge][0];
+				var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
+				var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
+				var pc = collisionPoint(line1,line2);
+				wall.v[0][0] = pc[0]; 
+				wall.v[0][1] = pc[1];
+				wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
+			}
+			return 1;
+		}
+	}
+}
 function cleanWall(wall){
 
 	if (!wall.initial){
-		for (var ii=0;ii<wall.v.length;ii++){
-			var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
-			var cc = {wall:0,edge:0,d:r*r+1};
-			var wcs = [];
-			for (var i=0;i<nWalls;i++){
-				cc = {wall:0,edge:0,d:r*r+1};
-				var c = collisionOne(pt,walls[i],cc,i);
-				if (c.d <= r*r){
-					wcs.push(c);
-					console.log(c.wall);
-					console.log(JSON.stringify(cc));
-				}
-			}
-			if (wcs.length > 0){
-				//set to intersection point
-				
-				wall.v.splice(0,ii);
-				wall.initial = [];
-				for (var i=0;i<wcs.length;i++){
-					var c = wcs[i];
-					var m1 = walls[c.wall].e[c.edge][1];
-					var m2 = walls[c.wall].e[c.edge][0];
-					var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
-					var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
-					var pc = collisionPoint(line1,line2);
-					wall.v[0][0] = pc[0]; 
-					wall.v[0][1] = pc[1];
-					wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
-				}
-				return;
-				break;
-			}
+		var ret = findStart(wall);
+		if (ret == 1){
+			return;
 		}
 	}
 	else {// look for end
@@ -650,9 +655,21 @@ function cleanWall(wall){
 						return "end";
 					}
 				}
+				else {
+					var ret = findStart(wall);
+					if (ret == 1){
+						return;
+					}
+				}
 			}
 			else if (wall.v[ii][2] > 0){
 				totald += wall.v[ii][2];
+				if (totald < r*r*4){
+					var ret = findStart(wall);
+					if (ret == 1){
+						return;
+					}
+				}
 			}
 		}
 	}
