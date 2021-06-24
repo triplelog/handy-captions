@@ -119,6 +119,22 @@ function makeEdges(){
 	}
 }
 
+function dPtEdge(pt,edge){
+	var pm = edge[1];//perpendicular slope of edge
+	var d;
+	if (pm == "inf"){
+		d = Math.pow(edge[2][1]-pt.y,2);
+	}
+	else if (edge[0] == "inf"){
+		d = Math.pow(edge[2][0]-pt.x,2);
+	}
+	else {
+		var xc = (edge[2][1]-pt.y+pt.x*pm-edge[2][0]*edge[0])/(pm-edge[0]);
+		var yc = pm*(xc-pt.x)+pt.y;
+		d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
+	}
+	return d;
+}
 function collisionOne(pt,wall,c,i){
 	for (var ii=0;ii<wall.e.length;ii++){
 		var d = r*r+1;
@@ -213,12 +229,15 @@ function move(timestamp) {
 					balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
 				}
 				else {
-					if (Math.tan(balls[i].a) < m*1.05 && Math.tan(balls[i].a) > m*0.95){
+					balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
+					var d = dPtEdge({x:x,y:y},walls[c.wall].e[c.edge]);
+					var dd = dPtEdge({x:x+Math.cos(balls[i].a)*elapsed/40,y:y+Math.sin(balls[i].a)*elapsed/40},walls[c.wall].e[c.edge]);
+					if (dd < d){
 						balls[i].a = 2*Math.PI-balls[i].a;
 					}
-					else {
-						balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
-					}
+				}
+				if (showAll){
+					console.log(x,y,balls[i].x,balls[i].y,m,Math.atan(m),balls[i].a);
 				}
 			}
 		}
