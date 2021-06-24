@@ -694,19 +694,19 @@ function cleanWall(wall){
 									var dd = 0;
 									var td = 0;
 									for (var iv=0;iv<walls[c.wall].v.length-1;iv++){
-										td += Math.pow(walls[c.wall].v[iv+1][0]-walls[c.wall].v[iv][0],2)+Math.pow(walls[c.wall].v[iv+1][1]-walls[c.wall].v[iv][1],2);
+										td += Math.pow( Math.pow(walls[c.wall].v[iv+1][0]-walls[c.wall].v[iv][0],2)+Math.pow(walls[c.wall].v[iv+1][1]-walls[c.wall].v[iv][1],2) , 0.5);
 									}
 									if (c.edge < wall.initial[iii].edge){
 										for (var iv=c.edge;iv<wall.initial[iii].edge;iv++){
-											dd += Math.pow(walls[c.wall].v[iv+1][0]-walls[c.wall].v[iv][0],2)+Math.pow(walls[c.wall].v[iv+1][1]-walls[c.wall].v[iv][1],2);
+											dd += Math.pow( Math.pow(walls[c.wall].v[iv+1][0]-walls[c.wall].v[iv][0],2)+Math.pow(walls[c.wall].v[iv+1][1]-walls[c.wall].v[iv][1],2) , 0.5);
 										}
 									}
 									else if (c.edge > wall.initial[iii].edge){
 										for (var iv=wall.initial[iii].edge;iv<c.edge;iv++){
-											dd += Math.pow(walls[c.wall].v[iv+1][0]-walls[c.wall].v[iv][0],2)+Math.pow(walls[c.wall].v[iv+1][1]-walls[c.wall].v[iv][1],2);
+											dd += Math.pow( Math.pow(walls[c.wall].v[iv+1][0]-walls[c.wall].v[iv][0],2)+Math.pow(walls[c.wall].v[iv+1][1]-walls[c.wall].v[iv][1],2) , 0.5);
 										}
 									}
-									if (dd > r*r*9 && td-dd > r*r*9){
+									if (dd > 3*r && td-dd > 3*r){
 										wcs.push(c);
 										break;
 									}
