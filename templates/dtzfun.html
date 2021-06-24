@@ -69,12 +69,12 @@ function addBall(bid) {
 	var y = Math.round(25 + Math.random()*50);
 	var a = Math.random()*2*Math.PI;
 	var s = Math.round(20 + Math.random()*50);
-	var region = ballRegion({x:x,y:y},bid,[0]);
+	var region = ballRegion([x,y],-1,[0]);
 	var counter = 0;
 	while (region == -1){
 		x = Math.round({{ width / 4 }} + Math.random()*{{ width / 2 }});
 		y = Math.round(25 + Math.random()*50);
-		region = ballRegion({x:x,y:y},-1,[0]);
+		region = ballRegion([x,y],-1,[0]);
 		counter++;
 		if (counter > 100){
 			console.log("no luck placing balls in region");
