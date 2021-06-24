@@ -52,7 +52,7 @@ svg.addEventListener("pointerup",pup);
 
 
 r = 2;
-walls = [outlineWall];
+var walls;
 nWalls = 0;
 balls = [];
 nBalls = 3;
@@ -64,12 +64,13 @@ var showAll = false;
 
 tempWall = {id:"wall-t",v:[],initial:false};
 
-let start;
-let old;
+var start;
+var old;
 
 resetGame();
 
 function resetGame(){
+	svg.innerHTML = '<path id="wall-t" d="" fill="white" stroke="black" stroke-width="1"></path>';
 	r = 2;
 	walls = [outlineWall];
 	nWalls = 0;
@@ -90,9 +91,8 @@ function resetGame(){
 
 	tempWall = {id:"wall-t",v:[],initial:false};
 
-	let start;
-	let old;
-
+	start = 0;
+	old = 0;
 	window.requestAnimationFrame(move);
 }
 
