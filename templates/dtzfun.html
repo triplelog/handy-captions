@@ -65,15 +65,15 @@ let old;
 
 function addBall(bid) {
 	walls[0].balls.push(bid);
-	var x = Math.round({{ width / 4 }} + Math.random()*{{ width / 2 }});
-	var y = Math.round(25 + Math.random()*50);
+	var x = Math.round(Math.random()*{{ width }});
+	var y = Math.round(Math.random()*100);
 	var a = Math.random()*2*Math.PI;
 	var s = Math.round(20 + Math.random()*50);
 	var region = ballRegion([x,y],-1,[0]);
 	var counter = 0;
 	while (region == -1){
-		x = Math.round({{ width / 4 }} + Math.random()*{{ width / 2 }});
-		y = Math.round(25 + Math.random()*50);
+		x = Math.round(Math.random()*{{ width }});
+		y = Math.round(Math.random()*100);
 		region = ballRegion([x,y],-1,[0]);
 		counter++;
 		if (counter > 100){
