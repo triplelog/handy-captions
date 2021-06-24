@@ -341,12 +341,10 @@ function move(timestamp) {
 		var wid = balls[i].region;
 		var c = collision({x:x,y:y},wid);
 		if (c.d <= r*r){
-			if (c.wall == -1){
-				
+			if (c.wall == -1){//hit temp Wall
 				loseLife();
-				return;
 			}
-			else {
+			else {//hit real Wall
 				var m = walls[c.wall].e[c.edge][0];
 				if (showAll){
 					console.log(m,Math.atan(m),balls[i].a);
