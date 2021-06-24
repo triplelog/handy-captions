@@ -233,11 +233,17 @@ function move(timestamp) {
 					var d = dPtEdge({x:x,y:y},walls[c.wall].e[c.edge]);
 					var dd = dPtEdge({x:x+Math.cos(balls[i].a)*elapsed/40,y:y+Math.sin(balls[i].a)*elapsed/40},walls[c.wall].e[c.edge]);
 					if (dd < d){
-						balls[i].a = 2*Math.PI-balls[i].a;
+						balls[i].a = Math.PI+balls[i].a;
 					}
 				}
 				if (showAll){
 					console.log(x,y,balls[i].x,balls[i].y,m,Math.atan(m),balls[i].a);
+				}
+				if (balls[i].a > 2*Math.PI){
+					balls[i].a -= 2*Math.PI;
+				}
+				else if (balls[i].a < -2*Math.PI){
+					balls[i].a += 2*Math.PI;
 				}
 			}
 		}
