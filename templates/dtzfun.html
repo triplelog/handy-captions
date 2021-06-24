@@ -320,8 +320,14 @@ function move(timestamp) {
 					balls[i].a += 2*Math.PI;
 				}
 				balls[i].a += -0.25 + Math.random()*0.5;
+				
+				var chk = ballRegion([x,y],i,[balls[i].region]);
+				if (chk !== balls[i].region){
+					console.log("escaping");
+				}
 			}
 		}
+		
 		
 		balls[i].el.setAttribute("cx",x);
 		balls[i].el.setAttribute("cy",y);
