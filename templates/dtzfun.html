@@ -233,7 +233,7 @@ function move(timestamp) {
 					var d = dPtEdge({x:x,y:y},walls[c.wall].e[c.edge]);
 					var dd = dPtEdge({x:x+Math.cos(balls[i].a)*elapsed/40,y:y+Math.sin(balls[i].a)*elapsed/40},walls[c.wall].e[c.edge]);
 					if (dd < d){
-						balls[i].a = Math.PI+balls[i].a;
+						balls[i].a = Math.PI/4+balls[i].a;
 					}
 				}
 				if (showAll){
@@ -304,8 +304,11 @@ function area(polygon) {
 }
 
 function updateRegions(wall,initialArr,endArr) {
+	
+	
 	var initial = initialArr[0];
 	var end = endArr[0];
+	var isWall = false;
 	console.log(initialArr,endArr);
 	for (var i=0;i<initialArr.length;i++){
 		for (var ii=0;ii<endArr.length;ii++){
@@ -314,10 +317,22 @@ function updateRegions(wall,initialArr,endArr) {
 				initial = initialArr[i];
 				end = endArr[ii];
 				i = initialArr.length + 10;
+				if (walls[initial.wall].balls.length == 0){
+					return;
+				}
+				isWall = true;
 				break;
 			}
 		}
 	}
+	if (isWall){
+		walls.push(newWall);
+		addWall(newWall);
+	}
+	else {
+		return;
+	}
+	
 	console.log(initial.pt);
 	console.log(end.pt);
 	var leftWall = {v:[]};
@@ -436,10 +451,7 @@ function pmove(evt){
 		if (end == "end"){
 			isDown = false;
 			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
-			walls.push(newWall);
-			//console.log(newWall);
-			//console.log(walls);
-			addWall(newWall);
+			
 			updateRegions(newWall,tempWall.initial,tempWall.end);
 			
 			tempWall.v = [];
