@@ -204,7 +204,7 @@ app.get('/game',
 		var path = jsonShapes[shape];
 		var deflated = zlib.deflateSync(path).toString('base64');
 		console.log(deflated);
-		var inflated = zlib.inflateSync(new Buffer(def, 'base64')).toString();
+		var inflated = zlib.inflateSync(new Buffer.from(def, 'base64')).toString();
 		console.log(inflated);
 		var retval = pathToPoints(path);
 		res.write(nunjucks.render('templates/dtzfun.html',{
