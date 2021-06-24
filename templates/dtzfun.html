@@ -499,11 +499,11 @@ function removeLoops(wall){
 		var line1 = {pt:{x:wall.e[i][2][0],y:wall.e[i][2][1]},m:wall.e[i][0]};
 		lines[i]=line1;
 	}
-	for (var i=0;i<wall.e.length;i++){
+	for (var i=0;i<wall.e.length-1;i++){
 		
 		var line1 = lines[i];
 										
-		for (var ii=0;ii<i-1;ii++){
+		for (var ii=1;ii<i-1;ii++){
 			var line2 = lines[ii];
 
 			var pc = collisionPoint(line1,line2);
@@ -523,8 +523,7 @@ function removeLoops(wall){
 			if (bothInt == 2){
 				console.log(wall.e.length,i,ii,wall.e[i],wall.e[ii],line1,line2,pc);
 				wall.v.splice(ii,i-ii);
-				//removeLoops(wall);
-				return;
+				removeLoops(wall);
 			}
 			
 		}
