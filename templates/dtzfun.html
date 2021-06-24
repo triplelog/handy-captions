@@ -162,7 +162,7 @@ function collision(pt,wid=-1){
 
 	var c = {wall:0,edge:0,d:r*r+1};
 	
-	if (temp && tempWall.initial){
+	if (tempWall.initial){
 		c = collisionOne(pt,tempWall,c,-1);
 		if (c.d <= r*r){
 			console.log(c);
