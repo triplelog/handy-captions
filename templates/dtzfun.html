@@ -12,13 +12,6 @@
 	position: absolute;
 	border: 1px solid black;
 }
-img {
-	width: 160vh;
-	height: 80vh;
-	left: calc(45vw - 160vh / 2);
-	top: 2.5vh;
-	position: absolute;
-}
 #borderSVG {
 	width: calc({{ width + 20 }} / 120 * 80vh);
 	height: 80vh;
@@ -33,10 +26,9 @@ img {
 <body>
 <button onclick="showInfo()">Show</button>
 <div class="game">
-	<!--<img src="img/lemur.jpg">-->
 	<svg id="borderSVG" viewBox="-10 -10 {{ width + 20 }} 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-		<path id="wall-t" d="" fill="white" stroke="black" stroke-width="1"></path>
+		<path id="wall-t" d="" fill="none" stroke="black" stroke-width="1"></path>
 	</svg>
 </div>
 
@@ -106,7 +98,7 @@ function addBall(bid) {
 	circle.id = "ball-"+bid;
 	circle.setAttributeNS(null,'cx',x);
 	circle.setAttributeNS(null,'cy',y);
-	circle.setAttributeNS(null,'r',r);
+	circle.setAttributeNS(null,'r',3);
 	circle.setAttributeNS(null,'fill',"#CCF");
 	circle.setAttributeNS(null,'stroke',"red");
 	circle.setAttributeNS(null,'stroke-width',"0.1");
@@ -124,7 +116,7 @@ function addWall(wall) {
 	}
 	path.id = wall.id;
 	path.setAttributeNS(null,'d',pd);
-	path.setAttributeNS(null,'fill',"white");
+	path.setAttributeNS(null,'fill',"none");
 	path.setAttributeNS(null,'stroke',"red");
 	path.setAttributeNS(null,'stroke-width',"1");
 	svg.appendChild(path);
@@ -473,12 +465,12 @@ function updateRegions(wall,initialArr,endArr) {
 	}
 	if (walls[initial.wall].balls.length == 0){
 		var path = document.getElementById("wall-"+initial.wall);
-		path.setAttributeNS(null,'fill',"none");
+		path.setAttributeNS(null,'fill',"gray");
 		filledArea += area(walls[initial.wall].v);
 	}
 	else if (walls[nWalls-1].balls.length == 0){
 		var path = document.getElementById("wall-"+(nWalls-1));
-		path.setAttributeNS(null,'fill',"none");
+		path.setAttributeNS(null,'fill',"gray");
 		filledArea += area(walls[nWalls-1].v);
 	}
 	console.log(filledArea,totalArea,filledArea*100/totalArea);
