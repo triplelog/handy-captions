@@ -32,6 +32,7 @@ img {
 </head>
 <body>
 <button onclick="showInfo()">Show</button>
+<button onclick="nextRound()">Next</button>
 <div class="game">
 	<img src="img/lemur.jpg">
 	<svg id="borderSVG" viewBox="-10 -10 {{ width + 20 }} 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -57,6 +58,7 @@ nWalls = 0;
 balls = [];
 nBalls = 3;
 isDown = false;
+kill = false;
 
 var filledArea = 0;
 var totalArea = 0;
@@ -93,6 +95,7 @@ function resetGame(){
 
 	start = 0;
 	old = 0;
+	kill = false;
 	window.requestAnimationFrame(move);
 }
 
@@ -298,6 +301,9 @@ function collision(pt,wid=-1){
 
 
 function move(timestamp) {
+	if (kill){
+		return;
+	}
 	if (!start){
 		start = timestamp;
 		old = timestamp;
@@ -543,11 +549,14 @@ function updateRegions(wall,initialArr,endArr) {
 	}
 	console.log(filledArea,totalArea,filledArea*100/totalArea);
 	if (filledArea*100/totalArea > winpct){
-		nBalls = 4;
-		resetGame();
+		kill = true;
 	}
 }
 
+function nextRound(){
+	nBalls = 4;
+	resetGame();
+}
 function showInfo(){
 	showAll = true;
 	start = 0;
