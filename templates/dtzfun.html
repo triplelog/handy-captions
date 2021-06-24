@@ -127,7 +127,8 @@ function addWall(wall) {
 	path.setAttributeNS(null,'fill',"white");
 	path.setAttributeNS(null,'stroke',"red");
 	path.setAttributeNS(null,'stroke-width',"1");
-	svg.appendChild(path);
+	var wt = document.getElementById("wall-t");
+	svg.insertBefore(path,wt);
 	nWalls+=1;
 	makeEdgesOne(wall);
 }
