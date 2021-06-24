@@ -322,9 +322,20 @@ function move(timestamp) {
 				balls[i].a += -0.25 + Math.random()*0.5;
 				
 				var chk = ballRegion([x,y],i,[balls[i].region]);
-				if (chk !== balls[i].region){
-					console.log("escaping",chk,balls[i].region);
+				var counter = 0;
+				var xx = x; var yy = y;
+				while (chk !== balls[i].region){
+					xx = x - Math.log(counter+3)/2+ Math.random()*Math.log(counter+3);
+					yy = y - Math.log(counter+3)/2+ Math.random()*Math.log(counter+3);
+					chk = ballRegion([xx,yy],i,[balls[i].region]);
+					
+					counter++;
+					if (counter > 10){
+						console.log("escaping",chk,balls[i].region);
+						break;
+					}
 				}
+				x = xx; y = yy;
 			}
 		}
 		
