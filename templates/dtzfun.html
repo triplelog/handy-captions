@@ -542,7 +542,7 @@ function cleanWall(wall){
 				var d = Math.pow(pt.x-wall.v[ii-1][0],2)+Math.pow(pt.y-wall.v[ii-1][1],2);
 				wall.v[ii][2] = d;
 				totald += d;
-				if (totald > r*r*2){
+				if (totald > r*r*9){
 					var cc = {wall:0,edge:0,d:r*r+1};
 					var wcs = [];
 					for (var i=0;i<nWalls;i++){
