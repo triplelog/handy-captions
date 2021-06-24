@@ -655,21 +655,9 @@ function cleanWall(wall){
 						return "end";
 					}
 				}
-				else {
-					var ret = findStart(wall);
-					if (ret == 1){
-						return;
-					}
-				}
 			}
 			else if (wall.v[ii][2] > 0){
 				totald += wall.v[ii][2];
-				if (totald < r*r*4){
-					var ret = findStart(wall);
-					if (ret == 1){
-						return;
-					}
-				}
 			}
 		}
 	}
