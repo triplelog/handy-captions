@@ -215,7 +215,8 @@ app.get('/game',
 		else if (req.query && req.query.p){
 			console.log(def);
 			console.log(req.query.p);
-			path = zlib.inflateSync(new Buffer.from(def, 'base64')).toString();
+			var p = req.query.p.toString();
+			path = zlib.inflateSync(new Buffer.from(p, 'base64')).toString();
 			
 		}
 		
