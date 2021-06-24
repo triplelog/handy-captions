@@ -59,7 +59,7 @@ nBalls = 3;
 isDown = false;
 
 var filledArea = 0;
-var totalArea;
+var totalArea = 0;
 var showAll = false;
 
 tempWall = {id:"wall-t",v:[],initial:false};
@@ -83,9 +83,9 @@ function resetGame(){
 	}
 	isDown = false;
 
-	var filledArea = 0;
-	var totalArea = area(walls[0].v);
-	var showAll = false;
+	filledArea = 0;
+	totalArea = area(walls[0].v);
+	showAll = false;
 
 
 
