@@ -524,6 +524,7 @@ function removeLoops(wall){
 				console.log(wall.e.length,i,ii,wall.e[i],wall.e[ii],line1,line2,pc);
 				wall.v.splice(ii,i-ii);
 				removeLoops(wall);
+				return;
 			}
 			
 		}
