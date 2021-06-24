@@ -571,7 +571,7 @@ function findStart(wall,lastHit=false){
 		}
 		if (wcs.length > 0){
 			if (lastHit){
-				hits.push(ii);
+				hits.push([ii,wcs]);
 			}
 			else {
 				//set to intersection point
@@ -600,6 +600,16 @@ function findStart(wall,lastHit=false){
 			ii = hits[hits.length-2];
 		}
 		console.log(ii);
+		var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
+		var cc = {wall:0,edge:0,d:r*r+1};
+		var wcs = [];
+		for (var i=0;i<nWalls;i++){
+			cc = {wall:0,edge:0,d:r*r+1};
+			var c = collisionOne(pt,walls[i],cc,i);
+			if (c.d <= r*r){
+				wcs.push(c);
+			}
+		}
 		wall.v.splice(0,ii);
 		wall.initial = [];
 		for (var i=0;i<wcs.length;i++){
@@ -613,8 +623,8 @@ function findStart(wall,lastHit=false){
 			wall.v[0][1] = pc[1];
 			wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
 		}
-		console.log(wall);
 		return 1;
+
 	}
 }
 function cleanWall(wall){
