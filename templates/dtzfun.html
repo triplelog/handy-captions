@@ -50,8 +50,8 @@ addWall(walls[0]);
 
 tempWall = {id:"wall-t",v:[],initial:false};
 r = 3;
-balls = [{id:"ball-0",x:50,y:50,a:-1,el:document.getElementById("ball-0")}];
-balls.push({id:"ball-1",x:50,y:20,a:2,el:document.getElementById("ball-1")});
+balls = [{id:"ball-0",region:0,x:50,y:50,a:-1,el:document.getElementById("ball-0")}];
+balls.push({id:"ball-1",region:0,x:50,y:20,a:2,el:document.getElementById("ball-1")});
 nBalls = 2;
 let start;
 let old;
@@ -158,7 +158,7 @@ function collisionOne(pt,wall,c,i){
 	return c;
 }
 
-function collision(pt,temp=true){
+function collision(pt,wid=-1){
 
 	var c = {wall:0,edge:0,d:r*r+1};
 	
@@ -169,8 +169,13 @@ function collision(pt,temp=true){
 			return c;
 		}
 	}
-	for (var i=0;i<nWalls;i++){
-		c = collisionOne(pt,walls[i],c,i);
+	if (wid==-1){
+		for (var i=0;i<nWalls;i++){
+			c = collisionOne(pt,walls[i],c,i);
+		}
+	}
+	else {
+		c = collisionOne(pt,walls[wid],c,wid);
 	}
 
 	return c;
@@ -188,8 +193,8 @@ function move(timestamp) {
 	for (var i=0;i<nBalls;i++){
 		var x = balls[i].x+Math.cos(balls[i].a)*elapsed/40;
 		var y = balls[i].y+Math.sin(balls[i].a)*elapsed/40;
-		
-		var c = collision({x:x,y:y});
+		var wid = balls[i].region;
+		var c = collision({x:x,y:y},wid);
 		if (c.d <= r*r){
 			if (c.wall == -1){
 				console.log("You lose a life!");
