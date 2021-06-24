@@ -67,7 +67,12 @@ function addBall(bid) {
 	var y = Math.round(25 + Math.random()*50);
 	var a = Math.random()*2*Math.PI;
 	var s = Math.round(20 + Math.random()*50);
-	
+	var region = ballRegion({x:x,y:y},bid,[0]);
+	while (region == -1){
+		x = Math.round({{ width / 4 }} + Math.random()*{{ width / 2 }});
+		y = Math.round(25 + Math.random()*50);
+		region = ballRegion({x:x,y:y},bid,[0]);
+	}
 	
 	var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 	circle.id = "ball-"+bid;
@@ -311,11 +316,17 @@ function ballRegion(pt,bid,myWalls=false){
 			var el = document.getElementById(walls[wid].id);
 			var isInside = el.isPointInFill(dp);
 			if (isInside){
-				balls[bid].region=wid;
+				if (bid >= 0){
+					balls[bid].region=wid;
+				}
+				else {
+					return wid;
+				}
 				break;
 			}
 		}
 	}
+	return -1;
 }
 function area(polygon) {
     let total = 0;
