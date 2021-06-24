@@ -225,8 +225,8 @@ function move(timestamp) {
 	const elapsed = timestamp - old;
 	old = timestamp;
 	for (var i=0;i<nBalls;i++){
-		var x = balls[i].x+Math.cos(balls[i].a)*elapsed/40;
-		var y = balls[i].y+Math.sin(balls[i].a)*elapsed/40;
+		var x = balls[i].x+Math.cos(balls[i].a)*elapsed*balls[i].s/1000;
+		var y = balls[i].y+Math.sin(balls[i].a)*elapsed*balls[i].s/1000;
 		var wid = balls[i].region;
 		var c = collision({x:x,y:y},wid);
 		if (c.d <= r*r){
