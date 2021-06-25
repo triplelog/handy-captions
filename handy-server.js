@@ -210,7 +210,7 @@ app.get('/game',
 		var balls = ["##+","3,l"];
 		var lives = ["##+#N","x,1,7"];
 		var win = ["##-#X","75,l,50"];
-		1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3)
+		//1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3)
 		var pointFormula = ["###/-1000*##+/##+L/##+L/","c,v,2,1000,r0,1,d,3,t,3"];
 		//console.log(req.query);
 		var path = jsonShapes[shape];
