@@ -226,7 +226,7 @@ app.get('/game',
 			}
 			
 			if (req.query.l){
-				//lives = decodeURIComponent(req.query.l).split("~");
+				lives = decodeURIComponent(req.query.l).split("~");
 				console.log(lives);
 			}
 			if (req.query.x){
@@ -242,7 +242,7 @@ app.get('/game',
 				speed = decodeURIComponent(req.query.s).split("~");
 			}
 			if (req.query.f){
-				//pointFormula = decodeURIComponent(req.query.f).split("~");
+				pointFormula = decodeURIComponent(req.query.f).split("~");
 				console.log(pointFormula);
 			}
 		}
