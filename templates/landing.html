@@ -42,8 +42,8 @@ body {
 }
 .main > svg.corner {
 	position: absolute;
-	width: calc(1.1 * (50vw - calc(20rem * 163 / 103) /2));
-	height: calc(1.1 * (50vh - 10rem));
+	width: calc(1.05 * (50vw - calc(20rem * 163 / 103) /2));
+	height: calc(1.05 * (50vh - 10rem));
 }
 svg.corner.tl {
 	left:0px;
@@ -51,6 +51,14 @@ svg.corner.tl {
 }
 svg.corner.br {
 	right:0px;
+	bottom:0px;
+}
+svg.corner.tr {
+	right:0px;
+	top:0px;
+}
+svg.corner.bl {
+	left:0px;
 	bottom:0px;
 }
 
@@ -75,6 +83,12 @@ h1 {
 		</svg>
 		<svg class="corner br" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<path d="M0,0 100,100" fill="none" stroke="black" stroke-width="2" />
+		</svg>
+		<svg class="corner tr" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<path d="M100,0 0,100" fill="none" stroke="black" stroke-width="2" />
+		</svg>
+		<svg class="corner bl" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<path d="M100,0 0,100" fill="none" stroke="black" stroke-width="2" />
 		</svg>
 		<svg viewBox="-1.5 -1.5 163 103" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<path d="M0,0 Q80,20 160,0 Q 140,50 160,100 Q 80,80 0,100 Q 20,50 0,0" fill="#DDD" stroke="none" />
