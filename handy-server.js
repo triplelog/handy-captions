@@ -288,7 +288,7 @@ function findComma(str,i,ii,rep){
 			openPar--;
 		}
 		
-		if (openPar == 0 and str[ii]==","){
+		if (openPar == 0 && str[ii]==","){
 			inside += rep;
 		}
 		else {
