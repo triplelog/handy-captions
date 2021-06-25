@@ -227,6 +227,7 @@ app.get('/game',
 			//bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
 			bigwall: retval[0],
 			width: retval[1],
+			speed: ["##*##-#X+","15,rand,30,l,15"],
 		}));
 		res.end();
 	}

@@ -121,7 +121,7 @@ function resetGame(level){
 	for (var i=0;i<nBalls;i++){
 		var rand = Math.random();
 		//var speed = 15*rand+Math.max(15,30-level);
-		var speed = solvePostfix("##*##-#X+","15,rand,30,l,15",{l:level});
+		var speed = solvePostfix("{{ speed[0] }}","{{speed[1]}}",{l:level});
 		console.log(level,speed);
 		addBall(i,speed);
 	}

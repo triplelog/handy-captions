@@ -15,7 +15,6 @@ function solvePostfix(expstr,intstr,data={}){
 	}
 	var currentIndex = 0;
 	var arrayIndex = 0;
-	console.log(intarr);
 	for (var i=0;i<expstr.length;i++){
 		if (expstr[i] == '#') {
         	stack[currentIndex] = intarr[arrayIndex];
@@ -38,7 +37,6 @@ function solvePostfix(expstr,intstr,data={}){
             }
             currentIndex--;
         }
-        console.log(stack);
 	}
 	return stack[0];
 }
