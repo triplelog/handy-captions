@@ -348,7 +348,6 @@ function makePostfix(infixexpr) {
 			expstr.push('-');
 		}
 		else{
-			if 
 			expstr.push(ci);
 		}
 	}
