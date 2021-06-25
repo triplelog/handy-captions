@@ -261,6 +261,55 @@ app.get('/game',
 	}
 );
 
+function closePar(str,i){
+	var openPar = 0;
+	for (var ii=i;ii<str.length;ii++){
+		if (str[ii]== "("){
+			openPar++;
+		}
+		else if (str[ii]== ")"){
+			openPar--;
+		}
+		
+		if (openPar == 0){
+			return ii;
+		}
+	}
+	return str.length;
+}
+function findComma(str,i,ii,rep){
+	var openPar = 0;
+	inside = "";
+	for (var ii=i;ii<str.length;ii++){
+		if (str[ii]== "("){
+			openPar++;
+		}
+		else if (str[ii]== ")"){
+			openPar--;
+		}
+		
+		if (openPar == 0 and str[ii]==","){
+			inside += rep;
+		}
+		else {
+			inside += str[ii];
+		}
+	}
+	return inside;
+}
+function replaceFunctions(str){
+	for (var i=0;i<str.length;i++){
+		if (str[i] == "X" || str[i] == "N"){
+			var ii = closePar(str,i+1);
+			var inside = findComma(str,i+2,ii,str[i]);
+			str = str.substr(0,i)+inside+str.substr(ii+1);
+		}
+		else if (str[i] == "A" || str[i] == "L" || str[i] == "R" || str[i] == "F" ){
+			var ii = closePar(str,i+1);
+			str = str.substr(0,i)+str.substr(i+1,ii-i)+str[i]+str.substr(ii+1);
+		}
+	}
+}
 function makePostfix(infixexpr) {
 	infixexpr = infixexpr.replace(/max/gi,"X");
 	infixexpr = infixexpr.replace(/min/gi,"N");
@@ -270,6 +319,8 @@ function makePostfix(infixexpr) {
 	infixexpr = infixexpr.replace(/round/gi,"R");
 	infixexpr = infixexpr.replace(/floor/gi,"F");
 	infixexpr = infixexpr.replace(/rand/gi,"?");
+	infixexpr = replaceFunctions(infixexpr);
+	console.log(infixexpr);
 	prec = {}
 	prec["X"] = 4
 	prec["N"] = 4
@@ -298,7 +349,7 @@ function makePostfix(infixexpr) {
 	temptoken = ''
 	for (var i=0;i<infixexpr.length;i++){
 		var ie = infixexpr[i];
-		if ("-0123456789.?".indexOf(ie) > -1){
+		if ("-0123456789.?abcdefghijklmnopqrstuvwxyz".indexOf(ie) > -1){
 			temptoken += ie
 		}
 		else{
