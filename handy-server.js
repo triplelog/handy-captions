@@ -215,7 +215,6 @@ app.get('/game',
 		//console.log(req.query);
 		var path = jsonShapes[shape];
 		if (req.query){
-			console.log(req.query);
 			if (req.query.s){
 				shape = req.query.s;
 				path = jsonShapes[shape];
@@ -227,9 +226,28 @@ app.get('/game',
 			}
 			
 			if (req.query.l){
+				console.log(req.query.l);
 				var p = req.query.l.replace(/ /g,"+");
 				lives = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
-				console.log(lives);
+			}
+			if (req.query.x){
+				//req.query.x;
+			}
+			if (req.query.b){
+				var p = req.query.b.replace(/ /g,"+");
+				balls = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
+			}
+			if (req.query.w){
+				var p = req.query.w.replace(/ /g,"+");
+				win = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
+			}
+			if (req.query.s){
+				var p = req.query.s.replace(/ /g,"+");
+				speed = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
+			}
+			if (req.query.f){
+				var p = req.query.f.replace(/ /g,"+");
+				pointFormula = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
 			}
 		}
 		//var deflated = zlib.deflateSync(path).toString('base64');
@@ -253,7 +271,7 @@ app.post('/makegame.html',
 	function(req, res) {
 		//var content = req.body;
 		console.log(req.body);
-		var lives = zlib.deflateSync("##+#N|x,1,7").toString('base64');
+		var lives = "##+#N|x,1,7".toString('base64');
 		res.redirect("../game?s=SC&l="+lives);
 	}
 );
