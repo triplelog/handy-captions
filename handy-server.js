@@ -227,6 +227,7 @@ app.get('/game',
 			
 			if (req.query.l){
 				lives = decodeURIComponent(req.query.l).split("~");
+				console.log(lives);
 			}
 			if (req.query.x){
 				//req.query.x;
@@ -242,6 +243,7 @@ app.get('/game',
 			}
 			if (req.query.f){
 				pointFormula = decodeURIComponent(req.query.f).split("~");
+				console.log(pointFormula);
 			}
 		}
 		//var deflated = zlib.deflateSync(path).toString('base64');
