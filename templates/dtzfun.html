@@ -68,7 +68,7 @@ svg.addEventListener("pointerup",pup);
 
 
 r = 2;
-var lives = 2;
+var lives = 3;
 var walls;
 nWalls = 0;
 balls = [];
@@ -98,6 +98,7 @@ function resetGame(level){
 	if (level > 0){
 		lives = solvePostfix("{{ lives[0] }}","{{lives[1]}}",{l:level,x:lives});
 		//pointTotal += 1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3);
+		console.log(JSON.stringify(pointData));
 		var pt = solvePostfix("{{ pointFormula[0] }}","{{ pointFormula[1]}}",pointData);
 		pointTotal += pt;
 		console.log(pointData.c,pt);
