@@ -312,6 +312,7 @@ function replaceFunctions(str){
 			}
 			else if (str[i] == "A" || str[i] == "L" || str[i] == "R" || str[i] == "F" ){
 				var ii = closePar(str,i+1);
+				console.log(str,i,ii);
 				if (ii+1 < str.length){
 					str = str.substr(0,i)+str.substr(i+1,ii-i)+str[i]+str.substr(ii+1);
 				}
