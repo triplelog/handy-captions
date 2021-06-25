@@ -280,19 +280,19 @@ function closePar(str,i){
 function findComma(str,i,ii,rep){
 	var openPar = 0;
 	inside = "";
-	for (var ii=i;ii<str.length;ii++){
-		if (str[ii]== "("){
+	for (var iii=i;iii<ii;iii++){
+		if (str[iii]== "("){
 			openPar++;
 		}
-		else if (str[ii]== ")"){
+		else if (str[iii]== ")"){
 			openPar--;
 		}
 		
-		if (openPar == 0 && str[ii]==","){
+		if (openPar == 0 && str[iii]==","){
 			inside += rep;
 		}
 		else {
-			inside += str[ii];
+			inside += str[iii];
 		}
 	}
 	return inside;
@@ -302,6 +302,7 @@ function replaceFunctions(str){
 		if (str[i+1]=="("){
 			if (str[i] == "X" || str[i] == "N"){
 				var ii = closePar(str,i+1);
+				console.log(str,i,ii);
 				var inside = findComma(str,i+2,ii,str[i]);
 				if (ii+1 < str.length){
 					str = str.substr(0,i)+"("+inside+str.substr(ii+1);
@@ -309,6 +310,7 @@ function replaceFunctions(str){
 				else {
 					str = str.substr(0,i)+"("+inside;
 				}
+				console.log(str);
 			}
 			else if (str[i] == "A" || str[i] == "L" || str[i] == "R" || str[i] == "F" ){
 				var ii = closePar(str,i+1);
