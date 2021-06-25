@@ -37,7 +37,7 @@ function solvePostfix(expstr,intstr,data={}){
             }
             currentIndex--;
         }
-        console.log(stack);
+        //console.log(stack);
 	}
 	return stack[0];
 }

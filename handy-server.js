@@ -261,11 +261,16 @@ app.get('/game',
 	}
 );
 
+function makePostfix(str) {
+
+	return encodeURIComponent('__+_N~x_1_7');
+}
+
 app.post('/makegame.html', 
 	function(req, res) {
 		//var content = req.body;
 		console.log(req.body);
-		var lives = encodeURIComponent('__+_N~x_1_7');
+		var lives = makePostfix(req.body.lives);
 		console.log(lives);
 		res.redirect("../game?n=SC&l="+lives);
 	}
