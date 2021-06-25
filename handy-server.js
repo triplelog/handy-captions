@@ -227,8 +227,8 @@ app.get('/game',
 			
 			if (req.query.l){
 				console.log(req.query.l);
-				var p = req.query.l.replace(/ /g,"+");
-				lives = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
+				lives = encodeURIComponent(req.query.l).split("|");
+				console.log(lives);
 			}
 			if (req.query.x){
 				//req.query.x;
@@ -271,8 +271,7 @@ app.post('/makegame.html',
 	function(req, res) {
 		//var content = req.body;
 		console.log(req.body);
-		var l = Buffer.from('"##+#N|x,1,7"');
-		var lives = l.toString('base64');
+		var lives = encodeURIComponent('"##+#N|x,1,7"');
 		console.log(lives);
 		res.redirect("../game?s=SC&l="+lives);
 	}
