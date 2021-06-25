@@ -226,9 +226,9 @@ app.get('/game',
 			}
 			
 			if (req.query.l){
-				console.log(req.query.l);
-				lives = encodeURIComponent(req.query.l).split("|");
-				console.log(lives);
+				console.log("l: ",req.query.l);
+				lives = decodeURIComponent(req.query.l).split("|");
+				console.log("ll: ",lives);
 			}
 			if (req.query.x){
 				//req.query.x;
