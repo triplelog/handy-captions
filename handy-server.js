@@ -261,10 +261,97 @@ app.get('/game',
 	}
 );
 
-function makePostfix(str) {
+function makePostfix(infixexpr) {
+	prec = {}
+	prec["*"] = 4
+	prec["/"] = 4
+	prec["+"] = 3
+	prec["~"] = 3
+	prec[">"] = 2
+	prec["<"] = 2
+	prec["="] = 2
+	prec["!"] = 2
+	prec["["] = 2
+	prec["]"] = 2
+	prec["&"] = 1
+	prec["|"] = 0
+	prec["("] = -1
+	opStack = []
+	postfixList = []
+	intstr = []
+	expstr = []
+	tokenList = []
+	temptoken = ''
+	for (var i=0;i<infixexpr.length;i++){
+		var ie = infixexpr[i];
+		if ("-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(ie) > -1){
+			temptoken += ie
+		}
+		else{
+			if (temptoken != ''){
+				tokenList.push(temptoken)
+			}
+			tokenList.push(ie)
+			temptoken = ''
+		}
+	}
+	if (temptoken != ''){
+		tokenList.push(temptoken)
+	}
+	
+	for (var i=0;i<tokenList.length;i++){
+		var token = tokenList[i];
+		if ("*/+~><=![]&|()".indexOf(token) == -1){
+			postfixList.push(token)
+		}
+		else if (token == '('){
+			opStack.push(token)
+		}
+		else if (token == ')'){
+			topToken = opStack.pop()
+			while (topToken != '('){
+				postfixList.push(topToken)
+				topToken = opStack.pop()
+			}
+		}
+		else {
+			while ((opStack.length > 0) && (prec[opStack[opStack.length-1]] >= prec[token])){
+				postfixList.push(opStack.pop())
+			}
+			opStack.push(token)
+		}
+	}
+	while (opStack.length > 0){
+		postfixList.push(opStack.pop())
+	}
+	for (var i=0;i<postfixList.length;i++){
+		var ci = postfixList[i];
+		if ("*/+~><=![]&|".indexOf(ci) == -1){
+			intstr.push(ci);
+			expstr.push('_');
+		}
+		else if (ci == '~'){
+			expstr.push('-');
+		}
+		else{
+			expstr.push(ci);
+		}
+	}
+	var sout = "";
+	for (var i=0;i<expstr.length;i++){
+		sout += expstr[i];
+	}
+	sout += "~";
+	for (var i=0;i<intstr.length;i++){
+		sout += intstr[i];
+		sout += "_";
+	}
+	//sout = sout.substr(0,sout.length-1);
+	console.log(sout);
+	return encodeURIComponent(expstr+"~"+intstr);
 
-	return encodeURIComponent('__+_N~x_1_7');
 }
+
 
 app.post('/makegame.html', 
 	function(req, res) {
