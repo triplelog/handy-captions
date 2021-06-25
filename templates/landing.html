@@ -5,19 +5,29 @@
 <style>
 
 body {
-	padding: 10%;
-	display: block;
-	position: absolute;
+	display: grid;
+	grid-template-rows: 1fr auto 1fr;
+	grid-template-columns: 1fr auto 1fr;
 }
 
 .main {
-	height: 88.9%;
-	width: 88.9%;
 	border: 2px solid black;
 	border-radius: 2rem;
-	position: absolute;
-	display: block;
 	background: #DDD;
+	width: 20rem;
+	height: 20rem;
+}
+.top {
+	grid-row: 1;
+	grid-column: 1 /4;
+}
+.bottom {
+	grid-row: 3;
+	grid-column: 1 /4;
+}
+.main {
+	grid-row: 2;
+	grid-column: 2;
 }
 
 </style>
@@ -25,7 +35,8 @@ body {
 </head>
 <body>
 
-
+<div class="top"></div>
+<div class="bottom"></div>
 <div class="main">
 	<h1>Digitizer Fun</h1>
 </div>
