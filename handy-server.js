@@ -298,15 +298,17 @@ function findComma(str,i,ii,rep){
 	return inside;
 }
 function replaceFunctions(str){
-	for (var i=0;i<str.length;i++){
-		if (str[i] == "X" || str[i] == "N"){
-			var ii = closePar(str,i+1);
-			var inside = findComma(str,i+2,ii,str[i]);
-			str = str.substr(0,i)+inside+str.substr(ii+1);
-		}
-		else if (str[i] == "A" || str[i] == "L" || str[i] == "R" || str[i] == "F" ){
-			var ii = closePar(str,i+1);
-			str = str.substr(0,i)+str.substr(i+1,ii-i)+str[i]+str.substr(ii+1);
+	for (var i=0;i<str.length-1;i++){
+		if (str[i+1]=="("){
+			if (str[i] == "X" || str[i] == "N"){
+				var ii = closePar(str,i+1);
+				var inside = findComma(str,i+2,ii,str[i]);
+				str = str.substr(0,i)+inside+str.substr(ii+1);
+			}
+			else if (str[i] == "A" || str[i] == "L" || str[i] == "R" || str[i] == "F" ){
+				var ii = closePar(str,i+1);
+				str = str.substr(0,i)+str.substr(i+1,ii-i)+str[i]+str.substr(ii+1);
+			}
 		}
 	}
 	return str;
