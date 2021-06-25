@@ -309,6 +309,7 @@ function replaceFunctions(str){
 			str = str.substr(0,i)+str.substr(i+1,ii-i)+str[i]+str.substr(ii+1);
 		}
 	}
+	return str;
 }
 function makePostfix(infixexpr) {
 	infixexpr = infixexpr.replace(/max/gi,"X");
