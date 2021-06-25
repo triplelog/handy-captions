@@ -82,14 +82,14 @@ h1 {
 
 #gameBox:checked ~ .first {
 	animation-name: spin;
-	animation-duration: 3s;
+	animation-duration: 2s;
 	animation-fill-mode: forwards;
 	animation-timing-function: linear;
 }
 #gameBox:checked ~ .second {
 	animation-name: spinReverse;
-	animation-delay: 3s;
-	animation-duration: 3s;
+	animation-delay: 2s;
+	animation-duration: 2s;
 	animation-fill-mode: forwards;
 	animation-timing-function: linear;
 }
@@ -141,6 +141,11 @@ h1 {
 			</div>
 		</div>
 		<div class="second">
+			Settings:
+			<form action="./makegame.html" method="post">
+				<div>Lives: <input type="text" name="lives" value="2+2"></input></div>
+				<button type="submit">Play</button>
+			</form>
 		</div>
 		
 	</div>

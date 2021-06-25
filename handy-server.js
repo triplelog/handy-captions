@@ -243,8 +243,9 @@ app.get('/game',
 
 app.post('/makegame.html', 
 	function(req, res) {
-		var content = req.body;
-		
+		//var content = req.body;
+		console.log(req.body);
+		res.redirect("../game");
 	}
 );
 
