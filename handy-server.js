@@ -261,6 +261,31 @@ app.get('/game',
 	}
 );
 
+function replaceNegatives(istr){
+	dindex = istr.indexOf('-')
+	while (dindex >-1){
+		if (dindex == 0){
+			if ("0123456789".indexOf(istr[1]) == -1) {
+				istr = '-1*'+istr.substring(1,);
+			}
+			dindex = istr.indexOf('-',1);
+		}
+		else{
+			if ("><=![]&|(".indexOf(istr[dindex-1])> -1) {
+				if ("0123456789".indexOf(istr[dindex-1])== -1){
+					istr = istr.substring(0,dindex)+'-1*'+istr.substring(dindex+1,);
+				}
+				dindex = istr.indexOf('-',dindex+1);
+			}
+			else{
+				istr = istr.substring(0,dindex)+'~'+istr.substring(dindex+1,);
+				dindex = istr.indexOf('-',dindex+1);
+			}
+		}
+	}
+				
+	return istr
+}
 function closePar(str,i){
 	var openPar = 0;
 	for (var ii=i;ii<str.length;ii++){
@@ -289,13 +314,13 @@ function findComma(str,i,ii,rep){
 		}
 		
 		if (openPar == 0 && str[iii]==","){
-			inside += rep;
+			inside = "("+inside+")"+rep+"(";
 		}
 		else {
 			inside += str[iii];
 		}
 	}
-	return inside;
+	return inside+")";
 }
 function replaceFunctions(str){
 	for (var i=0;i<str.length-1;i++){
@@ -337,6 +362,7 @@ function makePostfix(infixexpr) {
 	infixexpr = infixexpr.replace(/round/gi,"R");
 	infixexpr = infixexpr.replace(/floor/gi,"F");
 	infixexpr = infixexpr.replace(/rand/gi,"?");
+	infixexpr = replaceNegatives(infixexpr);
 	infixexpr = replaceFunctions(infixexpr);
 	console.log(infixexpr);
 	prec = {}
