@@ -303,7 +303,7 @@ function replaceFunctions(str){
 			if (str[i] == "X" || str[i] == "N"){
 				var ii = closePar(str,i+1);
 				console.log(str,i,ii);
-				var inside = findComma(str,i+2,ii,str[i]);
+				var inside = findComma(str,i+2,ii+1,str[i]);
 				if (ii+1 < str.length){
 					str = str.substr(0,i)+"("+inside+str.substr(ii+1);
 				}
@@ -328,6 +328,7 @@ function replaceFunctions(str){
 	return str;
 }
 function makePostfix(infixexpr) {
+	infixexpr = infixexpr.replace(/ /g,"");
 	infixexpr = infixexpr.replace(/max/gi,"X");
 	infixexpr = infixexpr.replace(/min/gi,"N");
 	infixexpr = infixexpr.replace(/abs/gi,"A");
@@ -440,8 +441,10 @@ app.post('/makegame.html',
 		//var content = req.body;
 		console.log(req.body);
 		var lives = makePostfix(req.body.lives);
+		var pointFormula = makePostfix(req.body.pointFormula);
 		console.log(lives);
-		res.redirect("../game?n=SC&l="+lives);
+		console.log(pointFormula);
+		res.redirect("../game?n=SC&l="+lives+"&f="+pointFormula);
 	}
 );
 

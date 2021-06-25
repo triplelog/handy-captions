@@ -154,7 +154,8 @@ h1 {
 			</div>
 			<div class="content">
 				<form action="./makegame.html" method="post">
-					<div>Lives: <input type="text" name="lives" value="2+2"></input></div>
+					<div>Lives: <input type="text" name="lives" value="min(7,x+1)"></input></div>
+					<div>Points: <input type="text" name="pointFormula" value="1000*(c-v/2)/r0/log(d+3)/log(t+3)"></input></div>
 					<button type="submit">Play</button>
 				</form>
 			</div>
