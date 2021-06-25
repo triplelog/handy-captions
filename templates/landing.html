@@ -5,15 +5,15 @@
 <style>
 
 .main {
-	height: 10rem;
-	width: 10rem;
+	height: 20rem;
+	width: calc(100vw / 100vh * 20rem);
 	border: 2px solid black;
 	border-radius: 2rem;
-	left: calc(50vw - 5rem);
-	top: calc(50vh - 5rem);
+	left: calc(calc(100vw / 100vh * 10rem) - 10rem);
+	top: calc(50vh - 10rem);
 	position: absolute;
 	background: #DDD;
-	
+	padding-top: 1rem;
 }
 
 </style>
@@ -21,7 +21,9 @@
 </head>
 <body>
 
-<div class="main">Digitizer Fun</div>
+<div class="main">
+	<h1>Digitizer Fun</h1>
+</div>
 
 
 <script>
