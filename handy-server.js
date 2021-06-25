@@ -318,6 +318,7 @@ function replaceFunctions(str){
 				else {
 					str = str.substr(0,i)+str.substr(i+1,ii-i)+str[i];
 				}
+				console.log(str);
 			}
 		}
 	}
