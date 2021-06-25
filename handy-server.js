@@ -234,12 +234,15 @@ app.get('/game',
 			}
 			if (req.query.b){
 				balls = decodeURIComponent(req.query.b).split("~");
+				console.log(balls);
 			}
 			if (req.query.w){
 				win = decodeURIComponent(req.query.w).split("~");
+				console.log(win);
 			}
 			if (req.query.s){
 				speed = decodeURIComponent(req.query.s).split("~");
+				console.log(speed);
 			}
 			if (req.query.f){
 				pointFormula = decodeURIComponent(req.query.f).split("~");
@@ -478,9 +481,15 @@ app.post('/makegame.html',
 		console.log(req.body);
 		var lives = makePostfix(req.body.lives);
 		var pointFormula = makePostfix(req.body.pointFormula);
+		var balls = makePostfix(req.body.balls);
+		var win = makePostfix(req.body.win);
+		var speed = makePostfix(req.body.speed);
 		console.log(lives);
 		console.log(pointFormula);
-		res.redirect("../game?n=SC&l="+lives+"&f="+pointFormula);
+		console.log(balls);
+		console.log(win);
+		console.log(speed);
+		res.redirect("../game?n=SC&l="+lives+"&f="+pointFormula+"&b="+balls+"&w="+win+"&s="+speed);
 	}
 );
 

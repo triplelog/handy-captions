@@ -155,6 +155,9 @@ h1 {
 				<form action="./makegame.html" method="post">
 					<div>Lives: <input type="text" name="lives" value="min(7,x+1)"></input></div>
 					<div>Points: <input type="text" name="pointFormula" value="1000*(c-v/2)/r0/log(d+3)/log(t+3)"></input></div>
+					<div>Balls: <input type="text" name="balls" value="l+3"></input></div>
+					<div>Win: <input type="text" name="win" value="max(50,75-l)"></input></div>
+					<div>Speed: <input type="text" name="speed" value="15*?+max(15,30-l)"></input></div>
 					<button type="submit">Play</button>
 				</form>
 			</div>
