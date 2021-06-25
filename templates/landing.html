@@ -41,21 +41,21 @@ body {
 	overflow: visible;
 	position: relative;
 }
-.main > svg {
+.first > svg {
 	position: absolute;
 	z-index: -1;
 }
-.main > svg.header {
+.first > svg.header {
 	top:-20%;
 }
-.main > .content {
+.first > .content {
 	position: absolute;
 	left:6.25%;
 	top:10%;
 	width:87.5%;
 	height:80%;
 }
-.main > div.header {
+.first > div.header {
 	position: absolute;
 	left:6.25%;
 	top:-10%;
@@ -72,14 +72,27 @@ h1 {
 }
 
 @keyframes spin {
-  from {transform: rotateX(0deg);}
-  to {transform: rotateX(90deg);}
+  from {transform: rotateY(0deg);}
+  to {transform: rotateY(90deg);}
 }
 
 #gameBox:checked ~ .main {
 	animation-name: spin;
-	animation-duration: 2s;
+	animation-duration: 3s;
 	animation-fill-mode: forwards;
+}
+.first {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.second {
+	border: 1px solid black;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: none;
+	
 }
 
 </style>
@@ -92,25 +105,29 @@ h1 {
 	<div class="bottomR">
 	</div>
 	<div class="bottomL"></div>
-	<input type="checkbox" id="gameBox"></input>
+	
 	<div class="main">
-		
-		<svg viewBox="-1.5 -1.5 163 103" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-			<path d="M0,0 Q80,20 160,0 Q 140,50 160,100 Q 80,80 0,100 Q 20,50 0,0" fill="#DDD" stroke="none" />
-			<path d="M0,0 Q80,20 160,0 Q 140,50 160,100 Q 80,80 0,100 Q 20,50 0,0 Q80,20 160,0" fill="none" stroke="black" stroke-width="2" />
-		</svg>
-		<svg class="header" viewBox="-1.5 -1.5 163 103" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-			<path d="M0,20 Q80,40 160,20 Q 80,0 0,20" fill="#AAA" stroke="none" />
-			<path d="M160,20 Q 80,0 0,20" fill="none" stroke="black" stroke-width="2" />
-		</svg>
-		<div class="header">
-			<h1>Digitizer Fun</h1>
-		</div>
-		<div class="content">
-			For more info about what is coming in the future, <a href="">click here</a>. To be notified of updates, follow the Twitter account or subscribe to our RSS feed.
+		<input type="checkbox" id="gameBox"></input>
+		<div class="first">
+			<svg viewBox="-1.5 -1.5 163 103" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<path d="M0,0 Q80,20 160,0 Q 140,50 160,100 Q 80,80 0,100 Q 20,50 0,0" fill="#DDD" stroke="none" />
+				<path d="M0,0 Q80,20 160,0 Q 140,50 160,100 Q 80,80 0,100 Q 20,50 0,0 Q80,20 160,0" fill="none" stroke="black" stroke-width="2" />
+			</svg>
+			<svg class="header" viewBox="-1.5 -1.5 163 103" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<path d="M0,20 Q80,40 160,20 Q 80,0 0,20" fill="#AAA" stroke="none" />
+				<path d="M160,20 Q 80,0 0,20" fill="none" stroke="black" stroke-width="2" />
+			</svg>
+			<div class="header">
+				<h1>Digitizer Fun</h1>
+			</div>
+			<div class="content">
+				For more info about what is coming in the future, <a href="">click here</a>. To be notified of updates, follow the Twitter account or subscribe to our RSS feed.
 			
-			<br />
-			While you wait, you can play a <label for="gameBox">game</label>.
+				<br />
+				While you wait, you can play a <label for="gameBox">game</label>.
+			</div>
+		</div>
+		<div class="second">
 		</div>
 		
 	</div>
