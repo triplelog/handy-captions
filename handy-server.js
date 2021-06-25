@@ -212,7 +212,7 @@ app.get('/game',
 		var win = ["__-_X","75_l_50"];
 		//1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3)
 		var pointFormula = ["___/-_*__+/__+L/__+L/","c_v_2_1000_r0_1_d_3_t_3"];
-		//console.log(req.query);
+		console.log(req.query);
 		var path = jsonShapes[shape];
 		if (req.query){
 			if (req.query.n){
@@ -226,7 +226,7 @@ app.get('/game',
 			}
 			
 			if (req.query.l){
-				lives = decodeURIComponent(req.query.l).split("~");
+				//lives = decodeURIComponent(req.query.l).split("~");
 				console.log(lives);
 			}
 			if (req.query.x){
@@ -242,7 +242,7 @@ app.get('/game',
 				speed = decodeURIComponent(req.query.s).split("~");
 			}
 			if (req.query.f){
-				pointFormula = decodeURIComponent(req.query.f).split("~");
+				//pointFormula = decodeURIComponent(req.query.f).split("~");
 				console.log(pointFormula);
 			}
 		}
