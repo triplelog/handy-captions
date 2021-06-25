@@ -4,10 +4,13 @@
 <title>Landing Page</title>
 <style>
 
-body {
+.g {
 	display: grid;
 	grid-template-rows: 1fr auto 1fr;
 	grid-template-columns: 1fr auto 1fr;
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
 }
 
 .main {
@@ -35,12 +38,13 @@ body {
 </head>
 <body>
 
-<div class="top"></div>
-<div class="bottom"></div>
-<div class="main">
-	<h1>Digitizer Fun</h1>
+<div class="g">
+	<div class="top"></div>
+	<div class="bottom"></div>
+	<div class="main">
+		<h1>Digitizer Fun</h1>
+	</div>
 </div>
-
 
 <script>
 
