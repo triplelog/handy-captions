@@ -51,6 +51,7 @@ img {
 	</svg>
 </div>
 
+<script src="js/postfix.js"></script>
 <script>
 
 winpct = 70;
@@ -94,11 +95,16 @@ function resetGame(level){
 	lives = Math.min(lives+1,7);
 	//var speedFormula = 15*Math.random()+Math.max(15,30-l);
 	winpct = Math.max(50,75-level);
-	pctNEl.textContent = winpct;
+	
+	
 	if (level > 0){
 		pointTotal += 1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3)
+		var pt = solvePostfix("##+","2,c",pointData);
+		console.log(pointData.c,pt);
 		ptEl.textContent = pointTotal;
 	}
+	pctNEl.textContent = winpct;
+	livesEl.textContent = lives;
 	pointData = {t:0,r0:0,r1:0,r2:0,r:1,d:0,v:winpct,c:0};
 	
 	
