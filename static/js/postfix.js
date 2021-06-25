@@ -36,6 +36,7 @@ function solvePostfix(expstr,intstr,data={}){
 	            case 'A': stack[currentIndex - 1] = Math.abs(stack[currentIndex - 1]); currentIndex++; break;
 	            case 'L': stack[currentIndex - 1] = Math.log(stack[currentIndex - 1]); currentIndex++; break;
             }
+            currentIndex--;
         }
         console.log(stack);
 	}
