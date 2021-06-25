@@ -466,8 +466,8 @@ function makePostfix(infixexpr) {
 		sout += "_";
 	}
 	//sout = sout.substr(0,sout.length-1);
-	console.log(sout);
-	return encodeURIComponent(sout);
+	console.log(sout.substr(0,sout.length-1));
+	return encodeURIComponent(sout.substr(0,sout.length-1));
 
 }
 
