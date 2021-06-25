@@ -214,16 +214,22 @@ app.get('/game',
 		var pointFormula = ["###/-#*##+/##+L/##+L/","c,v,2,1000,r0,1,d,3,t,3"];
 		//console.log(req.query);
 		var path = jsonShapes[shape];
-		if (req.query && req.query.s){
-			shape = req.query.s;
-			path = jsonShapes[shape];
-		}
-		else if (req.query && req.query.p){
-			var p = req.query.p.replace(/ /g,"+");
-			path = zlib.inflateSync(new Buffer.from(p, 'base64')).toString();
+		if (req.query){
+			if (req.query.s){
+				shape = req.query.s;
+				path = jsonShapes[shape];
+			}
+			else if (req.query.p){
+				var p = req.query.p.replace(/ /g,"+");
+				path = zlib.inflateSync(new Buffer.from(p, 'base64')).toString();
 			
+			}
+			
+			if (req.query.l){
+				lives = req.query.split("|");
+				console.log(lives);
+			}
 		}
-		
 		//var deflated = zlib.deflateSync(path).toString('base64');
 		
 		var retval = pathToPoints(path);
@@ -245,7 +251,7 @@ app.post('/makegame.html',
 	function(req, res) {
 		//var content = req.body;
 		console.log(req.body);
-		res.redirect("../game");
+		res.redirect("../game?s=SC&l=##+#N|x,1,7");
 	}
 );
 

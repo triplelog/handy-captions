@@ -41,21 +41,21 @@ body {
 	overflow: visible;
 	position: relative;
 }
-.first > svg {
+.first > svg, .second > svg {
 	position: absolute;
 	z-index: -1;
 }
-.first > svg.header {
+.first > svg.header, .second > svg.header {
 	top:-20%;
 }
-.first > .content {
+.first > .content, .second > .content {
 	position: absolute;
 	left:6.25%;
 	top:10%;
 	width:87.5%;
 	height:80%;
 }
-.first > div.header {
+.first > div.header, .second > div.header {
 	position: absolute;
 	left:6.25%;
 	top:-10%;
@@ -82,14 +82,14 @@ h1 {
 
 #gameBox:checked ~ .first {
 	animation-name: spin;
-	animation-duration: 2s;
+	animation-duration: 1s;
 	animation-fill-mode: forwards;
 	animation-timing-function: linear;
 }
 #gameBox:checked ~ .second {
 	animation-name: spinReverse;
-	animation-delay: 2s;
-	animation-duration: 2s;
+	animation-delay: 1s;
+	animation-duration: 1s;
 	animation-fill-mode: forwards;
 	animation-timing-function: linear;
 }
@@ -141,11 +141,24 @@ h1 {
 			</div>
 		</div>
 		<div class="second">
-			Settings:
-			<form action="./makegame.html" method="post">
-				<div>Lives: <input type="text" name="lives" value="2+2"></input></div>
-				<button type="submit">Play</button>
-			</form>
+			<svg viewBox="-1.5 -1.5 163 103" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<path d="M0,0 Q80,20 160,0 Q 140,50 160,100 Q 80,80 0,100 Q 20,50 0,0" fill="#DDD" stroke="none" />
+				<path d="M0,0 Q80,20 160,0 Q 140,50 160,100 Q 80,80 0,100 Q 20,50 0,0 Q80,20 160,0" fill="none" stroke="black" stroke-width="2" />
+			</svg>
+			<svg class="header" viewBox="-1.5 -1.5 163 103" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<path d="M0,20 Q80,40 160,20 Q 80,0 0,20" fill="#AAA" stroke="none" />
+				<path d="M160,20 Q 80,0 0,20" fill="none" stroke="black" stroke-width="2" />
+			</svg>
+			<div class="header">
+				<h1>Settings</h1>
+			</div>
+			<div class="content">
+				<form action="./makegame.html" method="post">
+					<div>Lives: <input type="text" name="lives" value="2+2"></input></div>
+					<button type="submit">Play</button>
+				</form>
+			</div>
+			
 		</div>
 		
 	</div>
