@@ -215,6 +215,7 @@ app.get('/game',
 		//console.log(req.query);
 		var path = jsonShapes[shape];
 		if (req.query){
+			console.log(req.query);
 			if (req.query.s){
 				shape = req.query.s;
 				path = jsonShapes[shape];
@@ -226,7 +227,7 @@ app.get('/game',
 			}
 			
 			if (req.query.l){
-				lives = req.query.split("|");
+				lives = req.query.l.split("|");
 				console.log(lives);
 			}
 		}
