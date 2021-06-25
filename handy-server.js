@@ -225,9 +225,7 @@ app.get('/game',
 		}
 		
 		//var deflated = zlib.deflateSync(path).toString('base64');
-		//console.log(deflated);
-		//var inflated = zlib.inflateSync(new Buffer.from(def, 'base64')).toString();
-		//console.log(inflated);
+		
 		var retval = pathToPoints(path);
 		res.write(nunjucks.render('templates/dtzfun.html',{
 			//bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
@@ -243,6 +241,21 @@ app.get('/game',
 	}
 );
 
+app.post('/makegame.html', 
+	function(req, res) {
+		var content = req.body;
+		
+	}
+);
+
+app.get('/landing.html', 
+	function(req, res) {
+		res.write(nunjucks.render('templates/landing.html',{
+		
+		}));
+		res.end();
+	}
+);
 
 app.post('/save.html', 
 	function(req, res) {

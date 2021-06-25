@@ -359,7 +359,7 @@ function loseLife() {
 }
 function move(timestamp) {
 	if (kill){
-		pointData.t=timestamp-start;
+		pointData.t=(timestamp-start)/1000;
 		return;
 	}
 	if (!start){
