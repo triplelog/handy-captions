@@ -262,19 +262,33 @@ app.get('/game',
 );
 
 function makePostfix(infixexpr) {
+	infixexpr = infixexpr.replace(/max/gi,"X");
+	infixexpr = infixexpr.replace(/min/gi,"N");
+	infixexpr = infixexpr.replace(/abs/gi,"A");
+	infixexpr = infixexpr.replace(/log/gi,"L");
+	infixexpr = infixexpr.replace(/ln/gi,"L");
+	infixexpr = infixexpr.replace(/round/gi,"R");
+	infixexpr = infixexpr.replace(/floor/gi,"F");
+	infixexpr = infixexpr.replace(/rand/gi,"?");
 	prec = {}
+	prec["X"] = 4
+	prec["N"] = 4
+	prec["A"] = 4
+	prec["L"] = 4
+	prec["R"] = 4
+	prec["F"] = 4
 	prec["*"] = 4
 	prec["/"] = 4
 	prec["+"] = 3
 	prec["~"] = 3
-	prec[">"] = 2
+	/*prec[">"] = 2
 	prec["<"] = 2
 	prec["="] = 2
 	prec["!"] = 2
 	prec["["] = 2
 	prec["]"] = 2
 	prec["&"] = 1
-	prec["|"] = 0
+	prec["|"] = 0*/
 	prec["("] = -1
 	opStack = []
 	postfixList = []
@@ -284,7 +298,7 @@ function makePostfix(infixexpr) {
 	temptoken = ''
 	for (var i=0;i<infixexpr.length;i++){
 		var ie = infixexpr[i];
-		if ("-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(ie) > -1){
+		if ("-0123456789.?".indexOf(ie) > -1){
 			temptoken += ie
 		}
 		else{
@@ -301,7 +315,7 @@ function makePostfix(infixexpr) {
 	
 	for (var i=0;i<tokenList.length;i++){
 		var token = tokenList[i];
-		if ("*/+~><=![]&|()".indexOf(token) == -1){
+		if ("*/+~><=![]&|()AFLNRX".indexOf(token) == -1){
 			postfixList.push(token)
 		}
 		else if (token == '('){
@@ -326,7 +340,7 @@ function makePostfix(infixexpr) {
 	}
 	for (var i=0;i<postfixList.length;i++){
 		var ci = postfixList[i];
-		if ("*/+~><=![]&|".indexOf(ci) == -1){
+		if ("*/+~><=![]&|AFLNRX".indexOf(ci) == -1){
 			intstr.push(ci);
 			expstr.push('_');
 		}
@@ -334,6 +348,7 @@ function makePostfix(infixexpr) {
 			expstr.push('-');
 		}
 		else{
+			if 
 			expstr.push(ci);
 		}
 	}

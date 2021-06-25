@@ -2,7 +2,7 @@ function solvePostfix(expstr,intstr,data={}){
 	var intarr = intstr.split("_");
 	var stack = [];
 	for (var i=0;i<intarr.length;i++){
-		if (intarr[i] == "rand"){
+		if (intarr[i] == "?"){
 			intarr[i] = Math.random();
 		}
 		else if (intarr[i].match(/[a-z]/i)){
