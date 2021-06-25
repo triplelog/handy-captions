@@ -36,8 +36,13 @@ img {
 <button onclick="nextRound()">Next</button>
 <span> Pct: </span>
 <span id="pctDone">0</span>
+<span> (</span>
+<span id="pctNeeded">70</span>
+<span>) </span>
 <span> Lives: </span>
 <span id="lives">3</span>
+<span> Points: </span>
+<span id="points">0</span>
 <div class="game">
 	<img src="img/lemur.jpg">
 	<svg id="borderSVG" viewBox="-10 -10 {{ width + 20 }} 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -53,6 +58,8 @@ var maxTime = 1000000;
 var outlineWall = {{ bigwall | dump | safe }};
 var svg = document.getElementById("borderSVG");
 var pctEl = document.getElementById("pctDone");
+var ptEl = document.getElementById("points");
+var pctNEl = document.getElementById("pctNeeded");
 var livesEl = document.getElementById("lives");
 svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
@@ -60,11 +67,14 @@ svg.addEventListener("pointerup",pup);
 
 
 r = 2;
-var lives = 3;
+var lives = 2;
 var walls;
 nWalls = 0;
 balls = [];
 nBalls = 3;
+var level = 0;
+var pointTotal = 0;
+var pointData = {t:0,r0:0,r1:0,r2:0,r:1,d:0,v:0,c:0};
 isDown = false;
 kill = false;
 
@@ -77,9 +87,21 @@ tempWall = {id:"wall-t",v:[],initial:false};
 var start;
 var old;
 
-resetGame();
+resetGame(level);
 
-function resetGame(){
+function resetGame(level){
+	nBalls = level+3;
+	lives = Math.min(lives+1,7);
+	//var speedFormula = 15*Math.random()+Math.max(15,30-l);
+	winpct = Math.max(50,75-level);
+	pctNEl.textContent = winpct;
+	if (level > 0){
+		pointTotal += 1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3)
+		ptEl.textContent = pointTotal;
+	}
+	pointData = {t:0,r0:0,r1:0,r2:0,r:1,d:0,v:winpct,c:0};
+	
+	
 	svg.innerHTML = '<path id="wall-t" d="" fill="white" stroke="black" stroke-width="1"></path>';
 	pctEl.textContent = "0";
 	r = 2;
@@ -89,8 +111,11 @@ function resetGame(){
 	removeLoops(walls[0]);
 	updateWall(walls[0]);
 	balls = [];
+	
 	for (var i=0;i<nBalls;i++){
-		addBall(i);
+		var rand = Math.random();
+		var speed = 15*rand+Math.max(15,30-level);
+		addBall(i,speed);
 	}
 	isDown = false;
 
@@ -106,14 +131,14 @@ function resetGame(){
 	old = 0;
 	kill = false;
 	window.requestAnimationFrame(move);
+	
 }
 
-function addBall(bid) {
+function addBall(bid,s) {
 	walls[0].balls.push(bid);
 	var x = Math.round(Math.random()*{{ width }});
 	var y = Math.round(Math.random()*100);
 	var a = Math.random()*2*Math.PI;
-	var s = Math.round(20 + Math.random()*40);
 	var region = ballRegion([x,y],-1,[0]);
 	var cc = {wall:0,edge:0,d:r*r+1};
 	var c = collisionOne({x:x,y:y},walls[0],cc,0);
@@ -311,6 +336,7 @@ function collision(pt,wid=-1){
 function loseLife() {
 	console.log("You lose a life!");
 	lives--;
+	pointData.d++;
 	if (lives < 0){
 		kill = true;
 	}
@@ -326,6 +352,7 @@ function loseLife() {
 }
 function move(timestamp) {
 	if (kill){
+		pointData.t=timestamp-start;
 		return;
 	}
 	if (!start){
@@ -565,23 +592,27 @@ function updateRegions(wall,initialArr,endArr) {
 		path.setAttributeNS(null,'fill',"none");
 		path.setAttributeNS(null,'stroke',"none");
 		filledArea += area(walls[initial.wall].v);
+		pointData.r0++;
 	}
 	else if (walls[nWalls-1].balls.length == 0){
 		var path = document.getElementById("wall-"+(nWalls-1));
 		path.setAttributeNS(null,'fill',"none");
 		path.setAttributeNS(null,'stroke',"none");
 		filledArea += area(walls[nWalls-1].v);
+		pointData.r0++;
 	}
+	pointData.r++;
 	console.log(filledArea,totalArea,filledArea*100/totalArea);
 	pctEl.textContent = Math.round(filledArea*1000/totalArea)/10;
 	if (filledArea*100/totalArea > winpct){
+		pointData.c = filledArea*100/totalArea;
 		kill = true;
 	}
 }
 
 function nextRound(){
-	nBalls++;
-	resetGame();
+	level++;
+	resetGame(level);
 }
 function showInfo(){
 	showAll = true;
