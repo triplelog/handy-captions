@@ -92,14 +92,14 @@ resetGame(level);
 
 function resetGame(level){
 	nBalls = solvePostfix("{{ balls[0] }}","{{balls[1]}}",{l:level});
-	lives = Math.min(lives+1,7);
-	//var speedFormula = 15*Math.random()+Math.max(15,30-l);
-	winpct = Math.max(50,75-level);
+	winpct = solvePostfix("{{ win[0] }}","{{win[1]}}",{l:level,b:nBalls});
 	
 	
 	if (level > 0){
-		pointTotal += 1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3)
-		var pt = solvePostfix("##+","2,c",pointData);
+		lives = solvePostfix("{{ lives[0] }}","{{lives[1]}}",{l:level,x:lives});
+		//pointTotal += 1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3);
+		var pt = solvePostfix("{{ pointFormula[0] }}","{{ pointFormula[1]}}",pointData);
+		pointTotal += pt;
 		console.log(pointData.c,pt);
 		ptEl.textContent = pointTotal;
 	}

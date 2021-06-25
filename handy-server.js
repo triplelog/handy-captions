@@ -208,6 +208,10 @@ app.get('/game',
 		var shape = "full";
 		var speed = ["##*##-#X+","15,rand,30,l,15"];
 		var balls = ["##+","3,l"];
+		var lives = ["##+#N","x,1,7"];
+		var win = ["##-#X","75,l,50"];
+		1000*(pointData.c-pointData.v/2)/(pointData.r0+1)/Math.log(pointData.d+3)/Math.log(pointData.t+3)
+		var pointFormula = ["###/-1000*##+/##+L/##+L/","c,v,2,1000,r0,1,d,3,t,3"];
 		//console.log(req.query);
 		var path = jsonShapes[shape];
 		if (req.query && req.query.s){
@@ -231,6 +235,9 @@ app.get('/game',
 			width: retval[1],
 			speed: speed,
 			balls: balls,
+			lives: lives,
+			win: win,
+			pointFormula: pointFormula,
 		}));
 		res.end();
 	}
