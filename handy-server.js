@@ -271,7 +271,9 @@ app.post('/makegame.html',
 	function(req, res) {
 		//var content = req.body;
 		console.log(req.body);
-		var lives = "##+#N|x,1,7".toString('base64');
+		var l = "##+#N|x,1,7";
+		var lives = l.toString('base64');
+		console.log(lives);
 		res.redirect("../game?s=SC&l="+lives);
 	}
 );
