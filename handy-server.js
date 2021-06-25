@@ -325,12 +325,12 @@ function makePostfix(infixexpr) {
 	infixexpr = replaceFunctions(infixexpr);
 	console.log(infixexpr);
 	prec = {}
-	prec["X"] = 4
-	prec["N"] = 4
-	prec["A"] = 4
-	prec["L"] = 4
-	prec["R"] = 4
-	prec["F"] = 4
+	prec["X"] = 5
+	prec["N"] = 5
+	prec["A"] = 5
+	prec["L"] = 5
+	prec["R"] = 5
+	prec["F"] = 5
 	prec["*"] = 4
 	prec["/"] = 4
 	prec["+"] = 3
