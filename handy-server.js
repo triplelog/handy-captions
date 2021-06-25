@@ -228,7 +228,7 @@ app.get('/game',
 			
 			if (req.query.l){
 				var p = req.query.l.replace(/ /g,"+");
-				lives = zlib.inflateSync(new Buffer.from(p, 'base64')).toString();
+				lives = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
 				console.log(lives);
 			}
 		}
