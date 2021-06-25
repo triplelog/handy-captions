@@ -215,8 +215,8 @@ app.get('/game',
 		//console.log(req.query);
 		var path = jsonShapes[shape];
 		if (req.query){
-			if (req.query.s){
-				shape = req.query.s;
+			if (req.query.n){
+				shape = req.query.n;
 				path = jsonShapes[shape];
 			}
 			else if (req.query.p){
@@ -226,28 +226,22 @@ app.get('/game',
 			}
 			
 			if (req.query.l){
-				console.log("l: ",req.query.l);
 				lives = decodeURIComponent(req.query.l).split("~");
-				console.log("ll: ",lives);
 			}
 			if (req.query.x){
 				//req.query.x;
 			}
 			if (req.query.b){
-				var p = req.query.b.replace(/ /g,"+");
-				balls = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
+				balls = decodeURIComponent(req.query.b).split("~");
 			}
 			if (req.query.w){
-				var p = req.query.w.replace(/ /g,"+");
-				win = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
+				win = decodeURIComponent(req.query.w).split("~");
 			}
 			if (req.query.s){
-				var p = req.query.s.replace(/ /g,"+");
-				speed = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
+				speed = decodeURIComponent(req.query.s).split("~");
 			}
 			if (req.query.f){
-				var p = req.query.f.replace(/ /g,"+");
-				pointFormula = zlib.inflateSync(new Buffer.from(p, 'base64')).toString().split("|");
+				pointFormula = decodeURIComponent(req.query.f).split("~");
 			}
 		}
 		//var deflated = zlib.deflateSync(path).toString('base64');
@@ -273,7 +267,7 @@ app.post('/makegame.html',
 		console.log(req.body);
 		var lives = encodeURIComponent('__+_N~x_1_7');
 		console.log(lives);
-		res.redirect("../game?s=SC&l="+lives);
+		res.redirect("../game?n=SC&l="+lives);
 	}
 );
 
