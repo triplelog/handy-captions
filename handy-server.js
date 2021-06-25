@@ -227,7 +227,8 @@ app.get('/game',
 			}
 			
 			if (req.query.l){
-				lives = req.query.l.split("|");
+				var p = req.query.l.replace(/ /g,"+");
+				lives = zlib.inflateSync(new Buffer.from(p, 'base64')).toString();
 				console.log(lives);
 			}
 		}
@@ -252,7 +253,8 @@ app.post('/makegame.html',
 	function(req, res) {
 		//var content = req.body;
 		console.log(req.body);
-		res.redirect("../game?s=SC&l=##+#N|x,1,7");
+		var lives = zlib.deflateSync("##+#N|x,1,7").toString('base64');
+		res.redirect("../game?s=SC&l="+lives);
 	}
 );
 
