@@ -467,7 +467,7 @@ function makePostfix(infixexpr) {
 	}
 	//sout = sout.substr(0,sout.length-1);
 	console.log(sout);
-	return encodeURIComponent(expstr+"~"+intstr);
+	return encodeURIComponent(sout);
 
 }
 
