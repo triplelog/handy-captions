@@ -91,7 +91,7 @@ var old;
 resetGame(level);
 
 function resetGame(level){
-	nBalls = level+3;
+	nBalls = solvePostfix("{{ balls[0] }}","{{balls[1]}}",{l:level});
 	lives = Math.min(lives+1,7);
 	//var speedFormula = 15*Math.random()+Math.max(15,30-l);
 	winpct = Math.max(50,75-level);
@@ -119,10 +119,8 @@ function resetGame(level){
 	balls = [];
 	
 	for (var i=0;i<nBalls;i++){
-		var rand = Math.random();
-		//var speed = 15*rand+Math.max(15,30-level);
 		var speed = solvePostfix("{{ speed[0] }}","{{speed[1]}}",{l:level});
-		console.log(level,speed);
+		//console.log(level,speed);
 		addBall(i,speed);
 	}
 	isDown = false;
