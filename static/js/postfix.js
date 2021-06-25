@@ -1,5 +1,5 @@
 function solvePostfix(expstr,intstr,data={}){
-	var intarr = intstr.split(",");
+	var intarr = intstr.split("_");
 	var stack = [];
 	for (var i=0;i<intarr.length;i++){
 		if (intarr[i] == "rand"){
@@ -16,7 +16,7 @@ function solvePostfix(expstr,intstr,data={}){
 	var currentIndex = 0;
 	var arrayIndex = 0;
 	for (var i=0;i<expstr.length;i++){
-		if (expstr[i] == '#') {
+		if (expstr[i] == '_') {
         	stack[currentIndex] = intarr[arrayIndex];
         	currentIndex++;
         	arrayIndex++;
