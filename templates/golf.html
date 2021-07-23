@@ -57,8 +57,8 @@ var svg = document.getElementById("borderSVG");
 //svg.addEventListener("pointerup",pup);
 
 var ball = {x:50,y:50,d:100,a:1,s:20,el:null};
-var wall = {};
-var start;
+var wall = {v:outlineWall};
+var start = false;
 var old;
 
 resetGame();
@@ -76,8 +76,8 @@ function addWall() {
 	
 	var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	var pd = "M";
-	for (var ii=0;ii<outlineWall.length;ii++){
-		pd += outlineWall[ii][0]+","+outlineWall[ii][1]+" ";
+	for (var ii=0;ii<wall.v.length;ii++){
+		pd += wall.v[ii][0]+","+wall.v[ii][1]+" ";
 	}
 	path.id = "outline";
 	path.setAttributeNS(null,'d',pd);
@@ -86,6 +86,27 @@ function addWall() {
 	path.setAttributeNS(null,'stroke-width',"1");
 	var wt = document.getElementById("wall");
 	svg.insertBefore(path,wt);
+
+	wall.e = [];
+	for (var ii=1;ii<wall.v.length;ii++){
+		var edge = [];
+		if (wall.v[ii][0]-wall.v[ii-1][0] == 0){
+			edge.push("inf");
+		}
+		else {
+			edge.push((wall.v[ii][1]-wall.v[ii-1][1])/(wall.v[ii][0]-wall.v[ii-1][0]));
+		}
+		if (wall.v[ii][1]-wall.v[ii-1][1] == 0){
+			edge.push("inf");
+		}
+		else {
+			edge.push(-1*(wall.v[ii][0]-wall.v[ii-1][0])/(wall.v[ii][1]-wall.v[ii-1][1]));
+		}
+		edge.push(wall.v[ii-1]);
+		edge.push(wall.v[ii]);
+		wall.e.push(edge);
+	}
+}
 
 }
 
@@ -149,35 +170,18 @@ function collisionOne(pt,wall,c,i){
 	return c;
 }
 
-function collision(pt,wid=-1){
+function collision(pt){
 
-	var c = {wall:0,edge:0,d:r*r+1};
 	
-	if (tempWall.initial){
-		c = collisionOne(pt,tempWall,c,-1);
-		if (c.d <= r*r){
-			console.log(c);
-			return c;
-		}
-	}
-	if (wid==-1){
-		for (var i=0;i<nWalls;i++){
-			c = collisionOne(pt,walls[i],c,i);
-		}
-	}
-	else {
-		c = collisionOne(pt,walls[wid],c,wid);
-	}
+	
+	c = collisionOne(pt,wall,c,i);
 
 	return c;
 }
 
 
 function move(timestamp) {
-	if (kill){
-		pointData.t=(timestamp-start)/1000;
-		return;
-	}
+
 	if (!start){
 		start = timestamp;
 		old = timestamp;
@@ -189,8 +193,7 @@ function move(timestamp) {
 
 	var x = ball.x+Math.cos(ball.a)*elapsed*ball.s/1000;
 	var y = ball.y+Math.sin(ball.a)*elapsed*ball.s/1000;
-	var wid = ball.region;
-	var c = collision({x:x,y:y},wid);
+	var c = collision({x:x,y:y});
 	if (c.d <= r*r){
 		var m = walls[c.wall].e[c.edge][0];
 		if (showAll){
