@@ -306,6 +306,10 @@ function takeShot(){
 	var m = sum_y/sum_x;
 	var angle = Math.atan(m);
 	console.log(m,angle);
+	ball.a = angle;
+	if (sum_x < 0){
+		ball.a = angle + Math.PI;
+	}
 }
 function pdown(evt){
 	isDown = true;
