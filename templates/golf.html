@@ -292,6 +292,8 @@ function takeShot(){
 	var sum_x = 0;
 	var sum_y = 0;
 	var angle = ball.a;
+	var minD = r*r;
+	var isC = false;
 	for (var i=0;i<100;i++){
 		var loc = el.getPointAtLength(d*i/100);
 		loc.x -= origin.x;
@@ -307,12 +309,12 @@ function takeShot(){
 		var y = origin.y+Math.sin(angle)*(d*i/100);
 		var pt = {x:x,y:y};
 		var c = collision(pt);
-		if (c.d < r*r){
-			console.log(loc,i);
+		if (c.d < 0.5 || (c.d > minD + r/2 && isC) ){
 			break;
 		}
-		if (i == 99){
-			console.log(loc,i);
+		else if (c.d < minD){
+			minD = c.d;
+			isC = true;
 		}
 	}
 	
