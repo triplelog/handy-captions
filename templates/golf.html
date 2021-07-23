@@ -40,7 +40,8 @@ img {
 
 	<svg id="borderSVG" viewBox="-10 -10 {{ width + 20 }} 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-		<path id="wall-t" d="" fill="white" stroke="black" stroke-width="1"></path>
+		<path id="wall" d="" fill="white" stroke="black" stroke-width="1"></path>
+		<circle id="ball" cx="50" cy="50" r="5" fill="blue" stroke="black" stroke-width="1"></circle>
 	</svg>
 </div>
 
@@ -55,7 +56,8 @@ svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
 svg.addEventListener("pointerup",pup);
 
-
+var ball = {x:50,y:50,d:100,a:1,s:20,el:document.getElementById("ball")};
+var wall = {};
 var start;
 var old;
 
@@ -63,7 +65,7 @@ resetGame();
 
 function resetGame(){
 	
-	svg.innerHTML = '<path id="wall-t" d="" fill="white" stroke="black" stroke-width="1"></path>';
+	svg.innerHTML = '<path id="wall" d="" fill="white" stroke="black" stroke-width="1"></path>';
 	
 	addWall();
 
@@ -81,7 +83,7 @@ function addWall() {
 	path.setAttributeNS(null,'fill',"white");
 	path.setAttributeNS(null,'stroke',"red");
 	path.setAttributeNS(null,'stroke-width',"1");
-	var wt = document.getElementById("wall-t");
+	var wt = document.getElementById("wall");
 	svg.insertBefore(path,wt);
 
 }
@@ -183,69 +185,50 @@ function move(timestamp) {
 	}
 	const elapsed = timestamp - old;
 	old = timestamp;
-	for (var i=0;i<nBalls;i++){
-		var x = balls[i].x+Math.cos(balls[i].a)*elapsed*balls[i].s/1000;
-		var y = balls[i].y+Math.sin(balls[i].a)*elapsed*balls[i].s/1000;
-		var wid = balls[i].region;
-		var c = collision({x:x,y:y},wid);
-		if (c.d <= r*r){
-			if (c.wall == -1){//hit temp Wall
-				loseLife();
-			}
-			else {//hit real Wall
-				var m = walls[c.wall].e[c.edge][0];
-				if (showAll){
-					console.log(m,Math.atan(m),balls[i].a);
-				}
-				var b = Math.atan(m);
-				if (m == "inf"){
-					b = Math.PI/2;
-					balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
-				}
-				else {
-					balls[i].a = -1*(2*Math.PI+balls[i].a-2*b);
-					var d = dPtEdge({x:x,y:y},walls[c.wall].e[c.edge]);
-					var dd = dPtEdge({x:x+Math.cos(balls[i].a)*elapsed/40,y:y+Math.sin(balls[i].a)*elapsed/40},walls[c.wall].e[c.edge]);
-					if (dd < d){
-						balls[i].a = Math.PI/4+balls[i].a;
-					}
-				}
-				if (showAll){
-					console.log(x,y,balls[i].x,balls[i].y,m,Math.atan(m),balls[i].a);
-				}
-				if (balls[i].a > 2*Math.PI){
-					balls[i].a -= 2*Math.PI;
-				}
-				else if (balls[i].a < -2*Math.PI){
-					balls[i].a += 2*Math.PI;
-				}
-				balls[i].a += -0.25 + Math.random()*0.5;
-				
-				var chk = ballRegion([x,y],i,[balls[i].region]);
-				var counter = 0;
-				var xx = x; var yy = y;
-				while (chk !== balls[i].region){
-					xx = x - Math.log(counter+3)/2+ Math.random()*Math.log(counter+3);
-					yy = y - Math.log(counter+3)/2+ Math.random()*Math.log(counter+3);
-					chk = ballRegion([xx,yy],i,[balls[i].region]);
-					
-					counter++;
-					if (counter > 10){
-						console.log("escaping",chk,balls[i].region);
-						break;
-					}
-				}
-				x = xx; y = yy;
+
+	var x = ball.x+Math.cos(ball.a)*elapsed*ball.s/1000;
+	var y = ball.y+Math.sin(ball.a)*elapsed*ball.s/1000;
+	var wid = ball.region;
+	var c = collision({x:x,y:y},wid);
+	if (c.d <= r*r){
+		var m = walls[c.wall].e[c.edge][0];
+		if (showAll){
+			console.log(m,Math.atan(m),ball.a);
+		}
+		var b = Math.atan(m);
+		if (m == "inf"){
+			b = Math.PI/2;
+			ball.a = -1*(2*Math.PI+ball.a-2*b);
+		}
+		else {
+			ball.a = -1*(2*Math.PI+ball.a-2*b);
+			var d = dPtEdge({x:x,y:y},walls[c.wall].e[c.edge]);
+			var dd = dPtEdge({x:x+Math.cos(ball.a)*elapsed/40,y:y+Math.sin(ball.a)*elapsed/40},walls[c.wall].e[c.edge]);
+			if (dd < d){
+				ball.a = Math.PI/4+ball.a;
 			}
 		}
+		if (showAll){
+			console.log(x,y,ball.x,ball.y,m,Math.atan(m),ball.a);
+		}
+		if (ball.a > 2*Math.PI){
+			ball.a -= 2*Math.PI;
+		}
+		else if (ball.a < -2*Math.PI){
+			ball.a += 2*Math.PI;
+		}
+		ball.a += -0.25 + Math.random()*0.5;
 		
 		
-		balls[i].el.setAttribute("cx",x);
-		balls[i].el.setAttribute("cy",y);
-		
-		balls[i].x = x;
-		balls[i].y = y;
 	}
+	
+	
+	ball.el.setAttribute("cx",x);
+	ball.el.setAttribute("cy",y);
+	
+	ball.x = x;
+	ball.y = y;
+
 	
 	
 	
