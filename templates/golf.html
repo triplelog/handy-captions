@@ -275,9 +275,10 @@ function updateTest(){
 }
 
 function drawShot(){
-	var pd = "M 10,10 90,90";
-	shot.el = document.getElementById("shot");
-	console.log(shot.el);
+	var pd = "M";
+	for (var i=0;i<shot.coords.length;i++){
+		pd += shot.coords[i].x+","+shot.coords[i].y+" ";
+	}
 	shot.el.setAttributeNS(null,'d',pd);
 }
 function pdown(evt){
@@ -286,6 +287,7 @@ function pdown(evt){
 	var x = Math.round((evt.clientX-bcr.left)/bcr.width*{{ width + 20 }}*10 - 100)/10;
 	var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
 	shot.coords=[{x:x,y:y}];
+	shot.el = document.getElementById("shot");
 }
 
 function pmove(evt){
