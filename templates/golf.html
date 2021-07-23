@@ -275,7 +275,8 @@ function updateTest(){
 }
 
 function drawShot(){
-	shot.el.setAttribute("d","M 10,10 90,90");
+	var pd = "M 10,10 90,90";
+	path.setAttributeNS(null,'d',pd);
 }
 function pdown(evt){
 	isDown = true;
