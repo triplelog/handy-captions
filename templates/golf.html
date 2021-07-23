@@ -41,7 +41,7 @@ img {
 	<svg id="borderSVG" viewBox="-10 -10 {{ width + 20 }} 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
 		<path id="wall" d="" fill="white" stroke="black" stroke-width="1"></path>
-		<circle id="ball" cx="50" cy="50" r="5" fill="blue" stroke="black" stroke-width="1"></circle>
+		
 	</svg>
 </div>
 
@@ -52,11 +52,11 @@ winpct = 70;
 var maxTime = 1000000;
 var outlineWall = {{ bigwall | dump | safe }};
 var svg = document.getElementById("borderSVG");
-svg.addEventListener("pointerdown",pdown);
-svg.addEventListener("pointermove",pmove);
-svg.addEventListener("pointerup",pup);
+//svg.addEventListener("pointerdown",pdown);
+//svg.addEventListener("pointermove",pmove);
+//svg.addEventListener("pointerup",pup);
 
-var ball = {x:50,y:50,d:100,a:1,s:20,el:document.getElementById("ball")};
+var ball = {x:50,y:50,d:100,a:1,s:20,el:null};
 var wall = {};
 var start;
 var old;
@@ -68,7 +68,8 @@ function resetGame(){
 	svg.innerHTML = '<path id="wall" d="" fill="white" stroke="black" stroke-width="1"></path>';
 	
 	addWall();
-
+	svg.innerHTML += '<circle id="ball" cx="50" cy="50" r="5" fill="blue" stroke="black" stroke-width="1"></circle>';
+	ball.el = document.getElementById("ball");
 }
 
 function addWall() {
