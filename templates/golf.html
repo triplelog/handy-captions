@@ -61,7 +61,7 @@ var wall = {v:outlineWall};
 var isDown = false;
 var shot = {el:null,coords:[]};
 var start = false;
-var r = 5;
+var r = 2;
 var old;
 var showAll = false;
 
@@ -74,7 +74,7 @@ function resetGame(){
 	addWall();
 	svg.innerHTML += '<path id="shot" d="" fill="none" stroke="gray" stroke-width="1"></path>';
 	shot.el = document.getElementById("shot");
-	svg.innerHTML += '<circle id="ball" cx="50" cy="50" r="5" fill="blue" stroke="black" stroke-width="1"></circle>';
+	svg.innerHTML += '<circle id="ball" cx="50" cy="50" r="2" fill="blue" stroke="none" stroke-width="0"></circle>';
 	ball.el = document.getElementById("ball");
 }
 
