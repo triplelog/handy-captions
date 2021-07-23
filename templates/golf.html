@@ -291,11 +291,17 @@ function takeShot(){
 	ball.d = d / ball.s;
 	var xx = [];
 	var yy = [];
+	var sum_x = 0;
+	var sum_y = 0;
 	for (var i=0;i<100;i++){
 		var loc = el.getPointAtLength(d/100);
 		loc.x -= origin.x;
 		loc.y -= origin.y;
+		sum_y += loc.y;
+		sum_x += loc.x;
 	}
+	var m = sum_y/sum_x;
+	console.log(m);
 }
 function pdown(evt){
 	isDown = true;
