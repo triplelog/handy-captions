@@ -292,7 +292,7 @@ function takeShot(){
 	var sum_x = 0;
 	var sum_y = 0;
 	for (var i=0;i<10;i++){
-		var loc = el.getPointAtLength(d/100);
+		var loc = el.getPointAtLength(d*i/100);
 		loc.x -= origin.x;
 		loc.y -= origin.y;
 		sum_y += loc.y;
@@ -302,8 +302,8 @@ function takeShot(){
 		if (sum_x < 0){
 			angle += Math.PI;
 		}
-		var x = origin.x+Math.cos(angle)*(d/100*1000)*ball.s/1000;
-		var y = origin.y+Math.sin(angle)*(d/100*1000)*ball.s/1000;
+		var x = origin.x+Math.cos(angle)*(d*i/100*1000)*ball.s/1000;
+		var y = origin.y+Math.sin(angle)*(d*i/100*1000)*ball.s/1000;
 		var pt = {x:x,y:y};
 		var c = collision(pt);
 		console.log(sum_x,sum_y,angle,x,y,c)
