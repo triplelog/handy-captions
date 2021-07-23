@@ -56,7 +56,8 @@ svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
 svg.addEventListener("pointerup",pup);
 
-var ball = {x:50,y:50,d:5,a:1,s:20,el:null};
+var ball = {x:45,y:10,d:5,a:1,s:20,el:null};
+var hole = {x:92,y:62};
 var wall = {v:outlineWall};
 var isDown = false;
 var shot = {el:null,coords:[]};
@@ -74,8 +75,10 @@ function resetGame(){
 	addWall();
 	svg.innerHTML += '<path id="shot" d="" fill="none" stroke="gray" stroke-width="1"></path>';
 	shot.el = document.getElementById("shot");
-	svg.innerHTML += '<circle id="ball" cx="50" cy="50" r="2" fill="blue" stroke="none" stroke-width="0"></circle>';
+	svg.innerHTML += '<circle id="ball" cx="'+ball.x+'" cy="'+ball.y+'" r="2" fill="blue" stroke="none" stroke-width="0"></circle>';
 	ball.el = document.getElementById("ball");
+	svg.innerHTML += '<circle id="hole" cx="'+hole.x+'" cy="'+hole.y+'" r="3" fill="none" stroke="green" stroke-width="1"></circle>';
+
 }
 
 function addWall() {

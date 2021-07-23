@@ -271,7 +271,7 @@ app.get('/golf',
 		var shape = "FL";
 		
 		var path = jsonShapes[shape];
-		console.log(path);
+		//console.log(path);
 		
 		var retval = pathToPoints(path);
 		res.write(nunjucks.render('templates/golf.html',{
