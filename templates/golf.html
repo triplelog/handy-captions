@@ -56,7 +56,7 @@ var svg = document.getElementById("borderSVG");
 //svg.addEventListener("pointermove",pmove);
 //svg.addEventListener("pointerup",pup);
 
-var ball = {x:50,y:50,d:100,a:1,s:20,el:null};
+var ball = {x:50,y:50,d:5,a:1,s:20,el:null};
 var wall = {v:outlineWall};
 var start = false;
 var r = 5;
@@ -237,7 +237,7 @@ function move(timestamp) {
 	
 	
 	
-	if (timestamp - start < maxTime) {
+	if (timestamp - start < ball.d*1000) {
 		window.requestAnimationFrame(move);
 	}
 }
