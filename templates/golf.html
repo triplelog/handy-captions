@@ -306,7 +306,7 @@ function takeShot(){
 		var y = origin.y+Math.sin(angle)*(d/100*1000)*ball.s/1000;
 		var pt = {x:x,y:y};
 		var c = collision(pt);
-		console.log(x,y,c)
+		console.log(sum_x,sum_y,angle,x,y,c)
 	}
 	var m = sum_y/sum_x;
 	var angle = Math.atan(m);
