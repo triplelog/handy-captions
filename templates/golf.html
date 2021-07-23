@@ -291,14 +291,15 @@ function takeShot(){
 	ball.d = d / ball.s;
 	var sum_x = 0;
 	var sum_y = 0;
-	for (var i=0;i<10;i++){
+	var angle = ball.a;
+	for (var i=0;i<100;i++){
 		var loc = el.getPointAtLength(d*i/100);
 		loc.x -= origin.x;
 		loc.y -= origin.y;
 		sum_y += loc.y;
 		sum_x += loc.x;
 		var m = sum_y/sum_x;
-		var angle = Math.atan(m);
+		angle = Math.atan(m);
 		if (sum_x < 0){
 			angle += Math.PI;
 		}
@@ -306,13 +307,11 @@ function takeShot(){
 		var y = origin.y+Math.sin(angle)*(d*i/100*1000)*ball.s/1000;
 		var pt = {x:x,y:y};
 		var c = collision(pt);
-		console.log(sum_x,sum_y,angle,x,y,c)
+		if (c.d < r*r){
+			break;
+		}
 	}
-	var m = sum_y/sum_x;
-	var angle = Math.atan(m);
-	if (sum_x < 0){
-		angle += Math.PI;
-	}
+	
 	console.log(m,angle);
 	ball.a = angle;
 }
