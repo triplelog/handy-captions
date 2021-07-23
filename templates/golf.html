@@ -172,7 +172,7 @@ function collisionOne(pt,wall,c,i){
 function collision(pt){
 
 	
-	
+	var c = {wall:0,edge:0,d:r*r+1};
 	c = collisionOne(pt,wall,c,i);
 
 	return c;
