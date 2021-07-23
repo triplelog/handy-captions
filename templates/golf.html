@@ -289,27 +289,32 @@ function takeShot(){
 	var origin = shot.coords[0];
 	console.log(d);
 	ball.d = d / ball.s;
-	var xx = [];
-	var yy = [];
 	var sum_x = 0;
 	var sum_y = 0;
-	for (var i=0;i<100;i++){
+	for (var i=0;i<10;i++){
 		var loc = el.getPointAtLength(d/100);
 		loc.x -= origin.x;
 		loc.y -= origin.y;
 		sum_y += loc.y;
 		sum_x += loc.x;
-		//var m = sum_y/sum_x;
-		//var angle = Math.atan(m);
-		//var ball_loc = {x:,y:};
+		var m = sum_y/sum_x;
+		var angle = Math.atan(m);
+		if (sum_x < 0){
+			angle += Math.PI;
+		}
+		var x = origin.x+Math.cos(angle)*(d/100*1000)*ball.s/1000;
+		var y = origin.y+Math.sin(angle)*(d/100*1000)*ball.s/1000;
+		var pt = {x:x,y:y};
+		var c = collision(pt);
+		console.log(pt,c)
 	}
 	var m = sum_y/sum_x;
 	var angle = Math.atan(m);
+	if (sum_x < 0){
+		angle += Math.PI;
+	}
 	console.log(m,angle);
 	ball.a = angle;
-	if (sum_x < 0){
-		ball.a = angle + Math.PI;
-	}
 }
 function pdown(evt){
 	isDown = true;
