@@ -303,13 +303,16 @@ function takeShot(){
 		if (sum_x < 0){
 			angle += Math.PI;
 		}
-		var x = origin.x+Math.cos(angle)*(d*i/100*1000)*ball.s/1000;
-		var y = origin.y+Math.sin(angle)*(d*i/100*1000)*ball.s/1000;
+		var x = origin.x+Math.cos(angle)*(d*i/100);
+		var y = origin.y+Math.sin(angle)*(d*i/100);
 		var pt = {x:x,y:y};
 		var c = collision(pt);
 		if (c.d < r*r){
-			console.log(loc,i)
+			console.log(loc,i);
 			break;
+		}
+		if (i == 99){
+			console.log(loc,i);
 		}
 	}
 	
