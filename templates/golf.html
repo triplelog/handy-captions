@@ -116,6 +116,7 @@ function addWall() {
 
 
 function startMove() {
+	start = 0;
 	window.requestAnimationFrame(move);
 }
 
@@ -281,6 +282,10 @@ function drawShot(){
 	}
 	shot.el.setAttributeNS(null,'d',pd);
 }
+function takeShot(){
+	var el = document.getElementById("shot");
+	console.log(el.getTotalLength());
+}
 function pdown(evt){
 	isDown = true;
 	var bcr = evt.currentTarget.getBoundingClientRect();
@@ -306,6 +311,7 @@ function pup(evt){
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
 		shot.coords.push({x:x,y:y});
 		isDown = false;
+		takeShot();
 	}
 }
 
