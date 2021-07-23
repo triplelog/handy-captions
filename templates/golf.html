@@ -195,7 +195,7 @@ function move(timestamp) {
 	var y = ball.y+Math.sin(ball.a)*elapsed*ball.s/1000;
 	var c = collision({x:x,y:y});
 	if (c.d <= r*r){
-		var m = walls[c.wall].e[c.edge][0];
+		var m = wall.e[c.edge][0];
 		if (showAll){
 			console.log(m,Math.atan(m),ball.a);
 		}
@@ -206,8 +206,8 @@ function move(timestamp) {
 		}
 		else {
 			ball.a = -1*(2*Math.PI+ball.a-2*b);
-			var d = dPtEdge({x:x,y:y},walls[c.wall].e[c.edge]);
-			var dd = dPtEdge({x:x+Math.cos(ball.a)*elapsed/40,y:y+Math.sin(ball.a)*elapsed/40},walls[c.wall].e[c.edge]);
+			var d = dPtEdge({x:x,y:y},wall.e[c.edge]);
+			var dd = dPtEdge({x:x+Math.cos(ball.a)*elapsed/40,y:y+Math.sin(ball.a)*elapsed/40},wall.e[c.edge]);
 			if (dd < d){
 				ball.a = Math.PI/4+ball.a;
 			}
@@ -366,10 +366,10 @@ function findStart(wall,lastHit=false){
 				wall.initial = [];
 				for (var i=0;i<wcs.length;i++){
 					var c = wcs[i];
-					var m1 = walls[c.wall].e[c.edge][1];
-					var m2 = walls[c.wall].e[c.edge][0];
+					var m1 = wall.e[c.edge][1];
+					var m2 = wall.e[c.edge][0];
 					var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
-					var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
+					var line2 = {pt:{x:wall.e[c.edge][2][0],y:wall.e[c.edge][2][1]},m:m2};
 					var pc = collisionPoint(line1,line2);
 					wall.v[0][0] = pc[0]; 
 					wall.v[0][1] = pc[1];
@@ -400,10 +400,10 @@ function findStart(wall,lastHit=false){
 		wall.initial = [];
 		for (var i=0;i<wcs.length;i++){
 			var c = wcs[i];
-			var m1 = walls[c.wall].e[c.edge][1];
-			var m2 = walls[c.wall].e[c.edge][0];
+			var m1 = wall.e[c.edge][1];
+			var m2 = wall.e[c.edge][0];
 			var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
-			var line2 = {pt:{x:walls[c.wall].e[c.edge][2][0],y:walls[c.wall].e[c.edge][2][1]},m:m2};
+			var line2 = {pt:{x:wall.e[c.edge][2][0],y:wall.e[c.edge][2][1]},m:m2};
 			var pc = collisionPoint(line1,line2);
 			wall.v[0][0] = pc[0]; 
 			wall.v[0][1] = pc[1];
