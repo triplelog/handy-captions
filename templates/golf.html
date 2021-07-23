@@ -299,9 +299,13 @@ function takeShot(){
 		loc.y -= origin.y;
 		sum_y += loc.y;
 		sum_x += loc.x;
+		//var m = sum_y/sum_x;
+		//var angle = Math.atan(m);
+		//var ball_loc = {x:,y:};
 	}
 	var m = sum_y/sum_x;
-	console.log(m);
+	var angle = Math.atan(m);
+	console.log(m,angle);
 }
 function pdown(evt){
 	isDown = true;
