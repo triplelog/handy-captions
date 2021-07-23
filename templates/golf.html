@@ -275,6 +275,7 @@ function updateTest(){
 	window.requestAnimationFrame(move);
 }
 
+
 function drawShot(){
 	var pd = "M";
 	for (var i=0;i<shot.coords.length;i++){
@@ -284,7 +285,17 @@ function drawShot(){
 }
 function takeShot(){
 	var el = document.getElementById("shot");
-	console.log(el.getTotalLength());
+	var d = el.getTotalLength();
+	var origin = shot.coords[0];
+	console.log(d);
+	ball.d = d / ball.s;
+	var xx = [];
+	var yy = [];
+	for (var i=0;i<100;i++){
+		var loc = el.getPointAtLength(d/100);
+		loc.x -= origin.x;
+		loc.y -= origin.y;
+	}
 }
 function pdown(evt){
 	isDown = true;
