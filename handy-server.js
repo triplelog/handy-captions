@@ -126,8 +126,8 @@ function pathToPoints(path) {
 	var width = (box.right-box.left)/(box.top-box.bottom)*100;
 	
 	for (var i=0;i<points.length;i++){
-		points[i][0]=(points[i][0]-box.left)/(box.right-box.left)*width;
-		points[i][1]=(points[i][1]-box.bottom)/(box.top-box.bottom)*100;
+		points[i][0]=Math.round((points[i][0]-box.left)/(box.right-box.left)*width*10)/10;
+		points[i][1]=Math.round((points[i][1]-box.bottom)/(box.top-box.bottom)*100*10)/10;
 	}
 	return [points,width,d];
 }
