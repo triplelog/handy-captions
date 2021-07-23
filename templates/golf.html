@@ -63,7 +63,7 @@ var shot = {el:null,coords:[]};
 var start = false;
 var r = 5;
 var old;
-var showAll = true;
+var showAll = false;
 
 resetGame();
 
@@ -308,6 +308,7 @@ function takeShot(){
 		var pt = {x:x,y:y};
 		var c = collision(pt);
 		if (c.d < r*r){
+			console.log(loc,i)
 			break;
 		}
 	}
