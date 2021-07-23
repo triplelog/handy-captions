@@ -75,10 +75,11 @@ function resetGame(){
 	addWall();
 	svg.innerHTML += '<path id="shot" d="" fill="none" stroke="gray" stroke-width="1"></path>';
 	shot.el = document.getElementById("shot");
+	svg.innerHTML += '<circle id="hole" cx="'+hole.x+'" cy="'+hole.y+'" r="3" fill="none" stroke="green" stroke-width="1"></circle>';
+
 	svg.innerHTML += '<circle id="ball" cx="'+ball.x+'" cy="'+ball.y+'" r="2" fill="blue" stroke="none" stroke-width="0"></circle>';
 	ball.el = document.getElementById("ball");
-	//svg.innerHTML += '<circle id="hole" cx="'+hole.x+'" cy="'+hole.y+'" r="3" fill="none" stroke="green" stroke-width="1"></circle>';
-
+	
 }
 
 function addWall() {
