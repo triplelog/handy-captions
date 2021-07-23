@@ -130,7 +130,7 @@ function dPtEdge(pt,edge){
 	}
 	return d;
 }
-function collisionOne(pt,wall,c,i){
+function collisionOne(pt,c){
 	for (var ii=0;ii<wall.e.length;ii++){
 		var d = r*r+1;
 		if (pt.x < Math.min(wall.e[ii][2][0]-r,wall.e[ii][3][0]-r)) {
@@ -162,7 +162,7 @@ function collisionOne(pt,wall,c,i){
 		}
 		//console.log(pt,d);
 		if (d<c.d){
-			c.wall = i;
+			c.wall = 0;
 			c.edge = ii;
 			c.d = d;
 		}
@@ -174,7 +174,7 @@ function collision(pt){
 
 	
 	var c = {wall:0,edge:0,d:r*r+1};
-	c = collisionOne(pt,wall,c,i);
+	c = collisionOne(pt,c);
 
 	return c;
 }
