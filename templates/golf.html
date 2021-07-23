@@ -52,12 +52,14 @@ winpct = 70;
 var maxTime = 1000000;
 var outlineWall = {{ bigwall | dump | safe }};
 var svg = document.getElementById("borderSVG");
-//svg.addEventListener("pointerdown",pdown);
-//svg.addEventListener("pointermove",pmove);
-//svg.addEventListener("pointerup",pup);
+svg.addEventListener("pointerdown",pdown);
+svg.addEventListener("pointermove",pmove);
+svg.addEventListener("pointerup",pup);
 
 var ball = {x:50,y:50,d:5,a:1,s:20,el:null};
 var wall = {v:outlineWall};
+var isDown = false;
+var shot = {el:null,coords:[]};
 var start = false;
 var r = 5;
 var old;
@@ -70,6 +72,8 @@ function resetGame(){
 	svg.innerHTML = '<path id="wall" d="" fill="white" stroke="black" stroke-width="1"></path>';
 	
 	addWall();
+	svg.innerHTML += '<path id="shot" d="" fill="none" stroke="gray" stroke-width="1"></path>';
+	shot.el = document.getElementById("shot");
 	svg.innerHTML += '<circle id="ball" cx="50" cy="50" r="5" fill="blue" stroke="black" stroke-width="1"></circle>';
 	ball.el = document.getElementById("ball");
 }
@@ -222,7 +226,6 @@ function move(timestamp) {
 		else if (ball.a < -2*Math.PI){
 			ball.a += 2*Math.PI;
 		}
-		ball.a += -0.25 + Math.random()*0.5;
 		
 		
 	}
@@ -271,13 +274,15 @@ function updateTest(){
 	window.requestAnimationFrame(move);
 }
 
-
+function drawShot(){
+	shot.el.setAttribute("d","M 10,10 90,90");
+}
 function pdown(evt){
 	isDown = true;
 	var bcr = evt.currentTarget.getBoundingClientRect();
 	var x = Math.round((evt.clientX-bcr.left)/bcr.width*{{ width + 20 }}*10 - 100)/10;
 	var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
-	tempWall.v = [[x,y,0]];
+	shot.coords=[{x:x,y:y}];
 }
 
 function pmove(evt){
@@ -285,26 +290,8 @@ function pmove(evt){
 		var bcr = evt.currentTarget.getBoundingClientRect();
 		var x = Math.round((evt.clientX-bcr.left)/bcr.width*{{ width + 20 }}*10 - 100)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
-		tempWall.v.push([x,y,0]);
-		var end = cleanWall(tempWall);
-		if (tempWall.initial){
-			makeEdgesOne(tempWall);
-			updateTemp();
-		}
-		if (end == "end"){
-			isDown = false;
-			var ret = findStart(tempWall,true);
-			removeLoops(tempWall);
-			var newWall = {id:"wall-"+nWalls,v:tempWall.v};
-			
-			updateRegions(newWall,tempWall.initial,tempWall.end);
-			
-			tempWall.v = [];
-			tempWall.e = [];
-			tempWall.initial = false;
-			updateTemp();
-			
-		}
+		shot.coords.append({x:x,y:y});
+		drawShot();
 	}
 }
 function pup(evt){
@@ -312,17 +299,8 @@ function pup(evt){
 		var bcr = evt.currentTarget.getBoundingClientRect();
 		var x = Math.round((evt.clientX-bcr.left)/bcr.width*{{ width + 20 }}*10 - 100)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
-		//tempWall.v.push([x,y,0]);
-		console.log(tempWall);
+		shot.coords.append({x:x,y:y});
 		isDown = false;
-		
-		
-		tempWall.v = [];
-		tempWall.e = [];
-		tempWall.initial = false;
-		updateTemp();
-		
-		
 	}
 }
 
