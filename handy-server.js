@@ -280,6 +280,8 @@ var hole = {x:42,y:47};
 			//bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
 			bigwall: retval[0],
 			width: retval[1],
+			ball: ball,
+			hole: hole
 		}));
 		res.end();
 	}
