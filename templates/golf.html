@@ -50,14 +50,17 @@ img {
 
 winpct = 70;
 var maxTime = 1000000;
-var outlineWall = {{ bigwall | dump | safe }};
+
 var svg = document.getElementById("borderSVG");
 svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
 svg.addEventListener("pointerup",pup);
 
-var ball = {x:20,y:20,d:5,a:1,s:20,el:null};
-var hole = {x:15,y:62};
+var outlineWall = {{ bigwall | dump | safe }};
+var ball = {x:{{ ball.x }},y:{{ ball.y }},d:5,a:1,s:20,el:null};
+var hole = {x:{{ hole.x }},y:{{ hole.y }} };
+
+
 var wall = {v:outlineWall};
 var isDown = false;
 var shot = {el:null,coords:[]};
@@ -367,80 +370,6 @@ function collisionPoint(line1,line2){
 	var xc = (line2.pt.y-line1.pt.y+line1.pt.x*line1.m-line2.pt.x*line2.m)/(line1.m-line2.m);
 	var yc = line1.m*(xc-line1.pt.x)+line1.pt.y;
 	return [xc,yc];
-}
-
-function findStart(wall,lastHit=false){
-	var hits = [];
-	for (var ii=0;ii<wall.v.length;ii++){
-		var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
-		var cc = {wall:0,edge:0,d:r*r+1};
-		var wcs = [];
-		for (var i=0;i<nWalls;i++){
-			cc = {wall:0,edge:0,d:r*r+1};
-			var c = collisionOne(pt,walls[i],cc,i);
-			if (c.d <= r*r){
-				wcs.push(c);
-				console.log(c.wall);
-				console.log(JSON.stringify(cc));
-			}
-		}
-		if (wcs.length > 0){
-			if (lastHit){
-				hits.push(ii);
-			}
-			else {
-				//set to intersection point
-			
-				wall.v.splice(0,ii);
-				wall.initial = [];
-				for (var i=0;i<wcs.length;i++){
-					var c = wcs[i];
-					var m1 = wall.e[c.edge][1];
-					var m2 = wall.e[c.edge][0];
-					var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
-					var line2 = {pt:{x:wall.e[c.edge][2][0],y:wall.e[c.edge][2][1]},m:m2};
-					var pc = collisionPoint(line1,line2);
-					wall.v[0][0] = pc[0]; 
-					wall.v[0][1] = pc[1];
-					wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
-				}
-				return 1;
-			}
-		}
-	}
-	if (lastHit){
-		console.log(hits);
-		var ii = hits[0];
-		if (hits.length > 1){
-			ii = hits[hits.length-2];
-		}
-		console.log(ii);
-		var pt = {x:wall.v[ii][0],y:wall.v[ii][1]};
-		var cc = {wall:0,edge:0,d:r*r+1};
-		var wcs = [];
-		for (var i=0;i<nWalls;i++){
-			cc = {wall:0,edge:0,d:r*r+1};
-			var c = collisionOne(pt,walls[i],cc,i);
-			if (c.d <= r*r){
-				wcs.push(c);
-			}
-		}
-		wall.v.splice(0,ii);
-		wall.initial = [];
-		for (var i=0;i<wcs.length;i++){
-			var c = wcs[i];
-			var m1 = wall.e[c.edge][1];
-			var m2 = wall.e[c.edge][0];
-			var line1 = {pt:{x:pt.x,y:pt.y},m:m1};
-			var line2 = {pt:{x:wall.e[c.edge][2][0],y:wall.e[c.edge][2][1]},m:m2};
-			var pc = collisionPoint(line1,line2);
-			wall.v[0][0] = pc[0]; 
-			wall.v[0][1] = pc[1];
-			wall.initial.push({wall:c.wall,edge:c.edge,pt:pc});
-		}
-		return 1;
-
-	}
 }
 
 </script>
