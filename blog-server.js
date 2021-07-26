@@ -6,7 +6,8 @@ const binding = require.resolve(`./maps/build/Release/binding`);
 const maincpp = require(binding);
 //const postfix = require('./postfix.js');
 // Imports the Google Cloud client library
-const vision = require('@google-cloud/vision');
+
+//const vision = require('@google-cloud/vision');
 
 
 
