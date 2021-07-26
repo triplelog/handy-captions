@@ -886,7 +886,10 @@ function formSubmit(event) {
 	var request = new XMLHttpRequest();
 	request.open('POST', url, true);
 	var el = document.getElementById('saveText');
-	request.send(new FormData(el)); // create FormData from form that triggered event
+	console.log(el);
+	var fd = new FormData(el);
+	console.loog(fd);
+	request.send(fd);
 	event.preventDefault();
 }
 document.getElementById('saveButton').addEventListener('click',formSubmit);
