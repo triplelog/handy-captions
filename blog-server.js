@@ -190,7 +190,7 @@ app.get('/',
 		//readJson();
 		var strokes = [];
 		var wordsHashed = {};
-		var displaySettings = {'paragraphs':{},defaultColor:'black',notBoldWidth:"3",boldWidth:"6",listList:{},quotes:{}};
+		var displaySettings = {'paragraphs':{},defaultColor:'black',notBoldWidth:"3",boldWidth:"6",listList:{},quotes:{},notes:{}};
 		var dm;
 		if (req.query && req.query.id){
 			var data = fs.readFileSync('./savedBlogs/'+req.query.id, 'utf8');
@@ -213,7 +213,7 @@ app.get('/',
 app.post('/save',
 	function(req, res) {
 		//var content = req.body;
-		console.log(req.body);
+		//console.log(req.body);
 		fs.writeFileSync('./savedBlogs/'+req.body.id, JSON.stringify(req.body) , 'utf8');
 		
 		res.end();

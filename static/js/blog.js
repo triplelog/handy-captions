@@ -526,6 +526,67 @@ function makeQuotes(quotes) {
 	
 }
 
+function makeNotes(notes) {
+	var noteEls = document.querySelectorAll('sidecontainer');
+	for (var i=0;i<noteEls.length;i++){
+		var deleteNote = true;
+		for (key in notes){
+			if (noteEls[i].getAttribute('data-start')==notes[key]['start'] && noteEls[i].getAttribute('data-end')==notes[key]['end']){
+				deleteNote = false;
+				break;
+			}
+		}
+		if (deleteNote){
+			var els = noteEls[i].querySelectorAll('div');
+			for (var ii=0;ii<els.length;ii++){
+				if (els[ii].id && els[ii].id.substr(0,5) == "word-"){
+					var el = els[ii].cloneNode(true);
+					noteEls[i].parentNode.insertBefore(el,noteEls[i]);
+				}
+			}
+			noteEls[i].parentNode.removeChild(noteEls[i]);
+		}
+	}
+	for (key in notes){
+		var skipNote = false;
+		for (var i=0;i<noteEls.length;i++){
+			if (noteEls[i].getAttribute('data-start')==notes[key]['start'] && noteEls[i].getAttribute('data-end')==notes[key]['end']){
+				skipNote = true;
+				break;
+			}
+		}
+		if (skipNote){
+			continue;
+		}
+		var noteEl = document.createElement("sidecontainer");
+		noteEl.setAttribute('data-start',notes[key]['start']);
+		noteEl.setAttribute('data-end',notes[key]['end']);
+		var startEl = document.getElementById('word-'+notes[key]['start']);
+		startEl.parentNode.insertBefore(noteEl,startEl);
+		var notEnd = true;
+		if (notes[key]['start'] == notes[key]['end']){
+			notEnd = false;
+		}
+		var el = startEl;
+		while (notEnd){
+			var oldEl = el;
+			var el = el.nextSibling;
+			var el2 = oldEl.cloneNode(true);
+			oldEl.parentNode.removeChild(oldEl);
+			noteEl.appendChild(el2);
+			if (!el || el.id == 'word-'+notes[key]['end']){
+				notEnd = false;
+			}
+		}
+		if (el){
+			var el2 = el.cloneNode(true);
+			el.parentNode.removeChild(el);
+			noteEl.appendChild(el2);
+		}
+		
+	}
+	
+}
 
 
 
@@ -632,6 +693,82 @@ function editUp(evt){
 		
 		
 	}
+	else if (sKey && isEdit == "note"){
+		var qid = 0;
+		for (key in displaySettings.notes){
+			if (displaySettings.notes[key]['selected']== true){
+				qid = key;
+				displaySettings.notes[key]['end']=sKey;
+				displaySettings.notes[key]['selected']= false;
+				break;
+				
+			}
+			else {
+				qid=key+1;
+			}
+		}
+		if (displaySettings.notes[qid]){
+			displaySettings.notes[qid]['end']=sKey;
+			//displaySettings.notes[qid]['keys']=[];
+			
+			var start = {'x':wordIds[displaySettings.notes[qid]['start']]['left'],'y':wordIds[displaySettings.notes[qid]['start']]['top']};
+			var end = {'x':wordIds[displaySettings.notes[qid]['end']]['left'],'y':wordIds[displaySettings.notes[qid]['end']]['top']};
+			for (key in wordIds){
+				if (start.y < wordIds[key]['top'] && end.y > wordIds[key]['top']){
+					
+				}
+				else if (start.y < end.y && start.y == wordIds[key]['top'] && start.x <= wordIds[key]['left']){
+					
+				}
+				else if (start.y < end.y && end.y == wordIds[key]['top'] && end.x >= wordIds[key]['left']) {
+				
+				}
+				else if (start.y == end.y && end.y == wordIds[key]['top'] && end.x >= wordIds[key]['left'] && start.x <= wordIds[key]['left']) {
+				
+				}
+				else {
+					continue;
+				}
+				for (key2 in displaySettings.notes){
+					if (key2 != qid && (displaySettings.notes[key2]['start'] == key || displaySettings.notes[key2]['end'] == key)){
+						delete displaySettings.notes[key2];
+					}
+				}
+				//displaySettings.notes[qid]['keys'].push(key);
+
+			}
+			for (key2 in displaySettings.notes){
+				var start2 = {'x':wordIds[displaySettings.notes[key2]['start']]['left'],'y':wordIds[displaySettings.notes[key2]['start']]['top']};
+				var end2 = {'x':wordIds[displaySettings.notes[key2]['end']]['left'],'y':wordIds[displaySettings.notes[key2]['end']]['top']};
+			
+				if (start2.y < start.y && end2.y > start.y){
+					
+				}
+				else if (start2.y < end2.y && start2.y == start.y && start2.x <= start.x){
+					
+				}
+				else if (start2.y < end2.y && end2.y == start.y && end2.x >= start.x) {
+				
+				}
+				else if (start2.y == end2.y && end2.y == start.y && end2.x >= start.x && start2.x <= start.x) {
+				
+				}
+				else {
+					continue;
+				}
+				if (key2 != qid){
+					delete displaySettings.notes[key2];
+				}
+			}
+			console.log(displaySettings.notes);
+			makeNotes(displaySettings.notes);
+		}
+		else {
+			displaySettings.notes[qid]={'selected':true,'start':sKey,'end':sKey};
+		}
+		
+		
+	}
 	else if (sKey){
 		var key = sKey;
 		mmStrokes = [{'x':wordIds[key]['left'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']+40},{'x':wordIds[key]['left']+wordIds[key]['width'],'y':wordIds[key]['top']},{'x':wordIds[key]['left'],'y':wordIds[key]['top']}];
@@ -712,6 +849,10 @@ function editMode(){
 }
 function quoteButton() {
 	isEdit = "quote";
+	outputEl.style.pointerEvents = "all";
+}
+function noteButton() {
+	isEdit = "note";
 	outputEl.style.pointerEvents = "all";
 }
 

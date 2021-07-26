@@ -127,6 +127,7 @@ blockquote:before {
 	<button onclick="showNewButtons();">ShowNew</button>
 	<button onclick="showListButtons();">ShowList</button>
 	<button onclick="editMode();">Edit</button>
+	<button onclick="noteButton();">Note</button>
 	<button onclick="quoteButton();">Quote</button>
 	<button onclick="boldButton();">Bold</button>
 	<button onclick="italicsButton();">Italics</button>
@@ -162,6 +163,7 @@ for (var i=0;i<strokes.length;i++){
 }
 divideWords(strokes);
 makeQuotes(displaySettings.quotes);
+makeNotes(displaySettings.notes);
 		
 var isDown = false;
 var isEdit = false;
