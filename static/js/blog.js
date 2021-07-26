@@ -598,9 +598,14 @@ function makeNotes(notes) {
 		
 		subEl.appendChild(subsubEl);
 		noteEl.appendChild(subEl);
+		
+		parEl.parentNode.insertBefore(noteEl,parEl);
+		
 		var parEl = document.getElementById('par-1');
 		parEl.parentNode.removeChild(parEl);
 		noteEl.appendChild(parEl);
+		
+		
 		
 	}
 	
