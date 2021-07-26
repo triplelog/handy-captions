@@ -191,13 +191,14 @@ app.get('/',
 		var strokes = [];
 		var wordsHashed = {};
 		var displaySettings = {'paragraphs':{},defaultColor:'black',notBoldWidth:"3",boldWidth:"6",listList:{},quotes:{}};
-		//var dm;
-		//if (req.query && req.query.q){
-		//	dm = JSON.parse(req.query.q)
-		//}
-		//wordsHashed = dm.wordsHashed;
-		//strokes = dm.strokes;
-		//displaySettings = dm.displaySettings;
+		var dm;
+		if (req.query && req.query.id){
+			var data = fs.readFileSync('./savedBlogs/'+req.query.id, 'utf8');
+			dm = JSON.parse(data);
+			wordsHashed = dm.wordsHashed;
+			strokes = dm.strokes;
+			displaySettings = dm.displaySettings;
+		}
 		
 		
 		res.write(nunjucks.render('templates/blog-input.html',{
@@ -213,9 +214,13 @@ app.post('/save',
 	function(req, res) {
 		//var content = req.body;
 		console.log(req.body);
+		fs.writeFileSync('./savedBlogs/'+req.body.id, JSON.stringify(req.body) , 'utf8');
+		
 		res.end();
 	}
 )
+
+
 const server1 = https.createServer(options, app);
 
 server1.listen(12312);
