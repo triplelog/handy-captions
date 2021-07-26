@@ -877,27 +877,17 @@ function leftList(id){
 function continueList(id){
 	displaySettings.listList[id]=2;
 }
-function save() {
-	var jsonmessage = {type:'save',displaySettings:displaySettings,strokes:strokes,wordsHashed:wordsHashed};
-	ws.send(JSON.stringify(jsonmessage));
-}
-function formSubmit(event) {
+
+function save(event) {
 	var url = "/save";
 	var request = new XMLHttpRequest();
-	
 	request.open('POST', url, true);
 	request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-	var el = document.getElementById('saveText');
-	console.log(el);
-	var fd = new FormData();
-	fd.append('saved', el.value);
-	for (var key of fd.entries()) {
-			console.log(key[0] + ', ' + key[1])
-	}
-	request.send(JSON.stringify({'saved':'hello'}));
+	var jsonmessage = {type:'save',displaySettings:displaySettings,strokes:strokes,wordsHashed:wordsHashed};
+	request.send(JSON.stringify(jsonmessage));
 	event.preventDefault();
 }
-document.getElementById('saveButton').addEventListener('click',formSubmit);
+document.getElementById('saveButton').addEventListener('click',save);
 function load() {
 	var jsonmessage = {type:'load'};
 	ws.send(JSON.stringify(jsonmessage));

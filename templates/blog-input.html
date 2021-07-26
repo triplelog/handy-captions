@@ -122,7 +122,7 @@ blockquote:before {
 <div class="tools">
 	<button onclick="grabWords();">Group</button>
 	<button onclick="swapMode();">Mode</button>
-	<input id="saveText" type="text" style="display: none;" name="saved" value="hello world"></input><button id="saveButton">Save</button>
+	<button id="saveButton">Save</button>
 	<button onclick="load();">Load</button>
 	<button onclick="showNewButtons();">ShowNew</button>
 	<button onclick="showListButtons();">ShowList</button>
@@ -142,26 +142,6 @@ blockquote:before {
 </div>
 <script src="../js/blog.js"></script>
 <script>
-
-var ws = new WebSocket('wss://digitizer.fun:8080');
-ws.onopen = function(evt) {
-	//var jsonmessage = {'type':'key'};
-	//jsonmessage.message = tkey;
-	//ws.send(JSON.stringify(jsonmessage));
-}
-ws.onmessage = function(evt){
-	var dm = JSON.parse(evt.data);
-	if (dm.type == "load"){
-		wordsHashed = dm.wordsHashed;
-		strokes = dm.strokes;
-		displaySettings = dm.displaySettings;
-		for (var i=0;i<strokes.length;i++){
-			addStroke(strokes[i],i,"black");
-		}
-		divideWords(strokes);
-		makeQuotes(displaySettings.quotes);
-	}
-}
 
 
 
