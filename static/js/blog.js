@@ -565,14 +565,17 @@ function makeNotes(notes) {
 			continue;
 		}
 		var noteEl = document.createElement("span");
-		noteEl.classList.add('sidecontainer')
-		var parEl = document.getElementById('par-1');
-		parEl.parentElement.removeChild(parEl);
-		noteEl.appendChild(parEl);
+		noteEl.classList.add('sidecontainer');
+		var subEl = document.createElement("span");
+		subEl.classList.add("side");
+		var subsubEl = document.createElement("span");
+		subsubEl.classList.add("sidetext");
+		<span class="side"><span class="sidetext">Sidenote 2 should be even longer to get next line.</span></span>
+
 		noteEl.setAttribute('data-start',notes[key]['start']);
 		noteEl.setAttribute('data-end',notes[key]['end']);
 		var startEl = document.getElementById('word-'+notes[key]['start']);
-		startEl.parentNode.insertBefore(noteEl,startEl);
+		subsubEl.appendChild(startEl);
 		var notEnd = true;
 		if (notes[key]['start'] == notes[key]['end']){
 			notEnd = false;
@@ -583,7 +586,7 @@ function makeNotes(notes) {
 			var el = el.nextSibling;
 			var el2 = oldEl.cloneNode(true);
 			oldEl.parentNode.removeChild(oldEl);
-			noteEl.appendChild(el2);
+			subsubEl.appendChild(el2);
 			if (!el || el.id == 'word-'+notes[key]['end']){
 				notEnd = false;
 			}
@@ -591,8 +594,14 @@ function makeNotes(notes) {
 		if (el){
 			var el2 = el.cloneNode(true);
 			el.parentNode.removeChild(el);
-			noteEl.appendChild(el2);
+			subsubEl.appendChild(el2);
 		}
+		
+		subEl.appendChild(subsubEl);
+		noteEl.appendChild(subEl);
+		var parEl = document.getElementById('par-1');
+		parEl.parentNode.removeChild(parEl);
+		noteEl.appendChild(parEl);
 		
 	}
 	
