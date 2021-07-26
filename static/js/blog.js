@@ -884,7 +884,15 @@ function save() {
 function formSubmit(event) {
 	var url = "/save";
 	var request = new XMLHttpRequest();
-	request.open('POST', url, true);
+	var options = {
+	  url: url,
+	  method: "POST",
+	  headers: {
+		'Content-type': 'application/json'
+	  },
+	  body: '{ "saved": "admin", "password": "----"}'
+	};
+	/*request.open('POST', url, true);
 	var el = document.getElementById('saveText');
 	console.log(el);
 	var fd = new FormData();
@@ -892,7 +900,8 @@ function formSubmit(event) {
 	for (var key of fd.entries()) {
 			console.log(key[0] + ', ' + key[1])
 		}
-	request.send(fd);
+	request.send(fd);*/
+	request.post(options);
 	event.preventDefault();
 }
 document.getElementById('saveButton').addEventListener('click',formSubmit);
