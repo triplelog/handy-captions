@@ -212,8 +212,7 @@ app.get('/',
 app.post('/save',
 	function(req, res) {
 		//var content = req.body;
-		console.log(req);
-		res.end();
+		console.log(req.body);
 	}
 )
 const server1 = https.createServer(options, app);
