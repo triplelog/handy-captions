@@ -181,6 +181,18 @@ app.use('/',express.static('static'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); 
 
+app.get('/blog', 
+	
+	function(req, res) {
+
+		
+		res.write(nunjucks.render('templates/blog-out.html',{
+		
+		}));
+		res.end();
+	}
+);
+
 app.get('/', 
 	
 	function(req, res) {
