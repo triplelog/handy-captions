@@ -888,7 +888,7 @@ function formSubmit(event) {
 	var el = document.getElementById('saveText');
 	console.log(el);
 	var fd = new FormData();
-	fd.append('saved', el.value);
+	fd.append('saved', 'el.value');
 	console.log(fd);
 	request.send(fd);
 	event.preventDefault();
