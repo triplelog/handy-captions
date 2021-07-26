@@ -573,8 +573,8 @@ function makeNotes(notes) {
 		
 		noteEl.setAttribute('data-start',notes[key]['start']);
 		noteEl.setAttribute('data-end',notes[key]['end']);
+		var elIds = ['word-'+notes[key]['start']];
 		var startEl = document.getElementById('word-'+notes[key]['start']);
-		subsubEl.appendChild(startEl);
 		var notEnd = true;
 		if (notes[key]['start'] == notes[key]['end']){
 			notEnd = false;
@@ -584,18 +584,21 @@ function makeNotes(notes) {
 			var oldEl = el;
 			var el = el.nextSibling;
 			var el2 = oldEl.cloneNode(true);
-			oldEl.parentNode.removeChild(oldEl);
-			subsubEl.appendChild(el2);
+			elIds.push(el2.id);
 			if (!el || el.id == 'word-'+notes[key]['end']){
 				notEnd = false;
 			}
 		}
 		if (el){
 			var el2 = el.cloneNode(true);
-			el.parentNode.removeChild(el);
-			subsubEl.appendChild(el2);
+			elIds.push(el2.id);
 		}
-		
+		for (var i=0;i<elIds.length;i++){
+			var el = document.getElementById(elIds[i]);
+			el.parentNode.removeChild(el);
+			subsubEl.appendChild(el);
+			
+		}
 		subEl.appendChild(subsubEl);
 		noteEl.appendChild(subEl);
 		
