@@ -881,7 +881,15 @@ function save() {
 	var jsonmessage = {type:'save',displaySettings:displaySettings,strokes:strokes,wordsHashed:wordsHashed};
 	ws.send(JSON.stringify(jsonmessage));
 }
-
+function formSubmit(event) {
+	var url = "/save";
+	var request = new XMLHttpRequest();
+	request.open('POST', url, true);
+	var el = document.getElementById('saveText');
+	request.send(new FormData(el)); // create FormData from form that triggered event
+	event.preventDefault();
+}
+document.getElementById('saveButton').addEventListener('click',formSubmit);
 function load() {
 	var jsonmessage = {type:'load'};
 	ws.send(JSON.stringify(jsonmessage));
