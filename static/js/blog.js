@@ -566,6 +566,9 @@ function makeNotes(notes) {
 		}
 		var noteEl = document.createElement("span");
 		noteEl.classList.add('sidecontainer')
+		var parEl = document.getElementById('par-1');
+		parEl.parentElement.removeChild(parEl);
+		noteEl.appendChild(parEl);
 		noteEl.setAttribute('data-start',notes[key]['start']);
 		noteEl.setAttribute('data-end',notes[key]['end']);
 		var startEl = document.getElementById('word-'+notes[key]['start']);

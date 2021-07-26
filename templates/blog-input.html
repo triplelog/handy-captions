@@ -332,6 +332,8 @@ function addBorder(stroke,idx,nidx,color) {
 
 function grabWords(){
 	divideWords(strokes);
+	makeQuotes(displaySettings.quotes);
+	makeNotes(displaySettings.notes);
 }
 function downloadImage() {
 	var dataURL = canvasEl.toDataURL('image/jpg');
