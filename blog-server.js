@@ -212,7 +212,7 @@ app.get('/',
 app.post('/save',
 	function(req, res) {
 		//var content = req.body;
-		console.log(req.body);
+		console.log(req);
 		res.end();
 	}
 )
