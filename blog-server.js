@@ -188,13 +188,34 @@ app.get('/',
 		//quickstart("./static/img/test.jpg");
 		
 		//readJson();
+		var strokes = [];
+		var wordsHashed = {};
+		var displaySettings = {'paragraphs':{},defaultColor:'black',notBoldWidth:"3",boldWidth:"6",listList:{},quotes:{}};
+		//var dm;
+		//if (req.query && req.query.q){
+		//	dm = JSON.parse(req.query.q)
+		//}
+		//wordsHashed = dm.wordsHashed;
+		//strokes = dm.strokes;
+		//displaySettings = dm.displaySettings;
+		
+		
 		res.write(nunjucks.render('templates/blog-input.html',{
-			
+			strokes: strokes,
+			wordsHashed: wordsHashed,
+			displaySettings: displaySettings
 		}));
 		res.end();
 	}
 );
 
+app.post('/save',
+	function(req, res) {
+		//var content = req.body;
+		console.log(req.body);
+		res.end();
+	}
+)
 const server1 = https.createServer(options, app);
 
 server1.listen(12312);
@@ -202,7 +223,7 @@ server1.listen(12312);
 const server = https.createServer(options, (req, res) => {
   res.writeHead(200);
   res.end('\n');
-}).listen(8081);
+}).listen(8080);
 
 const WebSocket = require('ws');
 //const wss = new WebSocket.Server({ port: 8080 , origin: 'http://tabdn.com'});

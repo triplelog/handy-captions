@@ -1,8 +1,6 @@
 var wordIds = {};
 
 var borders = {};
-var wordsHashed = {};
-var displaySettings = {'paragraphs':{},defaultColor:'black',notBoldWidth:"3",boldWidth:"6",listList:{},quotes:{}};
 function divideWords(strokes) {
 	strokesInfo = {};
 	wordMap = {};
