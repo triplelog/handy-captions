@@ -889,7 +889,9 @@ function formSubmit(event) {
 	console.log(el);
 	var fd = new FormData();
 	fd.append('saved', 'el.value');
-	console.log(fd.entries());
+	for (var key of fd.entries()) {
+			console.log(key[0] + ', ' + key[1])
+		}
 	request.send(fd);
 	event.preventDefault();
 }
