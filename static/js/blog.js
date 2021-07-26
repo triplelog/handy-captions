@@ -11,7 +11,9 @@ function divideWords(strokes) {
 	var outEl = document.getElementById("finalOutput");
 	outEl.innerHTML = "";
 	clearBorders();
+	var parIdx = 0;
 	var pEl = document.createElement("p");
+	pEl.id = "par-"+parIdx; parIdx++;
 	for (var i=0;i<strokes.length;i++){
 		if (strokes[i].length==0){
 			continue;
@@ -160,6 +162,7 @@ function divideWords(strokes) {
 					outEl.appendChild(pEl);
 				}
 				pEl = document.createElement("p");
+				pEl.id = "par-"+parIdx; parIdx++;
 				line = next -1;
 				
 			}
@@ -193,6 +196,7 @@ function divideWords(strokes) {
 				}
 				if (currentList == 0){
 					pEl = document.createElement("p");
+					pEl.id = "par-"+parIdx; parIdx++;
 				}
 				else {
 					pEl = document.createElement("li");
@@ -202,6 +206,7 @@ function divideWords(strokes) {
 				ulEl[1].appendChild(pEl);
 				outEl.appendChild(ulEl[1]);
 				pEl = document.createElement("p");
+				pEl.id = "par-"+parIdx; parIdx++;
 				currentList--;
 			}
 			else if (displaySettings.listList[line]==2 && currentList > 0){//continuation of last line
@@ -216,6 +221,7 @@ function divideWords(strokes) {
 			
 			outEl.appendChild(pEl);
 			pEl = document.createElement("p");
+			pEl.id = "par-"+parIdx; parIdx++;
 		}
 		
 		//console.log(adjWords[line]);
@@ -527,7 +533,7 @@ function makeQuotes(quotes) {
 }
 
 function makeNotes(notes) {
-	var noteEls = document.querySelectorAll('sidecontainer');
+	var noteEls = document.querySelectorAll('span.sidecontainer');
 	for (var i=0;i<noteEls.length;i++){
 		var deleteNote = true;
 		for (key in notes){
@@ -558,7 +564,8 @@ function makeNotes(notes) {
 		if (skipNote){
 			continue;
 		}
-		var noteEl = document.createElement("sidecontainer");
+		var noteEl = document.createElement("span");
+		noteEl.classList.add('sidecontainer')
 		noteEl.setAttribute('data-start',notes[key]['start']);
 		noteEl.setAttribute('data-end',notes[key]['end']);
 		var startEl = document.getElementById('word-'+notes[key]['start']);
