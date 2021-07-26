@@ -884,8 +884,9 @@ function save() {
 function formSubmit(event) {
 	var url = "/save";
 	var request = new XMLHttpRequest();
-	request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	
 	request.open('POST', url, true);
+	request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 	var el = document.getElementById('saveText');
 	console.log(el);
 	var fd = new FormData();
