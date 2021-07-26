@@ -570,8 +570,7 @@ function makeNotes(notes) {
 		subEl.classList.add("side");
 		var subsubEl = document.createElement("span");
 		subsubEl.classList.add("sidetext");
-		<span class="side"><span class="sidetext">Sidenote 2 should be even longer to get next line.</span></span>
-
+		
 		noteEl.setAttribute('data-start',notes[key]['start']);
 		noteEl.setAttribute('data-end',notes[key]['end']);
 		var startEl = document.getElementById('word-'+notes[key]['start']);
