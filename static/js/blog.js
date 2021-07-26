@@ -889,7 +889,7 @@ function formSubmit(event) {
 	console.log(el);
 	var fd = new FormData();
 	fd.append('saved', 'el.value');
-	console.log(fd);
+	console.log(fd.entries());
 	request.send(fd);
 	event.preventDefault();
 }
