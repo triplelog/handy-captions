@@ -584,17 +584,19 @@ function makeNotes(notes) {
 			var oldEl = el;
 			var el = el.nextSibling;
 			var el2 = oldEl.cloneNode(true);
-			elIds.push(el2.id);
+			elIds.push(el.id);
 			if (!el || el.id == 'word-'+notes[key]['end']){
 				notEnd = false;
 			}
 		}
 		if (el){
 			var el2 = el.cloneNode(true);
-			elIds.push(el2.id);
+			elIds.push(el.id);
 		}
 		for (var i=0;i<elIds.length;i++){
+			console.log(elIds[i]);
 			var el = document.getElementById(elIds[i]);
+			console.log(el);
 			el.parentNode.removeChild(el);
 			subsubEl.appendChild(el);
 			
