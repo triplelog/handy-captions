@@ -20,8 +20,8 @@ var nunjucks = require('nunjucks');
 var crypto = require("crypto");
 
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/martianmath.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/martianmath.com/fullchain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/digitizer.fun/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/digitizer.fun/fullchain.pem')
 };
 
 
