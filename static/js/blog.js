@@ -894,7 +894,7 @@ function formSubmit(event) {
 	for (var key of fd.entries()) {
 			console.log(key[0] + ', ' + key[1])
 	}
-	request.send(fd);
+	request.send(JSON.stringify({'saved':'hello'}));
 	event.preventDefault();
 }
 document.getElementById('saveButton').addEventListener('click',formSubmit);
