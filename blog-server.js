@@ -179,7 +179,7 @@ var app = express();
 
 app.use('/',express.static('static'));
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: false })); 
 
 app.get('/', 
 	
@@ -213,6 +213,7 @@ app.post('/save',
 	function(req, res) {
 		//var content = req.body;
 		console.log(req.body);
+		res.end();
 	}
 )
 const server1 = https.createServer(options, app);

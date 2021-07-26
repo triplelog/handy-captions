@@ -884,24 +884,16 @@ function save() {
 function formSubmit(event) {
 	var url = "/save";
 	var request = new XMLHttpRequest();
-	var options = {
-	  url: url,
-	  method: "POST",
-	  headers: {
-		'Content-type': 'application/json'
-	  },
-	  body: '{ "saved": "admin", "password": "----"}'
-	};
-	/*request.open('POST', url, true);
+	request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+	request.open('POST', url, true);
 	var el = document.getElementById('saveText');
 	console.log(el);
 	var fd = new FormData();
 	fd.append('saved', el.value);
 	for (var key of fd.entries()) {
 			console.log(key[0] + ', ' + key[1])
-		}
-	request.send(fd);*/
-	request.post(options);
+	}
+	request.send(fd);
 	event.preventDefault();
 }
 document.getElementById('saveButton').addEventListener('click',formSubmit);
