@@ -589,10 +589,6 @@ function makeNotes(notes) {
 				notEnd = false;
 			}
 		}
-		if (el){
-			var el2 = el.cloneNode(true);
-			elIds.push(el.id);
-		}
 		for (var i=0;i<elIds.length;i++){
 			console.log(elIds[i]);
 			var el = document.getElementById(elIds[i]);
