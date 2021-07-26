@@ -128,6 +128,7 @@ function addWall() {
 
 function startMove() {
 	start = 0;
+	actual.el = document.getElementById("actual");
 	actual.coords = [[ball.x,ball.y]];
 	actual.pd = "M"+ball.x+","+ball.y+" ";
 	actual.el.setAttributeNS(null,'d',actual.pd);
