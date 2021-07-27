@@ -533,26 +533,7 @@ function makeQuotes(quotes) {
 }
 
 function makeNotes(notes) {
-	var noteEls = document.querySelectorAll('span.sidecontainer');
-	for (var i=0;i<noteEls.length;i++){
-		var deleteNote = true;
-		for (key in notes){
-			if (noteEls[i].getAttribute('data-start')==notes[key]['start'] && noteEls[i].getAttribute('data-end')==notes[key]['end']){
-				deleteNote = false;
-				break;
-			}
-		}
-		if (deleteNote){
-			var els = noteEls[i].querySelectorAll('div');
-			for (var ii=0;ii<els.length;ii++){
-				if (els[ii].id && els[ii].id.substr(0,5) == "word-"){
-					var el = els[ii].cloneNode(true);
-					noteEls[i].parentNode.insertBefore(el,noteEls[i]);
-				}
-			}
-			noteEls[i].parentNode.removeChild(noteEls[i]);
-		}
-	}
+	
 	for (key in notes){
 		var skipNote = false;
 		for (var i=0;i<noteEls.length;i++){
@@ -564,12 +545,14 @@ function makeNotes(notes) {
 		if (skipNote){
 			continue;
 		}
+		notes[key]["type"] = "side";
+		var noteType = notes[key]["type"];
 		var noteEl = document.createElement("span");
-		noteEl.classList.add('sidecontainer');
+		noteEl.classList.add(noteType+'container');
 		var subEl = document.createElement("span");
-		subEl.classList.add("side");
+		subEl.classList.add(noteType+"note");
 		var subsubEl = document.createElement("span");
-		subsubEl.classList.add("sidetext");
+		subsubEl.classList.add(noteType+"text");
 		
 		noteEl.setAttribute('data-start',notes[key]['start']);
 		noteEl.setAttribute('data-end',notes[key]['end']);
@@ -600,12 +583,23 @@ function makeNotes(notes) {
 		subEl.appendChild(subsubEl);
 		noteEl.appendChild(subEl);
 		
-		
-		
-		var parEl = document.getElementById('par-1');
+		notes[key]['par-start']=1;
+		notes[key]['par-end']=1;
+		var pStart = notes[key['par-start']];
+		var parEl = document.getElementById('par-'+pStart);
 		parEl.parentNode.insertBefore(noteEl,parEl);
 		parEl.parentNode.removeChild(parEl);
 		noteEl.appendChild(parEl);
+		var notEnd = true;
+		if (notes[key]['par-start'] != notes[key]['par-end']){
+			var pEnd = notes[key['par-end']];
+			for (var i=pStart+1;i<pEnd+1;i++){
+				var parEl = document.getElementById('par-'+i);
+				parEl.parentNode.removeChild(parEl);
+				noteEl.appendChild(parEl);
+			}
+		}
+		
 		
 		
 		
