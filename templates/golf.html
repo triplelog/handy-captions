@@ -12,6 +12,7 @@
 	position: absolute;
 	border: 1px solid black;
 	touch-action: none;
+	--w: 120;
 }
 img {
 	width: 160vh;
@@ -21,9 +22,9 @@ img {
 	position: absolute;
 }
 #borderSVG {
-	width: calc({{ width + 20 }} / 120 * 80vh);
+	width: calc(var(--w) / 120 * 80vh);
 	height: 80vh;
-	left: calc(45vw - calc({{ width + 20 }} / 120 * 80vh) / 2);
+	left: calc(45vw - calc(var(--w) / 120 * 80vh) / 2);
 	top: 2.5vh;
 	position: absolute;
 }
@@ -39,7 +40,7 @@ img {
 
 <div class="game">
 
-	<svg id="borderSVG" viewBox="-10 -10 {{ width + 20 }} 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<svg id="borderSVG" viewBox="-10 -10 120 120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
 		<path id="wall" d="" fill="white" stroke="black" stroke-width="1"></path>
 		
@@ -57,13 +58,20 @@ svg.addEventListener("pointerdown",pdown);
 svg.addEventListener("pointermove",pmove);
 svg.addEventListener("pointerup",pup);
 
-var outlineWall = {{ bigwall | dump | safe }};
+/*var outlineWall = {{ bigwall | dump | safe }};
 var allHoles = {{ allHoles | dump | safe }};
 var ball = {x:{{ ball.x }},y:{{ ball.y }},d:5,a:1,s:20,el:null};
 var ballStart = {x:{{ ball.x }},y:{{ ball.y }}};
-var hole = {x:{{ hole.x }},y:{{ hole.y }} };
+var hole = {x:{{ hole.x }},y:{{ hole.y }} };*/
 
+var outlineWall;
+var allHoles = {{ allHoles | dump | safe }};
+var ball;
+var ballStart;
+var hole;
+var width;
 
+var cdId = 0;
 var wall = {v:outlineWall};
 var isDown = false;
 var shot = {el:null,coords:[]};
@@ -78,6 +86,14 @@ var showChange = 0;
 resetGame();
 
 function resetGame(){
+	outlineWall = allHoles[cdId].bigwall;
+	width = allHoles[cdId].width;
+	document.getElementById('borderSVG').style.width = ((width+20) / 120 * 80) +'vh';
+	document.getElementById('borderSVG').style.left = 'calc(45vw - calc('+(width+20)+' / 120 * 80vh) / 2)';
+	document.getElementById('borderSVG').setAttributeNS(null,'viewBox',"-10 -10 "+(width+20)+" 120");
+	ball = {x:allHoles[cdId].ball.x,y:allHoles[cdId].ball.y,d:5,a:1,s:20,el:null};
+	ballStart = {x:allHoles[cdId].ball.x,y:allHoles[cdId].ball.y};
+	hole = {x:allHoles[cdId].hole.x,y:allHoles[cdId].hole.y };
 	
 	svg.innerHTML = '<path id="wall" d="" fill="white" stroke="black" stroke-width="1"></path>';
 	
@@ -514,7 +530,7 @@ function takeShot(){
 function pdown(evt){
 	isDown = true;
 	var bcr = evt.currentTarget.getBoundingClientRect();
-	var x = Math.round((evt.clientX-bcr.left)/bcr.width*{{ width + 20 }}*10 - 100)/10;
+	var x = Math.round((evt.clientX-bcr.left)/bcr.width*( width + 20 )*10 - 100)/10;
 	var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
 	shot.coords=[{x:x,y:y}];
 	shot.el = document.getElementById("shot");
@@ -523,7 +539,7 @@ function pdown(evt){
 function pmove(evt){
 	if (isDown){
 		var bcr = evt.currentTarget.getBoundingClientRect();
-		var x = Math.round((evt.clientX-bcr.left)/bcr.width*{{ width + 20 }}*10 - 100)/10;
+		var x = Math.round((evt.clientX-bcr.left)/bcr.width*( width + 20 )*10 - 100)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
 		shot.coords.push({x:x,y:y});
 		drawShot();
@@ -532,7 +548,7 @@ function pmove(evt){
 function pup(evt){
 	if (isDown){
 		var bcr = evt.currentTarget.getBoundingClientRect();
-		var x = Math.round((evt.clientX-bcr.left)/bcr.width*{{ width + 20 }}*10 - 100)/10;
+		var x = Math.round((evt.clientX-bcr.left)/bcr.width*( width + 20 )*10 - 100)/10;
 		var y = Math.round((evt.clientY-bcr.top)/bcr.height*1200 - 100)/10;
 		shot.coords.push({x:x,y:y});
 		isDown = false;
