@@ -242,9 +242,6 @@ function collisionOne(pt,c){
 					}
 					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
 				}
-				if (d < c.d){
-					console.log(d,corner,pt,wall.e[ii])
-				}
 				
 			}
 			else {
@@ -288,7 +285,6 @@ function collisionOne(pt,c){
 					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
 				}
 				else {
-					console.log(xc,yc,wall.e[ii],pt);
 					d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
 				}
 			}
