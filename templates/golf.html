@@ -96,6 +96,17 @@ function resetGame(){
 
 function clearMove(){
 	var pd = actual.pd;
+	
+	wall = {v:outlineWall};
+	isDown = false;
+	shot = {el:null,coords:[]};
+	actual = {el:null,coords:[],pd:""};
+	lastShot = {el:null,coords:[],pd:""};
+	start = false;
+	r = 2;
+	old;
+	lastCollision = false;
+	
 	resetGame();
 	lastShot.el = document.getElementById("lastShot");
 	
