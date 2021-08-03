@@ -407,8 +407,8 @@ function move(timestamp) {
 				b = Math.atan(m);
 				console.log(ball.a,b,m);
 				//ball.a = -1*(2*Math.PI+ball.a-2*b);
-				b = Math.atan(m);
-				ball.a = 1*(ball.a-2*b);
+				b = Math.atan(m)*-1;
+				ball.a = 1*(2*b-ball.a);
 				console.log(ball.a,b,m);
 				var d = dPtEdge({x:x,y:y},wall.e[c.edge]);
 				var dd = dPtEdge({x:x+Math.cos(ball.a)*elapsed/40,y:y+Math.sin(ball.a)*elapsed/40},wall.e[c.edge]);
