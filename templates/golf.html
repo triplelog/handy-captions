@@ -58,6 +58,7 @@ svg.addEventListener("pointermove",pmove);
 svg.addEventListener("pointerup",pup);
 
 var outlineWall = {{ bigwall | dump | safe }};
+var allHoles = {{ allHoles | dump | safe }};
 var ball = {x:{{ ball.x }},y:{{ ball.y }},d:5,a:1,s:20,el:null};
 var ballStart = {x:{{ ball.x }},y:{{ ball.y }}};
 var hole = {x:{{ hole.x }},y:{{ hole.y }} };
@@ -73,7 +74,7 @@ var r = 2;
 var old;
 var showAll = false;
 var lastCollision = false;
-
+var showChange = 0;
 resetGame();
 
 function resetGame(){
@@ -152,6 +153,7 @@ function addWall() {
 
 function startMove() {
 	start = 0;
+	showChange = 0;
 	actual.el = document.getElementById("actual");
 	actual.coords = [[ball.x,ball.y]];
 	actual.pd = "M"+ball.x+","+ball.y+" ";
@@ -327,6 +329,7 @@ function move(timestamp) {
 	if (!start){
 		start = timestamp;
 		old = timestamp;
+		showChange = timestamp;
 		window.requestAnimationFrame(move);
 		return;
 	}
@@ -405,8 +408,7 @@ function move(timestamp) {
 	}
 	
 	
-	ball.el.setAttribute("cx",x);
-	ball.el.setAttribute("cy",y);
+	
 	
 	ball.x = x;
 	ball.y = y;
@@ -415,11 +417,20 @@ function move(timestamp) {
 	actual.pd += ball.x+","+ball.y+" ";
 	actual.el.setAttributeNS(null,'d',actual.pd);
 	
+	if (timestamp - showChange > 100){
+		ball.el.setAttribute("cx",x);
+		ball.el.setAttribute("cy",y);
+		showChange = timestamp;
+	}
+	
+	
 	
 	if (timestamp - start < ball.d*1000) {
 		window.requestAnimationFrame(move);
 	}
 	else{
+		ball.el.setAttribute("cx",x);
+		ball.el.setAttribute("cy",y);
 		ball.x = ballStart.x;
 		ball.y = ballStart.y;
 	}
