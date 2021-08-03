@@ -125,10 +125,22 @@ function pathToPoints(path) {
 	}
 	var width = (box.right-box.left)/(box.top-box.bottom)*100;
 	
-	for (var i=0;i<points.length;i++){
-		points[i][0]=Math.round((points[i][0]-box.left)/(box.right-box.left)*width*10)/10;
-		points[i][1]=Math.round((points[i][1]-box.bottom)/(box.top-box.bottom)*100*10)/10;
+	if (width < 100){
+		var leftOffset = Math.round((100-width)/2*10)/10;
+		for (var i=0;i<points.length;i++){
+			points[i][0]=leftOffset + Math.round((points[i][0]-box.left)/(box.right-box.left)*width*10)/10;
+			points[i][1]=Math.round((points[i][1]-box.bottom)/(box.top-box.bottom)*100*10)/10;
+		}
 	}
+	else {
+		var height = (box.top-box.bottom)/(box.right-box.left)*100;
+		var botOffset = Math.round((100-height)/2*10)/10;
+		for (var i=0;i<points.length;i++){
+			points[i][0]=Math.round((points[i][0]-box.left)/(box.right-box.left)*100*10)/10;
+			points[i][1]=botOffset + Math.round((points[i][1]-box.bottom)/(box.top-box.bottom)*height*10)/10;
+		}
+	}
+	width = 100;
 	return [points,width,d];
 }
 
