@@ -35,6 +35,7 @@ img {
 <button onclick="showInfo()">Show</button>
 <button onclick="nextRound()">Next</button>
 <button onclick="startMove()">Start</button>
+<button onclick="clearMove()">Clear</button>
 
 <div class="game">
 
@@ -66,6 +67,7 @@ var wall = {v:outlineWall};
 var isDown = false;
 var shot = {el:null,coords:[]};
 var actual = {el:null,coords:[],pd:""};
+var lastShot = {el:null,coords:[],pd:""};
 var start = false;
 var r = 2;
 var old;
@@ -83,11 +85,20 @@ function resetGame(){
 	shot.el = document.getElementById("shot");
 	svg.innerHTML += '<path id="actual" d="" fill="none" stroke="blue" stroke-width="1"></path>';
 	actual.el = document.getElementById("actual");
+	svg.innerHTML += '<path id="lastShot" d="" fill="none" stroke="gray" stroke-width="0.25"></path>';
+	lastShot.el = document.getElementById("lastShot");
 	svg.innerHTML += '<circle id="hole" cx="'+hole.x+'" cy="'+hole.y+'" r="3" fill="none" stroke="green" stroke-width="1"></circle>';
 
 	svg.innerHTML += '<circle id="ball" cx="'+ball.x+'" cy="'+ball.y+'" r="2" fill="blue" stroke="none" stroke-width="0"></circle>';
 	ball.el = document.getElementById("ball");
 	
+}
+
+function clearMove(){
+	resetGame();
+	lastShot.el = document.getElementById("lastShot");
+	var pd = "";
+	lastShot.setAttributeNS(null,'d',pd);
 }
 
 function addWall() {
