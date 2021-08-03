@@ -75,6 +75,7 @@ app.get('/magicmaker',
 
 function pathToPoints(cd) {
 	var path = cd.path;
+	console.log(path);
 	path = path.replace(/,/g," ");
 	path = path.replace(/M /g,"M");
 	path = path.replace(/ M/g,"M");
