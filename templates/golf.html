@@ -88,7 +88,6 @@ resetGame();
 function resetGame(){
 	outlineWall = allHoles[cdId].bigwall;
 	width = allHoles[cdId].width;
-	width = 100;
 	document.getElementById('borderSVG').style.width = ((width+20) / 120 * 80) +'vh';
 	document.getElementById('borderSVG').style.left = 'calc(45vw - calc('+(width+20)+' / 120 * 80vh) / 2)';
 	document.getElementById('borderSVG').setAttributeNS(null,'viewBox',"-10 -10 "+(width+20)+" 120");
@@ -154,13 +153,13 @@ function addWall() {
 			edge.push("inf");
 		}
 		else {
-			edge.push((wall.v[ii][1]-wall.v[ii-1][1])/(wall.v[ii][0]-wall.v[ii-1][0]));
+			edge.push((wall.v[ii][1]-wall.v[ii-1][1])*( width + 20 )/120/(wall.v[ii][0]-wall.v[ii-1][0]));
 		}
 		if (wall.v[ii][1]-wall.v[ii-1][1] == 0){
 			edge.push("inf");
 		}
 		else {
-			edge.push(-1*(wall.v[ii][0]-wall.v[ii-1][0])/(wall.v[ii][1]-wall.v[ii-1][1]));
+			edge.push(-1*(wall.v[ii][0]-wall.v[ii-1][0])*120/(width + 20)/(wall.v[ii][1]-wall.v[ii-1][1]));
 		}
 		edge.push(wall.v[ii-1]);
 		edge.push(wall.v[ii]);
