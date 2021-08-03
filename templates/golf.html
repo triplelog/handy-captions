@@ -153,13 +153,13 @@ function addWall() {
 			edge.push("inf");
 		}
 		else {
-			edge.push((wall.v[ii][1]-wall.v[ii-1][1])*( width + 20 )/120/(wall.v[ii][0]-wall.v[ii-1][0]));
+			edge.push((wall.v[ii][1]-wall.v[ii-1][1])/(wall.v[ii][0]-wall.v[ii-1][0]));
 		}
 		if (wall.v[ii][1]-wall.v[ii-1][1] == 0){
 			edge.push("inf");
 		}
 		else {
-			edge.push(-1*(wall.v[ii][0]-wall.v[ii-1][0])*120/(width + 20)/(wall.v[ii][1]-wall.v[ii-1][1]));
+			edge.push(-1*(wall.v[ii][0]-wall.v[ii-1][0])/(wall.v[ii][1]-wall.v[ii-1][1]));
 		}
 		edge.push(wall.v[ii-1]);
 		edge.push(wall.v[ii]);
@@ -398,12 +398,14 @@ function move(timestamp) {
 			console.log(m,Math.atan(m),ball.a);
 		}
 		if (!skipCol){
-			var b = Math.atan(m);
+			var b;
 			if (m == "inf"){
 				b = Math.PI/2;
 				ball.a = -1*(2*Math.PI+ball.a-2*b);
 			}
 			else {
+				m = m*(width + 20)/120;
+				b = Math.atan(m);
 				console.log(ball.a,b,m);
 				ball.a = -1*(2*Math.PI+ball.a-2*b);
 				console.log(ball.a,b,m);
