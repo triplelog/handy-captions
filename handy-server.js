@@ -73,7 +73,8 @@ app.get('/magicmaker',
 	}
 );
 
-function pathToPoints(path) {
+function pathToPoints(cd) {
+	var path = cd.path;
 	path = path.replace(/,/g," ");
 	path = path.replace(/M /g,"M");
 	path = path.replace(/ M/g,"M");
@@ -124,13 +125,18 @@ function pathToPoints(path) {
 		lp = point;
 	}
 	var width = (box.right-box.left)/(box.top-box.bottom)*100;
-	
+	var ball = {x:0,y:0};
+	var hole = {x:0,y:0};
 	if (width < 100){
 		var leftOffset = Math.round((100-width)/2*10)/10;
 		for (var i=0;i<points.length;i++){
 			points[i][0]=leftOffset + Math.round((points[i][0]-box.left)/(box.right-box.left)*width*10)/10;
 			points[i][1]=Math.round((points[i][1]-box.bottom)/(box.top-box.bottom)*100*10)/10;
 		}
+		ball.x = leftOffset + Math.round(cd.ball.x*100*10)/10;
+		ball.y = Math.round(cd.ball.y*100*10)/10;
+		hole.x = leftOffset + Math.round(cd.hole.x*100*10)/10;
+		hole.y = Math.round(cd.hole.y*100*10)/10;
 	}
 	else {
 		var height = (box.top-box.bottom)/(box.right-box.left)*100;
@@ -139,9 +145,13 @@ function pathToPoints(path) {
 			points[i][0]=Math.round((points[i][0]-box.left)/(box.right-box.left)*100*10)/10;
 			points[i][1]=botOffset + Math.round((points[i][1]-box.bottom)/(box.top-box.bottom)*height*10)/10;
 		}
+		ball.x = Math.round(cd.ball.x*100*10)/10;
+		ball.y = botOffset + Math.round(cd.ball.y*100*10)/10;
+		hole.x = Math.round(cd.hole.x*100*10)/10;
+		hole.y = botOffset + Math.round(cd.hole.y*100*10)/10;
 	}
 	width = 100;
-	return [points,width,d];
+	return [points,width,d,ball,hole];
 }
 
 var jsonShapes = {'full':"M 0,0 0,100 100,100 100,0"};
@@ -323,11 +333,11 @@ app.get('/golf',
 		
 		var allHoles = [];
 		for (var i=0;i<golfHoles.length;i++){
-			var retval = pathToPoints(golfHoles[i].path);
-			var ball = golfHoles[i].ball;
-			var hole = golfHoles[i].hole;
+			var retval = pathToPoints(golfHoles[i]);
+			//var ball = golfHoles[i].ball;
+			//var hole = golfHoles[i].hole;
 			var cd = golfHoles[i].cd;
-			allHoles.push({bigwall:retval[0],width:retval[1],ball:ball,hole:hole,cd:cd});
+			allHoles.push({bigwall:retval[0],width:retval[1],ball:retval[3],hole:retval[4],cd:cd});
 		}
 		
 		res.write(nunjucks.render('templates/golf.html',{
