@@ -95,10 +95,11 @@ function resetGame(){
 }
 
 function clearMove(){
+	var pd = actual.pd;
 	resetGame();
 	lastShot.el = document.getElementById("lastShot");
-	var pd = "";
-	lastShot.setAttributeNS(null,'d',pd);
+	
+	lastShot.el.setAttributeNS(null,'d',pd);
 }
 
 function addWall() {
