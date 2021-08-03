@@ -450,6 +450,7 @@ function move(timestamp) {
 	
 	
 	if (timestamp - start < ball.d*1000) {
+		console.log(ball.a);
 		window.requestAnimationFrame(move);
 	}
 	else{
