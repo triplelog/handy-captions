@@ -73,7 +73,76 @@ app.get('/magicmaker',
 	}
 );
 
-function pathToPoints(cd) {
+function pathToPoints(path) {
+	path = path.replace(/,/g," ");
+	path = path.replace(/M /g,"M");
+	path = path.replace(/ M/g,"M");
+	path = path.replace(/M/g," M ");
+	path = path.replace(/Z /g,"Z");
+	path = path.replace(/ Z/g,"Z");
+	path = path.replace(/Z/g," Z ");
+	path = path.trim();
+	var pSplit = path.split(" ").slice(1);
+	if (pSplit[pSplit.length-1] == "Z" || pSplit[pSplit.length-1] == "z"){
+		pSplit.splice(pSplit.length-1,1);
+		pSplit.push(pSplit[0]);
+		pSplit.push(pSplit[1]);
+	}
+	else if (pSplit[pSplit.length-2] != pSplit[0] || pSplit[pSplit.length-1] != pSplit[1]){
+		pSplit.push(pSplit[0]);
+		pSplit.push(pSplit[1]);
+	}
+	
+	var points = [];
+	var box = {top:0,bottom:0,left:0,right:0};
+	var d = 0;
+	var lp = [];
+	for (var i=0;i<pSplit.length/2;i++){
+		var point = [parseFloat(pSplit[2*i]),parseFloat(pSplit[2*i+1])];
+		if (i==0){
+			box.top=point[1];
+			box.bottom=point[1];
+			box.left=point[0];
+			box.right=point[0];
+		}
+		else {
+			d += Math.pow(Math.pow(point[0]-lp[0],2)+Math.pow(point[1]-lp[1],2),0.5);
+			if (point[1]<box.bottom) {
+				box.bottom=point[1];
+			}
+			if (point[1]>box.top) {
+				box.top=point[1];
+			}
+			if (point[0]<box.left) {
+				box.left=point[0];
+			}
+			if (point[0]>box.right) {
+				box.right=point[0];
+			}
+		}
+		points.push(point);
+		lp = point;
+	}
+	var width = (box.right-box.left)/(box.top-box.bottom)*100;
+	if (width < 100){
+		var leftOffset = Math.round((100-width)/2*10)/10;
+		for (var i=0;i<points.length;i++){
+			points[i][0]=leftOffset + Math.round((points[i][0]-box.left)/(box.right-box.left)*width*10)/10;
+			points[i][1]=Math.round((points[i][1]-box.bottom)/(box.top-box.bottom)*100*10)/10;
+		}
+	}
+	else {
+		var height = (box.top-box.bottom)/(box.right-box.left)*100;
+		var botOffset = Math.round((100-height)/2*10)/10;
+		for (var i=0;i<points.length;i++){
+			points[i][0]=Math.round((points[i][0]-box.left)/(box.right-box.left)*100*10)/10;
+			points[i][1]=botOffset + Math.round((points[i][1]-box.bottom)/(box.top-box.bottom)*height*10)/10;
+		}
+	}
+	width = 100;
+	return [points,width,d];
+}
+function pathToPointsBH(cd) {
 	var path = cd.path;
 	console.log(cd);
 	path = path.replace(/,/g," ");
@@ -154,7 +223,6 @@ function pathToPoints(cd) {
 	width = 100;
 	return [points,width,d,ball,hole];
 }
-
 var jsonShapes = {'full':"M 0,0 0,100 100,100 100,0"};
 var shapes = fs.readFileSync('./shapes/stateborders.csv', 'utf8').split("\r");
 //console.log(shapes[0]);
@@ -334,7 +402,7 @@ app.get('/golf',
 		
 		var allHoles = [];
 		for (var i=0;i<golfHoles.length;i++){
-			var retval = pathToPoints(golfHoles[i]);
+			var retval = pathToPointsBH(golfHoles[i]);
 			//var ball = golfHoles[i].ball;
 			//var hole = golfHoles[i].hole;
 			var cd = golfHoles[i].cd;
