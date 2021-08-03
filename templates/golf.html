@@ -193,10 +193,12 @@ function collisionOne(pt,c){
 				
 				
 				if (xc > maxX){
+					console.log(xc,maxX,wall.e[ii][2][0],wall.e[ii][3][0],pt.x);
 					corner = [maxX,pm*(maxX-pt.x)+pt.y];
 					d = Math.pow(pt.x-maxX,2)+ Math.pow(pm*(maxX-pt.x),2);
 				}
 				else if (xc < minX){
+					console.log(xc,maxX,wall.e[ii][2][0],wall.e[ii][3][0],pt.x);
 					corner = [minX,pm*(minX-pt.x)+pt.y];
 					d = Math.pow(pt.x-minX,2)+ Math.pow(pm*(minX-pt.x),2);
 				}
@@ -244,6 +246,7 @@ function move(timestamp) {
 	if (c.d <= r*r){
 		var m = wall.e[c.edge][0];//slope of line we hit
 		if (c.corner){
+			console.log(c.corner);
 			var mm = (y-c.corner[1])/(x-c.corner[0]);
 			
 			if (x-c.corner[0] == 0){
