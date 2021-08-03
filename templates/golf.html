@@ -407,7 +407,7 @@ function move(timestamp) {
 				b = Math.atan(m);
 				console.log(ball.a,b,m);
 				//ball.a = -1*(2*Math.PI+ball.a-2*b);
-				b = Math.atan(m)*-1;
+				b = Math.atan(m);
 				ball.a = 1*(-1*ball.a-2*b);
 				console.log(ball.a,b,m);
 				var d = dPtEdge({x:x,y:y},wall.e[c.edge]);
@@ -450,7 +450,6 @@ function move(timestamp) {
 	
 	
 	if (timestamp - start < ball.d*1000) {
-		console.log(ball.a);
 		window.requestAnimationFrame(move);
 	}
 	else{
