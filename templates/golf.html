@@ -33,10 +33,10 @@ img {
 
 </head>
 <body>
-<button onclick="showInfo()">Show</button>
-<button onclick="nextRound()">Next</button>
+
 <button onclick="startMove()">Start</button>
 <button onclick="clearMove()">Clear</button>
+<input type="number" min=0 max=435 value=0 id="cdId"></input>
 
 <div class="game">
 
@@ -86,6 +86,7 @@ var showChange = 0;
 resetGame();
 
 function resetGame(){
+	cdId = parseInt(document.getElementById("cdId").value);
 	outlineWall = allHoles[cdId].bigwall;
 	width = allHoles[cdId].width;
 	document.getElementById('borderSVG').style.width = ((width+20) / 120 * 80) +'vh';
@@ -447,7 +448,7 @@ function move(timestamp) {
 	actual.pd += ball.x+","+ball.y+" ";
 	actual.el.setAttributeNS(null,'d',actual.pd);
 	
-	if (timestamp - showChange > 300){
+	if (timestamp - showChange > 250){
 		ball.el.setAttribute("cx",x);
 		ball.el.setAttribute("cy",y);
 		showChange = timestamp;
