@@ -210,6 +210,7 @@ function collisionOne(pt,c){
 				}
 			}
 			else if (wall.e[ii][0] == "inf"){
+				
 				d = Math.pow(wall.e[ii][2][0]-pt.x,2);
 				if (pt.y > maxY){
 					if (yFlip){
@@ -230,6 +231,10 @@ function collisionOne(pt,c){
 					}
 					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
 				}
+				if (d < c.d){
+					console.log(d,corner,pt,wall.e[ii])
+				}
+				
 			}
 			else {
 				var xc = (wall.e[ii][2][1]-pt.y+pt.x*pm-wall.e[ii][2][0]*wall.e[ii][0])/(pm-wall.e[ii][0]);
