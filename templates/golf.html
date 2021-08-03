@@ -191,7 +191,7 @@ function collisionOne(pt,c){
 			}
 			else {
 				var xc = (wall.e[ii][2][1]-pt.y+pt.x*pm-wall.e[ii][2][0]*wall.e[ii][0])/(pm-wall.e[ii][0]);
-				
+				var yc = pm*(xc-pt.x)+pt.y;
 				
 				if (xc > maxX){
 					
@@ -202,8 +202,17 @@ function collisionOne(pt,c){
 					corner = ii;
 					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
 				}
+				else if (yc > maxY){
+					
+					corner = ii;
+					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
+				}
+				else if (yc < minY){
+					corner = ii;
+					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
+				}
 				else {
-					var yc = pm*(xc-pt.x)+pt.y;
+					console.log(xc,yc,wall.e,pt);
 					d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
 				}
 			}
