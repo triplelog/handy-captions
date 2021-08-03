@@ -154,16 +154,29 @@ function dPtEdge(pt,edge){
 function collisionOne(pt,c){
 	for (var ii=0;ii<wall.e.length;ii++){
 		var d = r*r+1;
-		if (pt.x < Math.min(wall.e[ii][2][0]-r,wall.e[ii][3][0]-r)) {
+		var corner = false;
+		var maxX = wall.e[ii][2][0];
+		var minX = wall.e[ii][3][0];
+		var maxY = wall.e[ii][2][1];
+		var minY = wall.e[ii][3][1];
+		if (wall.e[ii][3][0]>wall.e[ii][2][0]){
+			maxX = wall.e[ii][3][0];
+			minX = wall.e[ii][2][0];
+		}
+		if (wall.e[ii][3][1]>wall.e[ii][2][1]){
+			maxY = wall.e[ii][3][1];
+			minY = wall.e[ii][2][1];
+		}
+		if (pt.x < minX-r) {
 			//no collision
 		}
-		else if (pt.x > Math.max(wall.e[ii][2][0]+r,wall.e[ii][3][0]+r)) {
+		else if (pt.x > maxX+r) {
 			//no collision
 		}
-		else if (pt.y < Math.min(wall.e[ii][2][1]-r,wall.e[ii][3][1]-r)) {
+		else if (pt.y < minY-r) {
 			//no collision
 		}
-		else if (pt.y > Math.max(wall.e[ii][2][1]+r,wall.e[ii][3][1]+r)) {
+		else if (pt.y > maxX+r) {
 			//no collision
 		}
 		else {
@@ -177,8 +190,20 @@ function collisionOne(pt,c){
 			}
 			else {
 				var xc = (wall.e[ii][2][1]-pt.y+pt.x*pm-wall.e[ii][2][0]*wall.e[ii][0])/(pm-wall.e[ii][0]);
-				var yc = pm*(xc-pt.x)+pt.y;
-				d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
+				
+				
+				if (xc > maxX){
+					corner = [maxX,pm*(maxX-pt.x)+pt.y];
+					d = Math.pow(pt.x-maxX,2)+ Math.pow(pm*(maxX-pt.x),2);
+				}
+				else if (xc < minX){
+					corner = [minX,pm*(minX-pt.x)+pt.y];
+					d = Math.pow(pt.x-minX,2)+ Math.pow(pm*(minX-pt.x),2);
+				}
+				else {
+					var yc = pm*(xc-pt.x)+pt.y;
+					d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
+				}
 			}
 		}
 		//console.log(pt,d);
@@ -186,6 +211,7 @@ function collisionOne(pt,c){
 			c.wall = 0;
 			c.edge = ii;
 			c.d = d;
+			c.corner = corner;
 		}
 	}
 	return c;
@@ -194,7 +220,7 @@ function collisionOne(pt,c){
 function collision(pt){
 
 	
-	var c = {wall:0,edge:0,d:r*r+1};
+	var c = {wall:0,edge:0,d:r*r+1,corner:false};
 	c = collisionOne(pt,c);
 
 	return c;
@@ -216,7 +242,20 @@ function move(timestamp) {
 	var y = ball.y+Math.sin(ball.a)*elapsed*ball.s/1000;
 	var c = collision({x:x,y:y});
 	if (c.d <= r*r){
-		var m = wall.e[c.edge][0];
+		var m = wall.e[c.edge][0];//slope of line we hit
+		if (c.corner){
+			var mm = (y-c.corner[1])/(x-c.corner[0]);
+			
+			if (x-c.corner[0] == 0){
+				m = 0;
+			}
+			else if (y-c.corner[1] == 0){
+				m = "inf";
+			}
+			else {
+				m = -1/mm;//slope of corner line
+			}
+		}
 		if (showAll){
 			console.log(m,Math.atan(m),ball.a);
 		}
