@@ -70,6 +70,7 @@ var start = false;
 var r = 2;
 var old;
 var showAll = false;
+var lastCollision = false;
 
 resetGame();
 
@@ -194,11 +195,11 @@ function collisionOne(pt,c){
 				
 				if (xc > maxX){
 					
-					corner = wall.v[ii];
+					corner = ii;
 					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
 				}
 				else if (xc < minX){
-					corner = wall.v[ii];
+					corner = ii;
 					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
 				}
 				else {
@@ -244,44 +245,65 @@ function move(timestamp) {
 	var c = collision({x:x,y:y});
 	if (c.d <= r*r){
 		var m = wall.e[c.edge][0];//slope of line we hit
-		if (c.corner){
+		var thisCollision = "e"+c.edge;
+		var skipCol = false;
+		if (c.corner || c.corner == 0){
+			thisCollision = "v"+c.corner;
+			if (thisCollision == lastCollision){
+				skipCol = true;
+			}
+			else {
+				lastCollision = thisCollision;
+			}
+			var cx = wall.v[c.corner][0];
+			var cy = wall.v[c.corner][1];
 			console.log(c.corner);
-			var mm = (y-c.corner[1])/(x-c.corner[0]);
+			var mm = (y-cy)/(x-cx);
 			
-			if (x-c.corner[0] == 0){
+			if (x-cx == 0){
 				m = 0;
 			}
-			else if (y-c.corner[1] == 0){
+			else if (y-cy == 0){
 				m = "inf";
 			}
 			else {
 				m = -1/mm;//slope of corner line
 			}
 		}
-		if (showAll){
-			console.log(m,Math.atan(m),ball.a);
-		}
-		var b = Math.atan(m);
-		if (m == "inf"){
-			b = Math.PI/2;
-			ball.a = -1*(2*Math.PI+ball.a-2*b);
-		}
 		else {
-			ball.a = -1*(2*Math.PI+ball.a-2*b);
-			var d = dPtEdge({x:x,y:y},wall.e[c.edge]);
-			var dd = dPtEdge({x:x+Math.cos(ball.a)*elapsed/40,y:y+Math.sin(ball.a)*elapsed/40},wall.e[c.edge]);
-			if (dd < d){
-				ball.a = Math.PI/4+ball.a;
+			if (thisCollision == lastCollision){
+				skipCol = true;
+			}
+			else {
+				lastCollision = thisCollision;
 			}
 		}
 		if (showAll){
-			console.log(x,y,ball.x,ball.y,m,Math.atan(m),ball.a);
+			console.log(m,Math.atan(m),ball.a);
 		}
-		if (ball.a > 2*Math.PI){
-			ball.a -= 2*Math.PI;
-		}
-		else if (ball.a < -2*Math.PI){
-			ball.a += 2*Math.PI;
+		if (!skipCol){
+			var b = Math.atan(m);
+			if (m == "inf"){
+				b = Math.PI/2;
+				ball.a = -1*(2*Math.PI+ball.a-2*b);
+			}
+			else {
+				ball.a = -1*(2*Math.PI+ball.a-2*b);
+				var d = dPtEdge({x:x,y:y},wall.e[c.edge]);
+				var dd = dPtEdge({x:x+Math.cos(ball.a)*elapsed/40,y:y+Math.sin(ball.a)*elapsed/40},wall.e[c.edge]);
+				if (dd < d){
+					ball.a = Math.PI/4+ball.a;
+				}
+			}
+			if (showAll){
+				console.log(x,y,ball.x,ball.y,m,Math.atan(m),ball.a);
+			}
+			if (ball.a > 2*Math.PI){
+				ball.a -= 2*Math.PI;
+			}
+			else if (ball.a < -2*Math.PI){
+				ball.a += 2*Math.PI;
+			}
 		}
 		
 		
