@@ -447,7 +447,7 @@ function move(timestamp) {
 	actual.pd += ball.x+","+ball.y+" ";
 	actual.el.setAttributeNS(null,'d',actual.pd);
 	
-	if (timestamp - showChange > 1000){
+	if (timestamp - showChange > 300){
 		ball.el.setAttribute("cx",x);
 		ball.el.setAttribute("cy",y);
 		showChange = timestamp;
