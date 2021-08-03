@@ -72,7 +72,7 @@ var hole;
 var width;
 
 var cdId = 0;
-var wall = {v:outlineWall};
+var wall;
 var isDown = false;
 var shot = {el:null,coords:[]};
 var actual = {el:null,coords:[],pd:""};
@@ -94,6 +94,7 @@ function resetGame(){
 	ball = {x:allHoles[cdId].ball.x,y:allHoles[cdId].ball.y,d:5,a:1,s:20,el:null};
 	ballStart = {x:allHoles[cdId].ball.x,y:allHoles[cdId].ball.y};
 	hole = {x:allHoles[cdId].hole.x,y:allHoles[cdId].hole.y };
+	wall = {v:outlineWall};
 	
 	svg.innerHTML = '<path id="wall" d="" fill="white" stroke="black" stroke-width="1"></path>';
 	
