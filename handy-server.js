@@ -313,9 +313,9 @@ app.get('/golf',
 		var allHoles = [];
 		for (var i=0;i<golfHoles.length;i++){
 			var retval = pathToPoints(golfHoles[i].path);
-			var ball = pathToPoints(golfHoles[i].ball);
-			var hole = pathToPoints(golfHoles[i].hole);
-			var cd = pathToPoints(golfHoles[i].cd);
+			var ball = golfHoles[i].ball;
+			var hole = golfHoles[i].hole;
+			var cd = golfHoles[i].cd;
 			allHoles.push({bigwall:retval[0],width:retval[1],ball:ball,hole:hole,cd:cd});
 		}
 		
