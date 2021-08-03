@@ -212,7 +212,7 @@ function collisionOne(pt,c){
 					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
 				}
 				else {
-					console.log(xc,yc,wall.e,pt);
+					console.log(xc,yc,wall.e[ii],pt);
 					d = Math.pow(pt.x-xc,2)+ Math.pow(pt.y-yc,2);
 				}
 			}
