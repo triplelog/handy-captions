@@ -158,15 +158,19 @@ function collisionOne(pt,c){
 		var corner = false;
 		var maxX = wall.e[ii][2][0];
 		var minX = wall.e[ii][3][0];
+		var xFlip = false;
+		var yFlip = false;
 		var maxY = wall.e[ii][2][1];
 		var minY = wall.e[ii][3][1];
 		if (wall.e[ii][3][0]>wall.e[ii][2][0]){
 			maxX = wall.e[ii][3][0];
 			minX = wall.e[ii][2][0];
+			xFlip = true;
 		}
 		if (wall.e[ii][3][1]>wall.e[ii][2][1]){
 			maxY = wall.e[ii][3][1];
 			minY = wall.e[ii][2][1];
+			yFlip = true;
 		}
 		if (pt.x < minX-r) {
 			//no collision
@@ -183,33 +187,89 @@ function collisionOne(pt,c){
 		else {
 			var pm = wall.e[ii][1];//perpendicular slope of edge
 			
-			if (pm == "inf"){
+			if (pm == "inf"){//wall is horizontal
 				d = Math.pow(wall.e[ii][2][1]-pt.y,2);
+				if (pt.x > maxX){
+					if (xFlip){
+						corner = ii;
+					}
+					else {
+						corner = ii-1;
+					}
+					
+					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
+				}
+				else if (pt.x < minX){
+					if (xFlip){
+						corner = ii-1;
+					}
+					else {
+						corner = ii;
+					}
+					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
+				}
 			}
 			else if (wall.e[ii][0] == "inf"){
 				d = Math.pow(wall.e[ii][2][0]-pt.x,2);
+				if (pt.y > maxY){
+					if (yFlip){
+						corner = ii;
+					}
+					else {
+						corner = ii-1;
+					}
+					
+					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
+				}
+				else if (pt.x < minY){
+					if (yFlip){
+						corner = ii-1;
+					}
+					else {
+						corner = ii;
+					}
+					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
+				}
 			}
 			else {
 				var xc = (wall.e[ii][2][1]-pt.y+pt.x*pm-wall.e[ii][2][0]*wall.e[ii][0])/(pm-wall.e[ii][0]);
 				var yc = pm*(xc-pt.x)+pt.y;
 				
 				if (xc > maxX){
-					
-					corner = ii;
-					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
+					if (xFlip){
+						corner = ii;
+					}
+					else {
+						corner = ii-1;
+					}
+					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
 				}
 				else if (xc < minX){
-					corner = ii;
-					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
+					if (xFlip){
+						corner = ii-1;
+					}
+					else {
+						corner = ii;
+					}
+					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
 				}
 				else if (yc > maxY){
-					
-					corner = ii;
-					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
+					if (yFlip){
+						corner = ii;
+					}
+					else {
+						corner = ii-1;
+					}
+					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
 				}
 				else if (yc < minY){
-					corner = ii;
-					d = Math.pow(pt.x-wall.v[ii][0],2)+ Math.pow(pt.y-wall.v[ii][1],2);
+					if (yFlip){
+						corner = ii-1;
+					}
+					else {
+						corner = ii;
+					}
+					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
 				}
 				else {
 					console.log(xc,yc,wall.e[ii],pt);
