@@ -247,7 +247,7 @@ function move(timestamp) {
 		var m = wall.e[c.edge][0];//slope of line we hit
 		var thisCollision = "e"+c.edge;
 		var skipCol = false;
-		if (c.corner || c.corner == 0){
+		if (c.corner || c.corner === 0){
 			thisCollision = "v"+c.corner;
 			if (thisCollision == lastCollision){
 				skipCol = true;
