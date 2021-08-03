@@ -222,7 +222,7 @@ function collisionOne(pt,c){
 					
 					d = Math.pow(pt.x-wall.v[corner][0],2)+ Math.pow(pt.y-wall.v[corner][1],2);
 				}
-				else if (pt.x < minY){
+				else if (pt.y < minY){
 					if (yFlip){
 						corner = ii-1;
 					}
