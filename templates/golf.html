@@ -195,7 +195,7 @@ function collisionOne(pt,c){
 				if (xc > maxX){
 					
 					corner = [maxX,pm*(maxX-pt.x)+pt.y];
-					console.log(corner,xc,maxX,wall.e[ii][2][0],wall.e[ii][3][0],pt.x,JSON.stringify(wall.e[ii]));
+					console.log(corner,maxY,minY,pt.y,xc,maxX,wall.e[ii][2][0],wall.e[ii][3][0],pt.x,JSON.stringify(wall.e[ii]));
 					d = Math.pow(pt.x-maxX,2)+ Math.pow(pm*(maxX-pt.x),2);
 				}
 				else if (xc < minX){
