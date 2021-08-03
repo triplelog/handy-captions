@@ -74,7 +74,6 @@ app.get('/magicmaker',
 );
 
 function pathToPoints(path) {
-	console.log(path);
 	path = path.replace(/,/g," ");
 	path = path.replace(/M /g,"M");
 	path = path.replace(/ M/g,"M");
@@ -318,7 +317,7 @@ app.get('/golf',
 			var cd = pathToPoints(golfHoles[i].cd);
 			allHoles.push({bigwall:retval[0],width:retval[1],ball:ball,hole:hole,cd:cd});
 		}
-		var retval = pathToPoints(path);
+		
 		res.write(nunjucks.render('templates/golf.html',{
 			//bigwall: {id:"wall-0",balls:[],v:[[0,0],[0,50],[0,100],[100,100],[190,20],[9,2],[0,0]]},
 			//bigwall: retval[0],
