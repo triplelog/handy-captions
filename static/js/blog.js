@@ -263,7 +263,7 @@ function divideWords(strokes) {
 					ss.sort(function(a,b){return b-a;});
 					console.log(ss);
 					for (var si=0;si<ss.length;si++){
-						strokes.splice(ss[si],1);
+						
 						var ell = document.getElementById("stroke-"+ss[si]);
 						ell.parentElement.removeChild(ell);
 						for (var sii=ss[si]+1;sii<strokes.length;sii++){
@@ -271,6 +271,7 @@ function divideWords(strokes) {
 							console.log(ell);
 							ell.id = "stroke-"+(sii-1);
 						}
+						strokes.splice(ss[si],1);
 						
 					}
 					
