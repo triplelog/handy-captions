@@ -263,9 +263,11 @@ function divideWords(strokes) {
 					var ss = word['ids'];
 					ss.sort(function(a,b){return a-b;});
 					console.log(ss);
+					console.log(JSON.stringify(strokes));
 					for (var si=0;si<ss.length;si++){
 						delete strokes[ss[si]];
 					}
+					console.log(JSON.stringify(strokes));
 					continue;
 					
 				}
