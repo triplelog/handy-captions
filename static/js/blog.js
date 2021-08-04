@@ -926,10 +926,22 @@ function editMode(){
 	}
 }
 function quoteButton() {
+	var el = document.getElementById("editButton");
+	el.style.backgroundColor = "rgb(239,239,239)";
+	el.style.color = "black";
+	el = document.getElementById("quoteButton");
+	el.style.backgroundColor = "black";
+	el.style.color = "white";
 	isEdit = "quote";
 	outputEl.style.pointerEvents = "all";
 }
 function noteButton() {
+	var el = document.getElementById("editButton");
+	el.style.backgroundColor = "rgb(239,239,239)";
+	el.style.color = "black";
+	el = document.getElementById("noteButton");
+	el.style.backgroundColor = "black";
+	el.style.color = "white";
 	isEdit = "note";
 	outputEl.style.pointerEvents = "all";
 }
