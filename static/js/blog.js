@@ -915,12 +915,12 @@ function editMode(){
 	if (isEdit){
 		isEdit = false;
 		outputEl.style.pointerEvents = "none";
-		el.style.background = "rgb(239,239,239)";
+		el.style.backgroundColor = "rgb(239,239,239)";
 	}
 	else {
 		isEdit = true;
 		outputEl.style.pointerEvents = "all";
-		el.style.background = "white";
+		el.style.backgroundColor = "white";
 	}
 }
 function quoteButton() {
