@@ -83,7 +83,7 @@ blockquote:before {
 	left: 0px;
 }
 .tools {
-	position: absolute;
+	position: fixed;
 	top: 0px;
 }
 
@@ -165,7 +165,7 @@ topLine.addEventListener("update",scrollLine);
 function scrollLine(evt){
 	var tl = parseInt(evt.target.value);
 	console.log(tl);
-	window.scrollTo(0, 240);
+	window.scrollTo(0, 100*tl);
 }
 
 var strokes = {{ strokes | dump | safe }};
