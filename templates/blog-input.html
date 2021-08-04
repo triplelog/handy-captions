@@ -161,7 +161,7 @@ topLine.addEventListener("update",scrollLine);
 function scrollLine(evt){
 	var tl = parseInt(evt.target.value);
 	console.log(tl);
-	inputEl.style.top = "-240px";
+	window.scrollTo(0, 240);
 }
 
 var strokes = {{ strokes | dump | safe }};
