@@ -261,11 +261,11 @@ function divideWords(strokes) {
 					delete wordsHashed[hash];
 					
 					var ss = word['ids'];
-					ss.sort(function(a,b){return a-b;});
+					ss.sort(function(a,b){return b-a;});
 					console.log(ss);
 					console.log(JSON.stringify(strokes));
 					for (var si=0;si<ss.length;si++){
-						delete strokes[ss[si]];
+						strokes.splice(ss[si],1);
 					}
 					console.log(JSON.stringify(strokes));
 					continue;
