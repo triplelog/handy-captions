@@ -27,6 +27,7 @@ body {
 	top: 80px;
 	display: inline-block;
 	width: 100%;
+	z-index: -1;
 	
 }
 .output {
@@ -139,6 +140,7 @@ blockquote:before {
 	<button onclick="sizeButton();">Size</button>
 	<input type="text" id="fontSize"></input>
 	<span id="strLength"></span>
+	<input type="number" id="topLine" value="0" min="0"></input>
 	<!--<button onclick="downloadImage();">Download</button>-->
 </div>
 <script src="../js/blog.js"></script>
@@ -153,7 +155,14 @@ inputEl.addEventListener('pointercancel',inputCancel);
 inputEl.addEventListener('pointerup',inputUp);
 var outputEl = document.getElementById("output");
 outputEl.addEventListener('pointerup',editUp);
-
+var topLine = document.getElementById("topLine");
+topLine.addEventListener("change",scrollLine);
+topLine.addEventListener("update",scrollLine);
+function scrollLine(evt){
+	var tl = parseInt(evt.target.value);
+	console.log(tl);
+	inputEl.style.top = "-240px";
+}
 
 var strokes = {{ strokes | dump | safe }};
 var wordsHashed = {{ wordsHashed | dump | safe }};
