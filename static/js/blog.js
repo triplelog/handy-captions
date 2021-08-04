@@ -911,13 +911,16 @@ function sizeButton() {
 	}
 }
 function editMode(){
+	var el = document.getElementById("editButton");
 	if (isEdit){
 		isEdit = false;
 		outputEl.style.pointerEvents = "none";
+		delete el.style.background;
 	}
 	else {
 		isEdit = true;
 		outputEl.style.pointerEvents = "all";
+		el.style.background = "white";
 	}
 }
 function quoteButton() {
