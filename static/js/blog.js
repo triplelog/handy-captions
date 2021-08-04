@@ -263,11 +263,17 @@ function divideWords(strokes) {
 					var ss = word['ids'];
 					ss.sort(function(a,b){return b-a;});
 					console.log(ss);
-					console.log(JSON.stringify(strokes));
 					for (var si=0;si<ss.length;si++){
 						strokes.splice(ss[si],1);
+						var ell = document.getElementById("stroke-"+ss[si]);
+						ell.parentElement.removeChild(ell);
+						for (var sii=ss[si]+1;sii<strokes.length;sii++){
+							var ell = document.getElementById("stroke-"+sii);
+							ell.id = "stroke-"+(sii-1);
+						}
+						
 					}
-					console.log(JSON.stringify(strokes));
+					
 					continue;
 					
 				}
