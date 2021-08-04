@@ -257,7 +257,7 @@ function divideWords(strokes) {
 				console.log(wordsHashed[hash]);
 				var el = document.createElement("div");
 				if (wordsHashed[hash] && wordsHashed[hash].delete){
-					el.parentElement.removeChild(el);
+					
 					delete wordsHashed[hash];
 					
 					var ss = word['ids'];
