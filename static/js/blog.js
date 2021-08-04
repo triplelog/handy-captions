@@ -916,11 +916,13 @@ function editMode(){
 		isEdit = false;
 		outputEl.style.pointerEvents = "none";
 		el.style.backgroundColor = "rgb(239,239,239)";
+		el.style.color = "black";
 	}
 	else {
 		isEdit = true;
 		outputEl.style.pointerEvents = "all";
-		el.style.backgroundColor = "white";
+		el.style.backgroundColor = "black";
+		el.style.color = "white";
 	}
 }
 function quoteButton() {
