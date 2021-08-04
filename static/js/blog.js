@@ -256,6 +256,19 @@ function divideWords(strokes) {
 			else {
 				console.log(wordsHashed[hash]);
 				var el = document.createElement("div");
+				if (wordsHashed[hash].delete){
+					el.parentElement.removeChild(el);
+					delete wordsHashed[hash];
+					
+					var ss = word['ids'];
+					ss.sort(function(a,b){return a-b;});
+					console.log(ss);
+					for (var si=0;si<ss.length;si++){
+						delete strokes[ss[si]];
+					}
+					continue;
+					
+				}
 				var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 				var width = word['width']+4;
 				var height = word['maxY'] - word['minY']+4;
