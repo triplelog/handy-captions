@@ -1128,13 +1128,17 @@ function continueList(id){
 }
 
 function save(event) {
-	var url = "/save";
+	/*var url = "/save";
 	var request = new XMLHttpRequest();
 	request.open('POST', url, true);
 	request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 	var jsonmessage = {id:'test',displaySettings:displaySettings,strokes:strokes,wordsHashed:wordsHashed};
 	request.send(JSON.stringify(jsonmessage));
-	event.preventDefault();
+	event.preventDefault();*/
+	
+	var jsonmessage = {displaySettings:displaySettings,strokes:strokes,wordsHashed:wordsHashed};
+	var name = document.getElementById("saveName").value;
+	window.localStorage.setItem('blog-'+name,JSON.stringify(jsonmessage));
 }
 document.getElementById('saveButton').addEventListener('click',save);
 function load() {
