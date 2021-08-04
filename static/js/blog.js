@@ -1142,8 +1142,21 @@ function save(event) {
 }
 document.getElementById('saveButton').addEventListener('click',save);
 function load() {
-	var jsonmessage = {type:'load'};
-	ws.send(JSON.stringify(jsonmessage));
+	/*var jsonmessage = {type:'load'};
+	ws.send(JSON.stringify(jsonmessage));*/
+	
+	
+	var name = document.getElementById("saveName").value;
+	var jsonmessage = JSON.parse(window.localStorage.getItem('blog-'+name));
+	strokes = jsonmessage.strokes;
+	displaySettings = jsonmessage.displaySettings;
+	wordsHashed = jsonmessage.wordsHashed;
+	for (var i=0;i<strokes.length;i++){
+		addStroke(strokes[i],i,"black");
+	}
+	divideWords(strokes);
+	makeQuotes(displaySettings.quotes);
+	makeNotes(displaySettings.notes);
 }
 
 function hashStrokes(stroke) {
