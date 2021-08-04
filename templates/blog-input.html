@@ -148,6 +148,10 @@ blockquote:before {
 	<span id="strLength"></span>
 	<input type="number" id="topLine" value="0" min="0" style="width: 3rem;"></input>
 	<a href="../" download="blog.html">DLoad</a>
+	<form action="https://digitizer.fun/blogdata" method="post">
+		<input type="text" name="data" id="blogdata" style="display: none;"></input>
+		<button type="submit">Upload</button>
+	</form>
 	<!--<button onclick="downloadImage();">Download</button>-->
 </div>
 <!--<script src="../js/blog.js"></script>-->
@@ -156,6 +160,10 @@ var wordIds = {};
 
 var borders = {};
 function divideWords(strokes) {
+	
+	var jsonmessage = {displaySettings:displaySettings,strokes:strokes,wordsHashed:wordsHashed};
+	document.getElementById('blogdata').value = JSON.stringify(jsonmessage);
+	
 	strokesInfo = {};
 	wordMap = {};
 	adjWords = {};

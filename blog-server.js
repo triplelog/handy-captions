@@ -221,6 +221,15 @@ app.get('/',
 		res.end();
 	}
 );
+app.post('/blogdata',
+	function(req, res) {
+		//var content = req.body;
+		console.log(req.body);
+		
+		
+		res.end();
+	}
+)
 
 app.post('/save',
 	function(req, res) {
