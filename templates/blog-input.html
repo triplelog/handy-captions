@@ -131,6 +131,7 @@ blockquote:before {
 	<button onclick="load();">Load</button>
 	<button onclick="showNewButtons();">ShowNew</button>
 	<button onclick="showListButtons();">ShowList</button>
+	<button onclick="deleteButton();">Delete</button>
 	<button onclick="editMode();">Edit</button>
 	<button onclick="noteButton();">Note</button>
 	<button onclick="quoteButton();">Quote</button>
@@ -138,13 +139,13 @@ blockquote:before {
 	<button onclick="italicsButton();">Italics</button>
 	<button onclick="underlineButton();">Underline</button>
 	<button onclick="colorButton();">Color</button>
-	<input type="text" id="colorName"></input>
+	<input type="text" id="colorName" style="width: 4rem;"></input>
 	<button onclick="linkButton();">Link</button>
-	<input type="text" id="linkURL"></input>
+	<input type="text" id="linkURL" style="width: 4rem;"></input>
 	<button onclick="sizeButton();">Size</button>
-	<input type="text" id="fontSize"></input>
+	<input type="text" id="fontSize" style="width: 4rem;"></input>
 	<span id="strLength"></span>
-	<input type="number" id="topLine" value="0" min="0"></input>
+	<input type="number" id="topLine" value="0" min="0" style="width: 3rem;"></input>
 	<!--<button onclick="downloadImage();">Download</button>-->
 </div>
 <script src="../js/blog.js"></script>
@@ -331,14 +332,26 @@ function addBorder(stroke,idx,nidx,color) {
 	path.setAttributeNS(null,"d",pd);
 	if (newPath){
 		path.setAttributeNS(null,"id","border-"+idx);
-		path.setAttributeNS(null,"stroke",color);
+		path.setAttributeNS(null,"stroke","gray");
+		if (color != "gray"){
+			path.setAttributeNS(null,"stroke-dasharray","1,1");
+		}
+		else {
+			path.setAttributeNS(null,"stroke-dasharray","0");
+		}
 		path.setAttributeNS(null,"stroke-width","2");
 		path.setAttributeNS(null,"fill","none");
 		outputEl.appendChild(path);
 	}
 	else {
 		path.setAttributeNS(null,"id","border-"+nidx);
-		path.setAttributeNS(null,"stroke",color);
+		path.setAttributeNS(null,"stroke","gray");
+		if (color != "gray"){
+			path.setAttributeNS(null,"stroke-dasharray","1,1");
+		}
+		else {
+			path.setAttributeNS(null,"stroke-dasharray","0");
+		}
 	}
 	
 }

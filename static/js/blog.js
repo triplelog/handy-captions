@@ -69,7 +69,7 @@ function divideWords(strokes) {
 			mmStrokes = [{'x':minmaxArray[i][0],'y':line*100+20},{'x':minmaxArray[i][0],'y':line*100+60},{'x':minmaxArray[i][1],'y':line*100+60},{'x':minmaxArray[i][1],'y':line*100+20},{'x':minmaxArray[i][0],'y':line*100+20}];
 			addBorder(mmStrokes,line+"-"+i,line+"-"+i,'gray');
 			borders[line+"-"+i]=mmStrokes;
-			adjWords[line][i]={'borderKey':line+"-"+i,'left':minmaxArray[i][0],'width':minmaxArray[i][1]-minmaxArray[i][0],'top':line*100+20,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:40,strokes:[]};
+			adjWords[line][i]={'borderKey':line+"-"+i,'left':minmaxArray[i][0],'width':minmaxArray[i][1]-minmaxArray[i][0],'top':line*100+20,minX:0,maxX:minmaxArray[i][1]-minmaxArray[i][0],minY:0,maxY:40,strokes:[],ids:[]};
 			wordCount++;
 		}
 		lineInfo[line]=minmaxArray;
@@ -109,6 +109,7 @@ function divideWords(strokes) {
 			adjStrokes.push({x:x,y:y});
 		}
 		adjWords[line][id]['strokes'].push(adjStrokes);
+		adjWords[line][id]['ids'].push(i);
 		
 	}
 	//var idArray = new Uint32Array(wordCount);
@@ -232,9 +233,19 @@ function divideWords(strokes) {
 			var hash = hashStrokes(word['strokes']);
 			
 			if (wordsHashed[hash] && Object.keys(wordsHashed[hash].el).length > 0){
-				console.log("hashed",hash,word);
+				
 				var el = wordsHashed[hash].el;
-				console.log(el);
+				if (wordsHashed[hash].delete){
+					el.parentElement.removeChild(el);
+					delete wordsHashed[hash];
+					
+					var ss = word['ids'];
+					for (var si=0;si<ss.length;si++){
+						delete strokes[ss[si]];
+					}
+					continue;
+					
+				}
 				wordIds[hash]=word;
 				el.setAttribute('id','word-'+hash);
 				wordIdx++;
@@ -344,6 +355,18 @@ function combineMinmax(minmaxArray) {
 	}
 	minmaxArray.sort(function(a,b){return a[0] - b[0];});
 	return minmaxArray;
+}
+
+function deleteWord(el,id) {
+	if (!el){
+		el = document.getElementById('word-'+id);
+	}
+	if (!el){return;}
+	var hash = el.getAttribute('data-hash');
+	wordsHashed[hash]['delete']=true;
+	divideWords();
+	
+	
 }
 
 function makeBold(el,id,addBold=true) {
@@ -810,6 +833,13 @@ function boldButton() {
 	for (key in selectedWords){
 		if (key){
 			makeBold(false,key);
+		}
+	}
+}
+function deleteButton() {
+	for (key in selectedWords){
+		if (key){
+			deleteWord(false,key);
 		}
 	}
 }
