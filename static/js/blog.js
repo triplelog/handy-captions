@@ -240,6 +240,8 @@ function divideWords(strokes) {
 					delete wordsHashed[hash];
 					
 					var ss = word['ids'];
+					ss.sort(function(a,b){return a-b;});
+					console.log(ss);
 					for (var si=0;si<ss.length;si++){
 						delete strokes[ss[si]];
 					}
