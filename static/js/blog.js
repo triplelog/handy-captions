@@ -366,7 +366,7 @@ function deleteWord(el,id) {
 	if (!el){return;}
 	var hash = el.getAttribute('data-hash');
 	wordsHashed[hash]['delete']=true;
-	divideWords();
+	divideWords(strokes);
 	
 	
 }
