@@ -233,7 +233,7 @@ function divideWords(strokes) {
 			var hash = hashStrokes(word['strokes']);
 			
 			if (wordsHashed[hash] && Object.keys(wordsHashed[hash].el).length > 0){
-				
+				console.log(wordsHashed[hash]);
 				var el = wordsHashed[hash].el;
 				if (wordsHashed[hash].delete){
 					el.parentElement.removeChild(el);
@@ -254,7 +254,7 @@ function divideWords(strokes) {
 				pEl.appendChild(el);
 			}
 			else {
-			
+				console.log(wordsHashed[hash]);
 				var el = document.createElement("div");
 				var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 				var width = word['width']+4;
