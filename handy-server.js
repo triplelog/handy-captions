@@ -367,6 +367,7 @@ addHoles();
 app.post('/golfdata',
 	function(req, res) {
 		console.log(req.body);
+		res.end();
 	}
 )
 app.get('/golf', 
