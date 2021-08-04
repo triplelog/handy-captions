@@ -40,7 +40,7 @@ img {
 <input type="range" min=1 max=9 value=5 id="cdScore"></input>
 <a href="../golf" download="golf.html">Download</a>
 <form action="../golfdata" method="post">
-<input type="text" id="golfdata"></input>
+<input type="text" id="golfdata" style="display: none;"></input>
 <button type="submit">Upload</button>
 </form>
 <div class="game">
@@ -96,7 +96,7 @@ function updateScore(evt){
 	window.localStorage.setItem('cdScore'+cdId,t.value);
 	var gd = "";
 	for (var i=0;i<435;i++){
-		var oScore = window.localStorage.getItem('cdScore'+cdId);
+		var oScore = window.localStorage.getItem('cdScore'+i);
 		if (oScore){
 			oScore = ""+oScore;
 		}
