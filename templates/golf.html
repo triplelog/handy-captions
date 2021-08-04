@@ -37,6 +37,7 @@ img {
 <button onclick="startMove()">Start</button>
 <button onclick="clearMove()">Clear</button>
 <input type="number" min=0 max=435 value=0 id="cdId"></input>
+<input type="range" min=1 max=10 value=5 id="cdScore"></input>
 
 <div class="game">
 
@@ -85,8 +86,21 @@ var lastCollision = false;
 var showChange = 0;
 resetGame();
 
+function updateScore(evt){
+	var t = evt.target;
+	
+	
+	window.localStorage.setItem('cdScore'+cdId,t.value);
+}
+document.getElementById("cdScore").addEventListener("change",updateScore);
+
 function resetGame(){
 	cdId = parseInt(document.getElementById("cdId").value);
+	document.getElementById("cdScore").value = 5;
+	var oScore = window.localStorage.getItem('cdScore'+cdId);
+	if (oScore){
+		document.getElementById("cdScore").value = oScore;
+	}
 	outlineWall = allHoles[cdId].bigwall;
 	width = allHoles[cdId].width;
 	document.getElementById('borderSVG').style.width = ((width+20) / 120 * 80) +'vh';
