@@ -915,7 +915,7 @@ function editMode(){
 	if (isEdit){
 		isEdit = false;
 		outputEl.style.pointerEvents = "none";
-		delete el.style.background;
+		el.style.background = "rgb(239,239,239)";
 	}
 	else {
 		isEdit = true;
